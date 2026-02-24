@@ -1,0 +1,34 @@
+{% comment %}
+  NASS typography: Anybody (headings), Avenir Next (body), Smooch (accent).
+  Per Shopify docs: third-party fonts via <link> in layout.
+  https://shopify.dev/docs/storefronts/themes/architecture/settings/fonts
+{% endcomment %}
+{% # theme-check-disable AssetUrlFilters, RemoteAsset %}
+<link
+  rel="preconnect"
+  href="https://fonts.googleapis.com"
+  crossorigin
+>
+<link
+  rel="preconnect"
+  href="https://fonts.gstatic.com"
+  crossorigin
+>
+<link
+  rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Anybody:ital,wdth,wght@0,75..150,100..900&family=Smooch&display=swap"
+  as="style"
+>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Anybody:ital,wdth,wght@0,75..150,100..900&family=Smooch&display=swap"
+  media="print"
+  onload="this.media='all'"
+>
+<noscript>
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Anybody:ital,wdth,wght@0,75..150,100..900&family=Smooch&display=swap"
+  >
+</noscript>
+{% # theme-check-enable AssetUrlFilters, RemoteAsset %}

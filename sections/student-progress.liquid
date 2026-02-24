@@ -1,0 +1,232 @@
+{% comment %}
+  Student Progress — Lovable spec: "See How Our Students Perform"
+  Horizontal scroll of student video cards. Pure Liquid + CSS + vanilla JS.
+{% endcomment %}
+
+<section class="student-progress">
+  <div class="student-progress__container">
+    <div class="student-progress__header">
+      <h2 class="student-progress__title">
+        {{ section.settings.heading | default: "SEE HOW OUR" | escape }}
+        <span class="student-progress__title-highlight">{{ section.settings.heading_highlight | default: "STUDENTS PERFORM" | escape }}</span>
+      </h2>
+      <div class="student-progress__divider"></div>
+    </div>
+
+    <div class="student-progress__scroll-wrapper">
+      <div class="student-progress__row">
+        {% for block in section.blocks %}
+          {% if block.type == 'student_video' %}
+            <div class="student-progress__card" {{ block.shopify_attributes }}>
+              {% if block.settings.video != blank %}
+                {{
+                  block.settings.video
+                  | video_tag:
+                    class: 'student-progress__video',
+                    autoplay: false,
+                    loop: true,
+                    muted: true,
+                    controls: false,
+                    preload: 'none'
+                }}
+              {% else %}
+                <div class="student-progress__placeholder">
+                  {{ 'image' | placeholder_svg_tag: 'student-progress__placeholder-svg' }}
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="{{ 'student-progress-video-lazy.js' | asset_url }}" defer></script>
+
+{% stylesheet %}
+  .student-progress {
+    --sp-primary: var(--nass-primary, hsl(224, 100%, 50%));
+    --sp-background: var(--color-background, hsl(0, 0%, 100%));
+    --sp-foreground: #000;
+    --sp-card-bg: var(--color-card, hsl(0, 0%, 96%));
+    --sp-border: hsl(0, 0%, 90%);
+    --sp-font-display: var(--font-heading--family, 'Anybody'), system-ui, sans-serif;
+  }
+
+  .student-progress {
+    padding: 80px 0;
+    background-color: var(--sp-background);
+    border-radius: 24px;
+    overflow: hidden;
+  }
+
+  .student-progress__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 16px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .student-progress__header {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  .student-progress__title {
+    font-family: var(--sp-font-display);
+    font-weight: 900;
+    font-stretch: 150%;
+    letter-spacing: 0.03em;
+    line-height: 100%;
+    text-transform: uppercase;
+    color: var(--sp-foreground);
+    margin: 0;
+    padding: 0 8px;
+    font-size: 20px;
+  }
+
+  .student-progress__title-highlight {
+    color: var(--sp-primary);
+  }
+
+  .student-progress__divider {
+    width: 96px;
+    height: 4px;
+    background-color: var(--sp-primary);
+    margin: 16px auto 0;
+  }
+
+  .student-progress__scroll-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -16px;
+    padding: 0 16px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .student-progress__scroll-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .student-progress__row {
+    display: flex;
+    gap: 16px;
+    padding-bottom: 16px;
+    width: max-content;
+  }
+
+  .student-progress__card {
+    position: relative;
+    background-color: var(--sp-card-bg);
+    border-radius: 30px;
+    overflow: hidden;
+    border: 1px solid var(--sp-border);
+    width: 280px;
+    flex-shrink: 0;
+  }
+
+  .student-progress__video {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    display: block;
+  }
+
+  .student-progress__placeholder {
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: hsl(0, 0%, 10%);
+    border-radius: 20px;
+  }
+
+  .student-progress__placeholder-svg {
+    width: 40%;
+    height: auto;
+    opacity: 0.3;
+  }
+
+  @media (min-width: 768px) {
+    .student-progress__title {
+      font-size: 30px;
+    }
+
+    .student-progress__card {
+      width: 320px;
+    }
+  }
+
+  @media (min-width: 990px) {
+    .student-progress__row {
+      gap: 24px;
+    }
+
+    .student-progress__card {
+      width: 360px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .student-progress__card {
+      width: 400px;
+    }
+  }
+
+  .student-progress--dark,
+  [data-theme="dark"] .student-progress {
+    --sp-background: hsl(0, 0%, 0%);
+    --sp-foreground: hsl(0, 0%, 100%);
+    --sp-card-bg: hsl(0, 0%, 6%);
+    --sp-border: hsl(0, 0%, 20%);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Student Progress",
+  "class": "student-progress-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "SEE HOW OUR"
+    },
+    {
+      "type": "text",
+      "id": "heading_highlight",
+      "label": "Highlighted word(s)",
+      "default": "STUDENTS PERFORM"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "student_video",
+      "name": "Student Video",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Student Video"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Student Progress",
+      "blocks": [
+        { "type": "student_video" },
+        { "type": "student_video" },
+        { "type": "student_video" }
+      ]
+    }
+  ]
+}
+{% endschema %}

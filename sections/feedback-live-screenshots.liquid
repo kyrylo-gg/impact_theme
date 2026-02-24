@@ -37,15 +37,16 @@
           <div class="feedback-screenshots__row feedback-screenshots__row--pair">
             {% comment %} First item {% endcomment %}
             {% if block.settings.image != blank %}
+              {% assign img = block.settings.image %}
               <div class="feedback-screenshots__item feedback-screenshots__item--{{ block.settings.size | default: 'default' }}" {{ block.shopify_attributes }}>
                 <div class="feedback-screenshots__img-wrap">
                   <img
-                    src="{{ block.settings.image | image_url: width: 800 }}"
-                    srcset="{{ block.settings.image | image_url: width: 300 }} 300w, {{ block.settings.image | image_url: width: 500 }} 500w, {{ block.settings.image | image_url: width: 800 }} 800w"
+                    src="{{ img | image_url: width: 800 }}"
+                    srcset="{{ img | image_url: width: 300 }} 300w, {{ img | image_url: width: 500 }} 500w, {{ img | image_url: width: 800 }} 800w"
                     sizes="(max-width: 767px) 45vw, 22vw"
                     loading="lazy"
-                    width="800"
-                    height="800"
+                    width="{{ img.width }}"
+                    height="{{ img.height }}"
                     alt=""
                     class="feedback-screenshots__img"
                   >
@@ -59,15 +60,16 @@
             {% endif %}
             {% comment %} Second item {% endcomment %}
             {% if next_block.settings.image != blank %}
+              {% assign next_img = next_block.settings.image %}
               <div class="feedback-screenshots__item feedback-screenshots__item--{{ next_block.settings.size | default: 'default' }}" {{ next_block.shopify_attributes }}>
                 <div class="feedback-screenshots__img-wrap">
                   <img
-                    src="{{ next_block.settings.image | image_url: width: 800 }}"
-                    srcset="{{ next_block.settings.image | image_url: width: 300 }} 300w, {{ next_block.settings.image | image_url: width: 500 }} 500w, {{ next_block.settings.image | image_url: width: 800 }} 800w"
+                    src="{{ next_img | image_url: width: 800 }}"
+                    srcset="{{ next_img | image_url: width: 300 }} 300w, {{ next_img | image_url: width: 500 }} 500w, {{ next_img | image_url: width: 800 }} 800w"
                     sizes="(max-width: 767px) 45vw, 22vw"
                     loading="lazy"
-                    width="800"
-                    height="800"
+                    width="{{ next_img.width }}"
+                    height="{{ next_img.height }}"
                     alt=""
                     class="feedback-screenshots__img"
                   >
@@ -84,15 +86,16 @@
         {% else %}
           <div class="feedback-screenshots__row">
             {% if block.settings.image != blank %}
+              {% assign img = block.settings.image %}
               <div class="feedback-screenshots__item feedback-screenshots__item--{{ block.settings.size | default: 'default' }}" {{ block.shopify_attributes }}>
                 <div class="feedback-screenshots__img-wrap">
                   <img
-                    src="{{ block.settings.image | image_url: width: 800 }}"
-                    srcset="{{ block.settings.image | image_url: width: 300 }} 300w, {{ block.settings.image | image_url: width: 500 }} 500w, {{ block.settings.image | image_url: width: 800 }} 800w"
+                    src="{{ img | image_url: width: 800 }}"
+                    srcset="{{ img | image_url: width: 300 }} 300w, {{ img | image_url: width: 500 }} 500w, {{ img | image_url: width: 800 }} 800w"
                     sizes="(max-width: 767px) 100vw, 50vw"
                     loading="lazy"
-                    width="800"
-                    height="800"
+                    width="{{ img.width }}"
+                    height="{{ img.height }}"
                     alt=""
                     class="feedback-screenshots__img"
                   >
@@ -187,6 +190,7 @@
   .feedback-screenshots__row--pair {
     display: flex;
     flex-wrap: wrap;
+    align-items: flex-start;
     gap: 0.75rem;
   }
   @media (min-width: 480px) {
@@ -219,29 +223,24 @@
     position: relative;
   }
 
-  /* Responsive image containers — no forced stretch, preserve aspect */
+  /* Responsive image containers — size to image, no fixed height */
   .feedback-screenshots__img-wrap {
     position: relative;
     border-radius: var(--fls-inner-radius);
     overflow: hidden;
     background: hsl(0, 0%, 92%);
-    min-height: 80px;
+    line-height: 0;
   }
   .feedback-screenshots__img-wrap .feedback-screenshots__img {
-    max-width: 100%;
-    width: auto;
+    width: 100%;
     height: auto;
     display: block;
-    margin: 0 auto;
+    vertical-align: top;
   }
   .feedback-screenshots__img-wrap .feedback-screenshots__placeholder {
     width: 100%;
     height: auto;
     display: block;
-  }
-  .feedback-screenshots__item--tall .feedback-screenshots__img-wrap .feedback-screenshots__img {
-    object-fit: cover;
-    aspect-ratio: 3 / 4;
   }
 
   .feedback-screenshots__placeholder {

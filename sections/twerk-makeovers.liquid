@@ -1,0 +1,376 @@
+{% comment %}
+  Twerk Makeovers — Lovable spec: horizontal scroll of makeover videos with per-card mute.
+  Pure Liquid + CSS + vanilla JS.
+{% endcomment %}
+
+<section class="twerk-makeovers">
+  <div class="twerk-makeovers__container">
+    <div class="twerk-makeovers__header">
+      <h2 class="twerk-makeovers__title">
+        {{ section.settings.heading | default: "LOOK AT THESE INCREDIBLE" | escape }}
+        <span class="twerk-makeovers__title-highlight">{{ section.settings.heading_highlight | default: "TWERK MAKEOVERS!" | escape }}</span>
+      </h2>
+      {% if section.settings.subtitle != blank %}
+        <p class="twerk-makeovers__subtitle">{{ section.settings.subtitle | escape }}</p>
+      {% endif %}
+    </div>
+
+    <div class="twerk-makeovers__scroll-wrapper">
+      <div class="twerk-makeovers__row">
+        {% for block in section.blocks %}
+          {% if block.type == 'makeover_video' %}
+            <div class="twerk-makeovers__card" {{ block.shopify_attributes }}{% if forloop.first %} data-first-card{% endif %}>
+              {% if block.settings.video != blank %}
+                {% if block.settings.video.preview_image != blank %}
+                  {% assign poster_url = block.settings.video.preview_image | image_url: width: 800 %}
+                {% else %}
+                  {% assign poster_url = nil %}
+                {% endif %}
+                <div class="twerk-makeovers__media-wrap">
+                  {{
+                    block.settings.video
+                    | video_tag:
+                      class: 'twerk-makeovers__video',
+                      autoplay: false,
+                      loop: true,
+                      muted: true,
+                      controls: false,
+                      preload: 'none',
+                      poster: poster_url
+                  }}
+                  <button class="twerk-makeovers__play-btn" aria-label="Play" type="button" data-state="paused">
+                    <svg class="twerk-makeovers__play-icon twerk-makeovers__play-icon--play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="twerk-makeovers__play-icon twerk-makeovers__play-icon--pause" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                  </button>
+                </div>
+              {% else %}
+                <div class="twerk-makeovers__placeholder">
+                  {{ 'image' | placeholder_svg_tag: 'twerk-makeovers__placeholder-svg' }}
+                </div>
+              {% endif %}
+
+              <button
+                class="twerk-makeovers__mute-btn"
+                aria-label="Unmute"
+                data-muted="true"
+                data-video-index="{{ forloop.index0 }}"
+              >
+                <svg class="twerk-makeovers__mute-icon twerk-makeovers__mute-icon--off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" x2="17" y1="9" y2="15"/><line x1="17" x2="23" y1="9" y2="15"/></svg>
+                <svg class="twerk-makeovers__mute-icon twerk-makeovers__mute-icon--on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+              </button>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="{{ 'twerk-makeovers-video.js' | asset_url }}" defer></script>
+
+{% stylesheet %}
+  .twerk-makeovers {
+    --tm-primary: var(--nass-primary, hsl(224, 100%, 50%));
+    --tm-background: var(--color-background, hsl(0, 0%, 100%));
+    --tm-foreground: #000;
+    --tm-card-bg: var(--color-card, hsl(0, 0%, 96%));
+    --tm-border: hsl(0, 0%, 90%);
+    --tm-muted-fg: hsl(0, 0%, 45%);
+    --tm-font-display: var(--font-heading--family, 'Anybody'), system-ui, sans-serif;
+    --tm-font-body: var(--font-body--family, 'Avenir Next'), 'Avenir', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  .twerk-makeovers {
+    padding: 64px 0;
+    background-color: var(--tm-background);
+    border-radius: 24px;
+    overflow: hidden;
+  }
+
+  .twerk-makeovers__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 16px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .twerk-makeovers__header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .twerk-makeovers__title {
+    font-family: var(--tm-font-display);
+    font-weight: 900;
+    font-stretch: 150%;
+    letter-spacing: 0.03em;
+    line-height: 100%;
+    text-transform: uppercase;
+    color: var(--tm-foreground);
+    margin: 0 0 12px 0;
+    padding: 0 8px;
+    font-size: 20px;
+  }
+
+  .twerk-makeovers__title-highlight {
+    color: var(--tm-primary);
+  }
+
+  @media (min-width: 768px) {
+    .twerk-makeovers__title {
+      font-size: 30px;
+    }
+  }
+
+  .twerk-makeovers__subtitle {
+    font-family: var(--tm-font-body);
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--tm-muted-fg);
+    margin: 0;
+  }
+
+  .twerk-makeovers__scroll-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -16px;
+    padding: 0 16px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .twerk-makeovers__scroll-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .twerk-makeovers__row {
+    display: flex;
+    gap: 16px;
+    padding-bottom: 16px;
+    width: max-content;
+    scroll-snap-type: x mandatory;
+  }
+
+  .twerk-makeovers__card {
+    position: relative;
+    background-color: var(--tm-card-bg);
+    border-radius: 30px;
+    overflow: hidden;
+    border: 1px solid var(--tm-border);
+    width: 280px;
+    flex-shrink: 0;
+    scroll-snap-align: center;
+  }
+
+  .twerk-makeovers__media-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    background-color: hsl(0, 0%, 10%);
+  }
+
+  .twerk-makeovers__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    display: block;
+  }
+
+  .twerk-makeovers__play-btn {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.08);
+    border: none;
+    cursor: pointer;
+    color: #ffffff;
+    transition: background 0.2s ease, opacity 0.2s ease;
+  }
+
+  .twerk-makeovers__play-btn:hover {
+    background: rgba(0, 0, 0, 0.15);
+  }
+
+  .twerk-makeovers__play-btn.is-hidden {
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  .twerk-makeovers__play-icon {
+    width: 64px;
+    height: 64px;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+  }
+
+  .twerk-makeovers__play-btn[data-state="paused"] .twerk-makeovers__play-icon--pause {
+    display: none;
+  }
+  .twerk-makeovers__play-btn[data-state="playing"] .twerk-makeovers__play-icon--play {
+    display: none;
+  }
+  .twerk-makeovers__play-btn[data-state="playing"] .twerk-makeovers__play-icon--pause {
+    display: block;
+  }
+
+  .twerk-makeovers__placeholder {
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: hsl(0, 0%, 10%);
+    border-radius: 20px;
+  }
+
+  .twerk-makeovers__placeholder-svg {
+    width: 40%;
+    height: auto;
+    opacity: 0.3;
+  }
+
+  .twerk-makeovers__mute-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px);
+    border-radius: 9999px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    transition: background-color 0.2s ease;
+    animation: twerk-makeovers-pulse 2s infinite;
+    box-shadow:
+      0 0 0 2px rgba(255, 255, 255, 0.5),
+      0 0 15px rgba(255, 255, 255, 0.5);
+  }
+
+  .twerk-makeovers__mute-btn:hover {
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  .twerk-makeovers__mute-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .twerk-makeovers__mute-btn[data-muted="true"] .twerk-makeovers__mute-icon--on {
+    display: none;
+  }
+  .twerk-makeovers__mute-btn[data-muted="false"] .twerk-makeovers__mute-icon--off {
+    display: none;
+  }
+
+  @keyframes twerk-makeovers-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  @media (min-width: 750px) {
+    .twerk-makeovers {
+      padding: 96px 0;
+    }
+
+    .twerk-makeovers__title {
+      font-size: 30px;
+    }
+
+    .twerk-makeovers__subtitle {
+      font-size: 20px;
+    }
+
+    .twerk-makeovers__header {
+      margin-bottom: 48px;
+    }
+
+    .twerk-makeovers__row {
+      gap: 24px;
+    }
+
+    .twerk-makeovers__card {
+      width: 320px;
+    }
+  }
+
+  @media (min-width: 990px) {
+    .twerk-makeovers__title {
+      font-size: 48px;
+    }
+
+    .twerk-makeovers__subtitle {
+      font-size: 24px;
+    }
+  }
+
+  .twerk-makeovers--dark,
+  [data-theme="dark"] .twerk-makeovers {
+    --tm-background: hsl(0, 0%, 0%);
+    --tm-foreground: hsl(0, 0%, 100%);
+    --tm-card-bg: hsl(0, 0%, 6%);
+    --tm-border: hsl(0, 0%, 20%);
+    --tm-muted-fg: hsl(0, 0%, 60%);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Twerk Makeovers",
+  "class": "twerk-makeovers-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "LOOK AT THESE INCREDIBLE"
+    },
+    {
+      "type": "text",
+      "id": "heading_highlight",
+      "label": "Highlighted word(s)",
+      "default": "TWERK MAKEOVERS!"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "YOU CAN ACHIEVE THIS TOO!"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "makeover_video",
+      "name": "Makeover Video",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Makeover Video"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Twerk Makeovers",
+      "blocks": [
+        { "type": "makeover_video" },
+        { "type": "makeover_video" },
+        { "type": "makeover_video" },
+        { "type": "makeover_video" }
+      ]
+    }
+  ]
+}
+{% endschema %}

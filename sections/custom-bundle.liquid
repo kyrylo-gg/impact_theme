@@ -50,6 +50,7 @@
   {% assign has_main_product = true %}
   {% assign current_prod = section.settings.main_product %}
 {% endif %}
+<div id="custom-bundle" style="scroll-margin-top: 80px;">
 <div id="CustomBundle-{{ section.id }}" data-custom-bundle="{% if section.settings.group_products_in_cart %}true{% endif %}" class="section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient">
   <div class="section custom-product-bundle">
     <div class="custom-rpdouct-bundle__head custom-product-bundle__tabs">
@@ -450,6 +451,7 @@
     </div>
   </div>
   {{ size_chart_modals }}
+</div>
 </div>
 <script src="{{ 'custom-product-bundle.js' | asset_url }}" defer></script>
 <script>

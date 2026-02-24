@@ -1,0 +1,226 @@
+{% comment %}
+  Features section — Lovable spec. Pure Liquid + HTML + CSS.
+  Grid of feature blocks with icon, title, description.
+{% endcomment %}
+
+<section class="features" {{ section.shopify_attributes }}>
+  <div class="features__grid">
+    {% for block in section.blocks %}
+      {% if block.type == 'feature' %}
+        <div class="features__item" {{ block.shopify_attributes }}>
+          <div class="features__icon-wrap">
+            {% case block.settings.icon %}
+              {% when 'clock' %}
+                <svg class="features__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              {% when 'smartphone' %}
+                <svg class="features__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+              {% when 'heart' %}
+                <svg class="features__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+              {% when 'zap' %}
+                <svg class="features__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
+            {% endcase %}
+          </div>
+
+          <h3 class="features__title">{{ block.settings.title | escape }}</h3>
+
+          {% if block.settings.description != blank %}
+            <p class="features__description">{{ block.settings.description | escape }}</p>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+{% stylesheet %}
+  /* ========================================
+     Design Tokens — SCOPED
+     ======================================== */
+  .features {
+    --ft-primary: var(--nass-primary, hsl(224, 100%, 50%));
+    --ft-primary-10: hsla(224, 100%, 50%, 0.1);
+    --ft-foreground: var(--color-foreground, hsl(0, 0%, 0%));
+    --ft-muted-fg: #959595;
+    --ft-border: var(--color-border, hsl(0, 0%, 90%));
+
+    --ft-font-display: var(--font-heading--family, 'Anybody'), system-ui, sans-serif;
+    --ft-font-body: var(--font-body--family, 'Avenir Next'), 'Avenir', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  /* Section */
+  .features {
+    padding: 64px 0;
+    background-color: var(--color-background, hsl(0, 0%, 100%));
+    border-radius: 24px;
+    overflow: hidden;
+  }
+
+  /* Grid */
+  .features__grid {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 16px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  /* Item */
+  .features__item {
+    text-align: center;
+    min-width: 0;
+  }
+
+  /* Icon circle */
+  .features__icon-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: var(--ft-primary-10);
+    margin-bottom: 16px;
+  }
+
+  .features__icon {
+    width: 28px;
+    height: 28px;
+    color: var(--ft-primary);
+  }
+
+  /* Title */
+  .features__title {
+    font-family: var(--ft-font-display);
+    font-weight: 900;
+    font-stretch: 150%;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    font-size: 18px;
+    line-height: 1.2;
+    color: var(--ft-foreground);
+    margin: 0 0 8px;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  /* Description */
+  .features__description {
+    font-family: var(--ft-font-body);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.4;
+    color: var(--ft-muted-fg);
+    margin: 0;
+  }
+
+  /* ========================================
+     Responsive — Tablet+ (min-width: 750px)
+     ======================================== */
+  @media (min-width: 750px) {
+    .features__grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+
+    .features__title {
+      font-size: 30px;
+    }
+
+    .features__description {
+      font-size: 18px;
+    }
+  }
+
+  /* ========================================
+     Dark Mode
+     ======================================== */
+  .features--dark,
+  [data-theme="dark"] .features {
+    --ft-foreground: hsl(0, 0%, 100%);
+    --ft-muted-fg: hsl(0, 0%, 70%);
+    --ft-primary-10: hsla(224, 100%, 50%, 0.15);
+    --ft-border: hsl(0, 0%, 20%);
+    background-color: hsl(0, 0%, 0%);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Features",
+  "class": "features-section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "clock", "label": "Clock (Lifetime Access)" },
+            { "value": "smartphone", "label": "Smartphone (Any Device)" },
+            { "value": "heart", "label": "Heart (All Levels)" },
+            { "value": "zap", "label": "Zap (Quick Results)" }
+          ],
+          "default": "clock"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Lifetime Access"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Access your programs forever, no subscriptions needed"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Features",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "clock",
+            "title": "Lifetime Access",
+            "description": "Access your programs forever, no subscriptions needed"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "smartphone",
+            "title": "Any Device",
+            "description": "Watch on your phone, tablet, or computer"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "heart",
+            "title": "All Skill Levels",
+            "description": "Suitable for beginners to advanced dancers"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "zap",
+            "title": "Quick Results",
+            "description": "See visible results within the first weeks"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
