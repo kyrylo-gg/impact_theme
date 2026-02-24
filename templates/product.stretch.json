@@ -1,0 +1,282 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "zp-product-header-content": {
+      "type": "product-header-content-zipifypages",
+      "settings": {}
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "vendor",
+          "disabled": true,
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "heading_tag": "h2"
+          }
+        },
+        "badges": {
+          "type": "badges",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_taxes_notice": false
+          }
+        },
+        "rating": {
+          "type": "rating",
+          "settings": {
+            "show_empty": false
+          }
+        },
+        "785c6c77-63d0-4a4e-bd4d-aeee2dd7c6ec": {
+          "type": "inventory",
+          "settings": {
+            "low_inventory_threshold": 9
+          }
+        },
+        "payment_terms": {
+          "type": "payment_terms",
+          "settings": {}
+        },
+        "separator": {
+          "type": "separator",
+          "disabled": true,
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "hide_sold_out_variants": false,
+            "stack_blocks": true,
+            "selector_mode": "block",
+            "color_mode": "color",
+            "size_chart_page": ""
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "disabled": true,
+          "settings": {}
+        },
+        "d02f7f4f-fa13-4bda-88c6-1bb41e4a4ed0": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": true,
+            "show_gift_card_recipient": true,
+            "atc_button_background": "",
+            "atc_button_text_color": "",
+            "payment_button_background": "",
+            "payment_button_text_color": ""
+          }
+        },
+        "image_EzXWQL": {
+          "type": "image",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/1.gif",
+            "alignment": "center",
+            "max_width": 500,
+            "url": "https://www.nasswear.com/pages/bf25"
+          }
+        },
+        "81a1a79f-3827-424f-9a39-74811ea8e4f4": {
+          "type": "product_variations",
+          "settings": {
+            "option_name": "See also:",
+            "option_value_metafield": "custom.variation_value",
+            "products": "{{ product.metafields.custom.variation_products.value }}",
+            "color_mode": "variant"
+          }
+        },
+        "0669bfe9-354c-4601-abcf-c38d6afaeb80": {
+          "type": "text",
+          "settings": {
+            "text": "<p>🔄 30 Day Returns<br/>🚚 $140+ Free US Shipping<br/>💃 Unique NassyStitch Technology<br/>💚 Eco-Friendly Packaging</p>"
+          }
+        },
+        "cba091ce-a0d9-465f-ab86-d40697549bf2": {
+          "type": "associated_products",
+          "settings": {
+            "title": "Complete the look",
+            "stack_products": true,
+            "products_count": 5,
+            "background": "",
+            "text_color": ""
+          }
+        },
+        "description": {
+          "type": "description",
+          "disabled": true,
+          "settings": {
+            "collapse_content": true
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "badges",
+        "price",
+        "rating",
+        "785c6c77-63d0-4a4e-bd4d-aeee2dd7c6ec",
+        "payment_terms",
+        "separator",
+        "variant_picker",
+        "quantity_selector",
+        "d02f7f4f-fa13-4bda-88c6-1bb41e4a4ed0",
+        "image_EzXWQL",
+        "81a1a79f-3827-424f-9a39-74811ea8e4f4",
+        "0669bfe9-354c-4601-abcf-c38d6afaeb80",
+        "cba091ce-a0d9-465f-ab86-d40697549bf2",
+        "description"
+      ],
+      "settings": {
+        "full_width": true,
+        "show_fixed_add_to_cart": true,
+        "desktop_media_width": 55,
+        "desktop_media_layout": "carousel_thumbnails_left",
+        "mobile_media_size": "expanded",
+        "mobile_carousel_control": "floating_dots",
+        "enable_video_autoplay": true,
+        "enable_video_looping": true,
+        "enable_image_zoom": true,
+        "max_image_zoom_level": 3,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "input_background": "rgba(0,0,0,0)",
+        "input_text_color": ""
+      }
+    },
+    "rich_text_B46AnJ": {
+      "type": "rich-text",
+      "blocks": {
+        "richtext_GYE8hr": {
+          "type": "richtext",
+          "settings": {
+            "seo_optimization": true,
+            "content": "<h3>Customer Reviews</h3>"
+          }
+        }
+      },
+      "block_order": [
+        "richtext_GYE8hr"
+      ],
+      "custom_css": [
+        ".section-blends {padding: 20px;}"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "full_width": true,
+        "content_width": "small",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "1678891879e610efa5": {
+      "type": "apps",
+      "blocks": {
+        "2ff10f88-c4ef-45de-81d3-f1a3b191fb71": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        },
+        "cd0d0937-06f4-40ac-bcc9-e52ad1a728de": {
+          "type": "shopify://apps/judge-me-reviews/blocks/medals/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "2ff10f88-c4ef-45de-81d3-f1a3b191fb71",
+        "cd0d0937-06f4-40ac-bcc9-e52ad1a728de"
+      ],
+      "settings": {
+        "full_width": true,
+        "remove_vertical_spacing": false,
+        "remove_horizontal_spacing": false,
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "033c843a-f56c-4c1c-9e96-37189e8792f5": {
+      "type": "recently-viewed-products",
+      "settings": {
+        "full_width": true,
+        "products_count": 6,
+        "stack_products": false,
+        "show_progress_bar": false,
+        "products_per_row_mobile": "1",
+        "products_per_row_desktop": 3,
+        "subheading": "",
+        "title": "Recently viewed products",
+        "content": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
+    },
+    "zp-product-footer-content": {
+      "type": "product-footer-content-zipifypages",
+      "settings": {}
+    },
+    "rich_text_LWVib7": {
+      "type": "rich-text",
+      "blocks": {
+        "richtext_nVdpWJ": {
+          "type": "richtext",
+          "settings": {
+            "seo_optimization": false,
+            "content": "<h1>Stretching Guide: Your Comprehensive Resource for Flexibility and Strength</h1><p>Welcome to your ultimate stretching guide—a resource designed to help you unlock greater flexibility, improve mobility, and enhance your overall well-being. Whether you’re a complete beginner or looking to deepen your practice, this stretching exercise guide will walk you through the essentials, from foundational stretches to advanced techniques inspired by renowned flexibility experts like Nastya Nass.</p><h2>Why Stretching Matters</h2><p>Stretching is more than just a warm-up or cool-down activity. It’s a vital component of any fitness routine, supporting joint health, reducing the risk of injury, and promoting a full range of motion. Regular stretching can:</p><ul><li>Increase flexibility and lengthen muscles;</li><li>Improve posture and ease muscle tension;</li><li>Boost blood circulation;</li><li>Enhance athletic performance;</li><li>Support daily activities and reduce discomfort from prolonged sitting or repetitive movements.</li></ul><p>A reasonable level of flexibility is essential for the healthy functioning of joints and muscles, which in turn facilitates performance and reduces the risk of injury.</p><h2>Beginners Guide to Stretching</h2><p>If you’re new to stretching, start slow. The beginners guide to stretching emphasizes gentle, controlled movements and proper breathing. Here’s how to begin:</p><ul><li>Warm up first: Engage in 5-10 minutes of light activity (like walking) to prepare your muscles.</li><li>Move slowly: Stretch until you feel a gentle pull—never pain. Hold each stretch for about 30 seconds and repeat 2-4 times per muscle group.</li><li>Breathe deeply: Inhale and exhale steadily to help your muscles relax.</li><li>Be consistent: Aim to stretch at least 2-3 times per week, or daily for best results.</li></ul><h2>Common Beginner Stretches</h2><ul><li>Calf Stretch: Stand facing a wall, step one foot back, and press your heel down.</li><li>Hamstring Stretch: Sit with one leg extended and reach toward your toes.</li><li>Quadriceps Stretch: Stand and pull your foot toward your glutes to stretch the front of your thigh.</li><li>Hip Flexor Stretch: Kneel on one knee, press your hips forward gently.</li></ul><p>These foundational moves form the core of any effective stretching exercise guide.</p><h2>Stretch and Strengthen Exercise Guide</h2><p>Stretching isn’t just about flexibility—it’s also about building strength. The stretch and strengthen exercise guide combines dynamic and static stretches to optimize both flexibility and muscle tone. For example:</p><ul><li>Dynamic stretches (like leg swings or arm circles) warm up the body and prepare it for movement.</li><li>Static stretches (like holding a split or a deep lunge) increase flexibility and help muscles recover.</li></ul><p>Incorporating both types into your routine can help you move more efficiently and with greater control.</p><h2>Stretching Guide for Flexibility</h2><p>If your goal is to achieve greater flexibility, this stretching guide for flexibility is your roadmap. Flexibility training should focus on all major muscle groups, with extra attention to areas that feel tight or restricted. Key principles include:</p><ul><li>Progress gradually: As your flexibility improves, gently increase the depth and duration of each stretch.</li><li>Target problem areas: Focus on commonly tight regions like hamstrings, hip flexors, calves, and shoulders.</li><li>Listen to your body: Never force a stretch or bounce, which can lead to injury.</li></ul><p>For those inspired by experts like Nastya Nass, advanced flexibility moves such as splits, backbends, and deep hip openers can be added once you’ve built a solid foundation.</p><h2>The Ultimate Stretching Guide: Tips for Success</h2><p>To maximize your results, follow these essential tips from the ultimate stretching guide:</p><ul><li>Consistency is key: Stretch regularly—ideally daily—to see steady progress.</li><li>Quality over quantity: Focus on form and control rather than how far you can push.</li><li>Personalize your program: Tailor your routine to your needs, whether you’re an athlete, a desk worker, or someone recovering from injury.</li><li>Stay safe: If you have health conditions or injuries, consult a professional before starting a new stretching regimen.</li></ul><h2>Nastya Nass: Flexibility Inspiration</h2><p>Nastya Nass is a global fitness icon known for her impressive flexibility and dynamic stretch routines. Her approach often blends dance, yoga, and functional movement, making her routines both effective and engaging. Many people look to Nastya Nass for motivation, as her routines demonstrate the possibilities achievable with dedication and the right stretching guide.</p><h2>Sample Stretching Routine</h2><p>Here’s a sample routine inspired by the ultimate stretching guide and flexibility experts:</p><ol><li>Warm-up: 5 minutes of light cardio (marching, jogging, or jumping jacks)</li><li>Neck and Shoulder Stretch: Gently tilt your head side to side; roll your shoulders backward and forward.</li><li>Triceps and Arm Stretch: Reach one arm overhead, bend the elbow, and gently press with the opposite hand.</li><li>Chest Opener: Clasp your hands behind your back and lift your arms.</li><li>Hip Flexor Stretch: Kneel on one knee and press hips forward.</li><li>Hamstring Stretch: Sit with legs extended, reach toward your toes.</li><li>Quadriceps Stretch: Stand and pull one foot toward your glutes.</li><li>Calf Stretch: Press your heel down against the floor.</li><li>Lower Back Stretch: Lie on your back, hug your knees to your chest.</li><li>Cool Down: Gentle breathing and relaxation.</li></ol><p>Hold each stretch for 20-30 seconds, repeating as needed.</p><p>This stretching guide is your companion on the journey to a more flexible, resilient, and healthy body. Whether you’re following a beginners guide to stretching or seeking the advanced moves of the ultimate stretching guide, remember that progress comes with patience and consistency. Take inspiration from experts like Nastya Nass, and enjoy the lifelong benefits of a regular stretch and strengthen exercise guide.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "richtext_nVdpWJ"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "full_width": true,
+        "content_width": "small",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    }
+  },
+  "order": [
+    "zp-product-header-content",
+    "main",
+    "rich_text_B46AnJ",
+    "1678891879e610efa5",
+    "033c843a-f56c-4c1c-9e96-37189e8792f5",
+    "zp-product-footer-content",
+    "rich_text_LWVib7"
+  ]
+}

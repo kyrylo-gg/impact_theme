@@ -1,0 +1,106 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner": {
+      "type": "collection-banner",
+      "disabled": true,
+      "settings": {
+        "full_width": false,
+        "allow_transparent_header": false,
+        "enable_parallax": true,
+        "show_collection_title": true,
+        "show_collection_description": true,
+        "show_collection_image": true,
+        "collection_title_size": "h0",
+        "image_size": "auto",
+        "mobile_text_position": "place-self-center text-center",
+        "desktop_text_position": "sm:place-self-center sm:text-center",
+        "featured_product": "",
+        "featured_product_heading": "Featured product",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 30
+      }
+    },
+    "main": {
+      "type": "main-collection",
+      "blocks": {
+        "promotion_image_9AbJfP": {
+          "type": "promotion_image",
+          "disabled": true,
+          "settings": {
+            "position": 8,
+            "column_span": "1",
+            "image": "shopify://shop_images/Card_3_1.jpg",
+            "mobile_image": "shopify://shop_images/Card_3_1.jpg",
+            "title": "MORE FOR LESS",
+            "content": "",
+            "link_url": "https://www.nasswear.com/a/collections/bundle/shorts-bundle",
+            "link_text": "Up to 30% off shorts",
+            "heading_tag": "h4",
+            "text_position": "place-self-end-start text-start",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 5
+          }
+        }
+      },
+      "block_order": [
+        "promotion_image_9AbJfP"
+      ],
+      "settings": {
+        "products_per_page": 24,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 3,
+        "enable_newsletter_card": true,
+        "newsletter_card_position": 5,
+        "form_id": "",
+        "filter_layout": "sidebar",
+        "show_sort_by": true,
+        "show_filters": true,
+        "show_filter_group_name": false,
+        "show_color_swatch": true,
+        "show_empty_filter_values": false,
+        "show_filter_values_count": true,
+        "open_first_filter_group": false
+      }
+    },
+    "rich_text_zzUmDH": {
+      "type": "rich-text",
+      "blocks": {
+        "richtext_JabWiy": {
+          "type": "richtext",
+          "settings": {
+            "seo_optimization": false,
+            "content": "<h1>Women’s Shorts for Every Occasion</h1><p>When it comes to versatile and stylish wardrobe essentials, women’s shorts hold a special place. Whether you're heading to the beach, hitting the dance floor, or simply enjoying a casual day out, the right pair of shorts can elevate your look, keep you comfortable, and express your unique style. In this comprehensive guide, we’ll explore the diverse world of women’s shorts, highlighting key styles such as beach shorts women love, sexy shorts for women that turn heads, and dance shorts womens rely on for both performance and flair.</p><h2>Why Women’s Shorts Are a Must-Have</h2><p>Shorts are more than just a summer staple; they’re a year-round fashion essential that can be adapted to suit any activity or mood. The beauty of women’s shorts lies in their versatility — from casual cotton pairs perfect for lounging, to sleek leather or satin options ideal for a night out. They offer freedom of movement, breathability, and a flattering silhouette that complements various body types.</p><p>Whether you prefer high-waisted cuts that accentuate your waist, relaxed boyfriend styles for a laid-back vibe, or tailored designs for a polished look, there’s a perfect pair waiting for you. Plus, shorts can be easily paired with everything from crop tops and blouses to oversized sweaters and blazers, making them a dynamic piece in your wardrobe.</p><h2>Beach Shorts Women Adore for Sun and Sand</h2><p>When the sun is shining and the waves are calling, beach shorts women choose need to be both functional and fashionable. These shorts are typically made from lightweight, quick-drying fabrics like nylon or polyester blends that resist water and dry rapidly, making them ideal for beach activities.</p><p>Beach shorts often feature vibrant colors, tropical prints, or nautical stripes that capture the essence of summer fun. Many come with elastic waistbands or adjustable drawstrings for a comfortable fit, allowing you to move freely whether you’re swimming, playing beach volleyball, or simply strolling along the shore.</p><p>In addition to their practicality, beach shorts are designed to be flattering and easy to style. Pair them with a bikini top or a loose tank, add a wide-brimmed hat and sunglasses, and you’re ready for a perfect beach day. Some styles also include handy pockets, making them convenient for carrying small essentials like keys or lip balm.</p><h2>Sexy Shorts for Women: Confidence and Style Combined</h2><p>For those moments when you want to make a bold statement, sexy shorts for women are the go-to choice. These shorts are designed to highlight your curves and add a touch of allure to your outfit. Materials like leather, denim with distressed details, or silky fabrics often define this category.</p><p>High-cut styles that elongate the legs, shorts with lace or mesh inserts, and designs featuring bold colors or metallic accents can all contribute to a sexy, eye-catching look. Pair these shorts with a fitted crop top, a plunging neckline blouse, or a chic blazer for a night out or a special occasion.</p><p>The key to rocking sexy shorts is confidence and comfort. Choose a pair that fits well and makes you feel empowered. Accessories like statement heels, layered jewelry, and a clutch can complete your ensemble, ensuring you turn heads wherever you go.</p><h2>Dance Shorts Womens Trust for Performance and Style</h2><p>For dancers, dance shorts womens prefer must combine flexibility, durability, and style. Whether you’re into ballet, hip-hop, contemporary, or jazz, the right shorts can enhance your performance by allowing unrestricted movement and providing comfort during intense routines.</p><p>Dance shorts are typically made from stretchy, breathable fabrics such as spandex or lycra blends. They often feature snug fits with wide waistbands to stay securely in place during spins, jumps, and stretches. Some designs include mesh panels or cut-outs for added ventilation and aesthetic appeal.</p><p>In addition to their practical use, dance shorts are available in numerous colors and designs to suit your individual style and the type of dance you perform. You can combine them with leotards, sports bras, or relaxed tops during practice sessions and shows. Many dancers also value shorts made with moisture-wicking fabrics that help keep them dry and comfortable throughout their routines.</p><h3>Styling Tips for Women’s Shorts</h3><ul><li>Casual Chic: Pair denim or cotton shorts with a tucked-in tee and sneakers for an effortless everyday look.</li><li>Beach Ready: Combine your beach shorts with a breezy cover-up and sandals for a relaxed seaside vibe.</li><li>Night Out: Match sexy shorts with heels and a statement top to create a striking evening outfit.</li><li>Active and Athletic: Opt for dance shorts with a fitted tank and supportive sneakers for workouts or dance practice.</li></ul><h3>Choosing the Right Fit and Fabric</h3><p>When selecting women’s shorts, consider your body shape, the occasion, and your comfort preferences. For example:</p><ul><li>Slim Fit: Accentuates your silhouette and works well for sexy shorts or dance shorts.</li><li>Relaxed Fit: Offers comfort and ease, ideal for beach shorts or casual wear.</li><li>High-Waisted: Flattering for most body types, provides tummy control and a vintage vibe.</li><li>Fabric: Breathable cotton for everyday wear, moisture-wicking synthetics for active use, and luxe materials like leather or satin for special occasions.</li></ul><p>Women’s shorts are a dynamic and essential part of any wardrobe, offering endless possibilities to express style, comfort, and confidence. Whether you’re searching for beach shorts women can rely on for a sunny day, sexy shorts for women to make a statement, or dance shorts womens trust for their routines, there’s a perfect pair out there for you.</p><p>Embrace the freedom and fashion that shorts bring, and explore the variety of styles available to find your perfect fit. With the right pair of women’s shorts, you’re ready to take on any occasion with flair and comfort!</p>"
+          }
+        }
+      },
+      "block_order": [
+        "richtext_JabWiy"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "full_width": true,
+        "content_width": "small",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "main",
+    "rich_text_zzUmDH"
+  ]
+}

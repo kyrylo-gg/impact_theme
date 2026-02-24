@@ -1,0 +1,2874 @@
+{% comment %}
+    {{-- start samita wholesale quick order form --}}
+{% endcomment %}
+{% assign data_shop = shop.metafields.samita_wholesale.shop.value %}
+{% if data_shop %}
+    {% assign translateTexts = data_shop.settings.translations.default.quick_order_table %}
+    {% assign use_custom_drawer = data_shop.settings.cart_drawer.enable %}
+    {% assign is_show = false %}
+    {% assign is_show_volume_table_type = "on_qty_product" %}
+    {% assign current_url = canonical_url|strip %}
+    {% assign query_search_value = "" %}
+    {% assign default_limit_product_get_all = 10000 %}
+    {% assign limit_product_get_all = 20 %}
+
+    {%- assign idSize = shop.metafields.samita_wholesale.quickOrderFormIds.value | size -%}
+    <!-- //  get setting form quickorder metafields by url //  -->
+    {% if idSize > 0 %}
+        {% for id in shop.metafields.samita_wholesale.quickOrderFormIds.value %}
+            {% capture item %}quick_order_form_{{id}}{% endcapture %}
+            {% assign currentMetafield = shop.metafields.samita_wholesale[item] %}
+            {% for quickOrderForm in currentMetafield.value %}
+                {% assign _quickOrderForm = quickOrderForm | last %}
+                {% assign _url = shop.url | append:'/' | append: _quickOrderForm.configs.quickOrder_table_template.display_on_page|strip %}
+                {% assign curent_page_url = canonical_url | split: '/' | last %}
+                {% assign url_filter_page_val =  1 %}
+
+                {% if curent_page_url contains "page=" or curent_page_url contains "q=" or curent_page_url contains "collection=" or curent_page_url contains "sort_order=" %}
+
+                    {% assign last_curent_page_url = canonical_url | split: '/' | last %}
+                    {% assign _url = _url | append: '/' | append: curent_page_url %}
+
+                    {%- assign url_parts= curent_page_url | split:'&' -%}
+                    {%- for part in url_parts -%}
+                        {%- assign key_and_value = part | split:'=' -%}
+                        {%- if key_and_value.size > 1 -%}
+                            {% if key_and_value[0] == 'page' %}
+                                {% assign url_filter_page_val = key_and_value[1] | times: 1 %}
+                            {% elsif key_and_value[0] == 'q' %}
+                                {% assign url_filter_val =  key_and_value[1] | url_decode %}
+                            {% elsif key_and_value[0] == 'collection' %}
+                                {% assign url_collection_val =  key_and_value[1] | url_decode %}
+                            {% elsif key_and_value[0] == 'sort_order' %}
+                                {% assign url_sort_val =  key_and_value[1] | url_decode %}
+                            {% endif %}
+                        {%- endif -%}
+                    {%- endfor -%}
+
+                {% endif %}
+                <!-- //  end //  -->
+                {% if current_url == _url %}
+                    {% assign quickOrderFormObj = _quickOrderForm %}
+                    {% assign is_show = true %}
+                    {% break %}
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    {% else %}
+        {%- assign formSize = shop.metafields.samita_wholesale.quickOrderForms.value | size -%}
+        {% if formSize > 0 %}
+            {% for  _quickOrderForm in shop.metafields.samita_wholesale.quickOrderForms %}
+                {% assign _url = shop.url | append:'/' | append: _quickOrderForm.configs.quickOrder_table_template.display_on_page |strip %}
+                {% assign curent_page_url = canonical_url | split: '/' | last %}
+                {% assign url_filter_page_val =  1 %}
+
+                {% if curent_page_url contains "page=" or curent_page_url contains "q=" or curent_page_url contains "collection=" or curent_page_url contains "sort_order=" %}
+
+                    {% assign last_curent_page_url = canonical_url | split: '/' | last %}
+                    {% assign _url = _url | prepend: '/' | append: curent_page_url %}
+                    {%- assign url_parts= curent_page_url | split:'&' -%}
+                    {%- for part in url_parts -%}
+                        {%- assign key_and_value = part | split:'=' -%}
+                        {%- if key_and_value.size > 1 -%}
+                            {% if key_and_value[0] == 'page' %}
+                                {% assign url_filter_page_val = key_and_value[1] | times: 1 %}
+                            {% elsif key_and_value[0] == 'q' %}
+                                {% assign url_filter_val =  key_and_value[1] | url_decode %}
+                            {% elsif key_and_value[0] == 'collection' %}
+                                {% assign url_collection_val =  key_and_value[1] | url_decode %}
+                            {% elsif key_and_value[0] == 'sort_order' %}
+                                {% assign url_sort_val =  key_and_value[1] | url_decode %}
+                            {% endif %}
+                        {%- endif -%}
+                    {%- endfor -%}
+                {% endif %}
+                <!-- //  end //  -->
+                {% if current_url == _url %}
+                    {% assign quickOrderFormObj = _quickOrderForm %}
+                    {% assign is_show = true %}
+                    {% break %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+
+
+    <!-- //  show form //  -->
+    {% if is_show and quickOrderFormObj %}
+        {% assign product_configs =  quickOrderFormObj.product_configs %}
+        {% assign quickOrder_table_template = quickOrderFormObj.configs.quickOrder_table_template %}
+        {% assign multiple = quickOrder_table_template.enable_multiple_addCart %}
+        {% assign quick_order_form_design = quickOrder_table_template.design %}
+
+        <!-- //  assign pagination //  -->
+        {% assign product_per_page = quickOrder_table_template.pagination.per_page %}
+        {% assign pagination_type = quickOrder_table_template.pagination.type %}
+        <!-- //  end //  -->
+        {% assign product_ids = '' %}
+        {% assign collection_ids = '' %}
+        {% if product_configs.apply_product.type == "products" %}
+            {% for id in product_configs.apply_product.manual.ids %}
+                {% if forloop.last %}
+                    {% assign product_ids = product_ids | append:id %}
+                {% else %}
+                    {% assign product_ids = product_ids | append:id | append:',' %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        {% if product_configs.apply_product.type == "collections" %}
+            {% for id in product_configs.apply_product.collections.ids %}
+                {% if forloop.first %}
+                    {% if collection_ids != '' %}
+                        {% assign collection_ids = collection_ids | append:',' %}
+                    {% endif %}
+                {% endif %}
+
+                {% if forloop.last %}
+                    {% assign collection_ids = collection_ids | append:id %}
+                {% else%}
+                    {% assign collection_ids = collection_ids | append:id | append:',' %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        
+        {% assign samitaWS_all_product_id = '' %}
+        {% assign samitaWS_all_product_handle = '' %}
+
+        {% assign _product_ids = product_ids | split:',' %}
+        {% assign _collection_ids = collection_ids | split:',' %}
+
+        <!-- //  table form quick order  -->
+        <div id="samitaWS_quickOrderForm" class="samitaWS-quick-order-form" style="display:block;" data-atc="{% if multiple %}multiple{% endif %}">
+            <div class="samitaWS_mainPageHeading">
+                <span class="h1 page-title page-title ">
+                    {{quickOrderFormObj.title}}
+                </span>
+            </div>
+            <div class="samitaWS-tool-bar">
+                <div class="menu-tool-bar">
+                    {% if  quickOrderFormObj.configs.quickOrder_table_template.enable_quick_order_form_menu %}
+                        <div class="samita-tabs-nav">
+                            <div class="samita-tabs-nav-wrap samita-tabs-nav-wrap-ping-left">
+                                <button type="button" onClick="Samita.Wholesale.handleQuickOrderPage.scrollX('scrollX', 'minus')"><svg viewBox="0 0 20 20" class="samita-tabs-nav-Icon__Svg" focusable="false" aria-hidden="true"><path d="M0 10c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10-10-4.486-10-10zm8.414-1 1.293-1.293a1 1 0 0 0-1.414-1.414l-3 3a.997.997 0 0 0 0 1.414l3 3a1 1 0 0 0 1.414-1.414l-1.293-1.293h5.586a1 1 0 0 0 0-2h-5.586z"></path></svg></button>
+                                <div class="samita-tabs-nav-list" id="scrollX"> 
+                                    {% for link in linklists.samitaws-quick-oder-form-menu.links -%}
+                                        {% assign menu_link_url = shop.url | append : link.url %}
+                                        {% assign current_check_url = canonical_url  %}
+                                        {% if last_curent_page_url %}
+                                            {% assign menu_link_url = shop.url | append : '/' | append : last_curent_page_url  %}
+                                        {% endif %}
+                                        <a class="samita-tabs-tab {% if current_check_url == menu_link_url%} active {% endif %}" href="{{link.url}}" >{{link.title}}</a>
+                                    {%- endfor %}
+                                </div>
+                                <button type="button" onClick="Samita.Wholesale.handleQuickOrderPage.scrollX('scrollX', 'plus')"><svg viewBox="0 0 20 20" class="samita-tabs-nav-Icon__Svg" focusable="false" aria-hidden="true"><path d="M20 10c0 5.514-4.486 10-10 10s-10-4.486-10-10 4.486-10 10-10 10 4.486 10 10zm-8.414 1-1.293 1.293a1 1 0 0 0 1.414 1.414l3-3a.997.997 0 0 0 0-1.414l-3-3a1 1 0 1 0-1.414 1.414l1.293 1.293h-5.586a1 1 0 0 0 0 2h5.586z"></path></svg></button>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="search-tool-bar">
+                    <div class="controls-search">
+                        <input value="{{url_filter_val}}" name="q" placeholder="{{translateTexts["search_products"]}}" aria-label="{{translateTexts["search_products"]}}" autocomplete="off" class="controls-search-input">
+                        <button type="button" class="controls-search-submit" disabled>
+                            {{translateTexts["search"]}}
+                        </button>
+                        <button type="button" class="controls-search-clear-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M11.414 10l6.293-6.293a1 1 0 10-1.414-1.414L10 8.586 3.707 2.293a1 1 0 00-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 101.414 1.414L10 11.414l6.293 6.293A.998.998 0 0018 17a.999.999 0 00-.293-.707L11.414 10z" fill="#5C5F62"></path></svg>
+                        </button>
+                        <button type="button" class="controls-search-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2 8c0-3.309 2.691-6 6-6s6 2.691 6 6-2.691 6-6 6-6-2.691-6-6zm17.707 10.293l-5.395-5.396A7.946 7.946 0 0016 8c0-4.411-3.589-8-8-8S0 3.589 0 8s3.589 8 8 8a7.954 7.954 0 004.897-1.688l5.396 5.395A.998.998 0 0020 19a1 1 0 00-.293-.707z" fill="#3d4246"></path></svg>
+                        </button>
+                    </div>
+                    <div class="controls-items-your-cart">
+                        <button type="button" class="items-your-cart-view" onclick="goToCartPage();">
+                            {{translateTexts["quantity_in_cart"]}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% if product_configs.apply_product.type == "collections" or product_configs.apply_product.type == "products" %}
+                <div class="filter-tool-bar">
+                    <div class="filter-tool-bar-left">
+                        <div class="filter-by-collections_field">
+                            <h2 class="filter__label samita-caption-large">
+                                <label for="collections-filter">{{translateTexts["collection_by"]}}</label>
+                            </h2>
+                            <div class="samita-select">
+                                <select name="collection_by" class="filter-by__collections samita-select__select">
+                                    {% if product_configs.apply_product.type == "collections" %}
+                                        {% for id in product_configs.apply_product.collections.ids %}
+                                            {% assign _selected = false %}
+                                            {% if forloop.first and url_collection_val == null  %}
+                                                {% assign _selected = true %}
+                                            {% endif %}
+                                            {% assign colelction_id = id | strip | times: 1 %}
+                                            {% assign _collections = collections | where: 'id', colelction_id %}
+                                            {% for _collection in _collections %}
+
+                                                {% if url_collection_val != null and url_collection_val == _collection.handle  %}
+                                                    {% assign _selected = true %}
+                                                {% endif %}
+
+                                                <option value="{{_collection.handle}}" {% if _selected %} selected {% endif %} data-products-count="{{_collection.all_products_count}}" data-collection-id="{{_collection.id}}">{{_collection.title}}</option>
+                                                {% break %}
+                                            {% endfor %}
+                                        {% endfor %}
+                                    {% else %}
+                                        <option value="none" selected data-products-count="{{_product_ids.size}}" data-collection-id="">{{translateTexts["all_products"]}}</option>
+                                    {% endif %}
+                                </select>
+                                <svg aria-hidden="true" focusable="false" role="presentation" class="samita-select-icon samita-select-icon-caret" viewBox="0 0 10 6">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+                                    </path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-tool-bar-left-moble samita-medium-hide ">
+                    </div>
+                    <div class="filter-tool-bar-right">
+                        <div class="filter-by-collections_field samita-small-hide">
+                        </div>
+                        <div class="filter-product-count">
+                            <h2 class="filter-product-count__text filter__label">
+                                <label class=""><span>{{product_configs.apply_product.manual.ids.size}}</span></label>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            <div class="samitaWS-table">
+                <table class="samitaWS-responsive">
+                    <thead>
+                        <tr>
+                            {% for form_column in quickOrderFormObj.configs.quickOrder_table_template.table_elements.columns %}
+                                {% if form_column.status %}
+                                    <th data-name="{{form_column.title|downcase}}" {% if form_column.attr == "quantity" %}class="form_qty_head"{% endif %}>
+                                        {% case form_column.attr %}
+                                            {% when "product_image", "product_vendor", "product_price", "product_name", "product_type" %}
+                                                {% assign key_lang_translate = form_column.attr | split: '_' | last %}
+                                                {{translateTexts[key_lang_translate]}}
+                                            {% else %}
+                                            {{translateTexts[form_column.attr]}}
+                                        {% endcase %}
+                                    </th>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+                <div class="samitaWS-lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            </div>
+            <div class="samitaWS-footer">
+                <div class="samitaWS-footer-pagination">
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- //  style css //  -->
+        <style>
+            #samitaWS_quickOrderForm {
+                display: none;
+                width: 75%;
+                margin: 50px auto;
+            }
+
+            table.samitaWS-responsive {
+                border: 1px solid {{quick_order_form_design.border_color}};
+                border-collapse: collapse;
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                table-layout: fixed;
+                margin-bottom: 15px;
+            }
+            
+            table.samitaWS-responsive thead {
+                background: {{quick_order_form_design.bg_tbHeader}};
+                color: {{quick_order_form_design.txt_headerColor}};
+            }
+            table.samitaWS-responsive th {
+                padding: .625em;
+                text-align: center;
+                width: 100%;
+                border: 1px solid {{quick_order_form_design.border_color}};
+                border-style: {{quick_order_form_design.border_style}};
+                font-size: {{quick_order_form_design.txt_headerFontsize}}px;
+                overflow: hidden;
+            }
+            table.samitaWS-responsive td.form_product_name_row a{
+                color: {{quick_order_form_design.txt_rowColor}};
+                text-decoration: none;
+                font-weight: bold;
+            }
+            table.samitaWS-responsive tr td{
+                border: 1px solid {{quick_order_form_design.border_color}};
+                border-style: {{quick_order_form_design.border_style}};
+                color: {{quick_order_form_design.txt_rowColor}};
+                font-size: {{quick_order_form_design.txt_rowFontsize}}px;
+                padding: .35em;
+                text-align: center;
+            }
+
+            .samitaWS-quick-order-form table.samitaWS-responsive td {
+                background: {{quick_order_form_design.bg_tbRow}};
+            }
+            table.samitaWS-responsive th {
+                font-size: 14px;
+            }
+            table.samitaWS-responsive tbody button, .pagination-loading-page{
+                border-radius: 4px;
+                border: none;
+                box-shadow: 0 0 0 0 transparent;
+                cursor: pointer;
+                font-size: 1.4rem;
+                font-weight: 500;
+                line-height: 1;
+                text-align: center;
+                padding: 10px;
+                position: relative;
+                margin-bottom: 5px;
+                transition: background 0.2s ease-in-out;
+            }
+            @media screen and (max-width: 480px) {
+                .form_quantity_row .sqvf-quantity{
+                    max-width: 100%;
+                }
+                table.samitaWS-responsive tbody button, .pagination-loading-page{
+                    margin-bottom: 10px;
+                    width: 100%;
+                }
+                .filter-tool-bar {
+                    display: block!important;
+                }
+                .samitaWS-quick-order-form table.samitaWS-responsive {
+                    border: 0;
+                }
+                
+                .samitaWS-quick-order-form table.samitaWS-responsive thead {
+                    clip: rect(0 0 0 0);
+                    height: 1px;
+                    margin: -1px;
+                    overflow: hidden;
+                    padding: 0;
+                    position: absolute;
+                    width: 1px;
+                }
+                
+                .samitaWS-quick-order-form table.samitaWS-responsive tr {
+                    border-bottom: 3px solid {{quick_order_form_design.border_color}};
+                    border-style: {{quick_order_form_design.border_style}};
+                    display: block;
+                    margin-bottom: .625em;
+                    border-color: {{quick_order_form_design.border_color}};
+                }
+                
+                .samitaWS-quick-order-form table.samitaWS-responsive td {
+                    border-bottom: 1px solid {{quick_order_form_design.border_color}};
+                    border-style: {{quick_order_form_design.border_style}};
+                    display: block;
+                    font-size: .8em;
+                    text-align: right;
+                    min-height: 49px;
+                }
+                
+                .samitaWS-quick-order-form table.samitaWS-responsive td::before {
+                    content: attr(data-label);
+                    float: left;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                }
+                
+                .samitaWS-quick-order-form table.samitaWS-responsive td:last-child {
+                    border-bottom: 0;
+                }
+
+            }
+
+            .search-tool-bar {
+                display: flex;
+                flex-wrap: wrap;
+                position: relative;
+                margin-bottom: 15px;
+                align-items: center;
+                justify-content: center;
+            }
+            .controls-search {
+                position: relative;
+                display: flex;
+                min-width: 45%;
+                margin-bottom: 10px;
+            }
+            .search-tool-bar .controls-search-input {
+                flex: 1 1 auto;
+                width: 100%;    
+                max-width: 100%;
+                margin: 0;
+                outline: none;
+                border: 1px solid #e8e8e8;
+                border-radius: 2px;
+                padding: 10px 30px 10px 40px;
+                box-sizing: border-box;
+                height: 40px;
+                line-height: 1;
+                font-size: 13px;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+            }
+            .search-tool-bar .controls-search-button {
+                position: absolute;
+                left: 0;
+                top: 0;
+                height: 100%;
+                background: none;
+                border: none;
+                width: 40px;
+                padding: 12px!important;
+                outline: none;
+                min-width: auto;
+                border-radius: 0;
+                box-shadow: none;
+                border-bottom-left-radius: 0.25rem;
+                border-top-left-radius: 0.25rem;
+            }
+
+            .search-tool-bar .controls-search-clear-button { 
+                position: absolute;
+                height: 100%;
+                background: none;
+                border: none;
+                width: 40px;
+                padding: 12px!important;
+                outline: none;
+                min-width: auto;
+                border-radius: 0;
+                box-shadow: none;
+                border-bottom-left-radius: 0.25rem;
+                border-top-left-radius: 0.25rem;
+                right: 0;
+                left: 0;
+                display: none;
+            }
+            .search-tool-bar .controls-search-clear-button.show {
+                display: block;
+            } 
+            .search-tool-bar .controls-search-button.hide {
+                display: none;
+            }
+            .search-tool-bar .controls-search-submit, .items-your-cart-view {
+                border-radius: 4px;
+                border: none;
+                box-shadow: 0 0 0 0 transparent;
+                color: white;
+                cursor: pointer;
+                display: block;
+                font-size: 1em;
+                font-weight: 500;
+                line-height: 1;
+                text-align: center;
+                width: 15rem;
+                margin: 0 10px;
+                background: #121212;
+                transition: background 0.2s ease-in-out;
+            }
+            .items-your-cart-view {
+                height: 40px;
+            }
+            .samitaWS_mainPageHeading .page-title{
+                text-align: center;
+            }
+            #samitaWS_quickOrderForm button{
+                cursor: pointer;
+                background: {{quick_order_form_design.bg_buttonColor}};
+                color: {{quick_order_form_design.txt_buttonColor}};
+            }
+            #samitaWS_quickOrderForm button:hover{
+                background: {{quick_order_form_design.bg_buttonHoverColor}};
+                color: {{quick_order_form_design.txt_buttonHoverColor}};
+            }
+            #samitaWS_quickOrderForm button:disabled {
+                opacity: 0.2;
+            }
+            #samitaWS_quickOrderForm button svg, #samitaWS_quickOrderForm button svg path  {
+                fill: {{quick_order_form_design.txt_buttonColor}};
+            }
+            #samitaWS_quickOrderForm button:hover svg, #samitaWS_quickOrderForm button svg path  {
+                fill: {{quick_order_form_design.txt_buttonHoverColor}};
+            }
+            .samitaWS-footer-pagination {
+                text-align: center;
+            }
+
+            .samitaWS-footer-pagination .samitaWS-skeleton-page {
+                height: 100%;
+                display: flex!important;
+                flex-wrap: wrap;
+                justify-content: center;
+                max-width: 2rem;
+                margin: auto;
+                opacity: 0.4;
+                color: rgba(255,255,255,1);
+            }
+            .samitaWS-skeleton-page.load_more_button {
+                max-width: 10rem;
+            }
+            
+            .samitaWS-footer-pagination div {
+                height: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .samitaWS-footer-pagination button:not(.pagination-loading-page){
+                border: 0.0625rem solid #8c9196;
+                box-shadow: none;
+                position: relative;
+                line-height: 1;
+                margin: 0;
+                height: 3.25rem;
+                display: flex;
+                align-items: center;
+                font-size: 1em;
+                justify-content: center;
+                border-radius: 0;
+                min-width: 4.25rem;
+            }
+            .samitaWS-footer-pagination button.pagination-prev-page{
+                border-bottom-right-radius: 0;
+                border-top-right-radius: 0;
+                border-bottom-left-radius: 0.25rem;
+                border-top-left-radius: 0.25rem;
+            }
+            .samitaWS-footer-pagination button.pagination-next-page{
+                border-bottom-right-radius:  0.25rem;
+                border-top-right-radius:  0.25rem;
+                border-bottom-left-radius: 0;
+                border-top-left-radius: 0;
+            }
+            .samitaWS-footer-pagination button svg{
+                min-height: 0.0625rem;
+                min-width: 0.0625rem;
+                position: relative;
+                display: block;
+                max-height: 2rem;
+                max-width: 2rem;
+                position: relative;
+                width: 100%;
+                text-transform: none;
+            }
+            .thumbnail_img {
+                position: relative;
+                margin: auto;
+                width: 70px;
+                min-width: 70px;
+                display: block;
+            }
+            .thumbnail_img img{
+                border: 1px solid rgb(236 236 236);
+                display: block;
+                width: 100%;
+                height: auto;
+            }
+            .samitaWS-quickViewModal-wrapper {
+                position: fixed;
+                box-sizing: border-box;
+                left: 0;
+                top: 0;
+                width: 100%;
+                z-index: 999999;
+                opacity: 1;
+                background: rgba(10,10,10,.6);
+                color: #262626;
+                height: 100%;
+                min-height: 100vh;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            .samitaWS-quickViewModal-content {
+                min-height: 100%;
+                height: auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .samitaWS-quickViewModal-content .samitaWS-quickViewModal-close-modal, .samitaWS-ToastMes-close-modal {
+                position: absolute;
+                right: 0;
+                top: 0;
+                z-index: 10;
+                color: #000;
+                width: 35px;
+                height: 35px;
+                cursor: pointer;
+            }
+            .samitaWS-quickViewModal-content .product .samitaWS-quickViewModal-close-modal:before, .samitaWS-ToastMes-close-modal:before {
+                transform: rotate(45deg);
+            }
+            .samitaWS-quickViewModal-content .product .samitaWS-quickViewModal-close-modal:after, .samitaWS-ToastMes-close-modal:after {
+                transform: rotate(-45deg);
+            }
+            .samitaWS-quickViewModal-content .product .samitaWS-quickViewModal-close-modal:before, .samitaWS-quickViewModal-content .product .samitaWS-quickViewModal-close-modal:after, .samitaWS-ToastMes-close-modal:before, .samitaWS-ToastMes-close-modal:after {
+                position: absolute;
+                left: 17px;
+                content: " ";
+                height: 30px;
+                width: 1px;
+                background-color: #333;
+                top: 3px;
+            }
+            .samitaWS-quickViewModal-container {
+                margin-right: auto;
+                margin-left: auto;
+                padding: 50px;
+                max-width: 1100px;
+                width: 100%;
+            }
+            .samitaWS-quickViewModal-container .product{
+                overflow: hidden;
+                width: 100%;
+                padding: 0;
+                position: relative;
+                background: #fff;
+                border-radius: 5px;
+                max-width: 100%;
+                margin: 0 auto;
+                font-size: 14px;
+                line-height: 1.4;
+                -webkit-box-shadow: 0 20px 60px -2px rgb(27 33 58 / 40%);
+                box-shadow: 0 20px 60px -2px #1b213a66;
+            }
+            .samitaWS-quickViewModal-product-wrapper {
+                margin: 0;
+                width: 100%;
+            }
+            .sqvf-row {
+                margin-bottom: 0;
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-wrap: wrap;
+                flex-wrap: wrap;
+                margin-right: -15px;
+                margin-left: -15px;
+            }
+            .samitaWS-quickViewModal-container .product .product-summary, .samitaWS-quickViewModal-container .product .product-images-wrapper {
+                float: left;
+                margin: 0;
+                background-color: #fff;
+            }
+            .sqvf-product-details h1 {
+                font-size: 24px!important;
+                text-transform: none;
+                letter-spacing: .2px;
+                line-height: 1.2!important;
+                font-family: inherit!important;
+                margin: 4px 0 10px!important;
+                font-weight: bold;
+            }
+            .sqvf-product-details h1 a {
+                text-decoration: none;
+                color: currentColor;
+            }
+            .sqvf-col-md-6 {
+                position: relative;
+                width: 100%;
+                padding-right: 15px;
+                padding-left: 15px;
+            }
+            .product_image img {
+                border: 1px solid #f8f8f8;
+            }
+            .filter-tool-bar {
+                display: grid;
+                gap: 0 .5rem;
+                grid-template-columns: 1fr max-content max-content;
+                min-height: 60px;
+                line-height: 20px;
+                padding: 20px 0;
+            }
+            .filter-tool-bar .filter__label {
+                display: block;
+                font-size: 1.4rem;
+                margin: 0 2rem 0 0;
+            }
+            .filter-tool-bar .filter-by-collections_field {
+                align-items: center;
+                display: flex;
+                flex-grow: 1;
+            }
+            .samita-select {
+                position: relative;
+                margin-right: 1.75rem;
+            }
+            .samita-select__select {
+                -webkit-appearance: none;
+                appearance: none;
+                font-size: 1.4rem;
+                width: 100%;
+                box-sizing: border-box;
+                height: 4.5rem;
+                padding-right: 1.75rem;
+                position: relative;
+                border: 0;
+            }
+            .samita-select__select+.samita-select-icon-caret {
+                right: 0;
+            }
+            .samita-select .samita-select-icon-caret{
+                height: 0.6rem;
+                pointer-events: none;
+                position: absolute;
+                top: calc(50% - 0.2rem);
+                right: 0;
+            }
+            @media (min-width: 768px) {
+                .sqvf-col-md-6 {
+                    -ms-flex: 0 0 50%;
+                    flex: 0 0 50%;
+                    max-width: 50%;
+                }
+            }
+            @media screen and (max-width: 749px) {
+                .samita-small-hide {
+                    display: none!important;
+                }
+            }
+            @media screen and (min-width: 750px) {
+                .samita-medium-hide {
+                    display: none!important;
+                }
+            }
+            .samitaWS-table {
+                position: relative;
+            }
+            .samitaWS-table.loading .samitaWS-lds-spinner {
+                display: flex;
+            }
+            .samitaWS-table.loading table {
+                opacity: 0.3;
+            }
+            .samitaWS-lds-spinner {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(0, 0, 0, 0.1);
+                align-items: center;
+                display: none;
+                justify-content: center;
+            }
+            .samitaWS-lds-spinner div {
+                transform-origin: 40px 40px;
+                animation: samitaWS-lds-spinner 1.2s linear infinite;
+                display: block!important;
+            }
+            .samitaWS-lds-spinner div:after {
+                content: " ";
+                display: block;
+                position: absolute;
+                top: 3px;
+                left: 37px;
+                width: 6px;
+                height: 18px;
+                border-radius: 20%;
+                background: #010101;
+            }
+            .samitaWS-lds-spinner div:nth-child(1) {
+                transform: rotate(0deg);
+                animation-delay: -1.1s;
+            }
+            .samitaWS-lds-spinner div:nth-child(2) {
+                transform: rotate(30deg);
+                animation-delay: -1s;
+            }
+            .samitaWS-lds-spinner div:nth-child(3) {
+                transform: rotate(60deg);
+                animation-delay: -0.9s;
+            }
+            .samitaWS-lds-spinner div:nth-child(4) {
+                transform: rotate(90deg);
+                animation-delay: -0.8s;
+            }
+            .samitaWS-lds-spinner div:nth-child(5) {
+                transform: rotate(120deg);
+                animation-delay: -0.7s;
+            }
+            .samitaWS-lds-spinner div:nth-child(6) {
+                transform: rotate(150deg);
+                animation-delay: -0.6s;
+            }
+            .samitaWS-lds-spinner div:nth-child(7) {
+                transform: rotate(180deg);
+                animation-delay: -0.5s;
+            }
+            .samitaWS-lds-spinner div:nth-child(8) {
+                transform: rotate(210deg);
+                animation-delay: -0.4s;
+            }
+            .samitaWS-lds-spinner div:nth-child(9) {
+                transform: rotate(240deg);
+                animation-delay: -0.3s;
+            }
+            .samitaWS-lds-spinner div:nth-child(10) {
+                transform: rotate(270deg);
+                animation-delay: -0.2s;
+            }
+            .samitaWS-lds-spinner div:nth-child(11) {
+                transform: rotate(300deg);
+                animation-delay: -0.1s;
+            }
+            .samitaWS-lds-spinner div:nth-child(12) {
+                transform: rotate(330deg);
+                animation-delay: 0s;
+            }
+            @keyframes samitaWS-lds-spinner {
+                0% {
+                    opacity: 1;
+                }
+                100% {
+                    opacity: 0;
+                }
+            }
+            .loading-content img{
+                width: 7rem;
+                height: 10rem;
+                margin: auto;
+            }
+            .samitaWS-skeleton {
+                animation: skeleton-loading 1s linear infinite alternate;
+                display: block!important;
+            }
+
+            @keyframes skeleton-loading {
+                0% {
+                    background-color: hsl(200, 20%, 80%);
+                }
+                100% {
+                    background-color: hsl(200, 20%, 95%);
+                }
+            }
+
+            .samitaWS-skeleton-text {
+                width: 100%;
+                height: 0.7rem;
+                margin-bottom: 0.5rem;
+                border-radius: 0.25rem;
+            }
+
+            .samitaWS-skeleton-text__body {
+                width: 75%;
+            }
+
+            .samitaWS-skeleton-footer {
+                width: 30%;
+            }
+            .filter-tool-bar-right {
+                display: flex;
+                align-items: center;
+            }
+            .product__img_loading {
+                width: 70px;
+                height: 70px;
+                margin: auto;
+            }
+            .variant_product {
+                display: none!important;
+            }
+            .variant_product.show {
+                display: table-row!important;
+            }
+            .show-variants .show-variants__active {
+                display: none;
+            }
+            .show-variants.show .show-variants__notactive {
+                display: none;
+            }
+            .show-variants.show .show-variants__active {
+                display: block;
+            }
+            .sqvf-quantity{
+                min-height: 40px;
+                margin-right: 0;
+                padding: 0;
+                align-items: center;
+                border: 1px solid rgba(0,0,0,.25);
+                margin-bottom: 10px;
+                position: relative;
+                border-radius: 2px;
+                width: 100%;
+                max-width: 120px;
+            }
+            .form_quantity_row .sqvf-quantity{
+                margin: auto!important;
+            }
+            .sqvf-quantity .decrease,
+            .sqvf-quantity .increase{
+                position: absolute;
+                right: 0;
+                height: 20px;
+                width: 20px;
+                border-left: 1px solid rgba(0,0,0,.25);
+                cursor: pointer;
+            }
+            .sqvf-quantity .decrease{
+                bottom: 0;
+                border-top: 1px solid rgba(0,0,0,.25);
+            }
+            .sqvf-quantity .increase:before,
+            .sqvf-quantity .increase:after,
+            .sqvf-quantity .decrease:after{
+                content: "";
+                position: absolute;
+                background: #000;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+            .sqvf-quantity .decrease:after{
+                height: 1px;
+                width: 11px;
+            }
+            .sqvf-quantity .increase{
+                top: 0;
+            }
+            .sqvf-quantity .increase:before{
+                height: 11px;
+                width: 1px;
+            }
+            .sqvf-quantity .increase:after{
+                height: 0.5px;
+                width: 12px;
+            }
+            .sqvf-quantity-input{
+                border: none;
+                border-radius: 0;
+                line-height: 40px;
+                min-width: 60px;
+                max-height: 40px;
+                display: block;
+                outline: 0;
+                width: 100%;
+                height: 40px;
+                padding: 0 20px 0 15px;
+                min-height: auto;
+                margin: 0;
+                background: transparent;
+                text-align: left;
+                color: inherit;
+                --color-foreground: none;
+            }
+            .sqvf-quantity-input::-webkit-outer-spin-button,
+            .sqvf-quantity-input::-webkit-inner-spin-button{
+                -webkit-appearance: none;
+                margin: 0;
+            }
+            .sqvf-quantity-input {
+                -moz-appearance: textfield;
+            }
+            .error {
+                color: #a94442;
+            } 
+            .error.sqvf-quantity{
+                border-color: #a94442;
+            } 
+            .outofstock__show {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 12px;
+            }
+            .outofstock__show svg{
+                width: 1rem;
+                fill: #a94442;
+                margin-right: 5px;
+            }
+            .samita-tabs-nav {
+                margin-bottom: 10px;
+            }
+            .samita-tabs-nav .samita-tabs-nav-wrap {
+                display: flex;
+                flex: auto;
+                transform: translate(0);
+                white-space: nowrap;
+                width: 45%;
+                align-items: center;
+                margin: auto;
+            }
+            .samita-tabs-nav .samita-tabs-nav-wrap .samita-tabs-nav-list::-webkit-scrollbar {
+                width: 0px;
+                display: none;
+            }
+            .samita-tabs-nav .samita-tabs-nav-wrap>button {
+                background: transparent!important;
+                border: none;
+                box-shadow: none;
+                display: none;
+                height: 100%;
+                min-width: unset;
+                position: absolute;
+                z-index: 9999;
+            }
+            .samita-tabs-nav .samita-tabs-nav-wrap>button svg{
+                width: 2rem;
+                fill: #222222!important;
+            }
+            .samita-tabs-nav .samita-tabs-nav-wrap>button svg path{
+                fill: #222222!important;
+            }
+            .samita-tabs-nav .samita-tabs-nav-wrap .samita-tabs-nav-list {
+                background: transparent!important;
+                display: flex;
+                overflow-x: auto;
+                padding: 15px 0;
+                position: relative;
+                transition: transform .3s;
+                width: 100%;
+            }
+            .samita-tabs-nav .samita-tabs-nav-wrap .samita-tabs-nav-list .samita-tabs-tab {
+                border: 1px solid #e7ebef;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 12px;
+                margin-right: 10px;
+                padding: 5px 10px;
+                position: relative;
+                min-width: 10rem;
+                z-index: 2;
+                text-align: center;
+                text-decoration: unset;
+                color: #222222;
+            }
+            .samita-tabs-nav .samita-tabs-nav-wrap .samita-tabs-nav-list .samita-tabs-tab.active { 
+                background: #222222;
+                color: #ffffff;
+            }
+            .samita-tabs-nav .samita-tabs-nav-wrap:hover>button {
+                display: block;
+            }
+            .samita-tabs-nav .samita-tabs-nav-wrap>button:first-child {
+                right: 100%;
+            }
+            .samita-tabs-nav .samita-tabs-nav-wrap>button:last-child {
+                left: 100%;
+            }
+            .sqvf-product-images{
+                margin: 0;
+            }
+            .sqvf-product-images-wrapper{
+                width: 100%;
+                height: auto;
+                overflow: hidden;
+                position: relative;
+            }
+            .sqvf-product-images-stage{
+                display: flex;
+                position: relative;
+                transition: all 0.25s linear;
+                min-height: 25rem;
+            }
+            .sqvf-product-images-item{
+                padding: 16px;
+                padding-right: 0px;
+                width: 100%;
+                height: inherit;
+                flex: 1 0 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .sqvf-product-image{
+                border-radius: 3px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .sqvf-product-image img{
+                border-radius: 3px;
+                max-width: 84%;
+                height: auto;
+                aspect-ratio: 2/2.5;
+                object-fit: cover;
+            }
+            .sqvf-product-images-prev, .sqvf-product-images-next{
+                position: absolute;
+                top: 48%;
+                width: 36px;
+                height: 36px;
+                transform: translateY(-50%);
+                z-index: 2;
+                cursor: pointer;
+                background: #000;
+                border: none;
+                border-radius: 2px;
+                opacity: .2;
+                transition: all .3s;
+            }
+            .sqvf-product-images-prev:hover, .sqvf-product-images-next:hover{
+                opacity: .8;
+            }
+            .sqvf-product-images-prev{
+                left: 33px;
+            }
+            .sqvf-product-images-next{
+                right: 17px;
+            }
+            .sqvf-product-images-prev:after, .sqvf-product-images-next:after{
+                content: "";
+                position: absolute;
+                height: 14px;
+                width: 14px;
+                top: 50%;
+                transform: translate(-50%, -50%) rotate(45deg);
+            }
+            .sqvf-product-images-prev:after{
+                left: 58%;
+                border-left: 2px solid #fff;
+                border-bottom: 2px solid #fff;
+            }
+            .sqvf-product-images-next:after{
+                left: 42%;
+                border-right: 2px solid #fff;
+                border-top: 2px solid #fff;
+            }
+            .sqvf-thumbnails{
+                margin: 0 16px;
+                display: flex;
+                margin-bottom: 16px;
+                overflow-x: scroll;
+            }
+            .sqvf-thumbnails::-webkit-scrollbar {
+                display: none;
+            }
+            .sqvf-thumbnails{
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            .sqvf-thumbnail{
+                box-sizing: border-box;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 1px solid #fff;
+                transition: all 0.25s linear;
+                cursor: pointer;
+            }
+            .sqvf-thumbnail:not(:last-child){
+                margin-right: 5px;
+            }
+            .sqvf-thumbnails .sqvf-thumbnail img{
+                height: 48px;
+                width: auto;
+                aspect-ratio: 2/3;
+                object-fit: cover;
+                display: block;
+                pointer-events: none;
+            }
+            .sqvf-thumbnail.active{
+                border: 1px solid #000;
+            }
+            .sqvf-swatch {
+                margin-bottom: 20px;
+            }
+            .sqvf-swatch>label{
+                font-size: 14px;
+                font-weight: 700;
+                text-transform: uppercase;
+                margin-bottom: 5px;
+            }
+            ul.sqvf-swatch-values{
+                display: flex;
+                margin: 0 -5px;
+                flex-wrap: wrap;
+                padding: 0;
+            }
+            ul.sqvf-swatch-values li {
+                margin: 5px;
+                list-style: none;
+            }
+            span.sqvf-product__swatch-inner {
+                display: flex;
+                position: relative;
+                width: 100%;
+                height: 100%;
+                border-radius: 2px;
+                overflow: hidden;
+            }
+            span.sqvf-product__swatch-inner>.sqvf-swatch-text {
+                padding: 0 10px;
+                min-height: 32px;
+                min-width: 50px;
+                line-height: 30px;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                border: 1px solid #262626;
+                font-weight: 700;
+                color: #262626;
+                border-radius: 2px;
+                font-size: 12px;
+                cursor: pointer;
+            }
+            .is-selected span.sqvf-product__swatch-inner>.sqvf-swatch-text{
+                background: #262626;
+                color: #fff;
+            }
+            .sqvf-product-card__price-wrapper>span{
+                font-size: 18px;
+                font-weight: 700;
+            }
+            .sqvf-product-card__oldprice{
+                color: #bbb;
+                text-decoration: line-through;
+            }
+            .sqvf-quantity.disabled{
+                opacity: 0.2;
+                pointer-events: none;
+            }
+            .sqvf-quantity{
+                min-height: 40px;
+                margin-right: 0;
+                padding: 0;
+                align-items: center;
+                border: 1px solid rgba(0,0,0,.25);
+                margin-bottom: 10px;
+                position: relative;
+                border-radius: 2px;
+                width: 100%;
+                max-width: 120px;
+            }
+            .sqvf-quantity .decrease, .sqvf-quantity .increase{
+                position: absolute;
+                right: 0;
+                height: 20px;
+                width: 20px;
+                border-left: 1px solid rgba(0,0,0,.25);
+                cursor: pointer;
+            }
+            .sqvf-product-details{
+            padding: 16px;
+            padding-left: 0;
+            }
+            .sqvf-quantity .decrease{
+                bottom: 0;
+                border-top: 1px solid rgba(0,0,0,.25);
+            }
+            .sqvf-quantity .increase:before, .sqvf-quantity .increase:after, .sqvf-quantity .decrease:after{
+                content: "";
+                position: absolute;
+                background: #000;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+            .sqvf-quantity .decrease:after{
+                height: 1px;
+                width: 11px;
+            }
+            .sqvf-quantity .increase{
+                top: 0;
+            }
+            .sqvf-quantity .increase:before{
+                height: 11px;
+                width: 1px;
+            }
+            .sqvf-quantity .increase:after{
+                height: 0.5px;
+                width: 12px;
+            }
+            .sqvf-quantity-input{
+                border: none;
+                border-radius: 0;
+                line-height: 40px;
+                min-width: 60px;
+                max-height: 40px;
+                display: block;
+                outline: 0;
+                width: 100%;
+                height: 40px;
+                padding: 0 20px 0 15px;
+                min-height: auto;
+                margin: 0;
+                background: transparent;
+                text-align: left;
+                color: inherit;
+                --color-foreground: none;
+            }
+            .sqvf-quantity-input::-webkit-outer-spin-button, .sqvf-quantity-input::-webkit-inner-spin-button{
+                -webkit-appearance: none;
+                margin: 0;
+            }
+            .sqvf-quantity-input {
+                -moz-appearance: textfield;
+            }
+            #sqvf-btn{
+                background: {{quick_order_form_design.bg_buttonColor}};
+                color: {{quick_order_form_design.txt_buttonColor}};
+                border: 1px solid {{quick_order_form_design.bg_buttonColor}};
+                padding: 0 25px;
+                transition: all .5s;
+                border-radius: 3px;
+                box-shadow: 0 1px 4px 1px #0000001a;
+                min-width: 130px;
+                font-weight: 700;
+                text-transform: uppercase;
+                line-height: 38px;
+                min-height: 38px;
+                cursor: pointer;
+                width: 100%;
+                text-align: center;
+            }
+            #sqvf-btn:hover{
+                background: {{quick_order_form_design.bg_buttonHoverColor}};
+                color: {{quick_order_form_design.txt_buttonHoverColor}};
+                border: 1px solid {{quick_order_form_design.bg_buttonHoverColor}};
+            }
+            @media only screen and (max-width: 414px) {
+                .sqvf-product-images-item {
+                    padding-left: 0;
+                    padding-right: 0 !important;
+                }
+                .sqvf-product-details {
+                    padding-left: 16px;
+                }
+                .sqvf-product-images-prev {
+                    left: 20px;
+                }
+                .sqvf-product-images-next {
+                    right: 20px;
+                }
+                #sqvf-btn {
+                    padding: 0;
+                    min-width: 50px;
+                    font-weight: 500;
+                    line-height: 30px;
+                    min-height: 30px;
+                    font-size: 12px;
+                }
+            }
+            @media only screen and (max-width: 768px){
+                .sqvf-product-details {
+                    padding-left: 16px;
+                }
+                .sqvf-product-images-item {
+                    padding-right: 16px;
+                }
+                .sqvf-product-images-prev {
+                    left: 40px;
+                }
+                .sqvf-product-images-next {
+                    right: 40px;
+                }
+            }
+            button.loading >span {
+                opacity: 0.2;
+            }
+            button.loading:before {
+                -webkit-animation: spin .75s linear infinite;
+                animation: spin .75s linear infinite;
+                background-color: inherit;
+                border: 2px solid #212b36;
+                border-radius: 50%;
+                border-top-color: #e2dbdb;
+                bottom: 0;
+                content: "";
+                height: 15px;
+                left: 0;
+                margin: auto;
+                right: 0;
+                top: 0;
+                position: absolute;
+                width: 15px;
+                z-index: 1;
+            }
+            .controls-items-your-cart {
+                margin-bottom: 10px;
+            }
+            .form_product_price_row::after{
+                left: 48%!important;
+            }
+            .volume_pricing__show {
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                display: flex;
+                font-size: 12px;
+            }
+            .volume_pricing__show svg{
+                width: 12px;
+                height: 12px;
+            }
+            .samitaWS_tooltip_volumeTable_product_form {
+                display: none;
+            }
+            .samitaWS_tooltip_volumeTable_product_form.active {
+                display: block;
+            }
+            .volume_pricing__show:hover ~ .samitaWS_volumeTable_product_form {
+                visibility: unset;
+                opacity: 1;
+            }
+            .samitaWS_volumeTable_product_form:hover{
+                visibility: unset;
+                opacity: 1;
+            }
+            .form_quantity___quanity .samitaWS_volumeTable_product_form{
+                position: absolute;
+                width: 100%;
+                left: 0;
+                margin: 0%;
+                bottom: 25px;
+                box-shadow: 0 14px 12px -6px #0000000d;
+                background: #f5f5f5;
+                padding: 0.5em 0.5em 0.5em;
+                visibility: hidden;
+                opacity: 0;
+                transition: .2s;
+                z-index: 5;
+                border-radius: var(--spark-border-radius-default, 4px);
+                transition-delay: .4s;
+            }
+            .add_quantity__show {
+                display: flex;
+                align-items: center;
+                font-size: 12px;
+                justify-content: center;
+            }
+            .add_quantity__show svg {
+                width: 12px;
+                height: 12px;
+                margin-right: 5px;
+            }
+        </style>
+        {% if quick_order_form_design.customCss != "null" and quick_order_form_design.customCss != "" %}
+        <style>
+            {{quick_order_form_design.customCss}}
+        </style>
+        {% endif %}
+        <!-- //  JS.  //  -->
+        <script>
+            window.allProducts = [];
+            window.dataToasWS = [];
+            var Samita = window.Samita || {};
+            Samita.Wholesale = Samita.Wholesale || {};
+            Samita.Wholesale.currenQuickOrderForm = {{quickOrderFormObj | json}};
+
+            var shopData = {{data_shop | json}};
+            var _product_ids = {{_product_ids | json}};
+            var _collection_ids = {{_collection_ids | json}};
+            var _url_filter_val = {{url_filter_val | json}};
+            var _url_sort_val = {{url_sort_val | json}};
+            var _translateTexts = {{translateTexts | json}};
+            let url_filter_page_val = {{url_filter_page_val}};
+            var minKeySearch =  {{data_shop.settings.general.quick_order_page.minimum_search_key | times: 1 }};
+
+            Samita.Wholesale.handleQuickOrderPage = {
+                <!-- //  JS. Function //  -->
+                initQuickOrder: async function (productIds, collectionIds, url_filter_page_val) {
+                    const app = Samita.Wholesale;
+                    let currenPage = 1;
+                    let quickOrderFormObj = app.currenQuickOrderForm;
+                    let app_product_configs = quickOrderFormObj.product_configs;
+                    let quickOrder_table_template = quickOrderFormObj.configs.quickOrder_table_template;
+                    let product_per_page = quickOrder_table_template.pagination.per_page;
+                    let page_type = quickOrder_table_template.pagination.type;
+                    let number_end = parseInt(product_per_page * url_filter_page_val);
+                    let number_start = 0;
+                    if (url_filter_page_val > 1) {
+                        number_start = parseInt((url_filter_page_val - 1) * product_per_page);
+                    }
+                    let products_total = 0;
+                    let your_cart =  document.querySelector(".controls-items-your-cart button");
+                    your_cart.innerHTML = this.translate("quick_order_table.your_cart", Samita.Wholesale?.cart?.item_count ? Samita.Wholesale.cart.item_count : 0 );
+                    if (productIds.length || collectionIds.length) {
+                        /* loading */
+                        if (page_type == "pagination" || (page_type != "pagination" && url_filter_page_val < 2)) {
+                            let qrTable = document.querySelector(".samitaWS-table");
+                            qrTable.classList.add("loading");
+                            let qrTableContent = document.querySelector("table.samitaWS-responsive tbody");
+                            qrTableContent.innerHTML = this.renderLoadingTr({currenProductIds: ["1","2","3","4","5","6","7","8","9","10"], quickOrder_table_template});
+                        }
+                        let qrPagination = document.querySelector(".samitaWS-footer-pagination");
+                        let translate_load_more = {{translateTexts["load_more"] | json}};
+                    
+                        qrPagination.innerHTML = `<div class="samitaWS-skeleton samitaWS-skeleton-page pagination-number-page ${page_type}">${page_type == "pagination" ? 1 : `${translate_load_more}`}</div>`;
+
+                        let products = [], currenProductIds=[];
+                        if (productIds.length) {
+                            products_total = productIds.length;
+                            if (_url_filter_val && _url_filter_val.length >= minKeySearch) {
+                                await this.filterProductsSearch(_url_filter_val, 1 );
+                                let _current_products =  window.allProducts;
+                                let filterProductInApp = window.allProducts.filter((product) => {
+                                    let productCheck = productIds.find((id) => {
+                                        if (product.id == id) {
+                                            currenProductIds.push(id);
+                                            return true;
+                                        }
+                                        return false;
+                                    });
+                                    if (productCheck){
+                                        return true;
+                                    } else {
+                                        return false;
+                                    }
+                                });
+                                products_total = filterProductInApp.length;
+                                Samita.Wholesale.products = filterProductInApp;
+
+                            } else {
+                                for (let i = 0; i <= products_total; i++) {
+                                    if ( i >= number_start && i < number_end && productIds[i] )
+                                        currenProductIds.push(productIds[i]);
+                                }
+                                let oldProductIds = Samita.Wholesale?.products ? Samita.Wholesale?.products?.map((product)=> {return product.id}) : [];
+                                
+                                let productURLParamIds = currenProductIds.filter((value, index, self) => {
+                                    return (self.indexOf(value) === index && !oldProductIds.includes(value)) ;
+                                });
+
+                                productURLParamIds = productURLParamIds.map(productId =>  productId);
+                                if (productURLParamIds.length) {
+                                    let _current_products = await this.getCollectProductsOnPage({ids:productURLParamIds.join('|'), action: "products", shop: Samita.Wholesale.shop.url, view: "samitaWSProductsJson"});
+                                    if (_current_products && _current_products?.length) {
+                                        let __current_products = _current_products.filter((_current_product) => {
+                                            let check_old_product = Samita.Wholesale?.products?.find((_old_product) => {
+                                                return _old_product.id == _current_product.id;
+                                            });
+                                            return !check_old_product;
+                                        });
+                                        if (__current_products?.length) {
+                                            if (app?.products?.length) {
+                                                Samita.Wholesale.products = Samita.Wholesale.products.concat(__current_products);
+                                            } else 
+                                            Samita.Wholesale.products = __current_products;
+                                        }
+                                    }
+                                }
+                            }
+                        } else if (collectionIds.length) {
+                            let qrFilterIdCollection = document.querySelector('[name="collection_by"]');
+                            let filterIdCollection = qrFilterIdCollection.value;
+                            products_total = qrFilterIdCollection.querySelector("option[selected]").getAttribute("data-products-count");
+                            let collection_id = qrFilterIdCollection.querySelector("option[selected]").getAttribute("data-collection-id");
+                            
+                            if (_url_filter_val && _url_filter_val.length >= minKeySearch) {
+                                await this.filterProductsSearch(_url_filter_val, 1 );
+                                let _current_products =  window.allProducts;
+                                let filterProductInApp = window.allProducts.filter((product) => {
+                                    let check_pr = product.collections.find((_id) => {
+
+                                        if (_id == collection_id ) {
+                                            currenProductIds.push(product.id);
+                                            return true;
+                                        }
+
+                                        return false;
+                                    });
+                                    if (check_pr){
+                                        return true;
+                                    } else {
+                                        return false;
+                                    }
+                                });
+                                products_total = filterProductInApp.length;
+                                Samita.Wholesale.products = filterProductInApp;
+
+                            } else {
+
+                                let __current_products =  await this.getProductsCollectionJson({ handleColect: filterIdCollection, limit: product_per_page, page: url_filter_page_val, sort_by: _url_sort_val ? _url_sort_val : "manual" });
+
+                                if (__current_products?.length) {
+                                    currenProductIds = __current_products.map((product) => {
+                                        return product.id;
+                                    });
+                                    if (app?.products?.length) {
+                                        Samita.Wholesale.products = Samita.Wholesale.products.concat(__current_products);
+                                    } else 
+                                        Samita.Wholesale.products = __current_products;
+                                }
+                            }
+
+                        }
+                        this.renderTableContent({products_total, currenProductIds, products: Samita.Wholesale.products, quickOrder_table_template, page_type, url_filter_page_val});
+                        this.renderPagination({url_filter_page_val, product_per_page, products_total, page_type});
+                        this.initQuickOrderAction();
+                        this.checkscrollX();
+                        // require //
+                        this.fireAnEvent('samitaWSQuickOrderRenderCompleted', {});
+                    }
+                },
+
+                filterProductsSearch : async function( _url_filter_val, page) {
+                    let _current_products = await this.getCollectProductsOnPage({q:_url_filter_val, page: page, type: "product", view: "samitaWSProductsJson"});
+                    window.allProducts = window.allProducts.concat(_current_products);
+                    if ( _current_products.length >= 250 ) {
+                        await this.filterProductsSearch(_url_filter_val, parseInt( page + 1 ));
+                    }
+                },
+                getProductsCollectionJson: async function(data) {
+                    let { handleColect, limit, page } = data;
+                    const response = await fetch(`/collections/${handleColect}/products.json?limit=${limit}&page=${page}`, {
+                        method: 'GET',
+                    })
+                    .then(res => {
+                        return res.json();
+                    })
+                    .then( async nextRes => {
+                        if (nextRes.products) {
+                            let productURLParamIds = nextRes.products.map(product =>  product.id );
+                            if (productURLParamIds.length) {
+                                let _current_products = await this.getCollectProductsOnPage({ids:productURLParamIds.join('|'), action: "products", shop: Samita.Wholesale.shop.url, view: "samitaWSProductsJson"});
+                                return _current_products;
+                            }
+                        }
+                        return [];
+                    }).catch(()=> {
+                        return false;
+                    });
+                    return response;
+                },
+                getCollectProductsOnPage: async function(param) {
+                    const prms = new URLSearchParams(param);
+                    const response = await fetch(`/apps/sami-wholesale/search?${prms.toString()}`, {
+                        method: 'GET',
+                    })
+                    .then(res => {
+                        return res.json();
+                    })
+                    .then(nextRes => {
+                        return nextRes;
+                    }).catch(()=> {
+                        return false;
+                    });
+                    return response;
+                },
+                changePagination: function(math, currenPage, maxPageNumber, page_type="pagination") {
+                    let current_url = window.location.href;
+                    let nextPageNumber = parseInt(currenPage);
+                    if (math=="minus") {
+                        if (currenPage != 1) {
+                            nextPageNumber = parseInt(currenPage - 1); 
+                        }
+                    } else if (math=="plus") {
+                        nextPageNumber = parseInt(currenPage + 1);
+                        if (maxPageNumber < nextPageNumber) {
+                            nextPageNumber = currenPage;
+                        }
+                    }
+                    let nextUrl = "", checkChangePageVal = false;
+                    let _current_url = current_url.split("/");
+                    let current_param  = _current_url[_current_url.length - 1];
+                    if (page_type == "load_more_button") {
+                        Samita.Wholesale.handleQuickOrderPage.initQuickOrder(_product_ids, _collection_ids, nextPageNumber);
+                    } else {
+                        if(current_param.indexOf("page=")>-1 || current_param.indexOf("q=")>-1 || current_param.indexOf("collection=")>-1){
+                            let _current_params = current_param.split("&");
+                            _current_params.forEach(param => {
+                                let key_and_value = param.split("=");
+                                if (key_and_value["0"] == "q" || key_and_value["0"] == "collection") {
+                                    if (nextUrl) {
+                                        nextUrl = nextUrl + "&" + param;
+                                    } else {
+                                        nextUrl = nextUrl + param;
+                                    }
+                                    
+                                } else if (key_and_value["0"] == "page") {
+                                    checkChangePageVal = true;
+                                    if (nextUrl) {
+                                        nextUrl = nextUrl + "&" + key_and_value["0"] + "=" + nextPageNumber;
+                                    } else {
+                                        nextUrl = nextUrl + key_and_value["0"] + "=" + nextPageNumber;
+                                    }
+                                }
+                            });
+
+                            if (nextUrl) {
+                                if (!checkChangePageVal) {
+                                    nextUrl = nextUrl + "&page=" + nextPageNumber; 
+                                }
+                            } else {
+                                nextUrl = nextUrl + "page=" + nextPageNumber; 
+                            }
+                            _current_url[_current_url.length - 1] = nextUrl;
+                            window.location.href = _current_url.join("/");
+                        } else {
+                            window.location.href = current_url + "/page=" + nextPageNumber;
+                        }
+                    }
+                },
+                opendVariantProduct: function(productId, el) {
+                    const app = Samita.Wholesale;
+                    let productObj = app.products.find((product) => {
+                        if (productId == product.id) {
+                            return true;
+                        }
+                        return false;
+                    });
+                    
+                    let variantProductQr = document.querySelector(`#variant_product_${productId}`);
+                    
+                    if (el.classList.contains("show")) {
+                        el.classList.remove("show");
+                    } else {
+                        el.classList.add("show");
+                    }
+                    if (variantProductQr) {
+                        if (variantProductQr.classList.contains("show")) {
+                            variantProductQr.classList.remove("show");
+                        } else {
+                            variantProductQr.classList.add("show");
+                        }
+                    }
+                },
+                opendModalQuickView: function(productId) {
+                    const app = Samita.Wholesale;
+                    let productObj = app.products?.find((product) => {
+                        if (productId == product.id) {
+                            return true;
+                        }
+                        return false;
+                    });
+                    if (!productObj) return "";
+                    const widget = document.createElement('DIV');
+                    widget.classList.add('samitaWS-quickViewModal-wrapper');
+                    
+                    widget.innerHTML = `
+                    <div class="samitaWS-quickViewModal-content">
+                        <div class="samitaWS-quickViewModal-container">
+                            <div itemscope itemtype="http://schema.org/Product" class="product" samitaws-element="handle" p-handle="${productObj.handle}">
+                                <span class="samitaWS-quickViewModal-close-modal"></span>
+                                <div class="samitaWS-quickViewModal-product-wrapper">
+                                    <div class="sqvf-row">
+                                        <div class="sqvf-col-md-6 sqvf-col-sm-12 sqvf-col-xs-12 product-images-wrapper">
+                                            <div class="sqvf-product-gallery">                                         
+                                                <figure class="sqvf-product-images">
+                                                    <div class="sqvf-product-images-wrapper">
+                                                        <div class="sqvf-product-images-stage">
+                                                            ${productObj.images.map((img, index) => {
+                                                            return ` 
+                                                                <div class="sqvf-product-images-item" data-index="${index}" data-imgid="${img.id}">                                                                                                                        
+                                                                <div class="sqvf-product-image">
+                                                                    <img src="${img.src}" alt="${img.id}">
+                                                                </div>                                                                                                                                                                                      
+                                                                </div>                                                                                                                         
+                                                            `
+                                                            }).join('')}
+                                                        </div>
+                                                    </div>
+                                                    <div class="sqvf-product-images-nav">
+                                                        <button type="button" class="sqvf-product-images-prev"></button>
+                                                        <button type="button" class="sqvf-product-images-next"></button>
+                                                    </div>
+                                                </figure>            
+                                            </div>
+                                            <div class="sqvf-product-thumbnails">
+                                                <div class="sqvf-thumbnails">
+                                                ${productObj.images.map((img, index) => {                                              
+                                                    return `                                                          
+                                                        <div class="sqvf-thumbnail" data-index="${index}" data-imgid="${img.id}">                                                        
+                                                        <img src="${img.src}" alt="${img.id}">                                                      
+                                                        </div>                                                        
+                                                    `                                                 
+                                                    }).join('')}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="sqvf-col-md-6 sqvf-col-sm-12 sqvf-col-xs-12 product-images-wrapper-summary">
+                                            <div class="sqvf-product-details">
+                                                <h1 itemprop="name" class="sqvf-product-title">
+                                                    ${productObj.title}
+                                                </h1>
+                                                <div class="sqvf-product-rating"></div>
+                                                <div class="sqvf-product-card__price-wrapper">
+                                                    <span class="sqvf-product-card__price" samitaws-product-unit-price> </span>
+                                                    <span class="sqvf-product-card__oldprice" samitaWS-product-compare-at-price> </span>
+                                                    <span class="sqvf-product-card__saleprice" samitaWS-product-compare-at-price > </span>
+                                                </div>
+                                                <div class="sqvf-description">
+                                                    <span>
+                                                    ${productObj?.description ? productObj?.description : "" }
+                                                    </span>
+                                                </div>
+                                                <form action="/cart/add" method="post" enctype="multipart/form-data" class="sqvf-product-form">
+                                                    <input style="display:none;" name=id value="" />
+                                                    <div class="sqvf-swatchs">
+                                                    ${productObj.options_with_values.length > 1 ? productObj.options_with_values.map((option, index) => {
+                                                    if (option.values[0] == "Default Title") {
+                                                    return ``;
+                                                    }
+                                                    return `
+                                                        <div class="sqvf-swatch" data-option="${index}">
+                                                        <label>${option.name}: <span class="sqvf-current-value">${option.values[0]}</span></label>
+                                                        <ul class="sqvf-swatch-values">
+                                                            ${option.values.map((value, index) => {
+                                                            return `
+                                                                <li class="sqvf-swatch-value" data-value="${value}" data-index="${index}" data-option-name="${option.name}">
+                                                                <span class="sqvf-product__swatch-outer">
+                                                                    <span class="sqvf-product__swatch-inner">
+                                                                    <span class="sqvf-swatch-text">${value}</span>
+                                                                    </span>
+                                                                </span>
+                                                                </li>
+                                                            `
+                                                            }).join("")}
+                                                        </ul>
+                                                        </div>
+                                                    `
+                                                    }).join("") : ""}                                                                                                     
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    `;
+                    
+                    let targetModal = document.querySelector('body');
+                    const oldModal = targetModal.querySelector('.samitaWS-quickViewModal-wrapper');
+                    oldModal && oldModal.remove();
+                    document.querySelector('body').appendChild(widget);
+                    let modal = document.querySelector('.samitaWS-quickViewModal-wrapper');
+                    let modalContentQuickView = modal.querySelector('.samitaWS-quickViewModal-content');
+                    let removeQuickView = modal.querySelector('.samitaWS-quickViewModal-close-modal');
+                    if (modalContentQuickView) {
+                        document.addEventListener('mouseup', (e) => {
+                            let checkMouseup =  e.target.classList.contains("samitaWS-quickViewModal-content");
+                            if (checkMouseup) {
+                                fadeOutEffect(modal);
+                            }
+                        });
+                        removeQuickView.addEventListener('click', (e) => {
+                            fadeOutEffect(modal);
+                        });
+                    }
+                    let sliderWrapper = modalContentQuickView.querySelector('.sqvf-product-images-wrapper');
+                    let sliderStage = modalContentQuickView.querySelector('.sqvf-product-images-stage');
+                    let sliderItems = modalContentQuickView.querySelectorAll('.sqvf-product-images-item');
+                    let nextBtn = modalContentQuickView.querySelector('.sqvf-product-images-next');
+                    let prevBtn = modalContentQuickView.querySelector('.sqvf-product-images-prev');
+                    let sliderItemWidth = sliderItems[0].offsetWidth;
+                    let sliderItemLenght = sliderItems.length;
+                    let postionX = 0;
+                    let sliderIndex = 0;
+                
+                    let thumbnailItems = modalContentQuickView.querySelectorAll('.sqvf-thumbnail');
+                    thumbnailItems[0].classList.add("active");
+                    
+                    nextBtn.addEventListener("click", () => {          
+                        handleChangeSlide(1)
+                    });
+                    prevBtn.addEventListener("click", () => {
+                        handleChangeSlide(-1)
+                    });
+                    this.fireAnEvent('samitaWSQuickOrderRenderCompleted', {});
+                    thumbnailItems.forEach(item => item.addEventListener("click", (e) => {
+                        thumbnailItems.forEach(el => el.classList.remove("active"));
+                        e.target.classList.add("active");
+                        const thumbnailIndex = parseInt(e.target.dataset['index']);
+                        sliderIndex = thumbnailIndex;
+                        postionX = -1 * sliderIndex * sliderItemWidth;
+                        sliderStage.style = `transform: translateX(${postionX}px)`
+                    }))
+                    
+                    let handleChangeSlide = (dir) => {
+                        if (dir === 1){
+                            if(sliderIndex >= sliderItemLenght - 1){
+                            sliderIndex = sliderItemLenght - 1;
+                            return;
+                            }
+                            postionX = postionX - sliderItemWidth;
+                            sliderStage.style = `transform: translateX(${postionX}px)`
+                            sliderIndex ++;
+                        } else if (dir === -1 ){
+                            if(sliderIndex <= 0){
+                            sliderIndex = 0;
+                            return;
+                            }
+                            postionX = postionX + sliderItemWidth;
+                            sliderStage.style = `transform: translateX(${postionX}px)`
+                            sliderIndex --;                  
+                        }
+                        thumbnailItems.forEach(el => el.classList.remove("active"));
+                        thumbnailItems[sliderIndex].classList.add("active");                                             
+                    }
+                
+                    // find what option are selected
+                    let optionSelected = {};
+                    const selectOption = (optionElement) => {
+                        optionSelected[optionElement.dataset.optionName] = optionElement.dataset.value;
+                    }
+
+                    let loadOptionSelected = () => {
+                        const variant = productObj.variants.find(variant => {
+                            let result = true;
+                            for (let optionName in optionSelected) {
+                                if (!variant.options.includes(optionSelected[optionName])) {
+                                result = false;
+                                }
+                            }
+                            return result;
+                        })
+                        if(variant){
+                            // change image
+                            sliderItems.forEach(item => {
+                                if(item.dataset.imgid == variant.image_id)
+                                {
+                                    const optionSwatchValueIndex = parseInt(item.dataset.index);
+                                    sliderIndex = optionSwatchValueIndex;
+                                    postionX = -1 * sliderIndex * sliderItemWidth;
+                                    sliderStage.style = `transform: translateX(${postionX}px)`
+
+                                    thumbnailItems.forEach(el => el.classList.remove("active"));
+                                    thumbnailItems[sliderIndex].classList.add("active");  
+                                }         
+                            })
+                            modalContentQuickView.querySelector("[name=id]").value = variant.id;
+                            let event = new Event('change');
+                            modalContentQuickView.querySelector("[name=id]").dispatchEvent(event);
+                            // change price
+                            if(variant.compare_at_price && variant.price){
+                                modalContentQuickView.querySelector('.sqvf-product-card__oldprice').innerHTML = this.money(variant.compare_at_price, 1);
+                                modalContentQuickView.querySelector('.sqvf-product-card__saleprice').innerHTML = this.money(variant.price, 1);
+                            }else{
+                                modalContentQuickView.querySelector('.sqvf-product-card__oldprice').innerHTML = "";
+                                modalContentQuickView.querySelector('.sqvf-product-card__saleprice').innerHTML = this.money(variant.price, 1);
+                            }
+                        }else{
+                            console.log('variant undefined')
+                        }
+                    };
+
+                    // add click event for the options
+                    let optionSwatch = modalContentQuickView.querySelectorAll('.sqvf-swatch');
+                    optionSwatch.forEach(item => {
+                        let currentValue = item.querySelector('.sqvf-current-value');
+                        let optionSwatchValues = item.querySelectorAll('.sqvf-swatch-value');                  
+                        optionSwatchValues[0].classList.add("is-selected");
+        
+                        // when option is selected, we will add it to optionSelected Object
+                        selectOption(optionSwatchValues[0]);
+                        loadOptionSelected()
+                        
+                        optionSwatchValues.forEach((item1, index) => item1.addEventListener("click", (e) => {
+                            // when option is selected, we will add it to optionSelected Object
+                            optionSwatchValues.forEach(el => el.classList.remove("is-selected"));
+                            item1.classList.add("is-selected");
+                            currentValue.innerHTML = item1.dataset.value;
+                            selectOption(item1);
+                            loadOptionSelected();
+                            
+                        }))
+                    })
+                },
+                renderTableContent: function(data) {
+                    let qrTable = document.querySelector(".samitaWS-table");
+                    let qrCountPr = document.querySelector(".filter-product-count");
+                    qrTable.classList.remove("loading");
+                    let qrTableContent = document.querySelector("table.samitaWS-responsive tbody");
+                    let {products_total, currenProductIds, products, quickOrder_table_template, page_type, url_filter_page_val} = data;
+                    let _qrCountPr = qrCountPr.querySelector("label");
+                    if (_qrCountPr) {
+                        _qrCountPr.innerHTML = this.translate("quick_order_table.count_products", products_total);
+                    }
+                    if ( products_total > 0) {
+                        let overrideHtmlTableContent = currenProductIds.map(id => {
+                            let productObj = products.find((product) => {
+                                return product.id == id;
+                            });
+                            if (!productObj) return "";
+                            let inventory_product = 0;
+                            let available = false;
+                            let variantObj;
+                            if (!productObj) {
+                              return null;
+                            }
+                            productObj.variants.forEach(variant => {
+                                if (!variantObj) {
+                                    let imgSrc = productObj.images.find((img) => {
+                                        if (img?.variant_ids != "null" && img?.variant_ids?.find((id) => { return id = variant.id })) {
+                                            return img.src;
+                                        }
+                                        return false;
+                                    });
+                                    if (!imgSrc) {
+                                        imgSrc = productObj.images.find((img) => {
+                                            return img.src;
+                                        });
+                                    }
+                                    variant.imgSrc = imgSrc;
+                                    variantObj = variant;
+                                }
+                                if (variant.available) {
+                                    available = true;
+                                }
+                                
+                                inventory_product = parseInt( inventory_product + variant.inventory_quantity );
+                            });
+                            let contentTr = "";
+
+                            let translate_out_of_stock = {{translateTexts["out_of_stock"] | json}}
+                            let translate_volume_pricing = {{translateTexts["volume_pricing"] | json}}
+                            let quantityIncart = 0;
+                            if (Samita.Wholesale.cart) {
+                                let itemCartFind = Samita.Wholesale.cart.items.find(item => {
+                                    if (item.variant_id == variantObj.id) {
+                                        return true;
+                                    }
+                                    return false;
+                                });
+                                if (itemCartFind) {
+                                    quantityIncart = itemCartFind.quantity;
+                                }
+                            }
+                            quickOrder_table_template.table_elements.columns.forEach(form_column => {
+                                if (form_column.status) {
+                                    if (form_column.attr == "quantity") {
+                                        let translate_quantity_incart = this.translate("quick_order_table.quantity_in_cart", quantityIncart);
+                                        contentTr += `<td data-name="${form_column.title.toLowerCase()}" class="form_${form_column.attr}_row">
+                                            <div class="form_${form_column.attr}___quanity">
+                                                <div class="samitaWS_tooltip_volumeTable_product_form" style="position: relative;">
+                                                    <span class="volume_pricing__show"><svg viewBox="0 0 20 20" ><path d="M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm-1-9a1 1 0 0 0 2 0v-2a1 1 0 1 0-2 0v2zm0 4a1 1 0 1 0 2 0 1 1 0 0 0-2 0z"></path></svg> ${translate_volume_pricing} </span>
+                                                    <span class="samitaWS_volumeTable_product_form"></span>
+                                                </div>
+                                                <div class="sqvf-actions">
+                                                    <div class="sqvf-quantity ${productObj.variants.length > 1 ? "disabled" : "" }">
+                                                        <span class="decrease" onclick="Samita.Wholesale.handleQuickOrderPage.changeQuantity('minus', this);"></span>
+                                                        <input type="number" name="quantity" value="" class="sqvf-quantity-input" pattern="[0-9]*" inputmode="numeric" ${productObj.variants.length <= 1 ? "disabled" : "" } max="${variantObj.available ? 999999999 : variantObj.inventory_quantity}">
+                                                        <span class="increase" onclick="Samita.Wholesale.handleQuickOrderPage.changeQuantity('plus', this);"></span>
+                                                    </div>
+                                                </div>
+                                                ${ (inventory_product == 0 && !available) ? `<span class="error outofstock__show"><svg viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path fill-rule="evenodd" d="M10 20c5.514 0 10-4.486 10-10s-4.486-10-10-10-10 4.486-10 10 4.486 10 10 10zm1-6a1 1 0 1 1-2 0v-4a1 1 0 1 1 2 0v4zm-1-9a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"></path></svg> ${translate_out_of_stock} </span>` : ""}
+                                                <span class="sqvf-cart_qty">${quantityIncart < 1 ? "" : `${translate_quantity_incart}`}</span>
+                                            </div>
+                                        </td>`;
+                                    } else if (form_column.attr == "product_image") {
+                                        contentTr += `<td data-name="${form_column.title.toLowerCase()}"  class="form_${form_column.attr}_row">
+                                            <div>
+                                                <span class="thumbnail_img">
+                                                    <span>
+                                                        <img alt="${productObj.title}" src="${variantObj?.imgSrc?.src}" width="50px" height="70px">
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </td>`;
+                                    } else if (form_column.attr == "action") {
+                                        let translate_show_variant = this.translate("quick_order_table.show_count_variants", productObj.variants.length);
+                                        let translate_hide_variant = this.translate("quick_order_table.hide_count_variants", productObj.variants.length);
+                                        let translate_atc = {{translateTexts["add_to_cart"] | json}}
+                                        contentTr += `<td data-name="${form_column.title.toLowerCase()}" class="form_${form_column.attr}_row">
+                                            <span class="form_list_action">
+                                                ${productObj.variants.length > 1 ? `<button class="show-variants" onclick="Samita.Wholesale.handleQuickOrderPage.opendVariantProduct('${productObj.id}', this);">
+                                                    <span class="show-variants__notactive">${translate_show_variant}</span>
+                                                    <span class="show-variants__active">${translate_hide_variant}</span>
+                                                </button>` : `
+                                                <button class="action-atc" onclick="Samita.Wholesale.handleQuickOrderPage.addProductToCart('${variantObj.id}', this);" ${(inventory_product == 0 && !available) ? "disabled" : ""}>
+                                                    ${translate_atc}
+                                                </button>`}
+                                                ${quickOrder_table_template.enable_quick_view ? `<button class="action-qv" data-idPro="${productObj.id}" onclick="Samita.Wholesale.handleQuickOrderPage.opendModalQuickView('${productObj.id}');">
+                                                    <svg viewBox="64 64 896 896" focusable="false" data-icon="eye" width="10px" height="10px" fill="currentColor" aria-hidden="true"><path d="M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 000 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"></path></svg>
+                                                </button>`: ""}
+                                                <input name="id" value="${variantObj.id}" style="display: none;"/>
+                                            </span>
+                                        </td>`
+                                    } else if (form_column.attr == "product_price") {
+                                        contentTr += `<td data-name="${form_column.title.toLowerCase()}" class="form_${form_column.attr}_row" samitaws-product-main-price="true">
+                                            <span samitaWS-product-unit-price>${this.money(variantObj.price, 1)}</span>
+                                        </td>`
+                                    } else if (form_column.attr == "compare_at_price") {
+                                        contentTr += `<td data-name="${form_column.title.toLowerCase()}" class="form_${form_column.attr}_row" samitaws-product-main-price="true">
+                                            <span samitaWS-product-compare-at-price>${this.money(variantObj.compare_at_price_max, 1)}</span>
+                                        </td>`
+                                    } else if (form_column.attr == "product_sku") {
+                                        contentTr += `<td data-name="${form_column.title.toLowerCase()}" class="form_${form_column.attr}_row">
+                                            ${variantObj.sku}
+                                        </td>`
+                                    } else if (form_column.attr == "product_vendor") {
+                                        contentTr += `<td data-name="${form_column.title.toLowerCase()}" class="form_${form_column.attr}_row">
+                                            ${productObj.vendor}
+                                        </td>`
+                                    } else if (form_column.attr == "product_type") {
+                                        contentTr += `<td data-name="${form_column.title.toLowerCase()}" class="form_${form_column.attr}_row">
+                                            ${productObj?.product_type}
+                                        </td>`
+                                    } else if (form_column.attr == "product_name") {
+                                        contentTr += `<td data-name="${form_column.title.toLowerCase()}" class="form_${form_column.attr}_row">
+                                            <a href="/products/${productObj.handle}" samitaWS-collection-product-link data-samitaws-handle="${productObj.handle}">
+                                                ${productObj.title}
+                                            </a>
+                                        </td>`
+                                    }
+                                }
+                            });
+
+                            contentTr += this.renderVariantTr({columns: quickOrder_table_template.table_elements.columns, productObj, variants: productObj.variants});
+                            return `
+                                <tr data-proID="${productObj.id}"  p-variant-id="${variantObj?.id}" samitaws-element="handle" p-handle="${productObj.handle}">
+                                    ${contentTr}
+                                </tr>
+                            `;
+                        });
+                        if (page_type == "load_more_button" && url_filter_page_val > 1) {
+                            qrTableContent.insertAdjacentHTML('beforeend', overrideHtmlTableContent.join(""));
+                        } else {
+                            qrTableContent.innerHTML = overrideHtmlTableContent.join("");
+                        }
+                    } else {
+                        let translate_no_data = {{translateTexts["no_data"] | json}};
+                        if (page_type == "load_more_button") {
+                            if (url_filter_page_val <= 1) {
+                                qrTableContent.innerHTML = `
+                                    <tr>
+                                        <td colspan="${quickOrder_table_template.table_elements.columns.length}" style="text-align:center;">
+                                            <div class="samitaWS-empty samitaWS-empty-normal">
+                                                <div class="samitaWS-empty-image">
+                                                    <svg viewBox="0 0 50 50" class="samitaWS-empty-img-simple"  style="width: 50px; height: 50px; fill: #e8e8e8;"><path d="M8 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm9.707 4.293-4.82-4.82a5.968 5.968 0 0 0 1.113-3.473 6 6 0 0 0-12 0 6 6 0 0 0 6 6 5.968 5.968 0 0 0 3.473-1.113l4.82 4.82a.997.997 0 0 0 1.414 0 .999.999 0 0 0 0-1.414z"></path></svg>
+                                                <div class="samitaWS-empty-description">${translate_no_data}</div>
+                                            </div>
+                                        </td>
+                                    </tr>`;
+                            }
+                        } else 
+                            qrTableContent.innerHTML = `
+                            <tr>
+                                <td colspan="${quickOrder_table_template.table_elements.columns.length}" style="text-align:center;">
+                                    <div class="samitaWS-empty samitaWS-empty-normal">
+                                        <div class="samitaWS-empty-image">
+                                            <svg viewBox="0 0 50 50" class="samitaWS-empty-img-simple"  style="width: 50px; height: 50px; fill: #e8e8e8;"><path d="M8 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm9.707 4.293-4.82-4.82a5.968 5.968 0 0 0 1.113-3.473 6 6 0 0 0-12 0 6 6 0 0 0 6 6 5.968 5.968 0 0 0 3.473-1.113l4.82 4.82a.997.997 0 0 0 1.414 0 .999.999 0 0 0 0-1.414z"></path></svg>
+                                        <div class="samitaWS-empty-description">${translate_no_data}</div>
+                                    </div>
+                                </td>
+                            </tr>`;
+                    }
+
+                },
+                renderLoadingTr : function (data) {
+                    let {currenProductIds, quickOrder_table_template } = data;
+                    let loadingTr = currenProductIds.map(id => {
+
+                        let contentTr = "";
+                        quickOrder_table_template.table_elements.columns.forEach(form_column => {
+                            if (form_column.status) {
+                                if (form_column.attr == "product_image") {
+                                    contentTr += `
+                                        <td data-name="${form_column.title.toLowerCase()}" class="form_${form_column.attr}_row" data-proid="${id}">
+                                            <img class="product__img_loading samitaWS-skeleton" />
+                                        </td>
+                                    `
+                                } else {
+                                    contentTr += `
+                                        <td data-name="${form_column.title.toLowerCase()}" class="form_${form_column.attr}_row" data-proid="${id}">
+                                            <div class="samitaWS-skeleton samitaWS-skeleton-text samitaWS-skeleton-text"></div>    
+                                        </td>
+                                    `
+                                }
+                            }
+                        });
+                        return `
+                            <tr>
+                                ${contentTr}
+                            </tr>
+                        `;
+                    });
+                    return loadingTr.join("");
+                },
+                renderVariantTr: function(data) {
+                    let { columns, productObj, variants } = data;
+                    let htmlTh = ``;
+                    columns.forEach(form_column => {
+                        if (form_column.status) {
+                            let key_text = form_column.attr.split("_");
+                            key_text  = key_text[key_text.length - 1];
+                            htmlTh += `<th data-name="${form_column.title.toLowerCase()}" class="${form_column.attr == "quantity" ? "form_qty_head": ""}">
+                                ${form_column.attr == "product_image" || form_column.attr == "product_vendor" || form_column.attr == "product_price" || form_column.attr == "product_name" || form_column.attr == "product_type" ? _translateTexts[key_text] : _translateTexts[form_column.attr]}
+                            </th>`;
+                        }
+                    });
+                    let _contentTr = variants.map((variant) => {
+                        let contentTr = "";
+
+                        let imgSrc = productObj.images.find((img) => {
+                            if (img?.variant_ids != "null" && img?.variant_ids?.find((id) => { return id = variant.id })) {
+                                return img.src;
+                            }
+                            return false;
+                        });
+                        if (!imgSrc) {
+                            imgSrc = productObj.images.find((img) => {
+                                return img.src;
+                            });
+                        }
+                        variant.imgSrc = imgSrc;
+                        
+                        let translate_atc = {{translateTexts["add_to_cart"] | json}}
+                        let translate_out_of_stock = {{translateTexts["out_of_stock"] | json}}
+                        let translate_volume_pricing = {{translateTexts["volume_pricing"] | json}}
+                        let quantityIncart = 0;
+                        if (Samita.Wholesale.cart) {
+                            let itemCartFind = Samita.Wholesale.cart.items.find(item => {
+                                if (item.variant_id == variant.id) {
+                                    return true;
+                                }
+                                return false;
+                            });
+                            if (itemCartFind) {
+                                quantityIncart = itemCartFind.quantity;
+                            }
+                        }
+                        columns.forEach(form_column => {
+                            if (form_column.status) {
+                                if (form_column.attr == "quantity") {
+                                    let translate_quantity_incart = this.translate("quick_order_table.quantity_in_cart", quantityIncart);
+                                    contentTr += `<td data-name="${form_column.title.toLowerCase()}" class="form_${form_column.attr}_row">
+                                        <div class="form_${form_column.attr}___quanity">
+                                            <div class="samitaWS_tooltip_volumeTable_product_form" style="position: relative;">
+                                                <span class="volume_pricing__show"><svg viewBox="0 0 20 20"  ><path d="M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm-1-9a1 1 0 0 0 2 0v-2a1 1 0 1 0-2 0v2zm0 4a1 1 0 1 0 2 0 1 1 0 0 0-2 0z"></path></svg> ${translate_volume_pricing} </span>
+                                                <span class="samitaWS_volumeTable_product_form"></span>
+                                            </div>
+                                            <div class="sqvf-actions">
+                                                <div class="sqvf-quantity ${ (variant.inventory_quantity == 0 && !variant.available) ? "disabled": ""}">
+                                                    <span class="decrease" onclick="Samita.Wholesale.handleQuickOrderPage.changeQuantity('minus', this);"></span>
+                                                    <input type="number" name="quantity" value="" class="sqvf-quantity-input" pattern="[0-9]*" inputmode="numeric" max="${variant.available ? 999999999 : variant.inventory_quantity}">
+                                                    <span class="increase" onclick="Samita.Wholesale.handleQuickOrderPage.changeQuantity('plus', this);"></span>
+                                                </div>
+                                            </div>
+                                            ${ (variant.inventory_quantity == 0 && !variant.available) ? `<span class="error outofstock__show"><svg viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path fill-rule="evenodd" d="M10 20c5.514 0 10-4.486 10-10s-4.486-10-10-10-10 4.486-10 10 4.486 10 10 10zm1-6a1 1 0 1 1-2 0v-4a1 1 0 1 1 2 0v4zm-1-9a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"></path></svg> ${translate_out_of_stock} </span>` : ""}
+                                            <span class="sqvf-cart_qty">${quantityIncart < 1 ? "" : `${translate_quantity_incart}`}</span>
+                                        </div>
+                                    </td>`;
+                                } else if (form_column.attr == "product_image") {
+                                    contentTr += `<td data-name="${form_column.title.toLowerCase()}"  class="form_${form_column.attr}_row">
+                                        <div>
+                                            <span class="thumbnail_img">
+                                                <span>
+                                                    <img alt="${variant.title}" src="${variant?.imgSrc?.src}" width="50px" height="70px">
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </td>`;
+                                } else if (form_column.attr == "action") {
+                                    contentTr += `<td data-name="${form_column.title.toLowerCase()}" class="form_${form_column.attr}_row">
+                                        <span class="form_list_action">
+                                            <button class="action-atc" onclick="Samita.Wholesale.handleQuickOrderPage.addProductToCart('${variant.id}', this);" ${ (variant.inventory_quantity == 0 && !variant.available) ? "disabled": ""}>
+                                                ${translate_atc}
+                                            </button>
+                                        </span>
+                                        <input name="id" value="${variant.id}" style="display: none;"/>
+                                    </td>`
+                                } else if (form_column.attr == "product_price") {
+                                    contentTr += `<td data-name="${form_column.title.toLowerCase()}" class="form_${form_column.attr}_row" samitaws-product-main-price="true">
+                                        <span samitaWS-product-unit-price>${this.money(variant.price, 1)}</span>
+                                    </td>`
+                                } else if (form_column.attr == "compare_at_price") {
+                                    contentTr += `<td data-name="${form_column.title.toLowerCase()}" class="form_${form_column.attr}_row" samitaws-product-main-price="true">
+                                        <span samitaWS-product-compare-at-price>${this.money(variant.compare_at_price_max, 1)}</span>
+                                    </td>`
+                                } else if (form_column.attr == "product_sku") {
+                                    contentTr += `<td data-name="${form_column.title.toLowerCase()}" class="form_${form_column.attr}_row">
+                                        ${variant.sku}
+                                    </td>`
+                                } else if (form_column.attr == "product_vendor") {
+                                    contentTr += `<td data-name="${form_column.title.toLowerCase()}" class="form_${form_column.attr}_row">
+                                        ${productObj.vendor}
+                                    </td>`
+                                } else if (form_column.attr == "product_type") {
+                                    contentTr += `<td data-name="${form_column.title.toLowerCase()}" class="form_${form_column.attr}_row">
+                                        ${productObj?.product_type}
+                                    </td>`
+                                } else if (form_column.attr == "product_name") {
+                                    contentTr += `<td data-name="${form_column.title.toLowerCase()}" class="form_${form_column.attr}_row">
+                                        <a href="/products/${productObj.handle}" samitaWS-collection-product-link data-samitaws-handle="${productObj.handle}">
+                                            ${variant.title}
+                                        </a>
+                                    </td>`
+                                }
+                            }
+                        });
+                        return `<tr p-variant-id="${variant.id}" samitaws-element="handle" p-handle="${productObj.handle}">
+                        ${contentTr}
+                        </tr>` ;
+                    })
+                    
+                    return html = `
+                        <tr class="variant_product" id="variant_product_${productObj.id}">
+                            <td colspan="${columns.length}" style="text-align:center;">
+                                <table class="samitaWS-responsive">
+                                    <thead>
+                                        <tr>
+                                            ${htmlTh}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${_contentTr.join("")}
+                                    </tbody>
+                                </table>
+                                <div class="samitaWS-lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                            </td>
+                        </tr>
+                    `;
+                },
+                renderPagination: function(data) {
+                    let { url_filter_page_val, product_per_page, products_total, page_type } = data;
+                    let max_length = 0 , pagination_prev_number = parseInt( url_filter_page_val - 1 ), pagination_next_number = parseInt( url_filter_page_val + 1 );
+
+                    let qrPagination = document.querySelector(".samitaWS-footer-pagination");
+                    if (pagination_prev_number == 0) {
+                        pagination_prev_number =  1;
+                    }
+                    let first_items = parseInt(product_per_page * pagination_next_number);
+                    let last_items = parseInt(products_total + product_per_page);
+                    if (first_items > last_items) {
+                        pagination_next_number = parseInt(pagination_next_number - 1);
+                    }
+                    let modulo_items = parseInt(products_total % product_per_page);
+                    if ( modulo_items == 0 ) {
+                        max_length = parseInt( products_total / product_per_page);
+                    } else {
+                        max_length = parseInt( (products_total / product_per_page) + 1);
+                    }
+
+                    <!-- //  shiow pagination //  -->
+
+                    let htmlNumberPage = "", pageHtml = "";
+                    let translate_load_more = {{translateTexts["load_more"] | json}};
+                    if (page_type == "load_more_button") {
+                        pageHtml += `<div><button class="pagination-loading-page" onclick="Samita.Wholesale.handleQuickOrderPage.changePagination('plus', ${url_filter_page_val}, ${max_length}, '${page_type}');"  ${parseInt(url_filter_page_val) >= parseInt(max_length) ? "disabled" : ""}>
+                                ${translate_load_more}
+                            </button></div>
+                        `;
+                    } else {
+                        for (let _page_number = 1; _page_number <= max_length; _page_number++) {
+                            let show_p = parseInt(url_filter_page_val + 3), show_m = parseInt(url_filter_page_val - 3), old_max_length = parseInt(max_length - 1);
+                            if (url_filter_page_val > 1 && show_m >= 0  && _page_number == 2  && show_p >= 8) {
+                                htmlNumberPage += `<button class="pagination-number-page" ${_page_number == url_filter_page_val ? "disabled" : "" }>
+                                    ...
+                                </button>`
+                            } else if (url_filter_page_val > 1 && show_m >= 0  && _page_number == 1) {
+                                htmlNumberPage += `<button class="pagination-number-page" onclick="Samita.Wholesale.handleQuickOrderPage.changePagination('', ${_page_number}, ${max_length});">
+                                    ${_page_number}
+                                </button>`
+                            } else if (_page_number >= show_m && show_m < show_p && _page_number <= show_p && url_filter_page_val >= show_m) {
+                                htmlNumberPage += `
+                                <button class="pagination-number-page" ${_page_number == url_filter_page_val ? "disabled" : ""} onclick="Samita.Wholesale.handleQuickOrderPage.changePagination('', ${_page_number}, ${max_length});">
+                                    ${_page_number}
+                                </button>`
+                            } else if (_page_number >= url_filter_page_val && _page_number < show_p) {
+                                htmlNumberPage += `<button class="pagination-number-page" ${_page_number == url_filter_page_val ? "disabled" : ""} onclick="Samita.Wholesale.handleQuickOrderPage.changePagination('', ${_page_number}, ${max_length});">
+                                    ${_page_number}
+                                </button>`
+                            } else if (_page_number == old_max_length) {
+                                htmlNumberPage += `<button class="pagination-number-page" ${_page_number == url_filter_page_val ? "disabled" : ""}>
+                                    ...
+                                </button>`
+                            } else if (_page_number == max_length) {
+                                htmlNumberPage += `<button class="pagination-number-page" ${_page_number == url_filter_page_val ? "disabled" : ""} onclick="Samita.Wholesale.handleQuickOrderPage.changePagination('', ${_page_number}, ${max_length});">
+                                    ${_page_number}
+                                </button>`
+                            }
+                        }
+                        pageHtml = `
+                            <div>
+                                ${url_filter_page_val != 1 ? 
+                                    `<button class="pagination-prev-page" data-url="" ${ url_filter_page_val == pagination_prev_number ? "disabled" : ""} onclick="Samita.Wholesale.handleQuickOrderPage.changePagination('minus', ${url_filter_page_val}, ${max_length});">
+                                        <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M12 16a.997.997 0 0 1-.707-.293l-5-5a.999.999 0 0 1 0-1.414l5-5a.999.999 0 1 1 1.414 1.414l-4.293 4.293 4.293 4.293a.999.999 0 0 1-.707 1.707z"></path></svg>
+                                    </button>
+                                ` :""}
+                                ${htmlNumberPage}
+                                ${url_filter_page_val != max_length ? `<button class="pagination-next-page" onclick="Samita.Wholesale.handleQuickOrderPage.changePagination('plus', ${url_filter_page_val}, ${max_length});">
+                                    <svg viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="M8 16a.999.999 0 0 1-.707-1.707l4.293-4.293-4.293-4.293a.999.999 0 1 1 1.414-1.414l5 5a.999.999 0 0 1 0 1.414l-5 5a.997.997 0 0 1-.707.293z"></path></svg>
+                                </button>` : ""}
+                            </div>
+                        `;
+                    }
+                    <!-- //  end pagination //  -->
+                    if (qrPagination)
+                        qrPagination.innerHTML = pageHtml;
+                },
+                initQuickOrderAction: function() {
+                    let filterInput = document.querySelector('.search-tool-bar .controls-search-input');
+                    let buttonSubmitSearch = document.querySelector('.search-tool-bar .controls-search-submit');
+                    let buttonClearSearch = document.querySelector('.search-tool-bar .controls-search-clear-button');
+                    let buttonButtonSearch = document.querySelector('.search-tool-bar .controls-search-button');
+                    let filterCollecitonSelect = document.querySelector('[name="collection_by"]');
+                    let sortCollecitonSelect = document.querySelector('[name="sort_by"]');
+                    if (filterInput) {
+                        filterInput.addEventListener('keyup', (e) => {
+                            if (filterInput.value !="" || filterInput.value !=null) {
+                                buttonClearSearch.classList.add("show");
+                                buttonButtonSearch.classList.add("hide");
+                            } else {
+                                buttonClearSearch.classList.remove("show");
+                                buttonButtonSearch.classList.remove("hide");
+                            }
+                            if (e.which == 13 && minKeySearch <= filterInput.value.length) {
+                                buttonSubmitSearch.dispatchEvent(new Event('click'));
+                            }
+                            if (minKeySearch <= filterInput.value.length) {
+                                buttonSubmitSearch.removeAttribute("disabled");
+                            } else {
+                                buttonSubmitSearch.setAttribute("disabled", "disabled");
+                            }
+                        });
+                    }
+                    if (buttonSubmitSearch) {
+                        buttonSubmitSearch.addEventListener('click', (e) => {
+                            let filterInputVal = filterInput.value;
+                            if (filterInputVal && filterInputVal != "") {
+                                let current_url = window.location.href;
+
+                                let _current_url = current_url.split("/");
+
+                                let current_param = _current_url[_current_url.length - 1];
+
+                                if(current_param.indexOf("page=")>-1 || current_param.indexOf("q=")>-1 || current_param.indexOf("collection=")>-1 || current_param.indexOf("sort_order=")>-1){
+
+                                    let nextUrl = "", checkFilterInputVal = false;
+                                    let _current_params = current_param.split("&");
+                                    _current_params.forEach(param => {
+                                        let key_and_value = param.split("=");
+                                        if (key_and_value["0"] == "q") {
+                                            if (nextUrl) {
+                                                nextUrl = nextUrl + "&" + key_and_value["0"] + "=" + encodeURIComponent(filterInputVal);
+                                            } else {
+                                                nextUrl = nextUrl + key_and_value["0"] + "=" + encodeURIComponent(filterInputVal);
+                                            }
+                                            checkFilterInputVal = true;
+                                        } else if (key_and_value["0"] == "page") {
+                                            if (nextUrl) {
+                                                nextUrl = nextUrl + "&" + param;
+                                            } else {
+                                                if (current_param.indexOf("q=")>-1) {
+                                                    nextUrl = nextUrl + param;
+                                                } else {
+                                                    nextUrl = nextUrl + key_and_value["0"] + "=" + 1;
+                                                }
+                                            }
+                                        } else if (key_and_value["0"] == "collection" || key_and_value["0"] == "sort_order") {
+                                            if (nextUrl) {
+                                                nextUrl = nextUrl + "&" + param;
+                                            } else {
+                                                nextUrl = nextUrl + param;
+                                            }
+                                        }
+                                    });
+                                    if (nextUrl) {
+                                        if (!checkFilterInputVal) {
+                                            nextUrl = nextUrl + "&q=" + encodeURIComponent(filterInputVal); 
+                                        }
+                                    } else {
+                                        nextUrl = nextUrl + "q=" + encodeURIComponent(filterInputVal); 
+                                    }
+                                    _current_url[_current_url.length - 1] = nextUrl;
+                                    window.location.href = _current_url.join("/");
+                                } else {
+                                    window.location.href = current_url + "/q=" + encodeURIComponent(filterInputVal);
+                                }
+                            }
+                        });
+                    }
+                    if (buttonClearSearch) {
+                        let current_url = window.location.href;
+
+                        if(current_url.indexOf("q=") > -1) {
+                            buttonClearSearch.classList.add("show");
+                            buttonButtonSearch.classList.add("hide");
+                        }
+                        buttonClearSearch.addEventListener('click', (e) => {
+                            let current_url = window.location.href;
+                            filterInput.value = "";
+                            buttonClearSearch.classList.remove("show");
+                            buttonButtonSearch.classList.remove("hide");
+                            let nextUrl = "";
+                            let _current_url = current_url.split("/");
+                            let current_param = _current_url[_current_url.length - 1];
+
+                            if(current_param.indexOf("page=")>-1 || current_param.indexOf("q=")>-1 || current_param.indexOf("collection=")>-1 || current_param.indexOf("sort_order=")>-1){
+                                let _current_params = current_param.split("&");
+                                _current_params.forEach(param => {
+                                    let key_and_value = param.split("=");
+                                    if (key_and_value["0"] == "page" || key_and_value["0"] == "collection" || key_and_value["0"] == "sort_order") {
+                                        if (nextUrl) {
+                                            nextUrl = nextUrl + "&" + param;
+                                        } else {
+                                            nextUrl = nextUrl + param;
+                                        }
+                                    }
+                                });
+                                if (nextUrl) {
+                                    _current_url[_current_url.length - 1] = nextUrl;
+                                } else {
+                                    _current_url.splice(_current_url.length - 1, 1); 
+                                }
+                                window.location.href = _current_url.join("/");
+                            }
+                        });
+                    }
+                    if (filterCollecitonSelect) {
+                        filterCollecitonSelect.addEventListener('change', (e) => {
+                            let filterCollectionVal = filterCollecitonSelect.value;
+                            if (filterCollectionVal && filterCollectionVal != "") {
+                                let current_url = window.location.href;
+
+                                let _current_url = current_url.split("/");
+
+                                let current_param = _current_url[_current_url.length - 1];
+
+                                if(current_param.indexOf("page=")>-1 || current_param.indexOf("q=")>-1 || current_param.indexOf("collection=")>-1 || current_param.indexOf("sort_order=")>-1){
+
+                                    let nextUrl = "", checkFilterCollectionVal = false;
+                                    let _current_params = current_param.split("&");
+                                    _current_params.forEach(param => {
+                                        let key_and_value = param.split("=");
+                                        if (key_and_value["0"] == "q" || key_and_value["0"] == "sort_order") {
+                                            if (nextUrl) {
+                                                nextUrl = nextUrl + "&" + param;
+                                            } else {
+                                                nextUrl = nextUrl + param;
+                                            }
+                                        } else if (key_and_value["0"] == "page") {
+                                            if (nextUrl) {
+                                                nextUrl = nextUrl + "&" + param;
+                                            } else {
+                                                nextUrl = nextUrl + key_and_value["0"] + "=" + 1;
+                                            }
+                                        } else if (key_and_value["0"] == "collection") {
+                                            if (nextUrl) {
+                                                nextUrl = nextUrl + "&" + key_and_value["0"] + "=" + filterCollectionVal;
+                                            } else {
+                                                nextUrl = nextUrl + key_and_value["0"] + "=" + filterCollectionVal;
+                                            }
+                                            checkFilterCollectionVal = true;
+                                        }
+                                    });
+                                    if (nextUrl) {
+                                        if (!checkFilterCollectionVal) {
+                                            nextUrl = nextUrl + "&collection=" + filterCollectionVal; 
+                                        }
+                                    } else {
+                                        nextUrl = nextUrl + "collection=" + filterCollectionVal; 
+                                    }
+                                    _current_url[_current_url.length - 1] = nextUrl;
+                                    window.location.href = _current_url.join("/");
+                                } else {
+                                    window.location.href = current_url + "/collection=" + filterCollectionVal;
+                                }
+                            }
+                        });
+                    }
+                },
+                changeQuantity: function (math, el) {
+                    let quantityPr = el.parentElement.querySelector("input");
+                    let maxQty = quantityPr.getAttribute("max");
+                    if (quantityPr) {
+                        let currentQt = quantityPr.value;
+                        let newQt = 0;
+                        if (math == "plus") {
+                            newQt = parseInt(currentQt ? currentQt : newQt)  + 1;
+                        } else {
+                            if (parseInt(currentQt) > 1) {
+                                newQt = parseInt(currentQt)  - 1;
+                            }
+                        }
+                        if (newQt >= 1 ) {
+                            quantityPr.parentElement.classList.remove("error");
+                        } else {
+                            if (!quantityPr.parentElement.classList.contains("error")) {
+                                quantityPr.parentElement.classList.add("error");
+                            }
+                        }
+                        if (maxQty  < newQt) {
+                            newQt = maxQty;
+                            if (!quantityPr.closest(".sqvf-actions").querySelector(".add_quantity__show")) {
+                                quantityPr.closest(".sqvf-actions").insertAdjacentHTML("beforeend",`<span class="error add_quantity__show"><svg viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path fill-rule="evenodd" d="M10 20c5.514 0 10-4.486 10-10s-4.486-10-10-10-10 4.486-10 10 4.486 10 10 10zm1-6a1 1 0 1 1-2 0v-4a1 1 0 1 1 2 0v4zm-1-9a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"></path></svg> ${this.translate("quick_order_table.you_can_only_add_quantity_of_this_to_your_cart", maxQty )} </span>`);
+                            }
+                        } else {
+                            if (quantityPr.closest(".sqvf-actions").querySelector(".add_quantity__show")) {
+                                quantityPr.closest(".sqvf-actions").querySelector(".add_quantity__show").remove();
+                            }
+                        }
+                        quantityPr.value = newQt;
+                        let event = new Event('change');
+                        quantityPr.dispatchEvent(event);
+                    }
+                },
+                addProductToCart: async function (variant_id, el) {
+                    const app = Samita.Wholesale;
+                    let translate_atc = {{translateTexts["add_to_cart"] | json}}
+                    let translate_added = {{translateTexts["added"] | json}}
+                    el.classList.add("loading");
+                    el.setAttribute("disabled", true);
+                    let trQr =el.closest("tr");
+                    
+                    let qty = trQr.querySelector("[name=\"quantity\"]").value;
+                    let maxQty = trQr.querySelector("[name=\"quantity\"]").getAttribute("max");
+                    qty = parseInt(qty);
+                    if ( isNaN(qty) || qty < 1) {
+                        trQr.querySelector("[name=\"quantity\"]").parentElement.classList.add("error");
+                        app.handleToast({mes: this.translate("quick_order_table.please_select_quantity", "" ), heading: this.translate("quick_order_table.error", "" ), icon: 'error'});
+                        el.classList.remove("loading");
+                        el.removeAttribute("disabled");
+                        return false;
+                    }
+                    if (maxQty < qty) {
+                        trQr.querySelector("[name=\"quantity\"]").parentElement.classList.add("error");
+                        app.handleToast({mes: this.translate("quick_order_table.you_can_only_add_quantity_of_this_to_your_cart", maxQty ), heading: this.translate("quick_order_table.error", "" ), icon: 'error'});
+                        el.classList.remove("loading");
+                        el.removeAttribute("disabled");
+                        trQr.querySelector("[name=\"quantity\"]").value = maxQty;
+                        return false;
+                    }
+                    let param = {quantity: qty, id: variant_id};
+                    const prms = new URLSearchParams(param);
+                    const response = await fetch(`/cart/add.js?${prms.toString()}`, {
+                        method: 'POST',
+                    })
+                    .then(res => {
+                        return res.json();
+                    })
+                    .then(nextRes => {
+                        if (nextRes?.status && nextRes.status != 200) {
+                            app.handleToast({mes: nextRes.description, heading: nextRes.message, icon: 'error'});
+                        } else {
+                            if (Samita.Wholesale.shop.settings?.cart_drawer?.enable) {
+                                el.innerHTML = translate_added;
+                                app.handleToast({mes: `<a href="/cart" class="toast_view_cart">${this.translate("quick_order_table.view_cart_and_checkout", "" )}</a>`, heading: this.translate("quick_order_table.added_to_cart_success", "" ), icon: 'success'});
+                            }
+                        }
+                        trQr.querySelector("[name=\"quantity\"]").value = 0;
+                        setTimeout(function(){
+                            el.innerHTML = translate_atc;
+                            el.classList.remove("loading");
+                            el.removeAttribute("disabled");
+                        }, 2000);
+                        this.getCartAndUpdateHtml(variant_id, trQr);
+                        return nextRes;
+                    }).catch((status)=> {
+                        app.handleToast({mes: status, heading: this.translate("quick_order_table.Error", "" ), icon: 'error'});
+                        el.classList.remove("loading");
+                        return false;
+                    });
+                    return response;
+                },
+                getCartAndUpdateHtml: async function (variant_id, el) {
+                    const response = await fetch(`/cart.js`, {
+                        method: 'GET',
+                    })
+                    .then(res => {
+                        return res.json();
+                    })
+                    .then(async nextRes => {
+                        if (nextRes) {
+                            if (Samita.Wholesale.shop.settings?.cart_drawer?.enable) {
+                                if (Samita.Wholesale.HandleCartDrawer) {
+                                    Samita.Wholesale.HandleCartDrawer.init({oldAddCart:true});
+                                }
+                            }
+                            let your_cart =  document.querySelector(".controls-items-your-cart button");
+                            let countBubbles = document.querySelectorAll(Samita.Wholesale.settings.selectors.cart.countBubble);
+                            your_cart.innerHTML = this.translate("quick_order_table.your_cart", nextRes?.item_count ? nextRes.item_count : 0 );
+                            if (nextRes?.item_count) {
+                                // update quantity cart icon
+                                if (countBubbles?.length) {
+                                    countBubbles.forEach(countBubble => {
+                                        countBubble.style.display = "flex";
+                                        countBubble.innerHTML = nextRes?.item_count;
+                                    });
+                                }
+                            } else {
+                                if (countBubbles?.length) {
+                                    countBubbles.forEach(countBubble => {
+                                        countBubble.style.display = "none";
+                                    });
+                                }
+                            }
+                            Samita.Wholesale.cart = nextRes;
+                            nextRes.items.forEach(item => {
+                                if (item.variant_id == variant_id) {
+                                    let qty = item.quantity;
+
+                                    let quantityPr = el.querySelector("[name=\"quantity\"]");
+                                    let cartQT = el.querySelector(".sqvf-cart_qty");
+                                    
+                                    let maxQty = quantityPr.getAttribute("max");
+                                    let updated_qty = maxQty - qty; 
+                                    if (updated_qty < 1) {
+                                        updated_qty = 0;
+                                    }
+                                    quantityPr.setAttribute("max", updated_qty);
+                                    cartQT.innerHTML = this.translate("quick_order_table.quantity_in_cart", qty);
+                                }
+                            });
+                        }
+                        return nextRes;
+                    }).catch((status)=> {
+                        console.log("error", status);
+                        return false;
+                    });
+                },
+                /**
+                 * Money format
+                 */
+                money: function(cents, quantity, format) {
+                    if (typeof cents == 'string') { cents = cents.replace('.', ''); }
+                    cents = cents*parseInt(quantity);
+                    var value = '';
+                    var placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
+                    var formatString = (format || (Samita && Samita.Wholesale && Samita.Wholesale.shop.configuration.money_format) || "${{amount}}");
+                    function defaultOption(opt, def) {
+                        return (typeof opt == 'undefined' ? def : opt);
+                    }
+                
+                    function formatWithDelimiters(number, precision, thousands, decimal) {
+                        precision = defaultOption(precision, 2);
+                        thousands = defaultOption(thousands, ',');
+                        decimal = defaultOption(decimal, '.');
+                
+                        if (isNaN(number) || number == null) { return 0; }
+                        
+                        number = (number / 100.0).toFixed(precision);
+                
+                        var parts = number.split('.'),
+                        dollars = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + thousands),
+                        cents = parts[1] ? (decimal + parts[1]) : '';
+                        
+                        return dollars + cents;
+                    }
+                
+                    switch (formatString.match(placeholderRegex)[1]) {
+                        case 'amount':
+                        value = formatWithDelimiters(cents, 2);
+                        break;
+                        case 'amount_no_decimals':
+                        value = formatWithDelimiters(cents, 0);
+                        break; 
+                        case 'amount_with_comma_separator':
+                        value = formatWithDelimiters(cents, 2, '.', ',');
+                        break;
+                        case 'amount_no_decimals_with_comma_separator':
+                        value = formatWithDelimiters(cents, 0, '.', ',');
+                        break;
+                        case 'amount_no_decimals_with_space_separator':
+                        value = formatWithDelimiters(cents, 0, '.', ' ');
+                        break;
+                    }
+                
+                    return formatString.replace(placeholderRegex, value);
+                },
+
+                checkscrollX: function () {
+                    let div = document.getElementById('scrollX');
+                    if (div) {
+                        let buttonNextPrev = document.querySelectorAll(".samita-tabs-nav-wrap-ping-left button");
+
+                        let hasHorizontalScrollbar = div.scrollWidth > div.clientWidth;
+                        if (!hasHorizontalScrollbar) {
+                            buttonNextPrev.forEach(element => {
+                                element.style.opacity = 0;
+                            });
+                        }
+                    }
+                },
+                scrollX: function (id, operator) {
+                    const ElementId = document.getElementById(id);
+                    let number = ElementId.scrollLeft + 120;
+                    if (operator =="minus") {
+                        number = ElementId.scrollLeft - 120;
+                    }
+                    ElementId.scrollTo({ left: number, behavior: 'smooth' });
+                },
+                /*
+                * Translate App
+                */
+                translate: function(variable, format) {
+                    const shop_locale  = Samita.Wholesale.shop.locale;
+                    const translations = Samita.Wholesale.shop.settings.translations;
+                    const FixLangAvailableIsEmpty = this.langAvailable();
+                    let textLang = '';
+                    let _keys = variable.split(".");
+                    if (typeof(translations[shop_locale]) != 'undefined' && typeof(translations[shop_locale][_keys[0]]) != 'undefined' && typeof(translations[shop_locale][_keys[0]][_keys[1]]) != 'undefined' ) {
+                        textLang = translations[shop_locale][_keys[0]][_keys[1]];
+                    } else if (typeof translations.default[_keys[0]] != 'undefined' && typeof translations.default[_keys[0]][_keys[1]] != 'undefined') {
+                        textLang = translations.default[_keys[0]][_keys[1]];
+                    } else if (FixLangAvailableIsEmpty.length) {
+                        /*fix lang available */
+                        if (typeof FixLangAvailableIsEmpty[_keys[0]] != 'undefined' && typeof FixLangAvailableIsEmpty[_keys[0]][_keys[1]] != 'undefined') {
+                            textLang = FixLangAvailableIsEmpty[_keys[0]][_keys[1]];
+                        }
+                    }
+                    textLang = this.formatTextTranslate(textLang, format);
+
+                    return textLang;
+                },
+                langAvailable:  function() {
+                    return [];
+                },
+                fireAnEvent: function (evtName, params) {
+                    // Create the event
+                    let event = new CustomEvent(evtName, params);
+                    // Dispatch/Trigger/Fire the event
+                    window.dispatchEvent(event);
+                },
+                formatTextTranslate: function (textLang, format) {
+                    
+                    const placeholderRegex = {% raw %} /\{{\s*(.*?\w+)\s*\}}/ {% endraw %};
+                    let text_lang = textLang;
+                    if (textLang.match(placeholderRegex)) {
+                        const matchText = textLang.match(placeholderRegex)[1];
+                        const splitText = matchText.split("|");
+                        switch (matchText) {
+                            case 'count_products': 
+                                text_lang = textLang.replace({% raw %}"{{count_products}}"{% endraw %}, `<span>${format}</span>` ); 
+                                break;
+                            case 'count_variants': 
+                                text_lang = textLang.replace({% raw %}"{{count_variants}}"{% endraw %}, format); 
+                                break;
+                            case 'cart_total_items': 
+                                text_lang = textLang.replace({% raw %}"{{cart_total_items}}"{% endraw %}, format); 
+                                break;
+                            case 'max_quantity': 
+                                text_lang = textLang.replace({% raw %}"{{max_quantity}}"{% endraw %}, format); 
+                                break;
+                            case 'quantity_in_cart': 
+                                text_lang = textLang.replace({% raw %}"{{quantity_in_cart}}"{% endraw %}, format); 
+                                break;
+                        }
+                    }
+                    return text_lang;
+                }
+
+            };
+
+            if (Samita.Wholesale.currenQuickOrderForm) {
+                console.log("%c Samita Wholesale %c quick order start %c", "background: #212b36; padding: 1px; margin-bottom: 2px; border-radius: 3px 0 0 3px; color: #fff", "background: #5cc9a7; padding: 1px; margin-bottom: 2px; border-radius: 0 3px 3px 0; color: #fff", "background:transparent");
+                Samita.Wholesale.handleQuickOrderPage.initQuickOrder(_product_ids, _collection_ids, url_filter_page_val);
+            }
+
+            function fadeOutEffect(modal) {
+                modal.remove();
+            };
+
+            function goToCartPage() {
+                
+                if (Samita.Wholesale.shop.settings?.cart_drawer?.enable) {
+                    if (Samita.Wholesale.HandleCartDrawer) {
+                        Samita.Wholesale.HandleCartDrawer.init({oldAddCart:true});
+                    }
+                } else {
+                    window.location.replace('/cart');
+                }
+            };
+        </script>
+    {% endif %}
+{% endif %}

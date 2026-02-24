@@ -1,0 +1,196 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "content_width": "80ch"
+      }
+    },
+    "rich_text_xFMCRc": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_xPV39V": {
+          "type": "heading",
+          "settings": {
+            "text": "Claim an extra 10% off with code BFVIP",
+            "heading_tag": "h2",
+            "text_color": "",
+            "gradient": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_xPV39V"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "full_width": true,
+        "content_width": "small",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "image_with_text_overlay_6aC8Kz": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "richtext_wcJmej": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Private Offer for Mega Pack Buyers</p>"
+          }
+        },
+        "heading_Lm3xVR": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "text": "VIP🔥",
+            "heading_tag": "h1"
+          }
+        },
+        "heading_VdcV7p": {
+          "type": "heading",
+          "settings": {
+            "text": "🔥55% OFF 🔥",
+            "heading_tag": "h1"
+          }
+        },
+        "heading_irQTCr": {
+          "type": "heading",
+          "settings": {
+            "text": "ALL CLOTHING",
+            "heading_tag": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "richtext_wcJmej",
+        "heading_Lm3xVR",
+        "heading_VdcV7p",
+        "heading_irQTCr"
+      ],
+      "settings": {
+        "full_width": false,
+        "allow_transparent_header": false,
+        "enable_parallax": false,
+        "image_size": "auto",
+        "image": "shopify://shop_images/Banner_Desktop-2.png",
+        "mobile_image": "shopify://shop_images/Banner_Mobile-2.png",
+        "mobile_text_position": "place-self-center text-center",
+        "desktop_text_position": "sm:place-self-center sm:text-center",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0
+      }
+    },
+    "custom_liquid_8HQkEe": {
+      "type": "custom-liquid",
+      "name": "Custom Liquid",
+      "settings": {
+        "full_width": true,
+        "remove_vertical_spacing": false,
+        "remove_horizontal_spacing": false,
+        "liquid": "<div class=\"countdown-timer-block\" countdown-timer-id=\"cmi8tnuvp00a3aioh2o59a6tz\"></div>",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "rich_text_HgCLqy": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_GpUQhC": {
+          "type": "heading",
+          "settings": {
+            "text": "CHOOSE NASS BESTSELLERS:",
+            "heading_tag": "h1",
+            "text_color": "",
+            "gradient": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_GpUQhC"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "full_width": true,
+        "content_width": "small",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "featured_collection_q9cCqF": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "bf_block1",
+        "products": [],
+        "full_width": true,
+        "stack_products": true,
+        "show_progress_bar": false,
+        "products_count": 16,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "subheading": "",
+        "title": "",
+        "content": "",
+        "link_url": "",
+        "link_text": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
+    },
+    "featured_collection_JGzVjb": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "bf_block2",
+        "products": [],
+        "full_width": true,
+        "stack_products": true,
+        "show_progress_bar": false,
+        "products_count": 12,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "subheading": "",
+        "title": "",
+        "content": "",
+        "link_url": "",
+        "link_text": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "rich_text_xFMCRc",
+    "image_with_text_overlay_6aC8Kz",
+    "custom_liquid_8HQkEe",
+    "rich_text_HgCLqy",
+    "featured_collection_q9cCqF",
+    "featured_collection_JGzVjb"
+  ]
+}

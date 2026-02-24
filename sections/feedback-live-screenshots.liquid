@@ -1,0 +1,328 @@
+{% comment %}
+  Feedback — Live screenshots.
+  Collage of review/Instagram screenshots. Adaptive layout per Figma Feedback-NASS.
+  Breakpoints: 480, 640, 768, 1024 (responsive-design.mdc)
+  Mobile: 1 column, row can have 1 or 2 images (proportional + gap).
+  Desktop: 2 columns, same row logic in each column.
+{% endcomment %}
+
+<section
+  class="feedback-screenshots"
+  id="shopify-section-{{ section.id }}"
+  {{ section.shopify_attributes }}
+>
+  <div class="feedback-screenshots__inner">
+    <h2 class="feedback-screenshots__heading">
+      {{ section.settings.heading | default: "The twerk program everyone's excited about" | escape }}
+    </h2>
+
+    <div class="feedback-screenshots__grid">
+      {% assign blocks = section.blocks %}
+      {% assign skip_next = false %}
+      {% for block in blocks %}
+        {% if block.type != 'screenshot' %}{% continue %}{% endif %}
+        {% if skip_next %}
+          {% assign skip_next = false %}
+          {% continue %}
+        {% endif %}
+
+        {% assign next_idx = forloop.index %}
+        {% assign next_block = blocks[next_idx] %}
+        {% assign is_pair = false %}
+        {% if block.settings.row_share == 'half' and next_block != blank and next_block.type == 'screenshot' and next_block.settings.row_share == 'half' %}
+          {% assign is_pair = true %}
+        {% endif %}
+
+        {% if is_pair %}
+          <div class="feedback-screenshots__row feedback-screenshots__row--pair">
+            {% comment %} First item {% endcomment %}
+            {% if block.settings.image != blank %}
+              <div class="feedback-screenshots__item feedback-screenshots__item--{{ block.settings.size | default: 'default' }}" {{ block.shopify_attributes }}>
+                <div class="feedback-screenshots__img-wrap">
+                  <img
+                    src="{{ block.settings.image | image_url: width: 800 }}"
+                    srcset="{{ block.settings.image | image_url: width: 300 }} 300w, {{ block.settings.image | image_url: width: 500 }} 500w, {{ block.settings.image | image_url: width: 800 }} 800w"
+                    sizes="(max-width: 767px) 45vw, 22vw"
+                    loading="lazy"
+                    width="800"
+                    height="800"
+                    alt=""
+                    class="feedback-screenshots__img"
+                  >
+                  {% if block.settings.highlight %}<span class="feedback-screenshots__highlight" aria-hidden="true"></span>{% endif %}
+                </div>
+              </div>
+            {% else %}
+              <div class="feedback-screenshots__item feedback-screenshots__item--placeholder" {{ block.shopify_attributes }}>
+                <div class="feedback-screenshots__img-wrap">{{ 'image' | placeholder_svg_tag: 'feedback-screenshots__placeholder' }}</div>
+              </div>
+            {% endif %}
+            {% comment %} Second item {% endcomment %}
+            {% if next_block.settings.image != blank %}
+              <div class="feedback-screenshots__item feedback-screenshots__item--{{ next_block.settings.size | default: 'default' }}" {{ next_block.shopify_attributes }}>
+                <div class="feedback-screenshots__img-wrap">
+                  <img
+                    src="{{ next_block.settings.image | image_url: width: 800 }}"
+                    srcset="{{ next_block.settings.image | image_url: width: 300 }} 300w, {{ next_block.settings.image | image_url: width: 500 }} 500w, {{ next_block.settings.image | image_url: width: 800 }} 800w"
+                    sizes="(max-width: 767px) 45vw, 22vw"
+                    loading="lazy"
+                    width="800"
+                    height="800"
+                    alt=""
+                    class="feedback-screenshots__img"
+                  >
+                  {% if next_block.settings.highlight %}<span class="feedback-screenshots__highlight" aria-hidden="true"></span>{% endif %}
+                </div>
+              </div>
+            {% else %}
+              <div class="feedback-screenshots__item feedback-screenshots__item--placeholder" {{ next_block.shopify_attributes }}>
+                <div class="feedback-screenshots__img-wrap">{{ 'image' | placeholder_svg_tag: 'feedback-screenshots__placeholder' }}</div>
+              </div>
+            {% endif %}
+          </div>
+          {% assign skip_next = true %}
+        {% else %}
+          <div class="feedback-screenshots__row">
+            {% if block.settings.image != blank %}
+              <div class="feedback-screenshots__item feedback-screenshots__item--{{ block.settings.size | default: 'default' }}" {{ block.shopify_attributes }}>
+                <div class="feedback-screenshots__img-wrap">
+                  <img
+                    src="{{ block.settings.image | image_url: width: 800 }}"
+                    srcset="{{ block.settings.image | image_url: width: 300 }} 300w, {{ block.settings.image | image_url: width: 500 }} 500w, {{ block.settings.image | image_url: width: 800 }} 800w"
+                    sizes="(max-width: 767px) 100vw, 50vw"
+                    loading="lazy"
+                    width="800"
+                    height="800"
+                    alt=""
+                    class="feedback-screenshots__img"
+                  >
+                  {% if block.settings.highlight %}<span class="feedback-screenshots__highlight" aria-hidden="true"></span>{% endif %}
+                </div>
+              </div>
+            {% else %}
+              <div class="feedback-screenshots__item feedback-screenshots__item--placeholder" {{ block.shopify_attributes }}>
+                <div class="feedback-screenshots__img-wrap">{{ 'image' | placeholder_svg_tag: 'feedback-screenshots__placeholder' }}</div>
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .feedback-screenshots {
+    --fls-bg: rgba(0, 0, 0, 0.06);
+    --fls-primary: var(--nass-primary, #0038FF);
+    --fls-highlight: #FAFF00;
+    --fls-radius: 30px;
+    --fls-inner-radius: 20px;
+    --fls-font-display: var(--font-heading--family, 'Anybody'), system-ui, sans-serif;
+  }
+
+  /* Gray background with rounded corners like other sections */
+  .feedback-screenshots {
+    background: var(--fls-bg);
+    border-radius: 24px;
+    margin-top: 1.5rem;
+    padding: 2.5rem 0;
+  }
+  @media (min-width: 640px) {
+    .feedback-screenshots { padding: 3rem 0; }
+  }
+  @media (min-width: 1024px) {
+    .feedback-screenshots {
+      margin-top: 2rem;
+      padding: 4rem 0;
+    }
+  }
+
+  .feedback-screenshots__inner {
+    max-width: none;
+    width: 100%;
+    padding: 0 1rem 2rem;
+  }
+  @media (min-width: 480px) {
+    .feedback-screenshots__inner { padding: 0 1.25rem 2.5rem; }
+  }
+  @media (min-width: 768px) {
+    .feedback-screenshots__inner { padding: 0 1.5rem 3rem; }
+  }
+  @media (min-width: 1024px) {
+    .feedback-screenshots__inner { padding: 0 2rem 3rem; }
+  }
+
+  .feedback-screenshots__heading {
+    font-family: var(--fls-font-display);
+    font-weight: 600;
+    font-size: clamp(1.25rem, 4vw, 2.5rem);
+    line-height: 1.03;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 0.03em;
+    color: var(--color-foreground, #000);
+    margin: 0 0 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .feedback-screenshots__heading { margin-bottom: 2rem; }
+  }
+
+  /* Mobile: 1 column, rows with 1 or 2 images */
+  .feedback-screenshots__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  @media (min-width: 480px) {
+    .feedback-screenshots__grid { gap: 1.25rem; }
+  }
+
+  /* Single image row */
+  .feedback-screenshots__row {
+    width: 100%;
+  }
+
+  /* Pair row: 2 images side by side, proportional, gap between */
+  .feedback-screenshots__row--pair {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  @media (min-width: 480px) {
+    .feedback-screenshots__row--pair { gap: 1rem; }
+  }
+  .feedback-screenshots__row--pair .feedback-screenshots__item {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  /* Desktop: 2 columns, same row logic in each */
+  @media (min-width: 768px) {
+    .feedback-screenshots__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      align-items: start;
+    }
+    .feedback-screenshots__row {
+      break-inside: avoid;
+    }
+  }
+  @media (min-width: 1024px) {
+    .feedback-screenshots__grid {
+      gap: 1.5rem;
+    }
+  }
+
+  .feedback-screenshots__item {
+    position: relative;
+  }
+
+  /* Responsive image containers — no forced stretch, preserve aspect */
+  .feedback-screenshots__img-wrap {
+    position: relative;
+    border-radius: var(--fls-inner-radius);
+    overflow: hidden;
+    background: hsl(0, 0%, 92%);
+    min-height: 80px;
+  }
+  .feedback-screenshots__img-wrap .feedback-screenshots__img {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  .feedback-screenshots__img-wrap .feedback-screenshots__placeholder {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .feedback-screenshots__item--tall .feedback-screenshots__img-wrap .feedback-screenshots__img {
+    object-fit: cover;
+    aspect-ratio: 3 / 4;
+  }
+
+  .feedback-screenshots__placeholder {
+    opacity: 0.4;
+  }
+
+  .feedback-screenshots__highlight {
+    position: absolute;
+    inset: -2px;
+    border: 2px solid var(--fls-highlight);
+    border-radius: var(--fls-inner-radius);
+    pointer-events: none;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Feedback Screenshots",
+  "class": "feedback-screenshots-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The twerk program everyone's excited about"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "screenshot",
+      "name": "Screenshot",
+      "limit": 20,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "select",
+          "id": "row_share",
+          "label": "Row",
+          "default": "full",
+          "info": "Full = one image per row. Half = two images share row (pair with next Half).",
+          "options": [
+            { "value": "full", "label": "Full row" },
+            { "value": "half", "label": "Half (pair with next Half)" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Size",
+          "default": "default",
+          "options": [
+            { "value": "default", "label": "Default" },
+            { "value": "wide", "label": "Wide" },
+            { "value": "tall", "label": "Tall" }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "highlight",
+          "label": "Yellow highlight border",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feedback Screenshots",
+      "blocks": [
+        { "type": "screenshot", "settings": { "row_share": "full", "size": "default" } },
+        { "type": "screenshot", "settings": { "row_share": "half", "size": "default" } },
+        { "type": "screenshot", "settings": { "row_share": "half", "size": "wide", "highlight": true } },
+        { "type": "screenshot", "settings": { "row_share": "full", "size": "default" } },
+        { "type": "screenshot", "settings": { "row_share": "half", "size": "default" } },
+        { "type": "screenshot", "settings": { "row_share": "half", "size": "default", "highlight": true } }
+      ]
+    }
+  ]
+}
+{% endschema %}

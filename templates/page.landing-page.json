@@ -1,0 +1,426 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "video_BaXHgt": {
+      "type": "video",
+      "blocks": {
+        "heading_c8Yjpz": {
+          "type": "heading",
+          "settings": {
+            "text": "15-Min Twerk Wins -",
+            "heading_tag": "h1",
+            "special_padding": ""
+          }
+        },
+        "heading_3BpQMz": {
+          "type": "heading",
+          "settings": {
+            "text": "Glow without Pauses or Diets!",
+            "heading_tag": "h1",
+            "special_padding": ""
+          }
+        },
+        "heading_gdmDKG": {
+          "type": "heading",
+          "settings": {
+            "text": "Fit Busy Days, Beat Boredom -",
+            "heading_tag": "h3",
+            "special_padding": "16"
+          }
+        },
+        "heading_tdkqyi": {
+          "type": "heading",
+          "settings": {
+            "text": "Tailored Twerk Plan for Your Glow",
+            "heading_tag": "h3",
+            "special_padding": ""
+          }
+        },
+        "button_tJwbBp": {
+          "type": "button",
+          "settings": {
+            "style": "outline",
+            "size": "lg",
+            "text": "START NOW",
+            "url": "https://quiz.nasswear.com/",
+            "background": "",
+            "text_color": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "heading_c8Yjpz",
+        "heading_3BpQMz",
+        "heading_gdmDKG",
+        "heading_tdkqyi",
+        "button_tJwbBp"
+      ],
+      "custom_css": [
+        ".prose p {margin-top: 0;}"
+      ],
+      "settings": {
+        "full_width": false,
+        "allow_transparent_header": false,
+        "autoplay": true,
+        "proportional": true,
+        "justify_content": false,
+        "video_size": "lg",
+        "video": "shopify://files/videos/Banner Landing NASS desktop (1).webm",
+        "mobile_video": "shopify://files/videos/Banner Landing NASS mobile (1) (1).webm",
+        "external_video_url": "",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "content_width": "80ch"
+      }
+    },
+    "slideshow_KNCdNj": {
+      "type": "slideshow",
+      "blocks": {
+        "image_CL7LmK": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Frame_588.png",
+            "mobile_image": "shopify://shop_images/Frame_595.png",
+            "content_max_width": 780,
+            "mobile_text_position": "place-self-center text-center",
+            "desktop_text_position": "sm:place-self-center sm:text-center",
+            "subheading": "",
+            "title": "",
+            "heading_tag": "h0",
+            "button_text": "",
+            "button_link": "",
+            "text_color": "#ffffff",
+            "button_background": "#ffffff",
+            "button_text_color": "#000000",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0,
+            "background": "",
+            "background_gradient": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_CL7LmK"
+      ],
+      "disabled": true,
+      "custom_css": [
+        "img {padding: 20px;}",
+        "@media screen and (min-width: 700px) {img {padding: 48px; }}"
+      ],
+      "name": "Slideshow",
+      "settings": {
+        "full_width": true,
+        "allow_transparent_header": false,
+        "image_size": "auto",
+        "controls_type": "dots",
+        "transition_type": "fade_with_text",
+        "autoplay": false,
+        "cycle_speed": 6,
+        "background": "#ffffff",
+        "background_gradient": ""
+      }
+    },
+    "slideshow_hRm9zX": {
+      "type": "slideshow",
+      "blocks": {
+        "image_jPn44h": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/FINAL_CTA_1.png",
+            "mobile_image": "shopify://shop_images/Frame_600.png",
+            "content_max_width": 780,
+            "mobile_text_position": "place-self-center text-center",
+            "desktop_text_position": "sm:place-self-center sm:text-center",
+            "subheading": "",
+            "title": "",
+            "heading_tag": "h0",
+            "button_text": "",
+            "button_link": "https://quiz.nasswear.com/",
+            "text_color": "#ffffff",
+            "button_background": "#ffffff",
+            "button_text_color": "#000000",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0,
+            "background": "#ffffff",
+            "background_gradient": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_jPn44h"
+      ],
+      "name": "Slideshow",
+      "settings": {
+        "full_width": true,
+        "allow_transparent_header": true,
+        "image_size": "auto",
+        "controls_type": "dots",
+        "transition_type": "fade_with_text",
+        "autoplay": false,
+        "cycle_speed": 6,
+        "background": "#f2f2f2",
+        "background_gradient": ""
+      }
+    },
+    "rich_text_LmfyNQ": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_kdbwLN": {
+          "type": "heading",
+          "settings": {
+            "text": "Fix Barriers — Get Stable Progress Fun Way Without Diets!",
+            "heading_tag": "h1",
+            "text_color": "",
+            "gradient": ""
+          }
+        },
+        "richtext_4kKcAq": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Tailored to your life — short music-driven sessions beat boredom/time issues, deliver curves/tone safely.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_kdbwLN",
+        "richtext_4kKcAq"
+      ],
+      "custom_css": [
+        ".prose {max-width: 710px;}"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "full_width": false,
+        "content_width": "medium",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "multi_column_wW63DY": {
+      "type": "multi-column",
+      "blocks": {
+        "item_DQqdPH": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Frame_589.png",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_x4MeJN": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Frame_590.png",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_MRHCeT": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Frame_591.png",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        }
+      },
+      "block_order": [
+        "item_DQqdPH",
+        "item_x4MeJN",
+        "item_MRHCeT"
+      ],
+      "name": "Multi-column",
+      "settings": {
+        "full_width": true,
+        "stack_on_mobile": false,
+        "gap": "medium",
+        "text_alignment": "start",
+        "subheading": "",
+        "title": "",
+        "content": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "rich_text_Gwb4g3": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_tH6bRe": {
+          "type": "heading",
+          "settings": {
+            "text": "Babes Fixed Barriers — Got Glow-Ups Like This!",
+            "heading_tag": "h1",
+            "text_color": "",
+            "gradient": ""
+          }
+        },
+        "richtext_bwbTy4": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>See how short sessions/music beat time/boredom — stable tone without calorie stress.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_tH6bRe",
+        "richtext_bwbTy4"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "full_width": true,
+        "content_width": "small",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "multi_column_Nbm83r": {
+      "type": "multi-column",
+      "blocks": {
+        "item_pWr8ei": {
+          "type": "item",
+          "settings": {
+            "video": "shopify://files/videos/Progress 4x3 .webm",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_yc3cLK": {
+          "type": "item",
+          "settings": {
+            "video": "shopify://files/videos/profress 3_4.webm",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_TJahVU": {
+          "type": "item",
+          "settings": {
+            "video": "shopify://files/videos/progress 3_4.webm",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        }
+      },
+      "block_order": [
+        "item_pWr8ei",
+        "item_yc3cLK",
+        "item_TJahVU"
+      ],
+      "settings": {
+        "full_width": true,
+        "stack_on_mobile": false,
+        "gap": "medium",
+        "text_alignment": "center",
+        "subheading": "",
+        "title": "",
+        "content": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "slideshow_CcyjwM": {
+      "type": "slideshow",
+      "blocks": {
+        "image_YnM3UA": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/FINAL_CTA_2.png",
+            "mobile_image": "shopify://shop_images/Frame_599.png",
+            "content_max_width": 780,
+            "mobile_text_position": "place-self-center text-center",
+            "desktop_text_position": "sm:place-self-center sm:text-center",
+            "subheading": "",
+            "title": "",
+            "heading_tag": "h0",
+            "button_text": "",
+            "button_link": "https://quiz.nasswear.com/",
+            "text_color": "#ffffff",
+            "button_background": "#ffffff",
+            "button_text_color": "#000000",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0,
+            "background": "#ffffff",
+            "background_gradient": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_YnM3UA"
+      ],
+      "name": "Slideshow",
+      "settings": {
+        "full_width": true,
+        "allow_transparent_header": true,
+        "image_size": "auto",
+        "controls_type": "dots",
+        "transition_type": "fade_with_text",
+        "autoplay": false,
+        "cycle_speed": 6,
+        "background": "#f2f2f2",
+        "background_gradient": ""
+      }
+    }
+  },
+  "order": [
+    "video_BaXHgt",
+    "main",
+    "slideshow_KNCdNj",
+    "slideshow_hRm9zX",
+    "rich_text_LmfyNQ",
+    "multi_column_wW63DY",
+    "rich_text_Gwb4g3",
+    "multi_column_Nbm83r",
+    "slideshow_CcyjwM"
+  ]
+}

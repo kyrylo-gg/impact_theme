@@ -1,0 +1,47 @@
+.ts-timer {
+  width: fit-content;
+  display: flex;
+  gap: 24px;
+  padding-bottom: calc(var(--labels-size, 13px) * 1.4 + 4px);
+}
+
+.ts-timer__cell {
+  background: var(--countdown-background, #ccc);
+  color: var(--countdown-color, #fff);
+  font-size: var(--countdown-size, 25px);
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+  font-family: "Avenir";
+  line-height: 1;
+  border-radius: 5px;
+  position: relative;
+}
+
+.ts-timer__cell:not(:last-of-type)::after {
+  content: ":";
+  display: block;
+  font-family: "Avenir";
+  font-weight: 800;
+  font-size: var(--countdown-size, 25px);
+  line-height: 100%;
+  letter-spacing: 0;
+  color: var(--labels-color, #fff);
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 12px);
+  transform: translate(-50%, -50%);
+}
+
+.ts-timer__cell-label {
+  color: var(--labels-color, #fff);
+  font-size: var(--labels-size, 13px);
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  line-height: 140%;
+  z-index: 1;
+}

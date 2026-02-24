@@ -1,0 +1,628 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "zp-product-header-content": {
+      "type": "product-header-content-zipifypages",
+      "disabled": true,
+      "settings": {}
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "vendor",
+          "disabled": true,
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "heading_tag": "h2"
+          }
+        },
+        "badges": {
+          "type": "badges",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_taxes_notice": false
+          }
+        },
+        "rating": {
+          "type": "rating",
+          "settings": {
+            "show_empty": false
+          }
+        },
+        "785c6c77-63d0-4a4e-bd4d-aeee2dd7c6ec": {
+          "type": "inventory",
+          "settings": {
+            "low_inventory_threshold": 9
+          }
+        },
+        "payment_terms": {
+          "type": "payment_terms",
+          "settings": {}
+        },
+        "separator": {
+          "type": "separator",
+          "disabled": true,
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "hide_sold_out_variants": false,
+            "stack_blocks": true,
+            "selector_mode": "block",
+            "color_mode": "color",
+            "size_chart_page": ""
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "disabled": true,
+          "settings": {}
+        },
+        "d02f7f4f-fa13-4bda-88c6-1bb41e4a4ed0": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": true,
+            "show_gift_card_recipient": true,
+            "atc_button_background": "",
+            "atc_button_text_color": "",
+            "payment_button_background": "",
+            "payment_button_text_color": ""
+          }
+        },
+        "image_EzXWQL": {
+          "type": "image",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/1.gif",
+            "alignment": "center",
+            "max_width": 500,
+            "url": "https://www.nasswear.com/pages/bf25"
+          }
+        },
+        "81a1a79f-3827-424f-9a39-74811ea8e4f4": {
+          "type": "product_variations",
+          "settings": {
+            "option_name": "See also:",
+            "option_value_metafield": "custom.variation_value",
+            "products": "{{ product.metafields.custom.variation_products.value }}",
+            "color_mode": "variant"
+          }
+        },
+        "0669bfe9-354c-4601-abcf-c38d6afaeb80": {
+          "type": "text",
+          "settings": {
+            "text": "<p>🔄 30 Day Returns<br/>🚚 $140+ Free US Shipping<br/>💃 Unique NassyStitch Technology<br/>💚 Eco-Friendly Packaging</p>"
+          }
+        },
+        "cba091ce-a0d9-465f-ab86-d40697549bf2": {
+          "type": "associated_products",
+          "settings": {
+            "title": "Complete the look",
+            "stack_products": true,
+            "products_count": 5,
+            "background": "",
+            "text_color": ""
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "collapse_content": true
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "badges",
+        "price",
+        "rating",
+        "785c6c77-63d0-4a4e-bd4d-aeee2dd7c6ec",
+        "payment_terms",
+        "separator",
+        "variant_picker",
+        "quantity_selector",
+        "d02f7f4f-fa13-4bda-88c6-1bb41e4a4ed0",
+        "image_EzXWQL",
+        "81a1a79f-3827-424f-9a39-74811ea8e4f4",
+        "0669bfe9-354c-4601-abcf-c38d6afaeb80",
+        "cba091ce-a0d9-465f-ab86-d40697549bf2",
+        "description"
+      ],
+      "disabled": true,
+      "settings": {
+        "full_width": true,
+        "show_fixed_add_to_cart": true,
+        "desktop_media_width": 55,
+        "desktop_media_layout": "carousel_thumbnails_left",
+        "mobile_media_size": "expanded",
+        "mobile_carousel_control": "floating_dots",
+        "enable_video_autoplay": true,
+        "enable_video_looping": true,
+        "enable_image_zoom": true,
+        "max_image_zoom_level": 3,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "input_background": "rgba(0,0,0,0)",
+        "input_text_color": ""
+      }
+    },
+    "zp-product-footer-content": {
+      "type": "product-footer-content-zipifypages",
+      "settings": {}
+    },
+    "video_gBeQbF": {
+      "type": "video",
+      "blocks": {
+        "heading_YYd6fK": {
+          "type": "heading",
+          "settings": {
+            "text": "Win All Booty Programs<br>(Worth $456)",
+            "heading_tag": "h1",
+            "special_padding": ""
+          }
+        },
+        "subheading_cC3hyn": {
+          "type": "subheading",
+          "settings": {
+            "text": "Build your best booty starting February 14"
+          }
+        },
+        "button_Cw8pEC": {
+          "type": "button",
+          "settings": {
+            "style": "outline",
+            "size": "lg",
+            "text": "Join The Giveaway!",
+            "url": "#shopify-section-template--18941569400906__176950117725d45ca0",
+            "background": "",
+            "text_color": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "heading_YYd6fK",
+        "subheading_cC3hyn",
+        "button_Cw8pEC"
+      ],
+      "name": "Video",
+      "settings": {
+        "full_width": false,
+        "allow_transparent_header": false,
+        "autoplay": true,
+        "proportional": true,
+        "justify_content": false,
+        "video_size": "lg",
+        "video": "shopify://files/videos/Sequence 01.mp4",
+        "mobile_video": "shopify://files/videos/Sequence 01.mp4",
+        "external_video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 30
+      }
+    },
+    "rich_text_wK8jCC": {
+      "type": "rich-text",
+      "blocks": {
+        "richtext_xw8Xhi": {
+          "type": "richtext",
+          "settings": {
+            "seo_optimization": true,
+            "content": "<h5><strong>Because of your love for our twerk and booty programs, we decided to make this Valentine’s Day extra special.</strong></h5><p>To celebrate February 14, we’re giving you a chance to win all <strong>4 essential programs</strong> created by world-famous trainer Nastya NASS, trusted by over 1.6 million followers.</p><p>And already completed by more than <strong>5,000 girls</strong> who chose confidence, movement, and self-love.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "richtext_xw8Xhi"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "full_width": true,
+        "content_width": "small",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "multi_column_ynKfMj": {
+      "type": "multi-column",
+      "blocks": {
+        "item_RhgxWc": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/1_10e9eb4a-4632-4828-bcbc-7431817a6478.png",
+            "column_size": "3",
+            "title": "Twerk Program",
+            "heading_tag": "h4",
+            "content": "<p>Discover the art of twerking with our easy-to-follow 7-day program, suitable for all skill levels, ages, and body types.</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_jChNKR": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/2_449efa4d-1f08-43ba-97da-6097f9846ff3.png",
+            "column_size": "3",
+            "title": "Weight Loss Program",
+            "heading_tag": "h4",
+            "content": "<p>Weight Loss Program will guide you on how to sculpt the better version of yourself.</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_wdgdPj": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/3_5a46f4bf-6845-4319-96f9-53d621deef15.png",
+            "column_size": "3",
+            "title": "Booty Program",
+            "heading_tag": "h4",
+            "content": "<p>The most effective booty-building workouts which you can do at the comfort of your home.</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_chMA37": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/4.png",
+            "column_size": "3",
+            "title": "Booty Band Program",
+            "heading_tag": "h4",
+            "content": "<p>Great variety of booty-building exercises which you can perform with resistance band.</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        }
+      },
+      "block_order": [
+        "item_RhgxWc",
+        "item_jChNKR",
+        "item_wdgdPj",
+        "item_chMA37"
+      ],
+      "name": "Multi-column",
+      "settings": {
+        "full_width": true,
+        "stack_on_mobile": false,
+        "gap": "medium",
+        "text_alignment": "center",
+        "subheading": "",
+        "title": "WHAT DOES THE PRIZE INCLUDE?",
+        "content": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "rich_text_Fr7XG4": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_QTjXhq": {
+          "type": "heading",
+          "settings": {
+            "text": "HOW TO ENTER THE GIVEAWAY",
+            "heading_tag": "h1",
+            "text_color": "",
+            "gradient": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_QTjXhq"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "full_width": true,
+        "content_width": "small",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "image_with_text_overlay_f48d9b": {
+      "type": "image-with-text-overlay",
+      "name": "Image with text overlay",
+      "settings": {
+        "full_width": false,
+        "allow_transparent_header": false,
+        "enable_parallax": false,
+        "image_size": "auto",
+        "image": "shopify://shop_images/1_31f32e3a-961c-47dc-8fd5-8a2cd1088cdd.png",
+        "mobile_image": "shopify://shop_images/2_22eae8b7-fcb9-4f80-b197-00db8312d329.png",
+        "mobile_text_position": "place-self-center text-center",
+        "desktop_text_position": "sm:place-self-center sm:text-center",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0
+      }
+    },
+    "rich_text_ztejxc": {
+      "type": "rich-text",
+      "blocks": {
+        "richtext_PBdbQw": {
+          "type": "richtext",
+          "settings": {
+            "seo_optimization": true,
+            "content": "<h5><strong>To enter the giveaway, all you need to do is:</strong></h5><p>Fill in the form and leave your email and select your main reason for wanting to join our programs:<br/><br/>🌟 To build and shape your booty<br/>🌟 To learn twerk simply because it’s fun<br/>🌟 To use twerk as an energizing fitness workout<br/>🌟 To feel closer to Nastya NASS<br/>🌟 Or any other reason that feels right for you</p><p>We’re genuinely curious about what motivates you 🤍</p><p><strong>The giveaway winner will be announced on February 14.<br/><br/></strong>Results will be sent to the email you provided. Good luck. 🙏</p>"
+          }
+        }
+      },
+      "block_order": [
+        "richtext_PBdbQw"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "full_width": true,
+        "content_width": "small",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "176950117725d45ca0": {
+      "type": "apps",
+      "blocks": {
+        "klaviyo_email_marketing_sms_form_embed_block_X4GEdx": {
+          "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/form-embed-block/2632fe16-c075-4321-a88b-50b567f42507",
+          "settings": {
+            "formId": "WdGXyL"
+          }
+        }
+      },
+      "block_order": [
+        "klaviyo_email_marketing_sms_form_embed_block_X4GEdx"
+      ],
+      "settings": {
+        "full_width": true,
+        "remove_vertical_spacing": false,
+        "remove_horizontal_spacing": false,
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "ts_timer_banner_PYtMQ7": {
+      "type": "ts-timer-banner",
+      "blocks": {
+        "title_7D6ki4": {
+          "type": "title",
+          "settings": {
+            "label": "The giveaway is coming very soon:",
+            "color": "#ffffff",
+            "desk_font_size": 25,
+            "mob_font_size": 25,
+            "indent": 16,
+            "indent_mob": 12
+          }
+        },
+        "timer_NA6mrq": {
+          "type": "timer",
+          "settings": {
+            "timer_type": "cancel_date",
+            "cancel_date": "14-02-2026 12:00",
+            "cancel_time": 6,
+            "cancel_minutes": 15,
+            "cancel_action": "hide",
+            "countdown_background": "linear-gradient(180deg, rgba(82, 3, 5, 1), rgba(0, 0, 0, 1) 100%)",
+            "countdown_color": "#ffffff",
+            "desk_countdown_font_size": 25,
+            "mob_countdown_font_size": 25,
+            "labels_color": "#ffffff",
+            "desk_labels_font_size": 13,
+            "mob_labels_font_size": 13,
+            "indent": 16,
+            "indent_mob": 12
+          }
+        }
+      },
+      "block_order": [
+        "title_7D6ki4",
+        "timer_NA6mrq"
+      ],
+      "name": "TS Timer banner",
+      "settings": {
+        "enable_max_width": true,
+        "max_width": 800,
+        "desk_padding": 40,
+        "mob_padding": 20,
+        "desk_radius": 16,
+        "mob_radius": 12,
+        "desk_content_height_type": "fixed",
+        "desk_content_height": 250,
+        "mob_content_height_type": "fixed",
+        "mob_content_height": 270,
+        "background_type": "color",
+        "desk_bg_color": "#600407",
+        "mob_bg_color": "#600407",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0
+      }
+    },
+    "multi_column_rQ97je": {
+      "type": "multi-column",
+      "blocks": {
+        "item_nbU7hm": {
+          "type": "item",
+          "settings": {
+            "video": "shopify://files/videos/Progress 4x3 .webm",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_hk7gUV": {
+          "type": "item",
+          "settings": {
+            "video": "shopify://files/videos/profress 3_4.webm",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_jcXD8w": {
+          "type": "item",
+          "settings": {
+            "video": "shopify://files/videos/progress 3_4.webm",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        }
+      },
+      "block_order": [
+        "item_nbU7hm",
+        "item_hk7gUV",
+        "item_jcXD8w"
+      ],
+      "name": "Multi-column",
+      "settings": {
+        "full_width": true,
+        "stack_on_mobile": false,
+        "gap": "medium",
+        "text_alignment": "center",
+        "subheading": "",
+        "title": "CELEBRATE YOUR BOOTY PROGRESS WITH OUR STUDENTS",
+        "content": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "rich_text_CEzBQ8": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_Ykkhyd": {
+          "type": "heading",
+          "settings": {
+            "text": "WHAT OUR GIRLS SAY",
+            "heading_tag": "h1",
+            "text_color": "",
+            "gradient": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_Ykkhyd"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "full_width": true,
+        "content_width": "small",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "17694943824b87fda6": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_Ai9EDb": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_Ai9EDb"
+      ],
+      "settings": {
+        "full_width": true,
+        "remove_vertical_spacing": false,
+        "remove_horizontal_spacing": false,
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "rich_text_hDWLm4": {
+      "type": "rich-text",
+      "blocks": {
+        "button_JBpXgB": {
+          "type": "button",
+          "settings": {
+            "style": "fill",
+            "size": "xl",
+            "text": "Join the Giveaway",
+            "url": "#shopify-section-template--18941569400906__176950117725d45ca0",
+            "background": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "button_JBpXgB"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "full_width": true,
+        "content_width": "small",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    }
+  },
+  "order": [
+    "zp-product-header-content",
+    "main",
+    "zp-product-footer-content",
+    "video_gBeQbF",
+    "rich_text_wK8jCC",
+    "multi_column_ynKfMj",
+    "rich_text_Fr7XG4",
+    "image_with_text_overlay_f48d9b",
+    "rich_text_ztejxc",
+    "176950117725d45ca0",
+    "ts_timer_banner_PYtMQ7",
+    "multi_column_rQ97je",
+    "rich_text_CEzBQ8",
+    "17694943824b87fda6",
+    "rich_text_hDWLm4"
+  ]
+}

@@ -1,0 +1,173 @@
+.ts-timer-banner {
+  padding-inline: var(--section-padding);
+}
+
+.ts-timer-banner__inner {
+  position: relative;
+  border-radius: var(--content-radius);
+  overflow: hidden;
+}
+
+.ts-timer-banner--max .ts-timer-banner__inner {
+  max-width: var(--section-max-width);
+  margin: 0 auto;
+}
+
+.ts-timer-banner--desk-fixed .ts-timer-banner__inner {
+  height: var(--section-height);
+}
+
+.ts-timer-banner__media {
+  display: flex;
+  position: relative;
+  z-index: 1;
+}
+
+.ts-timer-banner__media-mobile {
+  display: none;
+}
+
+.ts-timer-banner--bg-color .ts-timer-banner__media {
+  background: var(--section-background);
+}
+
+.ts-timer-banner--desk-fixed .ts-timer-banner__media,
+.ts-timer-banner--desk-adapt-content .ts-timer-banner__media {
+  position: absolute;
+  inset: 0;
+}
+
+.ts-timer-banner__media img {
+  width: 100%;
+  height: fit-content;
+  object-fit: contain;
+}
+
+.ts-timer-banner--desk-fixed .ts-timer-banner__media img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.ts-timer-banner--desk-adapt-background .ts-timer-banner__media img {
+  height: fit-content;
+}
+
+.ts-timer-banner__content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.ts-timer-banner--desk-adapt-content .ts-timer-banner__content {
+  height: fit-content;
+}
+
+.ts-timer-banner--desk-adapt-background .ts-timer-banner__content {
+  position: absolute;
+  inset: 0;
+}
+
+.ts-timer-banner__block {
+  margin-top: var(--block-indent);
+}
+
+.ts-timer-banner__title {
+  color: var(--content-color);
+  font-size: var(--content-size);
+  text-align: center;
+  font-family: "Avenir";
+  font-weight: 800;
+  line-height: 120%;
+  letter-spacing: 0;
+}
+
+.ts-timer-banner__button {
+  background-color: var(--content-background);
+  color: var(--content-color);
+  padding: 10px 24px;
+  font-size: var(--content-size);
+  border-radius: 10px;
+  font-family: "Avenir";
+  font-weight: 800;
+  line-height: 150%;
+  letter-spacing: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.ts-timer-banner__button--fit {
+  width: fit-content;
+}
+
+.ts-timer-banner__button--fixed {
+  width: var(--content-width);
+}
+
+.ts-timer-banner__button--full {
+  width: 100%;
+}
+
+@media screen and (max-width: 749px) {
+  .ts-timer-banner--mob-adapt-background .ts-timer-banner__inner,
+  .ts-timer-banner--mob-adapt-content .ts-timer-banner__inner {
+    height: fit-content;
+  }
+
+  .ts-timer-banner--mob-fixed .ts-timer-banner__inner {
+    height: var(--section-height);
+  }
+
+  .ts-timer-banner__media-desktop {
+    display: none;
+  }
+
+  .ts-timer-banner__media-mobile {
+    display: block;
+  }
+
+  .ts-timer-banner--mob-fixed .ts-timer-banner__media,
+  .ts-timer-banner--mob-adapt-content .ts-timer-banner__media {
+    position: absolute;
+    inset: 0;
+  }
+
+  .ts-timer-banner--mob-adapt-background .ts-timer-banner__media {
+    position: relative;
+  }
+
+  .ts-timer-banner--mob-fixed .ts-timer-banner__media img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ts-timer-banner--mob-adapt-background .ts-timer-banner__media img {
+    height: fit-content;
+  }
+
+  .ts-timer-banner--mob-adapt-background .ts-timer-banner__content {
+    position: absolute;
+    inset: 0;
+  }
+
+  .ts-timer-banner--mob-adapt-content .ts-timer-banner__content {
+    position: relative;
+    height: fit-content;
+  }
+
+  .ts-timer-banner--mob-fixed .ts-timer-banner__content {
+    position: relative;
+    height: 100%;
+  }
+
+  .ts-timer-banner__block {
+    margin-top: var(--block-indent-mob);
+  }
+}

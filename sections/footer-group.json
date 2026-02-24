@@ -1,0 +1,123 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "custom_html_ACCcbL": {
+      "type": "custom-html",
+      "settings": {
+        "full_width": true,
+        "remove_vertical_spacing": true,
+        "remove_horizontal_spacing": true,
+        "hide_on_mobile": false,
+        "hide_on_desktop": true,
+        "html": "<div class=\"klaviyo-form-XPd3zS\"></div>",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "hide_on_pages": "ty-booty, ty-twerk, ty-weight-loss, landing-page"
+      }
+    },
+    "rich_text_GDzDx6": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_im9ket": {
+          "type": "heading",
+          "settings": {
+            "text": "NASS PROGRAMS",
+            "heading_tag": "h1",
+            "text_color": "",
+            "gradient": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_im9ket"
+      ],
+      "disabled": true,
+      "name": "Rich text",
+      "settings": {
+        "full_width": true,
+        "content_width": "small",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "custom_html_ATfNTn": {
+      "type": "custom-html",
+      "settings": {
+        "full_width": true,
+        "remove_vertical_spacing": true,
+        "remove_horizontal_spacing": true,
+        "hide_on_mobile": true,
+        "hide_on_desktop": false,
+        "html": "<div class=\"klaviyo-form-UxeRGv\"></div>",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "hide_on_pages": "ty-booty, ty-twerk, ty-weight-loss, landing-page"
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "6a160d8a-26e5-43b8-a0e2-c89e521831f3": {
+          "type": "newsletter",
+          "disabled": true,
+          "settings": {
+            "image_width": 160,
+            "heading_size": "h3",
+            "title": "Sign up for news, updates & 10% off your first order.",
+            "content": ""
+          }
+        },
+        "links": {
+          "type": "links",
+          "settings": {
+            "menu": "footer",
+            "show_menu_title": true,
+            "menu_title": ""
+          }
+        },
+        "text": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "title": "About",
+            "content": "<p>Use this text area to tell your customers about your brand and vision. You can change it in the theme editor.</p>",
+            "enable_follow_on_shop": true
+          }
+        }
+      },
+      "block_order": [
+        "6a160d8a-26e5-43b8-a0e2-c89e521831f3",
+        "links",
+        "text"
+      ],
+      "settings": {
+        "show_social_media": true,
+        "show_payment_icons": true,
+        "show_country_selector": true,
+        "show_country_flag": true,
+        "show_country_name": true,
+        "show_locale_selector": true
+      }
+    }
+  },
+  "order": [
+    "custom_html_ACCcbL",
+    "rich_text_GDzDx6",
+    "custom_html_ATfNTn",
+    "footer"
+  ]
+}

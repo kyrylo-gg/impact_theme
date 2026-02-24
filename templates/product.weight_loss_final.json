@@ -1,0 +1,801 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "zp-product-header-content": {
+      "type": "product-header-content-zipifypages",
+      "settings": {}
+    },
+    "e72b3e83-78ae-427f-a359-430414bcfda5": {
+      "type": "video",
+      "blocks": {
+        "heading_Gqjc7h": {
+          "type": "heading",
+          "settings": {
+            "text": "SCULPT YOUR  BODY & RECEIVE FREE FITNESS SET FOR $69",
+            "heading_tag": "h1",
+            "special_padding": ""
+          }
+        },
+        "500838c0-8ded-4626-92e1-12d9b0a54ab6": {
+          "type": "button",
+          "settings": {
+            "style": "outline",
+            "size": "xl",
+            "text": "Start My Journey",
+            "url": "#shopify-section-template--15538729025610__custom_bundle_hHqNG8",
+            "background": "",
+            "text_color": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "heading_Gqjc7h",
+        "500838c0-8ded-4626-92e1-12d9b0a54ab6"
+      ],
+      "settings": {
+        "full_width": false,
+        "allow_transparent_header": false,
+        "autoplay": true,
+        "proportional": true,
+        "justify_content": true,
+        "video_size": "lg",
+        "video": "shopify://files/videos/5402292306806064666.webm",
+        "mobile_video": "shopify://files/videos/5402292306806064667.webm",
+        "external_video_url": "",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 15
+      }
+    },
+    "text_with_icons_hLyxqc": {
+      "type": "text-with-icons",
+      "blocks": {
+        "item_KKaVg9": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-timer",
+            "custom_icon": "shopify://shop_images/Union_3_1.png",
+            "mobile_icon_width": 64,
+            "icon_width": 64,
+            "icon_background_type": "none",
+            "icon_background": "",
+            "icon_color": "",
+            "title": "TRANSFORM IN WEEKS",
+            "content": "<p><strong>8 Week Transformation! </strong><br/><br/>Achieve a noticeable booty transformation in 4 weeks – with jaw-dropping results by week 8!</p>"
+          }
+        },
+        "item_refEJq": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-coupon",
+            "custom_icon": "shopify://shop_images/Union_5_1_daf73bef-2f0e-4054-aef2-3dec2af75df4.png",
+            "mobile_icon_width": 64,
+            "icon_width": 64,
+            "icon_background_type": "none",
+            "icon_background": "",
+            "icon_color": "",
+            "title": "PROVEN TECHNIQUES",
+            "content": "<p><strong>Sculpt and lift with proven exercises! </strong></p><p> Trust in only proven exercises and techniques designed to tune, shape, and uplift your booty for that perfect lift.</p>"
+          }
+        },
+        "item_KzJF4C": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-coupon",
+            "custom_icon": "shopify://shop_images/Line_4_1_1.png",
+            "mobile_icon_width": 64,
+            "icon_width": 64,
+            "icon_background_type": "none",
+            "icon_background": "",
+            "icon_color": "",
+            "title": "GUIDANCE & SUPPORT",
+            "content": "<p><strong>Personalized answers to ensure your success!</strong><br/><br/> Questions along the way? Our dedicated support team is here to guide you through your fitness journey, ensuring you make progress with us.</p>"
+          }
+        },
+        "item_P6L8D7": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-coupon",
+            "custom_icon": "shopify://shop_images/Union_4_1.png",
+            "mobile_icon_width": 64,
+            "icon_width": 64,
+            "icon_background_type": "none",
+            "icon_background": "",
+            "icon_color": "",
+            "title": "UNLIMITED ACCESS",
+            "content": "<p><strong>Lifetime Access! </strong><br/><br/>Enjoy lifetime access to both programs on any device – start your transformation anywhere, anytime.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "item_KKaVg9",
+        "item_refEJq",
+        "item_KzJF4C",
+        "item_P6L8D7"
+      ],
+      "settings": {
+        "full_width": true,
+        "stack_on_mobile": false,
+        "title": "",
+        "heading_tag": "h5",
+        "text_alignment": "center",
+        "icon_spacing": "medium",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "image_with_text_overlay_kanFpd": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "button_8tj78F": {
+          "type": "button",
+          "settings": {
+            "style": "fill",
+            "size": "base",
+            "full_width": true,
+            "text": "<div class=\"custom-button-inner\">\n<span>nastya_nass_ <icon class=\"mark\"></icon></span><strong>7M Followers <icon class=\"community\"></icon></strong>\n</div>",
+            "url": "",
+            "background": "#ffffff",
+            "text_color": "#1a1a1a"
+          }
+        }
+      },
+      "block_order": [
+        "button_8tj78F"
+      ],
+      "settings": {
+        "full_width": false,
+        "allow_transparent_header": false,
+        "enable_parallax": false,
+        "image_size": "auto",
+        "image": "shopify://shop_images/nass_a141c8b3-1003-4bf6-a6ce-c845b13fd41c.jpg",
+        "mobile_image": "shopify://shop_images/nass_a141c8b3-1003-4bf6-a6ce-c845b13fd41c.jpg",
+        "mobile_text_position": "place-self-end-center text-center",
+        "desktop_text_position": "sm:place-self-end-center sm:text-center",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0
+      }
+    },
+    "3ea9a601-da90-466c-978b-d71e2fac7ae0": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "template--15158367551562__3ea9a601-da90-466c-978b-d71e2fac7ae0-heading-1": {
+          "type": "heading",
+          "settings": {
+            "text": "50% OFF<br> HOME AND BOOTY BAND PROGRAMS",
+            "heading_tag": "h1"
+          }
+        },
+        "8ae4b6e8-f89e-4015-a43d-b1baf10e7b4a": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Exercise with your own weight or booty bands </p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--15158367551562__3ea9a601-da90-466c-978b-d71e2fac7ae0-heading-1",
+        "8ae4b6e8-f89e-4015-a43d-b1baf10e7b4a"
+      ],
+      "disabled": true,
+      "settings": {
+        "full_width": false,
+        "allow_transparent_header": false,
+        "enable_parallax": false,
+        "image_size": "auto",
+        "image": "shopify://shop_images/L39A2193_1.jpg",
+        "mobile_image": "shopify://shop_images/IMG_6337.jpg",
+        "mobile_text_position": "place-self-center text-center",
+        "desktop_text_position": "sm:place-self-center sm:text-center",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 30
+      }
+    },
+    "ddc8cfd5-6e50-4d23-998a-585234bc2848": {
+      "type": "video",
+      "blocks": {
+        "337ac15c-256a-434b-ba4f-38c3afe35f0b": {
+          "type": "subheading",
+          "settings": {
+            "text": "Master your performance anywhere"
+          }
+        },
+        "template--15158367551562__ddc8cfd5-6e50-4d23-998a-585234bc2848-heading-1": {
+          "type": "heading",
+          "settings": {
+            "text": "VIEW IT ONLINE ON ANY SCREEN",
+            "heading_tag": "h1",
+            "special_padding": ""
+          }
+        }
+      },
+      "block_order": [
+        "337ac15c-256a-434b-ba4f-38c3afe35f0b",
+        "template--15158367551562__ddc8cfd5-6e50-4d23-998a-585234bc2848-heading-1"
+      ],
+      "disabled": true,
+      "settings": {
+        "full_width": false,
+        "allow_transparent_header": false,
+        "autoplay": true,
+        "proportional": true,
+        "justify_content": false,
+        "video_size": "lg",
+        "video": "shopify://files/videos/Devices2.webm",
+        "mobile_video": "shopify://files/videos/Devices2m.webm",
+        "external_video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0
+      }
+    },
+    "f4057b1a-6497-4d2e-9664-42d3ebd1d9b3": {
+      "type": "rich-text",
+      "blocks": {
+        "6e2f8aab-74ae-47fd-a14d-4f1b45a930b3": {
+          "type": "button",
+          "settings": {
+            "style": "fill",
+            "size": "xl",
+            "text": "Apply now!",
+            "url": "#shopify-section-template--15538729025610__custom_bundle_hHqNG8",
+            "background": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "6e2f8aab-74ae-47fd-a14d-4f1b45a930b3"
+      ],
+      "settings": {
+        "full_width": true,
+        "content_width": "small",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "5f0be783-db76-4fcb-a8fe-268b5cff16d3": {
+      "type": "multi-column",
+      "blocks": {
+        "template--14946156675146__5f0be783-db76-4fcb-a8fe-268b5cff16d3-item-1": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Frame_289_2_-min.png",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "<p><strong>Structured weight loss journey</strong><br/><br/>The course includes 8 video lessons which provide you with a structured path to achieve your weight loss goals.</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "97890959-8621-451e-ae81-07e20ca6b45e": {
+          "type": "item",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/Frame_288_1_1.png",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "<p><strong>Effective, safe workouts</strong><br/><br/>Access our extensive Exercise Library for tips and techniques on every move, ensuring your workout is both effective and safe.</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "template--14946156675146__5f0be783-db76-4fcb-a8fe-268b5cff16d3-item-2": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Frame_287_2_-min.png",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "<p><strong>Incorporate essential stretching<br/></strong></p><p>Incorporate our Stretching Guide into your routine, with quick and extensive options, to enhance flexibility and prevent injury.</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "template--14946156675146__5f0be783-db76-4fcb-a8fe-268b5cff16d3-item-3": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Frame_289_1_-min.png",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "<p><strong>Workouts optimized for amateurs <br/></strong><br/>Workout routine created to achieve best results within 8 weeks. </p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "dae5c4ed-33f7-48ac-bfc7-7e1fce3d54eb": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Frame_290_1_dfdd5f9e-8739-4609-ac3c-138a68e7f836.png",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "<p><strong>Workouts and wellness tips </strong><br/><br/>Receive exclusive access to  in-depth articles on nutrition, menstrual cycle effects on exercise, and progress tracking.</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        }
+      },
+      "block_order": [
+        "template--14946156675146__5f0be783-db76-4fcb-a8fe-268b5cff16d3-item-1",
+        "97890959-8621-451e-ae81-07e20ca6b45e",
+        "template--14946156675146__5f0be783-db76-4fcb-a8fe-268b5cff16d3-item-2",
+        "template--14946156675146__5f0be783-db76-4fcb-a8fe-268b5cff16d3-item-3",
+        "dae5c4ed-33f7-48ac-bfc7-7e1fce3d54eb"
+      ],
+      "settings": {
+        "full_width": true,
+        "stack_on_mobile": false,
+        "gap": "medium",
+        "text_alignment": "start",
+        "subheading": "",
+        "title": "What's inside?",
+        "content": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "custom_liquid_jmMmHk": {
+      "type": "custom-liquid",
+      "settings": {
+        "full_width": true,
+        "remove_vertical_spacing": false,
+        "remove_horizontal_spacing": false,
+        "liquid": "<div class=\"countdown-timer-block\" countdown-timer-id=\"cluguopvt2886301ht7bb5tdygg\"></div>",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "custom_bundle_hHqNG8": {
+      "type": "custom-bundle",
+      "blocks": {
+        "programs_step_i9gBYU": {
+          "type": "programs_step",
+          "settings": {
+            "title": "Choose Programs",
+            "badge_text": "Lifetime Access",
+            "show_general_badge": false,
+            "general_badge_text": "",
+            "products": [
+              "weight-loss-program",
+              "booty-programs-2",
+              "twerk-program-3"
+            ]
+          }
+        },
+        "step_LkPxMD": {
+          "type": "step",
+          "settings": {
+            "title": "Choose Leggings",
+            "badge_text": "Choose Your Free Leggings!",
+            "products": [
+              "muse-leggings-black",
+              "muse-leggings-blue",
+              "muse-leggings-fuchsia",
+              "essential-leggings-black-2",
+              "essential-leggings-blue-1",
+              "essential-leggings-khaki-1",
+              "essential-leggings-pink-1",
+              "purple-essential-leggings"
+            ],
+            "first_is_free": true,
+            "first_shown_is_free": false,
+            "allow_next": true,
+            "hide_when_extra": false,
+            "enable_filters": true,
+            "filters_title": "Size Filter",
+            "size_chart": "muse-leggings"
+          }
+        },
+        "step_JwUJrK": {
+          "type": "step",
+          "settings": {
+            "title": "Choose Top",
+            "badge_text": "Choose Your Free Top!",
+            "products": [
+              "muse-top-black",
+              "muse-top-blue",
+              "muse-top-fuchsia",
+              "black-essential-top",
+              "blue-essential-top",
+              "khaki-essential-top",
+              "pink-essential-top",
+              "purple-essential-top"
+            ],
+            "first_is_free": true,
+            "first_shown_is_free": false,
+            "allow_next": true,
+            "hide_when_extra": false,
+            "enable_filters": true,
+            "filters_title": "Size Filter",
+            "size_chart": "muse-top"
+          }
+        },
+        "step_87XKpK": {
+          "type": "step",
+          "settings": {
+            "title": "Select Shorts!",
+            "badge_text": "20% off in this bundle",
+            "products": [
+              "perfect-black",
+              "petal-splash",
+              "neon-drift",
+              "pinky-zebra",
+              "shadow-ninja",
+              "sunny-ani",
+              "terra-speckle",
+              "mystic-zebra",
+              "cosmic-nebula"
+            ],
+            "first_is_free": false,
+            "first_shown_is_free": false,
+            "allow_next": true,
+            "hide_when_extra": false,
+            "enable_filters": true,
+            "filters_title": "Size Filter",
+            "size_chart": "sizing-chart-biflex"
+          }
+        },
+        "step_xgkgbp": {
+          "type": "step",
+          "settings": {
+            "title": "Choose Equipment",
+            "badge_text": "",
+            "products": [
+              "ankle-strap-1",
+              "booty-band-set-1",
+              "gym-gloves",
+              "rubber-booty-band-set-1",
+              "stretching-band-set-1",
+              "copy-of-stretching-block"
+            ],
+            "first_is_free": false,
+            "first_shown_is_free": false,
+            "allow_next": true,
+            "hide_when_extra": false,
+            "enable_filters": false,
+            "filters_title": "Size Filter",
+            "size_chart": ""
+          }
+        }
+      },
+      "block_order": [
+        "programs_step_i9gBYU",
+        "step_LkPxMD",
+        "step_JwUJrK",
+        "step_87XKpK",
+        "step_xgkgbp"
+      ],
+      "custom_css": [
+        ".custom-product-bundle {min-height: auto;}"
+      ],
+      "settings": {
+        "title": "",
+        "main_product": "",
+        "free_extras_badge": true,
+        "duration": "8 video workouts",
+        "save_for_program": "",
+        "save_for_bundle": "Save 30%",
+        "extras_description": "<p>FREE FITNESS SET</p>",
+        "group_products_in_cart": false,
+        "show_extra_steps": false,
+        "allow_one_free": "no",
+        "allow_two_free": "both",
+        "hide_variations": false
+      }
+    },
+    "4a5f66e0-0efa-495c-a866-7858f2836c5a": {
+      "type": "rich-text",
+      "blocks": {
+        "template--15158367551562__4a5f66e0-0efa-495c-a866-7858f2836c5a-heading-1": {
+          "type": "heading",
+          "settings": {
+            "text": "OUR CUSTOMERS SAY...",
+            "heading_tag": "h1",
+            "text_color": "",
+            "gradient": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--15158367551562__4a5f66e0-0efa-495c-a866-7858f2836c5a-heading-1"
+      ],
+      "settings": {
+        "full_width": true,
+        "content_width": "small",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "171256447069be5dc1": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_UfE6rT": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_UfE6rT"
+      ],
+      "settings": {
+        "full_width": true,
+        "remove_vertical_spacing": false,
+        "remove_horizontal_spacing": false,
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "40de124a-5f36-40b7-9aa1-559609539663": {
+      "type": "video",
+      "blocks": {
+        "template--14907164164170__40de124a-5f36-40b7-9aa1-559609539663-play-1": {
+          "type": "play",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "template--14907164164170__40de124a-5f36-40b7-9aa1-559609539663-play-1"
+      ],
+      "settings": {
+        "full_width": false,
+        "allow_transparent_header": false,
+        "autoplay": false,
+        "proportional": false,
+        "justify_content": false,
+        "video_size": "fill",
+        "video": "shopify://files/videos/ShortReview1.2.mp4",
+        "mobile_video": "shopify://files/videos/ShortReview1.2.mp4",
+        "external_video_url": "",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0
+      }
+    },
+    "8873fe7e-34b6-4337-a688-fa3c6e71079d": {
+      "type": "impact-text",
+      "settings": {
+        "full_width": true,
+        "stack_mobile": true,
+        "text_alignment": "center",
+        "impact_text_style": "fill",
+        "text_divider": "none",
+        "impact_text_size_ratio": 1,
+        "background": "",
+        "background_gradient": "",
+        "heading_text_color": "",
+        "heading_gradient": "",
+        "text_color": "",
+        "button_background": "",
+        "button_text_color": ""
+      }
+    },
+    "main": {
+      "type": "main-product",
+      "disabled": true,
+      "settings": {
+        "full_width": false,
+        "show_fixed_add_to_cart": false,
+        "desktop_media_width": 55,
+        "desktop_media_layout": "carousel_thumbnails_left",
+        "mobile_media_size": "contained",
+        "mobile_carousel_control": "floating_dots",
+        "enable_video_autoplay": true,
+        "enable_video_looping": true,
+        "enable_image_zoom": true,
+        "max_image_zoom_level": 3,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "input_background": "rgba(0,0,0,0)",
+        "input_text_color": ""
+      }
+    },
+    "29817d12-4af7-49ab-8a92-c41c03e71d08": {
+      "type": "faq",
+      "blocks": {
+        "template--14907164164170__29817d12-4af7-49ab-8a92-c41c03e71d08-item-1": {
+          "type": "item",
+          "settings": {
+            "title": "What equipment do I need for these workouts?",
+            "content": "<p>In this course you will exercise with your own weight, so all you will need is a yoga mat and a chair or a stool for some step up exercises </p>"
+          }
+        },
+        "item_9pxiP4": {
+          "type": "item",
+          "settings": {
+            "title": "How soon can I expect to see results?",
+            "content": "<p>\"Noticeable changes can be seen in just 4 weeks with a commitment to the recommended training schedule of at least 3 times a week.\"</p>"
+          }
+        },
+        "item_yTgMeY": {
+          "type": "item",
+          "settings": {
+            "title": "Can beginners do these programs?",
+            "content": "<p>Absolutely! The program's difficulty progresses gradually, allowing you to adapt and master new moves comfortably.</p>"
+          }
+        },
+        "template--14907164164170__29817d12-4af7-49ab-8a92-c41c03e71d08-item-3": {
+          "type": "item",
+          "settings": {
+            "title": "Can I complete the workouts at my own pace?",
+            "content": "<p>Of course! You can complete the workouts at your own pace. This course does not have a strict schedule.</p>"
+          }
+        },
+        "item_GV48Lj": {
+          "type": "item",
+          "disabled": true,
+          "settings": {
+            "title": "Can I access the programs and materials offline?",
+            "content": "<p>\"Absolutely. All materials and programs are accessible offline for your convenience.” </p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--14907164164170__29817d12-4af7-49ab-8a92-c41c03e71d08-item-1",
+        "item_9pxiP4",
+        "item_yTgMeY",
+        "template--14907164164170__29817d12-4af7-49ab-8a92-c41c03e71d08-item-3",
+        "item_GV48Lj"
+      ],
+      "settings": {
+        "full_width": true,
+        "subheading": "",
+        "title": "FAQ",
+        "content": "",
+        "team_avatar_width": 160,
+        "support_hours": "",
+        "answer_time": "",
+        "button_text": "",
+        "button_url": "",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "button_background": "",
+        "button_text_color": "",
+        "accordion_background": "",
+        "accordion_text_color": ""
+      }
+    },
+    "zp-product-footer-content": {
+      "type": "product-footer-content-zipifypages",
+      "settings": {}
+    },
+    "press_dkUfwj": {
+      "type": "press",
+      "blocks": {
+        "quote_mXB6Cb": {
+          "type": "quote",
+          "settings": {
+            "logo_width": 100,
+            "author": "",
+            "content": "The difference between who you are and who you want to be is what you do",
+            "show_rating": false,
+            "rating": 4
+          }
+        }
+      },
+      "block_order": [
+        "quote_mXB6Cb"
+      ],
+      "settings": {
+        "full_width": true,
+        "content_size": "medium",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "logo_item_background": "",
+        "logo_item_border": ""
+      }
+    },
+    "rich_text_7Vny8K": {
+      "type": "rich-text",
+      "blocks": {
+        "button_ifGJJJ": {
+          "type": "button",
+          "settings": {
+            "style": "fill",
+            "size": "xl",
+            "text": "Do It Now!",
+            "url": "#shopify-section-template--15538729025610__custom_bundle_hHqNG8",
+            "background": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "button_ifGJJJ"
+      ],
+      "settings": {
+        "full_width": true,
+        "content_width": "small",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "rich_text_iEMEnH": {
+      "type": "rich-text",
+      "blocks": {
+        "richtext_PVpyQq": {
+          "type": "richtext",
+          "settings": {
+            "seo_optimization": false,
+            "content": "<h1>The Best Weight Loss Program by Nastya Nass</h1><p>Are you ready to transform your body, boost your confidence, and embrace a healthier lifestyle? Our comprehensive weight loss program is designed to help you achieve your goals with proven strategies and expert guidance. Whether you’re looking for the best weight loss program to jumpstart your journey or seeking a top rated weight loss program that delivers real results, you’ve come to the right place.</p><h2>Why Choose Our Weight Loss Program?</h2><p>With countless options available, finding the right weight loss program can feel overwhelming. The reality is, there’s no one-size-fits-all solution—what works for one person might not work for another. That’s why our approach is rooted in flexibility, personalization, and science-backed methods. We understand that sustainable weight loss is about more than just dropping pounds; it’s about building healthy habits that last a lifetime.</p><p>Our program stands out among the top weight loss programs because it combines the latest in nutrition science, effective exercise routines, and motivational coaching. We focus on helping you understand your body, your habits, and your unique needs so you can make lasting changes.</p><h2>Features of the Best Weight Loss Program</h2><p>What makes a weight loss program truly effective? Here’s what sets our program apart:</p><ul><li>Personalized Nutrition Plans: Enjoy a meal plan tailored to your preferences, lifestyle, and dietary needs. No foods are strictly off-limits; instead, we teach you how to make smarter choices and enjoy a balanced diet.</li><li>Comprehensive Weight Loss Workout Plan: Our weight loss exercise plan blends cardio, strength training, and high-intensity interval training (HIIT) for maximum fat burning and muscle preservation.</li><li>Flexible and Realistic Approach: We believe in progress, not perfection. Our program adapts to your schedule and fitness level, making it easier to stay consistent and see results.</li></ul><h2>What to Expect: Your Weight Loss Exercise Plan</h2><p>A successful weight loss workout plan is more than just a list of exercises—it’s a structured routine that keeps you engaged, challenged, and motivated. Our plan includes:</p><ul><li>Cardiovascular Training: Activities like running, cycling, or swimming to burn calories and boost heart health.</li><li>Strength Training: Exercises such as squats, bench presses, and deadlifts to build lean muscle, which increases your metabolism and helps you burn more calories at rest.</li><li>HIIT (High-Intensity Interval Training): Short bursts of intense activity followed by rest, proven to accelerate fat loss and improve fitness.</li><li>Active Recovery: Incorporate yoga, stretching, or light walking to promote recovery and prevent burnout.</li></ul><p>A typical week might look like this:</p><p><strong>Day 1</strong></p><p>Cardio (e.g., running, cycling)</p><p><strong>Day 2</strong></p><p>Strength Training (full body)</p><p><strong>Day 3</strong></p><p>HIIT Session</p><p><strong>Day 4</strong></p><p>Rest or Active Recovery (yoga, walking)</p><p><strong>Repeat</strong></p><p>With variations for continued progress</p><p>This balanced approach ensures you’re working all muscle groups, avoiding plateaus, and staying excited about your workouts.</p><h2>Meet Nastya Nass: Your Fitness Inspiration</h2><p>Our weight loss program proudly features guidance and workouts inspired by Nastya Nass, a world-renowned dancer and fitness influencer. Nastya is celebrated for her dynamic routines that blend dance with fitness, making exercise fun, engaging, and effective. Her passion for movement and healthy living has inspired millions to embrace a more active lifestyle.</p><p>Nastya’s unique approach is woven into our program, offering video lessons, practical tips, and motivational content to keep you moving and smiling. Whether you’re a beginner or a seasoned athlete, Nastya’s infectious energy and expertise will help you push past your limits and discover the joy of fitness.</p><h3>Why Our Program Ranks Among the Top Rated Weight Loss Programs</h3><p>When it comes to top rated weight loss programs, results matter. Our program is consistently ranked among the top weight loss programs because it delivers:</p><ul><li>Sustainable Results: Our focus on habit-building and gradual progress ensures you keep the weight off long-term.</li><li>Comprehensive Support: From nutrition advice to workout guidance and emotional support, we’re with you every step of the way.</li><li>Evidence-Based Methods: Every aspect of our program is grounded in the latest research and best practices in health and fitness.</li></ul><h3>What’s Included in the Program?</h3><ul><li>8-week structured course with video lessons and practical tips;</li><li>Customizable meal plans and recipes;</li><li>Weight loss workout plan with progressive difficulty;</li><li>Access to expert coaches and a supportive online community;</li><li>Tools to track your progress and celebrate your achievements;</li></ul><h3>Take the First Step Today</h3><p>Your journey to a healthier, happier you starts now. Whether you’re searching for the best weight loss program, a weight loss exercise plan that fits your lifestyle, or inspiration from fitness icons like Nastya Nass, our program has everything you need to succeed.</p><p>Don’t wait for tomorrow—start sculpting the best version of yourself today. Join one of the top rated weight loss programs and experience the difference that expert guidance, proven strategies, and real community support can make in your life.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "richtext_PVpyQq"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "full_width": true,
+        "content_width": "small",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    }
+  },
+  "order": [
+    "zp-product-header-content",
+    "e72b3e83-78ae-427f-a359-430414bcfda5",
+    "text_with_icons_hLyxqc",
+    "image_with_text_overlay_kanFpd",
+    "3ea9a601-da90-466c-978b-d71e2fac7ae0",
+    "ddc8cfd5-6e50-4d23-998a-585234bc2848",
+    "f4057b1a-6497-4d2e-9664-42d3ebd1d9b3",
+    "5f0be783-db76-4fcb-a8fe-268b5cff16d3",
+    "custom_liquid_jmMmHk",
+    "custom_bundle_hHqNG8",
+    "4a5f66e0-0efa-495c-a866-7858f2836c5a",
+    "171256447069be5dc1",
+    "40de124a-5f36-40b7-9aa1-559609539663",
+    "8873fe7e-34b6-4337-a688-fa3c6e71079d",
+    "main",
+    "29817d12-4af7-49ab-8a92-c41c03e71d08",
+    "zp-product-footer-content",
+    "press_dkUfwj",
+    "rich_text_7Vny8K",
+    "rich_text_iEMEnH"
+  ]
+}

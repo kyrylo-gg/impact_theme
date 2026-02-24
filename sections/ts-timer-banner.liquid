@@ -1,0 +1,874 @@
+{{ 'ts-timer-banner.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign section_class = "ts-timer-banner"
+  assign settings = section.settings
+  assign desk_radius = settings.desk_radius
+  assign mob_radius = settings.mob_radius
+
+  if section.settings.desk_padding == 0
+    assign desk_radius = 0
+  endif
+
+  if section.settings.mob_padding == 0
+    assign mob_radius = 0
+  endif
+
+  assign desk_bg_image = settings.desk_bg_image
+  assign mob_bg_image = settings.mob_bg_image | default: desk_bg_image
+
+  if settings.enable_max_width 
+    assign section_class = section_class | append: " ts-timer-banner--max"
+  endif
+  
+  assign desk_content_height_type = settings.desk_content_height_type
+  assign mob_content_height_type = settings.mob_content_height_type
+  assign background_type = settings.background_type
+
+  if desk_bg_image == blank
+    assign background_type = "color"
+  endif
+
+  if desk_content_height_type == "adapt-background" and background_type == "color"
+    assign desk_content_height_type = "adapt-content"
+  endif
+
+  if mob_content_height_type == "adapt-background" and background_type == "color"
+    assign mob_content_height_type = "adapt-content"
+  endif
+
+  assign section_class = section_class | append: " ts-timer-banner--desk-" | append: desk_content_height_type
+  assign section_class = section_class | append: " ts-timer-banner--mob-" | append: mob_content_height_type
+  
+  assign section_class = section_class | append: " ts-timer-banner--bg-" | append: background_type
+%}
+
+<style>
+  .section-{{ section.id }} {
+    --section-max-width: {{ section.settings.max_width }}px;
+    --section-padding: {{ section.settings.desk_padding }}px;
+    --section-height: {{ section.settings.desk_content_height }}px;
+    --section-background: {{ section.settings.desk_bg_color }};
+    --content-radius: {{ desk_radius }}px;
+
+    padding-top: {{ section.settings.desk_indent_top }}px;
+    padding-bottom: {{ section.settings.desk_indent_bottom }}px;
+  }
+  
+  @media screen and (max-width: 749px) {
+    .section-{{ section.id }} {
+      --section-padding: {{ section.settings.mob_padding }}px;
+      --section-height: {{ section.settings.mob_content_height }}px;
+      --section-background: {{ section.settings.mob_bg_color }};
+      --content-radius: {{ mob_radius }}px;
+
+    padding-top: {{ section.settings.mob_indent_top }}px;
+    padding-bottom: {{ section.settings.mob_indent_bottom }}px;
+    }
+  }
+</style>
+
+<style>
+  .custom-action-steps {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .custom-action-step {
+    height: 120px;
+    backdrop-filter: blur(60px);
+    background: #0000000F;
+    border-radius: 30px;
+    width: 100%;
+    padding: 16px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .custom-action-step p, .custom-action-step div {
+    font-size: 20px;
+    line-height: 22px;
+    font-family: Anybody;
+  }
+  .custom-action-step-icon {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    width: 20px;
+    height: 20px;
+  }
+  @media screen and (max-width: 749px) {
+    .custom-action-steps {
+      flex-direction: column;
+    }
+    .custom-action-step {
+      height: 110px;
+    }
+    .custom-action-step p, .custom-action-step div {
+      font-size: 16px;
+      line-height: 18px;
+    }
+  }
+</style>
+
+<div class="{{ section_class }} section-{{ section.id }}">
+  <div class="ts-timer-banner__inner">
+    <div class="ts-timer-banner__media">
+      {%- if background_type == "image" and desk_bg_image != blank -%}
+        {{ desk_bg_image | image_url: width: 2000 | image_tag: class: "ts-timer-banner__media-desktop" }}
+        {{ mob_bg_image | image_url: width: 2000 | image_tag: class: "ts-timer-banner__media-mobile" }}
+      {%- endif -%}
+    </div>
+
+    <div class="ts-timer-banner__content">
+      {%- for block in section.blocks -%}
+        {%- capture indents -%}
+          --block-indent: {{ block.settings.indent | default: 0 | append: "px;" -}}
+          --block-indent-mob: {{ block.settings.indent_mob | default: 0 | append: "px;" -}}
+        {%- endcapture -%}
+        <div 
+          class="ts-timer-banner__block block-{{ block.id }}"
+          style="{{ indents }} {% if block.type == "steps" %} width: 100%; {% endif %}" 
+          {{ block.shopify_attributes }}
+        >
+          {%- case block.type -%}
+            {%- when "title" -%}
+              <style>
+                .section-{{ section.id }} .block-{{ block.id }} {
+                  --content-color: {{ block.settings.color }};
+                  --content-size: {{ block.settings.desk_font_size }}px;
+                }
+                
+                @media screen and (max-width: 749px) {
+                  .section-{{ section.id }} .block-{{ block.id }} {
+                    --content-size: {{ block.settings.mob_font_size }}px;
+                  }
+                }
+              </style>
+              <p class="ts-timer-banner__title">{{ block.settings.label }}</p>
+            {%- when "timer" -%}
+              <style>
+                .section-{{ section.id }} .block-{{ block.id }} {
+                  --countdown-background: {{ block.settings.countdown_background }};
+                  --countdown-color: {{ block.settings.countdown_color }};
+                  --countdown-size: {{ block.settings.desk_countdown_font_size }}px;
+
+                  --labels-color: {{ block.settings.labels_color }};
+                  --labels-size: {{ block.settings.desk_labels_font_size }}px;
+                }
+                
+                @media screen and (max-width: 749px) {
+                  .section-{{ section.id }} .block-{{ block.id }} {
+                    --countdown-size: {{ block.settings.mob_countdown_font_size }}px;
+                    --labels-size: {{ block.settings.mob_labels_font_size }}px;
+                  }
+                }
+              </style>
+
+              {% liquid
+                assign timer_type = block.settings.timer_type
+                assign timer_target = block.settings.cancel_date
+                assign timer_action = block.settings.cancel_action
+                
+                if timer_type == "cancel_time"
+                  assign timer_minutes = block.settings.cancel_minutes
+                  assign timer_hours = block.settings.cancel_time | times: 60
+                  assign timer_target = timer_minutes | plus: timer_hours
+                endif
+              %}
+
+              <ts-timer 
+                class="ts-timer" 
+                data-timer="{{ timer_type }}"
+                data-target="{{ timer_target }}" 
+                data-action="{{ timer_action }}"
+                data-block="{{ block.id }}"
+              >
+                <div class="ts-timer__cell">
+                  <span data-cell="days">00</span>
+                  <span class="ts-timer__cell-label">Days</span>
+                </div>
+                <div class="ts-timer__cell">
+                  <span data-cell="hours">00</span>
+                  <span class="ts-timer__cell-label">Hours</span>
+                </div>
+                <div class="ts-timer__cell">
+                  <span data-cell="minutes">00</span>
+                  <span class="ts-timer__cell-label">Minutes</span>
+                </div>
+                <div class="ts-timer__cell">
+                  <span data-cell="seconds">00</span>
+                  <span class="ts-timer__cell-label">Seconds</span>
+                </div>
+              </ts-timer>
+            {%- when "button" -%}
+              <style>
+                .section-{{ section.id }} .block-{{ block.id }} {
+                  --content-background: {{ block.settings.button_background }};
+                  --content-color: {{ block.settings.button_color }};
+                  --content-width: {{ block.settings.button_width }}px;
+                  --content-size: {{ block.settings.desk_font_size }}px;
+                }
+                
+                @media screen and (max-width: 749px) {
+                  .section-{{ section.id }} .block-{{ block.id }} {
+                    --content-size: {{ block.settings.mob_font_size }}px;
+                  }
+                }
+              </style>
+
+              <a href="{{ block.settings.link }}" style="border-radius: {{ block.settings.button_border_radius }}px !important;" class="ts-timer-banner__button ts-timer-banner__button--{{ block.settings.width_type }}">
+                {{- block.settings.label -}} {% if block.settings.special_text !=blank %} <span   style="padding-left: 6px; {% if block.settings.special_text_color != blank %} color: {{ block.settings.special_text_color }} {% endif %}"> {{ block.settings.special_text }} </span> {% endif %}
+              </a>
+            {%- when "steps" -%}
+              <div class="custom-action-steps">
+                {% for i in (1..3) %}
+                  {%  assign text_block = 'text_' | append: i  %}
+                  {% if block.settings[text_block] != blank %}
+                    <div class="custom-action-step">
+                      <div class="custom-action-step-icon">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <circle cx="10" cy="10" r="10" fill="black"/>
+                          <path d="M14.46 7.95839L13.4012 7L9.41444 11.4055L6.87677 9.43198L6 10.5593L9.58359 13.3465L14.46 7.95839Z" fill="#FAFF00"/>
+                        </svg>
+                      </div>
+                      {{ block.settings[text_block] }}
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+          {%- endcase -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "TS Timer banner",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Section settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_max_width",
+        "label": "Enable max width",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "max_width",
+        "label": "Max width",
+        "min": 800,
+        "max": 1400,
+        "step": 20,
+        "default": 1220
+      },
+      {
+        "type": "header",
+        "content": "Padding settings"
+      },
+      {
+        "type": "range",
+        "id": "desk_padding",
+        "label": "Inline padding (desktop)",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "default": 40
+      },
+      {
+        "type": "range",
+        "id": "mob_padding",
+        "label": "Inline padding (mobile)",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "default": 20
+      },
+      {
+        "type": "header",
+        "content": "Border radius settings"
+      },
+      {
+        "type": "range",
+        "id": "desk_radius",
+        "label": "Border radius (desktop)",
+        "min": 0,
+        "max": 50,
+        "step": 1,
+        "default": 16
+      },
+      {
+        "type": "range",
+        "id": "mob_radius",
+        "label": "Border radius (mobile)",
+        "min": 0,
+        "max": 50,
+        "step": 1,
+        "default": 12
+      },
+      {
+        "type": "header",
+        "content": "Height settings"
+      },
+      {
+        "type": "select",
+        "id": "desk_content_height_type",
+        "label": "Banner height type (desktop)",
+        "options": [
+          {
+            "label": "Fixed",
+            "value": "fixed"
+          },
+          {
+            "label": "Adapt to background",
+            "value": "adapt-background"
+          },
+          {
+            "label": "Adapt to content",
+            "value": "adapt-content"
+          }
+        ],
+        "default": "fixed"
+      },
+      {
+        "type": "range",
+        "id": "desk_content_height",
+        "label": "Banner height (desktop)",
+        "min": 100,
+        "max": 800,
+        "step": 10,
+        "unit": "px",
+        "default": 480
+      },
+      {
+        "type": "select",
+        "id": "mob_content_height_type",
+        "label": "Banner height type (mobile)",
+        "options": [
+          {
+            "label": "Fixed",
+            "value": "fixed"
+          },
+          {
+            "label": "Adapt to background",
+            "value": "adapt-background"
+          },
+          {
+            "label": "Adapt to content",
+            "value": "adapt-content"
+          }
+        ],
+        "default": "fixed"
+      },
+      {
+        "type": "range",
+        "id": "mob_content_height",
+        "label": "Banner height (mobile)",
+        "min": 100,
+        "max": 800,
+        "step": 10,
+        "unit": "px",
+        "default": 480
+      },
+      {
+        "type": "header",
+        "content": "Background settings"
+      },
+      {
+        "type": "select",
+        "id": "background_type",
+        "label": "Background type",
+        "options": [
+          {
+            "label": "Image",
+            "value": "image"
+          },
+          {
+            "label": "Color",
+            "value": "color"
+          }
+        ],
+        "default": "color"
+      },
+      {
+        "type": "image_picker",
+        "id": "desk_bg_image",
+        "label": "Background image (desktop)"
+      },
+      {
+        "type": "image_picker",
+        "id": "mob_bg_image",
+        "label": "Background image (mobile)"
+      },
+      {
+        "type": "color_background",
+        "id": "desk_bg_color",
+        "label": "Background color (desktop)",
+        "default": "#000"
+      },
+      {
+        "type": "color_background",
+        "id": "mob_bg_color",
+        "label": "Background color (mobile)",
+        "default": "#000"
+      },
+      {
+        "type": "header",
+        "content": "Indent settings"
+      },
+      {
+        "type": "range",
+        "id": "desk_indent_top",
+        "label": "Indent top (desktop)",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "desk_indent_bottom",
+        "label": "Indent bottom (desktop)",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "mob_indent_top",
+        "label": "Indent top (mobile)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "mob_indent_bottom",
+        "label": "Indent bottom (mobile)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "default": 0
+      }
+    ],
+    "blocks": [
+      {
+        "type": "title",
+        "name": "Title",
+        "settings": [
+          {
+            "type": "inline_richtext",
+            "id": "label",
+            "label": "Label",
+            "default": "Title"
+          },
+          {
+            "type": "color",
+            "id": "color",
+            "label": "Color",
+            "default": "#fff"
+          },
+          {
+            "type": "header",
+            "content": "Font size - settings"
+          },
+          {
+            "type": "range",
+            "id": "desk_font_size",
+            "label": "Font size (desktop)",
+            "min": 16,
+            "max": 64,
+            "step": 1,
+            "unit": "px",
+            "default": 25
+          },
+          {
+            "type": "range",
+            "id": "mob_font_size",
+            "label": "Font size (mobile)",
+            "min": 8,
+            "max": 48,
+            "step": 1,
+            "unit": "px",
+            "default": 25
+          },
+          {
+            "type": "header",
+            "content": "Indent settings"
+          },
+          {
+            "type": "range",
+            "id": "indent",
+            "label": "Indent top (desktop)",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "default": 16
+          },
+          {
+            "type": "range",
+            "id": "indent_mob",
+            "label": "Indent top (mobile)",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "default": 12
+          }
+        ]
+      },
+      {
+        "type": "steps",
+        "name": "Action Steps",
+        "settings": [
+          {
+            "type": "richtext",
+            "id": "text_1",
+            "label": "Text 1"
+          },
+          {
+            "type": "richtext",
+            "id": "text_2",
+            "label": "Text 2"
+          },
+          {
+            "type": "richtext",
+            "id": "text_3",
+            "label": "Text 3"
+          }
+        ]
+      },
+      {
+        "type": "timer",
+        "name": "Timer",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Timer logic - settings"
+          },
+          {
+            "type": "select",
+            "id": "timer_type",
+            "label": "Timer type",
+            "options": [
+              {
+                "label": "Until date end",
+                "value": "cancel_date"
+              },
+              {
+                "label": "Until time end",
+                "value": "cancel_time"
+              },
+              {
+                "label": "Until day end (daily)",
+                "value": "daily"
+              }
+            ],
+            "default": "daily"
+          },
+          {
+            "type": "text",
+            "id": "cancel_date",
+            "label": "Cancel date for countdown",
+            "info": "Use next time format: dd-mm-yyyy hh:mm",
+            "placeholder": "dd-mm-yyyy hh:mm",
+            "default": "01-01-2026 12:00"
+          },
+          {
+            "type": "range",
+            "id": "cancel_time",
+            "label": "Cancel time for countdown",
+            "min": 0,
+            "max": 24,
+            "step": 1,
+            "unit": "h",
+            "default": 6,
+          },
+          {
+            "type": "range",
+            "id": "cancel_minutes",
+            "label": "Cancel time for countdown (minutes)",
+            "min": 1,
+            "max": 60,
+            "step": 1,
+            "unit": "m",
+            "default": 15,
+          },
+          {
+            "type": "select",
+            "id": "cancel_action",
+            "label": "Action after timer end",
+            "options": [
+              {
+                "label": "None",
+                "value": "none"
+              },
+              {
+                "label": "Hide section",
+                "value": "hide"
+              }
+            ],
+            "default": "none"
+          },
+          { 
+            "type": "header",
+            "content": "Countdown - settings"
+          },
+          {
+            "type": "color_background",
+            "id": "countdown_background",
+            "label": "Countdown background color",
+            "default": "#fff"
+          },
+          {
+            "type": "color",
+            "id": "countdown_color",
+            "label": "Countdown color",
+            "default": "#000"
+          },
+          {
+            "type": "range",
+            "id": "desk_countdown_font_size",
+            "label": "Countdown Font size (desktop)",
+            "min": 16,
+            "max": 64,
+            "step": 1,
+            "unit": "px",
+            "default": 25
+          },
+          {
+            "type": "range",
+            "id": "mob_countdown_font_size",
+            "label": "Countdown Font size (mobile)",
+            "min": 8,
+            "max": 48,
+            "step": 1,
+            "unit": "px",
+            "default": 25
+          },
+          { 
+            "type": "header",
+            "content": "Labels - settings"
+          },
+          {
+            "type": "color",
+            "id": "labels_color",
+            "label": "Labels color",
+            "default": "#fff"
+          },
+          {
+            "type": "range",
+            "id": "desk_labels_font_size",
+            "label": "Labels Font size (desktop)",
+            "min": 8,
+            "max": 32,
+            "step": 1,
+            "unit": "px",
+            "default": 13
+          },
+          {
+            "type": "range",
+            "id": "mob_labels_font_size",
+            "label": "Labels Font size (mobile)",
+            "min": 8,
+            "max": 32,
+            "step": 1,
+            "unit": "px",
+            "default": 13
+          },
+          {
+            "type": "header",
+            "content": "Indent settings"
+          },
+          {
+            "type": "range",
+            "id": "indent",
+            "label": "Indent top (desktop)",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "default": 16
+          },
+          {
+            "type": "range",
+            "id": "indent_mob",
+            "label": "Indent top (mobile)",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "default": 12
+          }
+        ]
+      },
+      {
+        "type": "button",
+        "name": "Button",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Content settings"
+          },
+          {
+            "type": "text",
+            "id": "label",
+            "label": "Label",
+            "default": "Button"
+          },
+          {
+            "type": "text",
+            "id": "special_text",
+            "label": "Special Text"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Link"
+          },
+          {
+            "type": "color_background",
+            "id": "button_background",
+            "label": "Background color",
+            "default": "#FFD700"
+          },
+          {
+            "type": "color",
+            "id": "button_color",
+            "label": "Color",
+            "default": "#000000"
+          },
+          {
+            "type": "header",
+            "content": "Font size - settings"
+          },
+          {
+            "type": "range",
+            "id": "button_border_radius",
+            "label": "Button border radius",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "default": 10
+          },
+          {
+            "type": "range",
+            "id": "desk_font_size",
+            "label": "Font size (desktop)",
+            "min": 10,
+            "max": 48,
+            "step": 1,
+            "unit": "px",
+            "default": 18
+          },
+          {
+            "type": "range",
+            "id": "mob_font_size",
+            "label": "Font size (mobile)",
+            "min": 10,
+            "max": 48,
+            "step": 1,
+            "unit": "px",
+            "default": 18
+          },
+          {
+            "type": "header",
+            "content": "Width settings"
+          },
+          {
+            "type": "select",
+            "id": "width_type",
+            "label": "Width type",
+            "options": [
+              {
+                "label": "Fit content",
+                "value": "fit"
+              },
+              {
+                "label": "Full (100%)",
+                "value": "full"
+              },
+              {
+                "label": "Fixed",
+                "value": "fix"
+              }
+            ],
+            "default": "fit"
+          },
+          {
+            "type": "range",
+            "id": "button_width",
+            "label": "Button width",
+            "min": 100,
+            "max": 400,
+            "step": 10,
+            "unit": "px",
+            "default": 160
+          },
+          {
+            "type": "header",
+            "content": "Indent settings"
+          },
+          {
+            "type": "range",
+            "id": "indent",
+            "label": "Indent top (desktop)",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "default": 16
+          },
+          {
+            "type": "range",
+            "id": "indent_mob",
+            "label": "Indent top (mobile)",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "default": 12
+          },
+          {
+            "type": "color",
+            "id": "special_text_color",
+            "label": "Special Text color",
+            "default": "#000"
+          },
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "TS Timer banner",
+        "blocks": [
+          {
+            "type": "title"
+          },
+          {
+            "type": "timer"
+          },
+          {
+            "type": "button"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

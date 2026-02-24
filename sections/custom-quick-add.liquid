@@ -1,0 +1,688 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    position: fixed;
+    bottom: 6px;
+    z-index: 50;
+    transition: opacity .3s ease, visibility .3s ease;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 10px;
+  }
+
+  .custom-quick-add {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 10px;
+    display: none;
+    flex-direction: row;
+    gap: 14px;
+    max-width: 610px;
+    margin: auto;
+  }
+
+  .custom-quick-add.show {
+    display: flex;
+  }
+
+  .countdown-timer {
+    display: flex;
+    align-items: flex-start;
+    gap: 2px;
+    flex-direction: row;
+    padding-top: 4px;
+  }
+
+  .timer-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .time-value {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:  var(--countdown-background, linear-gradient(180deg, #313131 0%, #1C1C1C 100%));
+    color: var(--countdown-color, #fff);
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    min-width: 33px;
+    max-width: 33px;
+    min-height: 33px;
+    max-height: 33px;
+    text-align: center;
+  }
+
+  .time-label {
+    font-size: 13px;
+    color:  var(--labels-color, #000);
+    font-weight: 500;
+  }
+
+  .colon {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 2px;
+  }
+
+  .custom-quick-add-block {
+    height: 60px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-between;
+    padding: 12px;
+    min-width: 376px;
+  }
+
+  .custom-quick-add-sublime {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .custom-quick-add-sublime-icon {
+    width: 16px;
+    min-width: 16px;
+  }
+
+  .custom-quick-add-sublime-text {
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 100%;
+    color: white;
+  }
+
+  .price,
+  .price-list,
+  .custom-quick-add-main .price-list {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .price-item--regular {
+    opacity: 0.5;
+    text-decoration: line-through;
+    font-size: 18px;
+  }
+
+  .price-item--sale {
+    color: #fff !important;
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  .custom-quick-add-button {
+    width: 81px;
+    min-width: 81px;
+    height: 30px;
+    border-radius: 100px;
+    padding-top: 4px;
+    padding-right: 2px;
+    padding-bottom: 4px;
+    padding-left: 2px;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    max-width: 90px;
+  }
+
+  .custom-quick-add-main {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    min-width: 166px;
+  }
+  .full-width {
+    width: 100%;
+  }
+  .timer-mobile {
+    display: none;
+  }
+  .sublime-mobile {
+    display: none;
+  }
+  .custom-quick-add-main .price-list .money,
+  .custom-quick-add-main .price-list .text-subdued,
+  .custom-quick-add-main .price-list .text-on-sale {
+    color:white !important;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 100%;
+  }
+
+  .custom-quick-add-main .price-list .money {
+    font-size: 15px;
+  }
+
+  .custom-quick-add-main .price, .price-list, .custom-quick-add-main .price-list {
+    width: 100%;
+  }
+  .custom-quick-add-main .price-list .text-subdued {
+    opacity: 0.7;
+  }
+
+  .removed {
+    display: none;
+  }
+
+  .custom-quick-add-main .price-list {
+    display: flex;
+    flex-direction: row-reverse;
+    color: white !important;
+    min-width: 88px;
+    justify-content: flex-end;
+  }
+
+  .custom-quick-add-sublime.sublime-desktop {
+    max-width: 150px;
+  }
+
+  @media (max-width: 768px) {
+    .time-label {
+      font-size: 9px;
+      color: var(--labels-color, #000);
+    }
+    .sublime-mobile {
+      display: flex;
+    }
+
+    .timer-desktop {
+      display: none;
+    }
+    .timer-mobile {
+      display: flex;
+      gap:2px;
+      color: white;
+      align-items: center;
+    }
+    .time-value {
+      font-size: 13px;
+      width: 26px;
+      height: 26px;
+      border-radius: 5px;
+      padding: 0px 4px;
+      gap: 10px;
+      min-width: 26px;
+      min-height:  26px;
+      color: var(--mobile-countdown-color, #fff);
+      background: var(--mobile-countdown-background, linear-gradient(180deg, #313131 0%, #1C1C1C 100%));
+    }
+    .colon {
+      font-size: 13px;
+      padding-bottom: 14px;
+    }
+    .time-mobile .time-value {
+      padding: 1px 4px;
+    }
+
+    .timer-mobile .time-label {
+      color: var(--mobile-labels-color, #fff);
+    }
+
+    .custom-quick-add-main {
+      gap: 7px;
+    }
+
+    .custom-quick-add-button {
+      width: 100%;
+      text-align: center;
+    }
+    .custom-quick-add-button:hover {
+      opacity: 0.95;
+    }
+
+    .sublime-desktop {
+      display: none;
+    }
+    .custom-quick-add {
+      background: transparent !important;
+    }
+    .custom-quick-add-sublime-icon {
+      filter: invert(100%);
+      min-width: 12px;
+    }
+    .custom-quick-add-sublime.sublime-mobile {
+      color: black;
+    }
+    .sublime-mobile .custom-quick-add-sublime-text {
+      color: black;
+    }
+    .custom-quick-add {
+      flex-direction: column-reverse;
+      gap: 0;
+      align-items: center;
+      background: white !important;
+      padding: 10px 16px 14px;
+      bottom: -12px;
+      position: relative;
+    }
+    .custom-quick-add-sublime.sublime-mobile {
+      margin-top: 4px;
+    }
+    .custom-quick-add-main .price-list .money,
+    .custom-quick-add-main .price-list .text-subdued,
+    .custom-quick-add-main .price-list .text-on-sale {
+      color:white !important;
+      font-weight: 500;
+      font-size: 13px;
+      line-height: 100%;
+    }
+
+    .custom-quick-add-main .price-list .money {
+      font-size: 13px;
+    }
+    .custom-quick-add-main .price-list {
+      min-width: 60px;
+      gap: 4px;
+    }
+    .custom-quick-add-block {
+      gap: 6px;
+      padding: 12px;
+      min-width: 346px;
+    }
+
+  }
+  .inverse {
+    filter: invert(100%);
+  }
+</style>
+<style>
+  #shopify-section-{{ section.id }} {
+      --countdown-background: {{ section.settings.countdown_background }};
+      --countdown-color: {{ section.settings.countdown_color }};
+      --labels-color: {{ section.settings.labels_color }};
+  }
+  @media screen and (max-width: 768px) {
+      #shopify-section-{{ section.id }} {
+          --mobile-countdown-background: {{ section.settings.mobile_countdown_background }};
+          --mobile-countdown-color: {{ section.settings.mobile_countdown_color }};
+          --mobile-labels-color: {{ section.settings.mobile_labels_color }};
+          background: transparent;
+      }
+  }
+
+  .custom-quick-add-main__savings {
+    display: flex;
+    width: fit-content;
+    padding: 2px 5px 1px;
+    border: 1px solid {{ section.settings.background_button }};
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 9px;
+    line-height: 140%;
+    color: #FFFFFF;
+    margin: 3px auto 0;
+  }
+</style>
+
+{% if section.settings.timer_enabled %}
+  {% liquid
+    assign timer_type = section.settings.timer_type
+    assign timer_target = section.settings.cancel_date
+    assign timer_action = section.settings.cancel_action
+
+    if timer_type == 'cancel_time'
+      assign timer_minutes = section.settings.cancel_minutes
+      assign timer_hours = section.settings.cancel_time | times: 60
+      assign timer_target = timer_minutes | plus: timer_hours
+    endif
+  %}
+{% endif %}
+
+<div id="quick-add-sticky-{{ section.id }}" class="custom-quick-add">
+  {% if section.settings.sublime_text != blank %}
+    <div class="custom-quick-add-sublime sublime-mobile">
+      <img
+        src="https://cdn.shopify.com/s/files/1/0276/5658/5290/files/Vector_1.svg?v=1764268945"
+        width="10"
+        height="12"
+        class="custom-quick-add-sublime-icon hidden"
+      >
+      <span class="custom-quick-add-sublime-text">
+        {{ section.settings.sublime_text }}
+      </span>
+    </div>
+  {% endif %}
+
+  {% if section.settings.timer_enabled %}
+    <ts-timer
+      data-timer="{{ timer_type }}"
+      data-target="{{ timer_target }}"
+      data-action="{{ timer_action }}"
+      data-section="{{ section.id }}"
+      class="countdown-timer timer-desktop"
+    >
+      {% assign labels = 'Days,Hours,Mins,Secs' | split: ',' %}
+      <div class="timer-block flex items-center">
+        <span class="time-value" data-cell="days">00</span>
+        <span class="time-label">{{ labels[0] }}</span>
+      </div>
+      <span class="colon">:</span>
+      <div class="timer-block flex items-center">
+        <span class="time-value" data-cell="hours">00</span>
+        <span class="time-label">{{ labels[1] }}</span>
+      </div>
+      <span class="colon">:</span>
+      <div class="timer-block flex items-center">
+        <span class="time-value" data-cell="minutes">00</span>
+        <span class="time-label">{{ labels[2] }}</span>
+      </div>
+      <span class="colon">:</span>
+      <div class="timer-block flex items-center">
+        <span class="time-value" data-cell="seconds">00</span>
+        <span class="time-label">{{ labels[3] }}</span>
+      </div>
+    </ts-timer>
+  {% else %}
+    {% if section.settings.sublime_text != blank %}
+      <div class="custom-quick-add-sublime sublime-desktop inverse">
+        <img
+          src="https://cdn.shopify.com/s/files/1/0276/5658/5290/files/Vector_1.svg?v=1764268945"
+          width="10"
+          height="12"
+          class="custom-quick-add-sublime-icon hidden"
+        >
+        <span class="custom-quick-add-sublime-text">
+          {{ section.settings.sublime_text }}
+        </span>
+      </div>
+    {% endif %}
+  {% endif %}
+
+  <div class="custom-quick-add-block" style="background:{{ section.settings.block_background }}">
+    {% if section.settings.timer_enabled %}
+      <ts-timer
+        data-timer="{{ timer_type }}"
+        data-target="{{ timer_target }}"
+        data-action="{{ timer_action }}"
+        data-section="{{ section.id }}"
+        class="countdown-timer timer-mobile"
+      >
+        {% assign labels = 'Days,Hours,Mins,Secs' | split: ',' %}
+        <div class="timer-block flex items-center">
+          <span class="time-value" data-cell="days">00</span>
+          <span class="time-label">{{ labels[0] }}</span>
+        </div>
+        <span class="colon">:</span>
+        <div class="timer-block flex items-center">
+          <span class="time-value" data-cell="hours">00</span>
+          <span class="time-label">{{ labels[1] }}</span>
+        </div>
+        <span class="colon">:</span>
+        <div class="timer-block flex items-center">
+          <span class="time-value" data-cell="minutes">00</span>
+          <span class="time-label">{{ labels[2] }}</span>
+        </div>
+        <span class="colon">:</span>
+        <div class="timer-block flex items-center">
+          <span class="time-value" data-cell="seconds">00</span>
+          <span class="time-label">{{ labels[3] }}</span>
+        </div>
+      </ts-timer>
+    {% endif %}
+
+    {% if section.settings.sublime_text != blank and section.settings.timer_enabled %}
+      <div class="custom-quick-add-sublime sublime-desktop">
+        <img
+          src="https://cdn.shopify.com/s/files/1/0276/5658/5290/files/Vector_1.svg?v=1764268945"
+          width="10"
+          height="12"
+          class="custom-quick-add-sublime-icon hidden"
+        >
+        <span class="custom-quick-add-sublime-text">
+          {{ section.settings.sublime_text }}
+        </span>
+      </div>
+    {% endif %}
+
+    <div class="custom-quick-add-main {% if section.settings.timer_enabled == false %} full-width {% endif %}">
+      <div class="custom-quick-add-main__price">
+        {% assign current_variant = section.settings.product.selected_or_first_available_variant %}
+        {%- render 'price-list',
+          product: section.settings.product,
+          variant: current_variant
+        -%}
+
+        {% if current_variant.compare_at_price > current_variant.price %}
+          {% assign discount =
+            current_variant.compare_at_price
+            | minus: current_variant.price
+            | times: 100
+            | divided_by: current_variant.compare_at_price
+          %}
+          <p class="custom-quick-add-main__savings">{{ discount }}% OFF</p>
+        {% endif %}
+      </div>
+      <a
+        href="{{ section.settings.button_link }}"
+        class="custom-quick-add-button"
+        style="background:{{ section.settings.background_button }}; color:{{ section.settings.text_color_button }}"
+      >
+        {{ section.settings.button_text }}
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const original = document.getElementById('quick-add-original');
+    const sticky = document.getElementById('quick-add-sticky-{{ section.id }}');
+    const buyButtons = document.querySelector('.buy-buttons');
+    const searchParams = new URLSearchParams(window.location.search);
+
+    if (searchParams.get("utm_source") && searchParams.get("utm_source") == "facebook") {
+      sticky.classList.add("show");
+    }
+
+    if (!original || !sticky) return;
+
+    function updateStickyVisibility() {
+      const hide = isElementInViewport(original, 0.1) || (buyButtons && isElementInViewport(buyButtons, 0.15));
+      if (hide) {
+        sticky.classList.add('hidden');
+      } else {
+        sticky.classList.remove('hidden');
+      }
+    }
+
+    function isElementInViewport(el, threshold = 0) {
+      const rect = el.getBoundingClientRect();
+      const height = window.innerHeight || document.documentElement.clientHeight;
+      return rect.top < height * (1 - threshold) && rect.bottom > height * threshold;
+    }
+
+    document.addEventListener('scroll', updateStickyVisibility, { passive: true });
+    window.addEventListener('resize', updateStickyVisibility);
+    updateStickyVisibility();
+  });
+</script>
+
+{% schema %}
+{
+  "name": "TS Sticky Add",
+  "tag": "section",
+  "class": "section-custom-quick-add",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product for prices"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Shop now"
+    },
+    {
+      "type": "color",
+      "id": "background_button",
+      "label": "Button background",
+      "default": "#FAFF00"
+    },
+    {
+      "type": "color",
+      "id": "text_color_button",
+      "label": "Button text color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "block_text_color",
+      "label": "Block text color"
+    },
+    {
+      "type": "color",
+      "id": "block_background",
+      "label": "Block background color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "richtext",
+      "id": "sublime_text",
+      "label": "Sublime text",
+      "default": "<p>7-day money-back guarantee</p>"
+    },
+    {
+      "type": "header",
+      "content": "Timer logic - settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "timer_enabled",
+      "label": "Show timer",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "timer_type",
+      "label": "Timer type",
+      "options": [
+        {
+          "label": "Until date end",
+          "value": "cancel_date"
+        },
+        {
+          "label": "Until time end",
+          "value": "cancel_time"
+        },
+        {
+          "label": "Until day end (daily)",
+          "value": "daily"
+        }
+      ],
+      "default": "daily"
+    },
+    {
+      "type": "text",
+      "id": "cancel_date",
+      "label": "Cancel date for countdown",
+      "info": "Use next time format: dd-mm-yyyy hh:mm",
+      "placeholder": "dd-mm-yyyy hh:mm",
+      "default": "01-01-2026 12:00"
+    },
+    {
+      "type": "range",
+      "id": "cancel_time",
+      "label": "Cancel time for countdown",
+      "min": 0,
+      "max": 24,
+      "step": 1,
+      "unit": "h",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "cancel_minutes",
+      "label": "Cancel time for countdown (minutes)",
+      "min": 1,
+      "max": 60,
+      "step": 1,
+      "unit": "m",
+      "default": 29
+    },
+    {
+      "type": "select",
+      "id": "cancel_action",
+      "label": "Action after timer end",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Hide section",
+          "value": "hide"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "header",
+      "content": "Countdown - settings"
+    },
+    {
+      "type": "color_background",
+      "id": "countdown_background",
+      "label": "Countdown background color",
+      "default": "#313131"
+    },
+    {
+      "type": "color",
+      "id": "countdown_color",
+      "label": "Countdown color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color_background",
+      "id": "mobile_countdown_background",
+      "label": "Countdown background color (Mobile)",
+      "default": "#313131"
+    },
+    {
+      "type": "color",
+      "id": "mobile_countdown_color",
+      "label": "Countdown color (Mobile)",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Labels - settings"
+    },
+    {
+      "type": "color",
+      "id": "labels_color",
+      "label": "Labels color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "mobile_labels_color",
+      "label": "Labels color (Mobile)",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "TS Sticky Add"
+    }
+  ]
+}
+{% endschema %}

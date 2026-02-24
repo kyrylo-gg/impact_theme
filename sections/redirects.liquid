@@ -1,0 +1,47 @@
+{% if section.settings.enable and section.blocks.size > 0 %}
+  <script type="text/javascript">
+    {% for block in section.blocks %}
+      {% if block.settings.from != blank and block.settings.to != blank %}
+        {% if routes.root_url == '/' %}
+          {% assign from_path = block.settings.from | remove_first: '/' %}
+        {% else %}
+          {% assign from_path = block.settings.from %}
+        {% endif %}
+        {% assign from = routes.root_url | append: from_path %}
+        {% if request.path == from and request.design_mode == false %}
+          window.location.href = '{{ request.origin }}{% if routes.root_url != '/' %}{{ routes.root_url }}{% endif %}{{ block.settings.to }}';
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  </script>
+{% endif %}
+{% schema %}
+  {
+    "name": "Custom Redirects",
+    "settings": [
+        {
+          "id": "enable",
+          "type": "checkbox",
+          "label": "Enable Redirects"
+        }
+    ],
+    "blocks": [
+      {
+        "type": "redirect",
+        "name": "Redirect",
+        "settings": [
+          {
+            "id": "from",
+            "type": "text",
+            "label": "From"
+          },
+          {
+            "id": "to",
+            "type": "text",
+            "label": "To"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

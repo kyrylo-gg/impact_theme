@@ -1,0 +1,279 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "zp-product-header-content": {
+      "type": "product-header-content-zipifypages",
+      "settings": {}
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "vendor",
+          "disabled": true,
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "heading_tag": "h2"
+          }
+        },
+        "badges": {
+          "type": "badges",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_taxes_notice": false
+          }
+        },
+        "rating": {
+          "type": "rating",
+          "settings": {
+            "show_empty": false
+          }
+        },
+        "785c6c77-63d0-4a4e-bd4d-aeee2dd7c6ec": {
+          "type": "inventory",
+          "settings": {
+            "low_inventory_threshold": 9
+          }
+        },
+        "payment_terms": {
+          "type": "payment_terms",
+          "settings": {}
+        },
+        "separator": {
+          "type": "separator",
+          "disabled": true,
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "hide_sold_out_variants": false,
+            "stack_blocks": true,
+            "selector_mode": "block",
+            "color_mode": "color",
+            "size_chart_page": ""
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "disabled": true,
+          "settings": {}
+        },
+        "d02f7f4f-fa13-4bda-88c6-1bb41e4a4ed0": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": true,
+            "show_gift_card_recipient": true,
+            "atc_button_background": "",
+            "atc_button_text_color": "",
+            "payment_button_background": "",
+            "payment_button_text_color": ""
+          }
+        },
+        "image_EzXWQL": {
+          "type": "image",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/1.gif",
+            "alignment": "center",
+            "max_width": 500,
+            "url": "https://www.nasswear.com/pages/bf25"
+          }
+        },
+        "81a1a79f-3827-424f-9a39-74811ea8e4f4": {
+          "type": "product_variations",
+          "settings": {
+            "option_name": "See also:",
+            "option_value_metafield": "custom.variation_value",
+            "products": "{{ product.metafields.custom.variation_products.value }}",
+            "color_mode": "variant"
+          }
+        },
+        "0669bfe9-354c-4601-abcf-c38d6afaeb80": {
+          "type": "text",
+          "settings": {
+            "text": "<p>🔄 30 Day Returns<br/>🚚 $140+ Free US Shipping<br/>💃 Unique NassyStitch Technology<br/>💚 Eco-Friendly Packaging</p>"
+          }
+        },
+        "cba091ce-a0d9-465f-ab86-d40697549bf2": {
+          "type": "associated_products",
+          "settings": {
+            "title": "Complete the look",
+            "stack_products": true,
+            "products_count": 5,
+            "background": "",
+            "text_color": ""
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "collapse_content": true
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "badges",
+        "price",
+        "rating",
+        "785c6c77-63d0-4a4e-bd4d-aeee2dd7c6ec",
+        "payment_terms",
+        "separator",
+        "variant_picker",
+        "quantity_selector",
+        "d02f7f4f-fa13-4bda-88c6-1bb41e4a4ed0",
+        "image_EzXWQL",
+        "81a1a79f-3827-424f-9a39-74811ea8e4f4",
+        "0669bfe9-354c-4601-abcf-c38d6afaeb80",
+        "cba091ce-a0d9-465f-ab86-d40697549bf2",
+        "description"
+      ],
+      "settings": {
+        "full_width": true,
+        "show_fixed_add_to_cart": true,
+        "desktop_media_width": 55,
+        "desktop_media_layout": "carousel_thumbnails_left",
+        "mobile_media_size": "expanded",
+        "mobile_carousel_control": "floating_dots",
+        "enable_video_autoplay": true,
+        "enable_video_looping": true,
+        "enable_image_zoom": true,
+        "max_image_zoom_level": 3,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "input_background": "rgba(0,0,0,0)",
+        "input_text_color": ""
+      }
+    },
+    "rich_text_B46AnJ": {
+      "type": "rich-text",
+      "blocks": {
+        "richtext_GYE8hr": {
+          "type": "richtext",
+          "settings": {
+            "seo_optimization": true,
+            "content": "<h3>Customer Reviews</h3>"
+          }
+        }
+      },
+      "block_order": [
+        "richtext_GYE8hr"
+      ],
+      "custom_css": [
+        ".section-blends {padding: 20px;}"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "full_width": true,
+        "content_width": "small",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "1678891879e610efa5": {
+      "type": "apps",
+      "blocks": {
+        "2ff10f88-c4ef-45de-81d3-f1a3b191fb71": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        },
+        "cd0d0937-06f4-40ac-bcc9-e52ad1a728de": {
+          "type": "shopify://apps/judge-me-reviews/blocks/medals/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "2ff10f88-c4ef-45de-81d3-f1a3b191fb71",
+        "cd0d0937-06f4-40ac-bcc9-e52ad1a728de"
+      ],
+      "settings": {
+        "full_width": true,
+        "remove_vertical_spacing": false,
+        "remove_horizontal_spacing": false,
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "033c843a-f56c-4c1c-9e96-37189e8792f5": {
+      "type": "recently-viewed-products",
+      "settings": {
+        "full_width": true,
+        "products_count": 6,
+        "stack_products": false,
+        "show_progress_bar": false,
+        "products_per_row_mobile": "1",
+        "products_per_row_desktop": 3,
+        "subheading": "",
+        "title": "Recently viewed products",
+        "content": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "recommendations_count": 6,
+        "products": [],
+        "full_width": true,
+        "stack_products": false,
+        "show_progress_bar": false,
+        "products_per_row_mobile": "1",
+        "products_per_row_desktop": 3,
+        "subheading": "",
+        "title": "You may also like",
+        "content": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
+    },
+    "zp-product-footer-content": {
+      "type": "product-footer-content-zipifypages",
+      "settings": {}
+    }
+  },
+  "order": [
+    "zp-product-header-content",
+    "main",
+    "rich_text_B46AnJ",
+    "1678891879e610efa5",
+    "033c843a-f56c-4c1c-9e96-37189e8792f5",
+    "related-products",
+    "zp-product-footer-content"
+  ]
+}

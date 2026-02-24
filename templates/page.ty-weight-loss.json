@@ -1,0 +1,440 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "video_GJa7FG": {
+      "type": "video",
+      "blocks": {
+        "heading_cVx68d": {
+          "type": "heading",
+          "settings": {
+            "text": "Thanks, Babe! Your Booty Course Access Sent! 🍑",
+            "heading_tag": "h1",
+            "special_padding": ""
+          }
+        },
+        "richtext_czbpTU": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Check Email for Login — Start Your Twerk Course Today!</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_cVx68d",
+        "richtext_czbpTU"
+      ],
+      "custom_css": [
+        ".prose div p {margin-top: 0;}"
+      ],
+      "settings": {
+        "full_width": false,
+        "allow_transparent_header": false,
+        "autoplay": true,
+        "proportional": true,
+        "justify_content": false,
+        "video_size": "lg",
+        "video": "shopify://files/videos/Banner Landing NASS desktop (1).webm",
+        "mobile_video": "shopify://files/videos/Banner Landing NASS mobile (1) (1).webm",
+        "external_video_url": "",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "content_width": "80ch"
+      }
+    },
+    "slideshow_KNCdNj": {
+      "type": "slideshow",
+      "blocks": {
+        "image_CL7LmK": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Frame_588_1.png",
+            "mobile_image": "shopify://shop_images/Frame_595_2.png",
+            "content_max_width": 780,
+            "mobile_text_position": "place-self-center text-center",
+            "desktop_text_position": "sm:place-self-center sm:text-center",
+            "subheading": "",
+            "title": "",
+            "heading_tag": "h0",
+            "button_text": "",
+            "button_link": "",
+            "text_color": "#ffffff",
+            "button_background": "#ffffff",
+            "button_text_color": "#000000",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0,
+            "background": "",
+            "background_gradient": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_CL7LmK"
+      ],
+      "disabled": true,
+      "custom_css": [
+        "img {padding: 20px;}",
+        "@media screen and (min-width: 700px) {img {padding: 48px; }}"
+      ],
+      "name": "Slideshow",
+      "settings": {
+        "full_width": true,
+        "allow_transparent_header": false,
+        "image_size": "auto",
+        "controls_type": "dots",
+        "transition_type": "fade_with_text",
+        "autoplay": false,
+        "cycle_speed": 6,
+        "background": "#ffffff",
+        "background_gradient": ""
+      }
+    },
+    "rich_text_LmfyNQ": {
+      "type": "rich-text",
+      "blocks": {
+        "special_heading_G3PM7a": {
+          "type": "special_heading",
+          "settings": {
+            "text_1": "Mega Pack",
+            "linethrough_text": "497",
+            "text_2": "$107",
+            "heading_tag": "h1",
+            "text_color": "rgba(0,0,0,0)",
+            "gradient": ""
+          }
+        },
+        "richtext_4kKcAq": {
+          "type": "richtext",
+          "settings": {
+            "seo_optimization": true,
+            "content": "<h3>Twerk + Booty + Loss — Limited Time Offer. Available Only on This Page!</h3>"
+          }
+        }
+      },
+      "block_order": [
+        "special_heading_G3PM7a",
+        "richtext_4kKcAq"
+      ],
+      "custom_css": [
+        ".prose {max-width: 710px;}",
+        ".h1.hyphenate {margin-top: 0;}"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "full_width": false,
+        "content_width": "medium",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "ts_timer_banner_qBgfDj": {
+      "type": "ts-timer-banner",
+      "blocks": {
+        "steps_7zLAP9": {
+          "type": "steps",
+          "settings": {
+            "text_1": "<p><strong>01 </strong></p><p>LOGIN APP WITH EMAIL</p>",
+            "text_2": "<p><strong>02 </strong></p><p>TAP \"MY COURSE</p>",
+            "text_3": "<p><strong>03</strong> </p><p>FLEX!</p>"
+          }
+        },
+        "timer_4kgBXy": {
+          "type": "timer",
+          "settings": {
+            "timer_type": "cancel_time",
+            "cancel_date": "01-01-2026 12:00",
+            "cancel_time": 0,
+            "cancel_minutes": 15,
+            "cancel_action": "none",
+            "countdown_background": "linear-gradient(180deg, rgba(49, 49, 49, 1), rgba(28, 28, 28, 1) 100%)",
+            "countdown_color": "#ffffff",
+            "desk_countdown_font_size": 25,
+            "mob_countdown_font_size": 25,
+            "labels_color": "#1a1a1a",
+            "desk_labels_font_size": 13,
+            "mob_labels_font_size": 13,
+            "indent": 80,
+            "indent_mob": 48
+          }
+        }
+      },
+      "block_order": [
+        "steps_7zLAP9",
+        "timer_4kgBXy"
+      ],
+      "name": "TS Timer banner",
+      "settings": {
+        "enable_max_width": true,
+        "max_width": 1220,
+        "desk_padding": 0,
+        "mob_padding": 0,
+        "desk_radius": 16,
+        "mob_radius": 12,
+        "desk_content_height_type": "fixed",
+        "desk_content_height": 330,
+        "mob_content_height_type": "fixed",
+        "mob_content_height": 480,
+        "background_type": "color",
+        "desk_bg_color": "",
+        "mob_bg_color": "",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0
+      }
+    },
+    "rich_text_Gwb4g3": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_tH6bRe": {
+          "type": "heading",
+          "settings": {
+            "text": "Babes Fixed Barriers — Got Glow-Ups Like This!",
+            "heading_tag": "h1",
+            "text_color": "",
+            "gradient": ""
+          }
+        },
+        "richtext_bwbTy4": {
+          "type": "richtext",
+          "settings": {
+            "seo_optimization": true,
+            "content": "<p>See how short sessions/music beat time/boredom — stable tone without calorie stress.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_tH6bRe",
+        "richtext_bwbTy4"
+      ],
+      "disabled": true,
+      "name": "Rich text",
+      "settings": {
+        "full_width": true,
+        "content_width": "small",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "multi_column_Cf6Ae4": {
+      "type": "multi-column",
+      "blocks": {
+        "item_X6paj8": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Frame_596.webp",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_Y9hVDb": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Frame_593.webp",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "",
+            "link_url": "https://www.nasswear.com/cart/43153999986762:1",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_RkHKA3": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Frame_595.webp",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        }
+      },
+      "block_order": [
+        "item_X6paj8",
+        "item_Y9hVDb",
+        "item_RkHKA3"
+      ],
+      "custom_css": [
+        "@media (max-width: 999px) {.section-blends {display: none; }}"
+      ],
+      "name": "Multi-column",
+      "settings": {
+        "full_width": true,
+        "stack_on_mobile": false,
+        "gap": "medium",
+        "text_alignment": "start",
+        "subheading": "",
+        "title": "",
+        "content": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "multi_column_mhqHeL": {
+      "type": "multi-column",
+      "blocks": {
+        "item_kGWMHW": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Frame_593.webp",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "",
+            "link_url": "https://www.nasswear.com/cart/43153999986762:1",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_C9PNQP": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Frame_596.webp",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_R8hVFb": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Frame_595.webp",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        }
+      },
+      "block_order": [
+        "item_kGWMHW",
+        "item_C9PNQP",
+        "item_R8hVFb"
+      ],
+      "custom_css": [
+        "@media (min-width: 1000px) {.section-blends {display: none; }}"
+      ],
+      "name": "Multi-column",
+      "settings": {
+        "full_width": true,
+        "stack_on_mobile": false,
+        "gap": "medium",
+        "text_alignment": "start",
+        "subheading": "",
+        "title": "",
+        "content": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "ts_timer_banner_7zkaPc": {
+      "type": "ts-timer-banner",
+      "blocks": {
+        "button_bJdpBE": {
+          "type": "button",
+          "settings": {
+            "label": "BUY",
+            "special_text": "MEGA PACK $107 NOW",
+            "link": "https://www.nasswear.com/cart/43153999986762:1",
+            "button_background": "#000",
+            "button_color": "#ffffff",
+            "button_border_radius": 32,
+            "desk_font_size": 18,
+            "mob_font_size": 13,
+            "width_type": "fit",
+            "button_width": 160,
+            "indent": 16,
+            "indent_mob": 12,
+            "special_text_color": "#faff00"
+          }
+        },
+        "title_NbDdWT": {
+          "type": "title",
+          "settings": {
+            "label": "<a href=\"https://api.fitnass.live/deeplink/free-workout\" target=\"_blank\" title=\"https://api.fitnass.live/deeplink/free-workout\">Open App & Start Cource</a>",
+            "color": "#7d7d7d",
+            "desk_font_size": 21,
+            "mob_font_size": 19,
+            "indent": 18,
+            "indent_mob": 18
+          }
+        }
+      },
+      "block_order": [
+        "button_bJdpBE",
+        "title_NbDdWT"
+      ],
+      "custom_css": [
+        ".ts-timer-banner__button {height: 60px;}"
+      ],
+      "name": "TS Timer banner",
+      "settings": {
+        "enable_max_width": true,
+        "max_width": 1220,
+        "desk_padding": 0,
+        "mob_padding": 22,
+        "desk_radius": 16,
+        "mob_radius": 12,
+        "desk_content_height_type": "fixed",
+        "desk_content_height": 200,
+        "mob_content_height_type": "fixed",
+        "mob_content_height": 140,
+        "background_type": "color",
+        "desk_bg_color": "",
+        "mob_bg_color": "",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 30
+      }
+    }
+  },
+  "order": [
+    "video_GJa7FG",
+    "main",
+    "slideshow_KNCdNj",
+    "rich_text_LmfyNQ",
+    "ts_timer_banner_qBgfDj",
+    "rich_text_Gwb4g3",
+    "multi_column_Cf6Ae4",
+    "multi_column_mhqHeL",
+    "ts_timer_banner_7zkaPc"
+  ]
+}

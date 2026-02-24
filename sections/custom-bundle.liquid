@@ -1,0 +1,742 @@
+{{ 'custom-product-bundle.css' | asset_url | stylesheet_tag }}
+<style>
+  .ts-custom-badge {
+    font-family: 'Avenir';
+    border: 2px solid #804DA9;
+    padding: 4px 10px 2px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    margin: 0 20px 0 auto;
+    color: #000000;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  .ts-custom-badge.light {
+    color: #FFFFFF;
+  }
+
+  .ts-custom-media-badge {
+    font-family: "Avenir";
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: -0.02em;
+    padding: 10px;
+    border-radius: 100px;
+    background-color: #F8FF00;
+    text-align: center;
+    display: none;
+  }
+
+  .ts-custom-media-badge:empty,
+  .ts-custom-badge:empty {
+    display: none !important;
+  }
+
+  .bundle-image-2,
+  .bundle-image-3 {
+    display: none;
+  }
+</style>
+{% assign current_prod = product %}
+{% assign has_main_product = false %}
+{% if section.settings.main_product != nil %}
+  {% assign has_main_product = true %}
+  {% assign current_prod = section.settings.main_product %}
+{% endif %}
+<div id="CustomBundle-{{ section.id }}" data-custom-bundle="{% if section.settings.group_products_in_cart %}true{% endif %}" class="section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient">
+  <div class="section custom-product-bundle">
+    <div class="custom-rpdouct-bundle__head custom-product-bundle__tabs">
+      {% assign title_html = section.settings.title %}
+      {% assign title_html = title_html
+        | replace: '<h1>', '<p class="h1 hyphenate">'
+        | replace: '</h1>', '</p>'
+        | replace: '<h2>', '<p class="h2 hyphenate">'
+        | replace: '</h2>', '</p>'
+        | replace: '<h3>', '<p class="h3 hyphenate">'
+        | replace: '</h3>', '</p>'
+        | replace: '<h4>', '<p class="h4 hyphenate">'
+        | replace: '</h4>', '</p>'
+        | replace: '<h5>', '<p class="h5 hyphenate">'
+        | replace: '</h5>', '</p>'
+        | replace: '<h6>', '<p class="h6 hyphenate">'
+        | replace: '</h6>', '</p>'
+      %}
+      <div class="custom-product-bundle__title">{{ title_html }}</div>
+      <ul class="custom-product-bundle__tabs-nav list-unstyled"{% if section.settings.hide_variations %} style="display: none"{% endif %}>
+        {% for variant in current_prod.variants %}
+          <li><a href="#{{ variant.title | handle }}" class="no-smooth-scroll">{{ variant.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="custom-product-bundle__tabs">
+      <div class="custom-product-bundle__tabs-content">
+        {% for variant in current_prod.variants %}
+          <div id="{{ variant.title | handle }}">
+            {% if variant.title contains 'Bundle' %}
+              <div class="custom-product-bundle__wrapper">
+                <div class="custom-product-bundle__wrapper-inner">
+                  <div class="program-badges">
+                    {% if section.settings.free_extras_badge %}
+                      <div class="program-badge program-badge--extras">
+                        Free extras
+                      </div>
+                    {% endif %}
+                    <div class="program-badge program-badge--save">
+                      {{ section.settings.save_for_bundle }}
+                    </div>
+                  </div>
+                  <div class="custom-product-bundle__first-items">
+                    {% for block in section.blocks %}
+                      {% if block.type == 'extra_step' %}
+                        {% continue %}
+                      {% endif %}
+                      {% for prod in block.settings.products %}
+                        {% if forloop.first %}
+                          {% assign variant_titles = prod.variants | map: 'title' %}
+                          {% assign bundle_variant = prod.selected_or_first_available_variant %}
+                          {% assign program = false %}
+                          {% for t in variant_titles %}
+                            {% if t contains 'Bundle' %}
+                              {% assign program = true %}
+                              {% assign bundle_variant = prod.variants[forloop.index0] %}
+                            {% endif %}
+                          {% endfor %}
+                          <div class="custom-product-bundle__item">
+                            {% if prod.id == 7455682986058 %}
+                              <img src="https://cdn.shopify.com/s/files/1/0276/5658/5290/files/nb.jpg" width="525" height="525" alt="4 Bundles image" class="bundle-image-1" />
+                              <img src="https://cdn.shopify.com/s/files/1/0276/5658/5290/files/main_product_c.webp" width="525" height="525" alt="4 Bundles image" class="bundle-image-2" />
+                              <img src="https://cdn.shopify.com/s/files/1/0276/5658/5290/files/main_product_d.webp" width="525" height="525" alt="4 Bundles image" class="bundle-image-3" />
+                            {% else %}
+                              {{ prod.featured_image | image_url: width: 525, height: 525 | image_tag }}
+                            {% endif %}
+                            {% comment %}
+                            {% if program %}
+                              {% render 'price-list', product: bundle_variant %}
+                            {% else %}
+                              <price-list class="price-list"><sale-price class="text-on-sale">{{ 0 | money_without_trailing_zeros }}</sale-price><compare-at-price class="text-subdued line-through">{{ prod.price | money_without_trailing_zeros }}</compare-at-price></price-list>
+                            {% endif %}
+                            {% endcomment %}
+                          </div>
+                        {% endif %}
+                      {% endfor %}
+                    {% endfor %}
+                  </div>
+                  <div class="custom-product-bundle__content">
+                    <div class="custom-product-bundle__content-title">{{ current_prod.title }}</div>
+                    {% if section.settings.extras_description != blank %}
+                      <div class="custom-product-bundle__content-description">
+                        {{ section.settings.extras_description }}
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="custom-product-bundle__btn" data-bundle-popup="bundle-popup"{% unless has_main_product %} data-variant-id="{{ variant.id }}"{% endunless %}>
+                <span>{% if template.suffix == 'twerk-free_shorts' %}Choose your free shorts{% else %}Make your bundle{% endif %}</span>
+                {% render 'icon-bundle-arrow' %}
+              </button>
+            {% else %}
+              <div class="custom-product-bundle__wrapper">
+                <div class="program-image">
+                  {{ current_prod.featured_image | image_url: width: 525, height: 525 | image_tag }}
+                </div>
+                <div class="program-content">
+                  <div class="program-badges">
+                    <!-- <div class="program-badge program-badge--number">
+                      556.8K
+                    </div> -->
+                    <div class="program-badge program-badge--time">
+                      {{ section.settings.duration }}
+                    </div>
+                    <div class="program-badge program-badge--save">
+                      {{ section.settings.save_for_program }}
+                    </div>
+                  </div>
+                  <div class="program-image-inner">
+                    {{ current_prod.featured_image | image_url: width: 525, height: 525 | image_tag }}
+                  </div>
+                  <div class="program-info">
+                    <strong class="program-title">{{ current_prod.title }}</strong>
+                    {% render 'price-list' %}
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="custom-product-bundle__btn custom-product-bundle__btn--add" data-simple-add-to-cart="{{ variant.id }}">
+                <div class="custom-product-bundle__btn-inner add">
+                  <span>Add to cart</span>
+                  {% render 'icon-bundle-add' %}
+                </div>
+                <div class="custom-product-bundle__btn-inner added">
+                  <span>Added to cart</span>
+                  {% render 'icon-bundle-remove' %}
+                </div>
+              </button>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="popups">
+    <div class="lightbox" id="bundle-popup">
+      <div class="cpb-steps">
+        {% assign size_chart_modals = '' %}
+        {% for block in section.blocks %}
+          {% if block.type == 'extra_step' and section.settings.show_extra_steps == false %}
+            {% continue %}
+          {% endif %}
+          {% assign size_chart_modals_part = '' %}
+          {% capture 'size_chart_modals_part' %}
+            {% if block.settings.size_chart != blank %}
+              {% render 'size-chart', custom: block.id, size_chart_page: block.settings.size_chart, modal_parts: 'modal' %}
+            {% endif %}
+          {% endcapture %}
+          {% assign size_chart_modals = size_chart_modals | append: size_chart_modals_part %}
+          {% assign allowZero = false %}
+          {% if section.settings.allow_one_free == 'first' and forloop.index == 2 %}
+            {% assign allowZero = true %}
+          {% elsif section.settings.allow_one_free == 'second' and forloop.index == 3 %}
+            {% assign allowZero = true %}
+          {% elsif section.settings.allow_one_free == 'both' or section.settings.allow_one_free == true %}
+            {% if forloop.index <= 3 %}
+              {% assign allowZero = true %}
+            {% endif %}
+          {% endif %}
+          {% if section.settings.allow_two_free == 'first' and forloop.index == 2 %}
+            {% assign allowZero = true %}
+          {% elsif section.settings.allow_two_free == 'second' and forloop.index == 3 %}
+            {% assign allowZero = true %}
+          {% elsif section.settings.allow_two_free == 'both' or section.settings.allow_two_free == true %}
+            {% if forloop.index <= 3 %}
+              {% assign allowZero = true %}
+            {% endif %}
+          {% endif %}
+          <div class="cpb-step{% if block.settings.hide_when_extra %} hide-if-extra-enabled{% endif %}{% if block.type != 'programs_step' %}
+            {% if block.settings.first_is_free or allowZero %} zero-prices{% endif %}
+          {% endif %}{% if allowZero %} {% if section.settings.allow_one_free %}zero-prices--one{% else %}zero-prices--two{% endif %}{% endif %}
+          {% if block.type == 'extra_step' %} extra-step{% endif %}" data-step="{{ forloop.index }}"{% unless forloop.first %} hidden{% endunless %}>
+            <div class="cpb-step-header">
+              <div class="cpb-step-header-info">
+                <div class="cpb-step-header-counter">Step <span data-steps-index>{{ forloop.index }}</span> of <span data-steps-count>{{ forloop.length }}</span></div>
+                <div class="cpb-step-header-title">{{ block.settings.title }}</div>
+              </div>
+              <div class="cpb-step-header-actions">
+                <button type="button" class="cpb-step-prev" data-prev-step area-label="Back">
+                  {% render 'icon-bundle-back' %}
+                </button>
+                <button type="button" class="cpb-steps-close" data-popup-close="step" area-label="Close">
+                  {% render 'icon-bundle-close' %}
+                </button>
+              </div>
+            </div>
+            <div class="cpb-tags-and-settings">
+              {% if block.type == 'programs_step' %}
+                {% if block.settings.show_general_badge %}
+                  <div class="cpb-step-presnet">
+                    <span>🎁</span> <p>{{ block.settings.general_badge_text }}</p>
+                  </div>
+                {% endif %}
+              {% else %}
+                {% if block.settings.badge_text != blank %}
+                  <div class="cpb-step-tag">
+                    {% render 'icon-bundle-checkmark-small' %}
+                    <span>{{ block.settings.badge_text }}</span>
+                  </div>
+                {% endif %}
+              {% endif %}
+
+              {% if block.settings.enable_filters %}
+                <button type="button" class="cpb-settings" data-bundle-popup="step_settings_{{ block.id }}">
+                  {% render 'icon-bundle-settings' %}
+                </button>
+              {% endif %}
+            </div>
+            <div class="cpb__options-list{% if block.type == 'programs_step' %} cpb__options-list--programs{% endif %}">
+              {% assign item_num = 0 %}
+              {% assign step = forloop.index %}
+              {% for p in block.settings.products %}
+                {%- liquid
+                  assign discount = 0
+                  assign discount_label = ""
+                
+                  if p.compare_at_price > p.price and step != 3 and step != 4
+                    assign discount = p.compare_at_price | minus: p.price | times: 100 | divided_by: p.compare_at_price
+                    assign discount_label = discount | append: "% OFF"
+                  endif
+                -%}
+                {% if p.available %}
+                  {% assign item_num = item_num | plus: 1 %}
+                  <div class="cpb__item" data-bundle-item-id="{{ p.id }}" data-sizes='{ {%- for value in p.options_by_name['Size'].values %}"{{ value }}": {% if p.variants[forloop.index0].available %}true{% else %}false{% endif %}{% unless forloop.last %},{% endunless %}{%- endfor -%} }' data-bundle-product-item='{ {% for variant in p.variants %}"{{ variant.id | json }}": {{ variant.title | json }}{% unless forloop.last %},{% endunless %}{% endfor %} }'>
+                    <div class="cpb__item-visual">
+                      {% comment %} USE data-remove-holder FOR BADGE REMOVER {% endcomment %}
+                      <div class="program-badges" data-remove-holder>
+                        <div class="ts-custom-media-badge">{{ discount_label }}</div>
+                        {% if block.settings.badge_text != blank and block.type == 'programs_step' %}
+                          <div class="cpb-step-tag">
+                            {% render 'icon-bundle-checkmark-small' %}
+                            <span>{{ block.settings.badge_text }}</span>
+                          </div>
+                        {% endif %}
+                      </div>
+                      {% if p.id == 7455682986058 %}
+                        <img src="https://cdn.shopify.com/s/files/1/0276/5658/5290/files/nb.jpg" width="525" height="525" alt="4 Bundles image" class="bundle-image-1" />
+                        <img src="https://cdn.shopify.com/s/files/1/0276/5658/5290/files/main_product_c.webp" width="525" height="525" alt="4 Bundles image" class="bundle-image-2" />
+                        <img src="https://cdn.shopify.com/s/files/1/0276/5658/5290/files/main_product_d.webp" width="525" height="525" alt="4 Bundles image" class="bundle-image-3" />
+                      {% elsif block.type == 'programs_step' %}
+                        {{ p.featured_image| image_url: width: 525, height: 525 | image_tag }}
+                      {% else %}
+                        {{ p.featured_image| image_url: width: 420, height: 525 | image_tag }}
+                      {% endif %}
+                      <div class="cpb__item-title">
+                        {{ p.title }}
+                      </div>
+                    </div>
+                    {% if block.type == 'programs_step' and p.description != blank %}
+                      <div class="cpb__item-description-holder">
+                        <div class="cpb__item-description">
+                          {{ p.description | strip_html }}
+                          <button class="cpb__item-description-opener">
+                            <div class="cpb__item-description-opener-inner">
+                              {{ p.description }}
+                            </div>
+                          </button>
+                        </div>
+                      </div>
+                    {% endif %}
+                    <button type="button" 
+                      class="custom-product-bundle__btn custom-product-bundle__btn--add{% if current_prod.id == p.id and has_main_product == false %} custom-product-bundle__btn--included{% endif %}"
+                      {% if current_prod.id == p.id and has_main_product == false %} disabled{% endif %}
+                      {%- capture price_html -%}
+                        {% if item_num == 1 and block.settings.first_shown_is_free %}
+                          {{ 0 | money_without_trailing_zeros }}
+                        {% else %}
+                          {%- render 'price-list', product: p, without_data_price: true -%}
+                        {% endif %}
+                      {%- endcapture -%}
+                      {% capture p_variants %}
+                        {{ p.variants | json }}
+                      {% endcapture %}
+                      {% if block.type == 'programs_step' %}data-add-program="{{ p.selected_or_first_available_variant.id }}"{% else %}data-bundle-item='{"title": {{ p.title | json }},"price":{{ price_html | replace: "'", '"' | json }},"variants": {{ p_variants | replace: "'", "%quote;" | replace: '4" ', '4%quote; ' }}, "variants_qty": [{% for var in p.variants %}{ "id": {{ var.id }}, "min": {{ var.quantity_rule.min }}, "max": {% if var.quantity_rule.max != nil and var.quantity_rule.max != blank %}{{ var.quantity_rule.max }}{% else %}{{ var.inventory_quantity }}{% endif %} }{% unless forloop.last %},{% endunless %}{% endfor %}], "image": {{ p.featured_image | image_url: width: 525 | json }}}'{% endif %}
+                    >
+                      <div class="custom-product-bundle__btn-inner add">
+                        <span>Add for <span class="zero-price">{{ 0 | money_without_trailing_zeros }}</span><span class="real-price">{% if item_num == 1 and block.settings.first_shown_is_free %}{{ 0 | money_without_trailing_zeros }}{% else %}{% render 'price-list', product: p %}{% endif %}</span></span>
+                        <span class="ts-custom-badge">{{ discount_label }}</span>
+                        {% render 'icon-bundle-add' %}
+                      </div>
+                      <div class="custom-product-bundle__btn-inner added">
+                        <span>Added for <span class="zero-price">{{ 0 | money_without_trailing_zeros }}</span><span class="real-price">{% if item_num == 1 and block.settings.first_shown_is_free %}{{ 0 | money_without_trailing_zeros }}{% else %}{% render 'price-list', product: p %}{% endif %}</span></span>
+                        <span class="ts-custom-badge light">{{ discount_label }}</span>
+                        {% render 'icon-bundle-remove' %}
+                      </div>
+                      <div class="custom-product-bundle__btn-inner included">
+                        <span>Included</span>
+                        {% render 'icon-bundle-checkmark' %}
+                      </div>
+                    </button>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+                  
+            <div class="custom-product-bundle__errors hidden">errors</div>
+            <button class="custom-product-bundle__btn custom-product-bundle__btn--step" data-next-step{%- if block.settings.allow_next -%}="available"{%- endif -%}{% if block.type == 'programs_step' and has_main_product %} disabled{% endif %}{% if block.type != 'programs_step' and block.settings.allow_next == false %} disabled{% endif %} type="button">
+              <div class="custom-product-bundle__btn-inner next">
+                <span>Next</span>
+                {% render 'icon-bundle-arrow' %}
+              </div>
+              <div class="custom-product-bundle__btn-inner view-cart">
+                <span>View Cart</span>
+                {% render 'icon-bundle-arrow' %}
+              </div>
+            </button>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% for block in section.blocks %}
+      {% if block.type == 'extra_step' and section.settings.show_extra_steps == false %}
+        {% continue %}
+      {% endif %}
+      {% if block.settings.enable_filters %}
+        <div class="lightbox lightbox--bottom lightbox--item" id="step_settings_{{ block.id }}" data-filters="{{ forloop.index }}">
+          <div class="cpb-step cpb-step-filters">
+            <div class="cpb-step-header">
+              <div class="cpb-step-header-info">
+                <div class="cpb-step-header-title">{{ block.settings.filters_title }}</div>
+                {%- assign prod_items_count = 0 -%}
+                {%- for p in block.settings.products -%}
+                  {% assign prod_items_count = forloop.length %}
+                  {% break %}
+                {%- endfor -%}
+                <div class="cpb-step-header-counter"><span data-filtered-count>{{ prod_items_count }}</span> of {{ prod_items_count }}</div>
+              </div>
+              <div class="cpb-step-header-actions">
+                <button type="button" class="cpb-steps-close" data-popup-close area-label="Close">
+                  {% render 'icon-bundle-close' %}
+                </button>
+              </div>
+            </div>
+            <div class="custom-bundle-filters">
+              <div class="custom-bundle-filters__label">
+                Size
+              </div>
+              <div class="custom-bundle-filters__options">
+                {% assign sizes = '' | split: '|' %}
+                {%- for p in block.settings.products -%}
+                  {%- for value in p.options_by_name['Size'].values -%}
+                    {% unless sizes contains value %}
+                      <label><input type="radio" name="filter" data-filter value="{{ value }}"><span>{{ value }}</span></label>
+                      {% assign sizes = sizes | join: '|' | append: '|' | append: value | split: '|' %}
+                    {% endunless %}
+                  {%- endfor -%}
+                {%- endfor -%}
+              </div>
+            </div>
+              <div class="custom-bundle-filters__nav">
+                <button type="button" class="custom-bundle-filters__clear" data-filters-clear>Clear Filters</button>
+                {% if block.settings.size_chart != blank %}
+                  {% render 'size-chart', custom: block.id, size_chart_page: block.settings.size_chart, modal_parts: 'link' %}
+                {% endif %}
+              </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+    <div class="lightbox lightbox--item" id="bundle_item_settings">
+      <div class="custom-bundle-item">
+        <div class="custom-bundle-item__image">
+          <img src="" width="393" height="495" class="custom-bundle-item__img" alt="" data-bundle-image>
+          <a href="#" class="custom-bundle-item__close no-smooth-scroll" aria-label="Close">
+            {% render 'icon-bundle-close' %}
+          </a>
+        </div>
+        <div class="custom-bundle-item__content">
+          <span class="h3" data-bundle-title></span>
+          <div class="custom-bundle-item__options">
+            <div class="custom-bundle-item__variants" data-bundle-variants>
+            </div>
+            <div class="custom-bundle-item__size-charts" data-size-chart>
+              {% for block in section.blocks %}
+                {% if block.settings.size_chart != blank %}
+                  {% render 'size-chart', custom: block.id, stepId: forloop.index, size_chart_page: block.settings.size_chart, modal_parts: 'link' %}
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+          <div class="custom-bundle-item__qty">
+            <button type="button" class="custom-bundle-item__qty-action" data-bundle-qty-minus aria-label="Decrease Quantity">
+              {% render 'icon-bundle-minus' %}
+            </button>
+            <input type="number" class="custom-bundle-item__qty-input" min="1" max="10" value="1" data-bundle-item-qty aria-label="Quantity">
+            <button type="button" class="custom-bundle-item__qty-action" data-bundle-qty-plus aria-label="Increase Quantity">
+              {% render 'icon-bundle-plus' %}
+            </button>
+          </div>
+          <button class="custom-product-bundle__btn" data-bundle-add>
+            <span>
+              Add to bundle{% comment %} for <span data-bundle-item-price></span>{% endcomment %}
+            </span>
+            {% render 'icon-bundle-add' %}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{ size_chart_modals }}
+</div>
+<script src="{{ 'custom-product-bundle.js' | asset_url }}" defer></script>
+<script>
+  (function () {
+    const section = document.querySelector("#CustomBundle-{{ section.id }}");
+    const bundlePopup = section.querySelector("#bundle-popup");
+    const searchParams = new URLSearchParams(window.location.search);
+
+    if (searchParams.get("bundle") == "open") {
+      bundlePopup.classList.add("show");
+    }
+  })();
+</script>
+{% schema %}
+  {
+    "name": "Custom Bundle",
+    "enabled_on": {
+      "templates": ["product", "collection"]
+    },
+    "limit": 1,
+    "settings": [
+      {
+        "id": "title",
+        "type": "richtext",
+        "label": "Section Title"
+      },
+      {
+        "id": "main_product",
+        "type": "product",
+        "label": "Main Product",
+        "info": "Select a course or leave the field empty to use the current product (the template has been assigned for). If the main product has been selected it won't include any product into bundle by default."
+      },
+      {
+        "id": "free_extras_badge",
+        "type": "checkbox",
+        "label": "Free Extras Badge"
+      },
+      {
+        "id": "duration",
+        "type": "text",
+        "label": "Duration of the program",
+        "default": "1 Week"
+      },
+      {
+        "id": "save_for_program",
+        "type": "text",
+        "label": "Text for program badge",
+        "default": "Save 63%"
+      },
+      {
+        "id": "save_for_bundle",
+        "type": "text",
+        "label": "Text for bundle badge",
+        "default": "Save up to 85%"
+      },
+      {
+        "id": "extras_description",
+        "type": "richtext",
+        "label": "Extras Description"
+      },
+      {
+        "id": "group_products_in_cart",
+        "type": "checkbox",
+        "label": "Group Products in the cart",
+        "info": "Delete all products of the current bundle from the cart when the main product has been deleted"
+      },
+      {
+        "id": "show_extra_steps",
+        "type": "checkbox",
+        "label": "Extra steps",
+        "info": "Show extra steps when multiple programs chosen"
+      },
+      {
+        "id": "allow_one_free",
+        "type": "select",
+        "label": "Allow 1 free product",
+        "options": [
+          {"label": "Not allow", "value": "no"},
+          {"label": "1st Step", "value": "first"},
+          {"label": "2nd Step", "value": "second"},
+          {"label": "1st and 2nd Step", "value": "both"},
+        ],
+        "info": "Allow adding any one product for free from 2nd or/and 3ed steps. Direct step option setting called 'First product is free' will be ignored in this case.",
+        "default": "both"
+      },
+      {
+        "id": "allow_two_free",
+        "type": "select",
+        "label": "Allow 2 free products",
+        "options": [
+          {"label": "Not allow", "value": "no"},
+          {"label": "1st Step", "value": "first"},
+          {"label": "2nd Step", "value": "second"},
+          {"label": "1st and 2nd Step", "value": "both"},
+        ],
+        "info": "Allow adding any 2 products for free from 2nd or/and 3ed steps. Direct step option setting called 'First product is free' will be ignored in this case. This option takes precedence over the one above.",
+        "default": "both"
+      },
+      {
+        "id": "hide_variations",
+        "type": "checkbox",
+        "label": "Hide variation switchers",
+        "default": false
+      }
+    ],
+    "blocks": [
+      {
+        "name": "Step",
+        "type": "step",
+        "settings": [
+          {
+            "type": "header",
+            "content": "General Settings"
+          },
+          {
+            "id": "title",
+            "type": "text",
+            "label": "Title"
+          },
+          {
+            "id": "badge_text",
+            "type": "text",
+            "label": "Badge Text"
+          },
+          {
+            "id": "products",
+            "type": "product_list",
+            "label": "Products List"
+          },
+          {
+            "id": "first_is_free",
+            "type": "checkbox",
+            "label": "First added product is free",
+            "default": true,
+            "info": "Check this option if you have set up a discount which makes the first added product free"
+          },
+          {
+            "id": "first_shown_is_free",
+            "type": "checkbox",
+            "label": "First shown product is free",
+            "default": false,
+            "info": "Check this option if you need to display the first product in a list with zero price"
+          },
+          {
+            "id": "allow_next",
+            "type": "checkbox",
+            "label": "Allow to continue",
+            "info": "Make continue button always active without need to include some products to the bundle",
+            "default": false
+          },
+          {
+            "id": "hide_when_extra",
+            "type": "checkbox",
+            "label": "Use extra step instead",
+            "info": "Hide this step when Extra Steps are visible",
+            "default": false
+          },
+          {
+            "type": "header",
+            "content": "Product Filters"
+          },
+          {
+            "id": "enable_filters",
+            "type": "checkbox",
+            "label": "Enable Size Filters",
+            "default": false
+          },
+          {
+            "id": "filters_title",
+            "type": "text",
+            "label": "Filters Title",
+            "default": "Size Filter"
+          },
+          {
+            "type": "header",
+            "content": "Size Chart"
+          },
+          {
+            "id": "size_chart",
+            "type": "page",
+            "label": "Size Chart"
+          }
+        ]
+      },
+      {
+        "name": "Extra Step",
+        "type": "extra_step",
+        "settings": [
+          {
+            "type": "header",
+            "content": "General Settings"
+          },
+          {
+            "id": "title",
+            "type": "text",
+            "label": "Title"
+          },
+          {
+            "id": "badge_text",
+            "type": "text",
+            "label": "Badge Text"
+          },
+          {
+            "id": "products",
+            "type": "product_list",
+            "label": "Products List"
+          },
+          {
+            "id": "first_is_free",
+            "type": "checkbox",
+            "label": "First added product is free",
+            "default": true,
+            "info": "Check this option if you have set up a discount which makes the first added product free"
+          },
+          {
+            "id": "allow_next",
+            "type": "checkbox",
+            "label": "Allow to continue",
+            "info": "Make continue button always active without need to include some products to the bundle",
+            "default": false
+          },
+          {
+            "type": "header",
+            "content": "Product Filters"
+          },
+          {
+            "id": "enable_filters",
+            "type": "checkbox",
+            "label": "Enable Size Filters",
+            "default": false
+          },
+          {
+            "id": "filters_title",
+            "type": "text",
+            "label": "Filters Title",
+            "default": "Size Filter"
+          },
+          {
+            "type": "header",
+            "content": "Size Chart"
+          },
+          {
+            "id": "size_chart",
+            "type": "page",
+            "label": "Size Chart"
+          }
+        ]
+      },
+      {
+        "name": "Programs Step",
+        "type": "programs_step",
+        "limit": 1,
+        "settings": [
+          {
+            "id": "title",
+            "type": "text",
+            "label": "Title"
+          },
+          {
+            "id": "badge_text",
+            "type": "text",
+            "label": "Programs Badge Text"
+          },
+          {
+            "id": "show_general_badge",
+            "type": "checkbox",
+            "label": "Show the general badge of the step",
+            "default": true
+          },
+          {
+            "id": "general_badge_text",
+            "type": "text",
+            "label": "General badge text",
+            "default": "Add 1 more program to claim FREE shorts!"
+          },
+          {
+            "id": "products",
+            "type": "product_list",
+            "label": "Products List"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Custom Bundle"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+<!-- Start of Shoplift scripts -->
+{% render 'shoplift' %}
+<!-- End of Shoplift scripts -->
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {%- render 'header-scripts.zipifypages', renderctx: 'lsctn' -%}{{ content_for_header }}
+  </head>
+  <body>
+    {{ content_for_layout }} 
+    {%- render 'page-footer.zipifypages', renderctx: 'lsctn' -%}
+  </body>
+</html>

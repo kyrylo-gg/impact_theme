@@ -1,0 +1,401 @@
+{% assign main_product = product %}
+{% assign has_bundle_options = false %}
+{%- for variant in main_product.variants -%}
+  {%- if variant.available and variant.title contains 'Bundle' -%}
+    {% assign has_bundle_options = true %}
+  {%- endif -%}
+{%- endfor -%}
+{% if has_bundle_options %}
+  <script type="text/javascript">
+    (function() {
+      const productSelectors = document.querySelectorAll('[data-course-bundle=""]');
+      if (productSelectors.length) {
+        const stack = productSelectors[0].closest('.section-stack--outer');
+        const prevSection = stack.closest('.shopify-section').previousElementSibling;
+        
+        if (productSelectors.length) {
+          if ({% if main_product.selected_or_first_available_variant.title contains 'Bundle' %}'false'{% else %}'true'{% endif %} == 'true') {
+            if (prevSection.classList.contains('shopify-section--impact-text')) {
+              prevSection.classList.add('hidden');
+            }
+          }
+        }
+      }
+    })();
+  </script>
+{% endif %}
+<style>
+  {%- assign section_background = section.settings.background | default: settings.background -%}
+  {%- assign card_background = section.settings.product_card_background | default: settings.product_card_background -%}
+  {%- assign card_blends = false -%}
+
+  {%- unless section_background != 'rgba(0,0,0,0)' and card_background != 'rgba(0,0,0,0)' and section_background != card_background -%}
+    {%- assign card_blends = true -%}
+  {%- endunless -%}
+
+  #shopify-section-{{ section.id }} .product-list {
+    --product-list-gap: {% if section.settings.stack_products and section.settings.products_per_row_mobile == '2' %}{% if card_blends %}var(--product-list-row-gap){% endif %} var(--spacing-2){% else %}var(--product-list-row-gap) var(--product-list-column-gap){% endif %};
+    --product-list-items-per-row: {{ section.settings.products_per_row_mobile | times: 1 }};
+    --product-list-carousel-item-width: 74vw;
+    --product-list-grid: {% if section.settings.stack_products %}auto / repeat(var(--product-list-items-per-row), minmax(0, 1fr)){% else %}auto / auto-flow var(--product-list-carousel-item-width){% endif %};
+  }
+
+  [data-product-selector-fitlers] {
+    justify-content: safe center;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .product-list {
+      --product-list-gap: var(--product-list-row-gap) var(--product-list-column-gap);
+      --product-list-items-per-row: 2;
+      --product-list-carousel-item-width: 36vw;
+    }
+
+    [data-product-selector-fitlers] {
+      justify-content: flex-start;
+    }
+  }
+
+  @media screen and (min-width: 1000px) {
+    #shopify-section-{{ section.id }} .product-list {
+      --product-list-items-per-row: {{ section.settings.products_per_row_desktop }};
+      --product-list-carousel-item-width: calc(var(--container-inner-width) / {{ section.settings.products_per_row_desktop }} - (var(--product-list-column-gap) / {{ section.settings.products_per_row_desktop }} * {{ section.settings.products_per_row_desktop | minus: 1 }}));
+    }
+  }
+</style>
+
+{%- assign products = section.settings.products | default: section.settings.collection.products -%}
+
+{%- assign unique_sizes = '' | split: ',' -%}
+{%- for product in products limit: section.settings.products_count -%}
+  {%- for variant in product.variants -%}
+    {%- if variant.available -%}
+      {%- unless unique_sizes contains variant.option1 -%}
+        {%- assign unique_sizes = unique_sizes | join: ',' | append: ',' | append: variant.option1 | split: ',' -%}
+      {%- endunless -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endfor -%}
+{%- assign unique_sizes = unique_sizes | join: ',' | remove_first: ',' | split: ',' -%}
+
+
+{% unless has_bundle_options and main_product.selected_or_first_available_variant.title contains 'Bundle' %} {% assign classes = 'hidden' %}{% endunless %}
+<div {% render 'section-properties', class: classes %}>
+  <div class="section-stack section-stack--outer">
+    <a id="product-selector-scroll-to" href="#{% if section.settings.scrollto != blank %}{{ section.settings.scrollto }}{% else %}product-selector-{{ section.id }}{% endif %}"></a>
+    <div id="product-selector-{{ section.id }}" class="section-stack">
+      {%- assign link_url = section.settings.link_url | default: section.settings.collection.url -%}
+      {%- render 'section-header', subheading: section.settings.subheading, heading: section.settings.title, heading_color: section.settings.heading_color, heading_gradient: section.settings.heading_gradient, content: section.settings.content, link_text: section.settings.link_text, link_url: link_url -%}
+      
+      {% if section.settings.size_filter %}
+        
+        {%- if section.settings.size_chart_page != blank -%}
+            {%- capture drawer_id -%}size-chart-{{ section.id }}-product-selector{%- endcapture -%}
+
+            <button type="button" class="text-lg text-subdued sm:hidden" aria-controls="{{ drawer_id | escape }}" aria-expanded="false">
+              <span class="link">{{ 'product.general.size_chart' | t }}</span>
+            </button>
+        {% endif %}
+        <div data-product-selector-fitlers class="variant-picker__option-values wrap gap-2">
+          {%- for value in unique_sizes -%}
+            {%- render 'swatch', type: 'block', value: value, selected: false, name: 'size-filter', form: 'fake' -%}
+          {%- endfor -%}
+        </div>
+        {%- if section.settings.size_chart_page != blank -%}
+            {%- capture drawer_id -%}size-chart-{{ section.id }}-product-selector{%- endcapture -%}
+
+            <button type="button" class="text-sm text-subdued hidden sm:block" aria-controls="{{ drawer_id | escape }}" aria-expanded="false">
+              <span class="link">{{ 'product.general.size_chart' | t }}</span>
+            </button>
+
+            <x-drawer id="{{ drawer_id }}" class="drawer drawer--lg product-popup-modal--size-chart">
+              <div style="overflow:hidden;">
+                <div class="cart-drawer__top">
+                  <div class="h-stack items-center justify-between">
+                    <div class="h-stack gap-2 sm:gap-2.5">
+                      <p class="h5">FIND YOUR SIZE</p>
+                    </div>
+            
+                    <button type="button" is="close-button" class="drawer__close-icon">
+                      <span class="sr-only">{{ 'general.accessibility.close' | t }}</span>
+                      {%- render 'icon' with 'close' -%}
+                    </button>
+                  </div>
+            
+                </div>
+            
+                <div class="product-popup-modal__content">
+                    {% if section.settings.size_chart_page.metafields.custom.size_calculator != blank %}
+                      <div class="size-calculator">
+            <!--             <h4 class="size-calculator__title">FIND YOUR SIZE</h4> -->
+                        <form action="#" data-size-calculate>
+                          <input type="checkbox" name="units" id="units" onchange="activeSizeUnits(this)">
+                          <label for="units">
+                            <ul class="size-calculator__units-label">
+                              <li><span>IN</span></li>
+                              <li><span>CM</span></li>
+                            </ul>
+                          </label>
+                          {% assign fields_data = section.settings.size_chart_page.metafields.custom.size_calculator | newline_to_br | replace: "\n", '' | strip_newlines | split: '<br />' | compact %}
+                          <div class="size-calculator__holder">
+                            <span class="h4">CALCULATE YOUR SIZE</span>
+                            <p style="font-size: 0.85em"><small>Select IN or CM above and input your measurements below. Tap "Calculate" to get your size. <a class="link" target="_blank" href="/pages/sizing">See Sizing to learn more</a></small></p>
+                            <div class="size-calculator__fields">
+                              {% for d in fields_data %}
+                                {% if d != blank %}
+                                  <label>
+                                    <span>{{ d | split: ':' | first | strip }}</span>
+                                    <input type="text" name="{{ d | split: ':' | first | handle }}">
+                                  </label>
+                                {% endif %}
+                              {% endfor %}
+                              <div id="active-size-units" style="margin-right:-35px;"><div style="opacity: 0">Units:</div><span>IN</span></div>
+                            </div>
+                            <button type="submit" class="button">CALCULATE</button>
+                            <div class="calculator-success hidden">
+                              <span class="h3">WE THINK YOU'RE AN</span>
+                              <span class="h3 calculated-size"></span>
+                            </div>
+                            <div class="calculator-error hidden">
+                              <p>Double-check selected unit of measurement; otherwise, we do not carry your size yet.</p>
+                            </div>
+                          </div>
+                          <script type="text/json">
+                            {
+                            {% for d in fields_data %}
+                              {% assign parts = d | split: ':' %}
+                              {{ parts.first | handle | json }}: {{ parts.last | split: '|' | json }}{% unless forloop.last %},{% endunless %}
+                            {% endfor %}
+                            }
+                          </script>
+                        </form>
+                      </div>
+                    {% endif %}
+                    {{ section.settings.size_chart_page.content | replace: '<p class="p1">&nbsp;</p>', '' }}
+                </div>
+              </div>
+            
+              <script>
+                function activeSizeUnits(el) {
+                  let activeSizeUnits = document.getElementById('active-size-units');
+                
+                  if (el.checked === true) {
+                    activeSizeUnits.querySelector('span').innerText = 'CM';
+                  } else {
+                    activeSizeUnits.querySelector('span').innerText = 'IN';
+                  }
+                }
+              </script>
+
+            </x-drawer>
+          {%- endif -%}
+      {% endif %}
+
+      <div class="{% if section.settings.show_progress_bar %}scrollable-with-controls{% else %}floating-controls-container{% endif %}">
+        {%- assign scroll_area_id = 'scroll-area-' | append: section.id -%}
+    
+        <scroll-carousel selector="product-card" id="{{ scroll_area_id }}" class="scroll-area bleed {% if section.settings.products_count > section.settings.products_per_row_desktop %}is-scrollable{% endif %}">
+          <reveal-items selector=".product-list > *">
+            {% if section.settings.checkboxes_mode %}<div>{% else %}<product-list class="product-list">{% endif %}
+    
+              {%- for product in products limit: section.settings.products_count -%}
+                {% if product.handle contains "docapp-free-gift-" %}{% continue %}{% endif %}
+                {% if section.settings.checkboxes_mode %}
+                  <label class="button button--xl product-selector__button hidden">
+                    <input id="product_selector_{{ product.handle }}" type="checkbox" checked class="checkbox" value="{{ product.selected_or_first_available_variant.id }}" data-course-bundle="not-calculated" data-price="{{ product.selected_or_first_available_variant.price }}">
+                    <span class="toggler-off">{{ 'product.general.add_to_cart_short' | t }} {{ product.title }}</span>
+                    <span class="toggler-on">{{ product.title }} Added</span>
+                  </label>
+                {% else %}
+                  {%- render 'product-card-selector', product: product, stacked: section.settings.stack_products, background: section.settings.product_card_background, text_color: section.settings.product_card_text_color, show_badges: true, show_quick_buy: false -%}
+                {% endif %}
+              {%- endfor -%}
+            {% if section.settings.checkboxes_mode %}</div>{% else %}</product-list>{% endif %}
+          </reveal-items>
+        </scroll-carousel>
+    
+        {%- if section.settings.stack_products == false -%}
+          {%- if section.settings.show_progress_bar -%}
+            {%- assign default_progress = section.settings.products_per_row_desktop | times: 1.0 | divided_by: section.settings.products_count -%}
+            {%- render 'scrollbar', observes: scroll_area_id, default_progress: default_progress, show_buttons: true -%}
+          {%- else -%}
+            <button is="prev-button" class="circle-button circle-button--lg circle-button--fill border group" aria-controls="{{ scroll_area_id }}" disabled>
+              <span class="sr-only">{{ 'general.accessibility.previous' | t }}</span>
+              <span class="animated-arrow animated-arrow--reverse"></span>
+            </button>
+    
+            <button is="next-button" class="circle-button circle-button--lg circle-button--fill border group" aria-controls="{{ scroll_area_id }}">
+              <span class="sr-only">{{ 'general.accessibility.next' | t }}</span>
+              <span class="animated-arrow"></span>
+            </button>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Product Selector",
+    "settings": [
+        {
+          "type": "text",
+          "id": "scrollto",
+          "label": "ScrollTo ID"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "product_list",
+          "id": "products",
+          "label": "Products",
+          "info": "Replaces collection when selected."
+        },
+        {
+          "type": "checkbox",
+          "id": "checkboxes_mode",
+          "label": "Checkboxes mode",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "size_filter",
+          "label": "Enable filter by size",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "stack_products",
+          "label": "Stack products",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_progress_bar",
+          "label": "Show carousel progress bar",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "products_count",
+          "min": 2,
+          "max": 50,
+          "label": "Products to show",
+          "default": 6
+        },
+        {
+          "type": "select",
+          "id": "products_per_row_mobile",
+          "label": "Products per row (mobile)",
+          "options": [
+            {
+              "value": "1",
+              "label": "1"
+            },
+            {
+              "value": "2",
+              "label": "2"
+            }
+          ],
+          "default": "2"
+        },
+        {
+          "type": "range",
+          "id": "products_per_row_desktop",
+          "min": 1,
+          "max": 5,
+          "label": "Products per row (desktop)",
+          "default": 3
+        },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Select a product"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link URL",
+          "info": "Default to collection URL."
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link text",
+          "default": "View all"
+        },
+        {
+          "type": "page",
+          "id": "size_chart_page",
+          "label": "Size chart page",
+          "info": "Feature a page for size option"
+        },
+        {
+          "type": "header",
+          "content": "Colors",
+          "info": "Gradient replaces solid colors when set."
+        },
+        {
+          "type": "color",
+          "id": "background",
+          "label": "Background"
+        },
+        {
+          "type": "color_background",
+          "id": "background_gradient",
+          "label": "Background gradient"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text"
+        },
+        {
+          "type": "color",
+          "id": "heading_color",
+          "label": "Heading color"
+        },
+        {
+          "type": "color_background",
+          "id": "heading_gradient",
+          "label": "Heading gradient"
+        },
+        {
+          "type": "color",
+          "id": "product_card_background",
+          "label": "Product card background"
+        },
+        {
+          "type": "color",
+          "id": "product_card_text_color",
+          "label": "Product card text"
+        }
+      ],
+    "presets": [
+      {
+        "name": "Product Selector"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

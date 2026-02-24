@@ -1,0 +1,284 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "zp-product-header-content": {
+      "type": "product-header-content-zipifypages",
+      "settings": {}
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "vendor",
+          "disabled": true,
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "heading_tag": "h2"
+          }
+        },
+        "badges": {
+          "type": "badges",
+          "disabled": true,
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_taxes_notice": false
+          }
+        },
+        "rating": {
+          "type": "rating",
+          "disabled": true,
+          "settings": {
+            "show_empty": false
+          }
+        },
+        "785c6c77-63d0-4a4e-bd4d-aeee2dd7c6ec": {
+          "type": "inventory",
+          "disabled": true,
+          "settings": {
+            "low_inventory_threshold": 9
+          }
+        },
+        "payment_terms": {
+          "type": "payment_terms",
+          "disabled": true,
+          "settings": {}
+        },
+        "separator": {
+          "type": "separator",
+          "disabled": true,
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "hide_sold_out_variants": false,
+            "stack_blocks": true,
+            "selector_mode": "block",
+            "color_mode": "color",
+            "size_chart_page": ""
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "disabled": true,
+          "settings": {}
+        },
+        "d02f7f4f-fa13-4bda-88c6-1bb41e4a4ed0": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": true,
+            "show_gift_card_recipient": true,
+            "atc_button_background": "",
+            "atc_button_text_color": "",
+            "payment_button_background": "",
+            "payment_button_text_color": ""
+          }
+        },
+        "image_EzXWQL": {
+          "type": "image",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/Desk_1.png",
+            "alignment": "center",
+            "max_width": 500,
+            "url": "https://www.nasswear.com/a/collections/bundle/shorts-bundle"
+          }
+        },
+        "81a1a79f-3827-424f-9a39-74811ea8e4f4": {
+          "type": "product_variations",
+          "settings": {
+            "option_name": "See also:",
+            "option_value_metafield": "custom.variation_value",
+            "products": "{{ product.metafields.custom.variation_products.value }}",
+            "color_mode": "variant"
+          }
+        },
+        "0669bfe9-354c-4601-abcf-c38d6afaeb80": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p>Free shipping on orders over $125 USD</p>"
+          }
+        },
+        "cba091ce-a0d9-465f-ab86-d40697549bf2": {
+          "type": "associated_products",
+          "settings": {
+            "title": "Complete the look",
+            "stack_products": true,
+            "products_count": 5,
+            "background": "",
+            "text_color": ""
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "collapse_content": false
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "badges",
+        "price",
+        "rating",
+        "785c6c77-63d0-4a4e-bd4d-aeee2dd7c6ec",
+        "payment_terms",
+        "separator",
+        "variant_picker",
+        "quantity_selector",
+        "d02f7f4f-fa13-4bda-88c6-1bb41e4a4ed0",
+        "image_EzXWQL",
+        "81a1a79f-3827-424f-9a39-74811ea8e4f4",
+        "0669bfe9-354c-4601-abcf-c38d6afaeb80",
+        "cba091ce-a0d9-465f-ab86-d40697549bf2",
+        "description"
+      ],
+      "settings": {
+        "full_width": true,
+        "show_fixed_add_to_cart": true,
+        "desktop_media_width": 55,
+        "desktop_media_layout": "carousel_thumbnails_left",
+        "mobile_media_size": "expanded",
+        "mobile_carousel_control": "floating_dots",
+        "enable_video_autoplay": false,
+        "enable_video_looping": true,
+        "enable_image_zoom": true,
+        "max_image_zoom_level": 3,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "input_background": "rgba(0,0,0,0)",
+        "input_text_color": ""
+      }
+    },
+    "1678891879e610efa5": {
+      "type": "apps",
+      "blocks": {
+        "2ff10f88-c4ef-45de-81d3-f1a3b191fb71": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "cd0d0937-06f4-40ac-bcc9-e52ad1a728de": {
+          "type": "shopify://apps/judge-me-reviews/blocks/medals/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "2ff10f88-c4ef-45de-81d3-f1a3b191fb71",
+        "cd0d0937-06f4-40ac-bcc9-e52ad1a728de"
+      ],
+      "disabled": true,
+      "settings": {
+        "full_width": true,
+        "remove_vertical_spacing": false,
+        "remove_horizontal_spacing": false,
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "033c843a-f56c-4c1c-9e96-37189e8792f5": {
+      "type": "recently-viewed-products",
+      "disabled": true,
+      "settings": {
+        "full_width": true,
+        "products_count": 6,
+        "stack_products": false,
+        "show_progress_bar": false,
+        "products_per_row_mobile": "1",
+        "products_per_row_desktop": 3,
+        "subheading": "",
+        "title": "Recently viewed products",
+        "content": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "recommendations_count": 6,
+        "products": [],
+        "full_width": true,
+        "stack_products": false,
+        "show_progress_bar": false,
+        "products_per_row_mobile": "1",
+        "products_per_row_desktop": 3,
+        "subheading": "",
+        "title": "You may also like",
+        "content": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
+    },
+    "zp-product-footer-content": {
+      "type": "product-footer-content-zipifypages",
+      "disabled": true,
+      "settings": {}
+    },
+    "image_with_text_overlay_94fgPh": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading_cTxDV8": {
+          "type": "heading",
+          "settings": {
+            "text": "HAVE A GREAT TWERKOUT AHEAD!",
+            "heading_tag": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "heading_cTxDV8"
+      ],
+      "settings": {
+        "full_width": false,
+        "allow_transparent_header": false,
+        "enable_parallax": false,
+        "image_size": "auto",
+        "image": "shopify://shop_images/AZER-MEDIA-151_2_1.jpg",
+        "mobile_image": "shopify://shop_images/Slice_13.jpg",
+        "mobile_text_position": "place-self-center text-center",
+        "desktop_text_position": "sm:place-self-center sm:text-center",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 30
+      }
+    }
+  },
+  "order": [
+    "zp-product-header-content",
+    "main",
+    "1678891879e610efa5",
+    "033c843a-f56c-4c1c-9e96-37189e8792f5",
+    "related-products",
+    "zp-product-footer-content",
+    "image_with_text_overlay_94fgPh"
+  ]
+}

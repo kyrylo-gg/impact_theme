@@ -1,0 +1,542 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "image_with_text_overlay_XW8pzC": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading_f4b949": {
+          "type": "heading",
+          "settings": {
+            "text": "HAPPY  HALLOWEN, BABE!",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_zUtEPp": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>It’s time to prepare for Halloween! Have you thought about your look? If not, we’ve got some ideas to inspire you! Make it bright, exciting, and catchy – just like you!</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_f4b949",
+        "richtext_zUtEPp"
+      ],
+      "settings": {
+        "full_width": true,
+        "allow_transparent_header": false,
+        "enable_parallax": false,
+        "image_size": "auto",
+        "image": "shopify://shop_images/Banner_Desk_1.jpg",
+        "mobile_image": "shopify://shop_images/Banner_story_1.jpg",
+        "mobile_text_position": "place-self-center text-center",
+        "desktop_text_position": "sm:place-self-center sm:text-center",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 30
+      }
+    },
+    "impact_text_dJCd8T": {
+      "type": "impact-text",
+      "blocks": {
+        "item_yDteCE": {
+          "type": "item",
+          "settings": {
+            "title": "FREE",
+            "subheading": "TWERK PROGRAM FOR $100+ ORDERS",
+            "content": "",
+            "button_text": "",
+            "button_url": "",
+            "animate_impact_text": false,
+            "animate_impact_text_duration": 2
+          }
+        }
+      },
+      "block_order": [
+        "item_yDteCE"
+      ],
+      "settings": {
+        "full_width": true,
+        "stack_mobile": true,
+        "text_alignment": "center",
+        "impact_text_style": "fill",
+        "text_divider": "none",
+        "impact_text_size_ratio": 1,
+        "background": "",
+        "background_gradient": "",
+        "heading_text_color": "",
+        "heading_gradient": "",
+        "text_color": "",
+        "button_background": "",
+        "button_text_color": ""
+      }
+    },
+    "featured_product_zQknCU": {
+      "type": "featured-product",
+      "blocks": {
+        "vendor_8mDe6f": {
+          "type": "vendor",
+          "disabled": true,
+          "settings": {
+          }
+        },
+        "title_WT7T8f": {
+          "type": "title",
+          "settings": {
+            "heading_tag": "h2"
+          }
+        },
+        "badges_P4LrYT": {
+          "type": "badges",
+          "settings": {
+          }
+        },
+        "price_k6NMYd": {
+          "type": "price",
+          "settings": {
+            "show_taxes_notice": false
+          }
+        },
+        "rating_jLqgQn": {
+          "type": "rating",
+          "disabled": true,
+          "settings": {
+            "show_empty": false
+          }
+        },
+        "separator_6egWQx": {
+          "type": "separator",
+          "disabled": true,
+          "settings": {
+          }
+        },
+        "description_DMgUJn": {
+          "type": "description",
+          "settings": {
+            "collapse_content": false
+          }
+        },
+        "variant_picker_aNaft7": {
+          "type": "variant_picker",
+          "disabled": true,
+          "settings": {
+            "hide_sold_out_variants": false,
+            "stack_blocks": true,
+            "selector_mode": "block",
+            "color_mode": "color",
+            "size_chart_page": ""
+          }
+        },
+        "quantity_selector_Vt69qq": {
+          "type": "quantity_selector",
+          "disabled": true,
+          "settings": {
+          }
+        },
+        "buy_buttons_6UCYPB": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": true,
+            "show_gift_card_recipient": true,
+            "atc_button_background": "",
+            "atc_button_text_color": "",
+            "payment_button_background": "",
+            "payment_button_text_color": ""
+          }
+        },
+        "pickup_availability_GHTzXW": {
+          "type": "pickup_availability",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "vendor_8mDe6f",
+        "title_WT7T8f",
+        "badges_P4LrYT",
+        "price_k6NMYd",
+        "rating_jLqgQn",
+        "separator_6egWQx",
+        "description_DMgUJn",
+        "variant_picker_aNaft7",
+        "quantity_selector_Vt69qq",
+        "buy_buttons_6UCYPB",
+        "pickup_availability_GHTzXW"
+      ],
+      "settings": {
+        "full_width": true,
+        "product": "twerk-program-1",
+        "desktop_media_width": 55,
+        "desktop_media_layout": "carousel_thumbnails_left",
+        "mobile_media_size": "expanded",
+        "mobile_carousel_control": "floating_dots",
+        "enable_video_autoplay": true,
+        "enable_video_looping": false,
+        "enable_image_zoom": true,
+        "max_image_zoom_level": 3,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "input_background": "rgba(0,0,0,0)",
+        "input_text_color": ""
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "content_width": "80ch"
+      }
+    },
+    "featured_collection_eP9aaW": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "shorts",
+        "products": [
+
+        ],
+        "full_width": true,
+        "stack_products": true,
+        "show_progress_bar": false,
+        "products_count": 8,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "subheading": "",
+        "title": "SHORTS",
+        "content": "",
+        "link_url": "",
+        "link_text": "View all",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
+    },
+    "impact_text_XJG9DX": {
+      "type": "impact-text",
+      "blocks": {
+        "item_qEjAYj": {
+          "type": "item",
+          "settings": {
+            "title": "2+1",
+            "subheading": "FREE TOP WITH TWO SHORTS",
+            "content": "",
+            "button_text": "",
+            "button_url": "",
+            "animate_impact_text": false,
+            "animate_impact_text_duration": 2
+          }
+        }
+      },
+      "block_order": [
+        "item_qEjAYj"
+      ],
+      "settings": {
+        "full_width": true,
+        "stack_mobile": true,
+        "text_alignment": "center",
+        "impact_text_style": "fill",
+        "text_divider": "none",
+        "impact_text_size_ratio": 1,
+        "background": "",
+        "background_gradient": "",
+        "heading_text_color": "",
+        "heading_gradient": "",
+        "text_color": "",
+        "button_background": "",
+        "button_text_color": ""
+      }
+    },
+    "featured_product_FAjfVr": {
+      "type": "featured-product",
+      "blocks": {
+        "vendor_ARyP9T": {
+          "type": "vendor",
+          "disabled": true,
+          "settings": {
+          }
+        },
+        "title_FJctbL": {
+          "type": "title",
+          "settings": {
+            "heading_tag": "h2"
+          }
+        },
+        "badges_69mazx": {
+          "type": "badges",
+          "settings": {
+          }
+        },
+        "price_LKTHt9": {
+          "type": "price",
+          "settings": {
+            "show_taxes_notice": false
+          }
+        },
+        "rating_3TirAU": {
+          "type": "rating",
+          "settings": {
+            "show_empty": false
+          }
+        },
+        "separator_p4QWLQ": {
+          "type": "separator",
+          "disabled": true,
+          "settings": {
+          }
+        },
+        "description_QVhmnF": {
+          "type": "description",
+          "settings": {
+            "collapse_content": false
+          }
+        },
+        "variant_picker_jW8PdP": {
+          "type": "variant_picker",
+          "settings": {
+            "hide_sold_out_variants": true,
+            "stack_blocks": true,
+            "selector_mode": "block",
+            "color_mode": "color",
+            "size_chart_page": "muse-top"
+          }
+        },
+        "quantity_selector_mKmNEn": {
+          "type": "quantity_selector",
+          "disabled": true,
+          "settings": {
+          }
+        },
+        "buy_buttons_itBAnT": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": true,
+            "show_gift_card_recipient": true,
+            "atc_button_background": "",
+            "atc_button_text_color": "",
+            "payment_button_background": "",
+            "payment_button_text_color": ""
+          }
+        },
+        "pickup_availability_Vceq8n": {
+          "type": "pickup_availability",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "vendor_ARyP9T",
+        "title_FJctbL",
+        "badges_69mazx",
+        "price_LKTHt9",
+        "rating_3TirAU",
+        "separator_p4QWLQ",
+        "description_QVhmnF",
+        "variant_picker_jW8PdP",
+        "quantity_selector_mKmNEn",
+        "buy_buttons_itBAnT",
+        "pickup_availability_Vceq8n"
+      ],
+      "settings": {
+        "full_width": true,
+        "product": "navy-top",
+        "desktop_media_width": 55,
+        "desktop_media_layout": "carousel_thumbnails_left",
+        "mobile_media_size": "expanded",
+        "mobile_carousel_control": "floating_dots",
+        "enable_video_autoplay": true,
+        "enable_video_looping": false,
+        "enable_image_zoom": true,
+        "max_image_zoom_level": 3,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "input_background": "rgba(0,0,0,0)",
+        "input_text_color": ""
+      }
+    },
+    "featured_collection_gTKfR8": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "crop-t-shirt",
+        "products": [
+
+        ],
+        "full_width": true,
+        "stack_products": true,
+        "show_progress_bar": false,
+        "products_count": 8,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "subheading": "",
+        "title": "TOPS & HOODIES",
+        "content": "",
+        "link_url": "",
+        "link_text": "View all",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
+    },
+    "featured_collection_Q8tVqM": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "sale-1",
+        "products": [
+
+        ],
+        "full_width": true,
+        "stack_products": true,
+        "show_progress_bar": false,
+        "products_count": 8,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "subheading": "",
+        "title": "SALE",
+        "content": "",
+        "link_url": "",
+        "link_text": "View all",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
+    },
+    "1729773225c791f69c": {
+      "type": "apps",
+      "blocks": {
+        "tevello_courses_communities_tevello_public_NNjWAX": {
+          "type": "shopify://apps/tevello-courses-communities/blocks/tevello-public/6af98c2b-ad4a-443c-872d-d116e2eac923",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "tevello_courses_communities_tevello_public_NNjWAX"
+      ],
+      "settings": {
+        "full_width": true,
+        "remove_vertical_spacing": false,
+        "remove_horizontal_spacing": false,
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "1729773211a4314e6a": {
+      "type": "apps",
+      "blocks": {
+        "instafeed_app_block_rkjTh6": {
+          "type": "shopify://apps/instafeed/blocks/app-block/c447db20-095d-4a10-9725-b5977662c9d5",
+          "settings": {
+            "title": "",
+            "title_color": "",
+            "alignment": "center",
+            "background_color": "",
+            "html_area": ""
+          }
+        }
+      },
+      "block_order": [
+        "instafeed_app_block_rkjTh6"
+      ],
+      "settings": {
+        "full_width": true,
+        "remove_vertical_spacing": false,
+        "remove_horizontal_spacing": false,
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "17297732525590e5c4": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_all_reviews_page_qeaCTV": {
+          "type": "shopify://apps/judge-me-reviews/blocks/all_reviews_page/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_all_reviews_page_qeaCTV"
+      ],
+      "settings": {
+        "full_width": true,
+        "remove_vertical_spacing": false,
+        "remove_horizontal_spacing": false,
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "image_with_text_overlay_w4rqDW": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading_7GttdP": {
+          "type": "heading",
+          "settings": {
+            "text": "BE TERRIBLY IRRESISTEBLE!",
+            "heading_tag": "h1"
+          }
+        },
+        "subheading_eRbiLL": {
+          "type": "subheading",
+          "settings": {
+            "text": "HAPPY HALLOWEEN!"
+          }
+        }
+      },
+      "block_order": [
+        "heading_7GttdP",
+        "subheading_eRbiLL"
+      ],
+      "settings": {
+        "full_width": true,
+        "allow_transparent_header": false,
+        "enable_parallax": false,
+        "image_size": "auto",
+        "image": "shopify://shop_images/Banner_Desk_1.jpg",
+        "mobile_image": "shopify://shop_images/image_70_1.jpg",
+        "mobile_text_position": "place-self-center text-center",
+        "desktop_text_position": "sm:place-self-center sm:text-center",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 30
+      }
+    }
+  },
+  "order": [
+    "image_with_text_overlay_XW8pzC",
+    "impact_text_dJCd8T",
+    "featured_product_zQknCU",
+    "main",
+    "featured_collection_eP9aaW",
+    "impact_text_XJG9DX",
+    "featured_product_FAjfVr",
+    "featured_collection_gTKfR8",
+    "1729773225c791f69c",
+    "1729773211a4314e6a",
+    "17297732525590e5c4",
+    "featured_collection_Q8tVqM",
+    "image_with_text_overlay_w4rqDW"
+  ]
+}

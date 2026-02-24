@@ -1,0 +1,1159 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "zp-product-header-content": {
+      "type": "product-header-content-zipifypages",
+      "settings": {}
+    },
+    "multi_column_xwxMPr": {
+      "type": "multi-column",
+      "blocks": {
+        "item_7z9Jz3": {
+          "type": "item",
+          "settings": {
+            "video": "shopify://files/videos/Lesson 1 demo (optimized 2).webm",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_B7cCrc": {
+          "type": "item",
+          "settings": {
+            "video": "shopify://files/videos/Lesson demo 2 (optimized) (online-video-cutter.com).webm",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_zXD9aL": {
+          "type": "item",
+          "settings": {
+            "video": "shopify://files/videos/lesson 3 demo (optimized) (online-video-cutter.com).webm",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_FxhEcU": {
+          "type": "item",
+          "settings": {
+            "video": "shopify://files/videos/Lesson 4 demo (1) (online-video-cutter.com).webm",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_bUxEQT": {
+          "type": "item",
+          "settings": {
+            "video": "shopify://files/videos/Lesson demo 5 (1) (online-video-cutter.com).webm",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_bXTU8J": {
+          "type": "item",
+          "settings": {
+            "video": "shopify://files/videos/Demo 6.webm",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_LUfxhw": {
+          "type": "item",
+          "settings": {
+            "video": "shopify://files/videos/Demo 7.webm",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_R4XRyJ": {
+          "type": "item",
+          "settings": {
+            "video": "shopify://files/videos/Lesson bonus demo (optimized).webm",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        }
+      },
+      "block_order": [
+        "item_7z9Jz3",
+        "item_B7cCrc",
+        "item_zXD9aL",
+        "item_FxhEcU",
+        "item_bUxEQT",
+        "item_bXTU8J",
+        "item_LUfxhw",
+        "item_R4XRyJ"
+      ],
+      "disabled": true,
+      "settings": {
+        "full_width": true,
+        "stack_on_mobile": false,
+        "gap": "small",
+        "text_alignment": "start",
+        "subheading": "",
+        "title": "",
+        "content": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "rating": {
+          "type": "rating",
+          "settings": {
+            "show_empty": false
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "heading_tag": "h2"
+          }
+        },
+        "text_dhDThT": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p>Learn by the Queen of Twerk</p>"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_taxes_notice": false
+          }
+        },
+        "payment_terms": {
+          "type": "payment_terms",
+          "disabled": true,
+          "settings": {}
+        },
+        "separator": {
+          "type": "separator",
+          "disabled": true,
+          "settings": {}
+        },
+        "81a1a79f-3827-424f-9a39-74811ea8e4f4": {
+          "type": "product_variations",
+          "disabled": true,
+          "settings": {
+            "option_name": "See also:",
+            "option_value_metafield": "custom.variation_value",
+            "products": "{{ product.metafields.custom.variation_products.value }}",
+            "color_mode": "variant"
+          }
+        },
+        "68c5db7e-d73d-444c-b20a-dbe760291af9": {
+          "type": "text",
+          "settings": {
+            "text": "<p>💃🏻 SUITABLE FOR EVERYONE<br/>✍️ 8 Lessons + 8 Combo Lessons<br/>🍑 Made by Queen of Twerk – Nastya Nass<br/>🤩 Lifetime access</p>"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "hide_sold_out_variants": false,
+            "stack_blocks": true,
+            "selector_mode": "dropdown",
+            "color_mode": "color",
+            "size_chart_page": ""
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": false,
+            "show_gift_card_recipient": true,
+            "atc_button_background": "",
+            "atc_button_text_color": "",
+            "payment_button_background": "",
+            "payment_button_text_color": ""
+          }
+        },
+        "description": {
+          "type": "description",
+          "disabled": true,
+          "settings": {
+            "collapse_content": true
+          }
+        },
+        "text_qiHDtK": {
+          "type": "text",
+          "settings": {
+            "text": "<p>✅Moneyback Guarantee<br/>✅Lifetime Access<br/>✅App Available</p>"
+          }
+        },
+        "judge_me_reviews_review_snippet_widget_zBtKHR": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_snippet_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "text_heMR9d": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p><em>“After having a baby I lost a bit of my shape, but after completing this program I got my body back. My husband looks at me with that spark again, and honestly my mood feels like a teenage girl’s haha.” </em></p><p><strong>Anna K., 36</strong></p>"
+          }
+        },
+        "liquid_eTWgwP": {
+          "type": "liquid",
+          "settings": {
+            "liquid": ""
+          }
+        }
+      },
+      "block_order": [
+        "rating",
+        "title",
+        "text_dhDThT",
+        "price",
+        "payment_terms",
+        "separator",
+        "81a1a79f-3827-424f-9a39-74811ea8e4f4",
+        "68c5db7e-d73d-444c-b20a-dbe760291af9",
+        "variant_picker",
+        "buy_buttons",
+        "description",
+        "text_qiHDtK",
+        "judge_me_reviews_review_snippet_widget_zBtKHR",
+        "text_heMR9d",
+        "liquid_eTWgwP"
+      ],
+      "settings": {
+        "full_width": true,
+        "show_fixed_add_to_cart": true,
+        "desktop_media_width": 35,
+        "desktop_media_layout": "carousel_thumbnails_left",
+        "mobile_media_size": "expanded",
+        "mobile_carousel_control": "floating_dots",
+        "enable_video_autoplay": true,
+        "enable_video_looping": true,
+        "enable_image_zoom": false,
+        "max_image_zoom_level": 3,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "input_background": "rgba(0,0,0,0)",
+        "input_text_color": ""
+      }
+    },
+    "e72b3e83-78ae-427f-a359-430414bcfda5": {
+      "type": "video",
+      "blocks": {
+        "template--14907164164170__e72b3e83-78ae-427f-a359-430414bcfda5-heading-1": {
+          "type": "heading",
+          "settings": {
+            "text": "LEARN TWERK IN SEVEN DAYS",
+            "heading_tag": "h1"
+          }
+        },
+        "500838c0-8ded-4626-92e1-12d9b0a54ab6": {
+          "type": "button",
+          "settings": {
+            "style": "outline",
+            "size": "lg",
+            "text": "Sign up",
+            "url": "#shopify-section-template--18282714497098__main",
+            "background": "",
+            "text_color": "#ffffff"
+          }
+        },
+        "207b5d77-26c1-498f-b02a-9f5a7ec2fe2c": {
+          "type": "subheading",
+          "settings": {
+            "text": "Yes, exactly. It is that easy with Twerk Program"
+          }
+        }
+      },
+      "block_order": [
+        "template--14907164164170__e72b3e83-78ae-427f-a359-430414bcfda5-heading-1",
+        "500838c0-8ded-4626-92e1-12d9b0a54ab6",
+        "207b5d77-26c1-498f-b02a-9f5a7ec2fe2c"
+      ],
+      "settings": {
+        "full_width": false,
+        "allow_transparent_header": false,
+        "autoplay": true,
+        "proportional": true,
+        "justify_content": false,
+        "video_size": "lg",
+        "video": "shopify://files/videos/835f2ea1406143ceb48a6ac2e1b0c019.webm",
+        "mobile_video": "shopify://files/videos/Banner_1 mobile_1_e7624eb4-76f9-43cd-9e88-9e075dc2f77a.webm",
+        "external_video_url": "",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0
+      }
+    },
+    "f1d4a317-3e40-4d0b-af41-d7b58676c8ac": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "c6301acf-f4fc-4af0-9791-1131429c0323": {
+          "type": "heading",
+          "settings": {
+            "text": "No matter of skill, shape or age",
+            "heading_tag": "h6"
+          }
+        },
+        "template--14907164164170__f1d4a317-3e40-4d0b-af41-d7b58676c8ac-heading-1": {
+          "type": "heading",
+          "settings": {
+            "text": "THE PROGRAM IS SUITABLE FOR EVERYONE",
+            "heading_tag": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "c6301acf-f4fc-4af0-9791-1131429c0323",
+        "template--14907164164170__f1d4a317-3e40-4d0b-af41-d7b58676c8ac-heading-1"
+      ],
+      "settings": {
+        "full_width": false,
+        "allow_transparent_header": false,
+        "enable_parallax": false,
+        "image_size": "auto",
+        "image": "shopify://shop_images/AZER-MEDIA-151_2_1.jpg",
+        "mobile_image": "shopify://shop_images/Slice_13.jpg",
+        "mobile_text_position": "place-self-center text-center",
+        "desktop_text_position": "sm:place-self-center sm:text-center",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 15
+      }
+    },
+    "image_with_text_overlay_cfTfnM": {
+      "type": "image-with-text-overlay",
+      "name": "Image with text overlay",
+      "settings": {
+        "full_width": true,
+        "allow_transparent_header": false,
+        "enable_parallax": false,
+        "image_size": "auto",
+        "image": "shopify://shop_images/Courses_1.png",
+        "mobile_image": "shopify://shop_images/Courses.png",
+        "mobile_text_position": "place-self-center text-center",
+        "desktop_text_position": "sm:place-self-center sm:text-center",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0
+      }
+    },
+    "a41fd81d-f6dc-4eff-ba95-ee5e2dc41b38": {
+      "type": "video",
+      "blocks": {
+        "template--14907164164170__a41fd81d-f6dc-4eff-ba95-ee5e2dc41b38-heading-1": {
+          "type": "heading",
+          "settings": {
+            "text": "Master your twerk peformance anywhere",
+            "heading_tag": "h6"
+          }
+        },
+        "e06625ed-7166-4cbe-b1c0-7732f4977782": {
+          "type": "heading",
+          "settings": {
+            "text": "VIEW IT ONLINE ON ANY SCREEN",
+            "heading_tag": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "template--14907164164170__a41fd81d-f6dc-4eff-ba95-ee5e2dc41b38-heading-1",
+        "e06625ed-7166-4cbe-b1c0-7732f4977782"
+      ],
+      "disabled": true,
+      "settings": {
+        "full_width": false,
+        "allow_transparent_header": false,
+        "autoplay": true,
+        "proportional": true,
+        "justify_content": false,
+        "video_size": "lg",
+        "video": "shopify://files/videos/5465186961780126207.webm",
+        "mobile_video": "shopify://files/videos/device trimed.webm",
+        "external_video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 15
+      }
+    },
+    "6a17e412-5781-464f-a3ba-e01d3b965529": {
+      "type": "rich-text",
+      "blocks": {
+        "template--14907164164170__6a17e412-5781-464f-a3ba-e01d3b965529-heading-1": {
+          "type": "heading",
+          "settings": {
+            "text": "",
+            "heading_tag": "h1",
+            "text_color": "",
+            "gradient": ""
+          }
+        },
+        "template--14907164164170__6a17e412-5781-464f-a3ba-e01d3b965529-richtext-1": {
+          "type": "richtext",
+          "settings": {
+            "content": "<h2><strong>LEARN TWERK<br/>FROM A WORLD CLASS DANCER</strong></h2>"
+          }
+        },
+        "d3ed3992-3582-40bb-8c2c-37e5e4cb737d": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Instagram <em>@nastya_nass_</em> 7M Followers</p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--14907164164170__6a17e412-5781-464f-a3ba-e01d3b965529-heading-1",
+        "template--14907164164170__6a17e412-5781-464f-a3ba-e01d3b965529-richtext-1",
+        "d3ed3992-3582-40bb-8c2c-37e5e4cb737d"
+      ],
+      "custom_css": [
+        "em {font-style: normal; background: none; background-image: url(\"https://cdn.shopify.com/s/files/1/0276/5658/5290/files/Instagram-Verified-Badge-PNG-Transparent-Image_430x.png?v=1694440020\"); padding-right: 18px; background-size: 16px; background-repeat: no-repeat; background-position: right;}"
+      ],
+      "settings": {
+        "full_width": true,
+        "content_width": "small",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "40de124a-5f36-40b7-9aa1-559609539663": {
+      "type": "video",
+      "blocks": {
+        "template--14907164164170__40de124a-5f36-40b7-9aa1-559609539663-play-1": {
+          "type": "play",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "template--14907164164170__40de124a-5f36-40b7-9aa1-559609539663-play-1"
+      ],
+      "settings": {
+        "full_width": false,
+        "allow_transparent_header": false,
+        "autoplay": false,
+        "proportional": true,
+        "justify_content": false,
+        "video_size": "fill",
+        "video": "shopify://files/videos/NASS_talk desktop_1.webm",
+        "mobile_video": "shopify://files/videos/NASS_talk mob_2.webm",
+        "external_video_url": "",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0
+      }
+    },
+    "6d1345cc-4552-409d-9456-77c424f1e5fb": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "template--14907164164170__6d1345cc-4552-409d-9456-77c424f1e5fb-subheading-1": {
+          "type": "subheading",
+          "settings": {
+            "text": "From a ballet dancer to the Twerk Queen"
+          }
+        },
+        "template--14907164164170__6d1345cc-4552-409d-9456-77c424f1e5fb-heading-1": {
+          "type": "heading",
+          "settings": {
+            "text": "World-famous dancer Nastya Nass will guide you through the basics of twerking",
+            "heading_tag": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "template--14907164164170__6d1345cc-4552-409d-9456-77c424f1e5fb-subheading-1",
+        "template--14907164164170__6d1345cc-4552-409d-9456-77c424f1e5fb-heading-1"
+      ],
+      "disabled": true,
+      "settings": {
+        "full_width": false,
+        "allow_transparent_header": false,
+        "enable_parallax": false,
+        "image_size": "auto",
+        "image": "shopify://shop_images/Screenshot_2023-09-06_170712.png",
+        "mobile_image": "shopify://shop_images/Screenshot_2023-09-06_172624.png",
+        "mobile_text_position": "place-self-center text-center",
+        "desktop_text_position": "sm:place-self-center sm:text-center",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 30
+      }
+    },
+    "f4057b1a-6497-4d2e-9664-42d3ebd1d9b3": {
+      "type": "rich-text",
+      "blocks": {
+        "6e2f8aab-74ae-47fd-a14d-4f1b45a930b3": {
+          "type": "button",
+          "settings": {
+            "style": "fill",
+            "size": "xl",
+            "text": "Apply now!",
+            "url": "#shopify-section-template--18282714497098__main",
+            "background": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "6e2f8aab-74ae-47fd-a14d-4f1b45a930b3"
+      ],
+      "settings": {
+        "full_width": true,
+        "content_width": "small",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "5f0be783-db76-4fcb-a8fe-268b5cff16d3": {
+      "type": "multi-column",
+      "blocks": {
+        "template--14946156675146__5f0be783-db76-4fcb-a8fe-268b5cff16d3-item-1": {
+          "type": "item",
+          "settings": {
+            "video": "shopify://files/videos/Lesson 1 demo (optimized 2).webm",
+            "column_size": "3",
+            "title": "Lesson One",
+            "heading_tag": "h4",
+            "content": "<p>In the first lesson you will learn how to make your booty jiggle. Master your booty jingle routine by completing combo lesson.</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "template--14946156675146__5f0be783-db76-4fcb-a8fe-268b5cff16d3-item-2": {
+          "type": "item",
+          "settings": {
+            "video": "shopify://files/videos/Lesson demo 2 (optimized) (online-video-cutter.com).webm",
+            "column_size": "3",
+            "title": "Lesson Two",
+            "heading_tag": "h4",
+            "content": "<p>This lesson is dedicated to hip tick, rich whine, puppy tail and  box moves. Put these moves together in combo lesson!</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "template--14946156675146__5f0be783-db76-4fcb-a8fe-268b5cff16d3-item-3": {
+          "type": "item",
+          "settings": {
+            "video": "shopify://files/videos/lesson 3 demo (optimized) (online-video-cutter.com).webm",
+            "column_size": "3",
+            "title": "Lesson Three",
+            "heading_tag": "h4",
+            "content": "<p>Learn how to whine your hips, whine move variations and whine combos.</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "dae5c4ed-33f7-48ac-bfc7-7e1fce3d54eb": {
+          "type": "item",
+          "settings": {
+            "video": "shopify://files/videos/Lesson 4 demo (1) (online-video-cutter.com).webm",
+            "column_size": "3",
+            "title": "Lesson Four",
+            "heading_tag": "h4",
+            "content": "<p>Nastya will teach you how to activate your glute muscles,  bruk down and booty pop moves and their variations. </p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "5f3f15ac-e0c4-411d-b8cb-beb4f4e6b45a": {
+          "type": "item",
+          "settings": {
+            "video": "shopify://files/videos/Lesson demo 5 (1) (online-video-cutter.com).webm",
+            "column_size": "3",
+            "title": "Lesson Five",
+            "heading_tag": "h4",
+            "content": "<p>Challenging lesson in which you will  twerk on your toes and practice twerking in new position.</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "534a2fbb-2cdb-405b-be56-5de2b38081bd": {
+          "type": "item",
+          "settings": {
+            "video": "shopify://files/videos/Demo 6.webm",
+            "column_size": "3",
+            "title": "Lesson Six",
+            "heading_tag": "h4",
+            "content": "<p>In this part you will learn how to twerk in dog position and some combo moves in this stance.</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "c7bc17bc-80e2-4552-82ad-ab38d4667302": {
+          "type": "item",
+          "settings": {
+            "video": "shopify://files/videos/Demo 7.webm",
+            "column_size": "3",
+            "title": "Lesson Seven",
+            "heading_tag": "h4",
+            "content": "<p>Final part is dedicated to the booty isolation twerking an some combo moves on the ground. </p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "8781ceff-3596-4178-af6e-2d1ca3780a7a": {
+          "type": "item",
+          "settings": {
+            "video": "shopify://files/videos/Lesson bonus demo (optimized).webm",
+            "column_size": "3",
+            "title": "Bonus!",
+            "heading_tag": "h4",
+            "content": "<p>In the bonus lesson Nastya will teach you how to clap your booty while twerking!</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        }
+      },
+      "block_order": [
+        "template--14946156675146__5f0be783-db76-4fcb-a8fe-268b5cff16d3-item-1",
+        "template--14946156675146__5f0be783-db76-4fcb-a8fe-268b5cff16d3-item-2",
+        "template--14946156675146__5f0be783-db76-4fcb-a8fe-268b5cff16d3-item-3",
+        "dae5c4ed-33f7-48ac-bfc7-7e1fce3d54eb",
+        "5f3f15ac-e0c4-411d-b8cb-beb4f4e6b45a",
+        "534a2fbb-2cdb-405b-be56-5de2b38081bd",
+        "c7bc17bc-80e2-4552-82ad-ab38d4667302",
+        "8781ceff-3596-4178-af6e-2d1ca3780a7a"
+      ],
+      "settings": {
+        "full_width": true,
+        "stack_on_mobile": false,
+        "gap": "medium",
+        "text_alignment": "start",
+        "subheading": "",
+        "title": "What does the course include?",
+        "content": "<p>Below you will find detailed description of each lesson:</p>",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "custom_bundle_fwHcJU": {
+      "type": "custom-bundle",
+      "blocks": {
+        "programs_step_LpNbpi": {
+          "type": "programs_step",
+          "settings": {
+            "title": "Select programs",
+            "badge_text": "Lifetime access",
+            "show_general_badge": true,
+            "general_badge_text": "Add 1 more program and select 2 free fitness products next!",
+            "products": [
+              "twerk-program-1",
+              "booty-programs-2",
+              "beginners-gym-program",
+              "advanced-gym-program",
+              "weight-loss-program-11"
+            ]
+          }
+        },
+        "extra_step_XQdgty": {
+          "type": "extra_step",
+          "settings": {
+            "title": "Choose Your Free Leggings",
+            "badge_text": "",
+            "products": [
+              "essential-leggings-black-2",
+              "essential-leggings-blue-1",
+              "essential-leggings-khaki-1",
+              "essential-leggings-pink-1",
+              "muse-leggings-black",
+              "muse-leggings-blue",
+              "muse-leggings-fuchsia"
+            ],
+            "first_is_free": true,
+            "allow_next": true,
+            "enable_filters": true,
+            "filters_title": "Size Filter",
+            "size_chart": "muse-leggings"
+          }
+        },
+        "extra_step_VNxhfp": {
+          "type": "extra_step",
+          "settings": {
+            "title": "Choose Your Free Top",
+            "badge_text": "",
+            "products": [
+              "essential-top-black",
+              "blue-essential-top",
+              "khaki-essential-top",
+              "pink-essential-top",
+              "purple-essential-top",
+              "muse-top-black",
+              "muse-top-blue",
+              "muse-top-fuchsia"
+            ],
+            "first_is_free": true,
+            "allow_next": true,
+            "enable_filters": true,
+            "filters_title": "Size Filter",
+            "size_chart": "muse-top"
+          }
+        },
+        "step_dc6qpt": {
+          "type": "step",
+          "settings": {
+            "title": "Check out our latest arrivals!",
+            "badge_text": "20% off exclusively in this bundle",
+            "products": [
+              "black-noir",
+              "cosmic-blue",
+              "gray-paint",
+              "blush-breeze-1",
+              "blush-breeze",
+              "safari-heat"
+            ],
+            "first_is_free": false,
+            "first_shown_is_free": false,
+            "allow_next": true,
+            "hide_when_extra": false,
+            "enable_filters": true,
+            "filters_title": "Size Filter",
+            "size_chart": "sizing-chart-new"
+          }
+        },
+        "step_RQNyqp": {
+          "type": "step",
+          "settings": {
+            "title": "Choose Your Nass Shorts",
+            "badge_text": "20% off exclusively in this bundle",
+            "products": [
+              "petal-splash",
+              "shadow-ninja",
+              "pinky-zebra",
+              "neon-drift",
+              "cosmic-nebula",
+              "terra-speckle",
+              "mystic-zebra",
+              "sunny-ani",
+              "perfect-black",
+              "solid-black"
+            ],
+            "first_is_free": false,
+            "first_shown_is_free": false,
+            "allow_next": true,
+            "hide_when_extra": false,
+            "enable_filters": true,
+            "filters_title": "Shorts Filter",
+            "size_chart": "sizing-chart-biflex"
+          }
+        },
+        "step_4TeBqm": {
+          "type": "step",
+          "settings": {
+            "title": "Select Top",
+            "badge_text": "Сomplete your outfit with 50% off",
+            "products": [
+              "top-navy",
+              "top-pink",
+              "top-white"
+            ],
+            "first_is_free": false,
+            "first_shown_is_free": false,
+            "allow_next": true,
+            "hide_when_extra": false,
+            "enable_filters": true,
+            "filters_title": "Size Filter",
+            "size_chart": "tank-top"
+          }
+        },
+        "step_hdVqLW": {
+          "type": "step",
+          "disabled": true,
+          "settings": {
+            "title": "Select Equipment",
+            "badge_text": "Add equipment for your booty workouts",
+            "products": [
+              "gym-pack-2",
+              "ankle-strap-2",
+              "rubber-booty-band-set-1",
+              "stretching-band-set-1",
+              "gym-gloves"
+            ],
+            "first_is_free": false,
+            "first_shown_is_free": false,
+            "allow_next": true,
+            "hide_when_extra": false,
+            "enable_filters": false,
+            "filters_title": "Size Filter",
+            "size_chart": ""
+          }
+        }
+      },
+      "block_order": [
+        "programs_step_LpNbpi",
+        "extra_step_XQdgty",
+        "extra_step_VNxhfp",
+        "step_dc6qpt",
+        "step_RQNyqp",
+        "step_4TeBqm",
+        "step_hdVqLW"
+      ],
+      "disabled": true,
+      "settings": {
+        "title": "<p>Get everything you need <br/>to start, in one bundle!</p>",
+        "main_product": "",
+        "free_extras_badge": true,
+        "duration": "1 Week",
+        "save_for_program": "Save 63%",
+        "save_for_bundle": "Save up to 63%",
+        "extras_description": "<p>+ courseS <br/>+ Shorts<br/>+ EQIPMENT</p>",
+        "group_products_in_cart": true,
+        "show_extra_steps": true,
+        "allow_two_free": "both",
+        "hide_variations": false
+      }
+    },
+    "c6126f5a-97df-4f0f-acf8-68e170f4dc81": {
+      "type": "impact-text",
+      "settings": {
+        "full_width": true,
+        "stack_mobile": true,
+        "text_alignment": "center",
+        "impact_text_style": "fill",
+        "text_divider": "none",
+        "impact_text_size_ratio": 1,
+        "background": "",
+        "background_gradient": "",
+        "heading_text_color": "",
+        "heading_gradient": "",
+        "text_color": "",
+        "button_background": "",
+        "button_text_color": ""
+      }
+    },
+    "4fc8f1a7-2ac1-41a3-80dc-02e94a393b25": {
+      "type": "rich-text",
+      "blocks": {
+        "template--14907164164170__4fc8f1a7-2ac1-41a3-80dc-02e94a393b25-richtext-1": {
+          "type": "richtext",
+          "settings": {
+            "content": "<h2><strong>OUR CUSTOMERS SAY...</strong></h2>"
+          }
+        }
+      },
+      "block_order": [
+        "template--14907164164170__4fc8f1a7-2ac1-41a3-80dc-02e94a393b25-richtext-1"
+      ],
+      "settings": {
+        "full_width": true,
+        "content_width": "small",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "1712565019552d8154": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_MqTpfj": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_MqTpfj"
+      ],
+      "settings": {
+        "full_width": true,
+        "remove_vertical_spacing": false,
+        "remove_horizontal_spacing": false,
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "multi_column_HLKVdX": {
+      "type": "multi-column",
+      "blocks": {
+        "item_LJbPeM": {
+          "type": "item",
+          "settings": {
+            "video": "shopify://files/videos/Progress 4x3 .webm",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_cgjggq": {
+          "type": "item",
+          "settings": {
+            "video": "shopify://files/videos/profress 3_4.webm",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_dXmRLR": {
+          "type": "item",
+          "settings": {
+            "video": "shopify://files/videos/progress 3_4.webm",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        }
+      },
+      "block_order": [
+        "item_LJbPeM",
+        "item_cgjggq",
+        "item_dXmRLR"
+      ],
+      "settings": {
+        "full_width": true,
+        "stack_on_mobile": true,
+        "gap": "medium",
+        "text_alignment": "center",
+        "subheading": "",
+        "title": "SEE HOW OUR STUDENTS PERFORM:",
+        "content": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "video_NbnaCW": {
+      "type": "video",
+      "blocks": {
+        "play_q4niyA": {
+          "type": "play",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "play_q4niyA"
+      ],
+      "disabled": true,
+      "settings": {
+        "full_width": false,
+        "allow_transparent_header": false,
+        "autoplay": false,
+        "proportional": true,
+        "justify_content": false,
+        "video_size": "lg",
+        "video": "shopify://files/videos/ShortReview1.2.mp4",
+        "external_video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 30
+      }
+    },
+    "29817d12-4af7-49ab-8a92-c41c03e71d08": {
+      "type": "faq",
+      "blocks": {
+        "item_M9XXMn": {
+          "type": "item",
+          "settings": {
+            "title": "What does lifetime access to the courses mean?",
+            "content": "<p>When you enroll in our online fitness courses, you gain lifetime access to all course materials, including videos, resources, and updates. This means you can learn at your own pace and revisit the content whenever you need a refresher or want to enhance your skills. Your access doesn’t expire, allowing you to stay motivated and engaged in your fitness journey for years to come!</p>"
+          }
+        },
+        "item_JTgR4Y": {
+          "type": "item",
+          "settings": {
+            "title": "What is your 30-day money-back guarantee?",
+            "content": "<p>We stand behind the quality of our online fitness courses, which is why we offer a 30-day money-back guarantee. If you’re not completely satisfied with your purchase within the first 30 days, simply reach out to our support team for a full refund—no questions asked. Your fitness journey is our priority, and we want you to feel confident in your decision to join us!<br/>Please note: we can cannot refund the course in case you completed more than 50% of the program.</p>"
+          }
+        },
+        "template--14907164164170__29817d12-4af7-49ab-8a92-c41c03e71d08-item-1": {
+          "type": "item",
+          "settings": {
+            "title": "How do I access the program?",
+            "content": "<p>We will add the courses to your nasswear.com profile, so all you will need to do is to log into your account!<br/></p>"
+          }
+        },
+        "template--14907164164170__29817d12-4af7-49ab-8a92-c41c03e71d08-item-3": {
+          "type": "item",
+          "settings": {
+            "title": "Can I complete the workouts at my own pace?",
+            "content": "<p>Of course! You can complete the workouts at your own pace. This course does not have a strict schedule.</p>"
+          }
+        },
+        "3cf54b69-9b9b-430a-a979-af74f7e91024": {
+          "type": "item",
+          "settings": {
+            "title": "How long are the workouts?",
+            "content": "<p>Each workout is 40-60 minutes.</p>"
+          }
+        },
+        "7e2f2941-628e-4960-a9bd-a5824e332a2c": {
+          "type": "item",
+          "settings": {
+            "title": "Am I able to download the workout sessions on my device?",
+            "content": "<p>At the moment all the content in Twerk Program is available online only.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "item_M9XXMn",
+        "item_JTgR4Y",
+        "template--14907164164170__29817d12-4af7-49ab-8a92-c41c03e71d08-item-1",
+        "template--14907164164170__29817d12-4af7-49ab-8a92-c41c03e71d08-item-3",
+        "3cf54b69-9b9b-430a-a979-af74f7e91024",
+        "7e2f2941-628e-4960-a9bd-a5824e332a2c"
+      ],
+      "settings": {
+        "full_width": true,
+        "subheading": "",
+        "title": "FAQ",
+        "content": "",
+        "team_avatar_width": 160,
+        "support_hours": "",
+        "answer_time": "",
+        "button_text": "",
+        "button_url": "",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "button_background": "",
+        "button_text_color": "",
+        "accordion_background": "",
+        "accordion_text_color": ""
+      }
+    },
+    "969663e4-f215-46e1-a1ce-7d5c6aee0fd8": {
+      "type": "rich-text",
+      "blocks": {
+        "template--14946156675146__969663e4-f215-46e1-a1ce-7d5c6aee0fd8-heading-1": {
+          "type": "heading",
+          "settings": {
+            "text": "Already have an account?",
+            "heading_tag": "h3",
+            "text_color": "",
+            "gradient": ""
+          }
+        },
+        "4b6b9662-2059-456e-85d3-9ae8036fc6e8": {
+          "type": "button",
+          "settings": {
+            "style": "fill",
+            "size": "xl",
+            "text": "Login",
+            "url": "/account",
+            "background": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--14946156675146__969663e4-f215-46e1-a1ce-7d5c6aee0fd8-heading-1",
+        "4b6b9662-2059-456e-85d3-9ae8036fc6e8"
+      ],
+      "settings": {
+        "full_width": true,
+        "content_width": "small",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "zp-product-footer-content": {
+      "type": "product-footer-content-zipifypages",
+      "settings": {}
+    }
+  },
+  "order": [
+    "zp-product-header-content",
+    "multi_column_xwxMPr",
+    "main",
+    "e72b3e83-78ae-427f-a359-430414bcfda5",
+    "f1d4a317-3e40-4d0b-af41-d7b58676c8ac",
+    "image_with_text_overlay_cfTfnM",
+    "a41fd81d-f6dc-4eff-ba95-ee5e2dc41b38",
+    "6a17e412-5781-464f-a3ba-e01d3b965529",
+    "40de124a-5f36-40b7-9aa1-559609539663",
+    "6d1345cc-4552-409d-9456-77c424f1e5fb",
+    "f4057b1a-6497-4d2e-9664-42d3ebd1d9b3",
+    "5f0be783-db76-4fcb-a8fe-268b5cff16d3",
+    "custom_bundle_fwHcJU",
+    "c6126f5a-97df-4f0f-acf8-68e170f4dc81",
+    "4fc8f1a7-2ac1-41a3-80dc-02e94a393b25",
+    "1712565019552d8154",
+    "multi_column_HLKVdX",
+    "video_NbnaCW",
+    "29817d12-4af7-49ab-8a92-c41c03e71d08",
+    "969663e4-f215-46e1-a1ce-7d5c6aee0fd8",
+    "zp-product-footer-content"
+  ]
+}

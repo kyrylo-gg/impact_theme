@@ -1,0 +1,886 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "zp-product-header-content": {
+      "type": "product-header-content-zipifypages",
+      "settings": {}
+    },
+    "e72b3e83-78ae-427f-a359-430414bcfda5": {
+      "type": "video",
+      "blocks": {
+        "richtext_Wknw8n": {
+          "type": "richtext",
+          "settings": {
+            "content": "<h1>BUILD YOUR BOOTY IN 8 WEEKS </h1>"
+          }
+        },
+        "subheading_xLiLth": {
+          "type": "subheading",
+          "settings": {
+            "text": "The Beginner's Gym Guide to a Stronger Booty"
+          }
+        },
+        "500838c0-8ded-4626-92e1-12d9b0a54ab6": {
+          "type": "button",
+          "settings": {
+            "style": "outline",
+            "size": "xl",
+            "text": "Start My Journey",
+            "url": "#shopify-section-template--18275648897098__custom_bundle_hHqNG8",
+            "background": "",
+            "text_color": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "richtext_Wknw8n",
+        "subheading_xLiLth",
+        "500838c0-8ded-4626-92e1-12d9b0a54ab6"
+      ],
+      "settings": {
+        "full_width": false,
+        "allow_transparent_header": false,
+        "autoplay": true,
+        "proportional": true,
+        "justify_content": true,
+        "video_size": "lg",
+        "video": "shopify://files/videos/0722 (1).webm",
+        "mobile_video": "shopify://files/videos/0722 (1)(1).webm",
+        "external_video_url": "",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 30
+      }
+    },
+    "text_with_icons_hLyxqc": {
+      "type": "text-with-icons",
+      "blocks": {
+        "item_KKaVg9": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-timer",
+            "custom_icon": "shopify://shop_images/Union_3_1.png",
+            "mobile_icon_width": 64,
+            "icon_width": 64,
+            "icon_background_type": "none",
+            "icon_background": "",
+            "icon_color": "",
+            "title": "TRANSFORM IN WEEKS",
+            "content": "<p>See and feel the difference in just 8 weeks with a structured program designed to activate, sculpt, and strengthen your glutes from the ground up.</p>"
+          }
+        },
+        "item_refEJq": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-coupon",
+            "custom_icon": "shopify://shop_images/Union_5_1_daf73bef-2f0e-4054-aef2-3dec2af75df4.png",
+            "mobile_icon_width": 64,
+            "icon_width": 64,
+            "icon_background_type": "none",
+            "icon_background": "",
+            "icon_color": "",
+            "title": "PROVEN TECHNIQUES",
+            "content": "<p>Each workout is built on science-backed methods that target your glutes safely and effectively—no fluff, just real results.</p>"
+          }
+        },
+        "item_KzJF4C": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-coupon",
+            "custom_icon": "shopify://shop_images/Line_4_1_1.png",
+            "mobile_icon_width": 64,
+            "icon_width": 64,
+            "icon_background_type": "none",
+            "icon_background": "",
+            "icon_color": "",
+            "title": "GUIDANCE & SUPPORT",
+            "content": "<p>You’re never alone on this journey. Follow clear instructions, track your progress, and stay motivated with expert tips every step of the way.</p>"
+          }
+        },
+        "item_P6L8D7": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-coupon",
+            "custom_icon": "shopify://shop_images/Union_4_1.png",
+            "mobile_icon_width": 64,
+            "icon_width": 64,
+            "icon_background_type": "none",
+            "icon_background": "",
+            "icon_color": "",
+            "title": "UNLIMITED ACCESS",
+            "content": "<p>Enjoy lifetime access to both programs on any device – start your transformation anywhere, anytime.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "item_KKaVg9",
+        "item_refEJq",
+        "item_KzJF4C",
+        "item_P6L8D7"
+      ],
+      "settings": {
+        "full_width": true,
+        "stack_on_mobile": false,
+        "title": "",
+        "heading_tag": "h5",
+        "text_alignment": "center",
+        "icon_spacing": "medium",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "5f0be783-db76-4fcb-a8fe-268b5cff16d3": {
+      "type": "multi-column",
+      "blocks": {
+        "template--14946156675146__5f0be783-db76-4fcb-a8fe-268b5cff16d3-item-1": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Frame_287_3_-min_5490d6dd-3adb-4906-b549-6df07d7ea27d.png",
+            "video": "shopify://files/videos/ezgif-8c9ff08ecb734a.webm",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "<p><strong>Structured booty-building journey</strong><br/><br/>This 8-week program is designed to take you step-by-step through a progressive, beginner-friendly path to sculpt and strengthen your glutes. With four workouts each week, you'll build consistency, confidence, and results—without feeling overwhelmed.<br/><br/></p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "template--14946156675146__5f0be783-db76-4fcb-a8fe-268b5cff16d3-item-2": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Frame_287_2_-min.jpg",
+            "video": "shopify://files/videos/0723.mp4",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "<p><strong>Expert guidance & support</strong><br/><br/>You're never on your own—this program includes clear instructions, form cues, and training tips to help you feel confident in every workout. Plus, you'll get ongoing support to stay motivated, track progress, and make the most of your 8-week transformation.<br/><br/></p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "97890959-8621-451e-ae81-07e20ca6b45e": {
+          "type": "item",
+          "settings": {
+            "video": "shopify://files/videos/ezgif-82908055032ae7.webm",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "<p><strong>Effective, safe workouts</strong><br/><br/>Every session is carefully crafted to activate your glutes while protecting your joints and posture. Whether you're new to fitness or returning after a break, the movements are low-risk yet high-reward—giving you visible results without the guesswork.<br/><br/></p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        }
+      },
+      "block_order": [
+        "template--14946156675146__5f0be783-db76-4fcb-a8fe-268b5cff16d3-item-1",
+        "template--14946156675146__5f0be783-db76-4fcb-a8fe-268b5cff16d3-item-2",
+        "97890959-8621-451e-ae81-07e20ca6b45e"
+      ],
+      "settings": {
+        "full_width": true,
+        "stack_on_mobile": false,
+        "gap": "medium",
+        "text_alignment": "start",
+        "subheading": "",
+        "title": "What's inside?",
+        "content": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "image_with_text_overlay_6dcQtb": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading_zYkyb9": {
+          "type": "heading",
+          "settings": {
+            "text": "CREATED BY NASTYA NASS",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_RP9t9X": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>World-famous fitness coach and booty workout expert</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_zYkyb9",
+        "richtext_RP9t9X"
+      ],
+      "name": "Image with text overlay",
+      "settings": {
+        "full_width": false,
+        "allow_transparent_header": false,
+        "enable_parallax": false,
+        "image_size": "lg",
+        "image": "shopify://shop_images/desk_bb61e646-5873-49dd-a0ec-65ced410fcaa.jpg",
+        "mobile_image": "shopify://shop_images/mob_09a312ce-8995-485c-833f-fb21c012d620.jpg",
+        "mobile_text_position": "place-self-center text-center",
+        "desktop_text_position": "sm:place-self-center sm:text-center",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 15
+      }
+    },
+    "rich_text_3fxB4z": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_mNQyJj": {
+          "type": "heading",
+          "settings": {
+            "text": "THIS PROGRAM IS FOR YOU IF...",
+            "heading_tag": "h1",
+            "text_color": "",
+            "gradient": ""
+          }
+        },
+        "subheading_tWCGex": {
+          "type": "subheading",
+          "settings": {
+            "text": "✅You want real results—not just sore legs or trendy workouts"
+          }
+        },
+        "subheading_eDm9FD": {
+          "type": "subheading",
+          "settings": {
+            "text": "✅You’re ready to stay consistent and see your glutes grow week by week"
+          }
+        },
+        "subheading_RqMEjM": {
+          "type": "subheading",
+          "settings": {
+            "text": "✅You want to finally build a booty that looks good in jeans and feels strong from within"
+          }
+        },
+        "subheading_mhjfPL": {
+          "type": "subheading",
+          "settings": {
+            "text": "✅You want to learn the right technique and build strength safely"
+          }
+        }
+      },
+      "block_order": [
+        "heading_mNQyJj",
+        "subheading_tWCGex",
+        "subheading_eDm9FD",
+        "subheading_RqMEjM",
+        "subheading_mhjfPL"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "full_width": true,
+        "content_width": "small",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "image_with_text_overlay_kanFpd": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "button_8tj78F": {
+          "type": "button",
+          "settings": {
+            "style": "fill",
+            "size": "base",
+            "full_width": true,
+            "text": "<div class=\"custom-button-inner\">\n<span>nastya_nass_ <icon class=\"mark\"></icon></span><strong>7M Followers <icon class=\"community\"></icon></strong>\n</div>",
+            "url": "",
+            "background": "#ffffff",
+            "text_color": "#1a1a1a"
+          }
+        }
+      },
+      "block_order": [
+        "button_8tj78F"
+      ],
+      "disabled": true,
+      "settings": {
+        "full_width": false,
+        "allow_transparent_header": false,
+        "enable_parallax": false,
+        "image_size": "auto",
+        "image": "shopify://shop_images/nass_a141c8b3-1003-4bf6-a6ce-c845b13fd41c.jpg",
+        "mobile_image": "shopify://shop_images/nass_a141c8b3-1003-4bf6-a6ce-c845b13fd41c.jpg",
+        "mobile_text_position": "place-self-end-center text-center",
+        "desktop_text_position": "sm:place-self-end-center sm:text-center",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0
+      }
+    },
+    "3ea9a601-da90-466c-978b-d71e2fac7ae0": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "template--15158367551562__3ea9a601-da90-466c-978b-d71e2fac7ae0-heading-1": {
+          "type": "heading",
+          "settings": {
+            "text": "50% OFF<br> HOME AND BOOTY BAND PROGRAMS",
+            "heading_tag": "h1"
+          }
+        },
+        "8ae4b6e8-f89e-4015-a43d-b1baf10e7b4a": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Exercise with your own weight or booty bands </p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--15158367551562__3ea9a601-da90-466c-978b-d71e2fac7ae0-heading-1",
+        "8ae4b6e8-f89e-4015-a43d-b1baf10e7b4a"
+      ],
+      "disabled": true,
+      "settings": {
+        "full_width": false,
+        "allow_transparent_header": false,
+        "enable_parallax": false,
+        "image_size": "auto",
+        "image": "shopify://shop_images/L39A2193_1.jpg",
+        "mobile_image": "shopify://shop_images/IMG_6337.jpg",
+        "mobile_text_position": "place-self-center text-center",
+        "desktop_text_position": "sm:place-self-center sm:text-center",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 30
+      }
+    },
+    "ddc8cfd5-6e50-4d23-998a-585234bc2848": {
+      "type": "video",
+      "blocks": {
+        "337ac15c-256a-434b-ba4f-38c3afe35f0b": {
+          "type": "subheading",
+          "settings": {
+            "text": "Master your performance anywhere"
+          }
+        },
+        "template--15158367551562__ddc8cfd5-6e50-4d23-998a-585234bc2848-heading-1": {
+          "type": "heading",
+          "settings": {
+            "text": "VIEW IT ONLINE ON ANY SCREEN",
+            "heading_tag": "h1",
+            "special_padding": ""
+          }
+        }
+      },
+      "block_order": [
+        "337ac15c-256a-434b-ba4f-38c3afe35f0b",
+        "template--15158367551562__ddc8cfd5-6e50-4d23-998a-585234bc2848-heading-1"
+      ],
+      "disabled": true,
+      "settings": {
+        "full_width": false,
+        "allow_transparent_header": false,
+        "autoplay": true,
+        "proportional": true,
+        "justify_content": false,
+        "video_size": "lg",
+        "video": "shopify://files/videos/Devices2.webm",
+        "mobile_video": "shopify://files/videos/Devices2m.webm",
+        "external_video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0
+      }
+    },
+    "f4057b1a-6497-4d2e-9664-42d3ebd1d9b3": {
+      "type": "rich-text",
+      "blocks": {
+        "6e2f8aab-74ae-47fd-a14d-4f1b45a930b3": {
+          "type": "button",
+          "settings": {
+            "style": "fill",
+            "size": "xl",
+            "text": "Apply now!",
+            "url": "#shopify-section-template--15299039526986__custom_bundle_hHqNG8",
+            "background": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "6e2f8aab-74ae-47fd-a14d-4f1b45a930b3"
+      ],
+      "disabled": true,
+      "settings": {
+        "full_width": true,
+        "content_width": "small",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "custom_bundle_hHqNG8": {
+      "type": "custom-bundle",
+      "blocks": {
+        "programs_step_i9gBYU": {
+          "type": "programs_step",
+          "settings": {
+            "title": "Choose Programs",
+            "badge_text": "Lifetime Access",
+            "show_general_badge": true,
+            "general_badge_text": "Add one more program to choose free fitness set",
+            "products": [
+              "beginners-gym-program",
+              "advanced-gym-program"
+            ]
+          }
+        },
+        "extra_step_MUzpyy": {
+          "type": "extra_step",
+          "settings": {
+            "title": "Choose Leggings",
+            "badge_text": "Choose Your Free Leggings!",
+            "products": [
+              "essential-leggings-black-2",
+              "essential-leggings-blue-1",
+              "essential-leggings-khaki-1",
+              "essential-leggings-pink-1",
+              "purple-essential-leggings"
+            ],
+            "first_is_free": true,
+            "allow_next": true,
+            "enable_filters": true,
+            "filters_title": "Size Filter",
+            "size_chart": "muse-leggings"
+          }
+        },
+        "extra_step_mwEnaQ": {
+          "type": "extra_step",
+          "settings": {
+            "title": "Choose Top",
+            "badge_text": "Choose Your Free Top!",
+            "products": [
+              "black-essential-top",
+              "blue-essential-top",
+              "khaki-essential-top",
+              "purple-essential-top",
+              "pink-essential-top"
+            ],
+            "first_is_free": true,
+            "allow_next": true,
+            "enable_filters": true,
+            "filters_title": "Size Filter",
+            "size_chart": "muse-top"
+          }
+        },
+        "step_dTU3b7": {
+          "type": "step",
+          "settings": {
+            "title": "Latest Arrivals",
+            "badge_text": "20% off in this bundle",
+            "products": [
+              "black-noir",
+              "blush-breeze",
+              "cosmic-blue",
+              "gray-paint",
+              "blush-breeze-1",
+              "safari-heat"
+            ],
+            "first_is_free": false,
+            "first_shown_is_free": false,
+            "allow_next": true,
+            "hide_when_extra": false,
+            "enable_filters": true,
+            "filters_title": "Size Filter",
+            "size_chart": "sizing-chart-new"
+          }
+        },
+        "step_x9azkg": {
+          "type": "step",
+          "settings": {
+            "title": "Select Shorts!",
+            "badge_text": "20% off in this bundle",
+            "products": [
+              "perfect-black",
+              "petal-splash",
+              "shadow-ninja",
+              "pinky-zebra",
+              "sunny-ani",
+              "terra-speckle",
+              "cosmic-nebula",
+              "mystic-zebra",
+              "neon-drift"
+            ],
+            "first_is_free": false,
+            "first_shown_is_free": false,
+            "allow_next": true,
+            "hide_when_extra": false,
+            "enable_filters": true,
+            "filters_title": "Size Filter",
+            "size_chart": "sizing-chart-biflex"
+          }
+        },
+        "step_9Ve9xB": {
+          "type": "step",
+          "settings": {
+            "title": "Choose Top",
+            "badge_text": "50% off on this step",
+            "products": [
+              "top-navy",
+              "top-pink",
+              "top-white"
+            ],
+            "first_is_free": false,
+            "first_shown_is_free": false,
+            "allow_next": true,
+            "hide_when_extra": false,
+            "enable_filters": false,
+            "filters_title": "Size Filter",
+            "size_chart": "muse-top"
+          }
+        },
+        "step_xgkgbp": {
+          "type": "step",
+          "settings": {
+            "title": "Choose Equipment",
+            "badge_text": "",
+            "products": [
+              "ankle-strap-1",
+              "booty-band-set-1",
+              "gym-gloves",
+              "rubber-booty-band-set-1",
+              "stretching-band-set-1",
+              "copy-of-stretching-block"
+            ],
+            "first_is_free": false,
+            "first_shown_is_free": false,
+            "allow_next": true,
+            "hide_when_extra": false,
+            "enable_filters": false,
+            "filters_title": "Size Filter",
+            "size_chart": ""
+          }
+        }
+      },
+      "block_order": [
+        "programs_step_i9gBYU",
+        "extra_step_MUzpyy",
+        "extra_step_mwEnaQ",
+        "step_dTU3b7",
+        "step_x9azkg",
+        "step_9Ve9xB",
+        "step_xgkgbp"
+      ],
+      "custom_css": [
+        ".custom-product-bundle {min-height: auto;}"
+      ],
+      "settings": {
+        "title": "<h2>Get everything you need<br/>to start, in one bundle!<br/><br/></h2>",
+        "main_product": "",
+        "free_extras_badge": false,
+        "duration": "8 Weeks",
+        "save_for_program": "Lifetime Access",
+        "save_for_bundle": "Save up to 50%",
+        "extras_description": "",
+        "group_products_in_cart": true,
+        "show_extra_steps": true,
+        "allow_one_free": "no",
+        "allow_two_free": "both",
+        "hide_variations": false
+      }
+    },
+    "4a5f66e0-0efa-495c-a866-7858f2836c5a": {
+      "type": "rich-text",
+      "blocks": {
+        "template--15158367551562__4a5f66e0-0efa-495c-a866-7858f2836c5a-heading-1": {
+          "type": "heading",
+          "settings": {
+            "text": "OUR CUSTOMERS SAY...",
+            "heading_tag": "h1",
+            "text_color": "",
+            "gradient": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--15158367551562__4a5f66e0-0efa-495c-a866-7858f2836c5a-heading-1"
+      ],
+      "settings": {
+        "full_width": true,
+        "content_width": "small",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "17125643674bfd4ace": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_NfRFXD": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_NfRFXD"
+      ],
+      "settings": {
+        "full_width": true,
+        "remove_vertical_spacing": false,
+        "remove_horizontal_spacing": false,
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "40de124a-5f36-40b7-9aa1-559609539663": {
+      "type": "video",
+      "blocks": {
+        "template--14907164164170__40de124a-5f36-40b7-9aa1-559609539663-play-1": {
+          "type": "play",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "template--14907164164170__40de124a-5f36-40b7-9aa1-559609539663-play-1"
+      ],
+      "disabled": true,
+      "settings": {
+        "full_width": false,
+        "allow_transparent_header": false,
+        "autoplay": false,
+        "proportional": false,
+        "justify_content": false,
+        "video_size": "fill",
+        "video": "shopify://files/videos/ShortReview1.2.mp4",
+        "mobile_video": "shopify://files/videos/ShortReview1.2.mp4",
+        "external_video_url": "",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0
+      }
+    },
+    "8873fe7e-34b6-4337-a688-fa3c6e71079d": {
+      "type": "impact-text",
+      "settings": {
+        "full_width": true,
+        "stack_mobile": true,
+        "text_alignment": "center",
+        "impact_text_style": "fill",
+        "text_divider": "none",
+        "impact_text_size_ratio": 1,
+        "background": "",
+        "background_gradient": "",
+        "heading_text_color": "",
+        "heading_gradient": "",
+        "text_color": "",
+        "button_background": "",
+        "button_text_color": ""
+      }
+    },
+    "main": {
+      "type": "main-product",
+      "disabled": true,
+      "settings": {
+        "full_width": false,
+        "show_fixed_add_to_cart": false,
+        "desktop_media_width": 55,
+        "desktop_media_layout": "carousel_thumbnails_left",
+        "mobile_media_size": "contained",
+        "mobile_carousel_control": "floating_dots",
+        "enable_video_autoplay": true,
+        "enable_video_looping": true,
+        "enable_image_zoom": true,
+        "max_image_zoom_level": 3,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "input_background": "rgba(0,0,0,0)",
+        "input_text_color": ""
+      }
+    },
+    "29817d12-4af7-49ab-8a92-c41c03e71d08": {
+      "type": "faq",
+      "blocks": {
+        "template--14907164164170__29817d12-4af7-49ab-8a92-c41c03e71d08-item-1": {
+          "type": "item",
+          "settings": {
+            "title": "What equipment do I need for these workouts?",
+            "content": "<p>This program is designed to be done in a gym setting, so access to basic gym equipment is necessary. You’ll be using machines like the leg press, cable machine, and hip thrust bench, along with free weights such as dumbbells and barbells. These tools allow for proper resistance and progression, which are key to building glute strength effectively.<br/><br/></p>"
+          }
+        },
+        "item_9pxiP4": {
+          "type": "item",
+          "settings": {
+            "title": "How soon can I expect to see results?",
+            "content": "<p>Many participants notice changes in the first 2–3 weeks—like improved glute activation, better posture, and more energy. Visible results typically appear around weeks 4–6 with consistent effort and proper recovery.<br/><br/></p>"
+          }
+        },
+        "item_yTgMeY": {
+          "type": "item",
+          "settings": {
+            "title": "Can beginners do these programs?",
+            "content": "<p>Absolutely! This course was designed specifically with beginners in mind. You'll start with foundational moves and gradually build strength, form, and confidence each week. No prior experience is needed.<br/><br/></p>"
+          }
+        },
+        "template--14907164164170__29817d12-4af7-49ab-8a92-c41c03e71d08-item-3": {
+          "type": "item",
+          "settings": {
+            "title": "Can I complete the workouts at my own pace?",
+            "content": "<p>Yes! While the program is structured over 8 weeks, you can move through it at a pace that works best for your schedule and fitness level. You’re in full control—no pressure, just progress.<br/><br/></p>"
+          }
+        },
+        "item_GV48Lj": {
+          "type": "item",
+          "settings": {
+            "title": "Can I access the programs and materials offline?",
+            "content": "<p>The materials are available online only in your nasswear.com profile</p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--14907164164170__29817d12-4af7-49ab-8a92-c41c03e71d08-item-1",
+        "item_9pxiP4",
+        "item_yTgMeY",
+        "template--14907164164170__29817d12-4af7-49ab-8a92-c41c03e71d08-item-3",
+        "item_GV48Lj"
+      ],
+      "settings": {
+        "full_width": true,
+        "subheading": "",
+        "title": "FAQ",
+        "content": "",
+        "team_avatar_width": 160,
+        "support_hours": "",
+        "answer_time": "",
+        "button_text": "",
+        "button_url": "",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "button_background": "",
+        "button_text_color": "",
+        "accordion_background": "",
+        "accordion_text_color": ""
+      }
+    },
+    "zp-product-footer-content": {
+      "type": "product-footer-content-zipifypages",
+      "settings": {}
+    },
+    "press_dkUfwj": {
+      "type": "press",
+      "blocks": {
+        "quote_mXB6Cb": {
+          "type": "quote",
+          "settings": {
+            "logo_width": 100,
+            "author": "",
+            "content": "The difference between who you are and who you want to be is what you do",
+            "show_rating": false,
+            "rating": 4
+          }
+        }
+      },
+      "block_order": [
+        "quote_mXB6Cb"
+      ],
+      "settings": {
+        "full_width": true,
+        "content_size": "medium",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "logo_item_background": "",
+        "logo_item_border": ""
+      }
+    },
+    "rich_text_7Vny8K": {
+      "type": "rich-text",
+      "blocks": {
+        "button_ifGJJJ": {
+          "type": "button",
+          "settings": {
+            "style": "fill",
+            "size": "xl",
+            "text": "Do It Now!",
+            "url": "",
+            "background": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "button_ifGJJJ"
+      ],
+      "settings": {
+        "full_width": true,
+        "content_width": "small",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "image_with_text_overlay_MRGNzx": {
+      "type": "image-with-text-overlay",
+      "disabled": true,
+      "name": "Image with text overlay",
+      "settings": {
+        "full_width": true,
+        "allow_transparent_header": false,
+        "enable_parallax": false,
+        "image_size": "auto",
+        "image": "shopify://shop_images/Courses_1.png",
+        "mobile_image": "shopify://shop_images/Courses.png",
+        "mobile_text_position": "place-self-center text-center",
+        "desktop_text_position": "sm:place-self-center sm:text-center",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0
+      }
+    }
+  },
+  "order": [
+    "zp-product-header-content",
+    "e72b3e83-78ae-427f-a359-430414bcfda5",
+    "text_with_icons_hLyxqc",
+    "5f0be783-db76-4fcb-a8fe-268b5cff16d3",
+    "image_with_text_overlay_6dcQtb",
+    "rich_text_3fxB4z",
+    "image_with_text_overlay_kanFpd",
+    "3ea9a601-da90-466c-978b-d71e2fac7ae0",
+    "ddc8cfd5-6e50-4d23-998a-585234bc2848",
+    "f4057b1a-6497-4d2e-9664-42d3ebd1d9b3",
+    "custom_bundle_hHqNG8",
+    "4a5f66e0-0efa-495c-a866-7858f2836c5a",
+    "17125643674bfd4ace",
+    "40de124a-5f36-40b7-9aa1-559609539663",
+    "8873fe7e-34b6-4337-a688-fa3c6e71079d",
+    "main",
+    "29817d12-4af7-49ab-8a92-c41c03e71d08",
+    "zp-product-footer-content",
+    "press_dkUfwj",
+    "rich_text_7Vny8K",
+    "image_with_text_overlay_MRGNzx"
+  ]
+}

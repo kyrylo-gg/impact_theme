@@ -1,0 +1,95 @@
+{%- if size_chart_page == blank -%}
+  {%- assign size_chart_page = product.metafields.info.size_chart -%}
+{%- endif -%}
+{%- if custom or option.name == 'Size' -%}
+  {% if pages[size_chart_page] != empty %}
+    {% if modal_parts == blank or modal_parts == 'link' %}
+      <modal-opener{% if stepId != blank %} data-in-step="{{ stepId }}" hidden{% endif %} class="product-popup-modal__opener no-js-hidden quick-add-hidden" {% if block %}{{ block.shopify_attributes }}{% endif %}>
+        <strong><a href="#" class="product-popup-modal__button link" aria-controls="SizeChartPopupModal-{% if custom %}{{ custom }}{% else %}{{ block.id }}{% endif %}">{{ 'product.general.size_chart' | t }}</a></strong>
+      </modal-opener>
+    {% endif %}
+    {% if modal_parts == blank or modal_parts == 'modal' %}
+      <size-chart id="SizeChartPopupModal-{% if custom %}{{ custom }}{% else %}{{ block.id }}{% endif %}" class="drawer drawer--lg product-popup-modal--size-chart"{% if modal_parts == 'modal' %} style="z-index: 2147483647"{% endif %}>
+        <div>
+          <div class="cart-drawer__top">
+            <div class="h-stack items-center justify-between">
+              <div class="h-stack gap-2 sm:gap-2.5">
+                <p class="h5">FIND YOUR SIZE</p>
+              </div>
+      
+              <button type="button" is="close-button" class="drawer__close-icon">
+                <span class="sr-only">{{ 'general.accessibility.close' | t }}</span>
+                {%- render 'icon' with 'close' -%}
+              </button>
+            </div>
+      
+          </div>
+      
+          <div class="v-stack gap-6 sm:gap-8 product-popup-modal__content">
+            <div class="product-popup-modal__content-info" part="body">
+              {% if pages[size_chart_page].metafields.custom.size_calculator != blank %}
+                <div class="size-calculator">
+      <!--             <h4 class="size-calculator__title">FIND YOUR SIZE</h4> -->
+                  <form action="#" data-size-calculate>
+                    <input type="checkbox" name="units" id="units" onchange="activeSizeUnits(this)">
+                    <label for="units">
+                      <ul class="size-calculator__units-label">
+                        <li><span>IN</span></li>
+                        <li><span>CM</span></li>
+                      </ul>
+                    </label>
+                    {% assign fields_data = pages[size_chart_page].metafields.custom.size_calculator | newline_to_br | replace: "\n", '' | strip_newlines | split: '<br />' | compact %}
+                    <div class="size-calculator__holder">
+                      <span class="h4">CALCULATE YOUR SIZE</span>
+                      <p style="font-size: 0.85em"><small>Select IN or CM above and input your measurements below. Tap "Calculate" to get your size. <a class="link" target="_blank" href="/pages/sizing">See Sizing to learn more</a></small></p>
+                      <div class="size-calculator__fields">
+                        {% for d in fields_data %}
+                          {% if d != blank %}
+                            <label>
+                              <span>{{ d | split: ':' | first | strip }}</span>
+                              <input type="text" name="{{ d | split: ':' | first | handle }}">
+                            </label>
+                          {% endif %}
+                        {% endfor %}
+                        <div id="active-size-units" style="margin-right:-35px;"><div style="opacity: 0">Units:</div><span>IN</span></div>
+                      </div>
+                      <button type="submit" class="button">CALCULATE</button>
+                      <div class="calculator-success hidden">
+                        <span class="h3">WE THINK YOU'RE AN</span>
+                        <span class="calculated-size"></span>
+                      </div>
+                      <div class="calculator-error hidden">
+                        <p>Double-check selected unit of measurement; otherwise, we do not carry your size yet.</p>
+                      </div>
+                    </div>
+                    <script type="text/json">
+                      {
+                      {% for d in fields_data %}
+                        {% assign parts = d | split: ':' %}
+                        {{ parts.first | handle | json }}: {{ parts.last | split: '|' | json }}{% unless forloop.last %},{% endunless %}
+                      {% endfor %}
+                      }
+                    </script>
+                  </form>
+                </div>
+              {% endif %}
+              {{ pages[size_chart_page].content | replace: '<p class="p1">&nbsp;</p>', '' }}
+            </div>
+          </div>
+        </div>
+      
+        <script>
+          function activeSizeUnits(el) {
+            let activeSizeUnits = document.getElementById('active-size-units');
+          
+            if (el.checked === true) {
+              activeSizeUnits.querySelector('span').innerText = 'CM';
+            } else {
+              activeSizeUnits.querySelector('span').innerText = 'IN';
+            }
+          }
+        </script>  
+      </size-chart>
+      {% endif %}
+  {% endif %}
+{%- endif -%}

@@ -1,0 +1,101 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner": {
+      "type": "collection-banner",
+      "disabled": true,
+      "settings": {
+        "full_width": false,
+        "allow_transparent_header": false,
+        "enable_parallax": true,
+        "show_collection_title": true,
+        "show_collection_description": true,
+        "show_collection_image": true,
+        "collection_title_size": "h0",
+        "image_size": "auto",
+        "mobile_text_position": "place-self-center text-center",
+        "desktop_text_position": "sm:place-self-center sm:text-center",
+        "featured_product": "",
+        "featured_product_heading": "Featured product",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 30
+      }
+    },
+    "main": {
+      "type": "main-collection",
+      "blocks": {
+        "promotion_image_9AbJfP": {
+          "type": "promotion_image",
+          "disabled": true,
+          "settings": {
+            "position": 4,
+            "column_span": "1",
+            "image": "shopify://shop_images/Petal_splash_5.jpg",
+            "mobile_image": "shopify://shop_images/Petal_splash_5.jpg",
+            "title": "BUY MORE, SAVE MORE",
+            "content": "",
+            "link_url": "https://www.nasswear.com/a/collections/bundle/shorts-bundle",
+            "link_text": "Grab The Deal Now!",
+            "heading_tag": "h4",
+            "text_position": "place-self-end-start text-start",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 30
+          }
+        },
+        "promotion_image_FLqgcM": {
+          "type": "promotion_image",
+          "disabled": true,
+          "settings": {
+            "position": 4,
+            "column_span": "1",
+            "image": "shopify://shop_images/Card_3_1.jpg",
+            "mobile_image": "shopify://shop_images/Card_3_1.jpg",
+            "title": "MORE FOR LESS",
+            "content": "<p>Up to 30% off shorts</p>",
+            "link_url": "https://www.nasswear.com/a/collections/bundle/shorts-bundle",
+            "link_text": "SHOP",
+            "heading_tag": "h4",
+            "text_position": "place-self-end-start text-start",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 6
+          }
+        }
+      },
+      "block_order": [
+        "promotion_image_9AbJfP",
+        "promotion_image_FLqgcM"
+      ],
+      "settings": {
+        "products_per_page": 24,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 3,
+        "enable_newsletter_card": true,
+        "newsletter_card_position": 5,
+        "form_id": "",
+        "filter_layout": "sidebar",
+        "show_sort_by": true,
+        "show_filters": true,
+        "show_filter_group_name": false,
+        "show_color_swatch": true,
+        "show_empty_filter_values": false,
+        "show_filter_values_count": true,
+        "open_first_filter_group": false
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "main"
+  ]
+}

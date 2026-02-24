@@ -1,0 +1,27 @@
+<script>
+  let unblocked = false;
+  function yettUnblock(){
+    window.yett.unblock();
+    window.removeEventListener("scroll", yettUnblock);
+    window.removeEventListener("mousemove", yettUnblock);
+    window.removeEventListener("click", clickCheck);
+    let unblocked = true;
+  };
+
+  function clickCheck (event) {
+    if (!unblocked) {
+      event.preventDefault();
+      yettUnblock();
+      window.removeEventListener("click", clickCheck);
+    }
+  }
+
+  if (window.innerWidth < 1024) {
+    window.addEventListener("click", clickCheck);
+  } else {
+    window.addEventListener("mousemove", yettUnblock);
+  }
+
+  window.setTimeout(yettUnblock, 1000);
+  window.addEventListener("scroll", yettUnblock);
+</script>

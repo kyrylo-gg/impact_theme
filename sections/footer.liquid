@@ -1,0 +1,413 @@
+{%- assign newsletter_block = section.blocks | where: 'type', 'newsletter' | first -%}
+
+{%- if section.blocks.size > 3 -%}
+<style>
+  @media screen and (min-width: 1000px) {
+    #shopify-section-{{ section.id }} {
+      {%- if newsletter_block != blank -%}
+        --footer-block-list-gap: var(--spacing-10);
+      {%- endif -%}
+
+      --footer-block-list-justify-content: space-between;
+    }
+  }
+</style>
+{%- endif -%}
+
+ {% if template contains 'page.ty-booty'
+        or template contains 'page.ty-twerk'
+        or template contains 'page.ty-weight-loss' %}
+  <style>
+    .footer {
+      background: #F0F0F0 !important;
+      background-color: #F0F0F0 !important;
+      border-radius: 30px 30px 0 0;
+      padding-top: 110px;
+    }
+    .footer-logo {
+      position: absolute;
+      top: 32px;
+      left: 32px;
+    }
+    .footer__aside-top, .footer__aside-bottom {
+      justify-content: flex-end;
+    }
+    .footer__aside .social-media {
+      display: none;
+    }
+    .footer__aside-bottom .footer__copyright {
+      margin-right: auto;
+    }
+    .footer__aside-top .bold.text-sm {
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 100%;
+    }
+    @media screen and (max-width: 1000px) {
+      .footer-logo {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+      }
+      .footer__aside-top, .footer__aside-bottom {
+        justify-content: flex-start;
+      }
+    }
+  </style>
+{% endif %}
+
+<div class="footer">
+  {% if template contains 'page.ty-booty'
+      or template contains 'page.ty-twerk'
+      or template contains 'page.ty-weight-loss' %}
+      <div class="footer-logo">
+        <svg width="75" height="16" viewBox="0 0 75 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M62.125 0.484574C62.9821 0.202166 63.9268 0.0480025 65.0763 0.00434415C65.2735 -0.00315859 66.2072 0.00161588 66.4244 0.0111663C67.3732 0.0520949 68.1103 0.13327 68.824 0.274473C70.2321 0.552788 71.3119 1.03097 72.0959 1.72403C72.2111 1.82635 72.4138 2.03031 72.5069 2.13945C73.0406 2.76293 73.3709 3.51602 73.4985 4.40144C73.5164 4.52559 73.5247 4.59926 73.5447 4.80458L73.5488 4.84756H70.9699L70.9651 4.80117C70.9244 4.3837 70.8375 4.06855 70.6754 3.75204C70.3093 3.03647 69.5928 2.48189 68.5985 2.14627C67.7855 1.87137 66.8712 1.74654 65.759 1.7595C65.2542 1.76564 64.886 1.78951 64.4798 1.8434C62.9387 2.04668 61.9058 2.58967 61.4851 3.41915C61.3286 3.72748 61.2493 4.10334 61.2617 4.47579C61.2686 4.66133 61.2907 4.79162 61.3424 4.94511C61.4286 5.20091 61.5941 5.43761 61.8175 5.6252C62.185 5.93353 62.7249 6.15932 63.4283 6.29984C63.5041 6.31485 64.9115 6.55769 66.5554 6.83942C68.1993 7.12114 69.6115 7.36398 69.6928 7.37899C70.9954 7.61979 72.0263 8.02498 72.7496 8.58024C73.3199 9.01818 73.7074 9.54684 73.9205 10.1751C74.0467 10.5482 74.1025 10.8852 74.1108 11.3245C74.1163 11.6144 74.1011 11.8252 74.057 12.0851C73.8501 13.2973 73.0558 14.2482 71.6808 14.9289C70.4789 15.5231 69.0157 15.8689 67.2691 15.9699C66.6361 16.0061 65.8162 16.0101 65.197 15.9794C63.7627 15.9092 62.5491 15.6882 61.5217 15.3103C59.9833 14.7448 58.869 13.8246 58.3373 12.682C58.0719 12.111 57.9443 11.5435 57.9181 10.8143L57.9139 10.6867H60.4922L60.497 10.7979C60.5122 11.1601 60.5598 11.4302 60.659 11.7236C60.8039 12.1485 61.0342 12.5067 61.3741 12.8355C61.6417 13.094 61.9423 13.3034 62.3257 13.4978C63.3104 13.9985 64.5488 14.2407 66.121 14.2407C67.62 14.2407 68.8688 14.0483 69.8066 13.6731C70.1521 13.5346 70.4507 13.3675 70.7044 13.1697C70.7968 13.0974 70.9768 12.9221 71.0464 12.8355C71.2078 12.6349 71.334 12.3852 71.3919 12.1533C71.4912 11.7515 71.4553 11.2249 71.3016 10.8436C71.1795 10.5387 70.9878 10.2911 70.721 10.0919C70.201 9.70305 69.1012 9.35857 67.3725 9.04274C67.2891 9.02773 66.2251 8.84287 65.0073 8.63277L64.9677 8.62592C62.8208 8.25525 62.5205 8.20339 62.2247 8.13294C62.1766 8.12149 62.1287 8.10956 62.073 8.09568L62.063 8.09319C60.4791 7.69892 59.4365 7.04406 58.9414 6.1334C58.6518 5.59996 58.5428 4.97717 58.6152 4.26092C58.7421 3.00509 59.4123 1.98529 60.6349 1.18786C61.0762 0.899998 61.5624 0.670798 62.125 0.484574Z" fill="black"/>
+          <path d="M46.1068 0.00151365C46.2226 -0.00326082 47.2108 0.00424344 47.3652 0.010382C48.8498 0.075868 49.9697 0.255953 50.9716 0.589522C53.1126 1.30373 54.2787 2.66733 54.4703 4.68306C54.4766 4.74513 54.4814 4.80721 54.4814 4.82154V4.84746L51.9059 4.84405L51.9011 4.78606C51.8535 4.24035 51.6735 3.76353 51.3584 3.35015C51.1998 3.14278 50.9764 2.92722 50.7371 2.75191C50.0165 2.22325 48.9829 1.8931 47.7307 1.79214C47.4528 1.76963 47.3232 1.76349 46.9756 1.7594C46.0578 1.74848 45.2676 1.82761 44.576 2.00019C43.1831 2.34877 42.3874 3.03364 42.2288 4.02206C42.2046 4.17077 42.1984 4.27036 42.2026 4.45659C42.206 4.64486 42.2129 4.7008 42.2488 4.84063C42.2998 5.04187 42.4018 5.24037 42.5404 5.41022C42.5991 5.48185 42.739 5.61623 42.8211 5.67899C43.1914 5.96344 43.7141 6.1715 44.4002 6.30724C44.4402 6.31475 45.8413 6.55622 47.5135 6.84272C49.1863 7.12922 50.6054 7.37343 50.6682 7.38503C51.5798 7.55556 52.4217 7.83251 53.0437 8.16744C54.2428 8.81412 54.8999 9.74047 55.0289 10.9663C55.1137 11.7671 54.9641 12.5523 54.6089 13.1798C54.409 13.5332 54.1552 13.8422 53.8215 14.1382C53.1216 14.761 52.05 15.274 50.7888 15.5912C49.8931 15.817 49.0374 15.9323 47.8617 15.9875C47.6121 15.9991 46.8363 16.0032 46.5412 15.9944C44.9587 15.9473 43.6754 15.7399 42.5729 15.3511C41.4123 14.9425 40.4711 14.3299 39.8457 13.5755C39.3216 12.9431 39.0072 12.2119 38.8982 11.3687C38.8727 11.1709 38.8562 10.9451 38.8562 10.7835V10.6866H41.433L41.4372 10.8244C41.4558 11.3994 41.6089 11.9008 41.9019 12.3463C42.5556 13.3408 43.9457 13.9957 45.7999 14.1826C45.9427 14.1969 46.2316 14.2181 46.4205 14.2283C46.6336 14.2399 47.4921 14.2399 47.7307 14.2283C48.8243 14.1751 49.6594 14.04 50.3992 13.7972C51.6466 13.3879 52.3003 12.7446 52.3789 11.8497C52.3962 11.6539 52.3769 11.3612 52.3334 11.1573C52.239 10.7152 52.0107 10.3544 51.6625 10.0952C51.1784 9.73433 50.2386 9.42191 48.7547 9.1279C48.3724 9.05175 48.3632 9.05015 46.158 8.66946L45.8896 8.62312C44.6815 8.41438 43.6237 8.2302 43.5382 8.21315C42.3053 7.96962 41.3468 7.58421 40.6869 7.0651C40.0126 6.53508 39.6395 5.87544 39.5492 5.0521C39.534 4.91362 39.5285 4.60666 39.5381 4.4484C39.594 3.54797 39.8898 2.81126 40.4677 2.13253C40.558 2.0268 40.8579 1.73006 40.9731 1.6332C41.5551 1.14342 42.1702 0.796893 42.9349 0.527446C43.7754 0.232078 44.7718 0.0567671 45.8758 0.0110641L46.1068 0.00151365Z" fill="black"/>
+          <path d="M0 15.5984H2.66166V3.32594L2.69821 3.32799L2.73407 3.33003L13.069 15.595L16.1768 15.5984V0.400231H13.5083V12.672H13.4414L3.25399 0.400231H0V15.5984Z" fill="black"/>
+          <path d="M22.8515 7.95155C24.9119 3.86415 26.611 0.493003 26.6275 0.459577L26.6578 0.400231L29.7836 0.403641L33.4368 7.93109C35.4462 12.071 37.1059 15.4899 37.1245 15.5281L37.1597 15.5984H34.1429L32.1377 11.1788L28.1431 2.66836H28.0783L26.0173 6.94198C24.8843 9.29264 23.4804 12.2006 22.8977 13.4053L21.8393 15.595L18.9969 15.5984L19.0514 15.4913C19.0811 15.4319 20.7912 12.039 22.8515 7.95155Z" fill="black"/>
+        </svg>
+      </div>
+  {% endif %}
+  <div class="container">
+    <div class="footer__wrapper">
+      {%- comment -%}
+      ------------------------------------------------------------------------------------------------------------------
+      BLOCK AREA
+      ------------------------------------------------------------------------------------------------------------------
+      {%- endcomment -%}
+      {% assign hide_class = '' %}
+      
+      {% if template contains 'page.ty-booty'
+        or template contains 'page.ty-twerk'
+        or template contains 'page.ty-weight-loss' %}
+        {% assign hide_class = 'hidden' %}
+      {% endif %}
+
+      {%- if section.blocks.size > 0 -%}
+        <div class="footer__block-list empty:hidden {{ hide_class }}">
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+              {%- when 'text' -%}
+                {%- if block.settings.title != blank or block.settings.content != blank or shop.features.follow_on_shop? and block.settings.enable_follow_on_shop -%}
+                  <div class="footer__block footer__block--text" {{ block.shopify_attributes }}>
+                    {%- if block.settings.title != blank -%}
+                      <p class="bold">{{ block.settings.title | escape }}</p>
+                    {%- endif -%}
+
+                    {%- if block.settings.content != blank -%}
+                      <div class="prose text-subdued">
+                        {{- block.settings.content -}}
+                      </div>
+                    {%- endif -%}
+
+                    {%- if shop.features.follow_on_shop? and block.settings.enable_follow_on_shop -%}
+                      <div class="follow-on-shop">
+                        {{- shop | login_button: action: 'follow' -}}
+                      </div>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
+
+              {%- when 'links' -%}
+                {%- if block.settings.menu != blank -%}
+                  <div class="footer__block footer__block--menu" {{ block.shopify_attributes }}>
+                    {%- if block.settings.show_menu_title -%}
+                      <p class="bold">{{ block.settings.menu_title | default: block.settings.menu.title }}</p>
+                    {%- endif -%}
+
+                    <ul class="v-stack gap-3" role="list">
+                      {%- for link in block.settings.menu.links -%}
+                        <li>
+                          <a href="{{ link.url }}" class="inline-block link-faded break-all">{{ link.title }}</a>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  </div>
+                {%- endif -%}
+
+              {%- when 'newsletter' -%}
+                <div class="footer__block footer__block--newsletter" {{ block.shopify_attributes }}>
+                  {%- if block.settings.image != blank -%}
+                    {%- capture sizes -%}{{ block.settings.image_width }}px{%- endcapture -%}
+                    {%- capture widths -%}{{ block.settings.image_width }}, {{ block.settings.image_width | times: 2 | at_most: block.settings.image.width }}{%- endcapture -%}
+                    {%- capture style -%}max-width: {{ block.settings.image_width }}px{%- endcapture -%}
+                    {{- block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: 'lazy', style: style, sizes: sizes, widths: widths -}}
+                  {%- endif -%}
+
+                  <div class="v-stack gap-6">
+                    {%- if block.settings.title != blank -%}
+                      <p class="{{ block.settings.heading_size }}">{{- block.settings.title | escape -}}</p>
+                    {%- endif -%}
+
+                    {%- if block.settings.content != blank -%}
+                      <div class="prose text-subdued">
+                        {{- block.settings.content -}}
+                      </div>
+                    {%- endif -%}
+
+                    {%- form 'customer', id: 'footer-newsletter', class: 'footer__newsletter-form form' -%}
+                      {%- if form.posted_successfully? -%}
+                        {%- capture success_message -%}{{ 'general.newsletter.subscribed_successfully' | t }}{%- endcapture -%}
+                        {%- render 'banner', content: success_message, status: 'success' -%}
+                      {%- else -%}
+                        {%- if form.errors -%}
+                          {%- capture error_message -%}{{ form.errors.translated_fields['email'] }} {{ form.errors.messages['email'] }}{%- endcapture -%}
+                          {%- render 'banner', content: error_message, status: 'error' -%}
+                        {%- endif -%}
+
+                        <input type="hidden" name="contact[tags]" value="newsletter">
+
+                        {%- capture label -%}{{ 'general.newsletter.email' | t }}{%- endcapture -%}
+                        {%- render 'input', name: 'contact[email]', label: label, type: 'email', required: true, autocomplete: 'email', enterkeyhint: 'send', self_submit: true -%}
+                      {%- endif -%}
+                    {%- endform -%}
+                  </div>
+                </div>
+            {%- endcase -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- comment -%}
+      ------------------------------------------------------------------------------------------------------------------
+      SECONDARY AREA
+      ------------------------------------------------------------------------------------------------------------------
+      {%- endcomment -%}
+
+      <div class="footer__aside empty:hidden">
+        {%- comment -%}
+        ----------------------------------------------------------------------------------------------------------------
+        SOCIAL MEDIA + LOCALIZATION
+        ----------------------------------------------------------------------------------------------------------------
+        {%- endcomment -%}
+
+        {%- if section.settings.show_social_media -%}
+          {%- capture social_media -%}{%- render 'social-media' -%}{%- endcapture -%}
+        {%- endif -%}
+
+        {%- if section.settings.show_country_selector and localization.available_countries.size > 1 -%}
+          {%- assign country_selector = true -%}
+        {%- endif -%}
+
+        {%- if section.settings.show_locale_selector and localization.available_languages.size > 1 -%}
+          {%- assign locale_selector = true -%}
+        {%- endif -%}
+
+        {%- if social_media != blank or country_selector or locale_selector -%}
+          <div class="footer__aside-top">
+            {{- social_media -}}
+
+            {%- if country_selector or locale_selector -%}
+              <div class="h-stack gap-6">
+                {%- if social_media == blank -%}
+                  {%- assign popover_horizontal_position = 'start' -%}
+                {%- else -%}
+                  {%- assign popover_horizontal_position = 'end' -%}
+                {%- endif -%}
+
+                {%- if country_selector -%}
+                  {%- render 'localization-selector', type: 'country', show_country_name: section.settings.show_country_name, show_country_flag: section.settings.show_country_flag, popover_horizontal_position: popover_horizontal_position -%}
+                {%- endif -%}
+
+                {%- if locale_selector -%}
+                  {%- render 'localization-selector', type: 'locale', popover_horizontal_position: popover_horizontal_position -%}
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {%- comment -%}
+        ----------------------------------------------------------------------------------------------------------------
+        COPYRIGHT + PAYMENT METHODS
+        ----------------------------------------------------------------------------------------------------------------
+        {%- endcomment -%}
+
+        <div class="footer__aside-bottom">
+          {%- if section.settings.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
+            <div class="footer__payment-icons h-stack wrap gap-2">
+              {%- for type in shop.enabled_payment_types -%}
+                {{- type | payment_type_svg_tag -}}
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+
+          <p class="footer__copyright text-sm text-subdued">© {{ 'now' | date: '%Y' }}, {{ shop.name }}. {{ powered_by_link }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Footer",
+  "class": "shopify-section--footer",
+  "tag": "footer",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_social_media",
+      "label": "Show social media",
+      "info": "To configure social media, go to your social media settings.",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show payment icons",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Country/region selector",
+      "info": "To add a country/region, go to your [markets settings.](/admin/settings/markets)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_country_selector",
+      "label": "Show country/region selector",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_country_flag",
+      "label": "Show country flag",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_country_name",
+      "label": "Show country name",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Language selector",
+      "info": "To add a language, go to your [language settings.](/admin/settings/languages)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_locale_selector",
+      "label": "Show language selector",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "About our store"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Use this text area to tell your customers about your brand and vision. You can change it in the theme editor.</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_follow_on_shop",
+          "label": "Show Follow on Shop",
+          "info": "To allow customers to follow your store on the Shop app from your storefront, Shop Pay must be enabled. [Learn more](https://help.shopify.com/manual/online-store/themes/customizing-themes/follow-on-shop)",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "links",
+      "name": "Links",
+      "settings": [
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu",
+          "info": "This menu won't show dropdown items.",
+          "default": "footer"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_menu_title",
+          "label": "Show menu title",
+          "default": true
+        },
+        {
+          "type": "inline_richtext",
+          "id": "menu_title",
+          "label": "Menu title",
+          "info": "Replaces the default menu title"
+        }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "name": "Newsletter",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Customers who subscribe will have their email address added to the \"accepts marketing\" [customer list](/admin/customers?query=&accepts_marketing=1)."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "600 x 600px .png recommended"
+        },
+        {
+          "type": "range",
+          "id": "image_width",
+          "min": 50,
+          "max": 300,
+          "step": 10,
+          "unit": "px",
+          "label": "Image width",
+          "default": 150
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "label": "Title size",
+          "options": [
+            {
+              "value": "h3",
+              "label": "H3"
+            },
+            {
+              "value": "h4",
+              "label": "H4"
+            },
+            {
+              "value": "h5",
+              "label": "H5"
+            },
+            {
+              "value": "h6",
+              "label": "H6"
+            }
+          ],
+          "default": "h3"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Sign up to our newsletter"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

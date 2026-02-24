@@ -1,0 +1,19 @@
+<!--LOOMI SDK-->
+<!--DO NOT EDIT-->
+<link rel="preconnect"  href="https://sdk.loomi-prod.xyz/" crossorigin>
+<link rel="dns-prefetch" href="https://sdk.loomi-prod.xyz/">
+<script>
+    const env = 2;
+    var store = "{{ shop.permanent_domain }}";
+    var alias = store.replace(".myshopify.com", "").replaceAll("-", "_").toUpperCase();
+    var jitsuKey =  "js.{{ shop.id }}";
+    window.loomi_ctx = {...(window.loomi_ctx || {}),storeAlias:alias,jitsuKey,env};
+</script>
+<link href="https://sdk.loomi-prod.xyz/widgets/vsly-preact.min.js?k=js.27656585290&e=2&s=FIT_NASS_STORE" rel="preload" as="script">
+<script type="text/javascript" src="https://sdk.loomi-prod.xyz/widgets/vsly-preact.min.js?k=js.27656585290&e=2&s=FIT_NASS_STORE"></script>
+<link href="https://sdk.loomi-prod.xyz/cf/FIT_NASS_STORE.js" rel="preload" as="script">
+<link href="https://sdk.loomi-prod.xyz/v/visually.js" rel="preload" as="script">
+<script type="text/javascript" src="https://sdk.loomi-prod.xyz/cf/FIT_NASS_STORE.js"></script>
+<script type="text/javascript" src="https://sdk.loomi-prod.xyz/v/visually.js"></script>
+<script defer type="text/javascript" src="https://sdk.loomi-prod.xyz/v/visually-a.js"></script>
+<!--LOOMI SDK-->

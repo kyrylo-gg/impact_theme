@@ -1,0 +1,264 @@
+.ts-timer-bar {
+  padding-inline: var(--section-padding);
+}
+
+.ts-timer-bar__inner {
+  position: relative;
+  border-radius: var(--content-radius);
+  overflow: hidden;
+}
+
+.ts-timer-bar--desk-fixed .ts-timer-bar__inner {
+  height: var(--section-height);
+}
+
+.ts-timer-bar__media {
+  display: flex;
+  position: relative;
+  z-index: 1;
+}
+
+.ts-timer-bar__media-mobile {
+  display: none;
+}
+
+.ts-timer-bar--bg-color .ts-timer-bar__media {
+  background: var(--section-background);
+}
+
+.ts-timer-bar--desk-fixed .ts-timer-bar__media,
+.ts-timer-bar--desk-adapt-content .ts-timer-bar__media {
+  position: absolute;
+  inset: 0;
+}
+
+.ts-timer-bar__media img {
+  width: 100%;
+  height: fit-content;
+  object-fit: contain;
+}
+
+.ts-timer-bar--desk-fixed .ts-timer-bar__media img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.ts-timer-bar--desk-adapt-background .ts-timer-bar__media img {
+  height: fit-content;
+}
+
+.ts-timer-bar__content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+  padding: 12px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ts-timer-bar__content-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ts-timer-bar--max .ts-timer-bar__content-inner {
+  max-width: var(--section-max-width);
+  margin: 0 auto;
+}
+
+.ts-timer-bar--desk-adapt-content .ts-timer-bar__content {
+  height: fit-content;
+}
+
+.ts-timer-bar--desk-adapt-background .ts-timer-bar__content {
+  position: absolute;
+  inset: 0;
+}
+
+.ts-timer-bar__headings {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+
+.ts-timer-bar__title,
+.ts-timer-bar__subtitle {
+  color: var(--content-color);
+  font-size: var(--content-size);
+  font-family: "Avenir";
+  font-weight: 800;
+  line-height: 120%;
+  letter-spacing: 0;
+}
+
+.ts-timer-bar__title ~ .ts-timer-bar__subtitle {
+  position: relative;
+}
+
+.ts-timer-bar__title ~ .ts-timer-bar__subtitle::after {
+  content: "";
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+  position: absolute;
+  background-color: var(--close-color);
+  top: 50%;
+  left: -32px;
+  transform: translate(-50%, -50%);
+}
+
+.ts-timer-bar__controls {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 72px;
+}
+
+.ts-timer-bar__button {
+  background-color: var(--content-background);
+  color: var(--content-color);
+  padding: 10px 24px;
+  font-size: var(--content-size);
+  border-radius: 10px;
+  font-family: "Avenir";
+  font-weight: 800;
+  line-height: 150%;
+  letter-spacing: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.ts-timer-bar__button--fit {
+  width: fit-content;
+}
+
+.ts-timer-bar__button--fixed {
+  width: var(--content-width);
+}
+
+.ts-timer-bar__close {
+  color: var(--close-color);
+  cursor: pointer;
+  display: flex;
+}
+
+.ts-timer-bar__close svg {
+  width: 13px;
+  height: fit-content;
+}
+
+@media screen and (max-width: 749px) {
+  .ts-timer-bar--mob-adapt-background .ts-timer-bar__inner,
+  .ts-timer-bar--mob-adapt-content .ts-timer-bar__inner {
+    height: fit-content;
+  }
+
+  .ts-timer-bar--mob-fixed .ts-timer-bar__inner {
+    height: var(--section-height);
+  }
+
+  .ts-timer-bar__media-desktop {
+    display: none;
+  }
+
+  .ts-timer-bar__media-mobile {
+    display: block;
+  }
+
+  .ts-timer-bar--mob-fixed .ts-timer-bar__media,
+  .ts-timer-bar--mob-adapt-content .ts-timer-bar__media {
+    position: absolute;
+    inset: 0;
+  }
+
+  .ts-timer-bar--mob-adapt-background .ts-timer-bar__media {
+    position: relative;
+  }
+
+  .ts-timer-bar--mob-fixed .ts-timer-bar__media img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ts-timer-bar--mob-adapt-background .ts-timer-bar__media img {
+    height: fit-content;
+  }
+
+  .ts-timer-bar--mob-adapt-background .ts-timer-bar__content {
+    position: absolute;
+    inset: 0;
+  }
+
+  .ts-timer-bar--mob-adapt-content .ts-timer-bar__content {
+    position: relative;
+    height: fit-content;
+  }
+
+  .ts-timer-bar--mob-fixed .ts-timer-bar__content {
+    position: relative;
+    height: 100%;
+  }
+
+  .ts-timer-bar__content {
+    padding: 12px 16px;
+    gap: 20px;
+  }
+
+  .ts-timer-bar__headings {
+    gap: 0;
+    align-items: start;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .ts-timer-bar__title ~ .ts-timer-bar__subtitle::after {
+    display: none;
+  }
+
+  .ts-timer-bar__timer-wrapper .ts-timer {
+    gap: 12px;
+  }
+
+  .ts-timer-bar__timer-wrapper .ts-timer__cell {
+    padding: 6px;
+  }
+
+  .ts-timer-bar__timer-wrapper .ts-timer__cell:not(:last-of-type)::after {
+    left: calc(100% + 6px);
+  }
+
+  .ts-timer-bar__controls {
+    gap: 0;
+  }
+
+  .ts-timer-bar__button {
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+    padding: 0;
+  }
+
+  .ts-timer-bar__button::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: all;
+  }
+
+  .ts-timer-bar__close {
+    z-index: 2;
+  }
+
+  .ts-timer-bar__close svg {
+    width: 8px;
+  }
+}

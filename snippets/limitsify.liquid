@@ -1,0 +1,15 @@
+{{ '//reginapps.com/limitsify/javascripts/limitsify.min.js' | script_tag }}
+
+<script>
+  if (typeof limitsifyTheme === 'undefined') {
+    var limitsifyTheme = new Limitsify.DefaultAdapter();
+
+    var limitsifyClient = new Limitsify({
+      apiToken: '{{ shop.metafields.limitsify.authentication_token }}',
+      cart: {{ cart | json }},
+      theme: limitsifyTheme,
+      rememberButtonLabels: false,
+      settings: '{{shop.metafields.limitsify.config }}'
+    });
+  }
+</script>

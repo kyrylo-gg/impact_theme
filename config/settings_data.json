@@ -1,0 +1,448 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "section_vertical_spacing": "medium",
+    "button_border_radius": 60,
+    "input_border_radius": 8,
+    "block_border_radius": 24,
+    "block_shadow_opacity": 10,
+    "block_shadow_vertical_offset": 18,
+    "background": "#ffffff",
+    "text_color": "#1a1a1a",
+    "header_background": "#f2f2f2",
+    "header_text_color": "#1a1a1a",
+    "footer_background": "#ffffff",
+    "footer_text_color": "#1a1a1a",
+    "primary_button_background": "#1a1a1a",
+    "primary_button_text_color": "#ffffff",
+    "secondary_button_background": "#f0c417",
+    "secondary_button_text_color": "#1a1a1a",
+    "product_card_text_color": "#1a1a1a",
+    "product_primary_badge_background": "#803cee",
+    "heading_font": "anybody_n4",
+    "heading_font_size": "large",
+    "heading_letter_spacing": 1,
+    "text_font": "avenir_next_n4",
+    "currency_code_enabled": false,
+    "show_page_transition": false,
+    "heading_apparition": "split_fade",
+    "color_swatch_config": "Blue:#72F7F9\nKhaki:#1A4136\nRed:#FF6857\nYellow:#FFFCA4\nSky Blue:#8DD7DC\nMint:#75DBAF\nDeep Blue:#206BB7\nMulticolor:multicolor.jpg",
+    "show_discount": false,
+    "discount_mode": "percentage",
+    "product_color_display": "swatch",
+    "product_info_alignment": "start",
+    "cart_type": "drawer",
+    "cart_icon": "shopping_basket",
+    "cart_empty_button_link": "shopify://collections/shorts",
+    "cart_show_free_shipping_threshold": false,
+    "cart_free_shipping_threshold": 94,
+    "favicon": "shopify://shop_images/nass_favicon.png",
+    "checkout_accent_color": "#f0c417",
+    "checkout_button_color": "#1a1a1a",
+    "sections": {
+      "redirects": {
+        "type": "redirects",
+        "blocks": {
+          "redirect_MxtkXz": {
+            "type": "redirect",
+            "settings": {
+              "from": "/collections",
+              "to": "/"
+            }
+          },
+          "redirect_LJQHip": {
+            "type": "redirect",
+            "settings": {
+              "from": "/products",
+              "to": "/"
+            }
+          },
+          "redirect_UXQEC3": {
+            "type": "redirect",
+            "settings": {
+              "from": "/products/willow-flow-1",
+              "to": "/products/willow-flow"
+            }
+          },
+          "redirect_dw6Yj7": {
+            "type": "redirect",
+            "settings": {
+              "from": "/products/perfect-black",
+              "to": "/products/perfect-black-shorts"
+            }
+          },
+          "redirect_wfkzFM": {
+            "type": "redirect",
+            "settings": {
+              "from": "/products/petal-splash",
+              "to": "/products/petal-splash-shorts"
+            }
+          },
+          "redirect_w4Wkht": {
+            "type": "redirect",
+            "settings": {
+              "from": "/products/pinky-zebra",
+              "to": "/products/pinky-zebra-shorts"
+            }
+          },
+          "redirect_EergMz": {
+            "type": "redirect",
+            "settings": {
+              "from": "/products/neon-drift",
+              "to": "/products/neon-drift-shorts"
+            }
+          },
+          "redirect_Ljgxfd": {
+            "type": "redirect",
+            "settings": {
+              "from": "/products/mystic-zebra",
+              "to": "/products/mystic-zebra-shorts"
+            }
+          },
+          "redirect_HWeraa": {
+            "type": "redirect",
+            "settings": {
+              "from": "/products/shadow-ninja",
+              "to": "/products/shadow-ninja-shorts"
+            }
+          },
+          "redirect_XK6EQ9": {
+            "type": "redirect",
+            "settings": {
+              "from": "",
+              "to": ""
+            }
+          },
+          "redirect_LWGMkj": {
+            "type": "redirect",
+            "settings": {
+              "from": "/products/sunny-ani",
+              "to": "/products/sunny-ani-shorts"
+            }
+          },
+          "redirect_MLHjzQ": {
+            "type": "redirect",
+            "settings": {
+              "from": "/products/cosmic-nebula",
+              "to": "/products/cosmic-nebula-shorts"
+            }
+          },
+          "redirect_QM6m43": {
+            "type": "redirect",
+            "settings": {
+              "from": "/products/terra-speckle",
+              "to": "/products/terra-speckle-shorts"
+            }
+          },
+          "redirect_WHjpaj": {
+            "type": "redirect",
+            "settings": {
+              "from": "/products/2-shorts-1-top",
+              "to": "/collections/tops-shorts"
+            }
+          },
+          "redirect_zFNxM3": {
+            "type": "redirect",
+            "settings": {
+              "from": "/products/twerk-program-2",
+              "to": "/products/twerk-program-1"
+            }
+          },
+          "redirect_H9PJxP": {
+            "type": "redirect",
+            "settings": {
+              "from": "/products/mega-course-pack-1",
+              "to": "/products/twerk-program-1"
+            }
+          },
+          "redirect_WDYn8V": {
+            "type": "redirect",
+            "settings": {
+              "from": "/products/mega-course-pack",
+              "to": "/products/twerk-program-1"
+            }
+          },
+          "redirect_dKT39f": {
+            "type": "redirect",
+            "settings": {
+              "from": "/products/mega-course-pack-2",
+              "to": "/products/twerk-program-1"
+            }
+          },
+          "redirect_ERXLG9": {
+            "type": "redirect",
+            "settings": {
+              "from": "/products/mega-course-pack-3",
+              "to": "/products/twerk-program-1"
+            }
+          },
+          "redirect_yw3G8B": {
+            "type": "redirect",
+            "settings": {
+              "from": "/products/megacoursepack",
+              "to": "/products/twerk-program-1"
+            }
+          }
+        },
+        "block_order": [
+          "redirect_MxtkXz",
+          "redirect_LJQHip",
+          "redirect_UXQEC3",
+          "redirect_dw6Yj7",
+          "redirect_wfkzFM",
+          "redirect_w4Wkht",
+          "redirect_EergMz",
+          "redirect_Ljgxfd",
+          "redirect_HWeraa",
+          "redirect_XK6EQ9",
+          "redirect_LWGMkj",
+          "redirect_MLHjzQ",
+          "redirect_QM6m43",
+          "redirect_WHjpaj",
+          "redirect_zFNxM3",
+          "redirect_H9PJxP",
+          "redirect_WDYn8V",
+          "redirect_dKT39f",
+          "redirect_ERXLG9",
+          "redirect_yw3G8B"
+        ],
+        "settings": {
+          "enable": true
+        }
+      },
+      "wsg-custom-fields": {
+        "type": "wsg-custom-fields",
+        "blocks": {
+          "33d01ef9-302a-41da-9e82-aa20956c0c13": {
+            "type": "text_block",
+            "settings": {
+              "text_input": "Website",
+              "isRequired": false
+            }
+          },
+          "ff8cd25a-11e1-4257-baa4-fdf11874553a": {
+            "type": "phone_block",
+            "settings": {
+              "phone_text_input": "Phone Number",
+              "isRequired": false
+            }
+          },
+          "ba10929b-9fff-4f31-8999-ce74f7475e6f": {
+            "type": "text_block",
+            "settings": {
+              "text_input": "Tax ID/ABN/VAT Number",
+              "isRequired": false
+            }
+          },
+          "7e3c653e-b2ef-4189-a5fd-6641fd6563d3": {
+            "type": "textarea_block",
+            "settings": {
+              "textarea_label": "Note",
+              "textarea_placeholder": "Tell us a little about yourself so that we can verify your business identity",
+              "isRequired": false
+            }
+          }
+        },
+        "block_order": [
+          "33d01ef9-302a-41da-9e82-aa20956c0c13",
+          "ff8cd25a-11e1-4257-baa4-fdf11874553a",
+          "ba10929b-9fff-4f31-8999-ce74f7475e6f",
+          "7e3c653e-b2ef-4189-a5fd-6641fd6563d3"
+        ],
+        "settings": {}
+      }
+    },
+    "content_for_index": [],
+    "blocks": {
+      "14060646107696862457": {
+        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": false,
+        "settings": {}
+      },
+      "12120936241911852800": {
+        "type": "shopify://apps/judge-me-reviews/blocks/reviews_tab/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": true,
+        "settings": {
+          "position": "right"
+        }
+      },
+      "3667842014806057753": {
+        "type": "shopify://apps/one-click-upsell-zipify-ocu/blocks/app-embed/bfe6e378-b73a-4871-b8d3-7d6ede22678e",
+        "disabled": false,
+        "settings": {}
+      },
+      "15683396631634586217": {
+        "type": "shopify://apps/inbox/blocks/chat/841fc607-4181-4ad1-842d-e24d7f8bad6b",
+        "disabled": true,
+        "settings": {
+          "button_color": "#000000",
+          "secondary_color": "#ffffff",
+          "ternary_color": "#6A6A6A",
+          "button_icon": "question_mark",
+          "button_text": "contact",
+          "button_horizontal_position": "bottom_right",
+          "button_vertical_position": "lowest",
+          "greeting_message": ""
+        }
+      },
+      "18180687451954623939": {
+        "type": "shopify://apps/eda40cb1-opensend/blocks/opensend/9c025a3f-ec2e-4066-a92f-ca94fbffaf84",
+        "disabled": false,
+        "settings": {}
+      },
+      "2399026625676879482": {
+        "type": "shopify://apps/tevello-courses-communities/blocks/app-embed/6af98c2b-ad4a-443c-872d-d116e2eac923",
+        "disabled": false,
+        "settings": {
+          "account_page_position": "top"
+        }
+      },
+      "14327677521557774844": {
+        "type": "shopify://apps/simprosys-google-shopping-feed/blocks/core_settings_block/1f0b859e-9fa6-4007-97e8-4513aff5ff3b",
+        "disabled": false,
+        "settings": {}
+      },
+      "1232542678405107163": {
+        "type": "shopify://apps/instafeed/blocks/head-block/c447db20-095d-4a10-9725-b5977662c9d5",
+        "disabled": false,
+        "settings": {}
+      },
+      "855628211100114053": {
+        "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507",
+        "disabled": false,
+        "settings": {}
+      },
+      "15557474716127144420": {
+        "type": "shopify://apps/kaching-bundles/blocks/app-embed-block/6c637362-a106-4a32-94ac-94dcfd68cdb8",
+        "disabled": false,
+        "settings": {}
+      },
+      "7194384644902525832": {
+        "type": "shopify://apps/fokkio-automatic-gift/blocks/widget/866ae171-054c-4fa5-8677-5f391a13902b",
+        "disabled": false,
+        "settings": {}
+      },
+      "1877152918344802950": {
+        "type": "shopify://apps/intelligems-a-b-testing/blocks/intelligems-script/fa83b64c-0c77-4c0c-b4b2-b94b42f5ef19",
+        "disabled": false,
+        "settings": {}
+      },
+      "169412249732273955": {
+        "type": "shopify://apps/intercom-ai-customer-service/blocks/widget/ef6552d6-43c7-4fc7-b903-fec510e74dee",
+        "disabled": true,
+        "settings": {}
+      },
+      "17676059084223943535": {
+        "type": "shopify://apps/triplewhale/blocks/triple_pixel_snippet/483d496b-3f1a-4609-aea7-8eee3b6b7a2a",
+        "disabled": false,
+        "settings": {}
+      }
+    }
+  },
+  "presets": {
+    "Sound": {
+      "section_vertical_spacing": "medium",
+      "button_border_radius": 60,
+      "input_border_radius": 8,
+      "block_border_radius": 24,
+      "block_shadow_opacity": 10,
+      "block_shadow_vertical_offset": 18,
+      "background": "#f0f0f0",
+      "text_color": "#1a1a1a",
+      "header_background": "#f0f0f0",
+      "header_text_color": "#1a1a1a",
+      "footer_background": "#ffffff",
+      "footer_text_color": "#1a1a1a",
+      "primary_button_background": "#1a1a1a",
+      "primary_button_text_color": "#ffffff",
+      "secondary_button_background": "#f0c417",
+      "secondary_button_text_color": "#1a1a1a",
+      "product_card_text_color": "#1a1a1a",
+      "product_primary_badge_background": "#803cee",
+      "heading_font": "din_next_n7",
+      "heading_font_size": "large",
+      "heading_letter_spacing": -2,
+      "text_font": "din_next_n4",
+      "show_page_transition": false,
+      "cart_icon": "shopping_basket",
+      "heading_apparition": "split_fade",
+      "product_color_display": "swatch",
+      "product_info_alignment": "start",
+      "checkout_accent_color": "#f0c417",
+      "checkout_button_color": "#1a1a1a"
+    },
+    "Home": {
+      "section_vertical_spacing": "medium",
+      "section_boxed_horizontal_spacing": "large",
+      "button_hover_effect": "reverse",
+      "background": "#ffffff",
+      "text_color": "#272727",
+      "success_color": "#708a5c",
+      "warning_color": "#e37e16",
+      "error_color": "#aa2826",
+      "header_background": "#ffffff",
+      "header_text_color": "#272727",
+      "footer_background": "#f2f2f2",
+      "footer_text_color": "#272727",
+      "primary_button_background": "#272727",
+      "primary_button_text_color": "#ffffff",
+      "secondary_button_background": "#3c619e",
+      "secondary_button_text_color": "#ffffff",
+      "product_card_text_color": "#272727",
+      "product_on_sale_accent": "#e34f4f",
+      "product_sold_out_badge_background": "#bebdb9",
+      "product_primary_badge_background": "#3c619e",
+      "heading_font": "futura_n7",
+      "heading_font_size": "large",
+      "heading_text_transform": "normal",
+      "heading_letter_spacing": -1,
+      "text_font": "futura_n4",
+      "cart_icon": "shopping_basket",
+      "heading_apparition": "split_rotation",
+      "color_swatch_style": "rectangle",
+      "product_color_display": "swatch",
+      "cart_type": "drawer",
+      "checkout_body_background_color": "#f2f2f2",
+      "checkout_sidebar_background_color": "#ffffff",
+      "checkout_accent_color": "#3c619e",
+      "checkout_button_color": "#3c619e"
+    },
+    "Shape": {
+      "page_width": 1440,
+      "section_vertical_spacing": "small",
+      "section_boxed_horizontal_spacing": "medium",
+      "button_border_radius": 60,
+      "input_border_radius": 8,
+      "block_border_radius": 20,
+      "icon_stroke_width": 1.5,
+      "button_style": "fill",
+      "button_hover_effect": "reverse",
+      "text_color": "#2a555a",
+      "header_background": "#ffffff",
+      "header_text_color": "#2a555a",
+      "footer_background": "#f7f7f7",
+      "footer_text_color": "#2a555a",
+      "primary_button_background": "#2a555a",
+      "primary_button_text_color": "#ffffff",
+      "secondary_button_background": "#d9967e",
+      "product_card_text_color": "#2a555a",
+      "cart_icon": "tote_bag",
+      "heading_font": "itc_berkeley_old_style_n4",
+      "heading_font_size": "large",
+      "heading_text_transform": "normal",
+      "heading_letter_spacing": -1,
+      "text_font": "muli_n4",
+      "text_font_size_desktop": 15,
+      "product_color_display": "swatch",
+      "product_info_alignment": "center"
+    }
+  }
+}

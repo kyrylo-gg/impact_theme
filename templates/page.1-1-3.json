@@ -1,0 +1,655 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "content_width": "80ch"
+      }
+    },
+    "image_with_text_overlay_6aC8Kz": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading_Lm3xVR": {
+          "type": "heading",
+          "settings": {
+            "text": "50% OFF SITEWIDE",
+            "heading_tag": "h0"
+          }
+        },
+        "richtext_wcJmej": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Discounts are already  applied!</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_Lm3xVR",
+        "richtext_wcJmej"
+      ],
+      "settings": {
+        "full_width": true,
+        "allow_transparent_header": false,
+        "enable_parallax": false,
+        "image_size": "auto",
+        "image": "shopify://shop_images/Banner_1_Desk_3_595b4fed-6034-465a-86ed-7771c1bb744f.jpg",
+        "mobile_text_position": "place-self-center text-center",
+        "desktop_text_position": "sm:place-self-center sm:text-center",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0
+      }
+    },
+    "featured_product_kAPefq": {
+      "type": "featured-product",
+      "blocks": {
+        "title_h3iV7t": {
+          "type": "title",
+          "settings": {
+            "heading_tag": "h2"
+          }
+        },
+        "badges_tkeJxN": {
+          "type": "badges",
+          "settings": {}
+        },
+        "price_TtPEAx": {
+          "type": "price",
+          "settings": {
+            "show_taxes_notice": false
+          }
+        },
+        "rating_4U8R79": {
+          "type": "rating",
+          "settings": {
+            "show_empty": false
+          }
+        },
+        "separator_QHdrMp": {
+          "type": "separator",
+          "settings": {}
+        },
+        "description_d4hnma": {
+          "type": "description",
+          "settings": {
+            "collapse_content": false
+          }
+        },
+        "buy_buttons_UpR36Q": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": true,
+            "show_gift_card_recipient": true,
+            "atc_button_background": "",
+            "atc_button_text_color": "",
+            "payment_button_background": "",
+            "payment_button_text_color": ""
+          }
+        },
+        "pickup_availability_EeNykr": {
+          "type": "pickup_availability",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "title_h3iV7t",
+        "badges_tkeJxN",
+        "price_TtPEAx",
+        "rating_4U8R79",
+        "separator_QHdrMp",
+        "description_d4hnma",
+        "buy_buttons_UpR36Q",
+        "pickup_availability_EeNykr"
+      ],
+      "name": "Featured product",
+      "settings": {
+        "full_width": true,
+        "product": "the-twerk-program",
+        "desktop_media_width": 55,
+        "desktop_media_layout": "carousel_thumbnails_left",
+        "mobile_media_size": "expanded",
+        "mobile_carousel_control": "floating_dots",
+        "enable_video_autoplay": true,
+        "enable_video_looping": false,
+        "enable_image_zoom": true,
+        "max_image_zoom_level": 3,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "input_background": "rgba(0,0,0,0)",
+        "input_text_color": ""
+      }
+    },
+    "featured_collection_qfmeGy": {
+      "type": "featured-collection",
+      "name": "Featured collection",
+      "settings": {
+        "collection": "programs",
+        "products": [],
+        "full_width": true,
+        "stack_products": true,
+        "show_progress_bar": false,
+        "products_count": 4,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "subheading": "",
+        "title": "COURSES",
+        "content": "",
+        "link_url": "",
+        "link_text": "View all",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
+    },
+    "featured_product_dp4XJT": {
+      "type": "featured-product",
+      "blocks": {
+        "vendor_zqUjLG": {
+          "type": "vendor",
+          "disabled": true,
+          "settings": {}
+        },
+        "title_DUEPiy": {
+          "type": "title",
+          "settings": {
+            "heading_tag": "h2"
+          }
+        },
+        "badges_9Bxg4M": {
+          "type": "badges",
+          "settings": {}
+        },
+        "price_yRjCPd": {
+          "type": "price",
+          "settings": {
+            "show_taxes_notice": false
+          }
+        },
+        "rating_tzqahU": {
+          "type": "rating",
+          "settings": {
+            "show_empty": false
+          }
+        },
+        "separator_qkzzyC": {
+          "type": "separator",
+          "disabled": true,
+          "settings": {}
+        },
+        "description_D6MbaB": {
+          "type": "description",
+          "settings": {
+            "collapse_content": false
+          }
+        },
+        "variant_picker_CMYapy": {
+          "type": "variant_picker",
+          "settings": {
+            "hide_sold_out_variants": false,
+            "stack_blocks": true,
+            "selector_mode": "block",
+            "color_mode": "color",
+            "size_chart_page": ""
+          }
+        },
+        "quantity_selector_imHmrF": {
+          "type": "quantity_selector",
+          "disabled": true,
+          "settings": {}
+        },
+        "buy_buttons_MUH4ir": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": true,
+            "show_gift_card_recipient": true,
+            "atc_button_background": "",
+            "atc_button_text_color": "",
+            "payment_button_background": "",
+            "payment_button_text_color": ""
+          }
+        },
+        "pickup_availability_DjEWpW": {
+          "type": "pickup_availability",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "vendor_zqUjLG",
+        "title_DUEPiy",
+        "badges_9Bxg4M",
+        "price_yRjCPd",
+        "rating_tzqahU",
+        "separator_qkzzyC",
+        "description_D6MbaB",
+        "variant_picker_CMYapy",
+        "quantity_selector_imHmrF",
+        "buy_buttons_MUH4ir",
+        "pickup_availability_DjEWpW"
+      ],
+      "settings": {
+        "full_width": true,
+        "product": "safari-heat-shorts",
+        "desktop_media_width": 55,
+        "desktop_media_layout": "carousel_thumbnails_left",
+        "mobile_media_size": "expanded",
+        "mobile_carousel_control": "floating_dots",
+        "enable_video_autoplay": true,
+        "enable_video_looping": false,
+        "enable_image_zoom": true,
+        "max_image_zoom_level": 3,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "input_background": "rgba(0,0,0,0)",
+        "input_text_color": ""
+      }
+    },
+    "featured_collection_q9cCqF": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "shorts-all",
+        "products": [],
+        "full_width": true,
+        "stack_products": true,
+        "show_progress_bar": false,
+        "products_count": 10,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "subheading": "",
+        "title": "MORE SHORTS:",
+        "content": "",
+        "link_url": "",
+        "link_text": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
+    },
+    "impact_text_iPTWkj": {
+      "type": "impact-text",
+      "blocks": {
+        "item_7tybty": {
+          "type": "item",
+          "settings": {
+            "title": "LEVEL UP",
+            "subheading": "Your Fit with Nass Tops",
+            "content": "",
+            "button_text": "",
+            "button_url": "",
+            "animate_impact_text": false,
+            "animate_impact_text_duration": 2
+          }
+        }
+      },
+      "block_order": [
+        "item_7tybty"
+      ],
+      "name": "Impact text",
+      "settings": {
+        "full_width": true,
+        "stack_mobile": true,
+        "text_alignment": "center",
+        "impact_text_style": "fill",
+        "text_divider": "none",
+        "impact_text_size_ratio": 1,
+        "background": "",
+        "background_gradient": "",
+        "heading_text_color": "",
+        "heading_gradient": "",
+        "text_color": "",
+        "button_background": "",
+        "button_text_color": ""
+      }
+    },
+    "featured_product_8dcd7N": {
+      "type": "featured-product",
+      "blocks": {
+        "vendor_mt6EnX": {
+          "type": "vendor",
+          "disabled": true,
+          "settings": {}
+        },
+        "title_CXn6AR": {
+          "type": "title",
+          "settings": {
+            "heading_tag": "h2"
+          }
+        },
+        "badges_DeKKHJ": {
+          "type": "badges",
+          "settings": {}
+        },
+        "price_U6W8Vz": {
+          "type": "price",
+          "settings": {
+            "show_taxes_notice": false
+          }
+        },
+        "rating_QGjbd7": {
+          "type": "rating",
+          "settings": {
+            "show_empty": false
+          }
+        },
+        "separator_867AtB": {
+          "type": "separator",
+          "settings": {}
+        },
+        "description_EEeYPU": {
+          "type": "description",
+          "settings": {
+            "collapse_content": false
+          }
+        },
+        "variant_picker_VmfP4f": {
+          "type": "variant_picker",
+          "settings": {
+            "hide_sold_out_variants": false,
+            "stack_blocks": true,
+            "selector_mode": "block",
+            "color_mode": "color",
+            "size_chart_page": ""
+          }
+        },
+        "quantity_selector_74fq9A": {
+          "type": "quantity_selector",
+          "disabled": true,
+          "settings": {}
+        },
+        "buy_buttons_8xfXLH": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": true,
+            "show_gift_card_recipient": true,
+            "atc_button_background": "",
+            "atc_button_text_color": "",
+            "payment_button_background": "",
+            "payment_button_text_color": ""
+          }
+        },
+        "pickup_availability_89Yird": {
+          "type": "pickup_availability",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "vendor_mt6EnX",
+        "title_CXn6AR",
+        "badges_DeKKHJ",
+        "price_U6W8Vz",
+        "rating_QGjbd7",
+        "separator_867AtB",
+        "description_EEeYPU",
+        "variant_picker_VmfP4f",
+        "quantity_selector_74fq9A",
+        "buy_buttons_8xfXLH",
+        "pickup_availability_89Yird"
+      ],
+      "settings": {
+        "full_width": true,
+        "product": "pink-top",
+        "desktop_media_width": 55,
+        "desktop_media_layout": "carousel_thumbnails_left",
+        "mobile_media_size": "expanded",
+        "mobile_carousel_control": "floating_dots",
+        "enable_video_autoplay": true,
+        "enable_video_looping": false,
+        "enable_image_zoom": true,
+        "max_image_zoom_level": 3,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "input_background": "rgba(0,0,0,0)",
+        "input_text_color": ""
+      }
+    },
+    "featured_collection_EFdVEg": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "crop-t-shirt",
+        "products": [],
+        "full_width": true,
+        "stack_products": true,
+        "show_progress_bar": false,
+        "products_count": 4,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "subheading": "",
+        "title": "MORE TOPS:",
+        "content": "",
+        "link_url": "",
+        "link_text": "View all",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
+    },
+    "impact_text_TrbLQP": {
+      "type": "impact-text",
+      "blocks": {
+        "item_WRLhyt": {
+          "type": "item",
+          "settings": {
+            "title": "LEGGINGS",
+            "subheading": "That Work as Hard as You Do",
+            "content": "",
+            "button_text": "",
+            "button_url": "",
+            "animate_impact_text": false,
+            "animate_impact_text_duration": 2
+          }
+        }
+      },
+      "block_order": [
+        "item_WRLhyt"
+      ],
+      "name": "Impact text",
+      "settings": {
+        "full_width": true,
+        "stack_mobile": true,
+        "text_alignment": "center",
+        "impact_text_style": "fill",
+        "text_divider": "none",
+        "impact_text_size_ratio": 1,
+        "background": "",
+        "background_gradient": "",
+        "heading_text_color": "",
+        "heading_gradient": "",
+        "text_color": "",
+        "button_background": "",
+        "button_text_color": ""
+      }
+    },
+    "featured_product_LDgLYi": {
+      "type": "featured-product",
+      "blocks": {
+        "vendor_7a99c7": {
+          "type": "vendor",
+          "disabled": true,
+          "settings": {}
+        },
+        "title_r88iVx": {
+          "type": "title",
+          "settings": {
+            "heading_tag": "h2"
+          }
+        },
+        "badges_cfQQEU": {
+          "type": "badges",
+          "settings": {}
+        },
+        "price_Jhgc8c": {
+          "type": "price",
+          "settings": {
+            "show_taxes_notice": false
+          }
+        },
+        "rating_gzFB69": {
+          "type": "rating",
+          "settings": {
+            "show_empty": false
+          }
+        },
+        "separator_RByRcK": {
+          "type": "separator",
+          "settings": {}
+        },
+        "description_pFDefH": {
+          "type": "description",
+          "settings": {
+            "collapse_content": false
+          }
+        },
+        "variant_picker_yEiN7M": {
+          "type": "variant_picker",
+          "settings": {
+            "hide_sold_out_variants": false,
+            "stack_blocks": true,
+            "selector_mode": "block",
+            "color_mode": "color",
+            "size_chart_page": ""
+          }
+        },
+        "quantity_selector_hhpKhX": {
+          "type": "quantity_selector",
+          "disabled": true,
+          "settings": {}
+        },
+        "buy_buttons_MHJdRb": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": true,
+            "show_gift_card_recipient": true,
+            "atc_button_background": "",
+            "atc_button_text_color": "",
+            "payment_button_background": "",
+            "payment_button_text_color": ""
+          }
+        },
+        "pickup_availability_VWpeKx": {
+          "type": "pickup_availability",
+          "disabled": true,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "vendor_7a99c7",
+        "title_r88iVx",
+        "badges_cfQQEU",
+        "price_Jhgc8c",
+        "rating_gzFB69",
+        "separator_RByRcK",
+        "description_pFDefH",
+        "variant_picker_yEiN7M",
+        "quantity_selector_hhpKhX",
+        "buy_buttons_MHJdRb",
+        "pickup_availability_VWpeKx"
+      ],
+      "settings": {
+        "full_width": true,
+        "product": "copy-of-essential-leggings-purple",
+        "desktop_media_width": 55,
+        "desktop_media_layout": "carousel_thumbnails_left",
+        "mobile_media_size": "expanded",
+        "mobile_carousel_control": "floating_dots",
+        "enable_video_autoplay": true,
+        "enable_video_looping": false,
+        "enable_image_zoom": true,
+        "max_image_zoom_level": 3,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "input_background": "rgba(0,0,0,0)",
+        "input_text_color": ""
+      }
+    },
+    "featured_collection_JGzVjb": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "leggings",
+        "products": [],
+        "full_width": true,
+        "stack_products": true,
+        "show_progress_bar": false,
+        "products_count": 8,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "subheading": "",
+        "title": "MORE LEGGINGS:",
+        "content": "",
+        "link_url": "",
+        "link_text": "View all",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
+    },
+    "featured_collection_DYrp6L": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "fitness-equipment",
+        "products": [],
+        "full_width": true,
+        "stack_products": true,
+        "show_progress_bar": false,
+        "products_count": 6,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 3,
+        "subheading": "",
+        "title": "EQUIPMENT",
+        "content": "",
+        "link_url": "",
+        "link_text": "View all",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_with_text_overlay_6aC8Kz",
+    "featured_product_kAPefq",
+    "featured_collection_qfmeGy",
+    "featured_product_dp4XJT",
+    "featured_collection_q9cCqF",
+    "impact_text_iPTWkj",
+    "featured_product_8dcd7N",
+    "featured_collection_EFdVEg",
+    "impact_text_TrbLQP",
+    "featured_product_LDgLYi",
+    "featured_collection_JGzVjb",
+    "featured_collection_DYrp6L"
+  ]
+}
