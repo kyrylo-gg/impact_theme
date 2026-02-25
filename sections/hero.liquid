@@ -508,7 +508,7 @@
 
   <div
     class="hero__container spacing-style section section--full-width"
-    style="{% render 'spacing-style', settings: section.settings %}"
+    style="{% render 'spacing-style', settings: section.settings %} --vertical-alignment: flex-end; --vertical-alignment-mobile: flex-end; --horizontal-alignment: center;"
   >
     {%- if section.settings.link != blank -%}
       <a
@@ -541,7 +541,7 @@
         {{section.settings.section_width}}
         {% if request.design_mode %}hero__content-wrapper--design-mode{% endif %}
       "
-      style="{% render 'layout-panel-style', settings: section.settings %}"
+      style="{% render 'layout-panel-style', settings: section.settings %} justify-content: flex-end; align-items: center;"
     >
       {% content_for 'blocks' %}
     </div>
@@ -621,17 +621,42 @@
     margin-inline-start: auto;
   }
 
-  /* Hero pill-button — NASS Design Guide compliance (#0038FF, Avenir) */
+  /* Hero content: bottom position, horizontal center */
+  .hero .hero__content-wrapper.layout-panel-flex--column {
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  /* Center button block (was left-aligned) */
+  .hero .hero__content-wrapper.layout-panel-flex--column > * {
+    align-self: center !important;
+  }
+
+  /* Bundle $107 Save — yellow brand accent (was black) */
+  .hero .text-accent {
+    color: var(--nass-accent-yellow, #f0c417) !important;
+  }
+
+  /* Hero pill-button — NASS Design Guide (Figma nodes 1484-6497, 1499-6652) */
   .hero .button-hero {
-    --button-color: var(--nass-neutral-white);
-    --button-background-color: var(--nass-primary);
-    --button-border-color: var(--nass-primary);
+    --button-color: var(--nass-neutral-white, #fff);
+    --button-background-color: var(--nass-primary, #0038FF);
+    --button-border-color: var(--nass-primary, #0038FF);
     --button-border-width: 0;
-    font-family: 'Avenir Next', 'Avenir', var(--font-body--family), sans-serif;
-    text-transform: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(1rem, 2vw, 1.625rem);
+    padding-block: clamp(0.9375rem, 2vw, 1.125rem);
+    padding-inline: clamp(1.25rem, 3vw, 1.625rem);
+    border-radius: 2rem;
+    font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
   }
   .hero .button-hero:hover {
-    --button-color: var(--nass-neutral-white);
+    --button-color: var(--nass-neutral-white, #fff);
     --button-background-color: #0028CC;
     --button-border-color: #0028CC;
   }

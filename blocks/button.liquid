@@ -1,4 +1,12 @@
-{% render 'button', link: block.settings.link, block: block %}
+{% liquid
+  assign button_href = block.settings.link
+  assign button_content = block.settings.label
+  assign button_icon = blank
+  if block.settings.show_icon and block.settings.style_class == 'button-hero'
+    assign button_icon = 'chevron-right'
+  endif
+%}
+{% render 'button', href: button_href, content: button_content, icon: button_icon, block: block %}
 
 {% schema %}
 {
