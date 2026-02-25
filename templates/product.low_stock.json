@@ -100,12 +100,11 @@
         },
         "image_EzXWQL": {
           "type": "image",
-          "disabled": true,
           "settings": {
-            "image": "shopify://shop_images/1.gif",
+            "image": "shopify://shop_images/Banner_Product_2.png",
             "alignment": "center",
             "max_width": 500,
-            "url": "https://www.nasswear.com/pages/bf25"
+            "url": "https://www.nasswear.com/products/twerk-program-1"
           }
         },
         "81a1a79f-3827-424f-9a39-74811ea8e4f4": {
