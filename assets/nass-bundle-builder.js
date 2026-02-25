@@ -159,15 +159,14 @@
       if (!resolvedProgramPackNumId) return false;
       var packSelected = getHasProgramPack();
       var thisIsPack = isProgramPack(productId);
-      if (packSelected && !thisIsPack) return true;
-      if (!packSelected && thisIsPack) {
-        var otherSelected = bbState.selectedItems.some(function(item) {
-          var st = bbState.steps.find(function(s) { return String(s.id) === String(item.stepId); });
-          return st && st.isProgramsStep && !isProgramPack(item.productId);
-        });
-        return otherSelected;
-      }
-      return false;
+      var otherSelected = bbState.selectedItems.some(function(item) {
+        var st = bbState.steps.find(function(s) { return String(s.id) === String(item.stepId); });
+        return st && st.isProgramsStep && !isProgramPack(item.productId);
+      });
+      var result = false;
+      if (packSelected && !thisIsPack) result = true;
+      else if (!packSelected && thisIsPack && otherSelected) result = true;
+      return result;
     }
 
     function getVisualOriginalPrice(stepId, realPrice, hasProgramPack) {
@@ -231,19 +230,27 @@
       renderStep();
       var variantNum = String(vid).replace(/.*\/(\d+)$/, '$1') || String(vid);
       var variantIdNum = parseInt(variantNum, 10) || variantNum;
-      fetch(cartUrls.add, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items: [{ id: variantIdNum, quantity: qty }] })
-      })
-        .then(function(r) {
-          return r.text().then(function(text) {
-            var data;
-            try { data = JSON.parse(text); } catch (e) { data = {}; }
-            if (!r.ok) return Promise.reject(new Error(data.message || data.description || 'Cart request failed'));
-            return data;
-          });
+      var payload = { items: [{ id: variantIdNum, quantity: qty }] };
+      function doCartAdd(retriesLeft) {
+        retriesLeft = retriesLeft != null ? retriesLeft : 2;
+        return fetch(cartUrls.add, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
         })
+          .then(function(r) {
+            return r.text().then(function(text) {
+              var data;
+              try { data = JSON.parse(text); } catch (e) { data = {}; }
+              if (r.status === 429 && retriesLeft > 0) {
+                return new Promise(function(resolve) { setTimeout(resolve, 1500); }).then(function() { return doCartAdd(retriesLeft - 1); });
+              }
+              if (!r.ok) return Promise.reject({ status: r.status, data: data, text: text });
+              return data;
+            });
+          });
+      }
+      doCartAdd(2)
         .then(function(data) {
           if (data.status === 422) {
             bbState.cartOperationInProgress = false;
@@ -255,6 +262,7 @@
             showToast((data.message || data.description) || 'Error adding to cart. Please try again.');
             return;
           }
+          if (!data || typeof data !== 'object') return;
           var lineKey = (data.items && data.items[0]) ? data.items[0].key : (data.key || null);
           var item = bbState.selectedItems.find(function(i) { return String(i.productId) === String(productId); });
           if (item) item.lineKey = lineKey;
@@ -271,7 +279,8 @@
           renderStep();
           renderDiscountBanner();
           renderFooterSummary();
-          showToast('Error adding to cart. Please try again.');
+          var msg = (err && err.status === 429) ? 'Too many requests. Please wait a moment and try again.' : ((err && err.data && (err.data.message || err.data.description)) || 'Error adding to cart. Please try again.');
+          showToast(msg);
         });
     }
 
@@ -399,6 +408,44 @@
         });
     }
 
+    function storefrontProductToInternal(sf) {
+      if (!sf || !sf.id) return null;
+      var v0 = (sf.variants && sf.variants.edges && sf.variants.edges[0]) ? sf.variants.edges[0].node : null;
+      var price = v0 && v0.price ? v0.price.amount : '0';
+      var compareAt = v0 && v0.compareAtPrice ? v0.compareAtPrice.amount : price;
+      var imgNodes = (sf.images && sf.images.edges) ? sf.images.edges.map(function(e) { return { url: e.node.url || '', altText: e.node.altText || '' }; }) : [];
+      var varNodes = (sf.variants && sf.variants.edges) ? sf.variants.edges.map(function(e) {
+        var v = e.node;
+        var o = (v.selectedOptions || []).map(function(opt) { return { name: opt.name, value: opt.value }; });
+        return { id: String(v.id), title: v.title || '', availableForSale: v.availableForSale !== false, price: { amount: String(v.price && v.price.amount || '0'), currencyCode: (v.price && v.price.currencyCode) || 'USD' }, selectedOptions: o };
+      }) : [];
+      return {
+        id: String(sf.id),
+        title: sf.title || '',
+        handle: sf.handle || '',
+        availableForSale: v0 ? v0.availableForSale !== false : true,
+        priceRange: { minVariantPrice: { amount: price, currencyCode: 'USD' } },
+        compareAtPriceRange: { minVariantPrice: { amount: compareAt, currencyCode: 'USD' } },
+        images: { nodes: imgNodes },
+        variants: { nodes: varNodes }
+      };
+    }
+
+    function fetchProductByIdStorefront(productId) {
+      if (!storefrontApiToken) return Promise.resolve(null);
+      var gid = String(productId).indexOf('gid://') === 0 ? productId : 'gid://shopify/Product/' + String(productId);
+      var url = 'https://' + shopDomain + '/api/2024-01/graphql.json';
+      var query = 'query($id:ID!){product(id:$id){id title handle images(first:10){edges{node{url altText}}}variants(first:20){edges{node{id title availableForSale price{amount currencyCode}compareAtPrice{amount}selectedOptions{name value}}}}}}';
+      return fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Shopify-Storefront-Access-Token': storefrontApiToken },
+        body: JSON.stringify({ query: query, variables: { id: gid } })
+      }).then(function(r) { return r.json(); }).then(function(data) {
+        var p = data && data.data && data.data.product;
+        return p ? storefrontProductToInternal(p) : null;
+      }).catch(function() { return null; });
+    }
+
     function loadAllProductsForSteps() {
       if (bbState.productsLoaded) return Promise.resolve();
       var handles = [];
@@ -419,7 +466,9 @@
           Object.assign(bbState.productsById, byHandle[h]);
         });
         var programsStep = bbState.steps.find(function(s) { return s.isProgramsStep; });
-        if (programsStep && programsStep.productIds && programsStep.productIds.length) {
+        if (programsStep) {
+          if (!programsStep.productIds) programsStep.productIds = [];
+          if (programsStep.productIds.length > 0) {
           if (!resolvedProgramPackNumId) {
             var bundleLike = programsStep.productIds.find(function(pid) {
               var p = bbState.productsById[pid];
@@ -434,7 +483,22 @@
             var existingKey = Object.keys(bbState.productsById).find(function(k) { return String(toNumericId(gidToNum(k) || k)) === String(resolvedProgramPackNumId); });
             if (existingKey) {
               programsStep.productIds = [existingKey].concat(programsStep.productIds.filter(function(id) { return String(toNumericId(gidToNum(id) || id)) !== String(resolvedProgramPackNumId); }));
+            } else if (programPackId && storefrontApiToken) {
+              return fetchProductByIdStorefront(programPackId).then(function(internal) {
+                if (internal && internal.id) {
+                  bbState.productsById[internal.id] = internal;
+                  programsStep.productIds = [internal.id].concat(programsStep.productIds);
+                }
+              }).then(function() { return Promise.resolve(); });
             }
+          }
+          } else if (resolvedProgramPackNumId && programPackId && storefrontApiToken) {
+            return fetchProductByIdStorefront(programPackId).then(function(internal) {
+              if (internal && internal.id) {
+                bbState.productsById[internal.id] = internal;
+                programsStep.productIds = [internal.id];
+              }
+            }).then(function() { return Promise.resolve(); });
           }
         }
       }).then(function() {
