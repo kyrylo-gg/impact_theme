@@ -76,7 +76,7 @@
         "title": {
           "type": "title",
           "settings": {
-            "label": "Special Spring Booty Offer 🌷",
+            "label": "Special Spring Booty Offer 🌷<strong>All Programs For $107</strong>",
             "color": "#000000",
             "desk_font_size": 25,
             "mob_font_size": 13
@@ -84,8 +84,9 @@
         },
         "subtitle": {
           "type": "subtitle",
+          "disabled": true,
           "settings": {
-            "label": "<strong>All Programs For $107</strong>",
+            "label": "",
             "color": "#000000",
             "desk_font_size": 25,
             "mob_font_size": 13
