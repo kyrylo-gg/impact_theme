@@ -24,7 +24,7 @@
         "template--14907164164170__e72b3e83-78ae-427f-a359-430414bcfda5-heading-1": {
           "type": "heading",
           "settings": {
-            "text": "FOUR PROGRAMS BUNDLE",
+            "text": "START YOUR SPRING BOOTY GLOW-UP",
             "heading_tag": "h1",
             "special_padding": ""
           }
@@ -321,7 +321,7 @@
           "type": "title",
           "settings": {
             "label": "Hurry up! The sale ends in:",
-            "color": "#ffffff",
+            "color": "#000000",
             "desk_font_size": 25,
             "mob_font_size": 25,
             "indent": 16,
@@ -365,8 +365,8 @@
         "mob_content_height_type": "fixed",
         "mob_content_height": 280,
         "background_type": "color",
-        "desk_bg_color": "#000",
-        "mob_bg_color": "#000",
+        "desk_bg_color": "#FAC2FF",
+        "mob_bg_color": "#FAC2FF",
         "desk_indent_top": 0,
         "desk_indent_bottom": 0,
         "mob_indent_top": 0,
