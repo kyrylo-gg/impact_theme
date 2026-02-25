@@ -111,7 +111,7 @@
                       </div>
                     {%- endif -%}
                     <button type="button" class="bb-cta-one-click__btn" data-bb-one-click data-variant-id="{{ one_click_variant.id }}" aria-label="One-Click Purchase">
-                      One-Click Purchase
+                      <span class="bb-cta-one-click__btn-text">One-Click Purchase</span>
                     </button>
                   </div>
                 </div>
@@ -570,6 +570,12 @@
     transform: scale(0.99);
   }
 
+  .nass-bundle-builder .bb-cta--loading,
+  .nass-bundle-builder .bb-cta:disabled {
+    cursor: wait;
+    opacity: 0.85;
+  }
+
   /* One-Click alternative — Design Guide Secondary (#B8A7D3), Grey 60 (#959595), inner radius 20px */
   .nass-bundle-builder .bb-cta-one-click {
     margin-top: 16px;
@@ -622,6 +628,10 @@
   }
 
   .nass-bundle-builder .bb-cta-one-click__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     padding: 12px 20px;
     font-size: 18px;
     font-weight: 500;
@@ -643,6 +653,21 @@
 
   .nass-bundle-builder .bb-cta-one-click__btn:active {
     transform: scale(0.99);
+  }
+
+  .nass-bundle-builder .bb-cta-one-click__btn--loading {
+    cursor: wait;
+  }
+
+  .nass-bundle-builder .bb-cta-one-click__spinner {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .nass-bundle-builder .bb-cta-one-click__spinner svg {
+    animation: bb-spinner-rotate 0.7s linear infinite;
   }
 
   @media (min-width: 768px) {
@@ -2678,7 +2703,7 @@
           "info": "For Programs step: select the NASS BUNDLE / 4 Programs Bundle product. When selected, other programs are disabled (and vice versa). Overrides section setting."
         }
       ]
-    },
+    }
   ],
   "presets": [
     {

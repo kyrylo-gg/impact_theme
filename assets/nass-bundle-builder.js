@@ -100,7 +100,11 @@
     var programPackNumId = programPackId ? toNumericId(gidToNum(programPackId) || programPackId) : '';
     var resolvedProgramPackNumId = programPackNumId || '';
     const discountCode = (config.discountCode || '').trim();
-    const checkoutUrl = config.checkoutUrl || '/checkout';
+    var checkoutUrl = config.checkoutUrl || '/checkout';
+    if (shopDomain && (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'))) {
+      checkoutUrl = 'https://' + shopDomain + '/checkout';
+      console.log('[BB] localhost detected, using store checkout:', checkoutUrl);
+    }
     const storefrontApiToken = (config.storefrontApiToken || '').trim();
     const sizeChartConfigHandle = (config.sizeChartConfigHandle || 'size-chart-settings').trim();
     var displayCurrency = 'USD';
@@ -111,7 +115,11 @@
       }
     } catch (e) {}
 
-    if (!wizardEl || !ctaEl) return;
+    if (!wizardEl || !ctaEl) {
+      console.log('[BB] early return: missing wizard or cta', { hasWizard: !!wizardEl, hasCta: !!ctaEl });
+      return;
+    }
+    console.log('[BB] elements found, continuing');
 
     const imageViewerEl = sectionRoot.querySelector('[data-bb-image-viewer]');
     const imageViewerImgEl = sectionRoot.querySelector('[data-bb-image-viewer-img]');
@@ -1215,7 +1223,29 @@
     if (scCalcBtn) scCalcBtn.addEventListener('click', runSizeCalculator);
 
     function openWizard() {
+      // #region agent log
+      console.log('[BB] openWizard called');
+      // #endregion
       if (!wizardEl) return;
+      var ctaLoading = false;
+      if (ctaEl && !ctaEl.disabled) {
+        ctaLoading = true;
+        ctaEl.disabled = true;
+        ctaEl.setAttribute('aria-busy', 'true');
+        var origText = ctaEl.textContent;
+        ctaEl.textContent = 'Loading...';
+        ctaEl.classList.add('bb-cta--loading');
+      }
+      function clearCtaLoading() {
+        try {
+          if (ctaEl && ctaLoading) {
+            ctaEl.disabled = false;
+            ctaEl.removeAttribute('aria-busy');
+            ctaEl.textContent = 'Start Building Your Bundle';
+            ctaEl.classList.remove('bb-cta--loading');
+          }
+        } catch (e) {}
+      }
       bbState.isOpen = true;
       bbState.currentStepIndex = 0;
       bbState.selectedItems = [];
@@ -1242,13 +1272,15 @@
           bbState.cartData = cart || { item_count: 0, items: [], total_price: 0, currency: displayCurrency };
           return loadAllProductsForSteps();
         })
-        .then(function() {
-          goToStep(0);
-        })
-        .catch(function() {
+        .then(function() { goToStep(0); })
+        .catch(function(err) {
+          // #region agent log
+          console.log('[BB] openWizard catch:', err && err.message ? err.message : err);
+          // #endregion
           bbState.cartData = { item_count: 0, items: [], total_price: 0, currency: displayCurrency };
-          loadAllProductsForSteps().then(function() { goToStep(0); });
-        });
+          return loadAllProductsForSteps().then(function() { goToStep(0); });
+        })
+        .finally(clearCtaLoading);
     }
 
     function closeWizard() {
@@ -1333,19 +1365,22 @@
       : function(fn) { setTimeout(fn, 150); };
     schedulePreload(preloadBundleDataInBackground);
 
-    ctaEl.addEventListener('click', openWizard);
+    ctaEl.addEventListener('click', function() { openWizard(); });
     if (typeof window !== 'undefined' && window.NassBundleBuilder) {
       window.NassBundleBuilder.openWizard = openWizard;
     }
 
     /* One-Click Purchase: clear cart → add variant → redirect to checkout */
-    sectionRoot.querySelectorAll('[data-bb-one-click]').forEach(function(btn) {
+    var oneClickBtns = sectionRoot.querySelectorAll('[data-bb-one-click]');
+    oneClickBtns.forEach(function(btn) {
       btn.addEventListener('click', function() {
         var variantId = btn.getAttribute('data-variant-id');
         if (!variantId) { showToast('Error: product not configured.'); return; }
         var variantNum = String(variantId).replace(/.*\/(\d+)$/, '$1') || String(variantId);
         var variantIdNum = parseInt(variantNum, 10) || variantNum;
         btn.disabled = true;
+        btn.classList.add('bb-cta-one-click__btn--loading');
+        btn.innerHTML = '<span class="bb-cta-one-click__spinner" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10" stroke-dasharray="32 56"/></svg></span><span class="bb-cta-one-click__btn-text">Adding...</span>';
         fetch(cartUrls.clear, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -1374,6 +1409,8 @@
           })
           .catch(function(err) {
             btn.disabled = false;
+            btn.classList.remove('bb-cta-one-click__btn--loading');
+            btn.innerHTML = '<span class="bb-cta-one-click__btn-text">One-Click Purchase</span>';
             showToast(err && err.message ? err.message : 'Error. Please try again.');
           });
       });
