@@ -636,7 +636,7 @@
         "extras_description": "<p>+ courseS <br/>+ Shorts<br/>+ EQIPMENT</p>",
         "group_products_in_cart": true,
         "show_extra_steps": true,
-        "allow_two_free": false
+        "allow_two_free": "no"
       }
     },
     "rich_text_iMTwnj": {

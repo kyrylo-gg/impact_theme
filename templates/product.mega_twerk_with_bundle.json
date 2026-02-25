@@ -17,7 +17,7 @@
             "letter_spacing": "normal",
             "case": "none",
             "wrap": "pretty",
-            "color": "var(--color-foreground-heading)",
+            "color": "#ffffff",
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
@@ -39,7 +39,7 @@
             "letter_spacing": "normal",
             "case": "none",
             "wrap": "pretty",
-            "color": "var(--color-foreground-heading)",
+            "color": "#ffffff",
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
@@ -62,7 +62,7 @@
             "letter_spacing": "normal",
             "case": "none",
             "wrap": "pretty",
-            "color": "var(--color-foreground)",
+            "color": "rgba(255,255,255,0.95)",
             "background": false,
             "background_color": "#00000026",
             "corner_radius": 0,
@@ -722,59 +722,59 @@
       "type": "faq",
       "blocks": {
         "question_1": {
-          "type": "question",
+          "type": "item",
           "settings": {
-            "question": "Is this program suitable for complete beginners?",
-            "answer": "<p>Absolutely! Our program is designed for all levels, from complete beginners who have never twerked before to advanced dancers looking to refine their technique.</p>"
+            "title": "Is this program suitable for complete beginners?",
+            "content": "<p>Absolutely! Our program is designed for all levels, from complete beginners who have never twerked before to advanced dancers looking to refine their technique.</p>"
           }
         },
         "question_2": {
-          "type": "question",
+          "type": "item",
           "settings": {
-            "question": "How long do I have access to the course?",
-            "answer": "<p>You get lifetime access to all course materials! Once you purchase, you can watch the lessons as many times as you want, forever.</p>"
+            "title": "How long do I have access to the course?",
+            "content": "<p>You get lifetime access to all course materials! Once you purchase, you can watch the lessons as many times as you want, forever.</p>"
           }
         },
         "question_3": {
-          "type": "question",
+          "type": "item",
           "settings": {
-            "question": "What equipment do I need?",
-            "answer": "<p>All you need is yourself, comfortable clothing, and enough space to move around. No special equipment required!</p>"
+            "title": "What equipment do I need?",
+            "content": "<p>All you need is yourself, comfortable clothing, and enough space to move around. No special equipment required!</p>"
           }
         },
         "question_4": {
-          "type": "question",
+          "type": "item",
           "settings": {
-            "question": "How soon will I see results?",
-            "answer": "<p>Many students notice improvement within the first week! With consistent practice, most students see significant progress within 2-4 weeks.</p>"
+            "title": "How soon will I see results?",
+            "content": "<p>Many students notice improvement within the first week! With consistent practice, most students see significant progress within 2-4 weeks.</p>"
           }
         },
         "question_5": {
-          "type": "question",
+          "type": "item",
           "settings": {
-            "question": "Is there a money-back guarantee?",
-            "answer": "<p>Yes! We offer a 30-day money-back guarantee. No questions asked.</p>"
+            "title": "Is there a money-back guarantee?",
+            "content": "<p>Yes! We offer a 30-day money-back guarantee. No questions asked.</p>"
           }
         },
         "question_6": {
-          "type": "question",
+          "type": "item",
           "settings": {
-            "question": "Can I access the course on my phone?",
-            "answer": "<p>Yes! The course is fully mobile-responsive. Watch on any device — smartphone, tablet, laptop, or TV.</p>"
+            "title": "Can I access the course on my phone?",
+            "content": "<p>Yes! The course is fully mobile-responsive. Watch on any device — smartphone, tablet, laptop, or TV.</p>"
           }
         },
         "question_7": {
-          "type": "question",
+          "type": "item",
           "settings": {
-            "question": "Do I need to be flexible or fit to start?",
-            "answer": "<p>Not at all! Our program includes warm-up routines and flexibility exercises that will help you improve over time.</p>"
+            "title": "Do I need to be flexible or fit to start?",
+            "content": "<p>Not at all! Our program includes warm-up routines and flexibility exercises that will help you improve over time.</p>"
           }
         },
         "question_8": {
-          "type": "question",
+          "type": "item",
           "settings": {
-            "question": "Is the content private?",
-            "answer": "<p>All lessons are private and can be watched in the comfort of your own home. There's no live component — it's just you and the videos at your own pace.</p>"
+            "title": "Is the content private?",
+            "content": "<p>All lessons are private and can be watched in the comfort of your own home. There's no live component — it's just you and the videos at your own pace.</p>"
           }
         }
       },

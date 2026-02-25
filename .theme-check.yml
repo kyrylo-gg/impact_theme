@@ -1,0 +1,11 @@
+# Theme Check config - ignore false positives for JS/CSS assets
+# JS/CSS .liquid files contain < and > in code, which trigger LiquidHTMLSyntaxError
+
+LiquidHTMLSyntaxError:
+  ignore:
+    - "assets/sections.js.liquid"
+    - "assets/theme.js.liquid"
+
+# Zipify/third-party sections may have complex HTML
+TemplateLength:
+  max_length: 100000

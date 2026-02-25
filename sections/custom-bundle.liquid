@@ -347,7 +347,7 @@
             </div>
                   
             <div class="custom-product-bundle__errors hidden">errors</div>
-            <button class="custom-product-bundle__btn custom-product-bundle__btn--step" data-next-step{%- if block.settings.allow_next -%}="available"{%- endif -%}{% if block.type == 'programs_step' and has_main_product %} disabled{% endif %}{% if block.type != 'programs_step' and block.settings.allow_next == false %} disabled{% endif %} type="button">
+            <button class="custom-product-bundle__btn custom-product-bundle__btn--step" data-next-step="{% if block.settings.allow_next %}available{% endif %}"{% if block.type == 'programs_step' and has_main_product %} disabled{% endif %}{% if block.type != 'programs_step' and block.settings.allow_next == false %} disabled{% endif %} type="button">
               <div class="custom-product-bundle__btn-inner next">
                 <span>Next</span>
                 {% render 'icon-bundle-arrow' %}
