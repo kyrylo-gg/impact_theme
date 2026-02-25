@@ -85,11 +85,17 @@
     color: var(--sp-foreground);
     margin: 0;
     padding: 0 8px;
-    font-size: 20px;
+    font-size: 30px;
   }
 
   .student-progress__title-highlight {
     color: var(--sp-primary);
+  }
+
+  @media (min-width: 768px) {
+    .student-progress__title {
+      font-size: 48px;
+    }
   }
 
   .student-progress__divider {
@@ -154,7 +160,7 @@
 
   @media (min-width: 768px) {
     .student-progress__title {
-      font-size: 30px;
+      font-size: 48px;
     }
 
     .student-progress__card {
