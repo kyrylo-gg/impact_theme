@@ -231,6 +231,52 @@
     "name": "Colors",
     "settings": [
       {
+        "type": "color_scheme_group",
+        "id": "color_schemes",
+        "definition": [
+          {
+            "type": "color",
+            "id": "scheme_background",
+            "label": "Background",
+            "default": "#ffffff",
+            "alpha": true
+          },
+          {
+            "type": "color",
+            "id": "scheme_text",
+            "label": "Text",
+            "default": "#1a1a1a",
+            "alpha": true
+          },
+          {
+            "type": "color",
+            "id": "scheme_button",
+            "label": "Button background",
+            "default": "#1a1a1a",
+            "alpha": true
+          },
+          {
+            "type": "color",
+            "id": "scheme_button_label",
+            "label": "Button text",
+            "default": "#ffffff",
+            "alpha": true
+          }
+        ],
+        "role": {
+          "text": "scheme_text",
+          "background": "scheme_background",
+          "links": "scheme_text",
+          "icons": "scheme_text",
+          "primary_button": "scheme_button",
+          "on_primary_button": "scheme_button_label",
+          "primary_button_border": "scheme_button",
+          "secondary_button": "scheme_background",
+          "on_secondary_button": "scheme_text",
+          "secondary_button_border": "scheme_text"
+        }
+      },
+      {
         "type": "header",
         "content": "General"
       },

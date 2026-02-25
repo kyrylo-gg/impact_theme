@@ -293,15 +293,21 @@
 </section>
 {%- endif -%}
 
-<script src="{{ 'nass-bundle-builder.js' | asset_url }}" defer></script>
+<script src="{{ 'nass-bundle-builder.js' | asset_url }}"></script>
 <script>
 (function() {
-  function run() {
+  function run(retries) {
+    retries = retries || 0;
+    if (retries > 20) return;
     var sectionId = '{{ section.id }}';
     var sectionRoot = document.getElementById('shopify-section-' + sectionId);
+    if (!sectionRoot) sectionRoot = document.querySelector('.nass-bundle-builder');
     if (!sectionRoot) return;
-    if (window.NassBundleBuilder && window.NassBundleBuilder.init) {
-      window.NassBundleBuilder.init(sectionRoot, {
+    if (!window.NassBundleBuilder || !window.NassBundleBuilder.init) {
+      setTimeout(function() { run(retries + 1); }, 50);
+      return;
+    }
+    window.NassBundleBuilder.init(sectionRoot, {
         sectionId: sectionId,
         shopDomain: '{{ shop.permanent_domain }}',
         cartAddUrl: '{{ routes.cart_add_url | append: ".js" }}',
@@ -327,10 +333,12 @@
         storefrontApiToken: {{ section.settings.storefront_api_token | json }},
         sizeChartConfigHandle: {{ section.settings.size_chart_config_handle | default: 'size-chart-settings' | json }}
       });
-    }
   }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
-  else run();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() { run(0); });
+  } else {
+    run(0);
+  }
 })();
 </script>
 

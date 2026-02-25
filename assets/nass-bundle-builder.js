@@ -46,15 +46,11 @@
   }
 
   function init(sectionRoot, config) {
-    // #region agent log
-    var _dbg = function(location, message, data, hypothesisId) {
-      fetch('http://127.0.0.1:7243/ingest/d1487c21-e3d1-4ffe-8098-9270a54ff810', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': '037be2' }, body: JSON.stringify({ sessionId: '037be2', location: location, message: message, data: data || {}, hypothesisId: hypothesisId || null, timestamp: Date.now() }) }).catch(function() {});
-    };
-    // #endregion
     const shopDomain = config.shopDomain;
     const sectionId = config.sectionId;
     const ctaEl = sectionRoot.querySelector('[data-bb-cta]');
-    const wizardEl = document.getElementById('bundle-builder-wizard-' + sectionId);
+    var wizardEl = document.getElementById('bundle-builder-wizard-' + sectionId);
+    if (!wizardEl) wizardEl = sectionRoot.querySelector('.bb-wizard-overlay');
     const closeEls = sectionRoot.querySelectorAll('[data-bb-close]');
     const backBtn = sectionRoot.querySelector('[data-bb-back]');
     const nextBtn = sectionRoot.querySelector('[data-bb-next]');
@@ -214,9 +210,6 @@
     }
 
     function addItem(stepId, productId, variantId, quantity) {
-      // #region agent log
-      _dbg('nass-bundle-builder.js:addItem:entry', 'addItem called', { stepId: stepId, productId: productId, selectedCount: bbState.selectedItems.length }, 'A');
-      // #endregion
       if (bbState.cartOperationInProgress) return;
       var p = bbState.productsById[productId];
       if (!p) return;
@@ -230,9 +223,6 @@
       var qty = Math.max(1, parseInt(quantity, 10) || 1);
       if (isSelected(productId)) return;
       bbState.selectedItems.push({ stepId: stepId, productId: productId, variantId: vid, quantity: qty, lineKey: null });
-      // #region agent log
-      _dbg('nass-bundle-builder.js:addItem:afterPush', 'after push', { selectedCount: bbState.selectedItems.length }, 'A');
-      // #endregion
       bbState.hasProgramPack = getHasProgramPack();
       renderStep();
       renderDiscountBanner();
@@ -255,9 +245,6 @@
           });
         })
         .then(function(data) {
-          // #region agent log
-          _dbg('nass-bundle-builder.js:addItem:fetchThen', 'addItem fetch response', { status: data.status, selectedCount: bbState.selectedItems.length }, 'D');
-          // #endregion
           if (data.status === 422) {
             bbState.cartOperationInProgress = false;
             bbState.selectedItems = bbState.selectedItems.filter(function(i) { return String(i.productId) !== String(productId); });
@@ -278,9 +265,6 @@
           applyDiscountAndRefreshCart().catch(function() { renderFooterSummary(); });
         })
         .catch(function(err) {
-          // #region agent log
-          _dbg('nass-bundle-builder.js:addItem:fetchCatch', 'addItem fetch failed', { selectedCount: bbState.selectedItems.length, err: String(err && err.message) }, 'D');
-          // #endregion
           bbState.cartOperationInProgress = false;
           bbState.selectedItems = bbState.selectedItems.filter(function(i) { return String(i.productId) !== String(productId); });
           bbState.hasProgramPack = getHasProgramPack();
@@ -292,9 +276,6 @@
     }
 
     function removeItem(productId) {
-      // #region agent log
-      _dbg('nass-bundle-builder.js:removeItem:entry', 'removeItem called', { productId: productId, selectedCount: bbState.selectedItems.length }, 'B');
-      // #endregion
       if (bbState.cartOperationInProgress) return;
       var item = bbState.selectedItems.find(function(i) { return String(i.productId) === String(productId); });
       if (!item) return;
@@ -316,9 +297,6 @@
       })
         .then(function(r) { return r.json(); })
         .then(function(data) {
-          // #region agent log
-          _dbg('nass-bundle-builder.js:removeItem:fetchThen', 'removeItem fetch response', { status: data && data.status, selectedCount: bbState.selectedItems.length }, 'B');
-          // #endregion
           if (data.status === 422 || data.status === 400 || (data.status && String(data.status).indexOf('bad_request') >= 0)) {
             bbState.cartOperationInProgress = false;
             bbState.selectedItems = prevItems;
@@ -335,9 +313,6 @@
           applyDiscountAndRefreshCart().catch(function() { renderFooterSummary(); });
         })
         .catch(function(err) {
-          // #region agent log
-          _dbg('nass-bundle-builder.js:removeItem:fetchCatch', 'removeItem fetch failed', { selectedCount: bbState.selectedItems.length, err: String(err && err.message) }, 'B');
-          // #endregion
           bbState.cartOperationInProgress = false;
           bbState.selectedItems = prevItems;
           bbState.hasProgramPack = getHasProgramPack();
@@ -640,9 +615,6 @@
       if (newScrollRow) newScrollRow.scrollLeft = scrollLeft;
       contentEl.querySelectorAll('[data-bb-add]').forEach(function(btn) {
         btn.addEventListener('click', function() {
-          // #region agent log
-          _dbg('nass-bundle-builder.js:addClick', 'Add button clicked', { step: btn.getAttribute('data-step'), productId: btn.getAttribute('data-product'), selectedCount: bbState.selectedItems.length, ts: Date.now() }, 'A');
-          // #endregion
           var s = btn.getAttribute('data-step');
           var pid = btn.getAttribute('data-product');
           var p = bbState.productsById[pid];
@@ -657,9 +629,6 @@
       });
       contentEl.querySelectorAll('[data-bb-remove]').forEach(function(btn) {
         btn.addEventListener('click', function() {
-          // #region agent log
-          _dbg('nass-bundle-builder.js:removeClick', 'Remove button clicked', { productId: btn.getAttribute('data-bb-remove'), selectedCount: bbState.selectedItems.length, ts: Date.now() }, 'B');
-          // #endregion
           removeItem(btn.getAttribute('data-bb-remove'));
         });
       });
@@ -1182,6 +1151,7 @@
     if (scCalcBtn) scCalcBtn.addEventListener('click', runSizeCalculator);
 
     function openWizard() {
+      if (!wizardEl) return;
       bbState.isOpen = true;
       bbState.currentStepIndex = 0;
       bbState.selectedItems = [];
@@ -1300,6 +1270,9 @@
     schedulePreload(preloadBundleDataInBackground);
 
     ctaEl.addEventListener('click', openWizard);
+    if (typeof window !== 'undefined' && window.NassBundleBuilder) {
+      window.NassBundleBuilder.openWizard = openWizard;
+    }
 
     /* One-Click Purchase: clear cart → add variant → redirect to checkout */
     sectionRoot.querySelectorAll('[data-bb-one-click]').forEach(function(btn) {
@@ -1366,6 +1339,21 @@
   }
 
   if (typeof window !== 'undefined') {
-    window.NassBundleBuilder = { init: init };
+    window.NassBundleBuilder = { init: init, openWizard: null };
+  }
+})();
+
+/* Hero CTA: when user navigates to #nass-bundle-builder (click or hash), open wizard */
+(function() {
+  function tryOpenFromHash() {
+    if (window.location.hash !== '#nass-bundle-builder') return;
+    if (!window.NassBundleBuilder || typeof window.NassBundleBuilder.openWizard !== 'function') return;
+    window.NassBundleBuilder.openWizard();
+  }
+  window.addEventListener('hashchange', tryOpenFromHash);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() { setTimeout(tryOpenFromHash, 100); });
+  } else {
+    setTimeout(tryOpenFromHash, 100);
   }
 })();

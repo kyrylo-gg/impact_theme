@@ -1,0 +1,21 @@
+{%- comment -%}
+  Renders CSS variables for each color scheme. Used by hero, custom-bundle and other sections
+  that use color_scheme setting. Integrates with Impact theme's --background-primary, --text-primary.
+{%- endcomment -%}
+
+{%- if settings.color_schemes -%}
+{% style %}
+  {%- for scheme in settings.color_schemes -%}
+    {%- if scheme.settings.scheme_background and scheme.settings.scheme_text -%}
+    .color-{{ scheme.id }} {
+      --background-primary: {{ scheme.settings.scheme_background.rgb }};
+      --text-primary: {{ scheme.settings.scheme_text.rgb }};
+      --button-background-primary: {{ scheme.settings.scheme_button.rgb }};
+      --button-text-primary: {{ scheme.settings.scheme_button_label.rgb }};
+      background-color: rgb({{ scheme.settings.scheme_background.rgba }});
+      color: rgb({{ scheme.settings.scheme_text.rgba }});
+    }
+    {%- endif -%}
+  {%- endfor -%}
+{% endstyle %}
+{%- endif -%}
