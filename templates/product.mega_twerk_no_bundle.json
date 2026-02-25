@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero_video": {
@@ -37,7 +46,12 @@
           }
         }
       },
-      "block_order": ["heading_1", "heading_2", "button_cta", "subheading"],
+      "block_order": [
+        "heading_1",
+        "heading_2",
+        "button_cta",
+        "subheading"
+      ],
       "settings": {
         "full_width": false,
         "allow_transparent_header": false,
@@ -93,7 +107,12 @@
           }
         }
       },
-      "block_order": ["program_card_CxChpM", "program_card_6rgVPi", "program_card_LQPeBc", "program_card_kXCJYU"],
+      "block_order": [
+        "program_card_CxChpM",
+        "program_card_6rgVPi",
+        "program_card_LQPeBc",
+        "program_card_kXCJYU"
+      ],
       "settings": {
         "heading": "WHAT DOES THIS PACK",
         "heading_highlight": "INCLUDE?"
@@ -167,7 +186,16 @@
           }
         }
       },
-      "block_order": ["lesson_card_xxm8fk", "lesson_card_F44HFT", "lesson_card_HW9zGg", "lesson_card_hBAFUG", "lesson_card_hQKaB4", "lesson_card_iAfUnn", "lesson_card_MzDK73", "lesson_card_BQBQhm"],
+      "block_order": [
+        "lesson_card_xxm8fk",
+        "lesson_card_F44HFT",
+        "lesson_card_HW9zGg",
+        "lesson_card_hBAFUG",
+        "lesson_card_hQKaB4",
+        "lesson_card_iAfUnn",
+        "lesson_card_MzDK73",
+        "lesson_card_BQBQhm"
+      ],
       "settings": {
         "heading": "WHAT'S INSIDE THE",
         "heading_highlight": "TWERK PROGRAM"
@@ -193,7 +221,10 @@
           }
         }
       },
-      "block_order": ["stat_CEnefT", "stat_QUTdLL"],
+      "block_order": [
+        "stat_CEnefT",
+        "stat_QUTdLL"
+      ],
       "settings": {
         "heading": "LEARN FROM A",
         "heading_highlight": "WORLD CLASS DANCER",
@@ -225,7 +256,11 @@
           }
         }
       },
-      "block_order": ["student_video_GKeqUQ", "student_video_YiePwJ", "student_video_DrpmJz"],
+      "block_order": [
+        "student_video_GKeqUQ",
+        "student_video_YiePwJ",
+        "student_video_DrpmJz"
+      ],
       "settings": {
         "heading": "SEE HOW OUR",
         "heading_highlight": "STUDENTS PERFORM"
@@ -259,7 +294,12 @@
           }
         }
       },
-      "block_order": ["makeover_video_EHx74H", "makeover_video_jMbjrF", "makeover_video_nH6rxE", "makeover_video_7jxidU"],
+      "block_order": [
+        "makeover_video_EHx74H",
+        "makeover_video_jMbjrF",
+        "makeover_video_nH6rxE",
+        "makeover_video_7jxidU"
+      ],
       "settings": {
         "heading": "LOOK AT THESE INCREDIBLE",
         "heading_highlight": "TWERK MAKEOVERS!",
@@ -332,7 +372,14 @@
           }
         }
       },
-      "block_order": ["screenshot_1", "screenshot_2", "screenshot_3", "screenshot_4", "screenshot_5", "screenshot_6"],
+      "block_order": [
+        "screenshot_1",
+        "screenshot_2",
+        "screenshot_3",
+        "screenshot_4",
+        "screenshot_5",
+        "screenshot_6"
+      ],
       "settings": {
         "heading": "The twerk program everyone's excited about"
       }
@@ -466,7 +513,14 @@
           }
         }
       },
-      "block_order": ["programs_step_LpNbpi", "step_Rj6P4A", "step_PnCX6i", "step_RQNyqp", "step_4TeBqm", "step_hdVqLW"],
+      "block_order": [
+        "programs_step_LpNbpi",
+        "step_Rj6P4A",
+        "step_PnCX6i",
+        "step_RQNyqp",
+        "step_4TeBqm",
+        "step_hdVqLW"
+      ],
       "settings": {
         "title": "<h2><strong>GET EVERYTHING YOU NEED TO START! <br/></strong>FREE US SHIPPING ON ORDERS OVER $140</h2>",
         "main_product": "",
@@ -518,7 +572,12 @@
           }
         }
       },
-      "block_order": ["feature_1", "feature_2", "feature_3", "feature_4"],
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3",
+        "feature_4"
+      ],
       "settings": {}
     },
     "testimonials_main": {
@@ -725,7 +784,28 @@
           }
         }
       },
-      "block_order": ["review_1", "review_2", "review_3", "review_4", "review_5", "review_6", "review_7", "review_8", "review_9", "review_10", "review_11", "review_12", "review_13", "review_14", "review_15", "review_16", "review_17", "review_18", "review_19", "review_20"],
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4",
+        "review_5",
+        "review_6",
+        "review_7",
+        "review_8",
+        "review_9",
+        "review_10",
+        "review_11",
+        "review_12",
+        "review_13",
+        "review_14",
+        "review_15",
+        "review_16",
+        "review_17",
+        "review_18",
+        "review_19",
+        "review_20"
+      ],
       "settings": {
         "heading_count": "40,000+",
         "subtitle": "See what our community has to say",
@@ -792,20 +872,17 @@
           }
         }
       },
-      "block_order": ["question_1", "question_2", "question_3", "question_4", "question_5", "question_6", "question_7", "question_8"],
-      "settings": {
-        "badge_text": "Got Questions?",
-        "heading": "FAQ",
-        "subtitle": "Everything you need to know before starting your journey",
-        "support_title": "Still have questions?",
-        "support_url": "",
-        "support_email": "support@nasswear.com",
-        "support_cta": "Contact our support team →",
-        "show_login": true,
-        "login_text": "Already have an account?",
-        "login_button_text": "Login",
-        "login_url": ""
-      }
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5",
+        "question_6",
+        "question_7",
+        "question_8"
+      ],
+      "settings": {}
     },
     "email_signup_main": {
       "type": "nass-email-signup",

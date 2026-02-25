@@ -76,18 +76,17 @@
         "title": {
           "type": "title",
           "settings": {
-            "label": "4  PROGRAMS FOR $107 🍑",
-            "color": "#ffffff",
+            "label": "Special Spring Booty Offer 🌷",
+            "color": "#000000",
             "desk_font_size": 25,
             "mob_font_size": 13
           }
         },
         "subtitle": {
           "type": "subtitle",
-          "disabled": true,
           "settings": {
-            "label": "Only $107🎁",
-            "color": "#ffd700",
+            "label": "<strong>All Programs For $107</strong>",
+            "color": "#000000",
             "desk_font_size": 25,
             "mob_font_size": 13
           }
@@ -103,7 +102,7 @@
             "countdown_color": "#ffffff",
             "desk_countdown_font_size": 25,
             "mob_countdown_font_size": 13,
-            "labels_color": "#ffffff",
+            "labels_color": "#000000",
             "desk_labels_font_size": 13,
             "mob_labels_font_size": 9
           }
@@ -142,8 +141,8 @@
         "mob_content_height_type": "adapt-content",
         "mob_content_height": 300,
         "background_type": "color",
-        "desk_bg_color": "#000000",
-        "mob_bg_color": "#000000",
+        "desk_bg_color": "#FAC2FF",
+        "mob_bg_color": "#FAC2FF",
         "hidden_templates": "product.mega_twerk-program-main,product.26_twerk_mainmenu,product.26_pinterest",
         "desk_indent_top": 0,
         "desk_indent_bottom": 0,
