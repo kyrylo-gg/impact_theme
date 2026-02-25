@@ -882,10 +882,31 @@
         "question_7",
         "question_8"
       ],
-      "settings": {}
+      "settings": {
+        "full_width": true,
+        "subheading": "",
+        "title": "FAQ",
+        "content": "<p>Use this text to share information about your product or shipping policies.</p>",
+        "team_avatar_width": 160,
+        "support_hours": "Our customer support is available Monday to Friday: 8am-8:30pm.",
+        "answer_time": "Average answer time: 24h",
+        "button_text": "",
+        "button_url": "",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "button_background": "",
+        "button_text_color": "",
+        "accordion_background": "",
+        "accordion_text_color": ""
+      }
     },
     "email_signup_main": {
       "type": "nass-email-signup",
+      "disabled": true,
       "settings": {
         "heading_line1": "JOIN THE NASS",
         "heading_line2": "COMMUNITY",
