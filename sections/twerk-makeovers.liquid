@@ -17,9 +17,15 @@
 
     <div class="twerk-makeovers__scroll-wrapper">
       <div class="twerk-makeovers__row">
+        {% assign tm_first_video_shown = false %}
         {% for block in section.blocks %}
           {% if block.type == 'makeover_video' %}
-            <div class="twerk-makeovers__card" {{ block.shopify_attributes }}{% if forloop.first %} data-first-card{% endif %}>
+            {% assign tm_is_first_video = false %}
+            {% if tm_first_video_shown == false %}
+              {% assign tm_is_first_video = true %}
+              {% assign tm_first_video_shown = true %}
+            {% endif %}
+            <div class="twerk-makeovers__card" {{ block.shopify_attributes }}{% if tm_is_first_video %} data-first-card{% endif %}>
               {% if block.settings.video != blank %}
                 {% if block.settings.video.preview_image != blank %}
                   {% assign poster_url = block.settings.video.preview_image | image_url: width: 800 %}
@@ -27,15 +33,20 @@
                   {% assign poster_url = nil %}
                 {% endif %}
                 <div class="twerk-makeovers__media-wrap">
+                  {% if tm_is_first_video %}
+                    {% assign tm_preload = 'auto' %}
+                  {% else %}
+                    {% assign tm_preload = 'none' %}
+                  {% endif %}
                   {{
                     block.settings.video
                     | video_tag:
                       class: 'twerk-makeovers__video',
-                      autoplay: false,
+                      autoplay: tm_is_first_video,
                       loop: true,
                       muted: true,
                       controls: false,
-                      preload: 'none',
+                      preload: tm_preload,
                       poster: poster_url
                   }}
                   <button class="twerk-makeovers__play-btn" aria-label="Play" type="button" data-state="paused">

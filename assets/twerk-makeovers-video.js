@@ -26,6 +26,11 @@
       var video = card.querySelector('.twerk-makeovers__video');
       if (!playBtn || !video) return;
 
+      if (!video.paused) {
+        playBtn.setAttribute('data-state', 'playing');
+        currentlyPlaying = video;
+      }
+
       playBtn.addEventListener('click', function() {
         if (video.paused) {
           pauseOtherVideos(video);
