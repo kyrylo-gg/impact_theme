@@ -393,7 +393,7 @@
             "title": "Select programs:",
             "badge_text": "Lifetime access",
             "show_general_badge": true,
-            "general_badge_text": "Free US shipping on orders over $140",
+            "general_badge_text": "60% Off All Clothing With Bundle Purchase!",
             "products": [
               "twerk-program-1",
               "twerk-program-us",
@@ -407,7 +407,7 @@
           "type": "step",
           "settings": {
             "title": "Select Nass shorts:",
-            "badge_text": "Check out our latest arrivals:",
+            "badge_text": "Extra 30% Off with Programs Bundle at Checkout",
             "products": [
               "caution-zone",
               "apex-stripe",
@@ -429,7 +429,7 @@
           "type": "step",
           "settings": {
             "title": "Select Nass shorts:",
-            "badge_text": "20% off with any program",
+            "badge_text": "Extra 30% Off with Programs Bundle at Checkout",
             "products": [
               "safari-heat",
               "black-noir",
@@ -451,7 +451,7 @@
           "type": "step",
           "settings": {
             "title": "Select Nass shorts:",
-            "badge_text": "20% off with any program",
+            "badge_text": "Extra 30% Off with Programs Bundle at Checkout",
             "products": [
               "perfect-black",
               "solid-black",
@@ -477,7 +477,7 @@
           "type": "step",
           "settings": {
             "title": "Select Top",
-            "badge_text": "20% off with any program",
+            "badge_text": "Extra 30% Off with Programs Bundle at Checkout",
             "products": [
               "pearl-white-top",
               "deep-ocean-top",
