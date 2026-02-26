@@ -1703,7 +1703,7 @@
     min-height: 1em;
     margin-bottom: 2px;
   }
-  @media (min-width: 1441px) {
+  @media (min-width: 1441px) and (min-height: 801px) {
     .nass-bundle-builder .bb-wizard-footer-expand {
       display: none;
     }
@@ -1733,7 +1733,7 @@
     flex-shrink: 0;
   }
 
-  @media (max-width: 1440px) {
+  @media (max-width: 1440px), (max-height: 800px) {
     .nass-bundle-builder .bb-wizard-footer:not(.bb-wizard-footer--expanded) .bb-wizard-summary {
       display: none;
     }
@@ -2568,13 +2568,13 @@
   /* Toast */
   .bb-toast {
     position: fixed;
-    bottom: 24px;
+    bottom: 104px;
     left: 50%;
     transform: translateX(-50%) translateY(20px);
     padding: 12px 24px;
     background: #000;
     color: #fff;
-    border-radius: var(--bb-radius);
+    border-radius: 16px;
     font-size: 14px;
     z-index: 9999;
     opacity: 0;
