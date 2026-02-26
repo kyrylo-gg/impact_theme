@@ -395,6 +395,7 @@
             "show_general_badge": true,
             "general_badge_text": "Free US shipping on orders over $140",
             "products": [
+              "twerk-program",
               "twerk-program-us",
               "weight-loss-program-us",
               "home-booty-band-program-us",
@@ -523,7 +524,7 @@
       ],
       "settings": {
         "title": "<h2><strong>GET EVERYTHING YOU NEED TO START! <br/></strong>FREE US SHIPPING ON ORDERS OVER $140</h2>",
-        "main_product": "",
+        "main_product": "twerk-program",
         "free_extras_badge": false,
         "duration": "1 Week",
         "save_for_program": "Save 82%",
