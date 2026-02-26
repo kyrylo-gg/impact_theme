@@ -326,6 +326,7 @@
         "screenshot_1": {
           "type": "screenshot",
           "settings": {
+            "image": "shopify://shop_images/review-1.png",
             "row_share": "full",
             "size": "default",
             "highlight": false
@@ -334,7 +335,8 @@
         "screenshot_2": {
           "type": "screenshot",
           "settings": {
-            "row_share": "half",
+            "image": "shopify://shop_images/review-2.png",
+            "row_share": "full",
             "size": "default",
             "highlight": false
           }
@@ -342,7 +344,8 @@
         "screenshot_3": {
           "type": "screenshot",
           "settings": {
-            "row_share": "half",
+            "image": "shopify://shop_images/review-3.png",
+            "row_share": "full",
             "size": "wide",
             "highlight": true
           }
@@ -350,6 +353,7 @@
         "screenshot_4": {
           "type": "screenshot",
           "settings": {
+            "image": "shopify://shop_images/review-9.png",
             "row_share": "full",
             "size": "default",
             "highlight": false
@@ -358,7 +362,8 @@
         "screenshot_5": {
           "type": "screenshot",
           "settings": {
-            "row_share": "half",
+            "image": "shopify://shop_images/review-4.png",
+            "row_share": "full",
             "size": "default",
             "highlight": false
           }
@@ -366,9 +371,91 @@
         "screenshot_6": {
           "type": "screenshot",
           "settings": {
-            "row_share": "half",
+            "image": "shopify://shop_images/review-7.png",
+            "row_share": "full",
             "size": "default",
             "highlight": true
+          }
+        },
+        "screenshot_f4aJhQ": {
+          "type": "screenshot",
+          "settings": {
+            "image": "shopify://shop_images/review-12.png",
+            "row_share": "full",
+            "size": "default",
+            "highlight": false
+          }
+        },
+        "screenshot_DejP6j": {
+          "type": "screenshot",
+          "settings": {
+            "image": "shopify://shop_images/review-8.png",
+            "row_share": "full",
+            "size": "default",
+            "highlight": false
+          }
+        },
+        "screenshot_Y6TpbM": {
+          "type": "screenshot",
+          "settings": {
+            "image": "shopify://shop_images/review-10.png",
+            "row_share": "half",
+            "size": "default",
+            "highlight": false
+          }
+        },
+        "screenshot_jCJ7g7": {
+          "type": "screenshot",
+          "settings": {
+            "image": "shopify://shop_images/review-14.png",
+            "row_share": "half",
+            "size": "default",
+            "highlight": false
+          }
+        },
+        "screenshot_hCqbk6": {
+          "type": "screenshot",
+          "settings": {
+            "image": "shopify://shop_images/review-13.png",
+            "row_share": "full",
+            "size": "default",
+            "highlight": false
+          }
+        },
+        "screenshot_V3yCMJ": {
+          "type": "screenshot",
+          "settings": {
+            "image": "shopify://shop_images/review-6.png",
+            "row_share": "full",
+            "size": "default",
+            "highlight": false
+          }
+        },
+        "screenshot_7MxVpW": {
+          "type": "screenshot",
+          "settings": {
+            "image": "shopify://shop_images/review-15.png",
+            "row_share": "half",
+            "size": "default",
+            "highlight": false
+          }
+        },
+        "screenshot_iXdiRn": {
+          "type": "screenshot",
+          "settings": {
+            "image": "shopify://shop_images/review-11.png",
+            "row_share": "half",
+            "size": "default",
+            "highlight": false
+          }
+        },
+        "screenshot_NJwjGr": {
+          "type": "screenshot",
+          "settings": {
+            "image": "shopify://shop_images/review-5.png",
+            "row_share": "full",
+            "size": "default",
+            "highlight": false
           }
         }
       },
@@ -378,7 +465,16 @@
         "screenshot_3",
         "screenshot_4",
         "screenshot_5",
-        "screenshot_6"
+        "screenshot_6",
+        "screenshot_f4aJhQ",
+        "screenshot_DejP6j",
+        "screenshot_Y6TpbM",
+        "screenshot_jCJ7g7",
+        "screenshot_hCqbk6",
+        "screenshot_V3yCMJ",
+        "screenshot_7MxVpW",
+        "screenshot_iXdiRn",
+        "screenshot_NJwjGr"
       ],
       "settings": {
         "heading": "The twerk program everyone's excited about"
