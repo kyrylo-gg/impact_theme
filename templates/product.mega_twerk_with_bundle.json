@@ -306,20 +306,6 @@
         "subtitle": "YOU CAN ACHIEVE THIS TOO!"
       }
     },
-    "countdown_timer_Ab3XyZ": {
-      "type": "countdown-timer",
-      "settings": {
-        "heading": "HURRY UP! THE SALE ENDS IN:",
-        "initial_days": 0,
-        "initial_hours": 16,
-        "initial_minutes": 11,
-        "initial_seconds": 20,
-        "label_days": "Days",
-        "label_hours": "Hours",
-        "label_minutes": "Minutes",
-        "label_seconds": "Seconds"
-      }
-    },
     "feedback_screenshots_main": {
       "type": "feedback-live-screenshots",
       "blocks": {
@@ -478,6 +464,20 @@
       ],
       "settings": {
         "heading": "The twerk program everyone's excited about"
+      }
+    },
+    "countdown_timer_Ab3XyZ": {
+      "type": "countdown-timer",
+      "settings": {
+        "heading": "HURRY UP! THE SALE ENDS IN:",
+        "initial_days": 0,
+        "initial_hours": 16,
+        "initial_minutes": 11,
+        "initial_seconds": 20,
+        "label_days": "Days",
+        "label_hours": "Hours",
+        "label_minutes": "Minutes",
+        "label_seconds": "Seconds"
       }
     },
     "nass_bundle_builder": {
@@ -942,8 +942,8 @@
     "social_proof_hPtKDy",
     "student_progress_ez8yde",
     "twerk_makeovers_dHGL9w",
-    "countdown_timer_Ab3XyZ",
     "feedback_screenshots_main",
+    "countdown_timer_Ab3XyZ",
     "nass_bundle_builder",
     "features_main",
     "testimonials_main",
