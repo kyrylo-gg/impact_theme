@@ -279,6 +279,9 @@
           renderDiscountBanner();
           renderFooterSummary();
           applyDiscountAndRefreshCart().catch(function() { renderFooterSummary(); });
+          if (isProgramPack(productId)) {
+            showToast('60% off all clothing applied!');
+          }
         })
         .catch(function(err) {
           bbState.cartOperationInProgress = false;
