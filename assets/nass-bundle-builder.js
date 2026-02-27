@@ -107,8 +107,23 @@
     }
     const storefrontApiToken = (config.storefrontApiToken || '').trim();
     const sizeChartConfigHandle = (config.sizeChartConfigHandle || 'size-chart-settings').trim();
+
+    // Resolve display currency with priority:
+    // 1) Shopify native multi-currency (Shopify.currency.active)
+    // 2) BoosterApps currency switcher (baCurr.config.final_currency or user_curr)
+    // 3) Config-provided currency from Liquid (cart.currency / shop.currency)
+    // 4) Fallback to shop base USD
     var displayCurrency = 'USD';
     try {
+      if (typeof window !== 'undefined') {
+        if (window.Shopify && window.Shopify.currency && window.Shopify.currency.active) {
+          displayCurrency = String(window.Shopify.currency.active).trim() || displayCurrency;
+        } else if (window.baCurr && window.baCurr.config) {
+          var baCfg = window.baCurr.config;
+          var boosterCur = (baCfg.final_currency || baCfg.user_curr || '').trim();
+          if (boosterCur) displayCurrency = boosterCur;
+        }
+      }
       if (config.currency && typeof config.currency === 'string') {
         var c = String(config.currency).trim();
         if (c) displayCurrency = c;
@@ -195,9 +210,21 @@
       return new Intl.NumberFormat('en-US', { style: 'currency', currency: currency || 'USD' }).format(amount);
     }
 
-    /* Single source for UI currency: cart when loaded, else config (shop/cart default). All amounts use this so symbol and scale stay consistent. */
+    /* Single source for UI currency: cart when loaded, else Booster/Shopify active, else config fallback. */
     function getDisplayCurrency() {
-      return (bbState.cartData && bbState.cartData.currency) ? bbState.cartData.currency : displayCurrency;
+      if (bbState.cartData && bbState.cartData.currency) return bbState.cartData.currency;
+      try {
+        if (typeof window !== 'undefined' && window.baCurr && window.baCurr.config) {
+          var baCfg = window.baCurr.config;
+          var boosterCur = (baCfg.final_currency || baCfg.user_curr || '').trim();
+          if (boosterCur) return boosterCur;
+        }
+        if (typeof window !== 'undefined' && window.Shopify && window.Shopify.currency && window.Shopify.currency.active) {
+          var active = String(window.Shopify.currency.active).trim();
+          if (active) return active;
+        }
+      } catch (e) {}
+      return displayCurrency;
     }
 
     function applyDiscountAndRefreshCart() {
