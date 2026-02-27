@@ -1090,7 +1090,7 @@
         "button_text": "Shop now",
         "background_button": "#faff00",
         "text_color_button": "#1a1a1a",
-        "block_text_color": "",
+        "block_text_color": "#1a1a1a",
         "block_background": "#fac2ff",
         "sublime_text": "<p>Special Spring  Booty Offer 🌷</p>",
         "timer_enabled": true,
@@ -1104,7 +1104,7 @@
         "mobile_countdown_background": "#000",
         "mobile_countdown_color": "#ffffff",
         "labels_color": "#000000",
-        "mobile_labels_color": "#ffffff"
+        "mobile_labels_color": "#1a1a1a"
       }
     }
   },
