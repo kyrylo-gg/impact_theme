@@ -946,6 +946,7 @@
         "block_text_color": "#1a1a1a",
         "block_background": "#fac2ff",
         "sublime_text": "<p>Special Spring Booty Offer 🌷</p>",
+        "sublime_text_color": "#1a1a1a",
         "timer_enabled": true,
         "timer_type": "daily",
         "cancel_date": "01-01-2026 12:00",
