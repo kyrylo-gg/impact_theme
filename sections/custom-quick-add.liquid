@@ -128,7 +128,7 @@
   }
 
   .price-item--sale {
-    color: #fff !important;
+    color: var(--block-text-color, #fff) !important;
     font-size: 22px;
     font-weight: 700;
   }
@@ -172,7 +172,7 @@
   .custom-quick-add-main .price-list .money,
   .custom-quick-add-main .price-list .text-subdued,
   .custom-quick-add-main .price-list .text-on-sale {
-    color:white !important;
+    color: var(--block-text-color, white) !important;
     font-weight: 500;
     font-size: 13px;
     line-height: 100%;
@@ -196,7 +196,7 @@
   .custom-quick-add-main .price-list {
     display: flex;
     flex-direction: row-reverse;
-    color: white !important;
+    color: var(--block-text-color, white) !important;
     min-width: 88px;
     justify-content: flex-end;
   }
@@ -426,6 +426,7 @@
       --countdown-background: {{ section.settings.countdown_background }};
       --countdown-color: {{ section.settings.countdown_color }};
       --labels-color: {{ section.settings.labels_color }};
+      --block-text-color: {{ section.settings.block_text_color | default: '#ffffff' }};
   }
   @media screen and (max-width: 768px) {
       #shopify-section-{{ section.id }} {
@@ -444,7 +445,7 @@
     font-weight: 700;
     font-size: 9px;
     line-height: 140%;
-    color: #FFFFFF;
+    color: var(--block-text-color, #FFFFFF);
     margin: 3px auto 0;
   }
 
