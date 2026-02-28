@@ -886,21 +886,43 @@
     function submitBundle() {
       if (bbState.isSubmitting || bbState.selectedItems.length === 0) return;
       bbState.isSubmitting = true;
-      applyDiscountAndRefreshCart()
+
+      var items = bbState.selectedItems.map(function(item) {
+        var variantNum = String(item.variantId).replace(/.*\/(\d+)$/, '$1') || String(item.variantId);
+        return { id: parseInt(variantNum, 10) || variantNum, quantity: item.quantity || 1 };
+      });
+
+      fetch(cartUrls.clear, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify({})
+      })
+        .then(function(r) { return r.ok ? r.json() : Promise.reject(new Error('Clear failed')); })
+        .then(function() {
+          return fetch(cartUrls.add, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ items: items })
+          });
+        })
+        .then(function(r) { return r.ok ? r.json() : Promise.reject(new Error('Add failed')); })
+        .then(function() {
+          var code = (getHasProgramPack() && discountCode) ? discountCode : '';
+          return fetch(cartUrls.update, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ discount: code })
+          });
+        })
         .then(function() {
           bbState.isSubmitting = false;
           closeWizard();
-          showToast('Items added to cart!');
+          var checkoutHref = checkoutUrl;
           if (discountCode && getHasProgramPack()) {
-            window.location.href = checkoutUrl + (checkoutUrl.indexOf('?') >= 0 ? '&' : '?') + 'discount=' + encodeURIComponent(discountCode);
-          } else {
-            var cartDrawer = document.querySelector('cart-drawer') || document.querySelector('[data-cart-drawer]');
-            if (cartDrawer && typeof cartDrawer.show === 'function') {
-              cartDrawer.show();
-            } else {
-              window.location.href = (typeof window !== 'undefined' && window.Theme && window.Theme.routes && window.Theme.routes.cart_url) || '/cart';
-            }
+            checkoutHref += (checkoutUrl.indexOf('?') >= 0 ? '&' : '?') + 'discount=' + encodeURIComponent(discountCode);
           }
+          window.location.href = checkoutHref;
         })
         .catch(function() {
           bbState.isSubmitting = false;
