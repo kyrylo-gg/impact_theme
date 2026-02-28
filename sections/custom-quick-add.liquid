@@ -92,7 +92,7 @@
     flex-direction: row;
     gap: 10px;
     justify-content: space-between;
-    padding: 12px;
+    padding: 12px 18px;
     min-width: 376px;
   }
 
@@ -110,7 +110,7 @@
     font-weight: 600;
     font-size: 13px;
     line-height: 100%;
-    color: white;
+    color: var(--sublime-text-color, white);
   }
 
   .price,
@@ -328,6 +328,7 @@
       min-width: 70px;
       text-align: center;
       font-weight: 700;
+      padding: 6px 14px;
     }
 
     .custom-quick-add-button:hover {
@@ -427,6 +428,7 @@
       --countdown-color: {{ section.settings.countdown_color }};
       --labels-color: {{ section.settings.labels_color }};
       --block-text-color: {{ section.settings.block_text_color | default: '#ffffff' }};
+      --sublime-text-color: {{ section.settings.sublime_text_color | default: '#ffffff' }};
   }
   @media screen and (max-width: 768px) {
       #shopify-section-{{ section.id }} {
@@ -667,6 +669,12 @@
       "id": "sublime_text",
       "label": "Sublime text",
       "default": "<p>7-day money-back guarantee</p>"
+    },
+    {
+      "type": "color",
+      "id": "sublime_text_color",
+      "label": "Sublime text color",
+      "default": "#ffffff"
     },
     {
       "type": "header",
