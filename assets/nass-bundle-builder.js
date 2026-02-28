@@ -895,8 +895,8 @@
             window.location.href = checkoutUrl + (checkoutUrl.indexOf('?') >= 0 ? '&' : '?') + 'discount=' + encodeURIComponent(discountCode);
           } else {
             var cartDrawer = document.querySelector('cart-drawer') || document.querySelector('[data-cart-drawer]');
-            if (cartDrawer && typeof cartDrawer.open === 'function') {
-              cartDrawer.open();
+            if (cartDrawer && typeof cartDrawer.show === 'function') {
+              cartDrawer.show();
             } else {
               window.location.href = (typeof window !== 'undefined' && window.Theme && window.Theme.routes && window.Theme.routes.cart_url) || '/cart';
             }
