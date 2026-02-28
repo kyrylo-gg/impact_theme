@@ -47,7 +47,7 @@
     background: transparent !important;
     padding: 0 12px;
     flex-shrink: 0;
-    margin-top: 8px;
+    margin-top: 0;
   }
 
   .timer-block {
@@ -461,64 +461,6 @@
 {% endif %}
 
 <div id="quick-add-sticky-{{ section.id }}" class="custom-quick-add">
-  {% if section.settings.sublime_text != blank %}
-    <div class="custom-quick-add-sublime sublime-mobile">
-      <img
-        src="https://cdn.shopify.com/s/files/1/0276/5658/5290/files/Vector_1.svg?v=1764268945"
-        width="10"
-        height="12"
-        class="custom-quick-add-sublime-icon hidden"
-      >
-      <span class="custom-quick-add-sublime-text">
-        {{ section.settings.sublime_text }}
-      </span>
-    </div>
-  {% endif %}
-
-  {% if section.settings.timer_enabled %}
-    <ts-timer
-      data-timer="{{ timer_type }}"
-      data-target="{{ timer_target }}"
-      data-action="{{ timer_action }}"
-      data-section="{{ section.id }}"
-      class="countdown-timer timer-desktop"
-    >
-      {% assign labels = 'Days,Hours,Mins,Secs' | split: ',' %}
-      <div class="timer-block flex items-center">
-        <span class="time-value" data-cell="days">00</span>
-        <span class="time-label">{{ labels[0] }}</span>
-      </div>
-      <span class="colon">:</span>
-      <div class="timer-block flex items-center">
-        <span class="time-value" data-cell="hours">00</span>
-        <span class="time-label">{{ labels[1] }}</span>
-      </div>
-      <span class="colon">:</span>
-      <div class="timer-block flex items-center">
-        <span class="time-value" data-cell="minutes">00</span>
-        <span class="time-label">{{ labels[2] }}</span>
-      </div>
-      <span class="colon">:</span>
-      <div class="timer-block flex items-center">
-        <span class="time-value" data-cell="seconds">00</span>
-        <span class="time-label">{{ labels[3] }}</span>
-      </div>
-    </ts-timer>
-  {% else %}
-    {% if section.settings.sublime_text != blank %}
-      <div class="custom-quick-add-sublime sublime-desktop inverse">
-        <img
-          src="https://cdn.shopify.com/s/files/1/0276/5658/5290/files/Vector_1.svg?v=1764268945"
-          width="10"
-          height="12"
-          class="custom-quick-add-sublime-icon hidden"
-        >
-        <span class="custom-quick-add-sublime-text">
-          {{ section.settings.sublime_text }}
-        </span>
-      </div>
-    {% endif %}
-  {% endif %}
 
   <div class="custom-quick-add-block" style="background:{{ section.settings.block_background }}">
     {% if section.settings.timer_enabled %}
@@ -527,7 +469,7 @@
         data-target="{{ timer_target }}"
         data-action="{{ timer_action }}"
         data-section="{{ section.id }}"
-        class="countdown-timer timer-mobile"
+        class="countdown-timer timer-desktop"
       >
         {% assign labels = 'Days,Hours,Mins,Secs' | split: ',' %}
         <div class="timer-block flex items-center">
@@ -566,6 +508,22 @@
       </div>
     {% endif %}
 
+    {% unless section.settings.timer_enabled %}
+      {% if section.settings.sublime_text != blank %}
+        <div class="custom-quick-add-sublime sublime-desktop inverse">
+          <img
+            src="https://cdn.shopify.com/s/files/1/0276/5658/5290/files/Vector_1.svg?v=1764268945"
+            width="10"
+            height="12"
+            class="custom-quick-add-sublime-icon hidden"
+          >
+          <span class="custom-quick-add-sublime-text">
+            {{ section.settings.sublime_text }}
+          </span>
+        </div>
+      {% endif %}
+    {% endunless %}
+
     <div class="custom-quick-add-main {% if section.settings.timer_enabled == false %} full-width {% endif %}">
       <div class="custom-quick-add-main__price">
         {% assign current_variant = section.settings.product.selected_or_first_available_variant %}
@@ -593,6 +551,21 @@
       </a>
     </div>
   </div>
+
+  {% if section.settings.sublime_text != blank %}
+    <div class="custom-quick-add-sublime sublime-mobile">
+      <img
+        src="https://cdn.shopify.com/s/files/1/0276/5658/5290/files/Vector_1.svg?v=1764268945"
+        width="10"
+        height="12"
+        class="custom-quick-add-sublime-icon hidden"
+      >
+      <span class="custom-quick-add-sublime-text">
+        {{ section.settings.sublime_text }}
+      </span>
+    </div>
+  {% endif %}
+
 </div>
 
 <script>
