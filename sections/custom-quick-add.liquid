@@ -206,20 +206,48 @@
   }
 
   @media (max-width: 768px) {
-    .time-label {
-      font-size: 9px;
-      color: var(--labels-color, #000);
+    /* Секция — на всю ширину, прижата к низу без зазора */
+    #shopify-section-{{ section.id }} {
+      bottom: 0;
+      left: 0;
+      transform: none;
+      width: 100%;
+      border-radius: 10px 10px 0px 0px;
+      max-width: 100%;
     }
 
-    .sublime-mobile {
+    /* Контейнер — белый фон, flex column, правильные скругления */
+    .custom-quick-add {
+      display: flex !important;
+      flex-direction: column;
+      gap: 6px;
+      background: #ffffff !important;
+      padding: 10px 20px 14px;
+      border-radius: 10px 10px 0px 0px;
+    }
+
+    /* Розовый блок — flex row, одна строка */
+    .custom-quick-add-block {
       display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      min-width: 0;
+      width: 100%;
+      height: 60px;
+      border-radius: 10px;
+      justify-content: space-between;
     }
 
+    /* Таймер — слева в розовом блоке */
     .timer-desktop {
       display: flex !important;
       margin-top: 0;
-      padding: 0 8px;
+      padding: 0;
       background: transparent !important;
+      flex-shrink: 0;
+      gap: 2px;
     }
 
     #shopify-section-{{ section.id }} ts-timer.countdown-timer.timer-desktop {
@@ -227,42 +255,32 @@
       overflow: visible !important;
     }
 
+    /* timer-mobile скрыт — используем только timer-desktop */
+    .timer-mobile,
     .custom-quick-add-block .timer-mobile {
       display: none !important;
     }
 
-    .timer-mobile {
-      display: flex;
-      gap: 2px;
-      color: white;
-      align-items: center;
-    }
+    /* Ячейки таймера на мобильном */
     .time-value {
       font-size: 13px;
       width: 26px;
-      height: 26px;
-      border-radius: 5px;
-      padding: 0px 4px;
-      gap: 10px;
       min-width: 26px;
-      min-height:  26px;
+      min-height: 26px;
+      max-height: 26px;
+      border-radius: 5px;
+      padding: 0 3px;
       color: var(--mobile-countdown-color, #fff);
       background: var(--mobile-countdown-background, linear-gradient(180deg, #313131 0%, #1C1C1C 100%));
     }
-    .colon {
-      font-size: 13px;
-      padding-bottom: 14px;
-    }
-    .time-mobile .time-value {
-      padding: 1px 4px;
-    }
 
-    .timer-mobile .time-label {
+    .time-label {
+      font-size: 9px;
       color: var(--mobile-labels-color, #fff);
     }
 
     .timer-desktop .time-label {
-      color: var(--mobile-labels-color, #000);
+      color: var(--mobile-labels-color, #fff);
     }
 
     .timer-desktop .time-value {
@@ -270,72 +288,25 @@
       color: #fff !important;
     }
 
+    .colon {
+      font-size: 13px;
+      padding-bottom: 12px;
+      margin: 0 1px;
+    }
+
+    /* Цена и кнопка */
     .custom-quick-add-main {
-      gap: 7px;
-    }
-
-    .custom-quick-add-button {
-      width: 100%;
-      text-align: center;
-    }
-    .custom-quick-add-button:hover {
-      opacity: 0.95;
-    }
-
-    .sublime-desktop {
-      display: none;
-    }
-
-    .custom-quick-add-block .sublime-desktop {
-      display: none;
-    }
-
-    .custom-quick-add {
-      background: transparent !important;
-    }
-    .custom-quick-add-sublime-icon {
-      filter: invert(100%);
-      width: 12px;
-    }
-    .custom-quick-add-sublime.sublime-mobile {
-      color: black;
-    }
-    .sublime-mobile .custom-quick-add-sublime-text {
-      color: black;
-    }
-    .custom-quick-add {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      grid-template-rows: auto auto;
-      gap: 10px 10px;
+      display: flex;
       align-items: center;
-      background: white !important;
-      padding: 10px 20px 14px;
-      bottom: -5px;
-      position: relative;
-    }
-    .timer-desktop {
-      grid-column: 1;
-      grid-row: 1;
-    }
-    .custom-quick-add-block {
-      grid-column: 2;
-      grid-row: 1;
+      gap: 6px;
       min-width: 0;
+      flex: 1;
     }
-    .sublime-mobile {
-      grid-column: 1 / -1;
-      grid-row: 2;
-      justify-content: center;
-      margin-top: 0;
-    }
-    .custom-quick-add-sublime.sublime-mobile {
-      margin-top: 0;
-    }
+
     .custom-quick-add-main .price-list .money,
     .custom-quick-add-main .price-list .text-subdued,
     .custom-quick-add-main .price-list .text-on-sale {
-      color:white !important;
+      color: white !important;
       font-weight: 500;
       font-size: 13px;
       line-height: 100%;
@@ -344,16 +315,104 @@
     .custom-quick-add-main .price-list .money {
       font-size: 13px;
     }
+
     .custom-quick-add-main .price-list {
-      min-width: 60px;
+      min-width: 0;
       gap: 4px;
     }
-    .custom-quick-add-block {
-      gap: 6px;
-      padding: 12px;
-      min-width: 0;
+
+    .custom-quick-add-button {
+      flex-shrink: 0;
+      width: auto;
+      min-width: 70px;
+      text-align: center;
     }
 
+    .custom-quick-add-button:hover {
+      opacity: 0.95;
+    }
+
+    /* Sublime — под розовым блоком, по центру */
+    .sublime-mobile {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      margin-top: 0;
+    }
+
+    .custom-quick-add-sublime.sublime-mobile {
+      margin-top: 0;
+      color: black;
+    }
+
+    .sublime-mobile .custom-quick-add-sublime-text {
+      color: black;
+    }
+
+    .custom-quick-add-sublime-icon {
+      filter: invert(100%);
+      width: 12px;
+    }
+
+    /* Десктопный sublime скрыт на мобильном */
+    .sublime-desktop,
+    .custom-quick-add-block .sublime-desktop {
+      display: none;
+    }
+  }
+
+  /* Очень маленькие экраны: 320–374px — уменьшаем чтобы влезло в одну строку */
+  @media (max-width: 374px) {
+    .custom-quick-add {
+      padding: 8px 12px 10px;
+      gap: 4px;
+    }
+
+    .custom-quick-add-block {
+      gap: 4px;
+      padding: 8px;
+    }
+
+    .time-value {
+      width: 22px;
+      min-width: 22px;
+      min-height: 22px;
+      max-height: 22px;
+      font-size: 11px;
+      padding: 0 2px;
+    }
+
+    .time-label {
+      font-size: 8px;
+    }
+
+    .colon {
+      font-size: 11px;
+      padding-bottom: 10px;
+      margin: 0;
+    }
+
+    .countdown-timer.timer-desktop {
+      gap: 1px;
+    }
+
+    .custom-quick-add-button {
+      font-size: 11px;
+      min-width: 58px;
+      padding: 4px 6px;
+    }
+
+    .custom-quick-add-main .price-list .money {
+      font-size: 11px;
+    }
+
+    .custom-quick-add-main .price-list .text-subdued {
+      font-size: 10px;
+    }
+
+    .custom-quick-add-main__savings {
+      font-size: 8px;
+    }
   }
   .inverse {
     filter: invert(100%);
@@ -370,7 +429,6 @@
           --mobile-countdown-background: {{ section.settings.mobile_countdown_background }};
           --mobile-countdown-color: {{ section.settings.mobile_countdown_color }};
           --mobile-labels-color: {{ section.settings.mobile_labels_color }};
-          background: transparent;
       }
   }
 
