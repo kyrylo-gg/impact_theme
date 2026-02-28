@@ -936,6 +936,7 @@
     },
     "custom_quick_add_QEqWLc": {
       "type": "custom-quick-add",
+      "disabled": true,
       "name": "TS Sticky Add",
       "settings": {
         "product": "twerk-program-1",
