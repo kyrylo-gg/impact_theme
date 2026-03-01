@@ -67,13 +67,6 @@
         "overlay_opacity": 0
       }
     },
-    "scroll_hint_hero": {
-      "type": "scroll-hint",
-      "settings": {
-        "text": "Discover what's inside",
-        "text_color": "#ffffff"
-      }
-    },
     "program_cards_ykQqNc": {
       "type": "program-cards",
       "blocks": {
@@ -971,7 +964,6 @@
   },
   "order": [
     "hero_video",
-    "scroll_hint_hero",
     "program_cards_ykQqNc",
     "twerk_lessons_MWt6Ji",
     "social_proof_hPtKDy",
