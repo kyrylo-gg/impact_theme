@@ -41,6 +41,11 @@
     {%- endcapture -%}
 
     {%- if section.settings.video -%}
+      {%- assign poster_for_video = section.settings.poster | default: section.settings.video.preview_image -%}
+      {%- assign poster_width_safe = 1200 -%}
+      {%- if poster_for_video != blank and poster_for_video.width != blank -%}
+        {%- assign poster_width_safe = poster_for_video.width -%}
+      {%- endif -%}
       <video-media
         {% if section.settings.autoplay %}
           autoplay
@@ -56,7 +61,7 @@
             controls
           {% endif %}
           preload="metadata"
-          poster="{{ section.settings.poster | default: section.settings.video.preview_image | image_url: width: poster_image.width }}"
+          {% if poster_for_video != blank %}poster="{{ poster_for_video | image_url: width: poster_width_safe }}"{% endif %}
         >
           <!-- Source for desktop view -->
           {% for source in section.settings.video.sources %}
