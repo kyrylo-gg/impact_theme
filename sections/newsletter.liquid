@@ -41,7 +41,7 @@
         {%- assign success_message = 'general.newsletter.subscribed_successfully' | t -%}
         {%- render 'banner', content: success_message, status: 'success' -%}
         <script>document.addEventListener('DOMContentLoaded', function(){
-          fbq('track', 'Lead');
+          if (typeof fbq === 'function') fbq('track', 'Lead');
         }); </script>
       {%- else -%}
         {%- if form.errors -%}

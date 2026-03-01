@@ -140,7 +140,7 @@
     <script type="text/javascript">
       window.addEventListener("klaviyoForms", function(e) {
         if (e.detail.type == 'submit') {
-          fbq('track', 'Lead');
+          if (typeof fbq === 'function') fbq('track', 'Lead');
         }
       });
     </script>
@@ -151,15 +151,7 @@
     {% endif %}
     <!-- PickyStory end snippet "main_widget_script" --> {% endcomment %}
 
-    <script type="text/javascript">
-      var _learnq = _learnq || [];
-        var classname = document.getElementsByClassName("button button--xl button--secondary");
-      var addToCart = function() {
-      _learnq.push(['track', 'Added to Cart', item]);
-      }; for (var i = 0; i < classname.length; i++) {
-      classname[i].addEventListener('click', addToCart, false);
-      }
-    </script>
+    {% comment %} Klaviyo addToCart tracking removed: 'item' was undefined, causing ReferenceError. Re-add with proper product object when needed. {% endcomment %}
 
     {% if template.name == "index" or template.name == "product" or template.name == "collection" %}
       {% render 'yett-unblock' %}
