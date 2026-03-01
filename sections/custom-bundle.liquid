@@ -110,12 +110,17 @@
                             {% endif %}
                           {% endfor %}
                           <div class="custom-product-bundle__item">
-                            {% if prod.id == 7455682986058 %}
-                              <img src="https://cdn.shopify.com/s/files/1/0276/5658/5290/files/nb.jpg" width="525" height="525" alt="4 Bundles image" class="bundle-image-1" />
-                              <img src="https://cdn.shopify.com/s/files/1/0276/5658/5290/files/main_product_c.webp" width="525" height="525" alt="4 Bundles image" class="bundle-image-2" />
-                              <img src="https://cdn.shopify.com/s/files/1/0276/5658/5290/files/main_product_d.webp" width="525" height="525" alt="4 Bundles image" class="bundle-image-3" />
+                            {% assign bundle_images = prod.images %}
+                            {% if bundle_images.size >= 3 %}
+                              <img src="{{ bundle_images[0] | image_url: width: 525, height: 525 }}" width="525" height="525" alt="{{ prod.title | escape }}" class="bundle-image-1" />
+                              <img src="{{ bundle_images[1] | image_url: width: 525, height: 525 }}" width="525" height="525" alt="{{ prod.title | escape }}" class="bundle-image-2" />
+                              <img src="{{ bundle_images[2] | image_url: width: 525, height: 525 }}" width="525" height="525" alt="{{ prod.title | escape }}" class="bundle-image-3" />
+                            {% elsif bundle_images.size == 2 %}
+                              <img src="{{ bundle_images[0] | image_url: width: 525, height: 525 }}" width="525" height="525" alt="{{ prod.title | escape }}" class="bundle-image-1" />
+                              <img src="{{ bundle_images[1] | image_url: width: 525, height: 525 }}" width="525" height="525" alt="{{ prod.title | escape }}" class="bundle-image-2" />
+                              <img src="{{ bundle_images[1] | image_url: width: 525, height: 525 }}" width="525" height="525" alt="{{ prod.title | escape }}" class="bundle-image-3" />
                             {% else %}
-                              {{ prod.featured_image | image_url: width: 525, height: 525 | image_tag }}
+                              {{ prod.featured_image | image_url: width: 525, height: 525 | image_tag: class: 'bundle-image-1' }}
                             {% endif %}
                             {% comment %}
                             {% if program %}
@@ -286,14 +291,19 @@
                           </div>
                         {% endif %}
                       </div>
-                      {% if p.id == 7455682986058 %}
-                        <img src="https://cdn.shopify.com/s/files/1/0276/5658/5290/files/nb.jpg" width="525" height="525" alt="4 Bundles image" class="bundle-image-1" />
-                        <img src="https://cdn.shopify.com/s/files/1/0276/5658/5290/files/main_product_c.webp" width="525" height="525" alt="4 Bundles image" class="bundle-image-2" />
-                        <img src="https://cdn.shopify.com/s/files/1/0276/5658/5290/files/main_product_d.webp" width="525" height="525" alt="4 Bundles image" class="bundle-image-3" />
+                      {% assign bundle_images = p.images %}
+                      {% if bundle_images.size >= 3 %}
+                        <img src="{{ bundle_images[0] | image_url: width: 525, height: 525 }}" width="525" height="525" alt="{{ p.title | escape }}" class="bundle-image-1" />
+                        <img src="{{ bundle_images[1] | image_url: width: 525, height: 525 }}" width="525" height="525" alt="{{ p.title | escape }}" class="bundle-image-2" />
+                        <img src="{{ bundle_images[2] | image_url: width: 525, height: 525 }}" width="525" height="525" alt="{{ p.title | escape }}" class="bundle-image-3" />
+                      {% elsif bundle_images.size == 2 %}
+                        <img src="{{ bundle_images[0] | image_url: width: 525, height: 525 }}" width="525" height="525" alt="{{ p.title | escape }}" class="bundle-image-1" />
+                        <img src="{{ bundle_images[1] | image_url: width: 525, height: 525 }}" width="525" height="525" alt="{{ p.title | escape }}" class="bundle-image-2" />
+                        <img src="{{ bundle_images[1] | image_url: width: 525, height: 525 }}" width="525" height="525" alt="{{ p.title | escape }}" class="bundle-image-3" />
                       {% elsif block.type == 'programs_step' %}
-                        {{ p.featured_image| image_url: width: 525, height: 525 | image_tag }}
+                        {{ p.featured_image | image_url: width: 525, height: 525 | image_tag }}
                       {% else %}
-                        {{ p.featured_image| image_url: width: 420, height: 525 | image_tag }}
+                        {{ p.featured_image | image_url: width: 420, height: 525 | image_tag }}
                       {% endif %}
                       <div class="cpb__item-title">
                         {{ p.title }}
