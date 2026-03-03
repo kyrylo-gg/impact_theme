@@ -43,7 +43,7 @@
             "style": "outline",
             "size": "lg",
             "text": "Get Offer Now!",
-            "url": "#CustomBundle-template--18860771835978__custom_bundle_fwHcJU",
+            "url": "#shopify-section-template--19162956398666__custom_bundle_fwHcJU78__custom_bundle_fwHcJU",
             "background": "",
             "text_color": "#ffffff"
           }
@@ -1093,6 +1093,7 @@
         "block_text_color": "#1a1a1a",
         "block_background": "#fac2ff",
         "sublime_text": "<p>Special Spring  Booty Offer 🌷</p>",
+        "sublime_text_color": "#ffffff",
         "timer_enabled": true,
         "timer_type": "daily",
         "cancel_date": "01-01-2026 12:00",
