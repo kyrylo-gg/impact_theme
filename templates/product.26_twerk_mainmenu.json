@@ -43,7 +43,7 @@
             "style": "outline",
             "size": "lg",
             "text": "Get Offer Now!",
-            "url": "#shopify-section-template--18830587101258__custom_bundle_fwHcJU",
+            "url": "#twerk-bundle",
             "background": "",
             "text_color": "#ffffff"
           }
@@ -1113,6 +1113,7 @@
         "block_text_color": "",
         "block_background": "#fac2ff",
         "sublime_text": "<p>Valentine's Day Booty Offer❤️🍑</p>",
+        "sublime_text_color": "#ffffff",
         "timer_enabled": true,
         "timer_type": "daily",
         "cancel_date": "01-01-2026 12:00",
