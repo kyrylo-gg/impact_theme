@@ -15,8 +15,8 @@
         "heading_1": {
           "type": "heading",
           "settings": {
-            "text": "START YOUR SPRING BOOTY GLOW-UP",
-            "heading_tag": "h1",
+            "text": "HAVE FUN AND BUILD A PERFECT BOOTY WITH TWERK WORKOUTS",
+            "heading_tag": "h2",
             "special_padding": ""
           }
         },
@@ -24,7 +24,7 @@
           "type": "heading",
           "settings": {
             "text": "ONLY $107<br>(SAVE $349)",
-            "heading_tag": "h1",
+            "heading_tag": "h2",
             "special_padding": ""
           }
         },
@@ -42,7 +42,7 @@
         "subheading": {
           "type": "subheading",
           "settings": {
-            "text": "60% off all clothing with Bundle purchase!"
+            "text": "Claim 60% off all clothing with Booty Pack!"
           }
         }
       },
