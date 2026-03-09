@@ -429,7 +429,7 @@
     "cafcdaea-96b8-41f5-862b-19ae985e6eb5": {
       "type": "featured-collection",
       "settings": {
-        "collection": "sets",
+        "collection": "leggings",
         "products": [],
         "full_width": true,
         "stack_products": true,
@@ -438,7 +438,7 @@
         "products_per_row_mobile": "2",
         "products_per_row_desktop": 4,
         "subheading": "",
-        "title": "SETS",
+        "title": "LEGGINGS",
         "content": "",
         "link_url": "",
         "link_text": "View all",
