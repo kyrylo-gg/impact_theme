@@ -36,7 +36,20 @@ Supported variables
         <p class="bold">{{ line_item.product.title | default: line_item.title }}</p>
       {%- endif -%}
 
-      {%- render 'price-list', line_item: line_item -%}
+      <div class="line-item__price-row">
+        {%- render 'price-list', line_item: line_item -%}
+        {%- assign show_discount_badge = false -%}
+        {%- if line_item.variant.compare_at_price != blank and line_item.variant.compare_at_price > line_item.final_price -%}
+          {%- assign show_discount_badge = true -%}
+          {%- assign line_savings_pct = line_item.variant.compare_at_price | minus: line_item.final_price | times: 100.0 | divided_by: line_item.variant.compare_at_price | round -%}
+        {%- elsif line_item.original_line_price > line_item.final_line_price -%}
+          {%- assign show_discount_badge = true -%}
+          {%- assign line_savings_pct = line_item.original_line_price | minus: line_item.final_line_price | times: 100.0 | divided_by: line_item.original_line_price | round -%}
+        {%- endif -%}
+        {%- if show_discount_badge -%}
+          <span class="line-item__discount-badge">{{ line_savings_pct }}% OFF</span>
+        {%- endif -%}
+      </div>
     </div>
 
     {%- unless line_item.product.has_only_default_variant or line_item.gift_card -%}

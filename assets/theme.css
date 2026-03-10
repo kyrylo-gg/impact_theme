@@ -4916,6 +4916,11 @@ split-lines {
   top: 0;
 }
 
+.cart-drawer:not([open]) {
+  overflow: hidden;
+  pointer-events: none;
+}
+
 .cart-drawer::part(outside-close-button) {
   display: none;
 }
@@ -4932,6 +4937,46 @@ split-lines {
 
 .cart-drawer__line-items > * + * {
   padding-block-start: var(--spacing-4);
+}
+
+/* Cart drawer line item: bold name; compare-at same size as price; badge in same row */
+.cart-drawer .line-item .bold {
+  font-weight: 700;
+}
+.cart-drawer .line-item__price-row {
+  display: flex !important;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.375rem 0.5rem;
+}
+.cart-drawer .line-item__price-row price-list {
+  display: flex !important;
+  flex: 0 1 auto;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.375rem 0.5rem;
+}
+.cart-drawer .line-item__price-row compare-at-price {
+  display: inline !important;
+  text-decoration: line-through;
+  color: rgb(var(--text-color) / 0.7);
+  font-size: 1em;
+  font-weight: 400;
+}
+.cart-drawer .line-item__price-row sale-price {
+  font-weight: 400;
+  color: rgb(var(--text-color));
+  font-size: 1em;
+}
+.cart-drawer .line-item__discount-badge {
+  display: inline-block !important;
+  flex-shrink: 0;
+  background: #F5D442;
+  color: #1a1a1a;
+  padding: 0.25em 0.6em;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 0.75rem;
 }
 
 .cart-drawer__note {

@@ -61,11 +61,27 @@ Supported variables
     </compare-at-price>
   {%- elsif line_item != blank -%}
     {%- comment -%}
-    --------------------------------------------------------------------------------------------------------------------
-    LINE ITEM CASE (used on cart, order page...)
-    --------------------------------------------------------------------------------------------------------------------
+    LINE ITEM CASE: use variant.compare_at_price (cart original_line_price often not set for compare-at).
     {%- endcomment -%}
-    <sale-price class="{% if line_item.original_line_price > line_item.final_line_price %}{{ on_sale_price_classes }}{% else %}{{ regular_price_classes }}{% endif %}">
+    {%- assign line_item_on_sale = false -%}
+    {%- if line_item.variant.compare_at_price != blank and line_item.variant.compare_at_price > line_item.final_price -%}
+      {%- assign line_item_on_sale = true -%}
+    {%- elsif line_item.original_line_price > line_item.final_line_price -%}
+      {%- assign line_item_on_sale = true -%}
+    {%- endif -%}
+    {%- if line_item_on_sale -%}
+      {%- assign compare_line_total = line_item.variant.compare_at_price | times: line_item.quantity -%}
+      <compare-at-price class="{{ compare_at_price_classes }}">
+        <span class="sr-only">{{ 'product.price.regular_price' | t }}</span>
+        {%- if settings.currency_code_enabled -%}
+          {{- compare_line_total | money_with_currency -}}
+        {%- else -%}
+          {{- compare_line_total | money_without_trailing_zeros -}}
+        {%- endif -%}
+      </compare-at-price>
+    {%- endif -%}
+
+    <sale-price class="{% if line_item_on_sale %}{{ on_sale_price_classes }}{% else %}{{ regular_price_classes }}{% endif %}">
       <span class="sr-only">{{ 'product.price.sale_price' | t }}</span>
 
       {%- if settings.currency_code_enabled -%}
@@ -74,18 +90,6 @@ Supported variables
         {{- line_item.final_line_price | money_without_trailing_zeros -}}
       {%- endif -%}
     </sale-price>
-
-    {%- if line_item.original_line_price > line_item.final_line_price -%}
-      <compare-at-price class="{{ compare_at_price_classes }}">
-        <span class="sr-only">{{ 'product.price.regular_price' | t }}</span>
-
-        {%- if settings.currency_code_enabled -%}
-          {{- line_item.original_line_price | money_with_currency -}}
-        {%- else -%}
-          {{- line_item.original_line_price | money_without_trailing_zeros -}}
-        {%- endif -%}
-      </compare-at-price>
-    {%- endif -%}
   {%- else -%}
     {%- comment -%}
     --------------------------------------------------------------------------------------------------------------------

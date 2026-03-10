@@ -469,6 +469,7 @@
     "countdown_timer_Ab3XyZ": {
       "type": "countdown-timer",
       "settings": {
+        "countdown_mode": "daily_kyiv_10am",
         "heading": "HURRY UP! THE SALE ENDS IN:",
         "initial_days": 0,
         "initial_hours": 16,

@@ -4,7 +4,7 @@
 {% endcomment %}
 
 <div id="twerk-bundle" class="twerk-bundle-anchor"></div>
-<section class="countdown-timer">
+<section class="countdown-timer" {% if section.settings.countdown_mode == 'daily_kyiv_10am' %}data-countdown-mode="daily_kyiv_10am"{% endif %}>
   <div class="countdown-timer__container">
     <div class="countdown-timer__inner">
       <div class="countdown-timer__text">
@@ -60,23 +60,68 @@
     var minutesEl = section.querySelector('[data-countdown-minutes]');
     var secondsEl = section.querySelector('[data-countdown-seconds]');
 
-    var total =
-      parseInt(daysEl.textContent, 10) * 86400 +
-      parseInt(hoursEl.textContent, 10) * 3600 +
-      parseInt(minutesEl.textContent, 10) * 60 +
-      parseInt(secondsEl.textContent, 10);
+    var dailyMode = section.getAttribute('data-countdown-mode') === 'daily_kyiv_10am';
 
     function pad(n) { return n < 10 ? '0' + n : String(n); }
 
+    function getSecondsUntilNext10amKyiv() {
+      var now = new Date();
+      var formatter = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'Europe/Kyiv',
+        hour: '2-digit', hour12: false,
+        minute: '2-digit', second: '2-digit'
+      });
+      var parts = formatter.formatToParts(now);
+      var hour = 0, minute = 0, second = 0;
+      parts.forEach(function (p) {
+        if (p.type === 'hour') hour = parseInt(p.value, 10);
+        if (p.type === 'minute') minute = parseInt(p.value, 10);
+        if (p.type === 'second') second = parseInt(p.value, 10);
+      });
+      var secSinceMidnight = hour * 3600 + minute * 60 + second;
+      var tenAmSec = 10 * 3600;
+      if (secSinceMidnight < tenAmSec) return tenAmSec - secSinceMidnight;
+      return (24 * 3600 - secSinceMidnight) + tenAmSec;
+    }
+
+    var total;
+    if (dailyMode) {
+      total = getSecondsUntilNext10amKyiv();
+    } else {
+      total =
+        parseInt(daysEl.textContent, 10) * 86400 +
+        parseInt(hoursEl.textContent, 10) * 3600 +
+        parseInt(minutesEl.textContent, 10) * 60 +
+        parseInt(secondsEl.textContent, 10);
+    }
+
     function tick() {
-      if (total <= 0) return;
-      total--;
+      if (total <= 0) {
+        if (dailyMode) {
+          total = 24 * 3600;
+        } else {
+          return;
+        }
+      } else {
+        total--;
+      }
 
       var d = Math.floor(total / 86400);
       var h = Math.floor((total % 86400) / 3600);
       var m = Math.floor((total % 3600) / 60);
       var s = total % 60;
 
+      daysEl.textContent = pad(d);
+      hoursEl.textContent = pad(h);
+      minutesEl.textContent = pad(m);
+      secondsEl.textContent = pad(s);
+    }
+
+    if (dailyMode) {
+      var d = Math.floor(total / 86400);
+      var h = Math.floor((total % 86400) / 3600);
+      var m = Math.floor((total % 3600) / 60);
+      var s = total % 60;
       daysEl.textContent = pad(d);
       hoursEl.textContent = pad(h);
       minutesEl.textContent = pad(m);
@@ -270,6 +315,16 @@
   "name": "Countdown Timer",
   "class": "countdown-timer-section",
   "settings": [
+    {
+      "type": "select",
+      "id": "countdown_mode",
+      "label": "Countdown mode",
+      "options": [
+        { "value": "fixed", "label": "Fixed (start from initial values)" },
+        { "value": "daily_kyiv_10am", "label": "Daily: until 10:00 AM Kyiv (resets every 24h)" }
+      ],
+      "default": "fixed"
+    },
     {
       "type": "text",
       "id": "heading",
