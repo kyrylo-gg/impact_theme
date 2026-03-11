@@ -137,22 +137,26 @@
         {% endfor %}
 
         {%- assign cart_compare_at_total = 0 -%}
+        {%- assign cart_savings = 0 -%}
         {%- for item in cart.items -%}
           {%- if item.variant.compare_at_price != blank and item.variant.compare_at_price > item.final_price -%}
             {%- assign line_compare = item.variant.compare_at_price | times: item.quantity -%}
             {%- assign cart_compare_at_total = cart_compare_at_total | plus: line_compare -%}
+            {%- assign line_saving = line_compare | minus: item.final_line_price -%}
+            {%- assign cart_savings = cart_savings | plus: line_saving -%}
           {%- elsif item.original_line_price > item.final_line_price -%}
             {%- assign cart_compare_at_total = cart_compare_at_total | plus: item.original_line_price -%}
+            {%- assign line_saving = item.original_line_price | minus: item.final_line_price -%}
+            {%- assign cart_savings = cart_savings | plus: line_saving -%}
           {%- endif -%}
         {%- endfor -%}
-        {%- assign cart_savings = cart_compare_at_total | minus: cart.total_price -%}
 
         <div class="cart-drawer__total-row h-stack gap-4 justify-between align-center">
           <span class="h5">{{ 'cart.general.total' | t }}</span>
           <div class="cart-drawer__total-prices h-stack gap-2 align-center">
             <span class="h5">{%- if cart.currency.iso_code == 'USD' -%}{{ cart.total_price | money }}{%- else -%}{{ cart.total_price | money_with_currency }}{%- endif -%}</span>
-            {%- if cart_compare_at_total > cart.total_price -%}
-              <span class="cart-drawer__compare-at-total h5 text-subdued" style="text-decoration: line-through;">{%- if cart.currency.iso_code == 'USD' -%}{{ cart_compare_at_total | money }}{%- else -%}{{ cart_compare_at_total | money_with_currency }}{%- endif -%}</span>
+            {%- if cart_savings > 0 -%}
+              <span class="cart-drawer__compare-at-total h5 text-subdued" style="text-decoration: line-through;">{%- assign compare_at_full = cart.total_price | plus: cart_savings -%}{%- if cart.currency.iso_code == 'USD' -%}{{ compare_at_full | money }}{%- else -%}{{ compare_at_full | money_with_currency }}{%- endif -%}</span>
             {%- endif -%}
           </div>
         </div>
@@ -177,7 +181,7 @@
           {%- else -%}
             <span></span>
           {%- endif -%}
-          {%- if cart_compare_at_total > cart.total_price -%}
+          {%- if cart_savings > 0 -%}
             <div class="cart-drawer__you-save h-stack gap-2 align-center flex-shrink-0">
               <span class="text-subdued text-sm">{{ 'cart.general.you_save' | t }}</span>
               <span class="cart-drawer__savings-badge">{%- if cart.currency.iso_code == 'USD' -%}{{ cart_savings | money }}{%- else -%}{{ cart_savings | money_with_currency }}{%- endif -%}</span>
