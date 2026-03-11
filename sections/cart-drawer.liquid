@@ -150,9 +150,9 @@
         <div class="cart-drawer__total-row h-stack gap-4 justify-between align-center">
           <span class="h5">{{ 'cart.general.total' | t }}</span>
           <div class="cart-drawer__total-prices h-stack gap-2 align-center">
-            <span class="h5">{{- cart.total_price | money_with_currency -}}</span>
+            <span class="h5">{%- if cart.currency.iso_code == 'USD' -%}{{ cart.total_price | money }}{%- else -%}{{ cart.total_price | money_with_currency }}{%- endif -%}</span>
             {%- if cart_compare_at_total > cart.total_price -%}
-              <span class="cart-drawer__compare-at-total h5 text-subdued" style="text-decoration: line-through;">{{ cart_compare_at_total | money_with_currency }}</span>
+              <span class="cart-drawer__compare-at-total h5 text-subdued" style="text-decoration: line-through;">{%- if cart.currency.iso_code == 'USD' -%}{{ cart_compare_at_total | money }}{%- else -%}{{ cart_compare_at_total | money_with_currency }}{%- endif -%}</span>
             {%- endif -%}
           </div>
         </div>
@@ -180,7 +180,7 @@
           {%- if cart_compare_at_total > cart.total_price -%}
             <div class="cart-drawer__you-save h-stack gap-2 align-center flex-shrink-0">
               <span class="text-subdued text-sm">{{ 'cart.general.you_save' | t }}</span>
-              <span class="cart-drawer__savings-badge">{{ cart_savings | money_with_currency }}</span>
+              <span class="cart-drawer__savings-badge">{%- if cart.currency.iso_code == 'USD' -%}{{ cart_savings | money }}{%- else -%}{{ cart_savings | money_with_currency }}{%- endif -%}</span>
             </div>
           {%- endif -%}
         </div>
@@ -230,6 +230,10 @@
 </cart-drawer>
 
 <style>
+  body.cart-drawer-open .needsclick.kl-teaser-QYMpAD.kl-private-reset-css-Xuajs1 {
+    display: none !important;
+  }
+
   .cart-drawer__banner {
     margin-top: 0.5rem;
     margin-inline: calc(-1 * var(--spacing-6));
@@ -316,6 +320,18 @@
   .cart-drawer__payment-icon {
     height: 24px;
     width: auto;
+  }
+  @media screen and (max-width: 699px) {
+    .cart-drawer__payment-icons {
+      gap: 0.25rem;
+    }
+    .cart-drawer__payment-icons .h-stack {
+      gap: 0.25rem;
+    }
+    .cart-drawer__payment-icon {
+      height: 12px;
+      width: auto;
+    }
   }
 
 </style>

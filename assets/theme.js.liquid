@@ -1432,6 +1432,9 @@ var _DialogElement = class _DialogElement extends HTMLElement {
       case "open":
         this.controls.forEach((toggle) => toggle.setAttribute("aria-expanded", newValue === null ? "false" : "true"));
         if (oldValue === null && (newValue === "" || newValue === "immediate")) {
+          if (this.id === "cart-drawer") {
+            document.body.classList.add("cart-drawer-open");
+          }
           this.removeAttribute("inert");
           this._originalParentBeforeAppend = null;
           if (this.shouldAppendToBody && this.parentElement !== document.body) {
@@ -1453,6 +1456,9 @@ var _DialogElement = class _DialogElement extends HTMLElement {
             document.documentElement.classList.add("lock");
           }
         } else if (oldValue !== null && newValue === null) {
+          if (this.id === "cart-drawer") {
+            document.body.classList.remove("cart-drawer-open");
+          }
           this.setAttribute("inert", "");
           const hideTransitionPromise = this._hideTransition() || Promise.resolve();
           hideTransitionPromise.then(() => {
