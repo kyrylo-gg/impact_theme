@@ -1,7 +1,12 @@
 {% assign hidden_templates = section.settings.hide_on_pages | downcase | split: ',' %}
 {% assign current_template = template.suffix | downcase | strip %}
+{% assign is_cart_page = template.name | downcase | strip %}
 
 {% assign hide_section = false %}
+
+{% if section.settings.hide_on_cart and is_cart_page == 'cart' %}
+  {% assign hide_section = true %}
+{% endif %}
 
 {%- for t in hidden_templates -%}
   {% assign t_clean = t | downcase | strip | replace: 'page.', '' %}
@@ -114,6 +119,13 @@
       "id": "hide_on_pages",
       "label": "Hide for pages",
       "info": "Use comma-separated values to hide this section on specific templates. Example: thank-you-custom, landing-page"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_cart",
+      "label": "Hide on cart page",
+      "default": false,
+      "info": "When enabled, this section is hidden on /cart"
     }
   ],
   "presets": [
