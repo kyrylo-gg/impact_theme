@@ -97,7 +97,15 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "v1wpbp2oz8");
 </script>
-    {% comment %} <style>.needsclick.kl-private-reset-css-Xuajs1, #epb_container {display: none !important}</style> {% endcomment %}
+    {% comment %} Hide Klaviyo "get 10% off" teaser when viewport is on Bundle Builder block {% endcomment %}
+    <style>
+      body.kl-teaser-hidden .kl-teaser-QYMpAD,
+      body.kl-teaser-hidden .needsclick.kl-private-reset-css-Xuajs1 {
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+      }
+    </style>
 
     {% render 'ts-base' %}
   </head>
@@ -145,6 +153,18 @@
       });
     </script>
     <script src="{{ 'custom_script.js' | asset_url }}" defer></script>
+    <script>
+      (function() {
+        var bundleEl = document.getElementById('nass-bundle-builder');
+        if (!bundleEl) return;
+        var io = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            document.body.classList.toggle('kl-teaser-hidden', entry.isIntersecting);
+          });
+        }, { rootMargin: '0px', threshold: 0.1 });
+        io.observe(bundleEl);
+      })();
+    </script>
     {% comment %} <!-- PickyStory snippet "main_widget_script", do not modify. Safe to remove after the app is uninstalled -->
     {% if content_for_header contains 'pickystory' %}
       <script defer src="https://cdn.pickystory.com/widget/dist/latest/pickystory-widget.min.js"></script>
