@@ -1091,7 +1091,7 @@
         "background_button": "#faff00",
         "text_color_button": "#1a1a1a",
         "block_text_color": "#1a1a1a",
-        "block_background": "#fac2ff",
+        "block_background": "#9acf8b",
         "sublime_text": "<p>Booty Boost Special</p>",
         "sublime_text_color": "#ffffff",
         "timer_enabled": true,
