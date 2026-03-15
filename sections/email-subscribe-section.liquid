@@ -1,0 +1,194 @@
+{% comment %}
+  Email Subscribe Section — Body Presale (page-layout: max 700 / 1184)
+  Spec: email-subscribe-section.spec.md
+{% endcomment %}
+
+{%- liquid
+  assign title_1 = section.settings.title_line1 | default: 'Leave your email to receive'
+  assign title_2 = section.settings.title_line2 | default: 'a special price on launch day'
+  assign subtitle = section.settings.subtitle | default: 'Valid for the first 55 customers only'
+  assign btn_text = section.settings.button_text | default: 'Get access'
+  assign product_img = section.settings.product_image
+  assign product_img_desk = section.settings.product_image_desk
+  assign badge_img = section.settings.badge_image
+  assign klaviyo_list_id = section.settings.klaviyo_list_id | default: 'UMrB7f' | strip
+  assign klaviyo_company_id = section.settings.klaviyo_company_id | strip
+-%}
+
+<div class="bp-section bp-subscribe" id="bp-subscribe-email" data-klaviyo-list-id="{{ klaviyo_list_id | escape }}" data-klaviyo-company-id="{{ klaviyo_company_id | escape }}">
+  <div class="bp-subscribe__wrap">
+    <div class="bp-subscribe__mobile">
+      <div class="bp-subscribe__card-m">
+        {%- if product_img != blank -%}<div class="bp-subscribe__product-m"><img src="{{ product_img | image_url: width: 770 }}" alt=""></div>{%- endif -%}
+        {%- if badge_img != blank -%}<div class="bp-subscribe__badge-m"><img src="{{ badge_img | image_url: width: 216 }}" alt="Special Price"></div>{%- endif -%}
+        <div class="bp-subscribe__stack-m">
+          <div class="bp-subscribe__yellow-m">
+            <p class="bp-subscribe__title-m bp-subscribe__title-m--1">{{ title_1 | escape }}</p>
+            <p class="bp-subscribe__title-m bp-subscribe__title-m--2">{{ title_2 | escape }}</p>
+            <p class="bp-subscribe__subtitle-m">{{ subtitle | escape }}</p>
+          </div>
+          <form class="bp-subscribe__form-m" action="#" method="post" data-bp-subscribe-form>
+            <input type="email" id="bp-subscribe-email-input" name="email" placeholder="Enter your email" class="bp-subscribe__input" required aria-label="Email" autocomplete="email">
+            <button type="submit" class="bp-subscribe__btn"><span class="bp-subscribe__btn-text">{{ btn_text | escape }}</span><span class="bp-subscribe__btn-arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.84939 18L18 9.00002C15.7048 6.74894 11.1446 2.25107 8.84944 -3.99984e-07L7.69451 1.11732C9.75923 3.14179 12.4902 5.83943 14.8996 8.20554L-3.58674e-07 8.2055L-4.28131e-07 9.7945L14.8996 9.7945L7.69455 16.8703L8.84939 18Z" fill="white"/></svg></span></button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="bp-subscribe__desktop">
+      <div class="bp-subscribe__card-d">
+        <div class="bp-subscribe__gray-d"></div>
+        {%- if product_img_desk != blank -%}<div class="bp-subscribe__product-d"><img src="{{ product_img_desk | image_url: width: 800 }}" alt=""></div>{%- elsif product_img != blank -%}<div class="bp-subscribe__product-d"><img src="{{ product_img | image_url: width: 800 }}" alt=""></div>{%- endif -%}
+        <div class="bp-subscribe__gradient-d"></div>
+        <div class="bp-subscribe__stack-d">
+          <div class="bp-subscribe__yellow-d">
+            <p class="bp-subscribe__title-d bp-subscribe__title-d--1">{{ title_1 | escape }}</p>
+            <p class="bp-subscribe__title-d bp-subscribe__title-d--2">{{ title_2 | escape }}</p>
+            <p class="bp-subscribe__subtitle-d">{{ subtitle | escape }}</p>
+          </div>
+          <form class="bp-subscribe__form-d" action="#" method="post" data-bp-subscribe-form>
+            <input type="email" id="bp-subscribe-email-input-d" name="email" placeholder="Enter your email" class="bp-subscribe__input bp-subscribe__input--d" required aria-label="Email" autocomplete="email">
+            <button type="submit" class="bp-subscribe__btn bp-subscribe__btn--d"><span class="bp-subscribe__btn-text">{{ btn_text | escape }}</span><span class="bp-subscribe__btn-arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.84939 18L18 9.00002C15.7048 6.74894 11.1446 2.25107 8.84944 -3.99984e-07L7.69451 1.11732C9.75923 3.14179 12.4902 5.83943 14.8996 8.20554L-3.58674e-07 8.2055L-4.28131e-07 9.7945L14.8996 9.7945L7.69455 16.8703L8.84939 18Z" fill="white"/></svg></span></button>
+          </form>
+        </div>
+        {%- if badge_img != blank -%}<div class="bp-subscribe__badge-d"><img src="{{ badge_img | image_url: width: 260 }}" alt="Special Price"></div>{%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var section = document.getElementById('bp-subscribe-email');
+  if (!section) return;
+  var listId = section.getAttribute('data-klaviyo-list-id');
+  var companyId = section.getAttribute('data-klaviyo-company-id');
+  var hasKlaviyo = listId && companyId;
+
+  section.querySelectorAll('[data-bp-subscribe-form]').forEach(function(form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var input = form.querySelector('input[type="email"]');
+      var btn = form.querySelector('button[type="submit"]');
+      if (!input || !input.value.trim()) return;
+
+      var email = input.value.trim().toLowerCase();
+      var originalBtnText = btn ? btn.innerText : '';
+
+      if (btn) { btn.disabled = true; if (btn.querySelector('.bp-subscribe__btn-text')) btn.querySelector('.bp-subscribe__btn-text').textContent = '...'; }
+
+      if (hasKlaviyo) {
+        var url = 'https://a.klaviyo.com/client/subscriptions/?company_id=' + encodeURIComponent(companyId);
+        var body = {
+          data: {
+            type: 'subscription',
+            attributes: {
+              profile: {
+                data: {
+                  type: 'profile',
+                  attributes: {
+                    email: email,
+                    subscriptions: { email: { marketing: { consent: 'SUBSCRIBED' } } }
+                  }
+                }
+              }
+            },
+            relationships: {
+              list: { data: { type: 'list', id: listId } }
+            }
+          }
+        };
+        fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'revision': '2024-02-15' },
+          body: JSON.stringify(body)
+        }).then(function(res) {
+          if (res.ok) {
+            try { window.dispatchEvent(new CustomEvent('klaviyoForms', { detail: { type: 'submit' } })); } catch (_) {}
+            input.value = '';
+          }
+          if (btn) {
+            btn.disabled = false;
+            if (btn.querySelector('.bp-subscribe__btn-text')) btn.querySelector('.bp-subscribe__btn-text').textContent = originalBtnText;
+          }
+        }).catch(function() {
+          if (btn) {
+            btn.disabled = false;
+            if (btn.querySelector('.bp-subscribe__btn-text')) btn.querySelector('.bp-subscribe__btn-text').textContent = originalBtnText;
+          }
+        });
+      } else {
+        input.value = '';
+        if (btn) { btn.disabled = false; if (btn.querySelector('.bp-subscribe__btn-text')) btn.querySelector('.bp-subscribe__btn-text').textContent = originalBtnText; }
+      }
+    });
+  });
+})();
+</script>
+
+{% stylesheet %}
+  .bp-subscribe__wrap { max-width: 700px; margin: 0 auto; }
+  @media (min-width: 1024px) { .bp-subscribe__wrap { max-width: 1184px; } }
+
+  .bp-subscribe__desktop { display: none; }
+  @media (min-width: 1024px) {
+    .bp-subscribe__mobile { display: none; }
+    .bp-subscribe__desktop { display: block; }
+  }
+
+  .bp-subscribe__card-m { position: relative; height: 700px; border-radius: 30px; background: linear-gradient(180deg, #fff 43%, #F2F2F2 55%); border: 1px solid rgba(0,0,0,0.06); }
+  .bp-subscribe__product-m { position: absolute; left: 50%; transform: translateX(-50%); top: 30px; width: 385px; max-width: calc(100% - 40px); height: 480px; overflow: hidden; border-radius: 20px; }
+  .bp-subscribe__product-m img { width: 100%; height: 100%; object-fit: cover; }
+  .bp-subscribe__badge-m { position: absolute; top: 160px; right: calc(50% - 192px + 30px); width: 108px; height: 108px; z-index: 2; transform: rotate(8deg); }
+  .bp-subscribe__badge-m img { width: 100%; height: 100%; object-fit: contain; }
+  .bp-subscribe__stack-m { position: absolute; left: 50%; transform: translateX(-50%); top: 350px; width: 385px; max-width: calc(100% - 40px); display: flex; flex-direction: column; gap: 12px; }
+  .bp-subscribe__yellow-m { width: 100%; padding: 20px; background: #FAFF00; border-radius: 30px; box-sizing: border-box; }
+  .bp-subscribe__title-m { font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif; font-size: 20px; text-transform: uppercase; letter-spacing: 0.04em; font-stretch: 130%; margin: 0 0 2px; color: #000; line-height: 0.95; }
+  .bp-subscribe__title-m--1 { font-weight: 500; }
+  .bp-subscribe__title-m--2 { font-weight: 900; }
+  .bp-subscribe__subtitle-m { font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 400; font-stretch: normal; letter-spacing: normal; font-size: 14px; margin: 8px 0 0; color: #000; }
+  .bp-subscribe__form-m { width: 100%; display: flex; flex-direction: column; gap: 8px; }
+  .bp-subscribe__input { padding: 17px 26px; border-radius: 32px; border: 1px solid rgba(0,0,0,0.1); background: #F5F5F5; font-family: 'Avenir Next', 'Avenir', sans-serif; font-size: 18px; font-weight: 500; }
+  .bp-subscribe__btn { display: inline-flex; align-items: center; justify-content: space-between; padding: 17px 26px 18px; border-radius: 32px; background: #0038FF !important; background-color: #0038FF !important; color: #fff !important; border: none; font-family: 'Avenir Next', 'Avenir', sans-serif; font-size: 18px; font-weight: 500; cursor: pointer; gap: 12px; }
+  .bp-subscribe__btn:hover { opacity: 0.9; }
+  .bp-subscribe__btn-arrow { display: inline-flex; flex-shrink: 0; }
+
+  .bp-subscribe__card-d { position: relative; height: 640px; border-radius: 30px; background: #fff; overflow: hidden; }
+  .bp-subscribe__gray-d { position: absolute; top: 338px; left: 0; right: 0; height: 312px; background: #F1F1F1; }
+  .bp-subscribe__product-d { position: absolute; left: 540px; top: 30px; height: 500px; width: auto; max-width: calc(100% - 540px); }
+  .bp-subscribe__product-d img { height: 100%; width: auto; object-fit: cover; }
+  .bp-subscribe__gradient-d { position: absolute; left: -943px; top: 0; width: 1755px; height: 100%; background: linear-gradient(90deg, rgba(80,76,63,0.6) 0%, transparent 100%); pointer-events: none; }
+  .bp-subscribe__stack-d { position: absolute; left: 48px; top: 48px; width: 512px; max-width: calc(100% - 96px); display: flex; flex-direction: column; gap: 12px; }
+  .bp-subscribe__yellow-d { width: 100%; padding: 28px 32px; background: #FAFF00; border-radius: 30px; box-sizing: border-box; }
+  .bp-subscribe__title-d { font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif; font-size: 40px; text-transform: uppercase; letter-spacing: 0.04em; font-stretch: 130%; margin: 0 0 2px; color: #000; line-height: 0.95; }
+  .bp-subscribe__title-d--1 { font-weight: 500; }
+  .bp-subscribe__title-d--2 { font-weight: 900; }
+  .bp-subscribe__subtitle-d { font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 400; font-stretch: normal; letter-spacing: normal; font-size: 24px; margin: 10px 0 0; color: #000; }
+  .bp-subscribe__form-d { width: 100%; display: flex; flex-direction: column; gap: 8px; }
+  .bp-subscribe__input--d { font-size: 18px; }
+  .bp-subscribe__btn--d { font-size: 18px; }
+  .bp-subscribe__badge-d { position: absolute; right: 120px; bottom: 280px; width: 130px; height: 130px; transform: rotate(8deg); z-index: 2; }
+  .bp-subscribe__badge-d img { width: 100%; height: 100%; object-fit: contain; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Email Subscribe",
+  "class": "shopify-section--email-subscribe-presale",
+  "tag": "section",
+  "settings": [
+    { "type": "header", "content": "Klaviyo" },
+    { "type": "text", "id": "klaviyo_company_id", "label": "Klaviyo Public API Key (Company ID)", "info": "6-character site ID from Klaviyo → Settings → API Keys" },
+    { "type": "text", "id": "klaviyo_list_id", "label": "Klaviyo List ID", "default": "UMrB7f" },
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "title_line1", "label": "Title line 1", "default": "Leave your email to receive" },
+    { "type": "text", "id": "title_line2", "label": "Title line 2", "default": "a special price on launch day" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Valid for the first 55 customers only" },
+    { "type": "text", "id": "button_text", "label": "Button text", "default": "Get access" },
+    { "type": "header", "content": "Images" },
+    { "type": "image_picker", "id": "product_image", "label": "Product image (mobile/tablet)" },
+    { "type": "image_picker", "id": "product_image_desk", "label": "Product image (desktop)" },
+    { "type": "image_picker", "id": "badge_image", "label": "Special Price badge" }
+  ],
+  "presets": [{ "name": "Email Subscribe" }]
+}
+{% endschema %}

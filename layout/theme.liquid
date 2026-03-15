@@ -48,6 +48,9 @@
     <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     <link rel="dns-prefetch" href="https://productreviews.shopifycdn.com">
     {% render 'google-fonts' %}
+    {%- if template.name == 'page' and template.suffix == 'body-presale' -%}
+      {% render 'nass-fonts' %}
+    {%- endif -%}
 
     {%- unless settings.heading_font.system? -%}
       <link rel="preload" href="{{ settings.heading_font | font_url }}" as="font" type="font/woff2" crossorigin>
@@ -106,6 +109,14 @@
         pointer-events: none !important;
       }
     </style>
+    {%- if template.name == 'page' and template.suffix == 'body-presale' -%}
+    <style>
+      .body-presale-page { --font-heading--family: var(--heading-font-family); min-height: 100vh; display: flex; flex-direction: column; align-items: center; width: 100%; padding: 32px 0; gap: 32px; background: rgb(var(--dialog-background, 255 255 255)); }
+      .body-presale-page .shopify-section { width: 100%; margin-bottom: 0; }
+      .body-presale-page .shopify-section:last-child { margin-bottom: 0; }
+      .body-presale-page .bp-section { margin-bottom: 0; }
+    </style>
+    {%- endif -%}
 
     {% render 'ts-base' %}
   </head>
@@ -133,7 +144,18 @@
     {%- endif -%}
 
     <main role="main" id="main" class="anchor">
-      {{ content_for_layout }}
+      {%- if template.name == 'page' and template.suffix == 'body-presale' -%}
+        <div class="body-presale-page">
+          {{ content_for_layout }}
+          {%- if content_for_layout == blank -%}
+            <div class="container" style="padding: 2rem; text-align: center; color: #666;">
+              <p><strong>Body Presale</strong> template is active but no sections are showing. In Theme Editor add sections or ensure this theme includes the body-presale sections.</p>
+            </div>
+          {%- endif -%}
+        </div>
+      {%- else -%}
+        {{ content_for_layout }}
+      {%- endif -%}
 
       {%- comment -%}
         IMPLEMENTATION NOTE: due to the very complex logic of margin/padding collapsing in Impact, the footer group is

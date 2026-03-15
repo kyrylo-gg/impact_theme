@@ -1,0 +1,150 @@
+{% comment %}
+  Nastya Nass Section — Body Presale (page-layout: max 335 / md:700 / 1184)
+  Spec: nastya-nass-section.spec.md
+{% endcomment %}
+
+{%- liquid
+  assign bg_mobile = section.settings.background_mobile
+  assign bg_desk = section.settings.background_desk
+  assign verified_icon = section.settings.verified_icon
+  assign raw1 = section.settings.title_line1 | default: 'Created and'
+  assign raw2 = section.settings.title_line2 | default: 'Designed by'
+  assign raw3 = section.settings.title_line3 | default: 'Fitness Coach'
+  assign raw4 = section.settings.title_line4 | default: 'Nastya Nass'
+  if raw1 contains ' Designed '
+    assign parts1 = raw1 | split: ' Designed '
+    assign line1 = parts1[0] | strip
+    assign line2 = 'Designed ' | append: parts1[1] | strip
+  else
+    assign line1 = raw1
+    assign line2 = raw2
+  endif
+  if raw2 contains ' Nastya ' and raw2 contains 'Fitness Coach'
+    assign parts2 = raw2 | split: ' Nastya '
+    assign line3 = parts2[0] | strip
+    assign line4 = 'Nastya ' | append: parts2[1] | strip
+  else
+    assign line3 = raw3
+    assign line4 = raw4
+  endif
+  assign description = section.settings.description | default: 'Trusted by over <span class="highlight">1.6 million followers</span> worldwide.'
+  assign username = section.settings.username | default: 'nastya_nass_'
+  assign followers = section.settings.followers_text | default: '6.7M followers'
+-%}
+
+<div class="bp-section bp-nastya">
+  <div class="bp-nastya__wrap">
+    <div class="bp-nastya__mobile">
+      <div class="bp-nastya__card-m">
+        {%- if bg_mobile != blank -%}<div class="bp-nastya__bg-m"><img src="{{ bg_mobile | image_url: width: 700 }}" alt="" loading="lazy"></div>{%- elsif bg_desk != blank -%}<div class="bp-nastya__bg-m"><img src="{{ bg_desk | image_url: width: 700 }}" alt="" loading="lazy"></div>{%- endif -%}
+        <div class="bp-nastya__gradient-m"></div>
+        <div class="bp-nastya__badge-m">
+          <div class="bp-nastya__badge-top-m">
+            <span class="bp-nastya__name-m">{{ username | escape }}</span>
+            {%- if verified_icon != blank -%}<img class="bp-nastya__verified-m" src="{{ verified_icon | image_url: width: 28 }}" alt="" width="14" height="14" aria-hidden="true">{%- endif -%}
+          </div>
+          <span class="bp-nastya__followers-m">{{ followers | escape }}</span>
+        </div>
+        <div class="bp-nastya__content-m">
+          <div class="bp-nastya__glass-m">
+            {%- if line1 != blank -%}<p class="bp-nastya__glass-line bp-nastya__glass-line--w">{{ line1 | escape }}</p>{%- endif -%}
+            {%- if line2 != blank -%}<p class="bp-nastya__glass-line bp-nastya__glass-line--w">{{ line2 | escape }}</p>{%- endif -%}
+            {%- if line3 != blank -%}<p class="bp-nastya__glass-line bp-nastya__glass-line--y">{{ line3 | escape }}</p>{%- endif -%}
+            {%- if line4 != blank -%}<p class="bp-nastya__glass-line bp-nastya__glass-line--y">{{ line4 | escape }}</p>{%- endif -%}
+          </div>
+          <p class="bp-nastya__desc-m">{{ description }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="bp-nastya__desktop">
+      <div class="bp-nastya__card-d">
+        {%- if bg_desk != blank -%}<div class="bp-nastya__bg-d"><img src="{{ bg_desk | image_url: width: 1400 }}" alt="" loading="lazy"></div>{%- elsif bg_mobile != blank -%}<div class="bp-nastya__bg-d"><img src="{{ bg_mobile | image_url: width: 1400 }}" alt="" loading="lazy"></div>{%- endif -%}
+        <div class="bp-nastya__gradient-d"></div>
+        <div class="bp-nastya__glass-d">
+          {%- if line1 != blank -%}<p class="bp-nastya__glass-d-line bp-nastya__glass-d-line--w">{{ line1 | escape }}</p>{%- endif -%}
+          {%- if line2 != blank -%}<p class="bp-nastya__glass-d-line bp-nastya__glass-d-line--w">{{ line2 | escape }}</p>{%- endif -%}
+          {%- if line3 != blank -%}<p class="bp-nastya__glass-d-line bp-nastya__glass-d-line--y">{{ line3 | escape }}</p>{%- endif -%}
+          {%- if line4 != blank -%}<p class="bp-nastya__glass-d-line bp-nastya__glass-d-line--y">{{ line4 | escape }}</p>{%- endif -%}
+        </div>
+        <p class="bp-nastya__desc-d">{{ description }}</p>
+        <div class="bp-nastya__badge-d">
+          <div class="bp-nastya__badge-top-d">
+            <span class="bp-nastya__name-d">{{ username | escape }}</span>
+            {%- if verified_icon != blank -%}<img class="bp-nastya__verified-d" src="{{ verified_icon | image_url: width: 36 }}" alt="" width="18" height="18" aria-hidden="true">{%- endif -%}
+          </div>
+          <span class="bp-nastya__followers-d">{{ followers | escape }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .bp-nastya__wrap { max-width: 335px; margin: 0 auto; }
+  @media (min-width: 768px) { .bp-nastya__wrap { max-width: 700px; } }
+  @media (min-width: 1024px) { .bp-nastya__wrap { max-width: 1184px; } }
+
+  .bp-nastya__desktop { display: none; }
+  @media (min-width: 1024px) {
+    .bp-nastya__mobile { display: none; }
+    .bp-nastya__desktop { display: block; }
+  }
+
+  .bp-nastya__card-m { position: relative; border-radius: 30px; overflow: hidden; min-height: 400px; }
+  .bp-nastya__bg-m { position: absolute; inset: 0; }
+  .bp-nastya__bg-m img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .bp-nastya__gradient-m { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.60) 45%, rgba(0,0,0,0.33) 65%, transparent 85%); }
+  .bp-nastya__badge-m { position: absolute; left: 20px; top: 129px; padding: 12px 16px; background: #fff; border-radius: 20px; display: inline-block; z-index: 2; max-width: calc(100% - 40px); box-sizing: border-box; }
+  .bp-nastya__badge-top-m { display: inline-flex; align-items: center; gap: 6px; }
+  .bp-nastya__name-m { font-family: 'Avenir Next', 'Avenir', sans-serif; font-size: 14px; font-weight: 500; color: #000; }
+  .bp-nastya__verified-m { width: 14px; height: 14px; flex-shrink: 0; }
+  .bp-nastya__followers-m { font-size: 14px; color: #959595; display: block; margin-top: 2px; }
+  .bp-nastya__content-m { position: relative; padding: 220px 20px 24px; z-index: 1; }
+  .bp-nastya__glass-m { padding: 20px; border-radius: 20px; background: rgba(255,255,255,0.01); backdrop-filter: blur(32px); margin-bottom: 16px; width: max-content; max-width: 100%; box-sizing: border-box; }
+  .bp-nastya__glass-line { font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif; font-size: 20px; font-weight: 900; font-stretch: 130%; margin: 0 0 2px; text-transform: uppercase; letter-spacing: 0.04em; line-height: 1.1; }
+  .bp-nastya__glass-line:last-child { margin-bottom: 0; }
+  .bp-nastya__glass-line--w { color: #fff; }
+  .bp-nastya__glass-line--y { color: #FAFF00; }
+  .bp-nastya__desc-m { font-family: 'Avenir Next', 'Avenir', sans-serif; font-size: 14px; font-weight: 500; color: #fff; margin: 0; }
+  .bp-nastya__desc-m .highlight { color: #FAFF00; }
+
+  .bp-nastya__card-d { position: relative; height: 560px; border-radius: 30px; background: #000; overflow: hidden; }
+  .bp-nastya__bg-d { position: absolute; inset: 0; }
+  .bp-nastya__bg-d img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+  .bp-nastya__gradient-d { position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.70) 0%, rgba(0,0,0,0.40) 40%, transparent 65%); }
+  .bp-nastya__glass-d { position: absolute; left: 48px; bottom: 306px; width: max-content; max-width: calc(100% - 96px); padding: 24px; border-radius: 20px; background: rgba(255,255,255,0.06); backdrop-filter: blur(32px); box-sizing: border-box; }
+  .bp-nastya__glass-d-line { font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif; font-size: 28px; font-weight: 900; font-stretch: 130%; margin: 0 0 2px; text-transform: uppercase; letter-spacing: 0.04em; line-height: 1.1; }
+  .bp-nastya__glass-d-line:last-child { margin-bottom: 0; }
+  .bp-nastya__glass-d-line--w { color: #fff; }
+  .bp-nastya__glass-d-line--y { color: #FAFF00; }
+  .bp-nastya__desc-d { position: absolute; left: 76px; top: 340px; width: 422px; max-width: calc(100% - 152px); font-family: 'Avenir Next', 'Avenir', sans-serif; font-size: 18px; font-weight: 500; color: #fff; margin: 0; text-shadow: 0 4px 4px rgba(0,0,0,0.25); }
+  .bp-nastya__desc-d .highlight { color: #FAFF00; }
+  .bp-nastya__badge-d { position: absolute; right: 48px; top: 186px; padding: 12px 16px; background: #fff; border-radius: 20px; display: inline-block; z-index: 2; max-width: calc(100% - 96px); box-sizing: border-box; }
+  .bp-nastya__badge-top-d { display: inline-flex; align-items: center; gap: 8px; }
+  .bp-nastya__name-d { font-family: 'Avenir Next', 'Avenir', sans-serif; font-size: 18px; font-weight: 500; color: #000; }
+  .bp-nastya__verified-d { width: 18px; height: 18px; flex-shrink: 0; }
+  .bp-nastya__followers-d { font-size: 18px; color: #959595; display: block; margin-top: 2px; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Nastya Nass",
+  "class": "shopify-section--nastya-nass-presale",
+  "tag": "section",
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "title_line1", "label": "Glass card line 1", "default": "Created and" },
+    { "type": "text", "id": "title_line2", "label": "Glass card line 2", "default": "Designed by" },
+    { "type": "text", "id": "title_line3", "label": "Glass card line 3", "default": "Fitness Coach" },
+    { "type": "text", "id": "title_line4", "label": "Glass card line 4", "default": "Nastya Nass" },
+    { "type": "html", "id": "description", "label": "Description", "default": "Trusted by over <span class=\"highlight\">1.6 million followers</span> worldwide.", "info": "Use class=\"highlight\" for yellow text" },
+    { "type": "text", "id": "username", "label": "Username", "default": "nastya_nass_" },
+    { "type": "text", "id": "followers_text", "label": "Followers text", "default": "6.7M followers" },
+    { "type": "header", "content": "Images" },
+    { "type": "image_picker", "id": "background_mobile", "label": "Background (mobile/tablet)" },
+    { "type": "image_picker", "id": "background_desk", "label": "Background (desktop)" },
+    { "type": "image_picker", "id": "verified_icon", "label": "Verified badge icon" }
+  ],
+  "presets": [{ "name": "Nastya Nass" }]
+}
+{% endschema %}

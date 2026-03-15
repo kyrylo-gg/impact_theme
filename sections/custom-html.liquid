@@ -4,7 +4,10 @@
 
 {% assign hide_section = false %}
 
-{% if section.settings.hide_on_cart and is_cart_page == 'cart' %}
+{%- comment -%} Hide on body-presale page and cart page {%- endcomment -%}
+{% if template.name == 'page' and template.suffix == 'body-presale' %}
+  {% assign hide_section = true %}
+{% elsif section.settings.hide_on_cart and is_cart_page == 'cart' %}
   {% assign hide_section = true %}
 {% endif %}
 

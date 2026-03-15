@@ -1,0 +1,153 @@
+{% comment %}
+  Stronger Body Section — Body Presale (page-layout: max 335/1184/1184)
+  Spec: stronger-body-section.spec.md
+{% endcomment %}
+
+{%- liquid
+  assign desc = section.settings.description | default: 'Get a <strong><u>strong, toned body</u></strong> with our 12-week program. <strong><u>Designed by experts</u></strong> to help you build strength and confidence.'
+  assign title_part1 = section.settings.title_part1 | default: 'Get a strong, toned body'
+  assign title_part2 = section.settings.title_part2 | default: 'in 12 weeks'
+  assign img1 = section.settings.mobile_img_1
+  assign img2 = section.settings.mobile_img_2
+  assign img3 = section.settings.mobile_img_3
+  assign img4 = section.settings.mobile_img_4
+  assign d1 = section.settings.desk_img_1
+  assign d2 = section.settings.desk_img_2
+  assign d3 = section.settings.desk_img_3
+  assign d4 = section.settings.desk_img_4
+  assign d5 = section.settings.desk_img_5
+  assign d6 = section.settings.desk_img_6
+  assign d7 = section.settings.desk_img_7
+-%}
+
+<div class="bp-section bp-stronger">
+  <div class="bp-stronger__wrap">
+    <div class="bp-stronger__mobile">
+      <div class="bp-stronger__desc-card">{{ desc }}</div>
+      <div class="bp-stronger__blue-card">
+        <span class="bp-stronger__blue-title bp-stronger__blue-title--1">{{ title_part1 | escape }}</span>
+        <span class="bp-stronger__blue-title bp-stronger__blue-title--2">{{ title_part2 | escape }}</span>
+      </div>
+      <div class="bp-stronger__grid-mobile">
+        {%- if img1 != blank -%}<div class="bp-stronger__cell"><img src="{{ img1 | image_url: width: 400 }}" alt="" loading="lazy"></div>{%- endif -%}
+        {%- if img2 != blank -%}<div class="bp-stronger__cell"><img src="{{ img2 | image_url: width: 400 }}" alt="" loading="lazy"></div>{%- endif -%}
+        {%- if img3 != blank -%}<div class="bp-stronger__cell"><img src="{{ img3 | image_url: width: 400 }}" alt="" loading="lazy"></div>{%- endif -%}
+        {%- if img4 != blank -%}<div class="bp-stronger__cell"><img src="{{ img4 | image_url: width: 400 }}" alt="" loading="lazy"></div>{%- endif -%}
+      </div>
+    </div>
+    <div class="bp-stronger__tablet">
+      <div class="bp-stronger__row-cards">
+        <div class="bp-stronger__desc-card bp-stronger__desc-card--tablet">{{ desc }}</div>
+        <div class="bp-stronger__blue-card bp-stronger__blue-card--tablet">
+          <span class="bp-stronger__blue-title bp-stronger__blue-title--1">{{ title_part1 | escape }}</span>
+          <span class="bp-stronger__blue-title bp-stronger__blue-title--2">{{ title_part2 | escape }}</span>
+        </div>
+      </div>
+      <div class="bp-stronger__grid-tablet-row1">
+        {%- if d1 != blank -%}<div class="bp-stronger__cell-t"><img src="{{ d1 | image_url: width: 300 }}" alt="" loading="lazy"></div>{%- endif -%}
+        {%- if d2 != blank -%}<div class="bp-stronger__cell-t"><img src="{{ d2 | image_url: width: 300 }}" alt="" loading="lazy"></div>{%- endif -%}
+        {%- if d3 != blank -%}<div class="bp-stronger__cell-t"><img src="{{ d3 | image_url: width: 300 }}" alt="" loading="lazy"></div>{%- endif -%}
+        {%- if d4 != blank -%}<div class="bp-stronger__cell-t"><img src="{{ d4 | image_url: width: 300 }}" alt="" loading="lazy"></div>{%- endif -%}
+      </div>
+      <div class="bp-stronger__grid-tablet-row2">
+        {%- if d5 != blank -%}<div class="bp-stronger__cell-t"><img src="{{ d5 | image_url: width: 300 }}" alt="" loading="lazy"></div>{%- endif -%}
+        {%- if d6 != blank -%}<div class="bp-stronger__cell-t"><img src="{{ d6 | image_url: width: 300 }}" alt="" loading="lazy"></div>{%- endif -%}
+        {%- if d7 != blank -%}<div class="bp-stronger__cell-t"><img src="{{ d7 | image_url: width: 300 }}" alt="" loading="lazy"></div>{%- endif -%}
+      </div>
+    </div>
+    <div class="bp-stronger__desktop">
+      <div class="bp-stronger__left">
+        <div class="bp-stronger__desc-card bp-stronger__desc-card--desktop">{{ desc }}</div>
+        <div class="bp-stronger__blue-card bp-stronger__blue-card--desktop">
+          <span class="bp-stronger__blue-title bp-stronger__blue-title--1">{{ title_part1 | escape }}</span>
+          <span class="bp-stronger__blue-title bp-stronger__blue-title--2">{{ title_part2 | escape }}</span>
+        </div>
+      </div>
+      <div class="bp-stronger__right">
+        <div class="bp-stronger__grid-d-row1">
+          {%- if d1 != blank -%}<div class="bp-stronger__cell-d"><img src="{{ d1 | image_url: width: 300 }}" alt="" loading="lazy"></div>{%- endif -%}
+          {%- if d2 != blank -%}<div class="bp-stronger__cell-d"><img src="{{ d2 | image_url: width: 300 }}" alt="" loading="lazy"></div>{%- endif -%}
+          {%- if d3 != blank -%}<div class="bp-stronger__cell-d"><img src="{{ d3 | image_url: width: 300 }}" alt="" loading="lazy"></div>{%- endif -%}
+          {%- if d4 != blank -%}<div class="bp-stronger__cell-d"><img src="{{ d4 | image_url: width: 300 }}" alt="" loading="lazy"></div>{%- endif -%}
+        </div>
+        <div class="bp-stronger__grid-d-row2">
+          {%- if d5 != blank -%}<div class="bp-stronger__cell-d"><img src="{{ d5 | image_url: width: 300 }}" alt="" loading="lazy"></div>{%- endif -%}
+          {%- if d6 != blank -%}<div class="bp-stronger__cell-d"><img src="{{ d6 | image_url: width: 300 }}" alt="" loading="lazy"></div>{%- endif -%}
+          {%- if d7 != blank -%}<div class="bp-stronger__cell-d"><img src="{{ d7 | image_url: width: 300 }}" alt="" loading="lazy"></div>{%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .bp-stronger__wrap { max-width: 335px; margin: 0 auto; }
+  @media (min-width: 768px) { .bp-stronger__wrap { max-width: 1184px; background: #fff; border-radius: 30px; padding: 6px; } }
+  @media (min-width: 1024px) { .bp-stronger__wrap { display: flex; flex-direction: row; height: 499px; gap: 0; } }
+
+  .bp-stronger__tablet { display: none; }
+  .bp-stronger__desktop { display: none; }
+  @media (min-width: 768px) { .bp-stronger__mobile { display: none; } .bp-stronger__tablet { display: block; } }
+  @media (min-width: 1024px) { .bp-stronger__tablet { display: none; } .bp-stronger__desktop { display: flex; } }
+
+  .bp-stronger__desc-card { padding: 20px; border: 1px solid rgba(0,0,0,0.06); border-radius: 30px; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 14px; color: #000; }
+  .bp-stronger__desc-card strong { font-weight: 800; text-decoration: underline; }
+  .bp-stronger__blue-card { margin-top: 15px; padding: 20px; background: #0038FF; border-radius: 30px; display: flex; flex-direction: column; gap: 2px; }
+  .bp-stronger__blue-title { color: #fff; font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif; text-transform: uppercase; letter-spacing: 0.03em; font-stretch: 125%; font-weight: 900; }
+  .bp-stronger__blue-title--1 { font-size: 20px; }
+  .bp-stronger__blue-title--2 { font-size: 20px; }
+  .bp-stronger__grid-mobile { display: grid; grid-template-columns: 140fr 189fr; gap: 6px; margin-top: 15px; }
+  .bp-stronger__grid-mobile .bp-stronger__cell { border-radius: 40px; overflow: hidden; }
+  .bp-stronger__grid-mobile .bp-stronger__cell:first-child { grid-row: span 1; height: 248px; }
+  .bp-stronger__grid-mobile .bp-stronger__cell:nth-child(2) { height: 248px; }
+  .bp-stronger__grid-mobile .bp-stronger__cell:nth-child(3),
+  .bp-stronger__grid-mobile .bp-stronger__cell:nth-child(4) { height: 245px; }
+  .bp-stronger__grid-mobile img { width: 100%; height: 100%; object-fit: cover; }
+
+  .bp-stronger__row-cards { display: flex; gap: 6px; margin-bottom: 15px; }
+  .bp-stronger__desc-card--tablet { flex: 1; font-size: 16px; }
+  .bp-stronger__blue-card--tablet { flex: 1; }
+  .bp-stronger__blue-card--tablet .bp-stronger__blue-title { font-size: 24px; }
+  .bp-stronger__grid-tablet-row1 { display: grid; grid-template-columns: 140fr 186fr 126fr 159fr; gap: 6px; margin-bottom: 6px; height: 248px; }
+  .bp-stronger__grid-tablet-row2 { display: grid; grid-template-columns: 201fr 170fr 245fr; gap: 6px; height: 245px; }
+  .bp-stronger__cell-t { border-radius: 40px; overflow: hidden; }
+  .bp-stronger__cell-t img { width: 100%; height: 100%; object-fit: cover; }
+
+  .bp-stronger__left { width: 46%; display: flex; flex-direction: column; gap: 15px; }
+  .bp-stronger__desc-card--desktop { flex: 1; padding: 24px; font-size: 18px; }
+  .bp-stronger__blue-card--desktop { padding: 24px; }
+  .bp-stronger__blue-card--desktop .bp-stronger__blue-title { font-size: 32px; }
+  .bp-stronger__right { flex: 1; display: flex; flex-direction: column; gap: 6px; margin-left: 15px; }
+  .bp-stronger__grid-d-row1 { display: grid; grid-template-columns: 140fr 186fr 126fr 159fr; gap: 6px; height: 248px; }
+  .bp-stronger__grid-d-row2 { display: grid; grid-template-columns: 201fr 170fr 245fr; gap: 6px; height: 245px; }
+  .bp-stronger__cell-d { border-radius: 40px; overflow: hidden; }
+  .bp-stronger__cell-d img { width: 100%; height: 100%; object-fit: cover; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Stronger Body",
+  "class": "shopify-section--stronger-body",
+  "tag": "section",
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "html", "id": "description", "label": "Description", "default": "Get a <strong><u>strong, toned body</u></strong> with our 12-week program. <strong><u>Designed by experts</u></strong> to help you build strength and confidence." },
+    { "type": "text", "id": "title_part1", "label": "Blue card line 1", "default": "Get a strong, toned body" },
+    { "type": "text", "id": "title_part2", "label": "Blue card line 2", "default": "in 12 weeks" },
+    { "type": "header", "content": "Mobile images (4)" },
+    { "type": "image_picker", "id": "mobile_img_1", "label": "Mobile 1" },
+    { "type": "image_picker", "id": "mobile_img_2", "label": "Mobile 2" },
+    { "type": "image_picker", "id": "mobile_img_3", "label": "Mobile 3" },
+    { "type": "image_picker", "id": "mobile_img_4", "label": "Mobile 4" },
+    { "type": "header", "content": "Desktop/Tablet images (7)" },
+    { "type": "image_picker", "id": "desk_img_1", "label": "Desk 1" },
+    { "type": "image_picker", "id": "desk_img_2", "label": "Desk 2" },
+    { "type": "image_picker", "id": "desk_img_3", "label": "Desk 3" },
+    { "type": "image_picker", "id": "desk_img_4", "label": "Desk 4" },
+    { "type": "image_picker", "id": "desk_img_5", "label": "Desk 5" },
+    { "type": "image_picker", "id": "desk_img_6", "label": "Desk 6" },
+    { "type": "image_picker", "id": "desk_img_7", "label": "Desk 7" }
+  ],
+  "presets": [{ "name": "Stronger Body" }]
+}
+{% endschema %}

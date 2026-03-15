@@ -1,0 +1,114 @@
+{% comment %}
+  Countdown Timer — Body Presale (page-layout: fluid / max 1184)
+  Spec: countdown-timer.spec.md — target date, yellow bar, "YOUR TRANSFORMATION STARTS IN"
+{% endcomment %}
+
+{%- liquid
+  assign target_date = section.settings.target_date | default: '2026-03-18T00:00:00'
+  assign title_line1 = section.settings.title_line1 | default: 'Your Transformation'
+  assign title_line2 = section.settings.title_line2 | default: 'Starts In'
+-%}
+
+<div class="bp-section bp-timer" data-target-date="{{ target_date }}">
+  <div class="bp-timer__container">
+    <div class="bp-timer__mobile">
+      <p class="bp-timer__heading-m">
+        <span class="bp-timer__heading-m--1">{{ title_line1 | escape }}</span>
+        <span class="bp-timer__heading-m--2">{{ title_line2 | escape }}</span>
+      </p>
+      <div class="bp-timer__blocks">
+        <div class="bp-timer__block"><div class="bp-timer__value-wrap"><span class="bp-timer__value" data-bp-days>00</span></div><span class="bp-timer__label">Days</span></div>
+        <span class="bp-timer__sep">:</span>
+        <div class="bp-timer__block"><div class="bp-timer__value-wrap"><span class="bp-timer__value" data-bp-hours>00</span></div><span class="bp-timer__label">Hours</span></div>
+        <span class="bp-timer__sep">:</span>
+        <div class="bp-timer__block"><div class="bp-timer__value-wrap"><span class="bp-timer__value" data-bp-mins>00</span></div><span class="bp-timer__label">Mins</span></div>
+        <span class="bp-timer__sep">:</span>
+        <div class="bp-timer__block"><div class="bp-timer__value-wrap"><span class="bp-timer__value" data-bp-secs>00</span></div><span class="bp-timer__label">Secs</span></div>
+      </div>
+    </div>
+    <div class="bp-timer__desktop">
+      <p class="bp-timer__heading-d"><span class="bp-timer__heading-d--1">{{ title_line1 | escape }}</span></p>
+      <p class="bp-timer__heading-d"><span class="bp-timer__heading-d--2">{{ title_line2 | escape }}</span></p>
+      <div class="bp-timer__blocks bp-timer__blocks--d">
+        <div class="bp-timer__block"><div class="bp-timer__value-wrap bp-timer__value-wrap--d"><span class="bp-timer__value" data-bp-days>00</span></div><span class="bp-timer__label bp-timer__label--d">Days</span></div>
+        <span class="bp-timer__sep bp-timer__sep--d">:</span>
+        <div class="bp-timer__block"><div class="bp-timer__value-wrap bp-timer__value-wrap--d"><span class="bp-timer__value" data-bp-hours>00</span></div><span class="bp-timer__label bp-timer__label--d">Hours</span></div>
+        <span class="bp-timer__sep bp-timer__sep--d">:</span>
+        <div class="bp-timer__block"><div class="bp-timer__value-wrap bp-timer__value-wrap--d"><span class="bp-timer__value" data-bp-mins>00</span></div><span class="bp-timer__label bp-timer__label--d">Mins</span></div>
+        <span class="bp-timer__sep bp-timer__sep--d">:</span>
+        <div class="bp-timer__block"><div class="bp-timer__value-wrap bp-timer__value-wrap--d"><span class="bp-timer__value" data-bp-secs>00</span></div><span class="bp-timer__label bp-timer__label--d">Secs</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var section = document.querySelector('.bp-timer');
+  if (!section) return;
+  var target = section.getAttribute('data-target-date');
+  if (!target) return;
+  function pad(n){ return n < 10 ? '0' + n : String(n); }
+  function tick(){
+    var end = new Date(target).getTime();
+    var now = Date.now();
+    var diff = Math.max(0, Math.floor((end - now) / 1000));
+    var d = pad(Math.floor(diff / 86400));
+    var h = pad(Math.floor((diff % 86400) / 3600));
+    var m = pad(Math.floor((diff % 3600) / 60));
+    var s = pad(diff % 60);
+    section.querySelectorAll('[data-bp-days]').forEach(function(el){ el.textContent = d; });
+    section.querySelectorAll('[data-bp-hours]').forEach(function(el){ el.textContent = h; });
+    section.querySelectorAll('[data-bp-mins]').forEach(function(el){ el.textContent = m; });
+    section.querySelectorAll('[data-bp-secs]').forEach(function(el){ el.textContent = s; });
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
+
+{% stylesheet %}
+  .bp-timer__container { max-width: 1184px; margin: 0 auto; }
+  .bp-section.bp-timer { padding-left: 0; padding-right: 0; }
+  @media (min-width: 768px) {
+    .bp-section.bp-timer { padding-left: 50px; padding-right: 50px; }
+  }
+  .bp-timer__desktop { display: none; }
+  @media (min-width: 768px) {
+    .bp-timer__mobile { display: none; }
+    .bp-timer__desktop { display: block; background: #FAFF00; border-radius: 30px; padding: 48px; text-align: center; }
+  }
+
+  .bp-timer__mobile { background: #FAFF00; padding: 32px 20px; width: 100%; box-sizing: border-box; }
+  .bp-timer__heading-m { font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif; font-size: 20px; text-transform: uppercase; text-align: center; margin: 0 0 12px; font-stretch: 125%; font-weight: 900; }
+  .bp-timer__heading-m--1 { font-weight: 500; }
+  .bp-timer__heading-m--2 { display: block; }
+  .bp-timer__blocks { display: flex; align-items: center; justify-content: center; gap: 4px; flex-wrap: wrap; }
+  .bp-timer__block { display: flex; flex-direction: column; align-items: center; }
+  .bp-timer__value-wrap { width: 46px; padding: 6px; border-radius: 5px; background: linear-gradient(180deg, #313131 0%, #1C1C1C 100%); display: flex; align-items: center; justify-content: center; }
+  .bp-timer__value { font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 800; font-size: 25px; color: #fff; }
+  .bp-timer__label { font-family: 'Avenir Next', 'Avenir', sans-serif; font-size: 13px; font-weight: 900; color: #000; }
+  .bp-timer__sep { font-family: 'Avenir Next', 'Avenir', sans-serif; font-size: 25px; font-weight: 800; color: #000; }
+
+  .bp-timer__heading-d { font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif; font-size: 40px; text-transform: uppercase; letter-spacing: 0.03em; margin: 0; color: #000; font-stretch: 125%; font-weight: 900; }
+  .bp-timer__heading-d--1 { font-weight: 500; }
+  .bp-timer__blocks--d { margin-top: 16px; gap: 12px; }
+  .bp-timer__value-wrap--d { width: 68px; height: 68px; border-radius: 10px; }
+  .bp-timer__value-wrap--d .bp-timer__value { font-size: 36px; }
+  .bp-timer__label--d { font-size: 23px; }
+  .bp-timer__sep--d { font-size: 36px; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Presale Countdown",
+  "class": "shopify-section--countdown-timer-presale",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "target_date", "label": "Target date (ISO)", "default": "2026-03-18T00:00:00", "info": "e.g. 2026-03-18T00:00:00" },
+    { "type": "text", "id": "title_line1", "label": "Title line 1", "default": "Your Transformation" },
+    { "type": "text", "id": "title_line2", "label": "Title line 2", "default": "Starts In" }
+  ],
+  "presets": [{ "name": "Presale Countdown" }]
+}
+{% endschema %}

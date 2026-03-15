@@ -1,0 +1,63 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-section",
+      "settings": {
+        "title_line1": "New Program",
+        "title_line2": "Launching Soon",
+        "subtitle": "Be the First to Get Special Prices",
+        "button_text_1": "Join",
+        "button_text_2": "waitlist"
+      }
+    },
+    "stronger": {
+      "type": "stronger-body-section",
+      "settings": {
+        "title_part1": "Get a strong, toned body",
+        "title_part2": "in 12 weeks"
+      }
+    },
+    "timer": {
+      "type": "countdown-timer-presale",
+      "settings": {
+        "target_date": "2026-03-18T00:00:00",
+        "title_line1": "Your Transformation",
+        "title_line2": "Starts In"
+      }
+    },
+    "subscribe": {
+      "type": "email-subscribe-section",
+      "settings": {
+        "title_line1": "Leave your email to receive",
+        "title_line2": "a special price on launch day",
+        "subtitle": "Valid for the first 55 customers only",
+        "button_text": "Get access"
+      }
+    },
+    "nastya": {
+      "type": "nastya-nass-section",
+      "settings": {
+        "title_line1": "Created and Designed by",
+        "title_line2": "Fitness Coach Nastya Nass",
+        "username": "nastya_nass_",
+        "followers_text": "6.7M followers"
+      }
+    },
+    "cta_button": {
+      "type": "body-presale-cta-button",
+      "settings": {
+        "text_before": "To the",
+        "text_accent": "New Program",
+        "text_after": "Launch"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "stronger",
+    "timer",
+    "subscribe",
+    "nastya",
+    "cta_button"
+  ]
+}

@@ -1,0 +1,71 @@
+{% comment %}
+  Body Presale — CTA button "To the New Program Launch" (pill, black, yellow accent, arrow)
+{% endcomment %}
+
+{%- liquid
+  assign text_before = section.settings.text_before | default: 'To the'
+  assign text_accent = section.settings.text_accent | default: 'New Program'
+  assign text_after = section.settings.text_after | default: 'Launch'
+  assign button_url = section.settings.button_url
+  if button_url == blank
+    assign button_url = '#bp-subscribe-email'
+  endif
+-%}
+
+<div class="bp-section bp-cta-button">
+  <div class="bp-cta-button__wrap">
+    {%- if button_url != blank -%}
+      <a href="{{ button_url }}" class="bp-cta-button__btn" data-no-instant>
+        <span class="bp-cta-button__label">
+          <span class="bp-cta-button__text bp-cta-button__text--white">{{ text_before | escape }}</span>
+          <span class="bp-cta-button__text bp-cta-button__text--yellow">{{ text_accent | escape }}</span>
+          <span class="bp-cta-button__text bp-cta-button__text--white">{{ text_after | escape }}</span>
+        </span>
+        <span class="bp-cta-button__arrow" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </a>
+    {%- else -%}
+      <span class="bp-cta-button__btn bp-cta-button__btn--no-link">
+        <span class="bp-cta-button__label">
+          <span class="bp-cta-button__text bp-cta-button__text--white">{{ text_before | escape }}</span>
+          <span class="bp-cta-button__text bp-cta-button__text--yellow">{{ text_accent | escape }}</span>
+          <span class="bp-cta-button__text bp-cta-button__text--white">{{ text_after | escape }}</span>
+        </span>
+        <span class="bp-cta-button__arrow" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </span>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .bp-cta-button__wrap { display: flex; justify-content: center; align-items: center; width: 100%; }
+  .bp-cta-button__btn { display: inline-flex; align-items: center; justify-content: center; gap: 12px; padding: 17px 28px 18px; background: #000; border-radius: 9999px; text-decoration: none; color: inherit; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: clamp(16px, 2vw, 20px); transition: opacity 0.2s, background 0.2s; }
+  .bp-cta-button__btn:hover { opacity: 0.9; }
+  .bp-cta-button__btn--no-link { cursor: default; pointer-events: none; }
+  .bp-cta-button__label { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 0.25em; }
+  .bp-cta-button__text--white { color: #fff; }
+  .bp-cta-button__text--yellow { color: #FAFF00; }
+  .bp-cta-button__arrow { display: inline-flex; flex-shrink: 0; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Presale CTA Button",
+  "class": "shopify-section--body-presale-cta",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "text_before", "label": "Text before accent", "default": "To the" },
+    { "type": "text", "id": "text_accent", "label": "Text (yellow)", "default": "New Program" },
+    { "type": "text", "id": "text_after", "label": "Text after accent", "default": "Launch" },
+    { "type": "url", "id": "button_url", "label": "Button link" }
+  ],
+  "presets": [{ "name": "Presale CTA Button" }]
+}
+{% endschema %}

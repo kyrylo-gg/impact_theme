@@ -1,0 +1,156 @@
+{% comment %}
+  Hero Section — Body Presale (page-layout: gap-8, px-5 / md:px-[50px])
+  Spec: hero-section.spec.md
+{% endcomment %}
+
+{%- liquid
+  assign desktop_bg = section.settings.desktop_bg
+  assign mobile_bg = section.settings.mobile_bg
+  assign desktop_ribbon_1 = section.settings.desktop_ribbon_1
+  assign desktop_ribbon_2 = section.settings.desktop_ribbon_2
+  assign mobile_ribbon_1 = section.settings.mobile_ribbon_1
+  assign mobile_ribbon_2 = section.settings.mobile_ribbon_2
+  assign title_1 = section.settings.title_line1 | default: 'New Program'
+  assign title_2 = section.settings.title_line2 | default: 'Launching Soon'
+  assign subtitle = section.settings.subtitle | default: 'Be the First to Get Special Prices'
+  assign button_text_1 = section.settings.button_text_1 | default: 'Join'
+  assign button_text_2 = section.settings.button_text_2 | default: 'waitlist'
+  assign button_url = section.settings.button_url
+  assign cta_href = button_url | default: '#bp-subscribe-email'
+-%}
+
+<div class="bp-section bp-hero">
+  <div class="bp-hero__container bp-hero__container--desktop">
+    <div class="bp-hero__banner bp-hero__banner--desktop">
+      {%- if desktop_bg != blank -%}
+        <img class="bp-hero__bg" src="{{ desktop_bg | image_url: width: 1184 }}" alt="" width="{{ desktop_bg.width }}" height="{{ desktop_bg.height }}" loading="eager" fetchpriority="high">
+      {%- endif -%}
+      <div class="bp-hero__overlay bp-hero__overlay--desktop" aria-hidden="true"></div>
+      {%- if desktop_ribbon_1 != blank -%}<img class="bp-hero__ribbon" src="{{ desktop_ribbon_1 | image_url: width: 600 }}" alt="" aria-hidden="true" loading="eager">{%- endif -%}
+      {%- if desktop_ribbon_2 != blank -%}<img class="bp-hero__ribbon" src="{{ desktop_ribbon_2 | image_url: width: 600 }}" alt="" aria-hidden="true" loading="eager">{%- endif -%}
+      <div class="bp-hero__content">
+        <div class="bp-hero__card">
+          <span class="bp-hero__title bp-hero__title--1">{{ title_1 | escape }}</span>
+          <span class="bp-hero__title bp-hero__title--2">{{ title_2 | escape }}</span>
+          <p class="bp-hero__subtitle">{{ subtitle | escape }}</p>
+        </div>
+        {%- if cta_href != blank -%}
+          <a href="{{ cta_href }}" class="bp-hero__cta" data-no-instant>
+            <span class="bp-hero__cta-label"><span class="bp-hero__cta-text">{{ button_text_1 | escape }}</span> <span class="bp-hero__cta-accent">{{ button_text_2 | escape }}</span></span>
+            <span class="bp-hero__cta-arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 9H15M15 9L10 4M15 9L10 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+        {%- else -%}
+          <div class="bp-hero__cta bp-hero__cta--no-link">
+            <span class="bp-hero__cta-label"><span class="bp-hero__cta-text">{{ button_text_1 | escape }}</span> <span class="bp-hero__cta-accent">{{ button_text_2 | escape }}</span></span>
+            <span class="bp-hero__cta-arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9H15M15 9L10 4M15 9L10 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+  <div class="bp-hero__container bp-hero__container--mobile">
+    <div class="bp-hero__banner bp-hero__banner--mobile">
+      {%- if mobile_bg != blank -%}
+        <img class="bp-hero__bg" src="{{ mobile_bg | image_url: width: 670 }}" alt="" width="{{ mobile_bg.width }}" height="{{ mobile_bg.height }}" loading="eager" fetchpriority="high">
+      {%- elsif desktop_bg != blank -%}
+        <img class="bp-hero__bg" src="{{ desktop_bg | image_url: width: 670 }}" alt="" loading="eager" fetchpriority="high">
+      {%- endif -%}
+      <div class="bp-hero__overlay bp-hero__overlay--mobile" aria-hidden="true"></div>
+      {%- if mobile_ribbon_1 != blank -%}<img class="bp-hero__ribbon" src="{{ mobile_ribbon_1 | image_url: width: 670 }}" alt="" aria-hidden="true" loading="eager">{%- endif -%}
+      {%- if mobile_ribbon_2 != blank -%}<img class="bp-hero__ribbon" src="{{ mobile_ribbon_2 | image_url: width: 670 }}" alt="" aria-hidden="true" loading="eager">{%- endif -%}
+      <div class="bp-hero__content bp-hero__content--mobile">
+        <div class="bp-hero__card bp-hero__card--mobile">
+          <span class="bp-hero__title bp-hero__title--1">{{ title_1 | escape }}</span>
+          <span class="bp-hero__title bp-hero__title--2">{{ title_2 | escape }}</span>
+          <p class="bp-hero__subtitle bp-hero__subtitle--mobile">{{ subtitle | escape }}</p>
+        </div>
+        {%- if cta_href != blank -%}
+          <a href="{{ cta_href }}" class="bp-hero__cta bp-hero__cta--mobile" data-no-instant>
+            <span class="bp-hero__cta-label"><span class="bp-hero__cta-text">{{ button_text_1 | escape }}</span> <span class="bp-hero__cta-accent">{{ button_text_2 | escape }}</span></span>
+            <span class="bp-hero__cta-arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9H15M15 9L10 4M15 9L10 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+        {%- else -%}
+          <div class="bp-hero__cta bp-hero__cta--mobile bp-hero__cta--no-link">
+            <span class="bp-hero__cta-label"><span class="bp-hero__cta-text">{{ button_text_1 | escape }}</span> <span class="bp-hero__cta-accent">{{ button_text_2 | escape }}</span></span>
+            <span class="bp-hero__cta-arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9H15M15 9L10 4M15 9L10 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .bp-section { padding: 32px 20px; margin-bottom: 32px; }
+  @media (min-width: 768px) { .bp-section { padding-left: 50px; padding-right: 50px; } }
+
+  .bp-hero__container--desktop { display: none; }
+  .bp-hero__container--mobile { display: block; width: 100%; }
+  @media (min-width: 768px) {
+    .bp-hero__container--desktop { display: block; width: 100%; }
+    .bp-hero__container--mobile { display: none; }
+  }
+
+  .bp-hero__banner { position: relative; overflow: hidden; width: 100%; border-radius: 30px; }
+  .bp-hero__banner--desktop { aspect-ratio: 1184 / 560; }
+  .bp-hero__banner--mobile { aspect-ratio: 335 / 560; }
+
+  .bp-hero__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .bp-hero__overlay--desktop { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,0.70) 0%, rgba(0,0,0,0) 60%); }
+  .bp-hero__overlay--mobile { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,0.40) 0%, rgba(0,0,0,0.25) 37%, rgba(0,0,0,0) 83%); }
+
+  .bp-hero__ribbon { position: absolute; right: 0; top: 0; pointer-events: none; }
+  .bp-hero__banner--desktop .bp-hero__ribbon { width: 50%; height: 100%; object-fit: contain; object-position: top right; }
+  .bp-hero__banner--mobile .bp-hero__ribbon { width: 100%; height: 100%; object-fit: contain; object-position: top right; }
+
+  .bp-hero__content { position: absolute; display: flex; flex-direction: column; align-items: flex-start; left: 6%; bottom: 5%; width: 88%; gap: 8px; }
+  .bp-hero__banner--desktop .bp-hero__content { left: 3.8%; bottom: 5%; width: clamp(280px, 50%, 540px); }
+
+  .bp-hero__card { display: inline-flex; flex-direction: column; align-items: flex-start; width: 100%; padding: clamp(14px, 5vw, 20px); background: #FAFF00; border-radius: 30px; gap: 4px; }
+  .bp-hero__banner--desktop .bp-hero__card { padding: clamp(20px, 3vw, 36px); gap: 4px; }
+
+  .bp-hero__title { color: #000; font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif; line-height: 1.1; letter-spacing: 0.04em; text-transform: uppercase; font-stretch: 130%; font-weight: 900; }
+  .bp-hero__title--1 { font-size: clamp(16px, 5vw, 20px); font-weight: 500; }
+  .bp-hero__title--2 { font-size: clamp(16px, 5vw, 20px); }
+  .bp-hero__banner--desktop .bp-hero__title--1,
+  .bp-hero__banner--desktop .bp-hero__title--2 { font-size: clamp(22px, 3.3vw, 40px); line-height: 0.95; }
+  .bp-hero__subtitle { color: #000; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-stretch: normal; letter-spacing: normal; font-size: clamp(12px, 3.5vw, 14px); margin: 0; }
+  .bp-hero__banner--desktop .bp-hero__subtitle { font-size: clamp(14px, 2vw, 24px); margin-top: 8px; }
+
+  .bp-hero__cta { display: inline-flex; align-items: center; justify-content: space-between; width: 100%; padding: 17px 26px 18px; background: #000; box-shadow: 0 0 150px rgba(255,255,255,0.40); border-radius: 32px; gap: 16px; text-decoration: none; color: inherit; }
+  .bp-hero__banner--desktop .bp-hero__cta { padding-left: clamp(20px, 3vw, 36px); }
+  .bp-hero__cta--mobile { padding: 14px 20px; }
+  .bp-hero__cta--no-link { cursor: default; pointer-events: none; }
+  .bp-hero__cta-label { display: inline-flex; align-items: center; gap: 0.25em; }
+  .bp-hero__cta-text { color: #fff; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: clamp(16px, 2vw, 24px); }
+  .bp-hero__cta--mobile .bp-hero__cta-text { font-size: clamp(14px, 4.5vw, 18px); }
+  .bp-hero__cta-accent { color: #FAFF00; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: clamp(16px, 2vw, 24px); }
+  .bp-hero__cta--mobile .bp-hero__cta-accent { font-size: clamp(14px, 4.5vw, 18px); }
+  .bp-hero__cta-arrow { display: inline-flex; flex-shrink: 0; margin-left: auto; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Presale Hero",
+  "class": "shopify-section--hero-section",
+  "tag": "section",
+  "settings": [
+    { "type": "header", "content": "Background images" },
+    { "type": "image_picker", "id": "desktop_bg", "label": "Desktop background" },
+    { "type": "image_picker", "id": "mobile_bg", "label": "Mobile background" },
+    { "type": "header", "content": "Ribbons" },
+    { "type": "image_picker", "id": "desktop_ribbon_1", "label": "Desktop ribbon 1" },
+    { "type": "image_picker", "id": "desktop_ribbon_2", "label": "Desktop ribbon 2" },
+    { "type": "image_picker", "id": "mobile_ribbon_1", "label": "Mobile ribbon 1" },
+    { "type": "image_picker", "id": "mobile_ribbon_2", "label": "Mobile ribbon 2" },
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "title_line1", "label": "Title line 1", "default": "New Program" },
+    { "type": "text", "id": "title_line2", "label": "Title line 2", "default": "Launching Soon" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Be the First to Get Special Prices" },
+    { "type": "text", "id": "button_text_1", "label": "Button text (white)", "default": "Join" },
+    { "type": "text", "id": "button_text_2", "label": "Button text (yellow)", "default": "waitlist" },
+    { "type": "url", "id": "button_url", "label": "Button link" }
+  ],
+  "presets": [{ "name": "Presale Hero" }]
+}
+{% endschema %}
