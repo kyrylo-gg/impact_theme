@@ -132,7 +132,7 @@
 
               {%- when 'subheading' -%}
                 {%- if block.settings.text != blank -%}
-                  <p class="bold" {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</p>
+                  <p class="bold" {{ block.shopify_attributes }}>{{ block.settings.text | escape | newline_to_br }}</p>
                 {%- endif -%}
 
               {%- when 'heading' -%}
@@ -310,10 +310,11 @@
       "name": "Subheading",
       "settings": [
         {
-          "type": "text",
+          "type": "textarea",
           "id": "text",
           "label": "Text",
-          "default": "Subheading"
+          "default": "Subheading",
+          "info": "Use Enter to add a line break."
         }
       ]
     },
