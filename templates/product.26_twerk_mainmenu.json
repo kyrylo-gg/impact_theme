@@ -336,7 +336,7 @@
             "cancel_time": 6,
             "cancel_minutes": 15,
             "cancel_action": "none",
-            "countdown_background": "#000",
+            "countdown_background": "#052010",
             "countdown_color": "#ffffff",
             "desk_countdown_font_size": 25,
             "mob_countdown_font_size": 25,
