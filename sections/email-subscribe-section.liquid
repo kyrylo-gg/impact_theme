@@ -60,9 +60,15 @@
 (function(){
   var section = document.getElementById('bp-subscribe-email');
   if (!section) return;
-  var listId = section.getAttribute('data-klaviyo-list-id');
-  var companyId = section.getAttribute('data-klaviyo-company-id');
+  var listId = (section.getAttribute('data-klaviyo-list-id') || '').trim();
+  var companyId = (section.getAttribute('data-klaviyo-company-id') || '').trim();
+  if (!companyId && typeof window.__klaviyo !== 'undefined' && window.__klaviyo.companyId) {
+    companyId = window.__klaviyo.companyId;
+  }
   var hasKlaviyo = listId && companyId;
+  if (!hasKlaviyo && listId) {
+    console.warn('[Body Presale] Klaviyo: add "Klaviyo Public API Key (Company ID)" in Theme Editor → Email Subscribe section. List ID is set:', listId);
+  }
 
   section.querySelectorAll('[data-bp-subscribe-form]').forEach(function(form){
     form.addEventListener('submit', function(e){
@@ -72,9 +78,13 @@
       if (!input || !input.value.trim()) return;
 
       var email = input.value.trim().toLowerCase();
-      var originalBtnText = btn ? btn.innerText : '';
+      var originalBtnText = btn ? (btn.querySelector('.bp-subscribe__btn-text') ? btn.querySelector('.bp-subscribe__btn-text').textContent : btn.innerText) : '';
 
       if (btn) { btn.disabled = true; if (btn.querySelector('.bp-subscribe__btn-text')) btn.querySelector('.bp-subscribe__btn-text').textContent = '...'; }
+
+      function resetBtn() {
+        if (btn) { btn.disabled = false; if (btn.querySelector('.bp-subscribe__btn-text')) btn.querySelector('.bp-subscribe__btn-text').textContent = originalBtnText; }
+      }
 
       if (hasKlaviyo) {
         var url = 'https://a.klaviyo.com/client/subscriptions/?company_id=' + encodeURIComponent(companyId);
@@ -99,26 +109,29 @@
         };
         fetch(url, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'revision': '2024-02-15' },
+          headers: {
+            'Content-Type': 'application/vnd.api+json',
+            'Accept': 'application/vnd.api+json',
+            'revision': '2024-10-15'
+          },
           body: JSON.stringify(body)
         }).then(function(res) {
-          if (res.ok) {
-            try { window.dispatchEvent(new CustomEvent('klaviyoForms', { detail: { type: 'submit' } })); } catch (_) {}
-            input.value = '';
-          }
-          if (btn) {
-            btn.disabled = false;
-            if (btn.querySelector('.bp-subscribe__btn-text')) btn.querySelector('.bp-subscribe__btn-text').textContent = originalBtnText;
-          }
-        }).catch(function() {
-          if (btn) {
-            btn.disabled = false;
-            if (btn.querySelector('.bp-subscribe__btn-text')) btn.querySelector('.bp-subscribe__btn-text').textContent = originalBtnText;
-          }
+          return res.text().then(function(text) {
+            if (res.ok) {
+              try { window.dispatchEvent(new CustomEvent('klaviyoForms', { detail: { type: 'submit' } })); } catch (_) {}
+              input.value = '';
+            } else {
+              console.error('[Body Presale] Klaviyo subscribe failed:', res.status, text);
+            }
+            resetBtn();
+          });
+        }).catch(function(err) {
+          console.error('[Body Presale] Klaviyo request error:', err);
+          resetBtn();
         });
       } else {
         input.value = '';
-        if (btn) { btn.disabled = false; if (btn.querySelector('.bp-subscribe__btn-text')) btn.querySelector('.bp-subscribe__btn-text').textContent = originalBtnText; }
+        resetBtn();
       }
     });
   });
