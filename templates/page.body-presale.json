@@ -12,6 +12,12 @@
     "hero": {
       "type": "hero-section",
       "settings": {
+        "desktop_bg": "shopify://shop_images/Hero_1_8afa2bb2-4550-4869-b079-3c6dcfbc7e10.png",
+        "mobile_bg": "shopify://shop_images/HERO_2.png",
+        "desktop_ribbon_1": "shopify://shop_images/1_97b166b1-34ca-47d9-930a-8ed212347632.png",
+        "desktop_ribbon_2": "shopify://shop_images/2_6ed855c8-52f7-49a6-aae7-bc1343a29711.png",
+        "mobile_ribbon_1": "shopify://shop_images/3_323c1294-3a45-4012-8564-30f4fea8cde0.png",
+        "mobile_ribbon_2": "shopify://shop_images/4_eb8c9c96-c5fe-4941-a2cc-bff1b00ecaf6.png",
         "title_line1": "New Program",
         "title_line2": "Launching Soon",
         "subtitle": "Be the First to Get Special Prices",
@@ -23,9 +29,20 @@
     "stronger": {
       "type": "stronger-body-section",
       "settings": {
-        "description": "Get a <strong><u>strong, toned body</u></strong> with our 12-week program. <strong><u>Designed by experts</u></strong> to help you build strength and confidence.",
+        "description": "Be the first to access the new program from Nastya NASS at a special price. Perfect for those who have long wanted to lose weight.<br><br>\n\nA step by step body transformation using a proven approach that fits busy lifestyles and adapts to health conditions and individual physiology.",
         "title_part1": "Get a strong, toned body",
-        "title_part2": "in 12 weeks"
+        "title_part2": "in 12 weeks",
+        "mobile_img_1": "shopify://shop_images/WhatsApp_Image_2023-07-24_at_17.52.png",
+        "mobile_img_2": "shopify://shop_images/IMG_7027.png",
+        "mobile_img_3": "shopify://shop_images/image00003.png",
+        "mobile_img_4": "shopify://shop_images/Photo_05.10.png",
+        "desk_img_1": "shopify://shop_images/WhatsApp_Image_2023-07-24_at_17.52_e7157c96-4e63-4344-873b-d8e59e8a3a50.png",
+        "desk_img_2": "shopify://shop_images/IMG_7027.png",
+        "desk_img_3": "shopify://shop_images/IMG_7132.png",
+        "desk_img_4": "shopify://shop_images/6D2DD00D-EC83-4C9E-B7E6-7063B8D143DE.png",
+        "desk_img_5": "shopify://shop_images/image00003_42d71d05-089b-4cdd-b7fb-270fa1394145.png",
+        "desk_img_6": "shopify://shop_images/Photo_05.10_51aa8f04-eaaf-4e83-8d1e-eaf4a124390a.png",
+        "desk_img_7": "shopify://shop_images/IMG_0971.png"
       }
     },
     "timer": {
@@ -44,7 +61,13 @@
         "title_line1": "Leave your email to receive",
         "title_line2": "a special price on launch day",
         "subtitle": "Valid for the first 55 customers only",
-        "button_text": "Get access"
+        "button_text": "Get access",
+        "success_line1": "Thanks for joining!",
+        "success_line2": "The special offer will be sent to your email on March 25.",
+        "success_subtitle": "",
+        "product_image": "shopify://shop_images/Body_Transformation_1_1-2.png",
+        "product_image_desk": "shopify://shop_images/Body_Transformation_1_1.png",
+        "badge_image": "shopify://shop_images/Frame_535.png"
       }
     },
     "nastya": {
@@ -54,9 +77,12 @@
         "title_line2": "Fitness Coach Nastya Nass",
         "title_line3": "Fitness Coach",
         "title_line4": "Nastya Nass",
-        "description": "Trusted by over <span class=\"highlight\">1.6 million followers</span> worldwide.",
+        "description": "Nastya Nass is a world-known fitness trainer and the creator of the iconic 7-Day Twerk Program.<br><br>  With over <span class=\"highlight\">1.6 million followers</span>, she leads one of the most influential twerk communities, especially popular in the United States.",
         "username": "nastya_nass_",
-        "followers_text": "6.7M followers"
+        "followers_text": "6.7M followers",
+        "background_mobile": "shopify://shop_images/Screenshot_2024-05-04_at_14.50_1-2.png",
+        "background_desk": "shopify://shop_images/Screenshot_2024-05-04_at_14.50_1_8156a8fd-f67e-49e1-b003-40b17791bfad.png",
+        "verified_icon": "shopify://shop_images/Vector.png"
       }
     },
     "cta_button": {
