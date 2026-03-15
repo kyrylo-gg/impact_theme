@@ -15,7 +15,7 @@
         "heading_1": {
           "type": "heading",
           "settings": {
-            "text": "START YOUR SPRING BOOTY GLOW-UP",
+            "text": "BOOTY WORKOUTS WORTH MILLIONS",
             "heading_tag": "h1",
             "special_padding": ""
           }
@@ -23,9 +23,15 @@
         "heading_2": {
           "type": "heading",
           "settings": {
-            "text": "ONLY $107<br>(SAVE $369)",
+            "text": "YOU FOUND IT!",
             "heading_tag": "h1",
             "special_padding": ""
+          }
+        },
+        "subheading": {
+          "type": "subheading",
+          "settings": {
+            "text": "Only $107 for St. Patrick’s Day (Save $349)"
           }
         },
         "button_cta": {
@@ -33,24 +39,18 @@
           "settings": {
             "style": "outline",
             "size": "lg",
-            "text": "Get Offer Now!",
+            "text": "To the Limited Offer",
             "url": "#nass-bundle-builder",
             "background": "",
             "text_color": "#ffffff"
-          }
-        },
-        "subheading": {
-          "type": "subheading",
-          "settings": {
-            "text": "60% off all clothing with Bundle purchase!"
           }
         }
       },
       "block_order": [
         "heading_1",
         "heading_2",
-        "button_cta",
-        "subheading"
+        "subheading",
+        "button_cta"
       ],
       "settings": {
         "full_width": false,
