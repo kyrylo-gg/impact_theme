@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -7,12 +16,14 @@
         "title_line2": "Launching Soon",
         "subtitle": "Be the First to Get Special Prices",
         "button_text_1": "Join",
-        "button_text_2": "waitlist"
+        "button_text_2": "waitlist",
+        "button_url": ""
       }
     },
     "stronger": {
       "type": "stronger-body-section",
       "settings": {
+        "description": "Get a <strong><u>strong, toned body</u></strong> with our 12-week program. <strong><u>Designed by experts</u></strong> to help you build strength and confidence.",
         "title_part1": "Get a strong, toned body",
         "title_part2": "in 12 weeks"
       }
@@ -28,6 +39,8 @@
     "subscribe": {
       "type": "email-subscribe-section",
       "settings": {
+        "klaviyo_company_id": "TT4MNz",
+        "klaviyo_list_id": "UMrB7f",
         "title_line1": "Leave your email to receive",
         "title_line2": "a special price on launch day",
         "subtitle": "Valid for the first 55 customers only",
@@ -39,6 +52,9 @@
       "settings": {
         "title_line1": "Created and Designed by",
         "title_line2": "Fitness Coach Nastya Nass",
+        "title_line3": "Fitness Coach",
+        "title_line4": "Nastya Nass",
+        "description": "Trusted by over <span class=\"highlight\">1.6 million followers</span> worldwide.",
         "username": "nastya_nass_",
         "followers_text": "6.7M followers"
       }
@@ -48,7 +64,8 @@
       "settings": {
         "text_before": "To the",
         "text_accent": "New Program",
-        "text_after": "Launch"
+        "text_after": "Launch",
+        "button_url": ""
       }
     }
   },
