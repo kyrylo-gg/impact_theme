@@ -37,21 +37,21 @@
             "special_padding": ""
           }
         },
+        "207b5d77-26c1-498f-b02a-9f5a7ec2fe2c": {
+          "type": "subheading",
+          "settings": {
+            "text": "Only $107 for St. Patrick’s Day (Save $349)"
+          }
+        },
         "500838c0-8ded-4626-92e1-12d9b0a54ab6": {
           "type": "button",
           "settings": {
             "style": "outline",
             "size": "lg",
-            "text": "Get Offer Now!",
+            "text": "To the Limited Offer",
             "url": "#twerk-bundle",
             "background": "",
             "text_color": "#ffffff"
-          }
-        },
-        "207b5d77-26c1-498f-b02a-9f5a7ec2fe2c": {
-          "type": "subheading",
-          "settings": {
-            "text": "60% off all clothing with Bundle purchase!"
           }
         }
       },
@@ -59,8 +59,8 @@
         "template--14907164164170__e72b3e83-78ae-427f-a359-430414bcfda5-play-1",
         "template--14907164164170__e72b3e83-78ae-427f-a359-430414bcfda5-heading-1",
         "heading_cPDcjc",
-        "500838c0-8ded-4626-92e1-12d9b0a54ab6",
-        "207b5d77-26c1-498f-b02a-9f5a7ec2fe2c"
+        "207b5d77-26c1-498f-b02a-9f5a7ec2fe2c",
+        "500838c0-8ded-4626-92e1-12d9b0a54ab6"
       ],
       "settings": {
         "full_width": false,
