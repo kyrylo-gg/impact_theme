@@ -76,7 +76,7 @@
         "title": {
           "type": "title",
           "settings": {
-            "label": "Special Spring Booty Offer 🌷<strong>All Programs For $107</strong>",
+            "label": "More Than a Million  in Gold Here 🔑",
             "color": "#000000",
             "desk_font_size": 25,
             "mob_font_size": 13
@@ -99,7 +99,7 @@
             "cancel_date": "25-12-2025 23:59",
             "cancel_time": 6,
             "cancel_action": "none",
-            "countdown_background": "linear-gradient(180deg, rgba(59, 59, 59, 1), rgba(0, 0, 0, 1) 100%)",
+            "countdown_background": "linear-gradient(180deg, rgba(14, 91, 45, 1), rgba(5, 32, 16, 1) 100%)",
             "countdown_color": "#ffffff",
             "desk_countdown_font_size": 25,
             "mob_countdown_font_size": 13,
@@ -142,8 +142,8 @@
         "mob_content_height_type": "adapt-content",
         "mob_content_height": 300,
         "background_type": "color",
-        "desk_bg_color": "#FAC2FF",
-        "mob_bg_color": "#FAC2FF",
+        "desk_bg_color": "#9ACF8B",
+        "mob_bg_color": "#9ACF8B",
         "hidden_templates": "product.mega_twerk-program-main,product.26_twerk_mainmenu,product.26_pinterest,product.mega_twerk-program-mainab,product.mega_twerk_with_bundle,product.mega_twerk_no_bundle",
         "desk_indent_top": 0,
         "desk_indent_bottom": 0,
