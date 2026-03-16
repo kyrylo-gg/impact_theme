@@ -48,7 +48,7 @@
     "timer": {
       "type": "countdown-timer-presale",
       "settings": {
-        "target_date": "2026-03-18T00:00:00",
+        "target_date": "2026-03-25T15:00:00",
         "title_line1": "Your Transformation",
         "title_line2": "Starts In"
       }
