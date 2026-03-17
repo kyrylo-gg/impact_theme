@@ -11,6 +11,7 @@
   "sections": {
     "zp-product-header-content": {
       "type": "product-header-content-zipifypages",
+      "disabled": true,
       "settings": {}
     },
     "main": {
@@ -143,6 +144,7 @@
         "cba091ce-a0d9-465f-ab86-d40697549bf2",
         "description"
       ],
+      "disabled": true,
       "settings": {
         "full_width": true,
         "show_fixed_add_to_cart": true,
@@ -161,118 +163,15 @@
         "input_text_color": ""
       }
     },
-    "rich_text_B46AnJ": {
-      "type": "rich-text",
-      "blocks": {
-        "richtext_GYE8hr": {
-          "type": "richtext",
-          "settings": {
-            "seo_optimization": true,
-            "content": "<h3>Customer Reviews</h3>"
-          }
-        }
-      },
-      "block_order": [
-        "richtext_GYE8hr"
-      ],
-      "custom_css": [
-        ".section-blends {padding: 20px;}"
-      ],
-      "name": "Rich text",
-      "settings": {
-        "full_width": true,
-        "content_width": "small",
-        "text_position": "center",
-        "background": "",
-        "background_gradient": "",
-        "text_color": ""
-      }
-    },
-    "1678891879e610efa5": {
-      "type": "apps",
-      "blocks": {
-        "2ff10f88-c4ef-45de-81d3-f1a3b191fb71": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "review_data": "sample_data",
-            "max_width": 1200,
-            "show_shop_reviews": false,
-            "empty_state": "empty_widget"
-          }
-        },
-        "cd0d0937-06f4-40ac-bcc9-e52ad1a728de": {
-          "type": "shopify://apps/judge-me-reviews/blocks/medals/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "2ff10f88-c4ef-45de-81d3-f1a3b191fb71",
-        "cd0d0937-06f4-40ac-bcc9-e52ad1a728de"
-      ],
-      "settings": {
-        "full_width": true,
-        "remove_vertical_spacing": false,
-        "remove_horizontal_spacing": false,
-        "background": "",
-        "background_gradient": "",
-        "text_color": ""
-      }
-    },
-    "033c843a-f56c-4c1c-9e96-37189e8792f5": {
-      "type": "recently-viewed-products",
-      "settings": {
-        "full_width": true,
-        "products_count": 6,
-        "stack_products": false,
-        "show_progress_bar": false,
-        "products_per_row_mobile": "1",
-        "products_per_row_desktop": 3,
-        "subheading": "",
-        "title": "Recently viewed products",
-        "content": "",
-        "background": "",
-        "background_gradient": "",
-        "text_color": "",
-        "heading_color": "",
-        "heading_gradient": "",
-        "product_card_background": "",
-        "product_card_text_color": ""
-      }
-    },
-    "related-products": {
-      "type": "related-products",
-      "settings": {
-        "recommendations_count": 6,
-        "products": [],
-        "full_width": true,
-        "stack_products": false,
-        "show_progress_bar": false,
-        "products_per_row_mobile": "1",
-        "products_per_row_desktop": 3,
-        "subheading": "",
-        "title": "You may also like",
-        "content": "",
-        "background": "",
-        "background_gradient": "",
-        "text_color": "",
-        "heading_color": "",
-        "heading_gradient": "",
-        "product_card_background": "",
-        "product_card_text_color": ""
-      }
-    },
     "zp-product-footer-content": {
       "type": "product-footer-content-zipifypages",
+      "disabled": true,
       "settings": {}
     }
   },
   "order": [
     "zp-product-header-content",
     "main",
-    "rich_text_B46AnJ",
-    "1678891879e610efa5",
-    "033c843a-f56c-4c1c-9e96-37189e8792f5",
-    "related-products",
     "zp-product-footer-content"
   ]
 }
