@@ -490,8 +490,9 @@
             "title": "Select Equipment",
             "badge_text": "Equipment for your booty workouts",
             "products": [
+              "nλss-knee-pads",
               "gym-gloves",
-              "stretching-band-set-1"
+              "booty-band-set-1"
             ],
             "first_is_free": false,
             "first_shown_is_free": false,
