@@ -523,7 +523,7 @@
         "step_tops": {
           "type": "bundle_step",
           "settings": {
-            "title": "leggings & tops",
+            "title": "Tops",
             "collection": "bundle-leggings-tops",
             "is_programs_step": false,
             "program_pack_product": ""
