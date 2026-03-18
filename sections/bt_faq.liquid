@@ -1,0 +1,89 @@
+{% comment %}
+  BT_FAQ (Body Transformation)
+  Based on lovable spec for FAQSection.tsx
+{% endcomment %}
+
+{%- liquid
+  assign title = section.settings.title | default: 'FAQ'
+  assign footer = section.settings.footer | default: "If you&#39;re ready, your best starting point is the one you&#39;ll stick with."
+-%}
+
+<section class="bt-wrap bt-faq">
+  <div class="bt-container bt-faq__container">
+    <h2 class="bt-faq__title">{{ title | escape }}</h2>
+
+    <div class="bt-faq__list">
+      {%- for block in section.blocks -%}
+        <details class="bt-faq__item"{% if forloop.first %} open{% endif %}>
+          <summary class="bt-faq__q">
+            <span>{{ block.settings.question | escape }}</span>
+            <span class="bt-faq__chev" aria-hidden="true">⌄</span>
+          </summary>
+          <div class="bt-faq__a">{{ block.settings.answer | escape }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+
+    <p class="bt-faq__footer">{{ footer }}</p>
+  </div>
+</section>
+
+{% stylesheet %}
+  .bt-wrap { width: 100%; display: flex; justify-content: center; padding: 0 16px; box-sizing: border-box; }
+  @media (min-width: 768px) { .bt-wrap { padding-left: 0; padding-right: 0; } }
+  .bt-container { width: 100%; max-width: 335px; text-align: center; }
+  @media (min-width: 768px) { .bt-container { max-width: 782px; } }
+
+  .bt-faq__title { margin: 0; font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif; font-weight: 900; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 24px; color: #111; line-height: 1.05; }
+  @media (min-width: 768px) { .bt-faq__title { font-size: 45px; } }
+
+  .bt-faq__list { margin-top: 32px; display: flex; flex-direction: column; gap: 16px; text-align: left; }
+  @media (min-width: 768px) { .bt-faq__list { margin-top: 40px; } }
+
+  .bt-faq__item { background: #F5F5F5; border-radius: 10px; overflow: hidden; }
+  .bt-faq__q { list-style: none; cursor: pointer; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  @media (min-width: 768px) { .bt-faq__q { padding: 18px 28px; } }
+  .bt-faq__q::-webkit-details-marker { display: none; }
+  .bt-faq__q span:first-child { font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; color: #111; font-size: 16px; }
+  @media (min-width: 768px) { .bt-faq__q span:first-child { font-size: 18px; } }
+  .bt-faq__chev { display: inline-flex; transition: transform 200ms ease; }
+  details[open] .bt-faq__chev { transform: rotate(180deg); }
+
+  .bt-faq__a { padding: 0 20px 20px; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; color: #8A8A8A; font-size: 14px; line-height: 1.45; }
+  @media (min-width: 768px) { .bt-faq__a { padding: 0 28px 20px; font-size: 16px; } }
+
+  .bt-faq__footer { margin: 40px 0 0; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; color: #8A8A8A; font-size: 14px; }
+  @media (min-width: 768px) { .bt-faq__footer { margin-top: 48px; font-size: 18px; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BT_FAQ",
+  "class": "shopify-section--bt-faq",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "FAQ" },
+    { "type": "text", "id": "footer", "label": "Footer text", "default": "If you&#39;re ready, your best starting point is the one you&#39;ll stick with." }
+  ],
+  "blocks": [
+    { "type": "faq", "name": "FAQ item", "settings": [
+      { "type": "text", "id": "question", "label": "Question", "default": "Is this program good for women 35+ / 40+ / 50+?" },
+      { "type": "textarea", "id": "answer", "label": "Answer", "default": "Yes! The program is designed for women of all ages and fitness levels. Each level adapts to your body's needs." }
+    ] }
+  ],
+  "presets": [
+    { "name": "BT_FAQ", "blocks": [
+      { "type": "faq" },
+      { "type": "faq", "settings": { "question": "Do I have to do jumping or HIIT?", "answer": "No jumping or HIIT required. The workouts are joint-friendly and designed for sustainable progress." } },
+      { "type": "faq", "settings": { "question": "What if I have low-energy days or PMS?", "answer": "That's exactly what Plan B is for. On tough days, switch to a gentler flow and stay on track without burning out." } },
+      { "type": "faq", "settings": { "question": "How many days per week is it?", "answer": "The program is designed for 3–5 days per week, depending on your level and schedule." } },
+      { "type": "faq", "settings": { "question": "How long is each workout?", "answer": "Workouts range from 20 to 40 minutes depending on the level." } },
+      { "type": "faq", "settings": { "question": "Do I need equipment?", "answer": "Minimal equipment — a set of dumbbells and a mat are enough to get started." } },
+      { "type": "faq", "settings": { "question": "How do I access the program?", "answer": "You'll get instant access through our app. Works on any device — phone, tablet, or computer." } },
+      { "type": "faq", "settings": { "question": "Is it a one-time purchase or subscription?", "answer": "It's a one-time purchase. Pay once, access forever." } },
+      { "type": "faq", "settings": { "question": "What if I'm a complete beginner?", "answer": "Start with the Soft level — it's built specifically for beginners with zero fitness experience." } }
+    ] }
+  ]
+}
+{% endschema %}
+

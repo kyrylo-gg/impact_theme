@@ -1,0 +1,150 @@
+{% comment %}
+  BT_Benefits (Body Transformation)
+  Based on lovable spec for BenefitsSection.tsx
+{% endcomment %}
+
+{%- liquid
+  assign title_1 = section.settings.title_1 | default: 'More Than Weight Loss. A Better Way'
+  assign title_2 = section.settings.title_2 | default: 'to Feel Every Day'
+
+  assign img_1 = section.settings.img_1
+  assign img_2 = section.settings.img_2
+  assign img_3 = section.settings.img_3
+  assign img_4 = section.settings.img_4
+  assign img_5 = section.settings.img_5
+  assign img_6 = section.settings.img_6
+  assign check_icon = section.settings.check_icon
+-%}
+
+<section class="bt-wrap bt-ben">
+  <div class="bt-container bt-ben__container">
+    <h2 class="bt-ben__title">
+      <span class="bt-ben__w">{{ title_1 | escape }}</span>
+      <span class="bt-ben__b"><br class="bt-ben__br-d"> {{ title_2 | escape }}</span>
+    </h2>
+
+    <div class="bt-ben__desktop">
+      <div class="bt-ben__desk-grid">
+        <div class="bt-ben__left">
+          <div class="bt-ben__row bt-ben__row--top">
+            <div class="bt-ben__tile bt-ben__tile--wide">{% if img_2 != blank %}<img src="{{ img_2 | image_url: width: 900 }}" alt="" loading="lazy">{% endif %}</div>
+            <div class="bt-ben__tile">{% if img_1 != blank %}<img src="{{ img_1 | image_url: width: 700 }}" alt="" loading="lazy">{% endif %}</div>
+          </div>
+          <div class="bt-ben__row bt-ben__row--bot">
+            <div class="bt-ben__tile">{% if img_5 != blank %}<img src="{{ img_5 | image_url: width: 700 }}" alt="" loading="lazy">{% endif %}</div>
+            <div class="bt-ben__tile bt-ben__tile--wide">{% if img_4 != blank %}<img src="{{ img_4 | image_url: width: 900 }}" alt="" loading="lazy">{% endif %}</div>
+          </div>
+        </div>
+
+        <div class="bt-ben__card">
+          <div class="bt-ben__pills">
+            {%- for block in section.blocks -%}
+              <div class="bt-ben__pill">
+                {%- if check_icon != blank -%}<img src="{{ check_icon | image_url: width: 60 }}" alt="" aria-hidden="true" loading="lazy">{%- endif -%}
+                <span>{{ block.settings.text | escape }}</span>
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bt-ben__mobile">
+      <div class="bt-ben__row bt-ben__row--m">
+        <div class="bt-ben__tile">{% if img_3 != blank %}<img src="{{ img_3 | image_url: width: 700 }}" alt="" loading="lazy">{% endif %}</div>
+        <div class="bt-ben__tile">{% if img_6 != blank %}<img src="{{ img_6 | image_url: width: 700 }}" alt="" loading="lazy">{% endif %}</div>
+      </div>
+      <div class="bt-ben__card bt-ben__card--m">
+        <div class="bt-ben__pills bt-ben__pills--m">
+          {%- for block in section.blocks -%}
+            <div class="bt-ben__pill bt-ben__pill--m">
+              {%- if check_icon != blank -%}<img src="{{ check_icon | image_url: width: 50 }}" alt="" aria-hidden="true" loading="lazy">{%- endif -%}
+              <span>{{ block.settings.text | escape }}</span>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .bt-wrap { width: 100%; display: flex; justify-content: center; padding: 0 16px; box-sizing: border-box; }
+  @media (min-width: 768px) { .bt-wrap { padding-left: 0; padding-right: 0; } }
+  .bt-container { width: 100%; max-width: 335px; }
+  @media (min-width: 768px) { .bt-container { max-width: 1184px; } }
+
+  .bt-ben__title { margin: 0; text-align: center; font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif; font-weight: 600; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 24px; line-height: 1.05; color: #111; }
+  @media (min-width: 768px) { .bt-ben__title { font-size: 45px; } }
+  .bt-ben__b { color: #0038FF; font-weight: 900; }
+  .bt-ben__br-d { display: none; }
+  @media (min-width: 768px) { .bt-ben__br-d { display: inline; } }
+
+  .bt-ben__desktop { display: none; }
+  .bt-ben__mobile { display: block; margin-top: 24px; }
+  @media (min-width: 768px) { .bt-ben__desktop { display: block; margin-top: 40px; } .bt-ben__mobile { display: none; } }
+
+  .bt-ben__desk-grid { display: flex; gap: 6px; }
+  .bt-ben__left { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+  .bt-ben__row { display: flex; gap: 6px; }
+  .bt-ben__row--top { height: 279px; }
+  .bt-ben__row--bot { height: 280px; }
+
+  .bt-ben__tile { flex: 1; border-radius: 30px; overflow: hidden; background: #111; }
+  .bt-ben__tile--wide { flex: 1.5; }
+  .bt-ben__tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .bt-ben__card { width: 379px; border-radius: 30px; overflow: hidden; background:
+    radial-gradient(ellipse 90% 80% at 90% 85%, rgba(190,200,255,0.7) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 60% at 10% 15%, rgba(200,210,255,0.4) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 70% at 50% 0%, rgba(210,215,255,0.3) 0%, transparent 50%),
+    #F0F1F8;
+  }
+  .bt-ben__pills { padding: 20px; display: flex; flex-direction: column; gap: 8px; }
+  .bt-ben__pill { display: inline-flex; align-items: center; gap: 10px; background: #0038FF; border-radius: 999px; padding: 12px 16px; color: #fff; }
+  .bt-ben__pill img { width: 25px; height: 25px; object-fit: contain; }
+  .bt-ben__pill span { font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 18px; }
+
+  .bt-ben__row--m { display: flex; gap: 6px; }
+  .bt-ben__row--m .bt-ben__tile { height: 240px; }
+  .bt-ben__card--m { width: 100%; margin-top: 6px; }
+  .bt-ben__pills--m { gap: 7px; }
+  .bt-ben__pill--m { padding: 10px 12px; }
+  .bt-ben__pill--m img { width: 19px; height: 19px; }
+  .bt-ben__pill--m span { font-size: 14px; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BT_Benefits",
+  "class": "shopify-section--bt-benefits",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "title_1", "label": "Title line 1", "default": "More Than Weight Loss. A Better Way" },
+    { "type": "text", "id": "title_2", "label": "Title line 2 (blue)", "default": "to Feel Every Day" },
+    { "type": "header", "content": "Images (desktop mosaic)" },
+    { "type": "image_picker", "id": "img_2", "label": "Desktop wide (top-left)" },
+    { "type": "image_picker", "id": "img_1", "label": "Desktop (top-right)" },
+    { "type": "image_picker", "id": "img_5", "label": "Desktop (bottom-left)" },
+    { "type": "image_picker", "id": "img_4", "label": "Desktop wide (bottom-right)" },
+    { "type": "header", "content": "Images (mobile row)" },
+    { "type": "image_picker", "id": "img_3", "label": "Mobile left" },
+    { "type": "image_picker", "id": "img_6", "label": "Mobile right" },
+    { "type": "image_picker", "id": "check_icon", "label": "Check icon (white)" }
+  ],
+  "blocks": [
+    { "type": "benefit", "name": "Benefit", "settings": [ { "type": "text", "id": "text", "label": "Text", "default": "A lighter, more comfortable body" } ] }
+  ],
+  "presets": [
+    { "name": "BT_Benefits", "blocks": [
+      { "type": "benefit", "settings": { "text": "A lighter, more comfortable body" } },
+      { "type": "benefit", "settings": { "text": "More energy for real life" } },
+      { "type": "benefit", "settings": { "text": "Confidence in your body again" } },
+      { "type": "benefit", "settings": { "text": "Clothes that fit and feel good" } },
+      { "type": "benefit", "settings": { "text": "Better daily well-being" } },
+      { "type": "benefit", "settings": { "text": "Inner calm and satisfaction" } }
+    ] }
+  ]
+}
+{% endschema %}
+

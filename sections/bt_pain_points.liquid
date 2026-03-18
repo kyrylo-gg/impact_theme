@@ -1,0 +1,149 @@
+{% comment %}
+  BT_PainPoints (Body Transformation)
+  Based on lovable spec for PainPointsSection.tsx
+{% endcomment %}
+
+{%- liquid
+  assign title_1 = section.settings.title_1 | default: "You're Not Lazy."
+  assign title_2 = section.settings.title_2 | default: "You Just Need a Better System."
+  assign subtitle = section.settings.subtitle | default: "Tap what feels true for you."
+  assign bottom_1 = section.settings.bottom_1 | default: "If any of that felt familiar, you're in the right place."
+  assign bottom_2 = section.settings.bottom_2 | default: "Here's who built this system — and why it's different."
+-%}
+
+<section class="bt-wrap bt-pain" data-bt-pain>
+  <div class="bt-container">
+    <h2 class="bt-pain__title">
+      <span class="bt-pain__title-w">{{ title_1 | escape }}</span><br>
+      <span class="bt-pain__title-b">{{ title_2 | escape }}</span>
+    </h2>
+
+    <div class="bt-pain__divider" aria-hidden="true"></div>
+
+    <p class="bt-pain__subtitle">{{ subtitle | escape }}</p>
+
+    <div class="bt-pain__grid">
+      {%- for block in section.blocks -%}
+        {%- assign variant = block.settings.variant | default: 'blue' -%}
+        <button type="button" class="bt-pain__card bt-pain__card--{{ variant }}" data-bt-flip aria-label="Flip card">
+          <div class="bt-pain__inner">
+            <div class="bt-pain__face bt-pain__face--front">
+              <div class="bt-pain__bubble">{{ block.settings.emoji | escape }}</div>
+              <p class="bt-pain__text">{{ block.settings.text | escape }}</p>
+            </div>
+            <div class="bt-pain__face bt-pain__face--back">
+              <div class="bt-pain__bubble">{{ block.settings.back_emoji | escape }}</div>
+              <p class="bt-pain__text">{{ block.settings.back_text | escape }}</p>
+            </div>
+          </div>
+        </button>
+      {%- endfor -%}
+    </div>
+
+    <p class="bt-pain__bottom">{{ bottom_1 | escape }}</p>
+    <p class="bt-pain__bottom bt-pain__bottom--muted">{{ bottom_2 | escape }}</p>
+  </div>
+</section>
+
+<script>
+(function(){
+  var root = document.querySelector('[data-bt-pain]');
+  if (!root) return;
+  root.querySelectorAll('[data-bt-flip]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      btn.classList.toggle('is-flipped');
+    });
+  });
+})();
+</script>
+
+{% stylesheet %}
+  .bt-wrap { width: 100%; display: flex; justify-content: center; padding: 0 16px; box-sizing: border-box; }
+  @media (min-width: 768px) { .bt-wrap { padding-left: 0; padding-right: 0; } }
+  .bt-container { width: 100%; max-width: 335px; }
+  @media (min-width: 768px) { .bt-container { max-width: 1184px; } }
+
+  .bt-pain__title { margin: 0; text-align: center; font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif; font-weight: 600; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 24px; line-height: 1.05; color: #111; }
+  @media (min-width: 768px) { .bt-pain__title { font-size: 45px; } }
+  .bt-pain__title-b { color: #0038FF; font-weight: 900; }
+
+  .bt-pain__divider { width: 48px; height: 3px; background: #0038FF; margin: 12px auto 0; }
+  @media (min-width: 768px) { .bt-pain__divider { margin-top: 16px; } }
+
+  .bt-pain__subtitle { margin: 16px 0 0; text-align: center; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; color: #111; font-size: 16px; }
+  @media (min-width: 768px) { .bt-pain__subtitle { font-size: 24px; margin-top: 24px; } }
+
+  .bt-pain__grid { margin-top: 32px; display: flex; flex-direction: column; gap: 20px; }
+  @media (min-width: 768px) { .bt-pain__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+  .bt-pain__card { width: 100%; height: 198px; border: 0; padding: 0; background: transparent; cursor: pointer; perspective: 1000px; }
+  @media (min-width: 768px) { .bt-pain__card { height: 259px; } }
+
+  .bt-pain__inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 500ms ease-out; }
+  .bt-pain__card.is-flipped .bt-pain__inner { transform: rotateY(180deg); }
+
+  .bt-pain__face { position: absolute; inset: 0; border-radius: 30px; display: flex; flex-direction: column; align-items: center; padding-top: 28px; box-sizing: border-box; backface-visibility: hidden; -webkit-backface-visibility: hidden; overflow: hidden; }
+  @media (min-width: 768px) { .bt-pain__face { padding-top: 48px; } }
+  .bt-pain__face--back { transform: rotateY(180deg); }
+
+  .bt-pain__card--blue .bt-pain__face { background:
+      radial-gradient(ellipse 85% 95% at 88% 78%, rgba(224,231,255,0.83) 0%, transparent 65%),
+      radial-gradient(ellipse 65% 85% at -8% 12%, rgba(224,231,255,0.63) 0%, transparent 55%),
+      radial-gradient(ellipse 95% 75% at 50% -8%, rgba(224,231,255,0.43) 0%, transparent 55%),
+      #FAFCFD; }
+  .bt-pain__card--purple .bt-pain__face { background:
+      radial-gradient(ellipse 85% 95% at 88% 78%, rgba(236,223,255,0.83) 0%, transparent 65%),
+      radial-gradient(ellipse 65% 85% at -8% 12%, rgba(236,223,255,0.63) 0%, transparent 55%),
+      radial-gradient(ellipse 95% 75% at 50% -8%, rgba(236,223,255,0.43) 0%, transparent 55%),
+      #FAFCFD; }
+
+  .bt-pain__bubble { width: 60px; height: 60px; border-radius: 999px; display: flex; align-items: center; justify-content: center; font-size: 40px; line-height: 1; margin-bottom: 16px; }
+  .bt-pain__card--blue .bt-pain__bubble { background: #E0E7FF; }
+  .bt-pain__card--purple .bt-pain__bubble { background: #ECDFFF; }
+
+  .bt-pain__text { margin: 0; padding: 0 24px; text-align: center; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; color: #111; font-size: 16px; max-width: 240px; }
+  @media (min-width: 768px) { .bt-pain__text { font-size: 18px; } }
+
+  .bt-pain__bottom { margin: 40px 0 0; text-align: center; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 16px; color: #111; }
+  @media (min-width: 768px) { .bt-pain__bottom { margin-top: 48px; font-size: 24px; } }
+  .bt-pain__bottom--muted { margin-top: 16px; font-size: 14px; color: #8A8A8A; }
+  @media (min-width: 768px) { .bt-pain__bottom--muted { font-size: 18px; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BT_PainPoints",
+  "class": "shopify-section--bt-pain-points",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "title_1", "label": "Title line 1", "default": "You're Not Lazy." },
+    { "type": "text", "id": "title_2", "label": "Title line 2 (blue)", "default": "You Just Need a Better System." },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Tap what feels true for you." },
+    { "type": "text", "id": "bottom_1", "label": "Bottom line 1", "default": "If any of that felt familiar, you're in the right place." },
+    { "type": "text", "id": "bottom_2", "label": "Bottom line 2", "default": "Here's who built this system — and why it's different." }
+  ],
+  "blocks": [
+    { "type": "card", "name": "Card", "settings": [
+      { "type": "text", "id": "emoji", "label": "Front emoji", "default": "😤" },
+      { "type": "text", "id": "text", "label": "Front text", "default": "I miss a few workouts… and then I quit for weeks." },
+      { "type": "text", "id": "back_emoji", "label": "Back emoji", "default": "😉" },
+      { "type": "text", "id": "back_text", "label": "Back text", "default": "This system gives you a simple way to continue, so you don't restart." },
+      { "type": "select", "id": "variant", "label": "Variant", "default": "blue", "options": [
+        { "value": "blue", "label": "Blue" },
+        { "value": "purple", "label": "Purple" }
+      ] }
+    ] }
+  ],
+  "presets": [
+    { "name": "BT_PainPoints", "blocks": [
+      { "type": "card", "settings": { "emoji": "😤", "text": "I miss a few workouts… and then I quit for weeks.", "back_emoji": "😉", "back_text": "This system gives you a simple way to continue, so you don't restart.", "variant": "blue" } },
+      { "type": "card", "settings": { "emoji": "😢", "text": "PMS hits — and my routine falls apart every month.", "back_emoji": "🙌", "back_text": "You'll have a built-in low-energy option, so you can stay consistent.", "variant": "purple" } },
+      { "type": "card", "settings": { "emoji": "📅", "text": "I can't stick to long workouts — my schedule is chaos.", "back_emoji": "😌", "back_text": "You'll always have a minimum effective option that still counts.", "variant": "blue" } },
+      { "type": "card", "settings": { "emoji": "😬", "text": "Jumping/HIIT hurts my knees — or feels too intense.", "back_emoji": "🤸", "back_text": "You start joint-friendly and level up only when you're ready.", "variant": "purple" } },
+      { "type": "card", "settings": { "emoji": "🤷‍♀️", "text": "I don't know what to do — so I do random workouts.", "back_emoji": "😄", "back_text": "You'll follow a clear roadmap: Build → Sculpt → Burn, step by step.", "variant": "blue" } },
+      { "type": "card", "settings": { "emoji": "😭", "text": "I want to look tighter, but I hate \"punishment\" workouts.", "back_emoji": "⚡️", "back_text": "This is consistency-first training — results without extremes.", "variant": "purple" } }
+    ] }
+  ]
+}
+{% endschema %}
+

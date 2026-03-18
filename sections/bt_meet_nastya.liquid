@@ -1,0 +1,156 @@
+{% comment %}
+  BT_MeetNastya (Body Transformation)
+  Based on lovable spec for MeetNastyaSection.tsx
+{% endcomment %}
+
+{%- liquid
+  assign title_1 = section.settings.title_1 | default: 'Meet'
+  assign title_2 = section.settings.title_2 | default: 'Nastya Nass'
+  assign stat_1 = section.settings.stat_1 | default: '6M+ on Instagram'
+  assign stat_2 = section.settings.stat_2 | default: '200M+ YouTube views'
+  assign bio = section.settings.bio | default: 'Nastya is a famous twerk star and a mom of two. She knows how to get back on track with a system that adapts to real life.'
+  assign quote = section.settings.quote | default: 'Between kids and a busy schedule, I needed a plan that adapts. This roadmap helped me keep going when life got messy.'
+
+  assign photo_mobile = section.settings.photo_mobile
+  assign photo_desktop = section.settings.photo_desktop
+  assign avatar = section.settings.avatar
+  assign verified_badge = section.settings.verified_badge
+  assign person_icon = section.settings.person_icon
+-%}
+
+<section class="bt-wrap bt-meet">
+  <div class="bt-container bt-meet__container">
+    <h2 class="bt-meet__title">
+      <span class="bt-meet__title-w">{{ title_1 | escape }}</span><br>
+      <span class="bt-meet__title-b">{{ title_2 | escape }}</span>
+    </h2>
+    <div class="bt-meet__divider" aria-hidden="true"></div>
+
+    <div class="bt-meet__card">
+      <div class="bt-meet__photo">
+        {%- if photo_mobile != blank -%}
+          <img class="bt-meet__img bt-meet__img--m" src="{{ photo_mobile | image_url: width: 900 }}" alt="" loading="lazy">
+        {%- endif -%}
+        {%- if photo_desktop != blank -%}
+          <img class="bt-meet__img bt-meet__img--d" src="{{ photo_desktop | image_url: width: 1200 }}" alt="" loading="lazy">
+        {%- endif -%}
+        <div class="bt-meet__grad" aria-hidden="true"></div>
+      </div>
+
+      <div class="bt-meet__body">
+        <div class="bt-meet__row">
+          <div class="bt-meet__avatar">
+            {%- if avatar != blank -%}
+              <img class="bt-meet__avatar-img" src="{{ avatar | image_url: width: 300 }}" alt="" loading="lazy">
+            {%- endif -%}
+            {%- if verified_badge != blank -%}
+              <img class="bt-meet__badge" src="{{ verified_badge | image_url: width: 80 }}" alt="" aria-hidden="true" loading="lazy">
+            {%- endif -%}
+          </div>
+
+          <div class="bt-meet__stats">
+            <div class="bt-meet__stat">
+              {%- if person_icon != blank -%}<img class="bt-meet__icon" src="{{ person_icon | image_url: width: 40 }}" alt="" aria-hidden="true" loading="lazy">{%- endif -%}
+              <span>{{ stat_1 | escape }}</span>
+            </div>
+            <div class="bt-meet__dot" aria-hidden="true"></div>
+            <div class="bt-meet__stat">
+              {%- if person_icon != blank -%}<img class="bt-meet__icon" src="{{ person_icon | image_url: width: 40 }}" alt="" aria-hidden="true" loading="lazy">{%- endif -%}
+              <span>{{ stat_2 | escape }}</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="bt-meet__bio">{{ bio | escape }}</p>
+
+        <div class="bt-meet__quote">
+          <p class="bt-meet__quote-text">
+            “{{ quote | escape }}” <span class="bt-meet__quote-name">— Nastya</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .bt-wrap { width: 100%; display: flex; justify-content: center; padding: 0 16px; box-sizing: border-box; }
+  @media (min-width: 768px) { .bt-wrap { padding-left: 0; padding-right: 0; } }
+  .bt-container { width: 100%; max-width: 335px; }
+  @media (min-width: 768px) { .bt-container { max-width: 782px; } }
+
+  .bt-meet__title { margin: 0; text-align: center; font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif; font-weight: 600; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 24px; line-height: 1.05; color: #111; }
+  @media (min-width: 768px) { .bt-meet__title { font-size: 45px; } }
+  .bt-meet__title-b { color: #0038FF; font-weight: 900; }
+  .bt-meet__divider { width: 48px; height: 3px; background: #0038FF; margin: 12px auto 0; }
+  @media (min-width: 768px) { .bt-meet__divider { margin-top: 16px; } }
+
+  .bt-meet__card { margin-top: 24px; background: #fff; border-radius: 30px; box-shadow: 0 6px 28px rgba(0,0,0,0.15); overflow: hidden; }
+  @media (min-width: 768px) { .bt-meet__card { margin-top: 40px; border: 1px solid #F4F4F4; } }
+
+  .bt-meet__photo { position: relative; margin: 8px; border-radius: 22px; overflow: hidden; }
+  .bt-meet__img { width: 100%; object-fit: cover; display: none; }
+  .bt-meet__img--m { display: block; height: 275px; }
+  .bt-meet__img--d { display: none; height: 328px; }
+  @media (min-width: 768px) {
+    .bt-meet__img--m { display: none; }
+    .bt-meet__img--d { display: block; }
+  }
+  .bt-meet__grad { position: absolute; left: 0; right: 0; bottom: 0; height: 222px; background: linear-gradient(to top, rgba(0,0,0,0.5), transparent); }
+
+  .bt-meet__body { padding: 0 20px 20px; margin-top: -24px; position: relative; }
+  @media (min-width: 768px) { .bt-meet__body { padding: 0 28px 28px; margin-top: -40px; } }
+
+  .bt-meet__row { display: flex; align-items: flex-end; gap: 12px; }
+  @media (min-width: 768px) { .bt-meet__row { gap: 16px; } }
+
+  .bt-meet__avatar { width: 84px; height: 84px; border-radius: 999px; border: 3px solid #fff; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.15); position: relative; flex-shrink: 0; background: #fff; }
+  @media (min-width: 768px) { .bt-meet__avatar { width: 115px; height: 115px; } }
+  .bt-meet__avatar-img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.58); transform-origin: center; }
+  @media (min-width: 768px) { .bt-meet__avatar-img { transform: scale(1.65); } }
+  .bt-meet__badge { position: absolute; right: 0; bottom: 0; width: 20px; height: 20px; }
+  @media (min-width: 768px) { .bt-meet__badge { width: 30px; height: 30px; } }
+
+  .bt-meet__stats { display: flex; flex-direction: column; gap: 4px; padding-bottom: 4px; }
+  @media (min-width: 768px) { .bt-meet__stats { flex-direction: row; align-items: center; gap: 0; } }
+  .bt-meet__stat { display: inline-flex; align-items: center; gap: 8px; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; color: #111; font-size: 16px; }
+  @media (min-width: 768px) { .bt-meet__stat { font-size: 21px; } }
+  .bt-meet__icon { width: 12px; height: 12px; }
+  @media (min-width: 768px) { .bt-meet__icon { width: 17px; height: 17px; } }
+  .bt-meet__dot { display: none; width: 4px; height: 4px; background: #111; border-radius: 999px; margin: 0 16px; }
+  @media (min-width: 768px) { .bt-meet__dot { display: block; } }
+
+  .bt-meet__bio { margin: 16px 0 0; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 14px; color: #8A8A8A; }
+  @media (min-width: 768px) { .bt-meet__bio { margin-top: 24px; font-size: 18px; } }
+
+  .bt-meet__quote { margin-top: 16px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.06); padding: 12px; }
+  @media (min-width: 768px) { .bt-meet__quote { margin-top: 20px; padding: 16px; } }
+  .bt-meet__quote-text { margin: 0; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 14px; color: #111; font-style: italic; line-height: 1.4; }
+  @media (min-width: 768px) { .bt-meet__quote-text { font-size: 18px; } }
+  .bt-meet__quote-name { font-style: normal; font-weight: 800; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BT_MeetNastya",
+  "class": "shopify-section--bt-meet-nastya",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "title_1", "label": "Title line 1", "default": "Meet" },
+    { "type": "text", "id": "title_2", "label": "Title line 2 (blue)", "default": "Nastya Nass" },
+    { "type": "header", "content": "Images" },
+    { "type": "image_picker", "id": "photo_mobile", "label": "Photo mobile" },
+    { "type": "image_picker", "id": "photo_desktop", "label": "Photo desktop" },
+    { "type": "image_picker", "id": "avatar", "label": "Avatar" },
+    { "type": "image_picker", "id": "verified_badge", "label": "Verified badge" },
+    { "type": "image_picker", "id": "person_icon", "label": "Person icon" },
+    { "type": "header", "content": "Text" },
+    { "type": "text", "id": "stat_1", "label": "Stat 1", "default": "6M+ on Instagram" },
+    { "type": "text", "id": "stat_2", "label": "Stat 2", "default": "200M+ YouTube views" },
+    { "type": "text", "id": "bio", "label": "Bio", "default": "Nastya is a famous twerk star and a mom of two. She knows how to get back on track with a system that adapts to real life." },
+    { "type": "text", "id": "quote", "label": "Quote", "default": "Between kids and a busy schedule, I needed a plan that adapts. This roadmap helped me keep going when life got messy." }
+  ],
+  "presets": [{ "name": "BT_MeetNastya" }]
+}
+{% endschema %}
+

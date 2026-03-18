@@ -1,0 +1,102 @@
+{% comment %}
+  BT_WhatWomenSay (Body Transformation)
+  Based on lovable spec for WhatWomenSaySection.tsx
+{% endcomment %}
+
+{%- liquid
+  assign title_1 = section.settings.title_1 | default: 'What Women Say'
+  assign title_2 = section.settings.title_2 | default: 'After Starting'
+  assign footer = section.settings.footer | default: "If you&#39;re thinking &quot;But will this work for me?&quot; — let&#39;s answer that."
+-%}
+
+<section class="bt-wrap bt-wws">
+  <div class="bt-container bt-wws__container">
+    <h2 class="bt-wws__title">
+      <span class="bt-wws__b">{{ title_1 | escape }}</span>
+      <span class="bt-wws__w"> {{ title_2 | escape }}</span>
+    </h2>
+    <div class="bt-wws__divider" aria-hidden="true"></div>
+
+    <div class="bt-wws__grid">
+      {%- for block in section.blocks -%}
+        <div class="bt-wws__item">
+          <div class="bt-wws__avatar">
+            <div class="bt-wws__avatar-inner">
+              {%- if block.settings.image != blank -%}
+                <img src="{{ block.settings.image | image_url: width: 240 }}" alt="" loading="lazy">
+              {%- endif -%}
+            </div>
+          </div>
+          <div class="bt-wws__card">
+            <p class="bt-wws__quote">{{ block.settings.quote | escape }}</p>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <p class="bt-wws__footer">{{ footer }}</p>
+  </div>
+</section>
+
+{% stylesheet %}
+  .bt-wrap { width: 100%; display: flex; justify-content: center; padding: 0 16px; box-sizing: border-box; }
+  @media (min-width: 768px) { .bt-wrap { padding-left: 0; padding-right: 0; } }
+  .bt-container { width: 100%; max-width: 335px; text-align: center; }
+  @media (min-width: 768px) { .bt-container { max-width: 1184px; } }
+
+  .bt-wws__title { margin: 0; font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif; font-weight: 900; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 24px; color: #0038FF; line-height: 1.05; }
+  @media (min-width: 768px) { .bt-wws__title { font-size: 45px; } }
+  .bt-wws__b { color: #0038FF; }
+  .bt-wws__w { color: #111; font-weight: 600; }
+
+  .bt-wws__divider { display: none; width: 48px; height: 3px; background: #0038FF; margin: 16px auto 0; }
+  @media (min-width: 768px) { .bt-wws__divider { display: block; } }
+
+  .bt-wws__grid { margin-top: 64px; display: flex; flex-direction: column; gap: 62px; }
+  @media (min-width: 768px) { .bt-wws__grid { margin-top: 80px; flex-direction: row; gap: 20px; } }
+
+  .bt-wws__item { position: relative; flex: 1; padding-top: 42px; }
+  @media (min-width: 768px) { .bt-wws__item { padding-top: 50px; } }
+
+  .bt-wws__avatar { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 84px; height: 84px; border-radius: 999px; background: #fff; box-shadow: 0 4px 24px rgba(0,0,0,0.15); border: 1px solid #fff; overflow: hidden; }
+  @media (min-width: 768px) { .bt-wws__avatar { width: 100px; height: 100px; } }
+  .bt-wws__avatar-inner { width: calc(100% - 4px); height: calc(100% - 4px); margin: 2px; border-radius: 999px; overflow: hidden; background: #111; }
+  @media (min-width: 768px) { .bt-wws__avatar-inner { width: calc(100% - 8px); height: calc(100% - 8px); margin: 4px; } }
+  .bt-wws__avatar-inner img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .bt-wws__card { height: 122px; border-radius: 30px; background: #fff; box-shadow: 0 6px 28px rgba(0,0,0,0.15); display: flex; align-items: flex-end; justify-content: center; padding: 0 16px 16px; box-sizing: border-box; }
+  @media (min-width: 768px) { .bt-wws__card { height: 136px; padding-bottom: 20px; } }
+
+  .bt-wws__quote { margin: 0; max-width: 247px; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 16px; color: #111; }
+  @media (min-width: 768px) { .bt-wws__quote { font-size: 18px; } }
+
+  .bt-wws__footer { margin: 32px 0 0; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 14px; color: #8A8A8A; }
+  @media (min-width: 768px) { .bt-wws__footer { margin-top: 48px; font-size: 18px; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BT_WhatWomenSay",
+  "class": "shopify-section--bt-what-women-say",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "title_1", "label": "Title (blue)", "default": "What Women Say" },
+    { "type": "text", "id": "title_2", "label": "Title suffix", "default": "After Starting" },
+    { "type": "text", "id": "footer", "label": "Footer text", "default": "If you&#39;re thinking &quot;But will this work for me?&quot; — let&#39;s answer that." }
+  ],
+  "blocks": [
+    { "type": "testimonial", "name": "Testimonial", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Avatar image" },
+      { "type": "text", "id": "quote", "label": "Quote", "default": "\"I finally stayed consistent.\"" }
+    ] }
+  ],
+  "presets": [
+    { "name": "BT_WhatWomenSay", "blocks": [
+      { "type": "testimonial", "settings": { "quote": "\"I finally stayed consistent.\"" } },
+      { "type": "testimonial", "settings": { "quote": "\"Starting Soft made me feel safe—and I kept going.\"" } },
+      { "type": "testimonial", "settings": { "quote": "\"Plan B saved my routine.\"" } }
+    ] }
+  ]
+}
+{% endschema %}
+

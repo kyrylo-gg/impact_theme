@@ -1,0 +1,134 @@
+{% comment %}
+  BT_RealResults (Body Transformation)
+  Based on lovable spec for RealResultsSection.tsx
+  Note: simplified vanilla scroll-based carousel (no Embla).
+{% endcomment %}
+
+{%- liquid
+  assign title_1 = section.settings.title_1 | default: 'Real Results'
+  assign title_2 = section.settings.title_2 | default: '(Consistency Wins)'
+  assign subtitle = section.settings.subtitle | default: 'This is what structured progression looks like.'
+  assign footer = section.settings.footer | default: "If you're ready to start transforming your body, here's the simplest way to begin."
+-%}
+
+<section class="bt-wrap bt-rr" data-bt-rr>
+  <div class="bt-container bt-rr__container">
+    <h2 class="bt-rr__title">
+      <span class="bt-rr__title-b">{{ title_1 | escape }}</span>
+      <span class="bt-rr__title-w"> {{ title_2 | escape }}</span>
+    </h2>
+    <div class="bt-rr__divider" aria-hidden="true"></div>
+    <p class="bt-rr__subtitle">{{ subtitle | escape }}</p>
+
+    <div class="bt-rr__carousel">
+      <div class="bt-rr__track" data-bt-rr-track>
+        {%- for block in section.blocks -%}
+          <div class="bt-rr__slide">
+            <div class="bt-rr__img">
+              {%- if block.settings.image != blank -%}
+                <img src="{{ block.settings.image | image_url: width: 900 }}" alt="" loading="lazy">
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <div class="bt-rr__dots" data-bt-rr-dots aria-hidden="true">
+      {%- for block in section.blocks -%}
+        <span class="bt-rr__dot{% if forloop.first %} is-active{% endif %}"></span>
+      {%- endfor -%}
+    </div>
+
+    <p class="bt-rr__footer">{{ footer | escape }}</p>
+  </div>
+</section>
+
+<script>
+(function(){
+  var root = document.querySelector('[data-bt-rr]');
+  if (!root) return;
+  var track = root.querySelector('[data-bt-rr-track]');
+  var dotsWrap = root.querySelector('[data-bt-rr-dots]');
+  if (!track || !dotsWrap) return;
+  var dots = Array.prototype.slice.call(dotsWrap.querySelectorAll('.bt-rr__dot'));
+  if (!dots.length) return;
+
+  function setActive(i){ dots.forEach(function(d, idx){ d.classList.toggle('is-active', idx === i); }); }
+
+  var ticking = false;
+  track.addEventListener('scroll', function(){
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function(){
+      ticking = false;
+      var slide = track.querySelector('.bt-rr__slide');
+      if (!slide) return;
+      var w = slide.getBoundingClientRect().width + 16;
+      var idx = Math.round(track.scrollLeft / w);
+      idx = Math.max(0, Math.min(idx, dots.length - 1));
+      setActive(idx);
+    });
+  }, { passive: true });
+})();
+</script>
+
+{% stylesheet %}
+  .bt-wrap { width: 100%; display: flex; justify-content: center; padding: 0 20px; box-sizing: border-box; }
+  @media (min-width: 768px) { .bt-wrap { padding-left: 0; padding-right: 0; } }
+  .bt-container { width: 100%; max-width: 335px; text-align: center; }
+  @media (min-width: 768px) { .bt-container { max-width: 1184px; } }
+
+  .bt-rr__title { margin: 0; font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif; font-weight: 600; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 24px; line-height: 1.05; }
+  @media (min-width: 768px) { .bt-rr__title { font-size: 45px; } }
+  .bt-rr__title-b { color: #0038FF; font-weight: 900; }
+  .bt-rr__title-w { color: #111; }
+
+  .bt-rr__divider { display: none; width: 48px; height: 3px; background: #0038FF; margin: 16px auto 0; }
+  @media (min-width: 768px) { .bt-rr__divider { display: block; } }
+
+  .bt-rr__subtitle { margin: 16px 0 0; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 16px; color: #111; }
+  @media (min-width: 768px) { .bt-rr__subtitle { margin-top: 0; font-size: 24px; } }
+
+  .bt-rr__carousel { margin-top: 32px; }
+  @media (min-width: 768px) { .bt-rr__carousel { margin-top: 40px; } }
+  .bt-rr__track { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+  @media (min-width: 768px) { .bt-rr__track { gap: 20px; } }
+  .bt-rr__track::-webkit-scrollbar { display: none; }
+  .bt-rr__slide { flex: 0 0 auto; scroll-snap-align: start; width: 295px; }
+  @media (min-width: 768px) { .bt-rr__slide { width: 381px; } }
+  .bt-rr__img { width: 295px; height: 372px; border-radius: 30px; overflow: hidden; background: #111; }
+  @media (min-width: 768px) { .bt-rr__img { width: 381px; height: 480px; } }
+  .bt-rr__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .bt-rr__dots { margin-top: 24px; display: flex; justify-content: center; gap: 8px; }
+  @media (min-width: 768px) { .bt-rr__dots { margin-top: 40px; } }
+  .bt-rr__dot { height: 2px; width: 20px; background: rgba(138,138,138,0.4); border-radius: 999px; transition: width 150ms ease, background 150ms ease; }
+  @media (min-width: 768px) { .bt-rr__dot { height: 3px; width: 28px; } }
+  .bt-rr__dot.is-active { width: 40px; background: #8A8A8A; }
+  @media (min-width: 768px) { .bt-rr__dot.is-active { width: 50px; } }
+
+  .bt-rr__footer { margin: 32px auto 0; max-width: 333px; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; color: #8A8A8A; font-size: 14px; }
+  @media (min-width: 768px) { .bt-rr__footer { max-width: none; font-size: 18px; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BT_RealResults",
+  "class": "shopify-section--bt-real-results",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "title_1", "label": "Title (blue)", "default": "Real Results" },
+    { "type": "text", "id": "title_2", "label": "Title suffix", "default": "(Consistency Wins)" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "This is what structured progression looks like." },
+    { "type": "text", "id": "footer", "label": "Footer text", "default": "If you're ready to start transforming your body, here's the simplest way to begin." }
+  ],
+  "blocks": [
+    { "type": "image", "name": "Result image", "settings": [ { "type": "image_picker", "id": "image", "label": "Image" } ] }
+  ],
+  "presets": [
+    { "name": "BT_RealResults", "blocks": [ { "type": "image" }, { "type": "image" }, { "type": "image" } ] }
+  ]
+}
+{% endschema %}
+

@@ -163,6 +163,58 @@
         "input_text_color": ""
       }
     },
+    "bt_hero": {
+      "type": "bt_hero",
+      "settings": {}
+    },
+    "bt_pain_points": {
+      "type": "bt_pain_points",
+      "settings": {}
+    },
+    "bt_meet_nastya": {
+      "type": "bt_meet_nastya",
+      "settings": {}
+    },
+    "bt_why_this_works": {
+      "type": "bt_why_this_works",
+      "settings": {}
+    },
+    "bt_choose_level": {
+      "type": "bt_choose_level",
+      "settings": {}
+    },
+    "bt_benefits": {
+      "type": "bt_benefits",
+      "settings": {}
+    },
+    "bt_no_restart": {
+      "type": "bt_no_restart",
+      "settings": {}
+    },
+    "bt_app_access": {
+      "type": "bt_app_access",
+      "settings": {}
+    },
+    "bt_real_results": {
+      "type": "bt_real_results",
+      "settings": {}
+    },
+    "bt_choose_your_path": {
+      "type": "bt_choose_your_path",
+      "settings": {}
+    },
+    "bt_what_women_say": {
+      "type": "bt_what_women_say",
+      "settings": {}
+    },
+    "bt_faq": {
+      "type": "bt_faq",
+      "settings": {}
+    },
+    "bt_start_where_you_are": {
+      "type": "bt_start_where_you_are",
+      "settings": {}
+    },
     "zp-product-footer-content": {
       "type": "product-footer-content-zipifypages",
       "disabled": true,
@@ -172,6 +224,19 @@
   "order": [
     "zp-product-header-content",
     "main",
+    "bt_hero",
+    "bt_pain_points",
+    "bt_meet_nastya",
+    "bt_why_this_works",
+    "bt_choose_level",
+    "bt_benefits",
+    "bt_no_restart",
+    "bt_app_access",
+    "bt_real_results",
+    "bt_choose_your_path",
+    "bt_what_women_say",
+    "bt_faq",
+    "bt_start_where_you_are",
     "zp-product-footer-content"
   ]
 }

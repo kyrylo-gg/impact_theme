@@ -1,0 +1,86 @@
+{% comment %}
+  BT_AppAccess (Body Transformation)
+  Based on lovable spec for AppAccessSection.tsx
+{% endcomment %}
+
+{%- liquid
+  assign title_1 = section.settings.title_1 | default: 'Instant Access'
+  assign title_2 = section.settings.title_2 | default: 'in the App'
+  assign subtitle_mobile = section.settings.subtitle_mobile | default: "Start today. Follow the plan.\nStay consistent."
+  assign subtitle_desktop = section.settings.subtitle_desktop | default: 'Start today. Follow the plan. Stay consistent.'
+  assign footer_text = section.settings.footer_text | default: 'And when you stay consistent, the change becomes visible.'
+-%}
+
+<section class="bt-wrap bt-app">
+  <div class="bt-container bt-app__container">
+    <div class="bt-app__banner">
+      <div class="bt-app__center">
+        <h2 class="bt-app__title">
+          <span class="bt-app__w">{{ title_1 | escape }} </span>
+          <span class="bt-app__y">{{ title_2 | escape }}</span>
+        </h2>
+        <div class="bt-app__divider" aria-hidden="true"></div>
+        <p class="bt-app__subtitle bt-app__subtitle--m">{{ subtitle_mobile | escape | newline_to_br }}</p>
+        <p class="bt-app__subtitle bt-app__subtitle--d">{{ subtitle_desktop | escape }}</p>
+      </div>
+    </div>
+
+    <p class="bt-app__footer bt-app__footer--m">{{ footer_text | escape }}</p>
+    <p class="bt-app__footer bt-app__footer--d">{{ footer_text | escape }}</p>
+  </div>
+</section>
+
+{% stylesheet %}
+  .bt-wrap { width: 100%; display: flex; justify-content: center; padding: 0 20px; box-sizing: border-box; }
+  @media (min-width: 768px) { .bt-wrap { padding-left: 0; padding-right: 0; } }
+  .bt-container { width: 100%; max-width: 335px; }
+  @media (min-width: 768px) { .bt-container { max-width: 1184px; } }
+
+  .bt-app__banner { width: 100%; background: #000; border-radius: 30px; display: flex; align-items: center; justify-content: center; height: 560px; }
+  @media (min-width: 768px) { .bt-app__banner { height: 511px; } }
+
+  .bt-app__center { text-align: center; padding: 0 28px; }
+  @media (min-width: 768px) { .bt-app__center { padding: 0; } }
+
+  .bt-app__title { margin: 0; font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif; font-weight: 600; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 24px; line-height: 1.05; }
+  @media (min-width: 768px) { .bt-app__title { font-size: 45px; } }
+  .bt-app__w { color: #fff; }
+  .bt-app__y { color: #FAFF00; font-weight: 900; }
+
+  .bt-app__divider { width: 48px; height: 3px; background: #FAFF00; margin: 12px auto; }
+  @media (min-width: 768px) { .bt-app__divider { margin-top: 16px; margin-bottom: 16px; } }
+
+  .bt-app__subtitle { margin: 0; color: #fff; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; }
+  .bt-app__subtitle--m { font-size: 16px; max-width: 279px; margin: 0 auto; display: block; }
+  .bt-app__subtitle--d { display: none; }
+  @media (min-width: 768px) {
+    .bt-app__subtitle--m { display: none; }
+    .bt-app__subtitle--d { display: block; font-size: 24px; }
+  }
+
+  .bt-app__footer { margin: 32px 0 0; text-align: center; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; color: #8A8A8A; }
+  .bt-app__footer--m { font-size: 14px; display: block; }
+  .bt-app__footer--d { display: none; font-size: 18px; }
+  @media (min-width: 768px) {
+    .bt-app__footer { margin-top: 32px; }
+    .bt-app__footer--m { display: none; }
+    .bt-app__footer--d { display: block; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BT_AppAccess",
+  "class": "shopify-section--bt-app-access",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "title_1", "label": "Title part 1 (white)", "default": "Instant Access" },
+    { "type": "text", "id": "title_2", "label": "Title part 2 (yellow)", "default": "in the App" },
+    { "type": "textarea", "id": "subtitle_mobile", "label": "Subtitle (mobile)", "default": "Start today. Follow the plan.\nStay consistent." },
+    { "type": "text", "id": "subtitle_desktop", "label": "Subtitle (desktop)", "default": "Start today. Follow the plan. Stay consistent." },
+    { "type": "text", "id": "footer_text", "label": "Footer text", "default": "And when you stay consistent, the change becomes visible." }
+  ],
+  "presets": [{ "name": "BT_AppAccess" }]
+}
+{% endschema %}
+

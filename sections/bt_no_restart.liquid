@@ -1,0 +1,178 @@
+{% comment %}
+  BT_NoRestart (Body Transformation)
+  Based on lovable spec for NoRestartSection.tsx
+{% endcomment %}
+
+{%- liquid
+  assign title = section.settings.title | default: 'The "No-Restart" System'
+  assign subtitle = section.settings.subtitle | default: "Low energy, PMS, stress, busy day.\nSwitch to Plan B and keep progressing."
+  assign plan_a_label_bold = section.settings.plan_a_label_bold | default: 'Plan A:'
+  assign plan_a_label = section.settings.plan_a_label | default: 'Full Session'
+  assign plan_b_label_bold = section.settings.plan_b_label_bold | default: 'Plan B:'
+  assign plan_b_label = section.settings.plan_b_label | default: 'Low-Energy Session'
+  assign footer = section.settings.footer | default: "Everything stays organized for you —\ninside the app."
+
+  assign plan_a_image = section.settings.plan_a_image
+  assign plan_b_image = section.settings.plan_b_image
+-%}
+
+<section class="bt-wrap bt-nr" data-bt-nr>
+  <div class="bt-container bt-nr__container">
+    <h2 class="bt-nr__title">{{ title | escape }}</h2>
+    <div class="bt-nr__divider" aria-hidden="true"></div>
+    <p class="bt-nr__subtitle">{{ subtitle | escape | newline_to_br }}</p>
+
+    <div class="bt-nr__toggle" role="tablist" aria-label="Plan toggle">
+      <div class="bt-nr__toggle-bg" data-bt-nr-bg aria-hidden="true"></div>
+      <button type="button" class="bt-nr__tab is-active" data-bt-nr-tab="a" aria-selected="true">
+        <strong>{{ plan_a_label_bold | escape }}</strong> <span>{{ plan_a_label | escape }}</span>
+      </button>
+      <button type="button" class="bt-nr__tab" data-bt-nr-tab="b" aria-selected="false">
+        <strong>{{ plan_b_label_bold | escape }}</strong> <span>{{ plan_b_label | escape }}</span>
+      </button>
+    </div>
+
+    <div class="bt-nr__card">
+      <div class="bt-nr__panel is-active" data-bt-nr-panel="a">
+        <div class="bt-nr__img">
+          {%- if plan_a_image != blank -%}
+            <img src="{{ plan_a_image | image_url: width: 900 }}" alt="" loading="lazy">
+          {%- endif -%}
+        </div>
+        <div class="bt-nr__lists">
+          <div class="bt-nr__list">{{ section.settings.plan_a_list_left | newline_to_br }}</div>
+          <div class="bt-nr__list">{{ section.settings.plan_a_list_right | newline_to_br }}</div>
+        </div>
+      </div>
+
+      <div class="bt-nr__panel" data-bt-nr-panel="b">
+        <div class="bt-nr__img">
+          {%- if plan_b_image != blank -%}
+            <img src="{{ plan_b_image | image_url: width: 900 }}" alt="" loading="lazy">
+          {%- endif -%}
+        </div>
+        <div class="bt-nr__lists">
+          <div class="bt-nr__list">{{ section.settings.plan_b_list_left | newline_to_br }}</div>
+          <div class="bt-nr__list">{{ section.settings.plan_b_list_right | newline_to_br }}</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="bt-nr__footer"><em>{{ footer | escape | newline_to_br }}</em></p>
+  </div>
+</section>
+
+<script>
+(function(){
+  var root = document.querySelector('[data-bt-nr]');
+  if (!root) return;
+  var bg = root.querySelector('[data-bt-nr-bg]');
+  var tabs = Array.prototype.slice.call(root.querySelectorAll('[data-bt-nr-tab]'));
+  var panels = Array.prototype.slice.call(root.querySelectorAll('[data-bt-nr-panel]'));
+  if (!bg || !tabs.length || !panels.length) return;
+
+  function layout(){
+    var active = root.querySelector('.bt-nr__tab.is-active');
+    if (!active) return;
+    var rect = active.getBoundingClientRect();
+    var parentRect = active.parentNode.getBoundingClientRect();
+    bg.style.left = (rect.left - parentRect.left) + 'px';
+    bg.style.width = rect.width + 'px';
+  }
+
+  function setActive(key){
+    tabs.forEach(function(t){
+      var is = t.getAttribute('data-bt-nr-tab') === key;
+      t.classList.toggle('is-active', is);
+      t.setAttribute('aria-selected', is ? 'true' : 'false');
+    });
+    panels.forEach(function(p){
+      p.classList.toggle('is-active', p.getAttribute('data-bt-nr-panel') === key);
+    });
+    layout();
+  }
+
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){ setActive(t.getAttribute('data-bt-nr-tab')); });
+  });
+  window.addEventListener('resize', layout);
+  layout();
+})();
+</script>
+
+{% stylesheet %}
+  .bt-wrap { width: 100%; display: flex; justify-content: center; padding: 0 20px; box-sizing: border-box; }
+  @media (min-width: 768px) { .bt-wrap { padding-left: 0; padding-right: 0; } }
+  .bt-container { width: 100%; max-width: 335px; text-align: center; }
+  @media (min-width: 768px) { .bt-container { max-width: 782px; } }
+
+  .bt-nr__title { margin: 0; font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif; font-weight: 600; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 24px; line-height: 1.05; color: #111; }
+  @media (min-width: 768px) { .bt-nr__title { font-size: 45px; } }
+  .bt-nr__divider { width: 60px; height: 3px; background: #0038FF; margin: 12px auto 0; }
+  @media (min-width: 768px) { .bt-nr__divider { margin-top: 16px; } }
+
+  .bt-nr__subtitle { margin: 16px 0 0; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 16px; color: #111; }
+  @media (min-width: 768px) { .bt-nr__subtitle { margin-top: 24px; font-size: 24px; } }
+
+  .bt-nr__toggle { position: relative; display: inline-flex; align-items: center; margin-top: 24px; padding: 4px; border-radius: 999px; background: #fff; box-shadow: 0 6px 28px rgba(0,0,0,0.15); overflow: hidden; max-width: 335px; width: 100%; box-sizing: border-box; }
+  @media (min-width: 768px) { .bt-nr__toggle { margin-top: 32px; padding: 8px; max-width: none; width: auto; } }
+  .bt-nr__toggle-bg { position: absolute; top: 4px; bottom: 4px; left: 4px; width: 50%; border-radius: 999px; background: #0038FF; transition: left 400ms cubic-bezier(0.4,0,0.2,1), width 400ms cubic-bezier(0.4,0,0.2,1); }
+  @media (min-width: 768px) { .bt-nr__toggle-bg { top: 8px; bottom: 8px; left: 8px; } }
+
+  .bt-nr__tab { position: relative; z-index: 1; border: 0; background: transparent; border-radius: 999px; padding: 8px 12px; font-family: 'Avenir Next', 'Avenir', sans-serif; font-size: 14px; cursor: pointer; color: #111; white-space: nowrap; transition: color 300ms ease; }
+  @media (min-width: 768px) { .bt-nr__tab { padding: 10px 16px; font-size: 21px; } }
+  .bt-nr__tab strong { font-weight: 800; }
+  .bt-nr__tab span { font-weight: 500; }
+  .bt-nr__tab.is-active { color: #fff; }
+
+  .bt-nr__card { margin-top: 24px; background: #fff; border-radius: 30px; box-shadow: 0 6px 28px rgba(0,0,0,0.15); overflow: hidden; text-align: left; }
+  @media (min-width: 768px) { .bt-nr__card { margin-top: 32px; } }
+
+  .bt-nr__panel { display: none; }
+  .bt-nr__panel.is-active { display: block; }
+
+  .bt-nr__img { padding: 12px; }
+  .bt-nr__img img { width: 100%; aspect-ratio: 1 / 1; border-radius: 18px; object-fit: cover; display: block; }
+  @media (min-width: 768px) {
+    .bt-nr__panel.is-active { display: flex; }
+    .bt-nr__img { flex: 0 0 369px; padding: 12px; }
+    .bt-nr__img img { width: 369px; height: 356px; aspect-ratio: auto; }
+  }
+
+  .bt-nr__lists { display: flex; gap: 16px; padding: 0 16px 16px; }
+  @media (min-width: 768px) { .bt-nr__lists { flex: 1; padding: 32px 24px 24px; } }
+  .bt-nr__list { flex: 1; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; color: #111; font-size: 14px; line-height: 1.55; }
+  @media (min-width: 768px) { .bt-nr__list { font-size: 18px; } }
+
+  .bt-nr__footer { margin: 32px 0 0; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; color: #8A8A8A; font-size: 14px; }
+  @media (min-width: 768px) { .bt-nr__footer { font-size: 18px; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BT_NoRestart",
+  "class": "shopify-section--bt-no-restart",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "The \"No-Restart\" System" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "Low energy, PMS, stress, busy day.\nSwitch to Plan B and keep progressing." },
+    { "type": "header", "content": "Toggle labels" },
+    { "type": "text", "id": "plan_a_label_bold", "label": "Plan A bold", "default": "Plan A:" },
+    { "type": "text", "id": "plan_a_label", "label": "Plan A text", "default": "Full Session" },
+    { "type": "text", "id": "plan_b_label_bold", "label": "Plan B bold", "default": "Plan B:" },
+    { "type": "text", "id": "plan_b_label", "label": "Plan B text", "default": "Low-Energy Session" },
+    { "type": "header", "content": "Plan A" },
+    { "type": "image_picker", "id": "plan_a_image", "label": "Plan A image" },
+    { "type": "textarea", "id": "plan_a_list_left", "label": "Plan A left list", "default": "Warm-up\nStrength block\nCore finisher" },
+    { "type": "textarea", "id": "plan_a_list_right", "label": "Plan A right list", "default": "Quick stretch\nTotal: ~XX min" },
+    { "type": "header", "content": "Plan B" },
+    { "type": "image_picker", "id": "plan_b_image", "label": "Plan B image" },
+    { "type": "textarea", "id": "plan_b_list_left", "label": "Plan B left list", "default": "Gentle warm-up\nLow-impact strength\nMobility + core" },
+    { "type": "textarea", "id": "plan_b_list_right", "label": "Plan B right list", "default": "Breathing / stretch\nTotal: ~YY min" },
+    { "type": "header", "content": "Footer" },
+    { "type": "textarea", "id": "footer", "label": "Footer text", "default": "Everything stays organized for you —\ninside the app." }
+  ],
+  "presets": [{ "name": "BT_NoRestart" }]
+}
+{% endschema %}
+

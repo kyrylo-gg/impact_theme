@@ -1,0 +1,159 @@
+{% comment %}
+  BT_StartWhereYouAre (Body Transformation)
+  Based on lovable spec for StartWhereYouAreSection.tsx
+{% endcomment %}
+
+{%- liquid
+  assign title_1 = section.settings.title_1 | default: 'Start Where You Are.'
+  assign title_2 = section.settings.title_2 | default: 'Stay Consistent.'
+  assign title_3 = section.settings.title_3 | default: 'Get Results.'
+  assign desc = section.settings.desc | default: "Start at your level (Soft → Basic → Hard)\nPlan B Flow for real-life days\nBuild → Sculpt → Burn (build first, burn faster)"
+  assign cta_text = section.settings.cta_text | default: 'Get Instant Access'
+  assign cta_url = section.settings.cta_url
+  assign footer_left = section.settings.footer_left | default: 'One-time purchase'
+  assign footer_right = section.settings.footer_right | default: 'Lifetime access'
+
+  assign img_mobile = section.settings.img_mobile
+  assign img_desktop = section.settings.img_desktop
+-%}
+
+<section class="bt-wrap bt-start">
+  <div class="bt-container bt-start__container">
+    <div class="bt-start__card">
+      <div class="bt-start__gray" aria-hidden="true"></div>
+
+      <div class="bt-start__m">
+        <div class="bt-start__imgm">
+          {%- if img_mobile != blank -%}
+            <img src="{{ img_mobile | image_url: width: 900 }}" alt="" loading="lazy">
+          {%- endif -%}
+        </div>
+
+        <div class="bt-start__tag">
+          <p class="bt-start__tagtext">
+            <span class="bt-start__tagsem">{{ title_1 | escape }}</span><br>
+            <span class="bt-start__tagsem">{{ title_2 | escape }}</span><br>
+            <span class="bt-start__tagbold">{{ title_3 | escape }}</span>
+          </p>
+        </div>
+
+        <div class="bt-start__desc">{{ desc | escape | newline_to_br }}</div>
+
+        {%- if cta_url != blank -%}
+          <a href="{{ cta_url }}" class="bt-start__cta">{{ cta_text | escape }} <span aria-hidden="true">→</span></a>
+        {%- else -%}
+          <div class="bt-start__cta bt-start__cta--nolink">{{ cta_text | escape }} <span aria-hidden="true">→</span></div>
+        {%- endif -%}
+
+        <div class="bt-start__footer">
+          <span>{{ footer_left | escape }}</span>
+          <i aria-hidden="true"></i>
+          <span>{{ footer_right | escape }}</span>
+        </div>
+      </div>
+
+      <div class="bt-start__d">
+        <div class="bt-start__imgd">
+          {%- if img_desktop != blank -%}
+            <img src="{{ img_desktop | image_url: width: 1400 }}" alt="" loading="lazy">
+          {%- endif -%}
+        </div>
+
+        <div class="bt-start__right">
+          <div class="bt-start__tag bt-start__tag--d">
+            <p class="bt-start__tagtext bt-start__tagtext--d">
+              <span class="bt-start__tagsem">{{ title_1 | escape }}</span><br>
+              <span class="bt-start__tagsem">{{ title_2 | escape }}</span><br>
+              <span class="bt-start__tagbold">{{ title_3 | escape }}</span>
+            </p>
+          </div>
+
+          <div class="bt-start__desc bt-start__desc--d">{{ desc | escape | newline_to_br }}</div>
+
+          {%- if cta_url != blank -%}
+            <a href="{{ cta_url }}" class="bt-start__cta bt-start__cta--d">{{ cta_text | escape }} <span aria-hidden="true">→</span></a>
+          {%- else -%}
+            <div class="bt-start__cta bt-start__cta--d bt-start__cta--nolink">{{ cta_text | escape }} <span aria-hidden="true">→</span></div>
+          {%- endif -%}
+
+          <div class="bt-start__footer bt-start__footer--d">
+            <span>{{ footer_left | escape }}</span>
+            <i aria-hidden="true"></i>
+            <span>{{ footer_right | escape }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .bt-wrap { width: 100%; display: flex; justify-content: center; padding: 0 20px; box-sizing: border-box; }
+  @media (min-width: 768px) { .bt-wrap { padding-left: 0; padding-right: 0; } }
+  .bt-container { width: 100%; max-width: 335px; }
+  @media (min-width: 768px) { .bt-container { max-width: 1184px; } }
+
+  .bt-start__card { position: relative; background: #fff; border-radius: 30px; overflow: hidden; box-shadow: 0 6px 28px rgba(0,0,0,0.15); }
+  .bt-start__gray { position: absolute; left: 0; right: 0; bottom: 0; height: 406px; background: #F2F2F2; }
+  @media (min-width: 768px) { .bt-start__gray { height: 38%; } }
+
+  .bt-start__m { position: relative; z-index: 1; padding-bottom: 20px; display: block; }
+  .bt-start__d { display: none; }
+  @media (min-width: 768px) { .bt-start__m { display: none; } .bt-start__d { display: flex; min-height: 511px; position: relative; z-index: 1; } }
+
+  .bt-start__imgm { height: 300px; display: flex; justify-content: center; overflow: visible; }
+  .bt-start__imgm img { height: 320px; object-fit: contain; margin-top: -24px; }
+
+  .bt-start__tag { margin: -16px 20px 0; position: relative; z-index: 2; }
+  .bt-start__tagtext { margin: 0; background: #FAFF00; border-radius: 16px; padding: 12px 14px; font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 20px; line-height: 1.05; color: #111; }
+  .bt-start__tagsem { font-weight: 600; }
+  .bt-start__tagbold { font-weight: 900; }
+
+  .bt-start__desc { margin: 20px 34px 0; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 14px; color: #8A8A8A; line-height: 1.55; }
+
+  .bt-start__cta { margin: 24px 20px 0; display: flex; align-items: center; justify-content: space-between; border-radius: 32px; padding: 17px 26px 18px; background: #0038FF; color: #fff; text-decoration: none; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 18px; }
+  .bt-start__cta--nolink { pointer-events: none; }
+
+  .bt-start__footer { margin: 16px 0 0; display: flex; justify-content: center; align-items: center; gap: 10px; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 14px; color: #111; }
+  .bt-start__footer i { width: 3px; height: 3px; border-radius: 999px; background: #0038FF; display: inline-block; }
+
+  .bt-start__imgd { width: 50%; position: relative; }
+  .bt-start__imgd img { position: absolute; left: -32px; top: -89px; width: 679px; height: auto; object-fit: contain; }
+
+  .bt-start__right { flex: 1; padding: 48px 40px 40px 0; position: relative; }
+  .bt-start__tag--d { margin: 0; }
+  .bt-start__tagtext--d { border-radius: 30px; padding: 20px 24px; font-size: 24px; display: inline-block; margin-left: -24px; }
+
+  .bt-start__desc--d { margin: 32px 0 0; font-size: 18px; }
+
+  .bt-start__cta--d { margin: 64px 0 0; width: calc(390px + 26px); }
+
+  .bt-start__footer--d { justify-content: flex-start; margin-top: 16px; font-size: 18px; }
+  .bt-start__footer--d i { width: 4px; height: 4px; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BT_StartWhereYouAre",
+  "class": "shopify-section--bt-start-where-you-are",
+  "tag": "section",
+  "settings": [
+    { "type": "header", "content": "Images" },
+    { "type": "image_picker", "id": "img_mobile", "label": "Product image (mobile)" },
+    { "type": "image_picker", "id": "img_desktop", "label": "Product image (desktop)" },
+    { "type": "header", "content": "Tagline" },
+    { "type": "text", "id": "title_1", "label": "Line 1", "default": "Start Where You Are." },
+    { "type": "text", "id": "title_2", "label": "Line 2", "default": "Stay Consistent." },
+    { "type": "text", "id": "title_3", "label": "Line 3 (bold)", "default": "Get Results." },
+    { "type": "header", "content": "Description & CTA" },
+    { "type": "textarea", "id": "desc", "label": "Description", "default": "Start at your level (Soft → Basic → Hard)\nPlan B Flow for real-life days\nBuild → Sculpt → Burn (build first, burn faster)" },
+    { "type": "text", "id": "cta_text", "label": "CTA text", "default": "Get Instant Access" },
+    { "type": "url", "id": "cta_url", "label": "CTA URL" },
+    { "type": "header", "content": "Footer" },
+    { "type": "text", "id": "footer_left", "label": "Left text", "default": "One-time purchase" },
+    { "type": "text", "id": "footer_right", "label": "Right text", "default": "Lifetime access" }
+  ],
+  "presets": [{ "name": "BT_StartWhereYouAre" }]
+}
+{% endschema %}
+

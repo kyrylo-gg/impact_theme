@@ -1,0 +1,118 @@
+{% comment %}
+  BT_Hero (Body Transformation)
+  Based on lovable spec for HeroSection.tsx
+{% endcomment %}
+
+{%- liquid
+  assign shopify_video = section.settings.video
+  assign mp4_url = section.settings.video_url
+  assign overlay_opacity = section.settings.overlay_opacity | default: 0.3
+  assign title_white_1 = section.settings.title_white_1 | default: 'Transform'
+  assign title_white_2 = section.settings.title_white_2 | default: 'Your Body'
+  assign title_yellow = section.settings.title_yellow | default: 'in 3 Months'
+  assign subtitle = section.settings.subtitle | default: 'Follow the Soft → Basic → Hard training roadmap — built for real life.'
+  assign below_text = section.settings.below_text | default: "If you've tried before but didn't get results, here's why."
+-%}
+
+<section class="bt-wrap bt-hero">
+  <div class="bt-container">
+    <div class="bt-hero__banner">
+      {%- if shopify_video != blank -%}
+        <video class="bt-hero__video" autoplay loop muted playsinline preload="auto">
+          {%- for source in shopify_video.sources -%}
+            {%- if source.mime_type == 'video/mp4' -%}
+              <source src="{{ source.url }}" type="{{ source.mime_type }}">
+            {%- endif -%}
+          {%- endfor -%}
+        </video>
+      {%- elsif mp4_url != blank -%}
+        <video class="bt-hero__video" autoplay loop muted playsinline preload="auto">
+          <source src="{{ mp4_url }}" type="video/mp4">
+        </video>
+      {%- endif -%}
+
+      <div class="bt-hero__overlay" style="opacity: {{ overlay_opacity }};" aria-hidden="true"></div>
+
+      <div class="bt-hero__content">
+        <h1 class="bt-hero__title">
+          <span class="bt-hero__title-white">{{ title_white_1 | escape }}</span><br class="bt-hero__br-m">
+          <span class="bt-hero__title-white">{{ title_white_2 | escape }}</span><br>
+          <span class="bt-hero__title-yellow">{{ title_yellow | escape }}</span>
+        </h1>
+
+        <div class="bt-hero__divider" aria-hidden="true"></div>
+
+        <p class="bt-hero__subtitle">{{ subtitle | escape }}</p>
+
+        <div class="bt-hero__scroll" aria-hidden="true">
+          <div class="bt-hero__scroll-pill">
+            <div class="bt-hero__scroll-dot"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="bt-hero__below">{{ below_text | escape }}</p>
+  </div>
+</section>
+
+{% stylesheet %}
+  .bt-wrap { width: 100%; display: flex; justify-content: center; padding: 0 16px; box-sizing: border-box; }
+  @media (min-width: 768px) { .bt-wrap { padding-left: 0; padding-right: 0; } }
+
+  .bt-container { width: 100%; max-width: 335px; }
+  @media (min-width: 768px) { .bt-container { max-width: 1184px; } }
+
+  .bt-hero__banner { position: relative; overflow: hidden; border-radius: 30px; width: 100%; aspect-ratio: 335 / 560; background: #000; }
+  @media (min-width: 768px) { .bt-hero__banner { aspect-ratio: 1184 / 511; } }
+
+  .bt-hero__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+  .bt-hero__overlay { position: absolute; inset: 0; background: #000; }
+
+  .bt-hero__content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 28px; }
+  @media (min-width: 768px) { .bt-hero__content { padding: 0; } }
+
+  .bt-hero__title { margin: 0; font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif; font-weight: 600; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; line-height: 1.05; font-size: 24px; color: #fff; }
+  @media (min-width: 768px) { .bt-hero__title { font-size: 45px; } }
+  .bt-hero__title-yellow { color: #FAFF00; font-weight: 900; }
+
+  .bt-hero__br-m { display: inline; }
+  @media (min-width: 768px) { .bt-hero__br-m { display: none; } }
+
+  .bt-hero__divider { width: 48px; height: 3px; background: #FAFF00; margin: 12px 0; }
+  @media (min-width: 768px) { .bt-hero__divider { display: none; } }
+
+  .bt-hero__subtitle { margin: 8px 0 0; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 16px; color: #fff; max-width: 279px; }
+  @media (min-width: 768px) { .bt-hero__subtitle { font-size: 24px; max-width: none; margin-top: 16px; } }
+
+  .bt-hero__scroll { position: absolute; left: 50%; bottom: 32px; transform: translateX(-50%); pointer-events: none; animation: bt-bounce 1.6s infinite; }
+  .bt-hero__scroll-pill { height: 40px; width: 24px; border-radius: 999px; border: 2px solid rgba(255,255,255,0.5); padding: 4px; box-sizing: border-box; display: flex; align-items: flex-start; justify-content: center; }
+  .bt-hero__scroll-dot { width: 4px; height: 8px; border-radius: 999px; background: rgba(255,255,255,0.5); }
+  @keyframes bt-bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-8px); } }
+
+  .bt-hero__below { margin: 32px 0 0; text-align: center; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 14px; color: #8A8A8A; }
+  @media (min-width: 768px) { .bt-hero__below { font-size: 18px; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BT_Hero",
+  "class": "shopify-section--bt-hero",
+  "tag": "section",
+  "settings": [
+    { "type": "header", "content": "Video" },
+    { "type": "video", "id": "video", "label": "Shopify video (Files)" },
+    { "type": "url", "id": "video_url", "label": "Fallback MP4 URL (optional)" },
+    { "type": "range", "id": "overlay_opacity", "label": "Overlay opacity", "min": 0, "max": 1, "step": 0.1, "default": 0.3 },
+    { "type": "header", "content": "Text" },
+    { "type": "text", "id": "title_white_1", "label": "Title white line 1", "default": "Transform" },
+    { "type": "text", "id": "title_white_2", "label": "Title white line 2", "default": "Your Body" },
+    { "type": "text", "id": "title_yellow", "label": "Title yellow", "default": "in 3 Months" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Follow the Soft → Basic → Hard training roadmap — built for real life." },
+    { "type": "text", "id": "below_text", "label": "Text below banner", "default": "If you've tried before but didn't get results, here's why." }
+  ],
+  "presets": [{ "name": "BT_Hero" }]
+}
+{% endschema %}
+

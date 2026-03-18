@@ -1,0 +1,118 @@
+{% comment %}
+  BT_WhyThisWorks (Body Transformation)
+  Based on lovable spec for WhyThisWorksSection.tsx
+{% endcomment %}
+
+{%- liquid
+  assign title_1 = section.settings.title_1 | default: 'Why Most "Fat-Loss" Challenges Fail —'
+  assign title_2 = section.settings.title_2 | default: 'and Why This Works'
+  assign col_left = section.settings.col_left | default: 'Typical'
+  assign col_right = section.settings.col_right | default: 'This program'
+  assign bottom_1 = section.settings.bottom_1 | default: 'Build → Sculpt → Burn (build first, burn faster).'
+  assign bottom_2 = section.settings.bottom_2 | default: "Here's what that looks like — step by step."
+-%}
+
+<section class="bt-wrap bt-why">
+  <div class="bt-container bt-why__container">
+    <h2 class="bt-why__title">
+      <span class="bt-why__title-w">{{ title_1 | escape }}</span><br>
+      <span class="bt-why__title-b">{{ title_2 | escape }}</span>
+    </h2>
+    <div class="bt-why__divider" aria-hidden="true"></div>
+
+    <div class="bt-why__card">
+      <div class="bt-why__grid">
+        <div class="bt-why__bg bt-why__bg--l" aria-hidden="true"></div>
+        <div class="bt-why__bg bt-why__bg--r" aria-hidden="true"></div>
+
+        <div class="bt-why__head">{{ col_left | escape }}</div>
+        <div class="bt-why__head">{{ col_right | escape }}</div>
+
+        {%- for block in section.blocks -%}
+          <div class="bt-why__cell">
+            <div class="bt-why__emoji">{{ block.settings.left_emoji | escape }}</div>
+            <div class="bt-why__text">{{ block.settings.left_text | escape | newline_to_br }}</div>
+          </div>
+          <div class="bt-why__cell">
+            <div class="bt-why__emoji">{{ block.settings.right_emoji | escape }}</div>
+            <div class="bt-why__text">{{ block.settings.right_text | escape }}</div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <p class="bt-why__bottom">{{ bottom_1 | escape }}</p>
+    <p class="bt-why__bottom bt-why__bottom--muted">{{ bottom_2 | escape }}</p>
+  </div>
+</section>
+
+{% stylesheet %}
+  .bt-wrap { width: 100%; display: flex; justify-content: center; padding: 0 16px; box-sizing: border-box; }
+  @media (min-width: 768px) { .bt-wrap { padding-left: 0; padding-right: 0; } }
+  .bt-container { width: 100%; max-width: 335px; }
+  @media (min-width: 768px) { .bt-container { max-width: 1063px; } }
+
+  .bt-why__title { margin: 0; text-align: center; font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif; font-weight: 600; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 24px; line-height: 1.05; color: #111; }
+  @media (min-width: 768px) { .bt-why__title { font-size: 45px; } }
+  .bt-why__title-b { color: #0038FF; font-weight: 900; }
+
+  .bt-why__divider { width: 48px; height: 3px; background: #0038FF; margin: 12px auto 0; }
+  @media (min-width: 768px) { .bt-why__divider { margin-top: 16px; } }
+
+  .bt-why__card { margin-top: 24px; display: flex; justify-content: center; }
+  @media (min-width: 768px) { .bt-why__card { margin-top: 40px; } }
+
+  .bt-why__grid { position: relative; display: grid; grid-template-columns: 1fr 1fr; width: 100%; max-width: 782px; background: #fff; border-radius: 30px; overflow: hidden; box-shadow: 0 50px 28px rgba(0,0,0,0.05); }
+
+  .bt-why__bg { position: absolute; top: 0; bottom: 0; width: 50%; pointer-events: none; }
+  .bt-why__bg--l { left: 0; background: linear-gradient(to bottom, rgba(229,185,160,0.30), #fff); }
+  .bt-why__bg--r { right: 0; background: linear-gradient(to bottom, rgba(163,229,160,0.30), #fff); }
+
+  .bt-why__head { position: relative; z-index: 1; padding: 24px 0 16px; display: flex; align-items: flex-end; justify-content: center; font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif; font-weight: 600; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 18px; color: #111; }
+  @media (min-width: 768px) { .bt-why__head { padding-top: 40px; font-size: 24px; } }
+
+  .bt-why__cell { position: relative; z-index: 1; padding: 24px 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  @media (min-width: 768px) { .bt-why__cell { padding: 32px 16px; } }
+
+  .bt-why__emoji { font-size: 40px; line-height: 1; margin-bottom: 12px; }
+  @media (min-width: 768px) { .bt-why__emoji { font-size: 48px; } }
+  .bt-why__text { font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 16px; color: #111; line-height: 1.35; }
+  @media (min-width: 768px) { .bt-why__text { font-size: 18px; } }
+
+  .bt-why__bottom { margin: 40px 0 0; text-align: center; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 16px; color: #111; }
+  @media (min-width: 768px) { .bt-why__bottom { margin-top: 48px; font-size: 24px; } }
+  .bt-why__bottom--muted { margin-top: 16px; font-size: 14px; color: #8A8A8A; }
+  @media (min-width: 768px) { .bt-why__bottom--muted { font-size: 18px; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BT_WhyThisWorks",
+  "class": "shopify-section--bt-why-this-works",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "title_1", "label": "Title line 1", "default": "Why Most \"Fat-Loss\" Challenges Fail —" },
+    { "type": "text", "id": "title_2", "label": "Title line 2 (blue)", "default": "and Why This Works" },
+    { "type": "text", "id": "col_left", "label": "Column left", "default": "Typical" },
+    { "type": "text", "id": "col_right", "label": "Column right", "default": "This program" },
+    { "type": "text", "id": "bottom_1", "label": "Bottom text 1", "default": "Build → Sculpt → Burn (build first, burn faster)." },
+    { "type": "text", "id": "bottom_2", "label": "Bottom text 2", "default": "Here's what that looks like — step by step." }
+  ],
+  "blocks": [
+    { "type": "row", "name": "Row", "settings": [
+      { "type": "text", "id": "left_emoji", "label": "Typical emoji", "default": "😫" },
+      { "type": "text", "id": "left_text", "label": "Typical text", "default": "Too hard, too soon" },
+      { "type": "text", "id": "right_emoji", "label": "Program emoji", "default": "🤸" },
+      { "type": "text", "id": "right_text", "label": "Program text", "default": "Build first, then level up" }
+    ] }
+  ],
+  "presets": [
+    { "name": "BT_WhyThisWorks", "blocks": [
+      { "type": "row", "settings": { "left_emoji": "😫", "left_text": "Too hard, too soon", "right_emoji": "🤸", "right_text": "Build first, then level up" } },
+      { "type": "row", "settings": { "left_emoji": "👟", "left_text": "Random\nworkouts", "right_emoji": "😄", "right_text": "Soft → Basic → Hard roadmap" } },
+      { "type": "row", "settings": { "left_emoji": "🙁", "left_text": "No plan for low-energy days", "right_emoji": "✅", "right_text": "Plan B Flow (No-Restart)" } }
+    ] }
+  ]
+}
+{% endschema %}
+

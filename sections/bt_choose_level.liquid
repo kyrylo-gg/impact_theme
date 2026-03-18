@@ -1,0 +1,170 @@
+{% comment %}
+  BT_ChooseLevel (Body Transformation)
+  Based on lovable spec for ChooseLevelSection.tsx
+{% endcomment %}
+
+{%- liquid
+  assign title_1 = section.settings.title_1 | default: 'Choose Your'
+  assign title_2 = section.settings.title_2 | default: 'Starting Level'
+  assign subtitle = section.settings.subtitle | default: "You don't push through. You progress."
+  assign bottom = section.settings.bottom | default: "And when life gets messy, you don't fall off—you switch modes."
+-%}
+
+<section class="bt-wrap bt-cl" data-bt-cl>
+  <div class="bt-container bt-cl__container">
+    <h2 class="bt-cl__title">
+      <span class="bt-cl__w">{{ title_1 | escape }}</span>
+      <span class="bt-cl__b"> {{ title_2 | escape }}</span>
+    </h2>
+
+    <p class="bt-cl__subtitle">{{ subtitle | escape }}</p>
+
+    <div class="bt-cl__scroller" data-bt-cl-scroller>
+      {%- for block in section.blocks -%}
+        <article class="bt-cl__card">
+          <div class="bt-cl__img">
+            {%- if block.settings.image != blank -%}
+              <img src="{{ block.settings.image | image_url: width: 900 }}" alt="" loading="lazy">
+            {%- endif -%}
+            <div class="bt-cl__img-grad" aria-hidden="true"></div>
+            <div class="bt-cl__badge">Level {{ forloop.index }}</div>
+          </div>
+
+          <div class="bt-cl__body">
+            <h3 class="bt-cl__card-title">
+              <span class="bt-cl__card-title-main">{{ block.settings.title | escape }}</span>
+              <span class="bt-cl__card-title-sub">{{ block.settings.subtitle | escape }}</span>
+            </h3>
+
+            <div class="bt-cl__lines">
+              <p class="bt-cl__line"><strong>Best for: </strong><span>{{ block.settings.best_for | escape }}</span></p>
+              <p class="bt-cl__line"><strong>Focus: </strong><span>{{ block.settings.focus | escape }}</span></p>
+              <p class="bt-cl__line"><strong>You'll feel: </strong><span>{{ block.settings.feel | escape }}</span></p>
+            </div>
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+
+    <div class="bt-cl__dots" data-bt-cl-dots aria-hidden="true">
+      {%- for block in section.blocks -%}
+        <span class="bt-cl__dot{% if forloop.first %} is-active{% endif %}"></span>
+      {%- endfor -%}
+    </div>
+
+    <p class="bt-cl__bottom">{{ bottom | escape }}</p>
+  </div>
+</section>
+
+<script>
+(function(){
+  var root = document.querySelector('[data-bt-cl]');
+  if (!root) return;
+  var scroller = root.querySelector('[data-bt-cl-scroller]');
+  var dotsWrap = root.querySelector('[data-bt-cl-dots]');
+  if (!scroller || !dotsWrap) return;
+  var dots = Array.prototype.slice.call(dotsWrap.querySelectorAll('.bt-cl__dot'));
+  if (!dots.length) return;
+
+  function setActive(i){ dots.forEach(function(d, idx){ d.classList.toggle('is-active', idx === i); }); }
+  var ticking = false;
+
+  scroller.addEventListener('scroll', function(){
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function(){
+      ticking = false;
+      var card = scroller.querySelector('.bt-cl__card');
+      if (!card) return;
+      var w = card.getBoundingClientRect().width + 20;
+      var idx = Math.round(scroller.scrollLeft / w);
+      idx = Math.max(0, Math.min(idx, dots.length - 1));
+      setActive(idx);
+    });
+  }, { passive: true });
+})();
+</script>
+
+{% stylesheet %}
+  .bt-wrap { width: 100%; display: flex; justify-content: center; padding: 0 16px; box-sizing: border-box; }
+  @media (min-width: 768px) { .bt-wrap { padding-left: 0; padding-right: 0; } }
+  .bt-container { width: 100%; max-width: 335px; }
+  @media (min-width: 768px) { .bt-container { max-width: 1184px; } }
+
+  .bt-cl__title { margin: 0; text-align: center; font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif; font-weight: 600; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 24px; line-height: 1.05; color: #111; }
+  @media (min-width: 768px) { .bt-cl__title { font-size: 45px; } }
+  .bt-cl__b { color: #0038FF; font-weight: 900; }
+
+  .bt-cl__subtitle { margin: 40px 0 0; text-align: center; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 16px; color: #111; }
+  @media (min-width: 768px) { .bt-cl__subtitle { margin-top: 64px; font-size: 24px; } }
+
+  .bt-cl__scroller { margin-top: 24px; display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding: 0 calc(50% - 167.5px) 32px; margin-bottom: -32px; }
+  @media (min-width: 768px) { .bt-cl__scroller { padding: 0; margin-bottom: 0; overflow: visible; justify-content: center; } }
+  .bt-cl__scroller::-webkit-scrollbar { display: none; }
+
+  .bt-cl__card { width: 335px; flex: 0 0 auto; scroll-snap-align: center; border-radius: 30px; overflow: hidden; background: #fff; box-shadow: 0 6px 28px rgba(0,0,0,0.15); }
+  @media (min-width: 768px) { .bt-cl__card { width: 381px; } }
+
+  .bt-cl__img { position: relative; width: 100%; aspect-ratio: 1 / 1; background: #111; }
+  .bt-cl__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .bt-cl__img-grad { position: absolute; left: 0; right: 0; top: 219px; height: 278px; background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.81) 23%, rgba(255,255,255,0.94) 32%, #fff 45%); }
+  @media (min-width: 768px) { .bt-cl__img-grad { top: 221px; height: 345px; } }
+
+  .bt-cl__badge { position: absolute; top: 20px; left: 20px; background: #FAFF00; border-radius: 999px; padding: 6px 12px; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 800; font-size: 14px; color: #111; z-index: 2; }
+  @media (min-width: 768px) { .bt-cl__badge { font-size: 18px; } }
+
+  .bt-cl__body { position: relative; z-index: 2; margin-top: -64px; padding: 0 20px 24px; }
+  @media (min-width: 768px) { .bt-cl__body { margin-top: -80px; padding-bottom: 20px; } }
+
+  .bt-cl__card-title { margin: 0; font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 20px; line-height: 1.1; color: #111; }
+  @media (min-width: 768px) { .bt-cl__card-title { font-size: 24px; } }
+  .bt-cl__card-title-main { font-weight: 900; display: block; }
+  .bt-cl__card-title-sub { font-weight: 600; display: block; }
+  @media (min-width: 768px) { .bt-cl__card-title-main, .bt-cl__card-title-sub { display: inline; } .bt-cl__card-title-sub { margin-left: 8px; } }
+
+  .bt-cl__lines { margin-top: 20px; display: grid; gap: 16px; font-family: 'Avenir Next', 'Avenir', sans-serif; }
+  .bt-cl__line { margin: 0; font-size: 14px; line-height: 1.4; }
+  @media (min-width: 768px) { .bt-cl__line { font-size: 18px; } }
+  .bt-cl__line strong { font-weight: 800; color: #111; }
+  .bt-cl__line span { font-weight: 500; color: #8A8A8A; white-space: pre-line; }
+
+  .bt-cl__dots { margin-top: 24px; display: flex; justify-content: center; gap: 8px; }
+  @media (min-width: 768px) { .bt-cl__dots { display: none; } }
+  .bt-cl__dot { height: 2px; width: 20px; border-radius: 999px; background: rgba(138,138,138,0.4); transition: width 150ms ease, background 150ms ease; }
+  .bt-cl__dot.is-active { width: 40px; background: #8A8A8A; }
+
+  .bt-cl__bottom { margin: 32px 0 0; text-align: center; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 14px; color: #8A8A8A; }
+  @media (min-width: 768px) { .bt-cl__bottom { margin-top: 48px; font-size: 21px; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BT_ChooseLevel",
+  "class": "shopify-section--bt-choose-level",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "title_1", "label": "Title part 1", "default": "Choose Your" },
+    { "type": "text", "id": "title_2", "label": "Title part 2 (blue)", "default": "Starting Level" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "You don't push through. You progress." },
+    { "type": "text", "id": "bottom", "label": "Bottom text", "default": "And when life gets messy, you don't fall off—you switch modes." }
+  ],
+  "blocks": [
+    { "type": "level", "name": "Level", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "text", "id": "title", "label": "Title", "default": "Soft" },
+      { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "(Foundation)" },
+      { "type": "text", "id": "best_for", "label": "Best for", "default": "beginners, low energy, joint-sensitive days" },
+      { "type": "text", "id": "focus", "label": "Focus", "default": "activation, control, core + glutes, safe patterns" },
+      { "type": "text", "id": "feel", "label": "You'll feel", "default": "stronger, more stable, more confident" }
+    ] }
+  ],
+  "presets": [
+    { "name": "BT_ChooseLevel", "blocks": [
+      { "type": "level", "settings": { "title": "Soft", "subtitle": "(Foundation)" } },
+      { "type": "level", "settings": { "title": "Basic", "subtitle": "(Sculpt)", "best_for": "visible tone without extremes", "focus": "strength-based sculpting", "feel": "tighter shape, better endurance" } },
+      { "type": "level", "settings": { "title": "Hard", "subtitle": "(Burn)", "best_for": "when your body is ready for higher intensity", "focus": "conditioning + fat-loss acceleration", "feel": "athletic, energized, leaner" } }
+    ] }
+  ]
+}
+{% endschema %}
+
