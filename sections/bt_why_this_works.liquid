@@ -53,11 +53,21 @@
         {%- for block in section.blocks -%}
           <div class="bt-why__cell">
             <div class="bt-why__emoji">{{ block.settings.left_emoji | escape }}</div>
-            <div class="bt-why__text">{{ block.settings.left_text | escape | newline_to_br }}</div>
+            {%- assign bt_left_text_stripped = block.settings.left_text | strip -%}
+            {%- if bt_left_text_stripped == 'Random workouts' -%}
+              <div class="bt-why__text">Random<br class="bt-why__br-m">workouts</div>
+            {%- else -%}
+              <div class="bt-why__text">{{ block.settings.left_text | escape | newline_to_br }}</div>
+            {%- endif -%}
           </div>
           <div class="bt-why__cell">
             <div class="bt-why__emoji">{{ block.settings.right_emoji | escape }}</div>
-            <div class="bt-why__text">{{ block.settings.right_text | escape }}</div>
+            {%- assign bt_right_text_stripped = block.settings.right_text | strip -%}
+            {%- if bt_right_text_stripped == 'Random workouts' -%}
+              <div class="bt-why__text">Random<br class="bt-why__br-m">workouts</div>
+            {%- else -%}
+              <div class="bt-why__text">{{ block.settings.right_text | escape }}</div>
+            {%- endif -%}
           </div>
         {%- endfor -%}
       </div>
@@ -93,6 +103,7 @@
   .bt-why__bg--r { right: 0; background: linear-gradient(to bottom, rgba(163,229,160,0.30), #fff); }
 
   .bt-why__head { position: relative; z-index: 1; padding: 24px 0 16px; display: flex; align-items: flex-end; justify-content: center; font-family: 'Anybody', sans-serif; font-weight: 600; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 18px; color: #111; }
+  @media (max-width: 767px) { .bt-why__head { align-items: flex-start; padding: 26px 0 18px; line-height: 1; } }
   @media (min-width: 768px) { .bt-why__head { padding-top: 40px; font-size: 24px; } }
 
   .bt-why__cell { position: relative; z-index: 1; padding: 24px 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
