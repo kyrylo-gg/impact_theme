@@ -166,6 +166,7 @@
     "bt_hero": {
       "type": "bt_hero",
       "settings": {
+        "video": "shopify://files/videos/HERO video.webm",
         "video_url": "",
         "overlay_opacity": 0.3,
         "title_white_1": "Transform",
@@ -447,6 +448,9 @@
     "bt_app_access": {
       "type": "bt_app_access",
       "settings": {
+        "video": "shopify://files/videos/HERO video.webm",
+        "video_url": "",
+        "overlay_opacity": 0.3,
         "title_1": "Instant Access",
         "title_2": "in the App",
         "subtitle_mobile": "Start today. Follow the plan.\nStay consistent.",
@@ -632,6 +636,8 @@
         "one_click_label": "Twerk program",
         "program_pack_product": "bundle-test",
         "discount_code": "",
+        "discount_promo_text": "Get 60% off all clothing with 4 Programs Bundle!",
+        "discount_applied_text": "60% off all clothing applied!",
         "size_chart_config_handle": "size-chart-settings",
         "storefront_api_token": "568094b7f376083a4b0dc6fee4785741"
       }
