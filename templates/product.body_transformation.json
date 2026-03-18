@@ -165,55 +165,526 @@
     },
     "bt_hero": {
       "type": "bt_hero",
-      "settings": {}
+      "settings": {
+        "video_url": "",
+        "overlay_opacity": 0.3,
+        "title_white_1": "Transform",
+        "title_white_2": "Your Body",
+        "title_yellow": "in 3 Months",
+        "subtitle": "Follow the Soft → Basic → Hard training roadmap — built for real life.",
+        "below_text": "If you've tried before but didn't get results, here's why."
+      }
     },
     "bt_pain_points": {
       "type": "bt_pain_points",
-      "settings": {}
+      "blocks": {
+        "card_p8ftjc": {
+          "type": "card",
+          "settings": {
+            "emoji": "😤",
+            "text": "I miss a few workouts… and then I quit for weeks.",
+            "back_emoji": "😉",
+            "back_text": "This system gives you a simple way to continue, so you don't restart.",
+            "variant": "blue"
+          }
+        },
+        "card_KRbhjG": {
+          "type": "card",
+          "settings": {
+            "emoji": "😓",
+            "text": "PMS hits — and my routine falls apart every month.",
+            "back_emoji": "🙌",
+            "back_text": "You'll have a built-in low-energy option, so you can stay consistent.",
+            "variant": "purple"
+          }
+        },
+        "card_RnizPY": {
+          "type": "card",
+          "settings": {
+            "emoji": "🗓",
+            "text": "I can’t stick to long workouts — my schedule is chaos.",
+            "back_emoji": "😌",
+            "back_text": "You’ll always have a minimum effective option that still counts.",
+            "variant": "blue"
+          }
+        },
+        "card_Nbw3bb": {
+          "type": "card",
+          "settings": {
+            "emoji": "😬",
+            "text": "Jumping/HIIT hurts my knees — or feels too intense.",
+            "back_emoji": "🤸",
+            "back_text": "You start joint-friendly and level up only when you're ready.",
+            "variant": "purple"
+          }
+        },
+        "card_h9QHTN": {
+          "type": "card",
+          "settings": {
+            "emoji": "🤷‍♀️",
+            "text": "I don’t know what to do — so I do random workouts.",
+            "back_emoji": "😄",
+            "back_text": "You’ll follow a clear roadmap: Build → Sculpt → Burn, step by step.",
+            "variant": "blue"
+          }
+        },
+        "card_AGKA3n": {
+          "type": "card",
+          "settings": {
+            "emoji": "😢",
+            "text": "I want to look tighter, but I hate “punishment” workouts.",
+            "back_emoji": "⚡",
+            "back_text": "This is consistency-first training — results without extremes.",
+            "variant": "purple"
+          }
+        }
+      },
+      "block_order": [
+        "card_p8ftjc",
+        "card_KRbhjG",
+        "card_RnizPY",
+        "card_Nbw3bb",
+        "card_h9QHTN",
+        "card_AGKA3n"
+      ],
+      "settings": {
+        "title_1": "You're Not Lazy.",
+        "title_2": "You Just Need a Better System.",
+        "subtitle": "Tap what feels true for you.",
+        "bottom_1": "If any of that felt familiar, you're in the right place.",
+        "bottom_2": "Here's who built this system — and why it's different."
+      }
     },
     "bt_meet_nastya": {
       "type": "bt_meet_nastya",
-      "settings": {}
+      "settings": {
+        "title_1": "Meet",
+        "title_2": "Nastya Nass",
+        "photo_mobile": "shopify://shop_images/Frame_245.png",
+        "photo_desktop": "shopify://shop_images/Frame_38.png",
+        "avatar": "shopify://shop_images/Frame_37.png",
+        "verified_badge": "shopify://shop_images/Vector_470c13d4-bda2-41de-816e-ef6792792c20.png",
+        "person_icon": "shopify://shop_images/Vector-2.png",
+        "stat_1": "6M+ on Instagram",
+        "stat_2": "200M+ YouTube views",
+        "bio": "Nastya is a famous twerk star and a mom of two. She knows how to get back on track with a system that adapts to real life.",
+        "quote": "Between kids and a busy schedule, I needed a plan that adapts. This roadmap helped me keep going when life got messy."
+      }
     },
     "bt_why_this_works": {
       "type": "bt_why_this_works",
-      "settings": {}
+      "blocks": {
+        "row_nPwhVe": {
+          "type": "row",
+          "settings": {
+            "left_emoji": "😫",
+            "left_text": "Too hard, too soon",
+            "right_emoji": "🤸",
+            "right_text": "Build first, then level up"
+          }
+        },
+        "row_VAQ4RB": {
+          "type": "row",
+          "settings": {
+            "left_emoji": "👟",
+            "left_text": "Random workouts",
+            "right_emoji": "😄",
+            "right_text": "Soft → Basic → Hard roadmap"
+          }
+        },
+        "row_nKNM8K": {
+          "type": "row",
+          "settings": {
+            "left_emoji": "🙁",
+            "left_text": "No plan for low-energy days",
+            "right_emoji": "✅",
+            "right_text": "Plan B Flow (No-Restart)"
+          }
+        }
+      },
+      "block_order": [
+        "row_nPwhVe",
+        "row_VAQ4RB",
+        "row_nKNM8K"
+      ],
+      "settings": {
+        "title_1": "Why Most \"Fat-Loss\" Challenges Fail —",
+        "title_2": "and Why This Works",
+        "col_left": "Typical",
+        "col_right": "This program",
+        "bottom_1": "Build → Sculpt → Burn (build first, burn faster).",
+        "bottom_2": "Here's what that looks like — step by step."
+      }
     },
     "bt_choose_level": {
       "type": "bt_choose_level",
-      "settings": {}
+      "blocks": {
+        "level_jMVchN": {
+          "type": "level",
+          "settings": {
+            "image": "shopify://shop_images/image_1.png",
+            "title": "Soft",
+            "subtitle": "(Foundation)",
+            "best_for": "beginners, low energy, joint-sensitive days",
+            "focus": "activation, control, core + glutes, safe patterns",
+            "feel": "stronger, more stable, more confident"
+          }
+        },
+        "level_iwNtGi": {
+          "type": "level",
+          "settings": {
+            "image": "shopify://shop_images/image_1-2.png",
+            "title": "Soft",
+            "subtitle": "(Foundation)",
+            "best_for": "beginners, low energy, joint-sensitive days",
+            "focus": "activation, control, core + glutes, safe patterns",
+            "feel": "stronger, more stable, more confident"
+          }
+        },
+        "level_caKewd": {
+          "type": "level",
+          "settings": {
+            "image": "shopify://shop_images/image_4_7b9ca31d-0b74-4e36-b34f-2d8ebbd2a1d4.png",
+            "title": "Soft",
+            "subtitle": "(Foundation)",
+            "best_for": "beginners, low energy, joint-sensitive days",
+            "focus": "activation, control, core + glutes, safe patterns",
+            "feel": "stronger, more stable, more confident"
+          }
+        }
+      },
+      "block_order": [
+        "level_jMVchN",
+        "level_iwNtGi",
+        "level_caKewd"
+      ],
+      "settings": {
+        "title_1": "Choose Your",
+        "title_2": "Starting Level",
+        "subtitle": "You don't push through. You progress.",
+        "bottom": "And when life gets messy, you don't fall off—you switch modes."
+      }
     },
     "bt_benefits": {
       "type": "bt_benefits",
-      "settings": {}
+      "blocks": {
+        "benefit_6FpgV4": {
+          "type": "benefit",
+          "settings": {
+            "text": "✅ A lighter, more comfortable body"
+          }
+        },
+        "benefit_pGh6FX": {
+          "type": "benefit",
+          "settings": {
+            "text": "✅ More energy for real life"
+          }
+        },
+        "benefit_taN6Jg": {
+          "type": "benefit",
+          "settings": {
+            "text": "✅ Confidence in your body again"
+          }
+        },
+        "benefit_LKR3zj": {
+          "type": "benefit",
+          "settings": {
+            "text": "✅ Clothes that fit and feel good"
+          }
+        },
+        "benefit_9hhkwA": {
+          "type": "benefit",
+          "settings": {
+            "text": "✅ Better daily well-being"
+          }
+        },
+        "benefit_7Wy8gN": {
+          "type": "benefit",
+          "settings": {
+            "text": "✅ Inner calm and satisfaction"
+          }
+        }
+      },
+      "block_order": [
+        "benefit_6FpgV4",
+        "benefit_pGh6FX",
+        "benefit_taN6Jg",
+        "benefit_LKR3zj",
+        "benefit_9hhkwA",
+        "benefit_7Wy8gN"
+      ],
+      "settings": {
+        "title_1": "More Than Weight Loss. A Better Way",
+        "title_2": "to Feel Every Day",
+        "img_2": "shopify://shop_images/Frame_270.png",
+        "img_1": "shopify://shop_images/Photo_05.10.2022_7_57_52_AM.png",
+        "img_5": "shopify://shop_images/image00003_b21221e8-123c-45fe-91ab-d2a3a8a4e634.png",
+        "img_4": "shopify://shop_images/Frame_272.png",
+        "img_3": "shopify://shop_images/Frame_271.png",
+        "img_6": "shopify://shop_images/Frame_275.png"
+      }
     },
     "bt_no_restart": {
       "type": "bt_no_restart",
-      "settings": {}
+      "settings": {
+        "title": "The \"No-Restart\" System",
+        "subtitle": "Low energy, PMS, stress, busy day.\nSwitch to Plan B and keep progressing.",
+        "plan_a_label_bold": "Plan A:",
+        "plan_a_label": "Full Session",
+        "plan_b_label_bold": "Plan B:",
+        "plan_b_label": "Low-Energy Session",
+        "plan_a_image": "shopify://shop_images/Frame_41.png",
+        "plan_a_list_left": "Warm-up\nStrength block\nCore finisher",
+        "plan_a_list_right": "Quick stretch\nTotal: ~XX min",
+        "plan_b_image": "shopify://shop_images/Frame_41-2.png",
+        "plan_b_list_left": "Gentle warm-up\nLow-impact strength\nMobility + core",
+        "plan_b_list_right": "Breathing / stretch\nTotal: ~YY min",
+        "footer": "Everything stays organized for you —\ninside the app."
+      }
     },
     "bt_app_access": {
       "type": "bt_app_access",
-      "settings": {}
+      "settings": {
+        "title_1": "Instant Access",
+        "title_2": "in the App",
+        "subtitle_mobile": "Start today. Follow the plan.\nStay consistent.",
+        "subtitle_desktop": "Start today. Follow the plan. Stay consistent.",
+        "footer_text": "And when you stay consistent, the change becomes visible."
+      }
     },
     "bt_real_results": {
       "type": "bt_real_results",
-      "settings": {}
+      "blocks": {
+        "image_cgnrit": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/464cbf43606d0cde8995166ea69097a71e6a28f2.png"
+          }
+        },
+        "image_NGhq7k": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/464cbf43606d0cde8995166ea69097a71e6a28f2.png"
+          }
+        },
+        "image_zEcTn8": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/464cbf43606d0cde8995166ea69097a71e6a28f2.png"
+          }
+        }
+      },
+      "block_order": [
+        "image_cgnrit",
+        "image_NGhq7k",
+        "image_zEcTn8"
+      ],
+      "settings": {
+        "title_1": "Real Results",
+        "title_2": "(Consistency Wins)",
+        "subtitle": "This is what structured progression looks like.",
+        "footer": "If you're ready to start transforming your body, here's the simplest way to begin."
+      }
     },
     "bt_choose_your_path": {
       "type": "bt_choose_your_path",
-      "settings": {}
+      "blocks": {
+        "level_w7h7C6": {
+          "type": "level",
+          "settings": {
+            "image": "shopify://shop_images/Frame_41-3.png",
+            "duration": "4 weeks",
+            "title": "Soft",
+            "subtitle": "(Foundation)",
+            "price": "$37",
+            "reg_price": "$80",
+            "description": "Start joint-friendly and build the base",
+            "url": ""
+          }
+        },
+        "level_HRzwTt": {
+          "type": "level",
+          "settings": {
+            "image": "shopify://shop_images/Frame_41-2_e07c83cf-fb7b-41b3-bc4d-a87d5482690c.png",
+            "duration": "4 weeks",
+            "title": "Basic",
+            "subtitle": "(Sculpt)",
+            "price": "$47",
+            "reg_price": "$100",
+            "description": "Strength-based sculpting for visible tone",
+            "url": ""
+          }
+        },
+        "level_pQWrEN": {
+          "type": "level",
+          "settings": {
+            "image": "shopify://shop_images/Frame_41_2ae210a5-aba4-455b-bc9e-01e39418aded.png",
+            "duration": "4 weeks",
+            "title": "Hard",
+            "subtitle": "(Burn)",
+            "price": "$57",
+            "reg_price": "$120",
+            "description": "Higher intensity when you’re ready",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "level_w7h7C6",
+        "level_HRzwTt",
+        "level_pQWrEN"
+      ],
+      "settings": {
+        "title": "Choose Your Path",
+        "subtitle": "Start at your level today — or get the complete system for the best value.",
+        "full_image_mobile": "shopify://shop_images/Frame_41-5.png",
+        "full_image_desktop": "shopify://shop_images/Frame_41-6.png",
+        "badge_1": "Recommended",
+        "badge_2": "Best Value",
+        "full_title": "FULL 12-WEEK PROGRAM",
+        "full_subtitle": "(Soft + Basic + Hard)",
+        "full_price": "$99",
+        "full_reg_price": "$300",
+        "full_save": "Save $201 today (67% OFF!)",
+        "full_url": "",
+        "cta_full": "Get the Full Program",
+        "cta_level": "Shop now",
+        "prefer_text": "Prefer to start smaller? Pick one level below.",
+        "bottom_1": "Most women choose the Full Bundle — so they can start Soft now and have the full roadmap ready when they're ready.",
+        "bottom_2": "Still want to hear it from women who started exactly where you are?"
+      }
     },
     "bt_what_women_say": {
       "type": "bt_what_women_say",
-      "settings": {}
+      "blocks": {
+        "testimonial_MmEdgf": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Frame_44-3.png",
+            "quote": "\"I finally stayed consistent.\""
+          }
+        },
+        "testimonial_kWLV7p": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Frame_44-2.png",
+            "quote": "\"I finally stayed consistent.\""
+          }
+        },
+        "testimonial_BmVnQ7": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Frame_44.png",
+            "quote": "“Plan B saved my routine.”"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_MmEdgf",
+        "testimonial_kWLV7p",
+        "testimonial_BmVnQ7"
+      ],
+      "settings": {
+        "title_1": "What Women Say",
+        "title_2": "After Starting",
+        "footer": "If you're thinking \"But will this work for me?\" — let's answer that."
+      }
     },
     "bt_faq": {
       "type": "bt_faq",
-      "settings": {}
+      "blocks": {
+        "faq_eJah3t": {
+          "type": "faq",
+          "settings": {
+            "question": "Is this program good for women 35+ / 40+ / 50+?",
+            "answer": "Yes. This program can be a good option for women 35+, 40+, and 50+ because it is built on a gradual progression from simple to more challenging workouts.\n\nThe program starts with easier exercises and increases in difficulty step by step. This allows the body to adapt safely over time instead of being exposed to sudden high intensity.\n\nAnother important safety feature is that to move to a more advanced level, you need to pass a test. This ensures that you are physically ready before progressing, which helps reduce the risk of overtraining or injury.\n\nBecause of this structured progression and readiness check, the program is designed to be as safe and adaptable as possible for different fitness levels and ages."
+          }
+        },
+        "faq_LLx6ba": {
+          "type": "faq",
+          "settings": {
+            "question": "Do I have to do jumping or HIIT?",
+            "answer": "No, you don’t have to do jumping or HIIT at the beginning.\n\nAt the soft level, there are no jumping exercises. This stage focuses on controlled movements, proper technique, and gradually building strength and endurance.\n\nThe program uses the HIIT (High-Intensity Interval Training) logic, meaning workouts follow an interval structure where periods of activity alternate with short rest. At the early stages this format is adapted to be comfortable and beginner-friendly.\n\nStarting from the basic level, the HIIT intensity gradually begins to increase, but it is still designed to feel manageable and safe, and it does not include jumping yet.\n\nJumping and more high-intensity HIIT elements appear at the hard level, when your body is already better prepared for higher impact and faster-paced workouts.\n\nThe program follows a gradual progression: both the intensity and complexity increase step by step, reaching their highest point in the final week of the hard level. This allows your body to adapt safely while still achieving strong results over time."
+          }
+        },
+        "faq_keYwNN": {
+          "type": "faq",
+          "settings": {
+            "question": "What if I have low-energy days or PMS?",
+            "answer": "This program is designed specifically with women in mind, and we understand that a woman’s body can feel very different from day to day.\n\nOn days when your energy is lower—during PMS or other hormonal shifts—you can switch to Flow training. These sessions are designed to be gentle, supportive, and low-impact, helping you stay active without putting extra stress on your body.\n\nIn addition, the program provides guidance about how the female body works during different hormonal stages, including:\n\n* the menstrual cycle\n* perimenopause, menopause and postmenopause.\n\nThis information helps you better understand your body and adjust your training in a way that feels safe, balanced, and supportive for your current energy level."
+          }
+        },
+        "faq_BgMzTi": {
+          "type": "faq",
+          "settings": {
+            "question": "How many days per week is it?",
+            "answer": "Each week includes 3 required workouts that you need to complete. These are the core sessions of the program and are designed to gradually build your strength, endurance, and overall fitness. To give your body proper time to recover and rebuild, I recommend leaving a rest day between workouts—for example, training on Monday, Wednesday, and Friday.\n\nIn addition, the program may include stretching or meditation sessions. These are optional, but highly recommended because they help improve flexibility, support recovery, and reduce stress.\n\nSo the weekly structure is simple:\n\n* 3 mandatory workouts\n* Optional stretching or meditation for recovery and well-being"
+          }
+        },
+        "faq_RciTK7": {
+          "type": "faq",
+          "settings": {
+            "question": "How long is each workout?",
+            "answer": "Each workout takes about 30 minutes on average.\n\nAs the program progresses and the difficulty increases, the workouts may feel more challenging, but they are still structured to stay close to this ~30 minute duration. This makes the program easy to incorporate into a daily routine while still providing enough time for an effective workout."
+          }
+        },
+        "faq_iVBrrP": {
+          "type": "faq",
+          "settings": {
+            "question": "Do I need equipment?",
+            "answer": "No, you don’t need any special equipment to complete the program.\n\nFor comfort, you may want to use a yoga mat or exercise mat, especially for floor exercises. It provides cushioning, improves stability, and helps prevent slipping during movements.\n\nAt the more advanced hard level, some exercises may include movements using a box or elevated surface (for example, step-ups or box-based exercises). However, this can be any stable elevation available at home, such as a sturdy step, platform, or similar surface."
+          }
+        },
+        "faq_ATY3n8": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I access the program?",
+            "answer": "Simply download the app from App Store or Play Market to access the program.\n\nOnce on the welcome screen, select:\"Email+Password\" option, use email associated with your order and create a password to activate your account."
+          }
+        },
+        "faq_bJDf9K": {
+          "type": "faq",
+          "settings": {
+            "question": "Is it a one-time purchase or subscription?",
+            "answer": "It is a one-time payment, and you will receive lifetime access to the course!"
+          }
+        },
+        "faq_EktWxU": {
+          "type": "faq",
+          "settings": {
+            "question": "What if I'm a complete beginner?",
+            "answer": "The training program is designed to work even for a complete beginner. It starts at a very easy level (soft) and gradually progresses to a more challenging level (hard). Each week the workload increases slightly, allowing your body to adapt without unnecessary overload.\n\nAt the beginning, the focus is on learning proper technique, building basic endurance, and getting your body used to regular physical activity. The exercises are simple, the intensity is moderate, and the goal is consistency rather than pushing to the limit.\n\nAs the weeks progress, the program becomes gradually more demanding. You may see more repetitions, additional sets, longer sessions, or slightly more complex movements. This progressive increase helps build strength, stamina, and overall fitness in a safe and structured way.\n\nBy the later stages of the program, the workouts become more challenging and dynamic. At this point your body is already prepared for higher intensity, so the exercises are designed to push your limits while still maintaining good form and control.\n\nThe key principle of the program is progressive progression: every week builds on the previous one. This approach helps beginners develop strength and endurance step by step, making the process sustainable, safe, and effective."
+          }
+        }
+      },
+      "block_order": [
+        "faq_eJah3t",
+        "faq_LLx6ba",
+        "faq_keYwNN",
+        "faq_BgMzTi",
+        "faq_RciTK7",
+        "faq_iVBrrP",
+        "faq_ATY3n8",
+        "faq_bJDf9K",
+        "faq_EktWxU"
+      ],
+      "settings": {
+        "title": "FAQ",
+        "footer": "If you're ready, your best starting point is the one you'll stick with."
+      }
     },
     "bt_start_where_you_are": {
       "type": "bt_start_where_you_are",
-      "settings": {}
+      "settings": {
+        "title_1": "Start Where You Are.",
+        "title_2": "Stay Consistent.",
+        "title_3": "Get Results.",
+        "desc": "Start at your level (Soft → Basic → Hard)\nPlan B Flow for real-life days\nBuild → Sculpt → Burn (build first, burn faster)",
+        "cta_text": "Get Instant Access",
+        "cta_url": "",
+        "footer_left": "One-time purchase",
+        "footer_right": "Lifetime access"
+      }
     },
     "zp-product-footer-content": {
       "type": "product-footer-content-zipifypages",
