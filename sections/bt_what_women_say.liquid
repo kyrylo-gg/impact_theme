@@ -12,8 +12,8 @@
 <section class="bt-wrap bt-wws">
   <div class="bt-container bt-wws__container">
     <h2 class="bt-wws__title">
-      <span class="bt-wws__b">{{ title_1 | escape }}</span>
-      <span class="bt-wws__w"> {{ title_2 | escape }}</span>
+      <span class="bt-wws__b">{{ title_1 | escape }}</span><br>
+      <span class="bt-wws__w">{{ title_2 | escape }}</span>
     </h2>
     <div class="bt-wws__divider" aria-hidden="true"></div>
 
@@ -39,12 +39,12 @@
 </section>
 
 {% stylesheet %}
-  .bt-wrap { width: 100%; display: flex; justify-content: center; padding: 0 16px; box-sizing: border-box; }
-  @media (min-width: 768px) { .bt-wrap { padding-left: 0; padding-right: 0; } }
+  .bt-wrap { width: 100%; display: flex; justify-content: center; padding: 24px 16px; box-sizing: border-box; }
+  @media (min-width: 768px) { .bt-wrap { padding: 40px 0; } }
   .bt-container { width: 100%; max-width: 335px; text-align: center; }
   @media (min-width: 768px) { .bt-container { max-width: 1184px; } }
 
-  .bt-wws__title { margin: 0; font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif; font-weight: 900; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 24px; color: #0038FF; line-height: 1.05; }
+  .bt-wws__title { margin: 0; font-family: 'Anybody', sans-serif; font-weight: 900; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 24px; color: #0038FF; line-height: 1.05; }
   @media (min-width: 768px) { .bt-wws__title { font-size: 45px; } }
   .bt-wws__b { color: #0038FF; }
   .bt-wws__w { color: #111; font-weight: 600; }
@@ -58,19 +58,34 @@
   .bt-wws__item { position: relative; flex: 1; padding-top: 42px; }
   @media (min-width: 768px) { .bt-wws__item { padding-top: 50px; } }
 
-  .bt-wws__avatar { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 84px; height: 84px; border-radius: 999px; background: #fff; box-shadow: 0 4px 24px rgba(0,0,0,0.15); border: 1px solid #fff; overflow: hidden; }
+  .bt-wws__avatar { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 84px; height: 84px; border-radius: 999px; background: #fff; box-shadow: 0 4px 24px rgba(0,0,0,0.15); border: 1px solid #fff; overflow: hidden; z-index: 2; }
   @media (min-width: 768px) { .bt-wws__avatar { width: 100px; height: 100px; } }
-  .bt-wws__avatar-inner { width: calc(100% - 4px); height: calc(100% - 4px); margin: 2px; border-radius: 999px; overflow: hidden; background: #111; }
-  @media (min-width: 768px) { .bt-wws__avatar-inner { width: calc(100% - 8px); height: calc(100% - 8px); margin: 4px; } }
+  .bt-wws__avatar-inner { width: calc(100% - 2px); height: calc(100% - 2px); margin: 1px; border-radius: 999px; overflow: hidden; background: #111; }
+  @media (min-width: 768px) { .bt-wws__avatar-inner { width: calc(100% - 6px); height: calc(100% - 6px); margin: 3px; } }
   .bt-wws__avatar-inner img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-  .bt-wws__card { height: 122px; border-radius: 30px; background: #fff; box-shadow: 0 6px 28px rgba(0,0,0,0.15); display: flex; align-items: flex-end; justify-content: center; padding: 0 16px 16px; box-sizing: border-box; }
-  @media (min-width: 768px) { .bt-wws__card { height: 136px; padding-bottom: 20px; } }
+  .bt-wws__card { position: relative; z-index: 1; height: 122px; border-radius: 30px; background: #fff; box-shadow: 0 6px 28px rgba(0,0,0,0.15); box-sizing: border-box; }
+  @media (min-width: 768px) { .bt-wws__card { height: 136px; } }
 
-  .bt-wws__quote { margin: 0; max-width: 247px; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 16px; color: #111; }
-  @media (min-width: 768px) { .bt-wws__quote { font-size: 18px; } }
+  .bt-wws__quote {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 58px;
+    width: 247px;
+    margin: 0;
+    font-family: Avenir, 'Nunito Sans', system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #111;
+    line-height: 1.35;
+    text-align: center;
+  }
+  @media (min-width: 768px) {
+    .bt-wws__quote { top: 66px; font-size: 18px; }
+  }
 
-  .bt-wws__footer { margin: 32px 0 0; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 14px; color: #8A8A8A; }
+  .bt-wws__footer { margin: 32px 0 0; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 14px; color: #8A8A8A; }
   @media (min-width: 768px) { .bt-wws__footer { margin-top: 48px; font-size: 18px; } }
 {% endstylesheet %}
 

@@ -88,14 +88,14 @@
 </section>
 
 {% stylesheet %}
-  .bt-wrap { width: 100%; display: flex; justify-content: center; padding: 0 20px; box-sizing: border-box; }
-  @media (min-width: 768px) { .bt-wrap { padding-left: 0; padding-right: 0; } }
+  .bt-wrap { width: 100%; display: flex; justify-content: center; padding: 24px 20px; box-sizing: border-box; }
+  @media (min-width: 768px) { .bt-wrap { padding: 40px 0; } }
   .bt-container { width: 100%; max-width: 335px; }
   @media (min-width: 768px) { .bt-container { max-width: 1184px; } }
 
   .bt-start__card { position: relative; background: #fff; border-radius: 30px; overflow: hidden; box-shadow: 0 6px 28px rgba(0,0,0,0.15); }
-  .bt-start__gray { position: absolute; left: 0; right: 0; bottom: 0; height: 406px; background: #F2F2F2; }
-  @media (min-width: 768px) { .bt-start__gray { height: 38%; } }
+  /* Remove grey background under text (per design) */
+  .bt-start__gray { display: none; }
 
   .bt-start__m { position: relative; z-index: 1; padding-bottom: 20px; display: block; }
   .bt-start__d { display: none; }
@@ -104,23 +104,23 @@
   .bt-start__imgm { height: 300px; display: flex; justify-content: center; overflow: visible; }
   .bt-start__imgm img { height: 320px; object-fit: contain; margin-top: -24px; }
 
-  .bt-start__tag { margin: -16px 20px 0; position: relative; z-index: 2; }
-  .bt-start__tagtext { margin: 0; background: #FAFF00; border-radius: 16px; padding: 12px 14px; font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 20px; line-height: 1.05; color: #111; }
+  .bt-start__tag { margin: -52px 20px 0; position: relative; z-index: 2; }
+  .bt-start__tagtext { margin: 0; background: #FAFF00; border-radius: 16px; padding: 12px 14px; font-family: 'Anybody', sans-serif; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 20px; line-height: 1.05; color: #111; text-align: left; }
   .bt-start__tagsem { font-weight: 600; }
   .bt-start__tagbold { font-weight: 900; }
 
-  .bt-start__desc { margin: 20px 34px 0; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 14px; color: #8A8A8A; line-height: 1.55; }
+  .bt-start__desc { margin: 12px 20px 0; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 14px; color: #8A8A8A; line-height: 1.55; text-align: left; }
 
-  .bt-start__cta { margin: 24px 20px 0; display: flex; align-items: center; justify-content: space-between; border-radius: 32px; padding: 17px 26px 18px; background: #0038FF; color: #fff; text-decoration: none; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 18px; }
+  .bt-start__cta { margin: 16px 20px 0; display: flex; align-items: center; justify-content: space-between; border-radius: 32px; padding: 17px 26px 18px; background: #0038FF; color: #fff; text-decoration: none; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 18px; }
   .bt-start__cta--nolink { pointer-events: none; }
 
-  .bt-start__footer { margin: 16px 0 0; display: flex; justify-content: center; align-items: center; gap: 10px; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 14px; color: #111; }
+  .bt-start__footer { margin: 8px 20px 0; display: flex; justify-content: flex-start; align-items: center; gap: 10px; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 14px; color: #111; }
   .bt-start__footer i { width: 3px; height: 3px; border-radius: 999px; background: #0038FF; display: inline-block; }
 
-  .bt-start__imgd { width: 50%; position: relative; }
-  .bt-start__imgd img { position: absolute; left: -32px; top: -89px; width: 679px; height: auto; object-fit: contain; }
+  .bt-start__imgd { width: 50%; position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; padding: 28px 0; }
+  .bt-start__imgd img { position: static; width: min(442px, 100%); height: auto; object-fit: contain; border-radius: 30px; border: 2px solid rgba(0,0,0,0.18); background: #F2F2F2; box-shadow: none; outline: 0; display: block; }
 
-  .bt-start__right { flex: 1; padding: 48px 40px 40px 0; position: relative; }
+  .bt-start__right { flex: 1; padding: 48px 40px 40px 0; position: relative; z-index: 1; }
   .bt-start__tag--d { margin: 0; }
   .bt-start__tagtext--d { border-radius: 30px; padding: 20px 24px; font-size: 24px; display: inline-block; margin-left: -24px; }
 

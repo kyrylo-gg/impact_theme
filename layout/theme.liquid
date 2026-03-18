@@ -51,6 +51,9 @@
     {%- if template.name == 'page' and template.suffix == 'body-presale' -%}
       {% render 'nass-fonts' %}
     {%- endif -%}
+    {%- if template.name == 'product' and template.suffix == 'body_transformation' -%}
+      {% render 'bt-body-transformation-fonts' %}
+    {%- endif -%}
 
     {%- unless settings.heading_font.system? -%}
       <link rel="preload" href="{{ settings.heading_font | font_url }}" as="font" type="font/woff2" crossorigin>

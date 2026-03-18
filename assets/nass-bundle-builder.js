@@ -3,6 +3,16 @@
  * Real-time cart (add/remove via Cart API), footer from cart.js, exit confirmation.
  */
 (function() {
+  function escapeHtml(s) {
+    if (s == null) return '';
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
   function gidToNum(gid) {
     if (!gid || typeof gid !== 'string') return '';
     var m = String(gid).match(/\/Product\/(\d+)/);
@@ -59,6 +69,12 @@
     const stepTextEl = sectionRoot.querySelector('[data-bb-step-text]');
     const contentEl = sectionRoot.querySelector('[data-bb-wizard-content]');
     const discountEl = sectionRoot.querySelector('[data-bb-wizard-discount]');
+    const discountPromoText = (config && typeof config.discountPromoText === 'string' && config.discountPromoText.trim())
+      ? config.discountPromoText.trim()
+      : 'Get 60% off all clothing with 4 Programs Bundle!';
+    const discountAppliedText = (config && typeof config.discountAppliedText === 'string' && config.discountAppliedText.trim())
+      ? config.discountAppliedText.trim()
+      : '60% off all clothing applied!';
     const footerEl = sectionRoot.querySelector('[data-bb-wizard-footer]');
     var routesRoot = (typeof window !== 'undefined' && window.Shopify && window.Shopify.routes && window.Shopify.routes.root)
       ? String(window.Shopify.routes.root).replace(/\/?$/, '/')
@@ -789,10 +805,10 @@
       var hasPack = getHasProgramPack();
       if (hasPack) {
         discountEl.className = 'bb-wizard-discount bb-wizard-discount--applied';
-        discountEl.innerHTML = '<span class="bb-wizard-discount-text">60% off all clothing applied!</span>';
+        discountEl.innerHTML = '<span class="bb-wizard-discount-text">' + escapeHtml(discountAppliedText) + '</span>';
       } else {
         discountEl.className = 'bb-wizard-discount bb-wizard-discount--promo';
-        discountEl.innerHTML = '<span class="bb-wizard-discount-text">Get 60% off all clothing with 4 Programs Bundle!</span>';
+        discountEl.innerHTML = '<span class="bb-wizard-discount-text">' + escapeHtml(discountPromoText) + '</span>';
       }
     }
 
@@ -1324,15 +1340,33 @@
           bbState.cartData = cart || { item_count: 0, items: [], total_price: 0, currency: displayCurrency };
           return loadAllProductsForSteps();
         })
-        .then(function() { goToStep(0); })
+        .then(function() {
+          goToStep(0);
+          tryPreselectFirstProgramsItem();
+        })
         .catch(function(err) {
           // #region agent log
           console.log('[BB] openWizard catch:', err && err.message ? err.message : err);
           // #endregion
           bbState.cartData = { item_count: 0, items: [], total_price: 0, currency: displayCurrency };
-          return loadAllProductsForSteps().then(function() { goToStep(0); });
+          return loadAllProductsForSteps().then(function() {
+            goToStep(0);
+            tryPreselectFirstProgramsItem();
+          });
         })
         .finally(clearCtaLoading);
+    }
+
+    function tryPreselectFirstProgramsItem() {
+      try {
+        if (typeof window === 'undefined') return;
+        if (!window.__bt_bb_preselect_first) return;
+        window.__bt_bb_preselect_first = false;
+        var programsStep = bbState.steps.find(function(s) { return s && s.isProgramsStep; });
+        if (!programsStep || !programsStep.productIds || !programsStep.productIds.length) return;
+        var firstPid = programsStep.productIds[0];
+        addItem(programsStep.id, firstPid, null, 1);
+      } catch (e) {}
     }
 
     function closeWizard() {

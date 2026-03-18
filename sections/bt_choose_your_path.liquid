@@ -46,11 +46,7 @@
             {%- endfor -%}
           </ul>
 
-          {%- if section.settings.full_url != blank -%}
-            <a href="{{ section.settings.full_url }}" class="bt-path__cta bt-path__cta--full">{{ cta_full | escape }} <span aria-hidden="true">→</span></a>
-          {%- else -%}
-            <div class="bt-path__cta bt-path__cta--full bt-path__cta--nolink">{{ cta_full | escape }} <span aria-hidden="true">→</span></div>
-          {%- endif -%}
+          <a href="#nass-bundle-builder" class="bt-path__cta bt-path__cta--full" data-bt-open-bundle data-bt-bb-preselect="true">{{ cta_full | escape }} <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </div>
@@ -77,11 +73,7 @@
                 <span class="bt-path__price-reg">Reg. {{ block.settings.reg_price | escape }}</span>
               </div>
               <p class="bt-path__desc">{{ block.settings.description | escape }}</p>
-              {%- if block.settings.url != blank -%}
-                <a href="{{ block.settings.url }}" class="bt-path__cta">{{ cta_level | escape }} <span aria-hidden="true">→</span></a>
-              {%- else -%}
-                <div class="bt-path__cta bt-path__cta--nolink">{{ cta_level | escape }} <span aria-hidden="true">→</span></div>
-              {%- endif -%}
+              <a href="#nass-bundle-builder" class="bt-path__cta" data-bt-open-bundle data-bt-bb-preselect="false">{{ cta_level | escape }} <span aria-hidden="true">→</span></a>
             </div>
           </div>
         {%- endif -%}
@@ -93,90 +85,141 @@
   </div>
 </section>
 
+<script>
+(function(){
+  function tryOpenBundleWizard(maxRetries){
+    maxRetries = typeof maxRetries === 'number' ? maxRetries : 20;
+    var retries = 0;
+    function tick(){
+      var bb = (window.NassBundleBuilder && typeof window.NassBundleBuilder.openWizard === 'function') ? window.NassBundleBuilder : null;
+      if (bb) {
+        bb.openWizard();
+        return;
+      }
+      if (retries >= maxRetries) {
+        // fallback: at least set hash so the bundle builder script can auto-open when ready
+        window.location.hash = '#nass-bundle-builder';
+        return;
+      }
+      retries += 1;
+      window.location.hash = '#nass-bundle-builder';
+      setTimeout(tick, 100);
+    }
+    tick();
+  }
+
+  document.querySelectorAll('[data-bt-open-bundle]').forEach(function(el){
+    el.addEventListener('click', function(e){
+      e.preventDefault();
+      window.__bt_bb_preselect_first = el.getAttribute('data-bt-bb-preselect') === 'true';
+      tryOpenBundleWizard(25);
+    });
+  });
+})();
+</script>
+
 {% stylesheet %}
-  .bt-wrap { width: 100%; display: flex; justify-content: center; padding: 0 16px; box-sizing: border-box; }
-  @media (min-width: 768px) { .bt-wrap { padding-left: 0; padding-right: 0; } }
+  .bt-wrap { width: 100%; display: flex; justify-content: center; padding: 24px 16px; box-sizing: border-box; }
+  @media (min-width: 768px) { .bt-wrap { padding: 40px 0; } }
   .bt-container { width: 100%; max-width: 335px; text-align: center; }
   @media (min-width: 768px) { .bt-container { max-width: 1184px; } }
 
-  .bt-path__title { margin: 0; font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif; font-weight: 900; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 24px; color: #0038FF; line-height: 1.05; }
+  .bt-path__title { margin: 0; font-family: 'Anybody', sans-serif; font-weight: 900; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 24px; color: #0038FF; line-height: 1.05; }
   @media (min-width: 768px) { .bt-path__title { font-size: 45px; } }
 
   .bt-path__divider { display: none; width: 48px; height: 3px; background: #0038FF; margin: 16px auto 0; }
   @media (min-width: 768px) { .bt-path__divider { display: block; } }
 
-  .bt-path__subtitle { margin: 16px 0 0; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 16px; color: #111; }
-  @media (min-width: 768px) { .bt-path__subtitle { margin-top: 24px; font-size: 24px; } }
+  .bt-path__subtitle { margin: 16px 0 0; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 14px; color: #111; }
+  @media (min-width: 768px) { .bt-path__subtitle { margin-top: 24px; font-size: 18px; } }
 
   .bt-path__full { margin-top: 24px; display: flex; justify-content: center; }
   @media (min-width: 768px) { .bt-path__full { margin-top: 40px; } }
   .bt-path__full-card { background: #fff; border-radius: 30px; overflow: hidden; box-shadow: 0 6px 28px rgba(0,0,0,0.15); }
   @media (min-width: 768px) { .bt-path__full-card { display: flex; max-width: 782px; width: 100%; } }
 
-  .bt-path__full-img { position: relative; margin: 12px; border-radius: 18px; overflow: hidden; height: 311px; border: 2px solid rgba(0,0,0,0.08); background: #111; }
+  .bt-path__full-img { position: relative; margin: 12px; border-radius: 18px; overflow: hidden; height: 311px; border: 0; background: #fff; }
   @media (min-width: 768px) { .bt-path__full-img { width: 369px; height: 396px; flex: 0 0 369px; } }
   .bt-path__img { width: 100%; height: 100%; object-fit: cover; display: none; }
   .bt-path__img--m { display: block; }
   @media (min-width: 768px) { .bt-path__img--m { display: none; } .bt-path__img--d { display: block; } }
 
   .bt-path__badges { position: absolute; left: 20px; top: 20px; display: flex; gap: 8px; }
-  .bt-path__badge { border-radius: 999px; padding: 6px 12px; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 800; font-size: 14px; color: #111; }
+  .bt-path__badge { border-radius: 999px; padding: 6px 12px; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 800; font-size: 14px; color: #111; }
   @media (min-width: 768px) { .bt-path__badge { font-size: 18px; } }
   .bt-path__badge--y { background: #FAFF00; }
   .bt-path__badge--g { background: #B8FF00; }
 
   .bt-path__full-body { padding: 0 20px 20px; text-align: left; }
   @media (min-width: 768px) { .bt-path__full-body { padding: 32px; } }
-  .bt-path__full-title { margin: 0; font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif; font-weight: 600; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 20px; color: #111; }
+  .bt-path__full-title { margin: 0; font-family: 'Anybody', sans-serif; font-weight: 600; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 20px; color: #111; }
   @media (min-width: 768px) { .bt-path__full-title { font-size: 24px; } }
-  .bt-path__full-sub { margin: 8px 0 0; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 800; font-size: 16px; color: #111; }
+  .bt-path__full-sub { margin: 8px 0 0; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 800; font-size: 16px; color: #111; }
   @media (min-width: 768px) { .bt-path__full-sub { font-size: 18px; } }
 
   .bt-path__price-row { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
-  .bt-path__price-now { font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 800; font-size: 21px; color: #0A8A2A; }
+  .bt-path__price-now { font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 800; font-size: 21px; color: #0A8A2A; }
   @media (min-width: 768px) { .bt-path__price-now { font-size: 24px; } }
   .bt-path__price-now--dark { color: #111; }
-  .bt-path__price-reg { font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 16px; color: #111; border-radius: 999px; border: 1px solid rgba(0,0,0,0.1); padding: 6px 12px; }
+  .bt-path__price-reg { font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 16px; color: #111; border-radius: 999px; border: 1px solid rgba(0,0,0,0.1); padding: 6px 12px; position: relative; }
   @media (min-width: 768px) { .bt-path__price-reg { font-size: 18px; } }
 
-  .bt-path__save { margin: 8px 0 0; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 800; font-size: 14px; color: #111; }
+  /* Full 12-week program price styling (per design) */
+  .bt-path__full .bt-path__price-now { color: #00C853; }
+  .bt-path__full .bt-path__price-reg::after {
+    content: '';
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    top: 50%;
+    height: 2px;
+    background: #FF0000;
+    transform: translateY(-50%);
+    border-radius: 999px;
+    pointer-events: none;
+  }
+
+  .bt-path__save { margin: 8px 0 0; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 800; font-size: 14px; color: #111; }
   @media (min-width: 768px) { .bt-path__save { font-size: 18px; } }
 
   .bt-path__list { margin: 16px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; }
-  .bt-path__list li { font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 14px; color: #111; text-align: left; }
+  .bt-path__list li { font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 14px; color: #111; text-align: left; }
   @media (min-width: 768px) { .bt-path__list li { font-size: 18px; } }
 
-  .bt-path__cta { margin-top: 20px; display: flex; align-items: center; justify-content: space-between; width: 100%; border-radius: 32px; padding: 17px 26px 18px; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 18px; text-decoration: none; background: #111; color: #fff; }
+  .bt-path__cta { margin-top: 20px; display: flex; align-items: center; justify-content: space-between; width: 100%; border-radius: 32px; padding: 17px 26px 18px; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 18px; text-decoration: none; background: #111; color: #fff; }
   .bt-path__cta--full { background: #0038FF; }
   .bt-path__cta--nolink { pointer-events: none; }
 
-  .bt-path__prefer { margin: 32px 0 0; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 16px; color: #111; }
-  @media (min-width: 768px) { .bt-path__prefer { margin-top: 40px; font-size: 24px; } }
+  .bt-path__prefer { margin: 32px 0 0; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 14px; color: #111; }
+  @media (min-width: 768px) { .bt-path__prefer { margin-top: 40px; font-size: 18px; } }
 
   .bt-path__levels { margin-top: 24px; display: flex; flex-direction: column; gap: 20px; }
   @media (min-width: 768px) { .bt-path__levels { flex-direction: row; } }
   .bt-path__level { flex: 1; display: flex; flex-direction: column; background: #fff; border-radius: 30px; overflow: hidden; box-shadow: 0 6px 28px rgba(0,0,0,0.15); }
 
-  .bt-path__level-img { position: relative; margin: 12px; border-radius: 18px; overflow: hidden; height: 311px; background: #111; }
-  @media (min-width: 768px) { .bt-path__level-img { height: 357px; } }
+  .bt-path__level-img { position: relative; margin: 12px; border-radius: 22px; overflow: hidden; height: 284px; background: #111; }
+  @media (min-width: 768px) { .bt-path__level-img { height: 312px; } }
   .bt-path__level-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .bt-path__level-badge { position: absolute; left: 20px; top: 20px; background: #FAFF00; border-radius: 999px; padding: 6px 12px; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 800; font-size: 14px; color: #111; }
+  .bt-path__level-badge { position: absolute; left: 20px; top: 20px; background: #FAFF00; border-radius: 999px; padding: 6px 12px; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 800; font-size: 14px; color: #111; }
   @media (min-width: 768px) { .bt-path__level-badge { font-size: 18px; } }
-  .bt-path__level-title { position: absolute; left: 20px; bottom: 20px; color: #fff; }
+  .bt-path__level-title { position: absolute; left: 20px; bottom: 20px; color: #fff; text-align: left; }
   .bt-path__level-title1,
-  .bt-path__level-title2 { display: block; font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 20px; line-height: 1.05; }
+  .bt-path__level-title2 { display: block; font-family: 'Anybody', sans-serif; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 20px; line-height: 1.05; }
   @media (min-width: 768px) { .bt-path__level-title1, .bt-path__level-title2 { font-size: 24px; } }
   .bt-path__level-title1 { font-weight: 900; }
   .bt-path__level-title2 { font-weight: 600; }
 
   .bt-path__level-body { padding: 0 20px 20px; margin-top: -8px; display: flex; flex-direction: column; flex: 1; text-align: left; }
-  .bt-path__desc { margin: 12px 0 0; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 14px; color: #8A8A8A; flex: 1; }
+  .bt-path__desc { margin: 12px 0 0; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 14px; color: #8A8A8A; flex: 1; }
   @media (min-width: 768px) { .bt-path__desc { font-size: 18px; } }
 
-  .bt-path__bottom1 { margin: 32px auto 0; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 16px; color: #111; max-width: 702px; }
-  @media (min-width: 768px) { .bt-path__bottom1 { margin-top: 48px; font-size: 24px; } }
-  .bt-path__bottom2 { margin: 16px auto 0; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 14px; color: #8A8A8A; }
+  .bt-path__bottom1 { margin: 32px auto 0; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 14px; color: #111; max-width: 702px; }
+  @media (min-width: 768px) { .bt-path__bottom1 { margin-top: 48px; font-size: 18px; } }
+  .bt-path__bottom2 { margin: 16px auto 0; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 14px; color: #8A8A8A; }
   @media (min-width: 768px) { .bt-path__bottom2 { font-size: 18px; } }
+
+  /* Body Transformation: keep bundle builder hidden on page (wizard still opens via hash) */
+  body.product--body_transformation .nass-bundle-builder .bb-section { display: none !important; }
 {% endstylesheet %}
 
 {% schema %}

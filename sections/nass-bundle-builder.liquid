@@ -163,7 +163,7 @@
       </header>
 
       <div class="bb-wizard-discount" data-bb-wizard-discount>
-        <span class="bb-wizard-discount-text">60% off when you add Program Pack — Discount banner placeholder</span>
+        <span class="bb-wizard-discount-text">{{ section.settings.discount_promo_text | default: 'Get 60% off all clothing with 4 Programs Bundle!' | escape }}</span>
       </div>
 
       <div class="bb-wizard-content" data-bb-wizard-content>
@@ -328,6 +328,8 @@
         {%- comment -%} Program pack product ID: required for mutual exclusion on step 1 (Pack vs other programs). Set in section or in the programs-step block. {%- endcomment -%}
         programPackProductId: {%- assign pp_id = '' -%}{%- if section.settings.program_pack_product -%}{%- assign pp_id = section.settings.program_pack_product.id -%}{%- endif -%}{%- for b in step_blocks -%}{%- if b.settings.is_programs_step and b.settings.program_pack_product -%}{%- assign pp_id = b.settings.program_pack_product.id -%}{%- break -%}{%- endif -%}{%- endfor -%}{%- if pp_id != blank -%}{{ pp_id | json }}{%- else -%}null{%- endif -%},
         discountCode: {{ section.settings.discount_code | json }},
+        discountPromoText: {{ section.settings.discount_promo_text | default: 'Get 60% off all clothing with 4 Programs Bundle!' | json }},
+        discountAppliedText: {{ section.settings.discount_applied_text | default: '60% off all clothing applied!' | json }},
         checkoutUrl: {{ routes.root_url | append: 'checkout' | json }},
         currency: {{ cart.currency | default: shop.currency | json }},
         storefrontApiToken: {{ section.settings.storefront_api_token | json }},
@@ -2658,6 +2660,18 @@
       "id": "discount_code",
       "label": "Discount code for 60% off (when Program Pack in bundle)",
       "info": "Create this discount in Shopify Admin (Discounts). When customer adds bundle with Program Pack, they'll be sent to checkout with this code applied."
+    },
+    {
+      "type": "text",
+      "id": "discount_promo_text",
+      "label": "Wizard promo text (no pack selected)",
+      "default": "Get 60% off all clothing with 4 Programs Bundle!"
+    },
+    {
+      "type": "text",
+      "id": "discount_applied_text",
+      "label": "Wizard applied text (pack selected)",
+      "default": "60% off all clothing applied!"
     },
     {
       "type": "header",

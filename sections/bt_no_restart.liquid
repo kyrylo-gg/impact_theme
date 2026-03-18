@@ -24,10 +24,24 @@
 
     <div class="bt-nr__toggle" role="tablist" aria-label="Plan toggle">
       <div class="bt-nr__toggle-bg" data-bt-nr-bg aria-hidden="true"></div>
-      <button type="button" class="bt-nr__tab is-active" data-bt-nr-tab="a" aria-selected="true">
+      <button
+        type="button"
+        class="bt-nr__tab is-active"
+        data-bt-nr-tab="a"
+        data-bold="{{ plan_a_label_bold | escape }}"
+        data-text="{{ plan_a_label | escape }}"
+        aria-selected="true"
+      >
         <strong>{{ plan_a_label_bold | escape }}</strong> <span>{{ plan_a_label | escape }}</span>
       </button>
-      <button type="button" class="bt-nr__tab" data-bt-nr-tab="b" aria-selected="false">
+      <button
+        type="button"
+        class="bt-nr__tab"
+        data-bt-nr-tab="b"
+        data-bold="{{ plan_b_label_bold | escape }}"
+        data-text="{{ plan_b_label | escape }}"
+        aria-selected="false"
+      >
         <strong>{{ plan_b_label_bold | escape }}</strong> <span>{{ plan_b_label | escape }}</span>
       </button>
     </div>
@@ -101,32 +115,54 @@
 </script>
 
 {% stylesheet %}
-  .bt-wrap { width: 100%; display: flex; justify-content: center; padding: 0 20px; box-sizing: border-box; }
-  @media (min-width: 768px) { .bt-wrap { padding-left: 0; padding-right: 0; } }
+  .bt-wrap { width: 100%; display: flex; justify-content: center; padding: 24px 20px; box-sizing: border-box; }
+  @media (min-width: 768px) { .bt-wrap { padding: 40px 0; } }
   .bt-container { width: 100%; max-width: 335px; text-align: center; }
   @media (min-width: 768px) { .bt-container { max-width: 782px; } }
 
-  .bt-nr__title { margin: 0; font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif; font-weight: 600; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 24px; line-height: 1.05; color: #111; }
+  .bt-nr__title { margin: 0; font-family: 'Anybody', sans-serif; font-weight: 600; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 24px; line-height: 1.05; color: #111; }
   @media (min-width: 768px) { .bt-nr__title { font-size: 45px; } }
   .bt-nr__divider { width: 60px; height: 3px; background: #0038FF; margin: 12px auto 0; }
   @media (min-width: 768px) { .bt-nr__divider { margin-top: 16px; } }
 
-  .bt-nr__subtitle { margin: 16px 0 0; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 16px; color: #111; }
-  @media (min-width: 768px) { .bt-nr__subtitle { margin-top: 24px; font-size: 24px; } }
+  .bt-nr__subtitle { margin: 16px 0 0; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 14px; color: #111; }
+  @media (min-width: 768px) { .bt-nr__subtitle { margin-top: 24px; font-size: 18px; } }
 
-  .bt-nr__toggle { position: relative; display: inline-flex; align-items: center; margin-top: 24px; padding: 4px; border-radius: 999px; background: #fff; box-shadow: 0 6px 28px rgba(0,0,0,0.15); overflow: hidden; max-width: 335px; width: 100%; box-sizing: border-box; }
-  @media (min-width: 768px) { .bt-nr__toggle { margin-top: 32px; padding: 8px; max-width: none; width: auto; } }
+  .bt-nr__toggle { position: relative; display: inline-flex; align-items: center; justify-content: center; margin-top: 24px; padding: 4px; border-radius: 999px; background: #fff; box-shadow: 0 6px 28px rgba(0,0,0,0.15); overflow: hidden; max-width: 335px; width: 100%; box-sizing: border-box; }
+  @media (min-width: 768px) { .bt-nr__toggle { margin-top: 32px; padding: 8px; max-width: 702px; width: 100%; } }
   .bt-nr__toggle-bg { position: absolute; top: 4px; bottom: 4px; left: 4px; width: 50%; border-radius: 999px; background: #0038FF; transition: left 400ms cubic-bezier(0.4,0,0.2,1), width 400ms cubic-bezier(0.4,0,0.2,1); }
   @media (min-width: 768px) { .bt-nr__toggle-bg { top: 8px; bottom: 8px; left: 8px; } }
+  .bt-nr__toggle-bg { z-index: 0; pointer-events: none; }
 
-  .bt-nr__tab { position: relative; z-index: 1; border: 0; background: transparent; border-radius: 999px; padding: 8px 12px; font-family: 'Avenir Next', 'Avenir', sans-serif; font-size: 14px; cursor: pointer; color: #111; white-space: nowrap; transition: color 300ms ease; }
-  @media (min-width: 768px) { .bt-nr__tab { padding: 10px 16px; font-size: 21px; } }
-  .bt-nr__tab strong { font-weight: 800; }
-  .bt-nr__tab span { font-weight: 500; }
+  .bt-nr__tab { position: relative; z-index: 1; border: 0; background: transparent; border-radius: 999px; padding: 8px 12px; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-size: 14px; cursor: pointer; color: #111; white-space: nowrap; transition: color 300ms ease; display: inline-flex; align-items: center; justify-content: center; }
+  @media (min-width: 768px) { .bt-nr__tab { padding: 12px 18px; font-size: 18px; } }
+  .bt-nr__tab strong { font-weight: 800; font-size: inherit; line-height: inherit; }
+  .bt-nr__tab span { font-weight: 500; font-size: inherit; line-height: inherit; }
   .bt-nr__tab.is-active { color: #fff; }
 
+  /* Defensive overrides: some themes reset buttons/strong/span */
+  .shopify-section--bt-no-restart .bt-nr__tab { font-size: 14px !important; line-height: 1.1 !important; color: #111 !important; opacity: 1 !important; visibility: visible !important; -webkit-text-fill-color: currentColor !important; text-shadow: none !important; mix-blend-mode: normal !important; }
+  @media (min-width: 768px) { .shopify-section--bt-no-restart .bt-nr__tab { font-size: 18px !important; } }
+  .shopify-section--bt-no-restart .bt-nr__tab.is-active { color: #fff !important; }
+  .shopify-section--bt-no-restart .bt-nr__tab strong,
+  .shopify-section--bt-no-restart .bt-nr__tab span { display: inline !important; color: inherit !important; font-size: inherit !important; line-height: inherit !important; opacity: 1 !important; visibility: visible !important; -webkit-text-fill-color: currentColor !important; text-shadow: none !important; mix-blend-mode: normal !important; }
+
+  /* Ultimate fallback: render labels via pseudo-elements (bypasses hidden inner text) */
+  .shopify-section--bt-no-restart .bt-nr__tab::before { content: attr(data-bold); font-weight: 800; }
+  .shopify-section--bt-no-restart .bt-nr__tab::after { content: " " attr(data-text); font-weight: 500; }
+  .shopify-section--bt-no-restart .bt-nr__tab::before,
+  .shopify-section--bt-no-restart .bt-nr__tab::after {
+    display: inline;
+    font-size: inherit !important;
+    line-height: inherit !important;
+    color: inherit !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    -webkit-text-fill-color: currentColor !important;
+  }
+
   .bt-nr__card { margin-top: 24px; background: #fff; border-radius: 30px; box-shadow: 0 6px 28px rgba(0,0,0,0.15); overflow: hidden; text-align: left; }
-  @media (min-width: 768px) { .bt-nr__card { margin-top: 32px; } }
+  @media (min-width: 768px) { .bt-nr__card { margin-top: 32px; max-width: 702px; margin-left: auto; margin-right: auto; } }
 
   .bt-nr__panel { display: none; }
   .bt-nr__panel.is-active { display: block; }
@@ -135,16 +171,16 @@
   .bt-nr__img img { width: 100%; aspect-ratio: 1 / 1; border-radius: 18px; object-fit: cover; display: block; }
   @media (min-width: 768px) {
     .bt-nr__panel.is-active { display: flex; }
-    .bt-nr__img { flex: 0 0 369px; padding: 12px; }
-    .bt-nr__img img { width: 369px; height: 356px; aspect-ratio: auto; }
+    .bt-nr__img { flex: 0 0 330px; padding: 12px; }
+    .bt-nr__img img { width: 330px; height: 320px; aspect-ratio: auto; }
   }
 
   .bt-nr__lists { display: flex; gap: 16px; padding: 0 16px 16px; }
   @media (min-width: 768px) { .bt-nr__lists { flex: 1; padding: 32px 24px 24px; } }
-  .bt-nr__list { flex: 1; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; color: #111; font-size: 14px; line-height: 1.55; }
+  .bt-nr__list { flex: 1; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; color: #111; font-size: 14px; line-height: 1.55; }
   @media (min-width: 768px) { .bt-nr__list { font-size: 18px; } }
 
-  .bt-nr__footer { margin: 32px 0 0; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; color: #8A8A8A; font-size: 14px; }
+  .bt-nr__footer { margin: 32px 0 0; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; color: #8A8A8A; font-size: 14px; }
   @media (min-width: 768px) { .bt-nr__footer { font-size: 18px; } }
 {% endstylesheet %}
 

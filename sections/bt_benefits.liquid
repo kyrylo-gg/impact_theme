@@ -20,6 +20,7 @@
   <div class="bt-container bt-ben__container">
     <h2 class="bt-ben__title">
       <span class="bt-ben__w">{{ title_1 | escape }}</span>
+      <br class="bt-ben__br-m">
       <span class="bt-ben__b"><br class="bt-ben__br-d"> {{ title_2 | escape }}</span>
     </h2>
 
@@ -69,14 +70,16 @@
 </section>
 
 {% stylesheet %}
-  .bt-wrap { width: 100%; display: flex; justify-content: center; padding: 0 16px; box-sizing: border-box; }
-  @media (min-width: 768px) { .bt-wrap { padding-left: 0; padding-right: 0; } }
+  .bt-wrap { width: 100%; display: flex; justify-content: center; padding: 24px 16px; box-sizing: border-box; }
+  @media (min-width: 768px) { .bt-wrap { padding: 40px 0; } }
   .bt-container { width: 100%; max-width: 335px; }
   @media (min-width: 768px) { .bt-container { max-width: 1184px; } }
 
-  .bt-ben__title { margin: 0; text-align: center; font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif; font-weight: 600; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 24px; line-height: 1.05; color: #111; }
+  .bt-ben__title { margin: 0; text-align: center; font-family: 'Anybody', sans-serif; font-weight: 600; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 24px; line-height: 1.05; color: #111; }
   @media (min-width: 768px) { .bt-ben__title { font-size: 45px; } }
   .bt-ben__b { color: #0038FF; font-weight: 900; }
+  .bt-ben__br-m { display: inline; }
+  @media (min-width: 768px) { .bt-ben__br-m { display: none; } }
   .bt-ben__br-d { display: none; }
   @media (min-width: 768px) { .bt-ben__br-d { display: inline; } }
 
@@ -85,6 +88,7 @@
   @media (min-width: 768px) { .bt-ben__desktop { display: block; margin-top: 40px; } .bt-ben__mobile { display: none; } }
 
   .bt-ben__desk-grid { display: flex; gap: 6px; }
+  @media (min-width: 768px) { .bt-ben__desk-grid { width: 100%; max-width: 1143px; margin-left: auto; margin-right: auto; gap: 20px; } }
   .bt-ben__left { flex: 1; display: flex; flex-direction: column; gap: 6px; }
   .bt-ben__row { display: flex; gap: 6px; }
   .bt-ben__row--top { height: 279px; }
@@ -100,10 +104,16 @@
     radial-gradient(ellipse 80% 70% at 50% 0%, rgba(210,215,255,0.3) 0%, transparent 50%),
     #F0F1F8;
   }
+  @media (min-width: 768px) { .bt-ben__card { width: 381px; } }
   .bt-ben__pills { padding: 20px; display: flex; flex-direction: column; gap: 8px; }
   .bt-ben__pill { display: inline-flex; align-items: center; gap: 10px; background: #0038FF; border-radius: 999px; padding: 12px 16px; color: #fff; }
   .bt-ben__pill img { width: 25px; height: 25px; object-fit: contain; }
-  .bt-ben__pill span { font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 18px; }
+  .bt-ben__pill span { font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 16px; white-space: nowrap; }
+  @media (min-width: 768px) {
+    .bt-ben__pills { padding: 22px 20px; }
+    .bt-ben__pill { padding: 10px 14px; }
+    .bt-ben__pill span { font-size: 18px; }
+  }
 
   .bt-ben__row--m { display: flex; gap: 6px; }
   .bt-ben__row--m .bt-ben__tile { height: 240px; }

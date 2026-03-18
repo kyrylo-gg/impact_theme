@@ -57,8 +57,8 @@
 </section>
 
 {% stylesheet %}
-  .bt-wrap { width: 100%; display: flex; justify-content: center; padding: 0 16px; box-sizing: border-box; }
-  @media (min-width: 768px) { .bt-wrap { padding-left: 0; padding-right: 0; } }
+  .bt-wrap { width: 100%; display: flex; justify-content: center; padding: 24px 16px; box-sizing: border-box; }
+  @media (min-width: 768px) { .bt-wrap { padding: 40px 0; } }
 
   .bt-container { width: 100%; max-width: 335px; }
   @media (min-width: 768px) { .bt-container { max-width: 1184px; } }
@@ -73,7 +73,7 @@
   .bt-hero__content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 28px; }
   @media (min-width: 768px) { .bt-hero__content { padding: 0; } }
 
-  .bt-hero__title { margin: 0; font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif; font-weight: 600; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; line-height: 1.05; font-size: 24px; color: #fff; }
+  .bt-hero__title { margin: 0; font-family: 'Anybody', sans-serif; font-weight: 600; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; line-height: 1.05; font-size: 28px; color: #fff; }
   @media (min-width: 768px) { .bt-hero__title { font-size: 45px; } }
   .bt-hero__title-yellow { color: #FAFF00; font-weight: 900; }
 
@@ -83,7 +83,7 @@
   .bt-hero__divider { width: 48px; height: 3px; background: #FAFF00; margin: 12px 0; }
   @media (min-width: 768px) { .bt-hero__divider { display: none; } }
 
-  .bt-hero__subtitle { margin: 8px 0 0; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 16px; color: #fff; max-width: 279px; }
+  .bt-hero__subtitle { margin: 8px 0 0; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 16px; color: #fff; max-width: 279px; }
   @media (min-width: 768px) { .bt-hero__subtitle { font-size: 24px; max-width: none; margin-top: 16px; } }
 
   .bt-hero__scroll { position: absolute; left: 50%; bottom: 32px; transform: translateX(-50%); pointer-events: none; animation: bt-bounce 1.6s infinite; }
@@ -91,7 +91,7 @@
   .bt-hero__scroll-dot { width: 4px; height: 8px; border-radius: 999px; background: rgba(255,255,255,0.5); }
   @keyframes bt-bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-8px); } }
 
-  .bt-hero__below { margin: 32px 0 0; text-align: center; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 14px; color: #8A8A8A; }
+  .bt-hero__below { margin: 32px 0 0; text-align: center; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 14px; color: #8A8A8A; }
   @media (min-width: 768px) { .bt-hero__below { font-size: 18px; } }
 {% endstylesheet %}
 

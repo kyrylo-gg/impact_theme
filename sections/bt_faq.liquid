@@ -29,12 +29,12 @@
 </section>
 
 {% stylesheet %}
-  .bt-wrap { width: 100%; display: flex; justify-content: center; padding: 0 16px; box-sizing: border-box; }
-  @media (min-width: 768px) { .bt-wrap { padding-left: 0; padding-right: 0; } }
+  .bt-wrap { width: 100%; display: flex; justify-content: center; padding: 24px 16px; box-sizing: border-box; }
+  @media (min-width: 768px) { .bt-wrap { padding: 40px 0; } }
   .bt-container { width: 100%; max-width: 335px; text-align: center; }
   @media (min-width: 768px) { .bt-container { max-width: 782px; } }
 
-  .bt-faq__title { margin: 0; font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif; font-weight: 900; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 24px; color: #111; line-height: 1.05; }
+  .bt-faq__title { margin: 0; font-family: 'Anybody', sans-serif; font-weight: 900; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 24px; color: #111; line-height: 1.05; }
   @media (min-width: 768px) { .bt-faq__title { font-size: 45px; } }
 
   .bt-faq__list { margin-top: 32px; display: flex; flex-direction: column; gap: 16px; text-align: left; }
@@ -44,15 +44,15 @@
   .bt-faq__q { list-style: none; cursor: pointer; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
   @media (min-width: 768px) { .bt-faq__q { padding: 18px 28px; } }
   .bt-faq__q::-webkit-details-marker { display: none; }
-  .bt-faq__q span:first-child { font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; color: #111; font-size: 16px; }
+  .bt-faq__q span:first-child { font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; color: #111; font-size: 16px; }
   @media (min-width: 768px) { .bt-faq__q span:first-child { font-size: 18px; } }
   .bt-faq__chev { display: inline-flex; transition: transform 200ms ease; }
   details[open] .bt-faq__chev { transform: rotate(180deg); }
 
-  .bt-faq__a { padding: 0 20px 20px; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; color: #8A8A8A; font-size: 14px; line-height: 1.45; }
-  @media (min-width: 768px) { .bt-faq__a { padding: 0 28px 20px; font-size: 16px; } }
+  .bt-faq__a { padding: 0 20px 20px; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; color: #8A8A8A; font-size: 14px; line-height: 1.45; }
+  @media (min-width: 768px) { .bt-faq__a { padding: 0 28px 20px; font-size: 18px; } }
 
-  .bt-faq__footer { margin: 40px 0 0; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; color: #8A8A8A; font-size: 14px; }
+  .bt-faq__footer { margin: 40px 0 0; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; color: #8A8A8A; font-size: 14px; }
   @media (min-width: 768px) { .bt-faq__footer { margin-top: 48px; font-size: 18px; } }
 {% endstylesheet %}
 

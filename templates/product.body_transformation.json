@@ -425,7 +425,7 @@
       }
     },
     "bt_no_restart": {
-      "type": "bt_no_restart",
+      "type": "bt_no_restart_v2",
       "settings": {
         "title": "The \"No-Restart\" System",
         "subtitle": "Low energy, PMS, stress, busy day.\nSwitch to Plan B and keep progressing.",
@@ -433,6 +433,8 @@
         "plan_a_label": "Full Session",
         "plan_b_label_bold": "Plan B:",
         "plan_b_label": "Low-Energy Session",
+        "day_badge": "Day 2",
+        "workout_title": "Lower Body\n+ Core",
         "plan_a_image": "shopify://shop_images/Frame_41.png",
         "plan_a_list_left": "Warm-up\nStrength block\nCore finisher",
         "plan_a_list_right": "Quick stretch\nTotal: ~XX min",
@@ -552,6 +554,86 @@
         "prefer_text": "Prefer to start smaller? Pick one level below.",
         "bottom_1": "Most women choose the Full Bundle — so they can start Soft now and have the full roadmap ready when they're ready.",
         "bottom_2": "Still want to hear it from women who started exactly where you are?"
+      }
+    },
+    "nass_bundle_builder": {
+      "type": "nass-bundle-builder",
+      "blocks": {
+        "step_programs": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "Select programs",
+            "collection": "bundle-programs",
+            "is_programs_step": true,
+            "program_pack_product": "bundle-test"
+          }
+        },
+        "step_shorts": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "Add Lounge shorts",
+            "collection": "bundle-lounge-shorts",
+            "is_programs_step": false,
+            "program_pack_product": ""
+          }
+        },
+        "step_leggings": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "Add sport shorts",
+            "collection": "bundle-sport-shorts",
+            "is_programs_step": false,
+            "program_pack_product": ""
+          }
+        },
+        "step_swimshorts": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "Add swim shorts",
+            "collection": "bundle-swim-shorts",
+            "is_programs_step": false,
+            "program_pack_product": ""
+          }
+        },
+        "step_tops": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "Tops",
+            "collection": "bundle-leggings-tops",
+            "is_programs_step": false,
+            "program_pack_product": ""
+          }
+        },
+        "bundle_step_bb96UU": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "Workout Equipment",
+            "collection": "bundle-equipment",
+            "is_programs_step": false,
+            "program_pack_product": ""
+          }
+        }
+      },
+      "block_order": [
+        "step_programs",
+        "step_shorts",
+        "step_leggings",
+        "step_swimshorts",
+        "step_tops",
+        "bundle_step_bb96UU"
+      ],
+      "settings": {
+        "image_1": "shopify://shop_images/Frame_7-6.png",
+        "image_2": "shopify://shop_images/Frame_7-4.png",
+        "image_3": "shopify://shop_images/padded_DSC09654_30427d69-c589-45c9-ab7f-2ec9f0e127e1.jpg",
+        "enable_section": true,
+        "show_one_click_alternative": true,
+        "one_click_product": "twerk-program-lovable",
+        "one_click_label": "Twerk program",
+        "program_pack_product": "bundle-test",
+        "discount_code": "",
+        "size_chart_config_handle": "size-chart-settings",
+        "storefront_api_token": "568094b7f376083a4b0dc6fee4785741"
       }
     },
     "bt_what_women_say": {
@@ -705,6 +787,7 @@
     "bt_app_access",
     "bt_real_results",
     "bt_choose_your_path",
+    "nass_bundle_builder",
     "bt_what_women_say",
     "bt_faq",
     "bt_start_where_you_are",

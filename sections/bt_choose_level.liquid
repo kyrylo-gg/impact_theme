@@ -13,8 +13,8 @@
 <section class="bt-wrap bt-cl" data-bt-cl>
   <div class="bt-container bt-cl__container">
     <h2 class="bt-cl__title">
-      <span class="bt-cl__w">{{ title_1 | escape }}</span>
-      <span class="bt-cl__b"> {{ title_2 | escape }}</span>
+      <span class="bt-cl__w">{{ title_1 | escape }}</span><br>
+      <span class="bt-cl__b">{{ title_2 | escape }}</span>
     </h2>
 
     <p class="bt-cl__subtitle">{{ subtitle | escape }}</p>
@@ -86,17 +86,17 @@
 </script>
 
 {% stylesheet %}
-  .bt-wrap { width: 100%; display: flex; justify-content: center; padding: 0 16px; box-sizing: border-box; }
-  @media (min-width: 768px) { .bt-wrap { padding-left: 0; padding-right: 0; } }
+  .bt-wrap { width: 100%; display: flex; justify-content: center; padding: 24px 16px; box-sizing: border-box; }
+  @media (min-width: 768px) { .bt-wrap { padding: 40px 0; } }
   .bt-container { width: 100%; max-width: 335px; }
   @media (min-width: 768px) { .bt-container { max-width: 1184px; } }
 
-  .bt-cl__title { margin: 0; text-align: center; font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif; font-weight: 600; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 24px; line-height: 1.05; color: #111; }
+  .bt-cl__title { margin: 0; text-align: center; font-family: 'Anybody', sans-serif; font-weight: 600; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 24px; line-height: 1.05; color: #111; }
   @media (min-width: 768px) { .bt-cl__title { font-size: 45px; } }
   .bt-cl__b { color: #0038FF; font-weight: 900; }
 
-  .bt-cl__subtitle { margin: 40px 0 0; text-align: center; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 16px; color: #111; }
-  @media (min-width: 768px) { .bt-cl__subtitle { margin-top: 64px; font-size: 24px; } }
+  .bt-cl__subtitle { margin: 40px 0 0; text-align: center; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 14px; color: #111; }
+  @media (min-width: 768px) { .bt-cl__subtitle { margin-top: 64px; font-size: 18px; } }
 
   .bt-cl__scroller { margin-top: 24px; display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding: 0 calc(50% - 167.5px) 32px; margin-bottom: -32px; }
   @media (min-width: 768px) { .bt-cl__scroller { padding: 0; margin-bottom: 0; overflow: visible; justify-content: center; } }
@@ -110,19 +110,19 @@
   .bt-cl__img-grad { position: absolute; left: 0; right: 0; top: 219px; height: 278px; background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.81) 23%, rgba(255,255,255,0.94) 32%, #fff 45%); }
   @media (min-width: 768px) { .bt-cl__img-grad { top: 221px; height: 345px; } }
 
-  .bt-cl__badge { position: absolute; top: 20px; left: 20px; background: #FAFF00; border-radius: 999px; padding: 6px 12px; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 800; font-size: 14px; color: #111; z-index: 2; }
+  .bt-cl__badge { position: absolute; top: 20px; left: 20px; background: #FAFF00; border-radius: 999px; padding: 6px 12px; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 800; font-size: 14px; color: #111; z-index: 2; }
   @media (min-width: 768px) { .bt-cl__badge { font-size: 18px; } }
 
   .bt-cl__body { position: relative; z-index: 2; margin-top: -64px; padding: 0 20px 24px; }
   @media (min-width: 768px) { .bt-cl__body { margin-top: -80px; padding-bottom: 20px; } }
 
-  .bt-cl__card-title { margin: 0; font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 20px; line-height: 1.1; color: #111; }
+  .bt-cl__card-title { margin: 0; font-family: 'Anybody', sans-serif; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 20px; line-height: 1.1; color: #111; }
   @media (min-width: 768px) { .bt-cl__card-title { font-size: 24px; } }
   .bt-cl__card-title-main { font-weight: 900; display: block; }
   .bt-cl__card-title-sub { font-weight: 600; display: block; }
-  @media (min-width: 768px) { .bt-cl__card-title-main, .bt-cl__card-title-sub { display: inline; } .bt-cl__card-title-sub { margin-left: 8px; } }
+  .bt-cl__body, .bt-cl__card-title, .bt-cl__lines, .bt-cl__line { text-align: left; }
 
-  .bt-cl__lines { margin-top: 20px; display: grid; gap: 16px; font-family: 'Avenir Next', 'Avenir', sans-serif; }
+  .bt-cl__lines { margin-top: 20px; display: grid; gap: 16px; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; }
   .bt-cl__line { margin: 0; font-size: 14px; line-height: 1.4; }
   @media (min-width: 768px) { .bt-cl__line { font-size: 18px; } }
   .bt-cl__line strong { font-weight: 800; color: #111; }
@@ -133,8 +133,8 @@
   .bt-cl__dot { height: 2px; width: 20px; border-radius: 999px; background: rgba(138,138,138,0.4); transition: width 150ms ease, background 150ms ease; }
   .bt-cl__dot.is-active { width: 40px; background: #8A8A8A; }
 
-  .bt-cl__bottom { margin: 32px 0 0; text-align: center; font-family: 'Avenir Next', 'Avenir', sans-serif; font-weight: 500; font-size: 14px; color: #8A8A8A; }
-  @media (min-width: 768px) { .bt-cl__bottom { margin-top: 48px; font-size: 21px; } }
+  .bt-cl__bottom { margin: 32px 0 0; text-align: center; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 14px; color: #8A8A8A; }
+  @media (min-width: 768px) { .bt-cl__bottom { margin-top: 48px; font-size: 18px; } }
 {% endstylesheet %}
 
 {% schema %}

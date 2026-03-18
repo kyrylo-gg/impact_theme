@@ -1,0 +1,316 @@
+{% comment %}
+  BT_NoRestartV2 (Body Transformation)
+  Rebuilt to match Figma toggle markup and avoid theme button resets.
+{% endcomment %}
+
+{%- liquid
+  assign title = section.settings.title | default: 'The "No-Restart" System'
+  assign title_norm = title | replace: ' system', ' System' | replace: ' SYSTEM', ' System'
+  assign title_parts = title_norm | split: ' System'
+  assign title_top = title_parts[0] | default: title_norm
+  assign title_words = title_top | split: ' '
+  assign title_top_first = title_words[0] | default: title_top
+  assign title_top_rest = title_top | replace_first: title_top_first, '' | strip
+  assign subtitle = section.settings.subtitle | default: "Low energy, PMS, stress, busy day.\nSwitch to Plan B and keep progressing."
+  assign plan_a_label_bold = section.settings.plan_a_label_bold | default: 'Plan A:'
+  assign plan_a_label = section.settings.plan_a_label | default: 'Full Session'
+  assign plan_b_label_bold = section.settings.plan_b_label_bold | default: 'Plan B:'
+  assign plan_b_label = section.settings.plan_b_label | default: 'Low-Energy Session'
+  assign footer = section.settings.footer | default: "Everything stays organized for you —\ninside the app."
+
+  assign plan_a_image = section.settings.plan_a_image
+  assign plan_b_image = section.settings.plan_b_image
+-%}
+
+<section class="bt-wrap bt-nr2" data-bt-nr2>
+  <div class="bt-container bt-nr2__container">
+    <h2 class="bt-nr2__title">
+      <span class="bt-nr2__title-top">
+        <span class="bt-nr2__title-top1">{{ title_top_first | escape }}</span>
+        {%- if title_top_rest != blank -%}<br class="bt-nr2__title-br-m">{%- endif -%}
+        {%- if title_top_rest != blank -%}<span class="bt-nr2__title-top2"> {{ title_top_rest | escape }}</span>{%- endif -%}
+      </span><br>
+      <span class="bt-nr2__title-accent">System</span>
+    </h2>
+    <div class="bt-nr2__divider" aria-hidden="true"></div>
+    <p class="bt-nr2__subtitle">{{ subtitle | escape | newline_to_br }}</p>
+
+    <div class="bt-nr2__toggle" role="tablist" aria-label="Plan toggle">
+      <div class="bt-nr2__toggle-bg" data-bt-nr2-bg aria-hidden="true"></div>
+      <button type="button" class="bt-nr2__tab is-active" data-bt-nr2-tab="a" aria-selected="true">
+        <span class="bt-nr2__label">
+          <strong>{{ plan_a_label_bold | escape }}</strong> {{ plan_a_label | escape }}
+        </span>
+      </button>
+      <button type="button" class="bt-nr2__tab" data-bt-nr2-tab="b" aria-selected="false">
+        <span class="bt-nr2__label">
+          <strong>{{ plan_b_label_bold | escape }}</strong> {{ plan_b_label | escape }}
+        </span>
+      </button>
+    </div>
+
+    <div class="bt-nr2__card">
+      <div class="bt-nr2__panel is-active" data-bt-nr2-panel="a" aria-hidden="false">
+        <div class="bt-nr2__panel-inner">
+          <div class="bt-nr2__img">
+            {%- if plan_a_image != blank -%}
+              <img src="{{ plan_a_image | image_url: width: 900 }}" alt="" loading="lazy">
+            {%- endif -%}
+            <div class="bt-nr2__img-grad" aria-hidden="true"></div>
+            <div class="bt-nr2__day bt-nr2__day--m">{{ section.settings.day_badge | default: 'Day 2' }}</div>
+            <div class="bt-nr2__img-title bt-nr2__img-title--m">{{ section.settings.workout_title | default: "Lower Body\n+ Core" | newline_to_br }}</div>
+          </div>
+          <div class="bt-nr2__content">
+            <div class="bt-nr2__head">
+              <div class="bt-nr2__day bt-nr2__day--d">{{ section.settings.day_badge | default: 'Day 2' }}</div>
+              <div class="bt-nr2__img-title bt-nr2__img-title--d">{{ section.settings.workout_title | default: "Lower Body\n+ Core" | newline_to_br }}</div>
+            </div>
+            <div class="bt-nr2__lists">
+              <div class="bt-nr2__list">{{ section.settings.plan_a_list_left | newline_to_br }}</div>
+              <div class="bt-nr2__list">{{ section.settings.plan_a_list_right | newline_to_br }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bt-nr2__panel" data-bt-nr2-panel="b" aria-hidden="true">
+        <div class="bt-nr2__panel-inner">
+          <div class="bt-nr2__img">
+            {%- if plan_b_image != blank -%}
+              <img src="{{ plan_b_image | image_url: width: 900 }}" alt="" loading="lazy">
+            {%- endif -%}
+            <div class="bt-nr2__img-grad" aria-hidden="true"></div>
+            <div class="bt-nr2__day bt-nr2__day--m">{{ section.settings.day_badge | default: 'Day 2' }}</div>
+            <div class="bt-nr2__img-title bt-nr2__img-title--m">{{ section.settings.workout_title | default: "Lower Body\n+ Core" | newline_to_br }}</div>
+          </div>
+          <div class="bt-nr2__content">
+            <div class="bt-nr2__head">
+              <div class="bt-nr2__day bt-nr2__day--d">{{ section.settings.day_badge | default: 'Day 2' }}</div>
+              <div class="bt-nr2__img-title bt-nr2__img-title--d">{{ section.settings.workout_title | default: "Lower Body\n+ Core" | newline_to_br }}</div>
+            </div>
+            <div class="bt-nr2__lists">
+              <div class="bt-nr2__list">{{ section.settings.plan_b_list_left | newline_to_br }}</div>
+              <div class="bt-nr2__list">{{ section.settings.plan_b_list_right | newline_to_br }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="bt-nr2__footer"><em>{{ footer | escape | newline_to_br }}</em></p>
+  </div>
+</section>
+
+<script>
+(function(){
+  var root = document.querySelector('[data-bt-nr2]');
+  if (!root) return;
+  var bg = root.querySelector('[data-bt-nr2-bg]');
+  var tabs = Array.prototype.slice.call(root.querySelectorAll('[data-bt-nr2-tab]'));
+  var panels = Array.prototype.slice.call(root.querySelectorAll('[data-bt-nr2-panel]'));
+  var card = root.querySelector('.bt-nr2__card');
+  if (!tabs.length || !panels.length || !card || !bg) return;
+  var activeKey = (root.querySelector('.bt-nr2__tab.is-active') || {}).getAttribute
+    ? root.querySelector('.bt-nr2__tab.is-active').getAttribute('data-bt-nr2-tab')
+    : 'a';
+  var animTimer = null;
+
+  function layoutBg(){
+    var active = root.querySelector('.bt-nr2__tab.is-active');
+    if (!active) return;
+    var rect = active.getBoundingClientRect();
+    var parentRect = active.parentNode.getBoundingClientRect();
+    bg.style.transform = 'translateX(' + (rect.left - parentRect.left) + 'px)';
+    bg.style.width = rect.width + 'px';
+  }
+
+  function setCardHeight(){
+    var activePanel = root.querySelector('.bt-nr2__panel.is-active');
+    if (!activePanel) return;
+    var inner = activePanel.querySelector('.bt-nr2__panel-inner');
+    if (!inner) return;
+    card.style.height = inner.getBoundingClientRect().height + 'px';
+  }
+
+  function setActive(key){
+    if (key === activeKey) return;
+    if (animTimer) { window.clearTimeout(animTimer); animTimer = null; }
+
+    var prevKey = activeKey;
+    activeKey = key;
+    var dir = (prevKey === 'a' && key === 'b') ? 'dir-right' : 'dir-left';
+    root.classList.remove('dir-left', 'dir-right');
+    root.classList.add(dir);
+
+    tabs.forEach(function(t){
+      var is = t.getAttribute('data-bt-nr2-tab') === key;
+      t.classList.toggle('is-active', is);
+      t.setAttribute('aria-selected', is ? 'true' : 'false');
+    });
+
+    var nextPanel = null;
+    var prevPanel = null;
+    panels.forEach(function(p){
+      var k = p.getAttribute('data-bt-nr2-panel');
+      if (k === key) nextPanel = p;
+      if (k === prevKey) prevPanel = p;
+      p.classList.remove('is-enter', 'is-exit');
+    });
+
+    if (!nextPanel) return;
+
+    // Ensure both panels are in DOM flow for the transition (absolute positioned)
+    nextPanel.classList.add('is-active', 'is-enter');
+    nextPanel.setAttribute('aria-hidden', 'false');
+    if (prevPanel) {
+      prevPanel.classList.add('is-exit');
+      prevPanel.setAttribute('aria-hidden', 'true');
+    }
+
+    // Trigger transitions
+    void nextPanel.offsetWidth;
+    nextPanel.classList.remove('is-enter');
+
+    layoutBg();
+    setCardHeight();
+
+    animTimer = window.setTimeout(function(){
+      panels.forEach(function(p){
+        var is = p.getAttribute('data-bt-nr2-panel') === key;
+        p.classList.toggle('is-active', is);
+        p.classList.remove('is-exit');
+      });
+      root.classList.remove('dir-left', 'dir-right');
+      animTimer = null;
+      setCardHeight();
+    }, 360);
+  }
+
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){ setActive(t.getAttribute('data-bt-nr2-tab')); });
+  });
+
+  window.addEventListener('resize', function(){
+    layoutBg();
+    setCardHeight();
+  });
+
+  layoutBg();
+  setCardHeight();
+})();
+</script>
+
+{% stylesheet %}
+  .bt-wrap { width: 100%; display: flex; justify-content: center; padding: 24px 20px; box-sizing: border-box; }
+  @media (min-width: 768px) { .bt-wrap { padding: 40px 0; } }
+  .bt-container { width: 100%; max-width: 335px; text-align: center; }
+  @media (min-width: 768px) { .bt-container { max-width: 1063px; } }
+
+  .bt-nr2__title { margin: 0; font-family: 'Anybody', sans-serif; font-weight: 600; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 24px; line-height: 1.05; color: #111; }
+  @media (min-width: 768px) { .bt-nr2__title { font-size: 45px; } }
+  .bt-nr2__title-accent { color: #0038FF; font-weight: 900; }
+  .bt-nr2__title-top { font-weight: 600; color: #111; }
+  .bt-nr2__title-br-m { display: inline; }
+  @media (min-width: 768px) { .bt-nr2__title-br-m { display: none; } .bt-nr2__title-top2 { display: inline; } }
+  .bt-nr2__divider { width: 60px; height: 3px; background: #0038FF; margin: 12px auto 0; }
+  @media (min-width: 768px) { .bt-nr2__divider { margin-top: 16px; width: 100px; } }
+
+  .bt-nr2__subtitle { margin: 16px 0 0; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 16px; color: #111; }
+  @media (min-width: 768px) { .bt-nr2__subtitle { margin-top: 24px; font-size: 24px; } }
+
+  /* Toggle - Figma style with sliding pill */
+  .bt-nr2__toggle { position: relative; margin: 24px auto 0; background: #fff; border-radius: 999px; padding: 4px; display: inline-flex; align-items: center; gap: 7px; box-shadow: 0 6px 28px rgba(0,0,0,0.15); overflow: hidden; width: 100%; max-width: 335px; box-sizing: border-box; }
+  @media (min-width: 768px) { .bt-nr2__toggle { margin-top: 32px; padding: 8px; gap: 16px; width: auto; max-width: none; display: inline-flex; } }
+
+  .bt-nr2__toggle-bg { position: absolute; top: 4px; bottom: 4px; left: 0; width: 0; border-radius: 999px; background: #0038FF; transform: translateX(0); transition: transform 420ms cubic-bezier(0.4,0,0.2,1), width 420ms cubic-bezier(0.4,0,0.2,1); z-index: 0; }
+  @media (min-width: 768px) { .bt-nr2__toggle-bg { top: 8px; bottom: 8px; } }
+
+  .bt-nr2__tab { all: unset; cursor: pointer; position: relative; z-index: 1; display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; flex: 0 0 auto; }
+  .bt-nr2__tab.is-active { }
+
+  .bt-nr2__label { display: inline-block; padding: 6px 8px; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 13px; line-height: 1.1; color: #111; white-space: nowrap; }
+  .bt-nr2__tab.is-active .bt-nr2__label { color: #fff; }
+  .bt-nr2__label strong { font-weight: 800; }
+  @media (min-width: 768px) { .bt-nr2__label { padding: 8px 16px; font-size: 21px; } }
+
+  /* Card sizing: match Figma (desktop 782, mobile 335) */
+  .bt-nr2__card { position: relative; margin: 24px auto 0; background: #fff; border-radius: 30px; box-shadow: 0 6px 28px rgba(0,0,0,0.15); overflow: hidden; text-align: left; max-width: 335px; transition: height 320ms ease; will-change: height; }
+  @media (min-width: 768px) { .bt-nr2__card { margin-top: 32px; max-width: 782px; } }
+
+  .bt-nr2__panel { position: absolute; inset: 0; opacity: 0; pointer-events: none; transition: opacity 260ms ease, transform 320ms ease; transform: translateX(24px); }
+  .bt-nr2__panel.is-active { opacity: 1; transform: translateX(0); pointer-events: auto; }
+  /* Directional slide (matches toggle slide direction) */
+  .bt-nr2.dir-left .bt-nr2__panel { transform: translateX(-24px); }
+  .bt-nr2.dir-right .bt-nr2__panel { transform: translateX(24px); }
+  .bt-nr2.dir-left .bt-nr2__panel.is-active,
+  .bt-nr2.dir-right .bt-nr2__panel.is-active { transform: translateX(0); }
+  .bt-nr2__panel.is-exit { opacity: 0; pointer-events: none; }
+  .bt-nr2.dir-right .bt-nr2__panel.is-exit { transform: translateX(-24px); }
+  .bt-nr2.dir-left .bt-nr2__panel.is-exit { transform: translateX(24px); }
+  .bt-nr2__panel-inner { width: 100%; height: auto; }
+  @media (min-width: 768px) { .bt-nr2__panel-inner { display: flex; } }
+
+  .bt-nr2__img { position: relative; padding: 12px; }
+  .bt-nr2__img img { width: 100%; height: 311px; border-radius: 18px; object-fit: cover; display: block; background: #111; }
+  @media (min-width: 768px) { .bt-nr2__img { flex: 0 0 369px; } .bt-nr2__img img { width: 369px; height: 356px; } }
+
+  .bt-nr2__img-grad { display: none; }
+  @media (max-width: 767px) {
+    .bt-nr2__img-grad { display: block; position: absolute; left: 12px; right: 12px; bottom: 12px; height: 210px; border-radius: 18px; background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1)); pointer-events: none; }
+    .bt-nr2__day--m { position: absolute; left: 32px; bottom: 12px; transform: translateY(-105px); background: #FAFF00; border-radius: 999px; padding: 6px 12px; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 800; font-size: 14px; line-height: 1.1; color: #111; z-index: 2; white-space: nowrap; display: inline-flex; align-items: center; }
+    .bt-nr2__img-title--m { position: absolute; left: 32px; bottom: 32px; font-family: 'Anybody', sans-serif; font-weight: 600; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 20px; line-height: 1.05; color: #fff; z-index: 2; text-align: left; }
+  }
+  @media (min-width: 768px) {
+    .bt-nr2__day--m, .bt-nr2__img-title--m { display: none; }
+  }
+
+  .bt-nr2__content { padding: 0 20px 20px; }
+  @media (min-width: 768px) { .bt-nr2__content { flex: 1; padding: 32px 28px 24px; } }
+
+  .bt-nr2__head { display: none; }
+  @media (min-width: 768px) { .bt-nr2__head { display: block; } }
+
+  .bt-nr2__day--d { background: #FAFF00; border-radius: 999px; padding: 6px 12px; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 800; font-size: 18px; line-height: 1.1; color: #111; white-space: nowrap; display: inline-flex; align-items: center; }
+  .bt-nr2__img-title--d { margin-top: 18px; font-family: 'Anybody', sans-serif; font-weight: 600; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 24px; line-height: 1.05; color: #111; text-align: left; }
+
+  .bt-nr2__lists { display: flex; gap: 16px; margin-top: 28px; }
+  @media (max-width: 767px) { .bt-nr2__lists { margin-top: 16px; } }
+
+  .bt-nr2__list { flex: 1; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; color: #111; font-size: 14px; line-height: 1.55; }
+  @media (min-width: 768px) { .bt-nr2__list { font-size: 18px; } }
+
+  .bt-nr2__footer { margin: 32px 0 0; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; color: #666; font-size: 14px; }
+  @media (min-width: 768px) { .bt-nr2__footer { font-size: 18px; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BT_NoRestartV2",
+  "class": "shopify-section--bt-no-restart-v2",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "The \"No-Restart\" System" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "Low energy, PMS, stress, busy day.\nSwitch to Plan B and keep progressing." },
+    { "type": "header", "content": "Toggle labels" },
+    { "type": "text", "id": "plan_a_label_bold", "label": "Plan A bold", "default": "Plan A:" },
+    { "type": "text", "id": "plan_a_label", "label": "Plan A text", "default": "Full Session" },
+    { "type": "text", "id": "plan_b_label_bold", "label": "Plan B bold", "default": "Plan B:" },
+    { "type": "text", "id": "plan_b_label", "label": "Plan B text", "default": "Low-Energy Session" },
+    { "type": "header", "content": "Workout badges" },
+    { "type": "text", "id": "day_badge", "label": "Day badge", "default": "Day 2" },
+    { "type": "textarea", "id": "workout_title", "label": "Workout title", "default": "Lower Body\n+ Core" },
+    { "type": "header", "content": "Plan A" },
+    { "type": "image_picker", "id": "plan_a_image", "label": "Plan A image" },
+    { "type": "textarea", "id": "plan_a_list_left", "label": "Plan A left list", "default": "Warm-up\nStrength block\nCore finisher" },
+    { "type": "textarea", "id": "plan_a_list_right", "label": "Plan A right list", "default": "Quick stretch\nTotal: ~XX min" },
+    { "type": "header", "content": "Plan B" },
+    { "type": "image_picker", "id": "plan_b_image", "label": "Plan B image" },
+    { "type": "textarea", "id": "plan_b_list_left", "label": "Plan B left list", "default": "Gentle warm-up\nLow-impact strength\nMobility + core" },
+    { "type": "textarea", "id": "plan_b_list_right", "label": "Plan B right list", "default": "Breathing / stretch\nTotal: ~YY min" },
+    { "type": "header", "content": "Footer" },
+    { "type": "textarea", "id": "footer", "label": "Footer text", "default": "Everything stays organized for you —\ninside the app." }
+  ],
+  "presets": [{ "name": "BT_NoRestartV2" }]
+}
+{% endschema %}
+
