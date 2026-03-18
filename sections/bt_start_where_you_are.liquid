@@ -39,11 +39,7 @@
 
         <div class="bt-start__desc">{{ desc | escape | newline_to_br }}</div>
 
-        {%- if cta_url != blank -%}
-          <a href="{{ cta_url }}" class="bt-start__cta">{{ cta_text | escape }} <span aria-hidden="true">→</span></a>
-        {%- else -%}
-          <div class="bt-start__cta bt-start__cta--nolink">{{ cta_text | escape }} <span aria-hidden="true">→</span></div>
-        {%- endif -%}
+        <a href="#nass-bundle-builder" class="bt-start__cta" data-bt-open-bundle="full">{{ cta_text | escape }} <span aria-hidden="true">→</span></a>
 
         <div class="bt-start__footer">
           <span>{{ footer_left | escape }}</span>
@@ -70,11 +66,7 @@
 
           <div class="bt-start__desc bt-start__desc--d">{{ desc | escape | newline_to_br }}</div>
 
-          {%- if cta_url != blank -%}
-            <a href="{{ cta_url }}" class="bt-start__cta bt-start__cta--d">{{ cta_text | escape }} <span aria-hidden="true">→</span></a>
-          {%- else -%}
-            <div class="bt-start__cta bt-start__cta--d bt-start__cta--nolink">{{ cta_text | escape }} <span aria-hidden="true">→</span></div>
-          {%- endif -%}
+          <a href="#nass-bundle-builder" class="bt-start__cta bt-start__cta--d" data-bt-open-bundle="full">{{ cta_text | escape }} <span aria-hidden="true">→</span></a>
 
           <div class="bt-start__footer bt-start__footer--d">
             <span>{{ footer_left | escape }}</span>
@@ -94,8 +86,10 @@
   @media (min-width: 768px) { .bt-container { max-width: 1184px; } }
 
   .bt-start__card { position: relative; background: #fff; border-radius: 30px; overflow: hidden; box-shadow: 0 6px 28px rgba(0,0,0,0.15); }
-  /* Remove grey background under text (per design) */
   .bt-start__gray { display: none; }
+  @media (max-width: 767px) {
+    .bt-start__gray { display: block; position: absolute; left: 0; right: 0; bottom: 0; top: 236px; background: #F2F2F2; }
+  }
 
   .bt-start__m { position: relative; z-index: 1; padding-bottom: 20px; display: block; }
   .bt-start__d { display: none; }
@@ -118,7 +112,7 @@
   .bt-start__footer i { width: 3px; height: 3px; border-radius: 999px; background: #0038FF; display: inline-block; }
 
   .bt-start__imgd { width: 50%; position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; padding: 28px 0; }
-  .bt-start__imgd img { position: static; width: min(442px, 100%); height: auto; object-fit: contain; border-radius: 30px; border: 2px solid rgba(0,0,0,0.18); background: #F2F2F2; box-shadow: none; outline: 0; display: block; }
+  .bt-start__imgd img { position: static; width: min(442px, 100%); height: auto; object-fit: contain; border-radius: 30px; border: 2px solid #F6F6F6; background: #F2F2F2; box-shadow: none; outline: 0; display: block; }
 
   .bt-start__right { flex: 1; padding: 48px 40px 40px 0; position: relative; z-index: 1; }
   .bt-start__tag--d { margin: 0; }
@@ -131,6 +125,42 @@
   .bt-start__footer--d { justify-content: flex-start; margin-top: 16px; font-size: 18px; }
   .bt-start__footer--d i { width: 4px; height: 4px; }
 {% endstylesheet %}
+
+<script>
+  (function () {
+    if (!document.body || !document.body.classList || !document.body.classList.contains('product--body_transformation')) return;
+
+    var root = document.getElementById('shopify-section-{{ section.id }}');
+    if (!root) return;
+
+    var btns = root.querySelectorAll('[data-bt-open-bundle="full"]');
+    if (!btns || !btns.length) return;
+
+    function tryOpen(attempt) {
+      attempt = attempt || 0;
+      if (window.NassBundleBuilder && typeof window.NassBundleBuilder.openWizard === 'function') {
+        window.__bt_bb_preselect_first = true;
+        window.NassBundleBuilder.openWizard();
+        return true;
+      }
+
+      if (attempt >= 20) {
+        window.location.hash = 'nass-bundle-builder';
+        return false;
+      }
+
+      setTimeout(function () { tryOpen(attempt + 1); }, 100);
+      return false;
+    }
+
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener('click', function (e) {
+        e.preventDefault();
+        tryOpen(0);
+      });
+    }
+  })();
+</script>
 
 {% schema %}
 {
