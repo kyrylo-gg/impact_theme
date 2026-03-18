@@ -764,6 +764,8 @@
     "bt_start_where_you_are": {
       "type": "bt_start_where_you_are",
       "settings": {
+        "img_mobile": "shopify://shop_images/Body_Transformation_1_2.png",
+        "img_desktop": "shopify://shop_images/Frame_41-6.png",
         "title_1": "Start Where You Are.",
         "title_2": "Stay Consistent.",
         "title_3": "Get Results.",
