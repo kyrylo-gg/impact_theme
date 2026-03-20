@@ -71,7 +71,7 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
     {{- 'custom.css' | asset_url | stylesheet_tag: preload: true -}}
   {% capture cur %}{% include "booster-currency" %}{% endcapture %}{% unless cur contains "Liquid error" %}{{ cur }}{% endunless %}
 
-<script id="docapp-cart">window.docappCart = {{ cart | json }}; window.docappCart.currency = "{{ 0 | money_with_currency | slice: -3, 3 }}"; window.docappCart.shop_currency = "{{ shop.currency }}";</script>
+<script id="docapp-cart">window.docappCart = {{ cart | json }}; window.docappCart.currency = "{{ cart.currency.iso_code | default: shop.currency }}"; window.docappCart.total_price_number = {{ cart.total_price | divided_by: 100.0 }}; window.docappCart.shop_currency = "{{ shop.currency }}";</script>
 <script id="docapp-free-item-speedup">
 (() => { if (!document.documentElement.innerHTML.includes('\\/shop' + '\\/js' + '\\/free-gift-cart-upsell-pro.min.js') || window.freeGiftCartUpsellProAppLoaded) return; let script = document.createElement('script'); script.src = "https://d2fk970j0emtue.cloudfront.net/shop/js/free-gift-cart-upsell-pro.min.js?shop=fit-nass-store.myshopify.com"; document.getElementById('docapp-free-item-speedup').after(script); })();
 </script>

@@ -100,7 +100,7 @@ If you plan to remove PageFly, please see the guide in our help center first: ht
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script id="docapp-cart">
-      window.docappCart = {{ cart | json }}; window.docappCart.currency = "{{ 0 | money_with_currency | slice: -3, 3 }}"; window.docappCart.shop_currency = "{{ shop.currency }}";
+      window.docappCart = {{ cart | json }}; window.docappCart.currency = "{{ cart.currency.iso_code | default: shop.currency }}"; window.docappCart.total_price_number = {{ cart.total_price | divided_by: 100.0 }}; window.docappCart.shop_currency = "{{ shop.currency }}";
     </script>
     <script id="docapp-free-item-speedup">
       (() => { if (!document.documentElement.innerHTML.includes('\\/shop' + '\\/js' + '\\/free-gift-cart-upsell-pro.min.js') || window.freeGiftCartUpsellProAppLoaded) return; let script = document.createElement('script'); script.src = "https://d2fk970j0emtue.cloudfront.net/shop/js/free-gift-cart-upsell-pro.min.js?shop=fit-nass-store.myshopify.com"; document.getElementById('docapp-free-item-speedup').after(script); })();
