@@ -36,6 +36,7 @@
       id: String(raw.id),
       title: raw.title || '',
       handle: raw.handle || '',
+      tags: Array.isArray(raw.tags) ? raw.tags : String(raw.tags || '').split(',').map(function(t) { return String(t || '').trim(); }).filter(Boolean),
       availableForSale: v0.available !== false,
       priceRange: { minVariantPrice: { amount: String(v0.price || '0'), currencyCode: 'USD' } },
       compareAtPriceRange: { minVariantPrice: { amount: String(v0.compare_at_price || v0.price || '0'), currencyCode: 'USD' } },
@@ -121,8 +122,9 @@
       checkoutUrl = 'https://' + shopDomain + '/checkout';
       console.log('[BB] localhost detected, using store checkout:', checkoutUrl);
     }
-    const storefrontApiToken = (config.storefrontApiToken || '').trim();
+    const storefrontApiToken = ((config.storefrontApiToken || '').trim() || '568094b7f376083a4b0dc6fee4785741');
     const sizeChartConfigHandle = (config.sizeChartConfigHandle || 'size-chart-settings').trim();
+    const sizeChartByProduct = (config && config.sizeChartByProduct && typeof config.sizeChartByProduct === 'object') ? config.sizeChartByProduct : {};
 
     // Resolve display currency with priority:
     // 1) Shopify native multi-currency (Shopify.currency.active)
@@ -477,6 +479,7 @@
         id: String(sf.id),
         title: sf.title || '',
         handle: sf.handle || '',
+        tags: Array.isArray(sf.tags) ? sf.tags : [],
         availableForSale: v0 ? v0.availableForSale !== false : true,
         priceRange: { minVariantPrice: { amount: price, currencyCode: 'USD' } },
         compareAtPriceRange: { minVariantPrice: { amount: compareAt, currencyCode: 'USD' } },
@@ -1000,7 +1003,7 @@
       if (variantModalAddBtn) variantModalAddBtn.disabled = !variantModalState.selectedVariantId;
       variantModalEl.classList.remove('bb-variant-modal--hidden');
       if (variantModalSizeGuideBtn) {
-        variantModalSizeGuideBtn.style.display = storefrontApiToken ? '' : 'none';
+        variantModalSizeGuideBtn.style.display = '';
         variantModalSizeGuideBtn.dataset.bbSizeChartProduct = productId;
       }
     }
@@ -1073,17 +1076,55 @@
       ).then(function(data) { return data && data.data && data.data.page ? data.data.page : null; });
     }
 
+    function fetchPageById(pageId) {
+      if (!pageId) return Promise.resolve(null);
+      return storefrontApiRequest(
+        'query GetPageById($id: ID!) { page(id: $id) { id title body handle metafield(namespace: "custom", key: "size_calculator") { key value } } }',
+        { id: pageId }
+      ).then(function(data) { return data && data.data && data.data.page ? data.data.page : null; });
+    }
+
+    function normalizePageHandle(rawValue) {
+      var v = String(rawValue || '').trim();
+      if (!v) return '';
+      if (v.indexOf('/pages/') >= 0) {
+        var parts = v.split('/pages/');
+        v = parts[parts.length - 1];
+      }
+      if (/^https?:\/\//i.test(v)) {
+        try {
+          var u = new URL(v);
+          var path = String(u.pathname || '');
+          if (path.indexOf('/pages/') >= 0) v = path.split('/pages/').pop();
+          else v = path;
+        } catch (e) {}
+      }
+      v = v.replace(/^\/+|\/+$/g, '');
+      return v;
+    }
+
     function fetchProductSizeChartRef(productId) {
       var gid = productId.indexOf('gid://') === 0 ? productId : 'gid://shopify/Product/' + gidToNum(productId);
+      var localProduct = bbState.productsById[productId] || bbState.productsById[String(gidToNum(productId) || '')];
+      var localTags = (localProduct && localProduct.tags) || [];
+      var localNoCalc = localTags.some(function(tag) { return String(tag || '').toLowerCase() === 'no_calc'; });
       return storefrontApiRequest(
-        'query GetProduct($id: ID!) { product(id: $id) { id metafield(namespace: "info", key: "size_chart") { value reference { ... on Page { id handle } } } } }',
+        'query GetProduct($id: ID!) { product(id: $id) { id tags metafield(namespace: "info", key: "size_chart") { value reference { ... on Page { id handle } } } } }',
         { id: gid }
       ).then(function(data) {
-        var m = data && data.data && data.data.product && data.data.product.metafield;
-        if (!m) return null;
-        if (m.reference && m.reference.handle) return { handle: m.reference.handle };
-        if (m.value && typeof m.value === 'string') return { handle: m.value };
-        return null;
+        var product = data && data.data && data.data.product;
+        var m = product && product.metafield;
+        var tags = (product && product.tags) || [];
+        var hasNoCalcTag = tags.some(function(tag) { return String(tag || '').toLowerCase() === 'no_calc'; }) || localNoCalc;
+        if (!m) return { handle: null, pageId: null, noCalc: hasNoCalcTag };
+        if (m.reference && (m.reference.handle || m.reference.id)) return { handle: normalizePageHandle(m.reference.handle), pageId: m.reference.id || null, noCalc: hasNoCalcTag };
+        if (m.value && typeof m.value === 'string') {
+          var value = String(m.value || '').trim();
+          var pageId = value.indexOf('gid://shopify/Page/') === 0 ? value : null;
+          var handle = pageId ? '' : normalizePageHandle(value);
+          return { handle: handle, pageId: pageId, noCalc: hasNoCalcTag };
+        }
+        return { handle: null, pageId: null, noCalc: hasNoCalcTag };
       });
     }
 
@@ -1128,15 +1169,13 @@
       return { waist: waist, hip: hip, chest: chest };
     }
 
-    var FALLBACK_DEFAULT = { 'lounge-shorts': { waist: [64,70,76,82,88,96], hip: [90,96,102,108,114,122] }, 'lounge-longtop': { chest: [84,89,91,94,97,102] }, 'lounge-leggings': { waist: [64,70,76,82,88,96], hip: [90,96,102,108,114,122] }, 'top-size-chart': { chest: [84,89,91,94,97,102] } };
-    var FALLBACK_SIZES = ['XS','S','M','L','XL','XXL'];
-    var BOUNDS = { waist: [50,120], hip: [70,140], chest: [70,130] };
-    var MSG = { out_of_bounds: 'It looks like there might be a typo. Please check your measurement (make sure you selected CM or IN correctly).', waist_gt_hip: 'Please double-check your entries. Usually, the hip measurement is larger than the waist measurement.', sizing_up: 'Our fabric is very stretchy. If you are between sizes, we recommend sizing up.', boundary: function(s){ return 'You are in between sizes. We recommend sizing UP to ' + s + ' for a comfortable, squat-proof fit.'; }, split: function(s){ return 'Based on your hip measurement, we recommend size ' + s + ' to ensure the best fit.'; } };
+    var MSG = { out_of_bounds: 'Double-check selected unit of measurement; otherwise, we do not carry your size yet.' };
 
     var sizeChartState = { open: false, productId: null, handle: null, page: null, config: null, unit: 'in', measurementType: 'waist-hip', sizeData: null, inchTable: [], cmTable: [] };
     var scModal = sectionRoot.querySelector('[data-bb-size-chart-modal]');
     var scCloseEls = sectionRoot.querySelectorAll('[data-bb-size-chart-close], .bb-size-chart-backdrop');
     var scUnitPills = sectionRoot.querySelectorAll('[data-bb-sc-unit]');
+    var scUnitToggle = sectionRoot.querySelector('.bb-size-chart-unit-toggle');
     var scUnitDisplay = sectionRoot.querySelector('[data-bb-sc-unit-display]');
     var scTableUnit = sectionRoot.querySelector('[data-bb-sc-table-unit]');
     var scTips = sectionRoot.querySelector('[data-bb-sc-tips]');
@@ -1144,13 +1183,21 @@
     var scFields = sectionRoot.querySelectorAll('[data-bb-sc-field]');
     var scCalcBtn = sectionRoot.querySelector('[data-bb-sc-calculate]');
     var scResult = sectionRoot.querySelector('[data-bb-sc-result]');
+    var scCalculator = sectionRoot.querySelector('.bb-size-chart-calculator');
     var scTableWrap = sectionRoot.querySelector('[data-bb-sc-table-wrap]');
     var scTable = sectionRoot.querySelector('[data-bb-sc-table]');
+    var scContent = sectionRoot.querySelector('[data-bb-sc-content]');
     var scLoading = sectionRoot.querySelector('[data-bb-sc-loading]');
     var scEmpty = sectionRoot.querySelector('[data-bb-sc-empty]');
+    function setCalculatorVisible(visible) {
+      if (!scCalculator) return;
+      scCalculator.style.display = visible ? '' : 'none';
+    }
 
     function openSizeChartModal(productId) {
-      if (!storefrontApiToken || !scModal) return;
+      if (!scModal) return;
+      var productKey = String(productId || '');
+      var localRef = sizeChartByProduct[productKey] || sizeChartByProduct[String(gidToNum(productKey) || '')] || null;
       sizeChartState.open = true;
       sizeChartState.productId = productId;
       sizeChartState.handle = null;
@@ -1160,29 +1207,61 @@
       sizeChartState.sizeData = null;
       sizeChartState.inchTable = [];
       sizeChartState.cmTable = [];
+      sizeChartState.noCalc = false;
       scModal.classList.remove('bb-size-chart-modal--hidden');
       if (scLoading) scLoading.style.display = '';
       if (scEmpty) scEmpty.style.display = 'none';
       if (scTableWrap) scTableWrap.style.display = 'none';
+      if (scContent) { scContent.style.display = 'none'; scContent.innerHTML = ''; }
+      if (scUnitToggle) scUnitToggle.style.display = '';
       scUnitPills.forEach(function(p) { p.classList.toggle('bb-size-chart-unit-pill--active', p.dataset.bbScUnit === 'in'); });
       if (scUnitDisplay) scUnitDisplay.textContent = 'IN';
       if (scTableUnit) scTableUnit.textContent = 'INCH';
       scFields.forEach(function(f) { f.value = ''; });
       if (scResult) { scResult.style.display = 'none'; scResult.className = 'bb-size-chart-result'; scResult.innerHTML = ''; }
+      setCalculatorVisible(true);
       if (scTips) scTips.innerHTML = '<p><strong>How to Measure:</strong></p><p>&bull; <strong>Waist:</strong> Measure around the narrowest part of your waistline.</p><p>&bull; <strong>Hips:</strong> Stand with feet together and measure around the fullest part of your hips.</p>';
       if (scInputs) { scInputs.className = 'bb-size-chart-inputs bb-size-chart-inputs--waist-hip'; scInputs.querySelectorAll('.bb-size-chart-input-group--chest').forEach(function(g){ g.style.display = 'none'; }); scInputs.querySelectorAll('.bb-size-chart-input-group:not(.bb-size-chart-input-group--chest)').forEach(function(g){ g.style.display = ''; }); }
+
+      if (localRef) {
+        sizeChartState.handle = localRef.handle || null;
+        sizeChartState.noCalc = localRef.noCalc === true;
+        sizeChartState.measurementType = getMeasurementType(sizeChartState.handle || '');
+        setCalculatorVisible(!sizeChartState.noCalc);
+        if (scUnitToggle) scUnitToggle.style.display = sizeChartState.noCalc ? 'none' : '';
+        if (sizeChartState.noCalc && localRef.html) {
+          if (scLoading) scLoading.style.display = 'none';
+          if (scTableWrap) scTableWrap.style.display = 'none';
+          if (scContent) { scContent.innerHTML = localRef.html; scContent.style.display = ''; }
+          if (scEmpty) scEmpty.style.display = 'none';
+          return;
+        }
+      }
+
+      if (!storefrontApiToken) {
+        if (scLoading) scLoading.style.display = 'none';
+        if (scTableWrap) scTableWrap.style.display = 'none';
+        setCalculatorVisible(false);
+        if (scEmpty) scEmpty.style.display = '';
+        return;
+      }
       fetchSizeChartConfig().then(function(cfg) { sizeChartState.config = cfg; });
       fetchProductSizeChartRef(productId).then(function(ref) {
-        if (!ref || !ref.handle) { if (scLoading) scLoading.style.display = 'none'; if (scEmpty) scEmpty.style.display = ''; return; }
-        sizeChartState.handle = ref.handle;
+        if (!ref) { if (scLoading) scLoading.style.display = 'none'; if (scEmpty) scEmpty.style.display = ''; return; }
+        sizeChartState.handle = ref.handle || null;
+        sizeChartState.noCalc = ref.noCalc === true;
         sizeChartState.measurementType = getMeasurementType(ref.handle);
+        setCalculatorVisible(!sizeChartState.noCalc);
+        if (scUnitToggle) scUnitToggle.style.display = sizeChartState.noCalc ? 'none' : '';
         if (scTips) scTips.innerHTML = sizeChartState.measurementType === 'chest' ? '<p><strong>How to Measure:</strong></p><p>&bull; <strong>Chest:</strong> Measure around the fullest part of your bust.</p>' : '<p><strong>How to Measure:</strong></p><p>&bull; <strong>Waist:</strong> Measure around the narrowest part of your waistline.</p><p>&bull; <strong>Hips:</strong> Stand with feet together and measure around the fullest part of your hips.</p>';
         if (scInputs) {
           scInputs.className = 'bb-size-chart-inputs bb-size-chart-inputs--' + sizeChartState.measurementType;
           scInputs.querySelectorAll('.bb-size-chart-input-group--chest').forEach(function(g){ g.style.display = sizeChartState.measurementType === 'chest' ? '' : 'none'; });
           scInputs.querySelectorAll('.bb-size-chart-input-group:not(.bb-size-chart-input-group--chest)').forEach(function(g){ g.style.display = sizeChartState.measurementType === 'chest' ? 'none' : ''; });
         }
-        return fetchPageByHandle(ref.handle);
+        if (ref.pageId) return fetchPageById(ref.pageId);
+        if (ref.handle) return fetchPageByHandle(ref.handle);
+        return null;
       }).then(function(page) {
         if (scLoading) scLoading.style.display = 'none';
         if (!page) { if (scEmpty) scEmpty.style.display = ''; return; }
@@ -1190,17 +1269,16 @@
         var parsed = parseSizeChartHTML(page.body);
         sizeChartState.inchTable = parsed.inchTable;
         sizeChartState.cmTable = parsed.cmTable;
-        var defMap = (sizeChartState.config && sizeChartState.config.default_data) || FALLBACK_DEFAULT;
-        var fallback = defMap[sizeChartState.handle] || defMap['lounge-shorts'] || FALLBACK_DEFAULT['lounge-shorts'];
-        var calc = page.metafield && page.metafield.value ? parseCalculatorData(page.metafield.value) : { waist: [], hip: [], chest: [] };
-        var calcWaist = calc.waist.length ? calc.waist : (fallback && fallback.waist) || [];
-        var calcHip = calc.hip.length ? calc.hip : (fallback && fallback.hip) || [];
-        var calcChest = calc.chest.length ? calc.chest : (fallback && fallback.chest) || FALLBACK_DEFAULT['lounge-longtop'].chest || [];
-        var sizes = (parsed.inchTable[0] || []).slice(1);
-        if (!sizes.length) sizes = FALLBACK_SIZES;
-        sizeChartState.sizeData = { sizes: sizes, calculatorWaist: calcWaist, calculatorHip: calcHip, calculatorChest: calcChest };
-        renderSizeChartTable();
-        if (scTableWrap) scTableWrap.style.display = '';
+        if (sizeChartState.noCalc) {
+          if (scTableWrap) scTableWrap.style.display = 'none';
+          if (scContent) {
+            scContent.innerHTML = page.body || '';
+            scContent.style.display = '';
+          }
+        } else {
+          renderSizeChartTable();
+          if (scTableWrap) scTableWrap.style.display = '';
+        }
         if (scEmpty) scEmpty.style.display = 'none';
       }).catch(function() { if (scLoading) scLoading.style.display = 'none'; if (scEmpty) scEmpty.style.display = ''; });
     }
@@ -1228,34 +1306,65 @@
     }
 
     function runSizeCalculator() {
-      var sd = sizeChartState.sizeData;
-      if (!sd) return;
+      if (sizeChartState.noCalc) return;
       var unit = sizeChartState.unit;
+      var table = unit === 'in' ? sizeChartState.inchTable : sizeChartState.cmTable;
+      if (!table || !table.length) { showSizeChartResult('error', null, MSG.out_of_bounds); return; }
       var waistVal = parseFloat((scInputs && scInputs.querySelector('[data-bb-sc-field="waist"]')) ? scInputs.querySelector('[data-bb-sc-field="waist"]').value : '') || 0;
       var hipVal = parseFloat((scInputs && scInputs.querySelector('[data-bb-sc-field="hip"]')) ? scInputs.querySelector('[data-bb-sc-field="hip"]').value : '') || 0;
       var chestVal = parseFloat((scInputs && scInputs.querySelector('[data-bb-sc-field="chest"]')) ? scInputs.querySelector('[data-bb-sc-field="chest"]').value : '') || 0;
+      var headers = (table[0] || []).slice(1);
+      function findRowByKeyword(keyword) {
+        var kw = String(keyword || '').toLowerCase();
+        for (var i = 1; i < table.length; i++) {
+          var label = String((table[i] && table[i][0]) || '').toLowerCase();
+          if (label.indexOf(kw) >= 0) return table[i];
+        }
+        return null;
+      }
+      function parseCellRange(cell) {
+        var nums = String(cell || '').replace(',', '.').match(/-?\d+(?:\.\d+)?/g);
+        if (!nums || !nums.length) return null;
+        var parsed = nums.map(function(n) { return parseFloat(n); }).filter(function(n) { return !isNaN(n); });
+        if (!parsed.length) return null;
+        if (parsed.length === 1) return { min: parsed[0], max: parsed[0] };
+        return { min: Math.min.apply(null, parsed), max: Math.max.apply(null, parsed) };
+      }
+      function findColumnIndexForValue(row, value) {
+        if (!row) return -1;
+        var ranges = [];
+        for (var c = 1; c < row.length; c++) {
+          ranges.push(parseCellRange(row[c]));
+        }
+        for (var i = 0; i < ranges.length; i++) {
+          var r = ranges[i];
+          if (!r) continue;
+          if (value >= r.min && value <= r.max) return i;
+        }
+        // If value falls into a small "gap" between adjacent ranges,
+        // treat it as previous size (left range).
+        for (var j = 0; j < ranges.length - 1; j++) {
+          var left = ranges[j];
+          var right = ranges[j + 1];
+          if (!left || !right) continue;
+          if (value > left.max && value < right.min) return j;
+        }
+        return -1;
+      }
       if (sizeChartState.measurementType === 'chest') {
-        var chestCm = unit === 'in' ? chestVal * 2.54 : chestVal;
-        if (chestCm < BOUNDS.chest[0] || chestCm > BOUNDS.chest[1]) { showSizeChartResult('error', null, MSG.out_of_bounds); return; }
-        var idx = sd.calculatorChest.findIndex(function(max) { return chestCm <= max; });
-        if (idx < 0) idx = sd.sizes.length - 1;
-        if (idx < sd.sizes.length - 1 && chestCm === sd.calculatorChest[idx]) idx++;
-        showSizeChartResult('success', sd.sizes[idx], MSG.sizing_up);
+        var chestRow = findRowByKeyword('chest');
+        var chestIdx = findColumnIndexForValue(chestRow, chestVal);
+        if (chestIdx < 0 || !headers[chestIdx]) { showSizeChartResult('error', null, MSG.out_of_bounds); return; }
+        showSizeChartResult('success', headers[chestIdx], '');
       } else {
-        var waistCm = unit === 'in' ? waistVal * 2.54 : waistVal;
-        var hipCm = unit === 'in' ? hipVal * 2.54 : hipVal;
-        if (waistCm < BOUNDS.waist[0] || waistCm > BOUNDS.waist[1] || hipCm < BOUNDS.hip[0] || hipCm > BOUNDS.hip[1]) { showSizeChartResult('error', null, MSG.out_of_bounds); return; }
-        if (waistCm > hipCm) { showSizeChartResult('warning', null, MSG.waist_gt_hip); return; }
-        var wi = sd.calculatorWaist.findIndex(function(max) { return waistCm <= max; });
-        var hi = sd.calculatorHip.findIndex(function(max) { return hipCm <= max; });
-        if (wi < 0) wi = sd.sizes.length - 1;
-        if (hi < 0) hi = sd.sizes.length - 1;
-        if (wi < sd.sizes.length - 1 && waistCm === sd.calculatorWaist[wi]) wi++;
-        if (hi < sd.sizes.length - 1 && hipCm === sd.calculatorHip[hi]) hi++;
-        var recIdx = hi;
-        var size = sd.sizes[recIdx];
-        var isSplit = wi !== hi;
-        showSizeChartResult('success', size, isSplit ? MSG.split(size) : MSG.sizing_up);
+        var waistRow = findRowByKeyword('waist');
+        var hipRow = findRowByKeyword('hip');
+        var waistIdx = findColumnIndexForValue(waistRow, waistVal);
+        var hipIdx = findColumnIndexForValue(hipRow, hipVal);
+        if (waistIdx < 0 || hipIdx < 0) { showSizeChartResult('error', null, MSG.out_of_bounds); return; }
+        var recIdx = waistIdx > hipIdx ? waistIdx : hipIdx;
+        if (!headers[recIdx]) { showSizeChartResult('error', null, MSG.out_of_bounds); return; }
+        showSizeChartResult('success', headers[recIdx], '');
       }
     }
 

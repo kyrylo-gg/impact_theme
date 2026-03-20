@@ -4,7 +4,7 @@
 {%- if custom or option.name == 'Size' -%}
   {% if pages[size_chart_page] != empty %}
     {% if modal_parts == blank or modal_parts == 'link' %}
-      <modal-opener{% if stepId != blank %} data-in-step="{{ stepId }}" hidden{% endif %} class="product-popup-modal__opener no-js-hidden quick-add-hidden" {% if block %}{{ block.shopify_attributes }}{% endif %}>
+      <modal-opener{% if stepId != blank %} data-in-step="{{ stepId }}" hidden{% endif %}{% if product_id != blank %} data-bundle-product-id="{{ product_id }}"{% endif %} class="product-popup-modal__opener no-js-hidden quick-add-hidden" {% if block %}{{ block.shopify_attributes }}{% endif %}>
         <strong><a href="#" class="product-popup-modal__button link" aria-controls="SizeChartPopupModal-{% if custom %}{{ custom }}{% else %}{{ block.id }}{% endif %}">{{ 'product.general.size_chart' | t }}</a></strong>
       </modal-opener>
     {% endif %}

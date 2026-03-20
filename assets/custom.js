@@ -1,61 +1,90 @@
 (function() {
-  var form = document.querySelector('[data-size-calculate]');
-  const sizes = ['XS','S','M','L','XL','XXL','XXXL'];
+  var forms = document.querySelectorAll('[data-size-calculate]');
+  var sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
 
-  if (form) {
-    form.addEventListener('submit', function (e) {
+  function normalizeKey(name) {
+    return String(name || '').toLowerCase().trim();
+  }
+
+  function getIndexByValue(values, inputValue) {
+    if (!Array.isArray(values) || !values.length || !Number.isFinite(inputValue)) return null;
+
+    var parsed = values.map(function(v) { return parseFloat(v); }).filter(function(v) { return Number.isFinite(v); });
+    if (!parsed.length) return null;
+
+    var min = parsed[0];
+    var max = parsed[parsed.length - 1];
+    if (inputValue < min || inputValue > max) return null;
+
+    var neededIndex = null;
+    parsed.forEach(function(val, index) {
+      if (inputValue >= val && inputValue <= max) neededIndex = index;
+    });
+
+    return neededIndex;
+  }
+
+  forms.forEach(function(form) {
+    form.addEventListener('submit', function(e) {
       e.preventDefault();
-  
-      var formInputs = form.querySelectorAll('input');
+
       var units = form.querySelector('#units');
-      var script = form.querySelector('script');
-      const data = JSON.parse(script.innerText);
+      var script = form.querySelector('script[type="text/json"]');
       var success = form.querySelector('.calculator-success');
       var error = form.querySelector('.calculator-error');
-      var sizeEl = success.querySelector('.calculated-size');
-      var inputVal = 0;
-        
+      var sizeEl = success ? success.querySelector('.calculated-size') : null;
+      if (!script || !success || !error || !sizeEl) return;
+
+      var data = {};
+      try {
+        data = JSON.parse(script.innerText || '{}');
+      } catch (err) {
+        data = {};
+      }
+
       success.classList.add('hidden');
       error.classList.add('hidden');
-  
-      var indexes = [];
-      formInputs.forEach(input => {
-        if (data[input.getAttribute('name')]) {
-          if (units.checked) {
-            inputVal = input.value;
-          } else {
-            inputVal = input.value*2.54;
-          }
-          var neededIndex = false;
-          data[input.getAttribute('name')].forEach((val, index) => {
-            if (parseFloat(inputVal) >= parseFloat(val) && parseFloat(inputVal) <= parseFloat(data[input.getAttribute('name')][data[input.getAttribute('name')].length - 1])) {
-              neededIndex = index;
-            }
-          });
-          if (neededIndex !== false) {
-            indexes.push(neededIndex);
-          }
-        }
+
+      var indexesByKey = {};
+      Object.keys(data).forEach(function(rawKey) {
+        var key = normalizeKey(rawKey);
+        var input = form.querySelector('[name="' + rawKey + '"]');
+        if (!input) return;
+
+        var rawValue = parseFloat(String(input.value || '').replace(',', '.'));
+        if (!Number.isFinite(rawValue)) return;
+
+        var normalizedValue = units && units.checked ? rawValue : rawValue * 2.54;
+        var idx = getIndexByValue(data[rawKey], normalizedValue);
+        if (idx !== null) indexesByKey[key] = idx;
       });
-  
-      if (indexes.length == 2 && sizes[indexes[0]] !== undefined && sizes[indexes[1]] !== undefined) {
-        success.classList.remove('hidden');
-        var size = 0;
-        if (indexes[0] > indexes[1]) {
-          size = sizes[indexes[0]]
-        } else {
-          size = sizes[indexes[1]]
-        }
-        sizeEl.textContent = size;
-      } else if (indexes.length == 1 && sizes[indexes[0]] !== undefined) {
+
+      // For waist+hip flow, return size by larger index (more conservative fit).
+      // On equal indexes, hip index is used (same size value).
+      if (indexesByKey.hip !== undefined && indexesByKey.waist !== undefined) {
+        var recommendedIdx = indexesByKey.waist > indexesByKey.hip ? indexesByKey.waist : indexesByKey.hip;
+        if (sizes[recommendedIdx] !== undefined) {
+          sizeEl.textContent = sizes[recommendedIdx];
           success.classList.remove('hidden');
-          sizeEl.textContent = sizes[indexes[0]];
+          return;
+        }
+      }
+
+      if (indexesByKey.chest !== undefined && sizes[indexesByKey.chest] !== undefined) {
+        sizeEl.textContent = sizes[indexesByKey.chest];
+        success.classList.remove('hidden');
+        return;
+      }
+
+      var availableIndexes = Object.values(indexesByKey);
+      if (availableIndexes.length === 1 && sizes[availableIndexes[0]] !== undefined) {
+        sizeEl.textContent = sizes[availableIndexes[0]];
+        success.classList.remove('hidden');
       } else {
         error.classList.remove('hidden');
       }
-      
     });
-  }
+  });
 })();
 
 

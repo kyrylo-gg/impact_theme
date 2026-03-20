@@ -476,6 +476,8 @@ function customBundleProduct() {
 
         let bundleHolder = btn.closest('[data-bundle-product-item]');
         let step = bundleHolder.closest('[data-step]');
+        let noCalcForProduct = String(bundleHolder.dataset.noCalc || '').toLowerCase() === 'true';
+        let productId = String(bundleHolder.dataset.bundleItemId || '');
         let settings = JSON.parse(btn.dataset.bundleItem);
         image.setAttribute('src', settings.image);
         title.innerText = settings.title;
@@ -582,8 +584,21 @@ function customBundleProduct() {
         
         if (sizeChartOpeners.length) {
           sizeChartOpeners.forEach(opener => {
-            if (opener.getAttribute('data-in-step') !== undefined && opener.getAttribute('data-in-step') == step.dataset.step) {
+            if (
+              opener.getAttribute('data-in-step') !== undefined &&
+              opener.getAttribute('data-in-step') == step.dataset.step &&
+              String(opener.getAttribute('data-bundle-product-id') || '') === productId
+            ) {
               opener.removeAttribute('hidden');
+              opener.dataset.noCalc = noCalcForProduct ? 'true' : 'false';
+              var controlsId = opener.querySelector('[aria-controls]') ? opener.querySelector('[aria-controls]').getAttribute('aria-controls') : null;
+              if (controlsId) {
+                var sizeChartModal = document.getElementById(controlsId);
+                if (sizeChartModal) {
+                  var calcBlock = sizeChartModal.querySelector('.size-calculator');
+                  if (calcBlock) calcBlock.style.display = noCalcForProduct ? 'none' : '';
+                }
+              }
             } else {
               opener.setAttribute('hidden', true);
             }

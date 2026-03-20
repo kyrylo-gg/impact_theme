@@ -200,9 +200,13 @@
           {% endif %}
           {% assign size_chart_modals_part = '' %}
           {% capture 'size_chart_modals_part' %}
-            {% if block.settings.size_chart != blank %}
-              {% render 'size-chart', custom: block.id, size_chart_page: block.settings.size_chart, modal_parts: 'modal' %}
-            {% endif %}
+            {% for p in block.settings.products %}
+              {% assign product_size_chart_page = p.metafields.info.size_chart.value | default: p.metafields.info.size_chart %}
+              {% if product_size_chart_page != blank %}
+                {% capture size_chart_custom_id %}{{ block.id }}-{{ p.id }}{% endcapture %}
+                {% render 'size-chart', custom: size_chart_custom_id, product_id: p.id, size_chart_page: product_size_chart_page, modal_parts: 'modal' %}
+              {% endif %}
+            {% endfor %}
           {% endcapture %}
           {% assign size_chart_modals = size_chart_modals | append: size_chart_modals_part %}
           {% assign allowZero = false %}
@@ -271,15 +275,23 @@
                 {%- liquid
                   assign discount = 0
                   assign discount_label = ""
+                  assign has_no_calc_tag = false
                 
                   if p.compare_at_price > p.price and step != 3 and step != 4
                     assign discount = p.compare_at_price | minus: p.price | times: 100 | divided_by: p.compare_at_price
                     assign discount_label = discount | append: "% OFF"
                   endif
+                  for tag in p.tags
+                    assign tag_downcase = tag | downcase
+                    if tag_downcase == 'no_calc'
+                      assign has_no_calc_tag = true
+                      break
+                    endif
+                  endfor
                 -%}
                 {% if p.available %}
                   {% assign item_num = item_num | plus: 1 %}
-                  <div class="cpb__item" data-bundle-item-id="{{ p.id }}" data-sizes='{ {%- for value in p.options_by_name['Size'].values %}"{{ value }}": {% if p.variants[forloop.index0].available %}true{% else %}false{% endif %}{% unless forloop.last %},{% endunless %}{%- endfor -%} }' data-bundle-product-item='{ {% for variant in p.variants %}"{{ variant.id | json }}": {{ variant.title | json }}{% unless forloop.last %},{% endunless %}{% endfor %} }'>
+                  <div class="cpb__item" data-bundle-item-id="{{ p.id }}" data-no-calc="{{ has_no_calc_tag }}" data-sizes='{ {%- for value in p.options_by_name['Size'].values %}"{{ value }}": {% if p.variants[forloop.index0].available %}true{% else %}false{% endif %}{% unless forloop.last %},{% endunless %}{%- endfor -%} }' data-bundle-product-item='{ {% for variant in p.variants %}"{{ variant.id | json }}": {{ variant.title | json }}{% unless forloop.last %},{% endunless %}{% endfor %} }'>
                     <div class="cpb__item-visual">
                       {% comment %} USE data-remove-holder FOR BADGE REMOVER {% endcomment %}
                       <div class="program-badges" data-remove-holder>
@@ -435,9 +447,14 @@
             </div>
             <div class="custom-bundle-item__size-charts" data-size-chart>
               {% for block in section.blocks %}
-                {% if block.settings.size_chart != blank %}
-                  {% render 'size-chart', custom: block.id, stepId: forloop.index, size_chart_page: block.settings.size_chart, modal_parts: 'link' %}
-                {% endif %}
+                {% assign current_step_index = forloop.index %}
+                {% for p in block.settings.products %}
+                  {% assign product_size_chart_page = p.metafields.info.size_chart.value | default: p.metafields.info.size_chart %}
+                  {% if product_size_chart_page != blank %}
+                    {% capture size_chart_custom_id %}{{ block.id }}-{{ p.id }}{% endcapture %}
+                    {% render 'size-chart', custom: size_chart_custom_id, stepId: current_step_index, product_id: p.id, size_chart_page: product_size_chart_page, modal_parts: 'link' %}
+                  {% endif %}
+                {% endfor %}
               {% endfor %}
             </div>
           </div>

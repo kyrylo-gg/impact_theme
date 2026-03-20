@@ -284,6 +284,7 @@
               <table class="bb-size-chart-table" data-bb-sc-table></table>
             </div>
           </div>
+          <div class="bb-size-chart-content" data-bb-sc-content style="display:none;"></div>
           <div class="bb-size-chart-loading" data-bb-sc-loading style="display:none;">Loading size chart...</div>
           <div class="bb-size-chart-empty" data-bb-sc-empty style="display:none;">Size chart not available</div>
         </div>
@@ -333,7 +334,40 @@
         checkoutUrl: {{ routes.root_url | append: 'checkout' | json }},
         currency: {{ cart.currency | default: shop.currency | json }},
         storefrontApiToken: {{ section.settings.storefront_api_token | json }},
-        sizeChartConfigHandle: {{ section.settings.size_chart_config_handle | default: 'size-chart-settings' | json }}
+        sizeChartConfigHandle: {{ section.settings.size_chart_config_handle | default: 'size-chart-settings' | json }},
+        sizeChartByProduct: {
+          {%- assign first_size_chart_item = true -%}
+          {%- for block in step_blocks -%}
+            {%- if block.settings.collection != blank -%}
+              {%- for p in block.settings.collection.products -%}
+                {%- liquid
+                  assign has_no_calc_tag = false
+                  for tag in p.tags
+                    assign tag_downcase = tag | downcase
+                    if tag_downcase == 'no_calc'
+                      assign has_no_calc_tag = true
+                      break
+                    endif
+                  endfor
+                  assign size_chart_handle = ''
+                  assign size_chart_html = ''
+                  assign sc_ref = p.metafields.info.size_chart.value | default: p.metafields.info.size_chart
+                  if sc_ref != blank
+                    assign size_chart_handle = sc_ref.handle | default: sc_ref
+                    assign normalized_handle = size_chart_handle | replace: '/pages/', '' | replace: 'https://', '' | replace: 'http://', ''
+                    assign normalized_handle = normalized_handle | split: '/' | last
+                    if pages[normalized_handle] != blank
+                      assign size_chart_handle = normalized_handle
+                      assign size_chart_html = pages[normalized_handle].content
+                    endif
+                  endif
+                -%}
+                {%- if first_size_chart_item -%}{%- assign first_size_chart_item = false -%}{%- else -%},{%- endif -%}
+                {{ p.id | json }}: { "noCalc": {{ has_no_calc_tag | json }}, "handle": {{ size_chart_handle | json }}, "html": {{ size_chart_html | json }} }
+              {%- endfor -%}
+            {%- endif -%}
+          {%- endfor -%}
+        }
       });
   }
   if (document.readyState === 'loading') {
@@ -1294,6 +1328,48 @@
   .nass-bundle-builder .bb-size-chart-table td { padding: 0.375rem 0.25rem; white-space: nowrap; text-align: center; border-top: 1px solid var(--bb-border); }
   .nass-bundle-builder .bb-size-chart-table th:first-child,
   .nass-bundle-builder .bb-size-chart-table td:first-child { text-align: left; font-weight: 600; }
+  .nass-bundle-builder .bb-size-chart-content {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--color-foreground, #000);
+    line-height: 1.45;
+  }
+  .nass-bundle-builder .bb-size-chart-content > *:first-child { margin-top: 0; }
+  .nass-bundle-builder .bb-size-chart-content > *:last-child { margin-bottom: 0; }
+  .nass-bundle-builder .bb-size-chart-content h1,
+  .nass-bundle-builder .bb-size-chart-content h2,
+  .nass-bundle-builder .bb-size-chart-content h3,
+  .nass-bundle-builder .bb-size-chart-content h4 {
+    margin: 0 0 0.5rem;
+    font-family: var(--bb-font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+  .nass-bundle-builder .bb-size-chart-content table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.75rem;
+    margin: 0.75rem 0 0;
+  }
+  .nass-bundle-builder .bb-size-chart-content th,
+  .nass-bundle-builder .bb-size-chart-content td {
+    padding: 0.375rem 0.25rem;
+    text-align: center;
+    border-top: 1px solid var(--bb-border);
+    white-space: nowrap;
+  }
+  .nass-bundle-builder .bb-size-chart-content th:first-child,
+  .nass-bundle-builder .bb-size-chart-content td:first-child {
+    text-align: left;
+    font-weight: 600;
+  }
+  .nass-bundle-builder .bb-size-chart-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+  }
   .nass-bundle-builder .bb-size-chart-loading,
   .nass-bundle-builder .bb-size-chart-empty {
     text-align: center;
@@ -2014,6 +2090,48 @@
   }
   .nass-bundle-builder .bb-size-chart-table th:first-child,
   .nass-bundle-builder .bb-size-chart-table td:first-child { text-align: left; font-weight: 600; }
+  .nass-bundle-builder .bb-size-chart-content {
+    margin-top: 8px;
+    font-size: 0.875rem;
+    color: var(--color-foreground, #000);
+    line-height: 1.45;
+  }
+  .nass-bundle-builder .bb-size-chart-content > *:first-child { margin-top: 0; }
+  .nass-bundle-builder .bb-size-chart-content > *:last-child { margin-bottom: 0; }
+  .nass-bundle-builder .bb-size-chart-content h1,
+  .nass-bundle-builder .bb-size-chart-content h2,
+  .nass-bundle-builder .bb-size-chart-content h3,
+  .nass-bundle-builder .bb-size-chart-content h4 {
+    margin: 0 0 8px;
+    font-family: var(--bb-font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+  .nass-bundle-builder .bb-size-chart-content table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.75rem;
+    margin: 12px 0 0;
+  }
+  .nass-bundle-builder .bb-size-chart-content th,
+  .nass-bundle-builder .bb-size-chart-content td {
+    padding: 0.375rem 0.25rem;
+    text-align: center;
+    border-top: 1px solid var(--bb-border);
+    white-space: nowrap;
+  }
+  .nass-bundle-builder .bb-size-chart-content th:first-child,
+  .nass-bundle-builder .bb-size-chart-content td:first-child {
+    text-align: left;
+    font-weight: 600;
+  }
+  .nass-bundle-builder .bb-size-chart-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
   .nass-bundle-builder .bb-size-chart-loading,
   .nass-bundle-builder .bb-size-chart-empty {
     text-align: center;
