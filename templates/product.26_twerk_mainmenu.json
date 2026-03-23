@@ -420,6 +420,15 @@
             "is_programs_step": false,
             "program_pack_product": ""
           }
+        },
+        "bundle_step_jtYGNr": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "Choose Equipment",
+            "collection": "bundle-equipment",
+            "is_programs_step": false,
+            "program_pack_product": ""
+          }
         }
       },
       "block_order": [
@@ -427,7 +436,8 @@
         "bundle_step_Trf8GW",
         "bundle_step_bixVxn",
         "bundle_step_L6hhmF",
-        "bundle_step_UeCxyW"
+        "bundle_step_UeCxyW",
+        "bundle_step_jtYGNr"
       ],
       "name": "Bundle Builder",
       "settings": {
