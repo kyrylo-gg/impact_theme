@@ -373,161 +373,77 @@
         "mob_indent_bottom": 0
       }
     },
-    "custom_bundle_fwHcJU": {
-      "type": "custom-bundle",
+    "nass_bundle_builder_FNw8g9": {
+      "type": "nass-bundle-builder",
       "blocks": {
-        "programs_step_LpNbpi": {
-          "type": "programs_step",
+        "bundle_step_ghkYnU": {
+          "type": "bundle_step",
           "settings": {
-            "title": "Select programs:",
-            "badge_text": "Lifetime access",
-            "show_general_badge": true,
-            "general_badge_text": "60% Off All Clothing With Bundle Purchase!",
-            "products": [
-              "twerk-program",
-              "twerk-program-us",
-              "weight-loss-program-us",
-              "home-booty-band-program-us",
-              "home-booty-program-us"
-            ]
+            "title": "Select programs",
+            "collection": "",
+            "is_programs_step": true,
+            "program_pack_product": ""
           }
         },
-        "step_RQNyqp": {
-          "type": "step",
+        "bundle_step_Trf8GW": {
+          "type": "bundle_step",
           "settings": {
-            "title": "Select Nass shorts:",
-            "badge_text": "Extra 50% Off with Programs Bundle at Checkout",
-            "products": [
-              "mystic-zebra",
-              "neon-drift",
-              "terra-speckle",
-              "solid-black",
-              "cosmic-nebula",
-              "perfect-black",
-              "shadow-ninja",
-              "pinky-zebra",
-              "petal-splash",
-              "sunny-ani"
-            ],
-            "first_is_free": false,
-            "first_shown_is_free": false,
-            "allow_next": true,
-            "hide_when_extra": false,
-            "enable_filters": true,
-            "filters_title": "Size Filter",
-            "size_chart": "sizing-chart-model-2"
+            "title": "Choose lounge shorts",
+            "collection": "",
+            "is_programs_step": false,
+            "program_pack_product": ""
           }
         },
-        "step_PnCX6i": {
-          "type": "step",
+        "bundle_step_bixVxn": {
+          "type": "bundle_step",
           "settings": {
-            "title": "Choose Nass shorts:",
-            "badge_text": "Extra 50% Off with Programs Bundle at Checkout",
-            "products": [
-              "gray-paint",
-              "blush-breeze",
-              "safari-heat",
-              "cosmic-blue",
-              "blush-breeze-1",
-              "black-noir"
-            ],
-            "first_is_free": false,
-            "first_shown_is_free": false,
-            "allow_next": true,
-            "hide_when_extra": false,
-            "enable_filters": true,
-            "filters_title": "Size Filter",
-            "size_chart": "sizing-chart-new"
+            "title": "Add sport shorts",
+            "collection": "",
+            "is_programs_step": false,
+            "program_pack_product": ""
           }
         },
-        "step_htTFcp": {
-          "type": "step",
+        "bundle_step_L6hhmF": {
+          "type": "bundle_step",
           "settings": {
-            "title": "Choose Nass shorts:",
-            "badge_text": "Extra 50% Off with Programs Bundle at Checkout",
-            "products": [
-              "caution-zone",
-              "apex-stripe",
-              "lounge-black",
-              "lounge-gray",
-              "lounge-mauve",
-              "nomad-weave"
-            ],
-            "first_is_free": false,
-            "first_shown_is_free": false,
-            "allow_next": true,
-            "hide_when_extra": false,
-            "enable_filters": true,
-            "filters_title": "Size Filter",
-            "size_chart": "lounge-shorts"
+            "title": "Add swim shorts",
+            "collection": "",
+            "is_programs_step": false,
+            "program_pack_product": ""
           }
         },
-        "step_4TeBqm": {
-          "type": "step",
+        "bundle_step_UeCxyW": {
+          "type": "bundle_step",
           "settings": {
-            "title": "Select Top",
-            "badge_text": "Extra 50% Off with Programs Bundle at Checkout",
-            "products": [
-              "pearl-white-top",
-              "deep-ocean-top",
-              "peony-top",
-              "top-navy",
-              "top-pink",
-              "top-white"
-            ],
-            "first_is_free": false,
-            "first_shown_is_free": false,
-            "allow_next": true,
-            "hide_when_extra": false,
-            "enable_filters": true,
-            "filters_title": "Size Filter",
-            "size_chart": "lounge-top"
-          }
-        },
-        "step_hdVqLW": {
-          "type": "step",
-          "settings": {
-            "title": "Select Equipment",
-            "badge_text": "Equipment for your booty workouts",
-            "products": [
-              "nλss-knee-pads",
-              "booty-band-set-1",
-              "gym-gloves"
-            ],
-            "first_is_free": false,
-            "first_shown_is_free": false,
-            "allow_next": true,
-            "hide_when_extra": false,
-            "enable_filters": false,
-            "filters_title": "Size Filter",
-            "size_chart": ""
+            "title": "Select top",
+            "collection": "",
+            "is_programs_step": false,
+            "program_pack_product": ""
           }
         }
       },
       "block_order": [
-        "programs_step_LpNbpi",
-        "step_RQNyqp",
-        "step_PnCX6i",
-        "step_htTFcp",
-        "step_4TeBqm",
-        "step_hdVqLW"
+        "bundle_step_ghkYnU",
+        "bundle_step_Trf8GW",
+        "bundle_step_bixVxn",
+        "bundle_step_L6hhmF",
+        "bundle_step_UeCxyW"
       ],
-      "custom_css": [
-        "@media (max-width: 749px) {.custom-product-bundle {padding-top: 20px; }}"
-      ],
+      "name": "Bundle Builder",
       "settings": {
-        "title": "<h2><strong>ENJOY FOUR PROGRAMS IN ONE DEAL! <br/></strong>FREE US SHIPPING ON ORDERS OVER $140</h2>",
-        "main_product": "twerk-program",
-        "free_extras_badge": false,
-        "duration": "1 Week",
-        "save_for_program": "Save 82%",
-        "save_for_bundle": "Save up to 76%",
-        "extras_description": "<p>+ courseS <br/>+ Shorts<br/>+ EQuIPMENT</p>",
-        "group_products_in_cart": true,
-        "show_extra_steps": false,
-        "allow_one_free": "no",
-        "allow_two_free": "no",
-        "hide_variations": true
+        "image_1": "shopify://shop_images/Frame_7-6.png",
+        "image_2": "shopify://shop_images/Frame_7-4.png",
+        "image_3": "shopify://shop_images/padded_DSC09654_30427d69-c589-45c9-ab7f-2ec9f0e127e1.jpg",
+        "enable_section": true,
+        "show_one_click_alternative": false,
+        "one_click_product": "twerk-program-3",
+        "one_click_label": "Only Twerk program",
+        "program_pack_product": "twerk-program",
+        "discount_code": "",
+        "discount_promo_text": "Get 60% off all clothing with 4 Programs Bundle!",
+        "discount_applied_text": "60% off all clothing applied!",
+        "size_chart_config_handle": "size-chart-settings",
+        "storefront_api_token": ""
       }
     },
     "main": {
@@ -1138,7 +1054,7 @@
     "40de124a-5f36-40b7-9aa1-559609539663",
     "multi_column_CeAVQg",
     "ts_timer_banner_rUceqg",
-    "custom_bundle_fwHcJU",
+    "nass_bundle_builder_FNw8g9",
     "main",
     "c6126f5a-97df-4f0f-acf8-68e170f4dc81",
     "4fc8f1a7-2ac1-41a3-80dc-02e94a393b25",
