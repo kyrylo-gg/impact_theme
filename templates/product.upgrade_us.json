@@ -479,7 +479,7 @@
             "title": "Select programs",
             "collection": "upgrade-pack",
             "is_programs_step": true,
-            "program_pack_product": "programs-upgrade"
+            "program_pack_product": ""
           }
         },
         "bundle_step_jiTzDm": {
