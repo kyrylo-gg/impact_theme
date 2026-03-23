@@ -373,6 +373,89 @@
         "mob_indent_bottom": 0
       }
     },
+    "nass_bundle_builder_qgYTE9": {
+      "type": "nass-bundle-builder",
+      "blocks": {
+        "bundle_step_XtVHe3": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "Select programs",
+            "collection": "bundle-programs-copy",
+            "is_programs_step": true,
+            "program_pack_product": "twerk-program-pin"
+          }
+        },
+        "bundle_step_ByqJTa": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "Choose lounge shorts",
+            "collection": "bundle-lounge-shorts",
+            "is_programs_step": false,
+            "program_pack_product": ""
+          }
+        },
+        "bundle_step_t6xmeg": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "Add sport shorts",
+            "collection": "bundle-sport-shorts",
+            "is_programs_step": false,
+            "program_pack_product": ""
+          }
+        },
+        "bundle_step_xnAhLe": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "Add swim shorts",
+            "collection": "bundle-swim-shorts",
+            "is_programs_step": false,
+            "program_pack_product": ""
+          }
+        },
+        "bundle_step_kUkFQ6": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "Select leggings &  tops",
+            "collection": "bundle-leggings-tops",
+            "is_programs_step": false,
+            "program_pack_product": ""
+          }
+        },
+        "bundle_step_KYdtwx": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "Choose Equipment",
+            "collection": "bundle-equipment",
+            "is_programs_step": false,
+            "program_pack_product": ""
+          }
+        }
+      },
+      "block_order": [
+        "bundle_step_XtVHe3",
+        "bundle_step_ByqJTa",
+        "bundle_step_t6xmeg",
+        "bundle_step_xnAhLe",
+        "bundle_step_kUkFQ6",
+        "bundle_step_KYdtwx"
+      ],
+      "name": "Bundle Builder",
+      "settings": {
+        "image_1": "shopify://shop_images/Frame_7-6.png",
+        "image_2": "shopify://shop_images/Frame_7-4.png",
+        "image_3": "shopify://shop_images/padded_DSC09654_30427d69-c589-45c9-ab7f-2ec9f0e127e1.jpg",
+        "enable_section": true,
+        "show_one_click_alternative": true,
+        "one_click_product": "twerk-program-3",
+        "one_click_label": "Only Twerk program",
+        "program_pack_product": "twerk-program-pin",
+        "discount_code": "",
+        "discount_promo_text": "Get 60% off all clothing with 4 Programs Bundle!",
+        "discount_applied_text": "60% off all clothing applied!",
+        "size_chart_config_handle": "size-chart-settings",
+        "storefront_api_token": ""
+      }
+    },
     "rich_text_3GgPYT": {
       "type": "rich-text",
       "blocks": {
@@ -951,89 +1034,6 @@
         "labels_color": "#000000",
         "mobile_labels_color": "#1a1a1a"
       }
-    },
-    "nass_bundle_builder_qgYTE9": {
-      "type": "nass-bundle-builder",
-      "blocks": {
-        "bundle_step_XtVHe3": {
-          "type": "bundle_step",
-          "settings": {
-            "title": "Select programs",
-            "collection": "bundle-programs-copy",
-            "is_programs_step": true,
-            "program_pack_product": "twerk-program-pin"
-          }
-        },
-        "bundle_step_ByqJTa": {
-          "type": "bundle_step",
-          "settings": {
-            "title": "Choose lounge shorts",
-            "collection": "bundle-lounge-shorts",
-            "is_programs_step": false,
-            "program_pack_product": ""
-          }
-        },
-        "bundle_step_t6xmeg": {
-          "type": "bundle_step",
-          "settings": {
-            "title": "Add sport shorts",
-            "collection": "bundle-sport-shorts",
-            "is_programs_step": false,
-            "program_pack_product": ""
-          }
-        },
-        "bundle_step_xnAhLe": {
-          "type": "bundle_step",
-          "settings": {
-            "title": "Add swim shorts",
-            "collection": "bundle-swim-shorts",
-            "is_programs_step": false,
-            "program_pack_product": ""
-          }
-        },
-        "bundle_step_kUkFQ6": {
-          "type": "bundle_step",
-          "settings": {
-            "title": "Select leggings &  tops",
-            "collection": "bundle-leggings-tops",
-            "is_programs_step": false,
-            "program_pack_product": ""
-          }
-        },
-        "bundle_step_KYdtwx": {
-          "type": "bundle_step",
-          "settings": {
-            "title": "Choose Equipment",
-            "collection": "bundle-equipment",
-            "is_programs_step": false,
-            "program_pack_product": ""
-          }
-        }
-      },
-      "block_order": [
-        "bundle_step_XtVHe3",
-        "bundle_step_ByqJTa",
-        "bundle_step_t6xmeg",
-        "bundle_step_xnAhLe",
-        "bundle_step_kUkFQ6",
-        "bundle_step_KYdtwx"
-      ],
-      "name": "Bundle Builder",
-      "settings": {
-        "image_1": "shopify://shop_images/Frame_7-6.png",
-        "image_2": "shopify://shop_images/Frame_7-4.png",
-        "image_3": "shopify://shop_images/padded_DSC09654_30427d69-c589-45c9-ab7f-2ec9f0e127e1.jpg",
-        "enable_section": true,
-        "show_one_click_alternative": true,
-        "one_click_product": "twerk-program-3",
-        "one_click_label": "Only Twerk program",
-        "program_pack_product": "twerk-program-pin",
-        "discount_code": "",
-        "discount_promo_text": "Get 60% off all clothing with 4 Programs Bundle!",
-        "discount_applied_text": "60% off all clothing applied!",
-        "size_chart_config_handle": "size-chart-settings",
-        "storefront_api_token": ""
-      }
     }
   },
   "order": [
@@ -1044,6 +1044,7 @@
     "40de124a-5f36-40b7-9aa1-559609539663",
     "multi_column_CeAVQg",
     "ts_timer_banner_rUceqg",
+    "nass_bundle_builder_qgYTE9",
     "rich_text_3GgPYT",
     "image_with_text_overlay_QD6tRc",
     "image_with_text_overlay_qVMnJr",
@@ -1058,7 +1059,6 @@
     "29817d12-4af7-49ab-8a92-c41c03e71d08",
     "zp-product-footer-content",
     "rich_text_MYJmh8",
-    "custom_quick_add_R3TUQm",
-    "nass_bundle_builder_qgYTE9"
+    "custom_quick_add_R3TUQm"
   ]
 }
