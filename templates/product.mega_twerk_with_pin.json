@@ -266,46 +266,6 @@
         "video_mobile": "shopify://files/videos/NASS_talk mob_2.webm"
       }
     },
-    "twerk_makeovers_dHGL9w": {
-      "type": "twerk-makeovers",
-      "blocks": {
-        "makeover_video_EHx74H": {
-          "type": "makeover_video",
-          "settings": {
-            "video": "shopify://files/videos/makeover-1.mp4"
-          }
-        },
-        "makeover_video_jMbjrF": {
-          "type": "makeover_video",
-          "settings": {
-            "video": "shopify://files/videos/makeover-2.mp4"
-          }
-        },
-        "makeover_video_nH6rxE": {
-          "type": "makeover_video",
-          "settings": {
-            "video": "shopify://files/videos/makeover-3.mp4"
-          }
-        },
-        "makeover_video_7jxidU": {
-          "type": "makeover_video",
-          "settings": {
-            "video": "shopify://files/videos/makeover-4.mp4"
-          }
-        }
-      },
-      "block_order": [
-        "makeover_video_EHx74H",
-        "makeover_video_jMbjrF",
-        "makeover_video_nH6rxE",
-        "makeover_video_7jxidU"
-      ],
-      "settings": {
-        "heading": "look at these incredible",
-        "heading_highlight": "twerk makeovers",
-        "subtitle": "YOU CAN ACHIEVE THIS TOO!"
-      }
-    },
     "feedback_screenshots_main": {
       "type": "feedback-live-screenshots",
       "blocks": {
@@ -488,9 +448,9 @@
           "type": "bundle_step",
           "settings": {
             "title": "Select programs",
-            "collection": "bundle-programs",
+            "collection": "bundle-programs-copy",
             "is_programs_step": true,
-            "program_pack_product": "bundle-test"
+            "program_pack_product": "twerk-program-pin"
           }
         },
         "step_shorts": {
@@ -555,7 +515,7 @@
         "show_one_click_alternative": true,
         "one_click_product": "twerk-program-lovable",
         "one_click_label": "Twerk program",
-        "program_pack_product": "bundle-test",
+        "program_pack_product": "twerk-program-pin",
         "discount_code": "",
         "discount_promo_text": "Get 60% off all clothing with 4 Programs Bundle!",
         "discount_applied_text": "60% off all clothing applied!",
@@ -606,6 +566,46 @@
         "feature_4"
       ],
       "settings": {}
+    },
+    "twerk_makeovers_dHGL9w": {
+      "type": "twerk-makeovers",
+      "blocks": {
+        "makeover_video_EHx74H": {
+          "type": "makeover_video",
+          "settings": {
+            "video": "shopify://files/videos/makeover-1.mp4"
+          }
+        },
+        "makeover_video_jMbjrF": {
+          "type": "makeover_video",
+          "settings": {
+            "video": "shopify://files/videos/makeover-2.mp4"
+          }
+        },
+        "makeover_video_nH6rxE": {
+          "type": "makeover_video",
+          "settings": {
+            "video": "shopify://files/videos/makeover-3.mp4"
+          }
+        },
+        "makeover_video_7jxidU": {
+          "type": "makeover_video",
+          "settings": {
+            "video": "shopify://files/videos/makeover-4.mp4"
+          }
+        }
+      },
+      "block_order": [
+        "makeover_video_EHx74H",
+        "makeover_video_jMbjrF",
+        "makeover_video_nH6rxE",
+        "makeover_video_7jxidU"
+      ],
+      "settings": {
+        "heading": "look at these incredible",
+        "heading_highlight": "twerk makeovers",
+        "subtitle": "YOU CAN ACHIEVE THIS TOO!"
+      }
     },
     "testimonials_main": {
       "type": "nass-testimonials",
