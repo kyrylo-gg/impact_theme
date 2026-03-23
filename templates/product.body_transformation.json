@@ -442,7 +442,7 @@
         "plan_b_image": "shopify://shop_images/Frame_41-2.png",
         "plan_b_list_left": "Gentle warm-up\nLow-impact strength\nMobility + core",
         "plan_b_list_right": "Breathing / stretch\nTotal: ~YY min",
-        "footer": "Everything stays organized for you —\ninside the app."
+        "footer": "Everything stays organized for you inside the app."
       }
     },
     "bt_app_access": {
@@ -687,14 +687,14 @@
           "type": "faq",
           "settings": {
             "question": "Is this program good for women 35+ / 40+ / 50+?",
-            "answer": "Yes. This program can be a good option for women 35+, 40+, and 50+ because it is built on a gradual progression from simple to more challenging workouts.\n\nThe program starts with easier exercises and increases in difficulty step by step. This allows the body to adapt safely over time instead of being exposed to sudden high intensity.\n\nAnother important safety feature is that to move to a more advanced level, you need to pass a test. This ensures that you are physically ready before progressing, which helps reduce the risk of overtraining or injury.\n\nBecause of this structured progression and readiness check, the program is designed to be as safe and adaptable as possible for different fitness levels and ages."
+            "answer": "Yes. This program is great for women 35+, 40+, and 50+. It ensures safety through gradual progression (starting easy to let the body adapt) and readiness test (you must pass a test to advance), which minimizes the risk of injury."
           }
         },
         "faq_LLx6ba": {
           "type": "faq",
           "settings": {
             "question": "Do I have to do jumping or HIIT?",
-            "answer": "No, you don’t have to do jumping or HIIT at the beginning.\n\nAt the soft level, there are no jumping exercises. This stage focuses on controlled movements, proper technique, and gradually building strength and endurance.\n\nThe program uses the HIIT (High-Intensity Interval Training) logic, meaning workouts follow an interval structure where periods of activity alternate with short rest. At the early stages this format is adapted to be comfortable and beginner-friendly.\n\nStarting from the basic level, the HIIT intensity gradually begins to increase, but it is still designed to feel manageable and safe, and it does not include jumping yet.\n\nJumping and more high-intensity HIIT elements appear at the hard level, when your body is already better prepared for higher impact and faster-paced workouts.\n\nThe program follows a gradual progression: both the intensity and complexity increase step by step, reaching their highest point in the final week of the hard level. This allows your body to adapt safely while still achieving strong results over time."
+            "answer": "No. You don’t have to do jumping or intense HIIT at the start. The program uses a step-by-step interval structure for safe adaptation.\nSoft Level: No jumping. Focuses on technique and gentle conditioning.\n\nBasic Level: Slightly higher intensity, but still manageable and jump-free.\n\nHard Level: Introduces jumping and high-intensity HIIT only when your body is fully prepared."
           }
         },
         "faq_keYwNN": {
