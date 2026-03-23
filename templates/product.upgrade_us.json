@@ -368,6 +368,7 @@
         "template--14907164164170__6a17e412-5781-464f-a3ba-e01d3b965529-richtext-1",
         "d3ed3992-3582-40bb-8c2c-37e5e4cb737d"
       ],
+      "disabled": true,
       "custom_css": [
         "em {font-style: normal; background: none; background-image: url(\"https://cdn.shopify.com/s/files/1/0276/5658/5290/files/Instagram-Verified-Badge-PNG-Transparent-Image_430x.png?v=1694440020\"); padding-right: 18px; background-size: 16px; background-repeat: no-repeat; background-position: right;}"
       ],
@@ -391,6 +392,7 @@
       "block_order": [
         "template--14907164164170__40de124a-5f36-40b7-9aa1-559609539663-play-1"
       ],
+      "disabled": true,
       "settings": {
         "full_width": false,
         "allow_transparent_header": false,
