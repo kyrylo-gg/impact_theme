@@ -470,139 +470,74 @@
         "text_color": ""
       }
     },
-    "custom_liquid_pKWtCe": {
-      "type": "custom-liquid",
-      "settings": {
-        "full_width": true,
-        "remove_vertical_spacing": false,
-        "remove_horizontal_spacing": false,
-        "liquid": "<div class=\"countdown-timer-block\" countdown-timer-id=\"cm1ugcxk917487719rqre2uojys\"></div>",
-        "background": "",
-        "background_gradient": "",
-        "text_color": ""
-      }
-    },
-    "custom_bundle_fwHcJU": {
-      "type": "custom-bundle",
+    "nass_bundle_builder_mtrdAj": {
+      "type": "nass-bundle-builder",
       "blocks": {
-        "programs_step_LpNbpi": {
-          "type": "programs_step",
+        "bundle_step_DGgyaM": {
+          "type": "bundle_step",
           "settings": {
             "title": "Select programs",
-            "badge_text": "Lifetime access",
-            "show_general_badge": false,
-            "general_badge_text": "Select your free shorts on the next step!",
-            "products": [
-              "programs-upgrade"
-            ]
+            "collection": "",
+            "is_programs_step": true,
+            "program_pack_product": ""
           }
         },
-        "step_RQNyqp": {
-          "type": "step",
+        "bundle_step_jiTzDm": {
+          "type": "bundle_step",
           "settings": {
-            "title": "Select Nass shorts",
-            "badge_text": "33% off with any program",
-            "products": [
-              "perfect-black",
-              "solid-black",
-              "pinky-zebra",
-              "cosmic-nebula",
-              "neon-drift",
-              "terra-speckle",
-              "mystic-zebra",
-              "shadow-ninja",
-              "petal-splash",
-              "sunny-ani"
-            ],
-            "first_is_free": false,
-            "first_shown_is_free": false,
-            "allow_next": true,
-            "hide_when_extra": false,
-            "enable_filters": true,
-            "filters_title": "Size Filter",
-            "size_chart": "sizing-chart-model-2"
+            "title": "Choose lounge shorts",
+            "collection": "",
+            "is_programs_step": false,
+            "program_pack_product": ""
           }
         },
-        "step_PnCX6i": {
-          "type": "step",
+        "bundle_step_rYay7T": {
+          "type": "bundle_step",
           "settings": {
-            "title": "Select Nass shorts",
-            "badge_text": "33% off with any program",
-            "products": [
-              "black-noir",
-              "blush-breeze",
-              "cosmic-blue",
-              "gray-paint",
-              "blush-breeze-1",
-              "safari-heat"
-            ],
-            "first_is_free": false,
-            "first_shown_is_free": false,
-            "allow_next": true,
-            "hide_when_extra": false,
-            "enable_filters": true,
-            "filters_title": "Size Filter",
-            "size_chart": "sizing-chart-new"
+            "title": "Add sport shorts",
+            "collection": "",
+            "is_programs_step": false,
+            "program_pack_product": ""
           }
         },
-        "step_4TeBqm": {
-          "type": "step",
+        "bundle_step_E4hBWx": {
+          "type": "bundle_step",
           "settings": {
-            "title": "Select Top",
-            "badge_text": "33% off with any program",
-            "products": [
-              "top-navy",
-              "top-pink",
-              "top-white"
-            ],
-            "first_is_free": false,
-            "first_shown_is_free": false,
-            "allow_next": true,
-            "hide_when_extra": false,
-            "enable_filters": true,
-            "filters_title": "Size Filter",
-            "size_chart": "tank-top"
+            "title": "Add swim shorts",
+            "collection": "",
+            "is_programs_step": false,
+            "program_pack_product": ""
           }
         },
-        "step_hdVqLW": {
-          "type": "step",
+        "bundle_step_VUTzyw": {
+          "type": "bundle_step",
           "settings": {
-            "title": "Select Equipment",
-            "badge_text": "Equipment for your booty workouts",
-            "products": [
-              "stretching-band-set-copy",
-              "gym-gloves"
-            ],
-            "first_is_free": false,
-            "first_shown_is_free": true,
-            "allow_next": true,
-            "hide_when_extra": false,
-            "enable_filters": false,
-            "filters_title": "Size Filter",
-            "size_chart": ""
+            "title": "Select top",
+            "collection": "",
+            "is_programs_step": false,
+            "program_pack_product": ""
           }
         }
       },
       "block_order": [
-        "programs_step_LpNbpi",
-        "step_RQNyqp",
-        "step_PnCX6i",
-        "step_4TeBqm",
-        "step_hdVqLW"
+        "bundle_step_DGgyaM",
+        "bundle_step_jiTzDm",
+        "bundle_step_rYay7T",
+        "bundle_step_E4hBWx",
+        "bundle_step_VUTzyw"
       ],
+      "name": "Bundle Builder",
       "settings": {
-        "title": "<h2><strong>COMPLETE YOUR WORKOUT EXPERIENCE WITH CHRISTMAS UPGRADE PACK!</strong></h2>",
-        "main_product": "",
-        "free_extras_badge": true,
-        "duration": "1 Week",
-        "save_for_program": "Save 82%",
-        "save_for_bundle": "Save up to 82%",
-        "extras_description": "<p>+ courseS <br/>+ Shorts<br/>+ EQIPMENT</p>",
-        "group_products_in_cart": true,
-        "show_extra_steps": false,
-        "allow_one_free": "no",
-        "allow_two_free": "no",
-        "hide_variations": false
+        "enable_section": true,
+        "show_one_click_alternative": false,
+        "one_click_product": "",
+        "one_click_label": "Only Twerk program",
+        "program_pack_product": "",
+        "discount_code": "",
+        "discount_promo_text": "Get 60% off all clothing with 4 Programs Bundle!",
+        "discount_applied_text": "60% off all clothing applied!",
+        "size_chart_config_handle": "size-chart-settings",
+        "storefront_api_token": ""
       }
     },
     "impact_text_EMzCE4": {
@@ -1206,8 +1141,7 @@
     "6a17e412-5781-464f-a3ba-e01d3b965529",
     "40de124a-5f36-40b7-9aa1-559609539663",
     "multi_column_CeAVQg",
-    "custom_liquid_pKWtCe",
-    "custom_bundle_fwHcJU",
+    "nass_bundle_builder_mtrdAj",
     "impact_text_EMzCE4",
     "featured_product_b9NNzV",
     "main",
