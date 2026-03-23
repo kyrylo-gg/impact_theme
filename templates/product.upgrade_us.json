@@ -24,7 +24,7 @@
         "template--14907164164170__e72b3e83-78ae-427f-a359-430414bcfda5-heading-1": {
           "type": "heading",
           "settings": {
-            "text": "TWERK PROGRAM UPGRADE <br>ONLY $49!",
+            "text": "ALL BOOTY PROGRAMS FOR ONLY $49!",
             "heading_tag": "h1",
             "special_padding": ""
           }
@@ -129,6 +129,7 @@
         },
         "template--14946156675146__5f0be783-db76-4fcb-a8fe-268b5cff16d3-item-3": {
           "type": "item",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/booty_band_212.jpg",
             "column_size": "3",
@@ -142,6 +143,7 @@
         },
         "dae5c4ed-33f7-48ac-bfc7-7e1fce3d54eb": {
           "type": "item",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/weight_loss_program_36417aa7-7758-48b7-b433-fa9c50ce1f65.jpg",
             "column_size": "3",
@@ -155,6 +157,7 @@
         },
         "5f3f15ac-e0c4-411d-b8cb-beb4f4e6b45a": {
           "type": "item",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/stretching_74304a20-30a9-489a-8df4-91c716b97268.jpg",
             "column_size": "3",
@@ -277,6 +280,7 @@
       "block_order": [
         "heading_TVBCHz"
       ],
+      "disabled": true,
       "settings": {
         "full_width": false,
         "allow_transparent_header": false,
