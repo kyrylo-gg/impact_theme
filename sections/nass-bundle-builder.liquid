@@ -19,7 +19,9 @@
       <div class="bb-heading">
         <span class="bb-badge-pill">Save up to 82%</span>
         <h2 class="bb-title">BUILD YOUR <span class="bb-title-accent">PERFECT BUNDLE!</span></h2>
-        <p class="bb-description">Mix programs, shorts, and tops. Get 60% off all clothing when you add the 4 Programs Bundle.</p>
+        {% if section.settings.bb_description != blank %}
+          <p class="bb-description">{{ section.settings.bb_description }}</p>
+        {% endif %}
       </div>
 
       {%- comment -%} Landing Card {%- endcomment -%}
@@ -75,9 +77,11 @@
           <h3 class="bb-card-title">CUSTOM BUNDLE BUILDER</h3>
           <p class="bb-card-subtitle">Programs + Shorts + Leggings + Tops</p>
 
-          <div class="bb-promo-banner">
-            60% OFF ALL CLOTHING / with Program Pack purchase
-          </div>
+          {% if section.settings.bb_promo_banner_text != blank %}
+            <div class="bb-promo-banner">
+              {{ section.settings.bb_promo_banner_text }}
+            </div>
+          {% endif %}
 
           <div class="bb-cta-block">
             <span class="bb-shipping-badge">
@@ -2738,6 +2742,18 @@
       "id": "enable_section",
       "label": "Enable Bundle Builder",
       "default": true
+    },
+    {
+      "type": "text",
+      "id": "bb_description",
+      "label": "Description text",
+      "default": "Mix programs, shorts, and tops. Get 60% off all clothing when you add the 4 Programs Bundle."
+    },
+    {
+      "type": "text",
+      "id": "bb_promo_banner_text",
+      "label": "Promo banner text",
+      "default": "60% OFF ALL CLOTHING / with Program Pack purchase"
     },
     {
       "type": "header",
