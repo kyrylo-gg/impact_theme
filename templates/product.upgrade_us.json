@@ -49,7 +49,7 @@
             "style": "outline",
             "size": "lg",
             "text": "Get Now!",
-            "url": "#shopify-section-template--18403179561034__custom_bundle_fwHcJU",
+            "url": "#nass-bundle-builder",
             "background": "",
             "text_color": "#ffffff"
           }
@@ -528,14 +528,19 @@
       ],
       "name": "Bundle Builder",
       "settings": {
+        "image_1": "shopify://shop_images/Frame_7-6.png",
+        "image_2": "shopify://shop_images/Frame_7-4.png",
+        "image_3": "shopify://shop_images/padded_DSC09654_30427d69-c589-45c9-ab7f-2ec9f0e127e1.jpg",
         "enable_section": true,
+        "bb_description": "Mix programs, shorts, and tops. Get 60% off all clothing when you add the 4 Programs Bundle.",
+        "bb_promo_banner_text": "ALL BOOTY PROGRAMS FOR ONLY $49!",
         "show_one_click_alternative": false,
         "one_click_product": "",
         "one_click_label": "Only Twerk program",
         "program_pack_product": "",
         "discount_code": "",
-        "discount_promo_text": "Get 60% off all clothing with 4 Programs Bundle!",
-        "discount_applied_text": "60% off all clothing applied!",
+        "discount_promo_text": "30% off all clothing in bundle",
+        "discount_applied_text": "30% off all clothing in bundle",
         "size_chart_config_handle": "size-chart-settings",
         "storefront_api_token": ""
       }
