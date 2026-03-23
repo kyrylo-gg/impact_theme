@@ -363,7 +363,7 @@
         "title_1": "Choose Your",
         "title_2": "Starting Level",
         "subtitle": "You don't push through. You progress.",
-        "bottom": "And when life gets messy, you don’t fall off. You switch modes."
+        "bottom": "And when life gets messy, you don't fall off—you switch modes."
       }
     },
     "bt_benefits": {
@@ -542,7 +542,7 @@
       ],
       "settings": {
         "title": "Choose Your Path",
-        "subtitle": "Start at your level today — or get the complete system for the best value.",
+        "subtitle": "Start at your level today, or choose the complete system for the best value.",
         "full_image_mobile": "shopify://shop_images/Frame_41-5.png",
         "full_image_desktop": "shopify://shop_images/Frame_41-6.png",
         "badge_1": "Recommended",
@@ -556,7 +556,7 @@
         "cta_full": "Get the Full Program",
         "cta_level": "Shop now",
         "prefer_text": "Prefer to start smaller? Pick one level below.",
-        "bottom_1": "Most women choose the Full Bundle — so they can start Soft now and have the full roadmap ready when they're ready.",
+        "bottom_1": "Most women choose the Full Bundle so they can start Soft now and have the full roadmap ready when they’re ready.",
         "bottom_2": "Still want to hear it from women who started exactly where you are?"
       }
     },
