@@ -172,7 +172,7 @@
         "title_white_1": "Transform",
         "title_white_2": "Your Body",
         "title_yellow": "in 3 Months",
-        "subtitle": "Follow the Soft → Basic → Hard training roadmap — built for real life.",
+        "subtitle": "Follow the Soft → Basic → Hard training roadmap. Built for real life.",
         "below_text": "If you've tried before but didn't get results, here's why."
       }
     },
@@ -193,7 +193,7 @@
           "type": "card",
           "settings": {
             "emoji": "😓",
-            "text": "PMS hits — and my routine falls apart every month.",
+            "text": "PMS hits, and my routine falls apart every month.",
             "back_emoji": "🙌",
             "back_text": "You'll have a built-in low-energy option, so you can stay consistent.",
             "variant": "purple"
@@ -203,7 +203,7 @@
           "type": "card",
           "settings": {
             "emoji": "🗓",
-            "text": "I can’t stick to long workouts — my schedule is chaos.",
+            "text": "I cannot stick to long workouts. My schedule is chaotic.",
             "back_emoji": "😌",
             "back_text": "You’ll always have a minimum effective option that still counts.",
             "variant": "blue"
@@ -213,7 +213,7 @@
           "type": "card",
           "settings": {
             "emoji": "😬",
-            "text": "Jumping/HIIT hurts my knees — or feels too intense.",
+            "text": "Jumping or HIIT hurts my knees or just feels too intense.",
             "back_emoji": "🤸",
             "back_text": "You start joint-friendly and level up only when you're ready.",
             "variant": "purple"
@@ -223,7 +223,7 @@
           "type": "card",
           "settings": {
             "emoji": "🤷‍♀️",
-            "text": "I don’t know what to do — so I do random workouts.",
+            "text": "I do random workouts because I do not know what to do.",
             "back_emoji": "😄",
             "back_text": "You’ll follow a clear roadmap: Build → Sculpt → Burn, step by step.",
             "variant": "blue"
@@ -235,7 +235,7 @@
             "emoji": "😢",
             "text": "I want to look tighter, but I hate “punishment” workouts.",
             "back_emoji": "⚡",
-            "back_text": "This is consistency-first training — results without extremes.",
+            "back_text": "This is consistency-first training. Visible results without extremes.",
             "variant": "purple"
           }
         }
@@ -631,6 +631,8 @@
         "image_2": "shopify://shop_images/Frame_7-4.png",
         "image_3": "shopify://shop_images/padded_DSC09654_30427d69-c589-45c9-ab7f-2ec9f0e127e1.jpg",
         "enable_section": true,
+        "bb_description": "Mix programs, shorts, and tops. Get 60% off all clothing when you add the 4 Programs Bundle.",
+        "bb_promo_banner_text": "60% OFF ALL CLOTHING / with Program Pack purchase",
         "show_one_click_alternative": true,
         "one_click_product": "twerk-program-lovable",
         "one_click_label": "Twerk program",
