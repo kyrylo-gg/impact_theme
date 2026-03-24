@@ -15,7 +15,7 @@
         "heading_1": {
           "type": "heading",
           "settings": {
-            "text": "BOOTY WORKOUTS WORTH MILLIONS",
+            "text": "RECONNECT WITH YOUR BODY THIS EASTER",
             "heading_tag": "h1",
             "special_padding": ""
           }
@@ -31,7 +31,7 @@
         "subheading": {
           "type": "subheading",
           "settings": {
-            "text": "Only $107 for St. Patrick’s Day (Save $349)"
+            "text": "Only $97 for All Booty Programs (Save $359)"
           }
         },
         "button_cta": {
@@ -264,46 +264,6 @@
         "username": "@nastya_nass_",
         "video_desktop": "shopify://files/videos/NASS_talk desktop_1.webm",
         "video_mobile": "shopify://files/videos/NASS_talk mob_2.webm"
-      }
-    },
-    "twerk_makeovers_dHGL9w": {
-      "type": "twerk-makeovers",
-      "blocks": {
-        "makeover_video_EHx74H": {
-          "type": "makeover_video",
-          "settings": {
-            "video": "shopify://files/videos/makeover-1.mp4"
-          }
-        },
-        "makeover_video_jMbjrF": {
-          "type": "makeover_video",
-          "settings": {
-            "video": "shopify://files/videos/makeover-2.mp4"
-          }
-        },
-        "makeover_video_nH6rxE": {
-          "type": "makeover_video",
-          "settings": {
-            "video": "shopify://files/videos/makeover-3.mp4"
-          }
-        },
-        "makeover_video_7jxidU": {
-          "type": "makeover_video",
-          "settings": {
-            "video": "shopify://files/videos/makeover-4.mp4"
-          }
-        }
-      },
-      "block_order": [
-        "makeover_video_EHx74H",
-        "makeover_video_jMbjrF",
-        "makeover_video_nH6rxE",
-        "makeover_video_7jxidU"
-      ],
-      "settings": {
-        "heading": "look at these incredible",
-        "heading_highlight": "twerk makeovers",
-        "subtitle": "YOU CAN ACHIEVE THIS TOO!"
       }
     },
     "feedback_screenshots_main": {
@@ -552,6 +512,8 @@
         "image_2": "shopify://shop_images/Frame_7-4.png",
         "image_3": "shopify://shop_images/padded_DSC09654_30427d69-c589-45c9-ab7f-2ec9f0e127e1.jpg",
         "enable_section": true,
+        "bb_description": "Mix programs, shorts, and tops. Get 60% off all clothing when you add the 4 Programs Bundle.",
+        "bb_promo_banner_text": "60% OFF ALL CLOTHING / with Program Pack purchase",
         "show_one_click_alternative": true,
         "one_click_product": "twerk-program-lovable",
         "one_click_label": "Twerk program",
@@ -606,6 +568,46 @@
         "feature_4"
       ],
       "settings": {}
+    },
+    "twerk_makeovers_dHGL9w": {
+      "type": "twerk-makeovers",
+      "blocks": {
+        "makeover_video_EHx74H": {
+          "type": "makeover_video",
+          "settings": {
+            "video": "shopify://files/videos/makeover-1.mp4"
+          }
+        },
+        "makeover_video_jMbjrF": {
+          "type": "makeover_video",
+          "settings": {
+            "video": "shopify://files/videos/makeover-2.mp4"
+          }
+        },
+        "makeover_video_nH6rxE": {
+          "type": "makeover_video",
+          "settings": {
+            "video": "shopify://files/videos/makeover-3.mp4"
+          }
+        },
+        "makeover_video_7jxidU": {
+          "type": "makeover_video",
+          "settings": {
+            "video": "shopify://files/videos/makeover-4.mp4"
+          }
+        }
+      },
+      "block_order": [
+        "makeover_video_EHx74H",
+        "makeover_video_jMbjrF",
+        "makeover_video_nH6rxE",
+        "makeover_video_7jxidU"
+      ],
+      "settings": {
+        "heading": "look at these incredible",
+        "heading_highlight": "twerk makeovers",
+        "subtitle": "YOU CAN ACHIEVE THIS TOO!"
+      }
     },
     "testimonials_main": {
       "type": "nass-testimonials",
