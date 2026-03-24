@@ -585,7 +585,6 @@
   document.addEventListener('DOMContentLoaded', () => {
     const original = document.getElementById('quick-add-original');
     const sticky = document.getElementById('quick-add-sticky-{{ section.id }}');
-    const stickyButton = sticky ? sticky.querySelector('.custom-quick-add-button') : null;
     const buyButtons = document.querySelector('.buy-buttons');
     const bundleBuilder = document.getElementById('nass-bundle-builder');
     const searchParams = new URLSearchParams(window.location.search);
@@ -600,22 +599,6 @@
     }
 
     if (!sticky) return;
-
-    if (stickyButton) {
-      stickyButton.addEventListener('click', function(e) {
-        const href = String(stickyButton.getAttribute('href') || '');
-        if (href !== '#nass-bundle-builder') return;
-
-        e.preventDefault();
-        if (window.NassBundleBuilder && typeof window.NassBundleBuilder.openWizard === 'function') {
-          window.NassBundleBuilder.openWizard();
-          return;
-        }
-
-        // Fallback: keep hash behavior if builder script not ready yet.
-        window.location.hash = '#nass-bundle-builder';
-      });
-    }
 
     function updateStickyVisibility() {
       const hideOriginal = original && isElementInViewport(original, 0.1);
