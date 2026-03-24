@@ -95,8 +95,8 @@
         "timer_42j3k2": {
           "type": "timer",
           "settings": {
-            "timer_type": "daily",
-            "cancel_date": "25-12-2025 23:59",
+            "timer_type": "cancel_date",
+            "cancel_date": "05-04-2026 23:59",
             "cancel_time": 6,
             "cancel_action": "none",
             "countdown_background": "linear-gradient(180deg, rgba(49, 49, 49, 1), rgba(28, 28, 28, 1) 100%)",
