@@ -76,7 +76,7 @@
         "title": {
           "type": "title",
           "settings": {
-            "label": "More Than a Million  in Gold Here 🔑",
+            "label": "Get 2+1 on All Clothing This Easter 🐰",
             "color": "#000000",
             "desk_font_size": 25,
             "mob_font_size": 13
@@ -99,7 +99,7 @@
             "cancel_date": "25-12-2025 23:59",
             "cancel_time": 6,
             "cancel_action": "none",
-            "countdown_background": "linear-gradient(180deg, rgba(14, 91, 45, 1), rgba(5, 32, 16, 1) 100%)",
+            "countdown_background": "linear-gradient(180deg, rgba(49, 49, 49, 1), rgba(28, 28, 28, 1) 100%)",
             "countdown_color": "#ffffff",
             "desk_countdown_font_size": 25,
             "mob_countdown_font_size": 13,
