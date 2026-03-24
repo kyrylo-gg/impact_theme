@@ -482,6 +482,7 @@
         },
         "step_tops": {
           "type": "bundle_step",
+          "disabled": true,
           "settings": {
             "title": "Leggings and Tops",
             "collection": "bundle-leggings-tops",
@@ -491,6 +492,7 @@
         },
         "bundle_step_bb96UU": {
           "type": "bundle_step",
+          "disabled": true,
           "settings": {
             "title": "Workout Equipment",
             "collection": "bundle-equipment",
