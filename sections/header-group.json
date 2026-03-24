@@ -171,7 +171,7 @@
         "show_country_selector": true,
         "show_country_flag": true,
         "show_country_name": false,
-        "transparent_header_text_color": "#ffffff",
+        "transparent_header_text_color": "#fedadc",
         "transparent_logo": "shopify://shop_images/NASS_white_logo_1.svg",
         "reduce_padding": true,
         "background_opacity": 92,
