@@ -10,25 +10,48 @@
   assign subtitle_desktop = section.settings.subtitle_desktop | default: 'Start today. Follow the plan. Stay consistent.'
   assign footer_text = section.settings.footer_text | default: 'And when you stay consistent, the change becomes visible.'
 
-  assign shopify_video = section.settings.video
-  assign mp4_url = section.settings.video_url
+  assign shopify_video_mobile = section.settings.video_mobile
+  assign shopify_video_desktop = section.settings.video_desktop
+  assign mp4_url_mobile = section.settings.video_url_mobile
+  assign mp4_url_desktop = section.settings.video_url_desktop
+  assign shopify_video_legacy = section.settings.video
+  assign mp4_url_legacy = section.settings.video_url
   assign overlay_opacity = section.settings.overlay_opacity | default: 0.3
 -%}
 
 <section class="bt-wrap bt-app">
   <div class="bt-container bt-app__container">
     <div class="bt-app__banner">
-      {%- if shopify_video != blank -%}
-        <video class="bt-app__video" autoplay loop muted playsinline preload="auto">
-          {%- for source in shopify_video.sources -%}
+      {%- assign mobile_video_to_use = shopify_video_mobile | default: shopify_video_legacy -%}
+      {%- assign mobile_mp4_to_use = mp4_url_mobile | default: mp4_url_legacy -%}
+      {%- assign desktop_video_to_use = shopify_video_desktop | default: shopify_video_legacy -%}
+      {%- assign desktop_mp4_to_use = mp4_url_desktop | default: mp4_url_legacy -%}
+
+      {%- if mobile_video_to_use != blank -%}
+        <video class="bt-app__video bt-app__video--m" autoplay loop muted playsinline preload="auto">
+          {%- for source in mobile_video_to_use.sources -%}
             {%- if source.mime_type == 'video/mp4' -%}
               <source src="{{ source.url }}" type="{{ source.mime_type }}">
             {%- endif -%}
           {%- endfor -%}
         </video>
-      {%- elsif mp4_url != blank -%}
-        <video class="bt-app__video" autoplay loop muted playsinline preload="auto">
-          <source src="{{ mp4_url }}" type="video/mp4">
+      {%- elsif mobile_mp4_to_use != blank -%}
+        <video class="bt-app__video bt-app__video--m" autoplay loop muted playsinline preload="auto">
+          <source src="{{ mobile_mp4_to_use }}" type="video/mp4">
+        </video>
+      {%- endif -%}
+
+      {%- if desktop_video_to_use != blank -%}
+        <video class="bt-app__video bt-app__video--d" autoplay loop muted playsinline preload="auto">
+          {%- for source in desktop_video_to_use.sources -%}
+            {%- if source.mime_type == 'video/mp4' -%}
+              <source src="{{ source.url }}" type="{{ source.mime_type }}">
+            {%- endif -%}
+          {%- endfor -%}
+        </video>
+      {%- elsif desktop_mp4_to_use != blank -%}
+        <video class="bt-app__video bt-app__video--d" autoplay loop muted playsinline preload="auto">
+          <source src="{{ desktop_mp4_to_use }}" type="video/mp4">
         </video>
       {%- endif -%}
       <div class="bt-app__overlay" style="opacity: {{ overlay_opacity }};" aria-hidden="true"></div>
@@ -59,6 +82,12 @@
   @media (min-width: 768px) { .bt-app__banner { height: 511px; } }
 
   .bt-app__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .bt-app__video--m { display: block; }
+  .bt-app__video--d { display: none; }
+  @media (min-width: 768px) {
+    .bt-app__video--m { display: none; }
+    .bt-app__video--d { display: block; }
+  }
   .bt-app__overlay { position: absolute; inset: 0; background: #000; }
 
   .bt-app__center { text-align: center; padding: 0 28px; position: relative; z-index: 1; }
@@ -97,8 +126,13 @@
   "tag": "section",
   "settings": [
     { "type": "header", "content": "Video background (optional)" },
-    { "type": "video", "id": "video", "label": "Shopify video (Files)" },
-    { "type": "url", "id": "video_url", "label": "Fallback MP4 URL (optional)" },
+    { "type": "video", "id": "video_mobile", "label": "Mobile Shopify video (Files)" },
+    { "type": "url", "id": "video_url_mobile", "label": "Mobile fallback MP4 URL (optional)" },
+    { "type": "video", "id": "video_desktop", "label": "Desktop Shopify video (Files)" },
+    { "type": "url", "id": "video_url_desktop", "label": "Desktop fallback MP4 URL (optional)" },
+    { "type": "header", "content": "Legacy fallback (optional)" },
+    { "type": "video", "id": "video", "label": "Legacy Shopify video (used if mobile/desktop are empty)" },
+    { "type": "url", "id": "video_url", "label": "Legacy MP4 URL (used if mobile/desktop are empty)" },
     { "type": "range", "id": "overlay_opacity", "label": "Overlay opacity", "min": 0, "max": 1, "step": 0.1, "default": 0.3 },
     { "type": "text", "id": "title_1", "label": "Title part 1 (white)", "default": "Instant Access" },
     { "type": "text", "id": "title_2", "label": "Title part 2 (yellow)", "default": "in the App" },

@@ -17,7 +17,7 @@
     <p class="bt-path__subtitle">{{ subtitle | escape }}</p>
 
     <div class="bt-path__full">
-      <div class="bt-path__full-card">
+      <div id="bt-path__full-card" class="bt-path__full-card">
         <div class="bt-path__full-img">
           {%- if section.settings.full_image_mobile != blank -%}
             <img class="bt-path__img bt-path__img--m" src="{{ section.settings.full_image_mobile | image_url: width: 900 }}" alt="" loading="lazy">

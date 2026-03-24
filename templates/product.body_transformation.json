@@ -797,7 +797,7 @@
       "name": "TS Sticky Add",
       "settings": {
         "product": "body-transformation",
-        "button_link": "#bt-full-program-cta",
+        "button_link": "#bt-path__full-card",
         "button_text": "Shop now",
         "background_button": "#faff00",
         "text_color_button": "#1a1a1a",
