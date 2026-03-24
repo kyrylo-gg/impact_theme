@@ -796,7 +796,7 @@
       "name": "TS Sticky Add",
       "settings": {
         "product": "body-transformation",
-        "button_link": "#BT_ChooseYourPath",
+        "button_link": "#bt_choose_your_path",
         "button_text": "Shop now",
         "background_button": "#FAFF00",
         "text_color_button": "#1a1a1a",
