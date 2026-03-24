@@ -704,6 +704,13 @@
             "answer": "Yes. The program is specifically designed for women, accommodating daily energy and hormonal shifts:\n\nFlow training: Gentle, low-impact workouts you can switch to on low-energy days.\n\nHormonal guidance: Educational insights on the menstrual cycle, perimenopause, and menopause.\nThis helps you understand your body and adjust your workouts safely and comfortably."
           }
         },
+        "faq_EktWxU": {
+          "type": "faq",
+          "settings": {
+            "question": "What if I'm a complete beginner?",
+            "answer": "Yes. The program is perfect for complete beginners, following a strict gradual progression from Soft to Hard levels."
+          }
+        },
         "faq_BgMzTi": {
           "type": "faq",
           "settings": {
@@ -739,11 +746,11 @@
             "answer": "It is a one-time payment, and you will receive lifetime access to the course!"
           }
         },
-        "faq_EktWxU": {
+        "faq_Jfm3bf": {
           "type": "faq",
           "settings": {
-            "question": "What if I'm a complete beginner?",
-            "answer": "Yes. The program is perfect for complete beginners, following a strict gradual progression from Soft to Hard levels."
+            "question": "What is your money-back guarantee?",
+            "answer": "We offer a 30-day money-back guarantee. If you’re not completely satisfied with your purchase, you can request a full refund within 30 days—no questions asked."
           }
         }
       },
@@ -751,12 +758,13 @@
         "faq_eJah3t",
         "faq_LLx6ba",
         "faq_keYwNN",
+        "faq_EktWxU",
         "faq_BgMzTi",
         "faq_RciTK7",
         "faq_iVBrrP",
         "faq_ATY3n8",
         "faq_bJDf9K",
-        "faq_EktWxU"
+        "faq_Jfm3bf"
       ],
       "settings": {
         "title": "FAQ",
