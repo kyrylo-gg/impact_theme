@@ -448,6 +448,10 @@
     "bt_app_access": {
       "type": "bt_app_access",
       "settings": {
+        "video_mobile": "shopify://files/videos/Main.Gif 30 FPS - вертикал (1).webm",
+        "video_url_mobile": "",
+        "video_desktop": "shopify://files/videos/Main.Gif 30 FPS- горизонтал.webm",
+        "video_url_desktop": "",
         "video": "shopify://files/videos/HERO video.webm",
         "video_url": "",
         "overlay_opacity": 0.3,
