@@ -15,7 +15,7 @@
         "heading_1": {
           "type": "heading",
           "settings": {
-            "text": "BOOTY WORKOUTS WORTH MILLIONS",
+            "text": "RECONNECT WITH YOUR BODY THIS EASTER",
             "heading_tag": "h1",
             "special_padding": ""
           }
@@ -31,7 +31,7 @@
         "subheading": {
           "type": "subheading",
           "settings": {
-            "text": "Only $107 for St. Patrick’s Day (Save $349)"
+            "text": "Only $97 for All Booty Programs (Save $359)"
           }
         },
         "button_cta": {
@@ -512,6 +512,8 @@
         "image_2": "shopify://shop_images/Frame_7-4.png",
         "image_3": "shopify://shop_images/padded_DSC09654_30427d69-c589-45c9-ab7f-2ec9f0e127e1.jpg",
         "enable_section": true,
+        "bb_description": "Mix programs, shorts, and tops. Get 60% off all clothing when you add the 4 Programs Bundle.",
+        "bb_promo_banner_text": "60% OFF ALL CLOTHING / with Program Pack purchase",
         "show_one_click_alternative": true,
         "one_click_product": "twerk-program-lovable",
         "one_click_label": "Twerk program",
