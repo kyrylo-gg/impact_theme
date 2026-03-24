@@ -440,8 +440,8 @@
         "plan_a_list_left": "Warm-up\nStrength block",
         "plan_a_list_right": "Core finisher\nQuick stretch",
         "plan_b_image": "shopify://shop_images/Frame_41-2.png",
-        "plan_b_list_left": "Gentle warm-up\nLow-impact strength\nMobility + core",
-        "plan_b_list_right": "Breathing / stretch\nTotal: ~YY min",
+        "plan_b_list_left": "Gentle warm-up\nLow-impact strength",
+        "plan_b_list_right": "Mobility + core\nBreathing / stretch",
         "footer": "Everything stays organized for you inside the app."
       }
     },
