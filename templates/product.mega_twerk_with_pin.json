@@ -20,14 +20,6 @@
             "special_padding": ""
           }
         },
-        "heading_2": {
-          "type": "heading",
-          "settings": {
-            "text": "YOU FOUND IT!",
-            "heading_tag": "h1",
-            "special_padding": ""
-          }
-        },
         "subheading": {
           "type": "subheading",
           "settings": {
@@ -48,7 +40,6 @@
       },
       "block_order": [
         "heading_1",
-        "heading_2",
         "subheading",
         "button_cta"
       ],
