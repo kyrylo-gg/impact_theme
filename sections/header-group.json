@@ -144,7 +144,7 @@
         "background_type": "color",
         "desk_bg_color": "#FEDADC",
         "mob_bg_color": "#FEDADC",
-        "hidden_templates": "product.mega_twerk-program-main,product.26_twerk_mainmenu,product.26_pinterest,product.mega_twerk-program-mainab,product.mega_twerk_with_bundle,product.mega_twerk_no_bundle",
+        "hidden_templates": "product.mega_twerk-program-main,product.26_twerk_mainmenu,product.26_pinterest,product.mega_twerk-program-mainab,product.mega_twerk_with_bundle,product.mega_twerk_no_bundle,product.mega_twerk_with_pin,product.mega_twerk_with_seo,product.body_transformation",
         "desk_indent_top": 0,
         "desk_indent_bottom": 0,
         "mob_indent_top": 0,
