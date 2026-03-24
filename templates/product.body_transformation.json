@@ -750,7 +750,7 @@
           "type": "faq",
           "settings": {
             "question": "What is your money-back guarantee?",
-            "answer": "We offer a 30-day money-back guarantee. If you’re not completely satisfied with your purchase, you can request a full refund within 30 days—no questions asked."
+            "answer": "We offer a 30-day money-back guarantee. If you’re not completely satisfied with your purchase, you can request a full refund within 30 days - no questions asked."
           }
         }
       },
@@ -783,6 +783,7 @@
         "cta_text": "Get Instant Access",
         "cta_url": "",
         "footer_left": "One-time purchase",
+        "footer_middle": "30-day money-back guarantee",
         "footer_right": "Lifetime access"
       }
     },
