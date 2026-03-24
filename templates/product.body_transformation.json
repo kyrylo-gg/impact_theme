@@ -567,9 +567,9 @@
           "type": "bundle_step",
           "settings": {
             "title": "Select programs",
-            "collection": "bundle-programs",
+            "collection": "bundle-bt",
             "is_programs_step": true,
-            "program_pack_product": "bundle-test"
+            "program_pack_product": "body-transformation"
           }
         },
         "step_shorts": {
@@ -798,7 +798,7 @@
         "product": "body-transformation",
         "button_link": "#shopify-section-template--19311759196234__bt_choose_your_path",
         "button_text": "Shop now",
-        "background_button": "#FAFF00",
+        "background_button": "#faff00",
         "text_color_button": "#1a1a1a",
         "block_text_color": "",
         "block_background": "#fedadc",
