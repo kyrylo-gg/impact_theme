@@ -111,6 +111,59 @@
         { id: 'review', title: 'Review your bundle', collectionHandle: '', isProgramsStep: false, productIds: [] },
       ];
     }
+    function normalizeExperimentGroup(raw) {
+      var v = String(raw || '').trim().toLowerCase();
+      if (!v) return '';
+      if (v === 'control' || v === 'c') return 'control';
+      if (v === 'a' || v === 'group_a' || v === 'group-a' || v === 'groupa' || v === 'variant_a' || v === 'variation_a') return 'a';
+      if (v === 'b' || v === 'group_b' || v === 'group-b' || v === 'groupb' || v === 'variant_b' || v === 'variation_b') return 'b';
+      return '';
+    }
+    function readExperimentGroup() {
+      var qp = '';
+      try {
+        var params = new URLSearchParams(window.location.search || '');
+        qp = params.get('ig_bb_group') || params.get('bb_group') || '';
+      } catch (e) {}
+      var fromWindow = (typeof window !== 'undefined')
+        ? (window.__IG_BB_GROUP || window.__ig_bb_group || '')
+        : '';
+      var fromStorage = '';
+      try { fromStorage = window.localStorage ? (window.localStorage.getItem('ig_bb_group') || '') : ''; } catch (e2) {}
+      return normalizeExperimentGroup(qp || fromWindow || fromStorage);
+    }
+    function applyIntelligemsStepFilter(steps) {
+      var path = '';
+      try { path = String(window.location.pathname || '').toLowerCase(); } catch (e) {}
+      var isTargetPage = /\/products\/mega[-_]twerk[-_]with[-_]bundle\/?$/.test(path);
+      if (!isTargetPage) return steps;
+
+      var group = readExperimentGroup();
+      if (!group) return steps;
+
+      // Step ordinals are counted among non-review steps:
+      // 1st, 2nd, 3rd, ...; review step is never removed.
+      var hiddenOrdinals = {};
+      if (group === 'control') hiddenOrdinals = { 2: true, 3: true };
+      else if (group === 'a') hiddenOrdinals = { 3: true };
+      else if (group === 'b') hiddenOrdinals = { 2: true };
+      else return steps;
+
+      var idx = 0;
+      var filtered = steps.filter(function(step) {
+        if (step.id === 'review') return true;
+        idx += 1;
+        return !hiddenOrdinals[idx];
+      });
+
+      // Safety: don't allow empty non-review flow.
+      var nonReviewCount = filtered.filter(function(s) { return s.id !== 'review'; }).length;
+      if (nonReviewCount === 0) return steps;
+
+      console.log('[BB][IG] Applied step filter', { group: group, before: steps.length, after: filtered.length });
+      return filtered;
+    }
+    stepsFromConfig = applyIntelligemsStepFilter(stepsFromConfig);
     var programPackId = (config.programPackProductId != null && config.programPackProductId !== '')
       ? String(config.programPackProductId)
       : null;
