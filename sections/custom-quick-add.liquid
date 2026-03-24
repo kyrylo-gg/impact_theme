@@ -110,7 +110,7 @@
     font-weight: 600;
     font-size: 13px;
     line-height: 100%;
-    color: var(--sublime-text-color, white);
+    color: #000000;
   }
 
   .price,
@@ -172,7 +172,7 @@
   .custom-quick-add-main .price-list .money,
   .custom-quick-add-main .price-list .text-subdued,
   .custom-quick-add-main .price-list .text-on-sale {
-    color: var(--block-text-color, white) !important;
+    color: #000000 !important;
     font-weight: 500;
     font-size: 13px;
     line-height: 100%;
@@ -448,7 +448,7 @@
     font-weight: 700;
     font-size: 9px;
     line-height: 140%;
-    color: var(--block-text-color, #FFFFFF);
+    color: #000000;
     margin: 3px auto 0;
   }
 
@@ -585,9 +585,15 @@
   document.addEventListener('DOMContentLoaded', () => {
     const original = document.getElementById('quick-add-original');
     const sticky = document.getElementById('quick-add-sticky-{{ section.id }}');
+    const stickyButton = sticky ? sticky.querySelector('.custom-quick-add-button') : null;
     const buyButtons = document.querySelector('.buy-buttons');
     const bundleBuilder = document.getElementById('nass-bundle-builder');
     const searchParams = new URLSearchParams(window.location.search);
+    const isBodyTransformationPage = document.body.classList.contains('product--body_transformation');
+
+    if (sticky) {
+      sticky.classList.add('show');
+    }
 
     if (searchParams.get("utm_source") && searchParams.get("utm_source") == "facebook") {
       sticky.classList.add("show");
@@ -595,9 +601,25 @@
 
     if (!sticky) return;
 
+    if (stickyButton) {
+      stickyButton.addEventListener('click', function(e) {
+        const href = String(stickyButton.getAttribute('href') || '');
+        if (href !== '#nass-bundle-builder') return;
+
+        e.preventDefault();
+        if (window.NassBundleBuilder && typeof window.NassBundleBuilder.openWizard === 'function') {
+          window.NassBundleBuilder.openWizard();
+          return;
+        }
+
+        // Fallback: keep hash behavior if builder script not ready yet.
+        window.location.hash = '#nass-bundle-builder';
+      });
+    }
+
     function updateStickyVisibility() {
       const hideOriginal = original && isElementInViewport(original, 0.1);
-      const hideBuyButtons = buyButtons && isElementInViewport(buyButtons, 0.15);
+      const hideBuyButtons = !isBodyTransformationPage && buyButtons && isElementInViewport(buyButtons, 0.15);
       const hideBundleBuilder = bundleBuilder && isElementInViewport(bundleBuilder, 0.1);
       const hide = hideOriginal || hideBuyButtons || hideBundleBuilder;
       if (hide) {
