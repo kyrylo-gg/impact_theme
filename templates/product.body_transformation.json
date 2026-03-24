@@ -335,22 +335,22 @@
           "type": "level",
           "settings": {
             "image": "shopify://shop_images/image_1-2.png",
-            "title": "Soft",
-            "subtitle": "(Foundation)",
-            "best_for": "beginners, low energy, joint-sensitive days",
-            "focus": "activation, control, core + glutes, safe patterns",
-            "feel": "stronger, more stable, more confident"
+            "title": "Basic",
+            "subtitle": "(Sculpt)",
+            "best_for": "visible tone without extremes",
+            "focus": "strength-based sculpting(lower body + core)",
+            "feel": "tighter shape, better endurance"
           }
         },
         "level_caKewd": {
           "type": "level",
           "settings": {
             "image": "shopify://shop_images/image_4_7b9ca31d-0b74-4e36-b34f-2d8ebbd2a1d4.png",
-            "title": "Soft",
-            "subtitle": "(Foundation)",
-            "best_for": "beginners, low energy, joint-sensitive days",
-            "focus": "activation, control, core + glutes, safe patterns",
-            "feel": "stronger, more stable, more confident"
+            "title": "Hard",
+            "subtitle": "(Burn)",
+            "best_for": "when your body is ready for higher intensity",
+            "focus": "conditioning + fat-loss acceleration",
+            "feel": "athletic, energized, leaner"
           }
         }
       },
