@@ -76,7 +76,7 @@
         "title": {
           "type": "title",
           "settings": {
-            "label": "Get 2+1 on All Clothing This Easter 🐰",
+            "label": "Get 2+1 on All Clothing  This Easter 🐰",
             "color": "#000000",
             "desk_font_size": 25,
             "mob_font_size": 13
@@ -142,8 +142,8 @@
         "mob_content_height_type": "adapt-content",
         "mob_content_height": 300,
         "background_type": "color",
-        "desk_bg_color": "#9ACF8B",
-        "mob_bg_color": "#9ACF8B",
+        "desk_bg_color": "#FEDADC",
+        "mob_bg_color": "#FEDADC",
         "hidden_templates": "product.mega_twerk-program-main,product.26_twerk_mainmenu,product.26_pinterest,product.mega_twerk-program-mainab,product.mega_twerk_with_bundle,product.mega_twerk_no_bundle",
         "desk_indent_top": 0,
         "desk_indent_bottom": 0,
