@@ -6,6 +6,8 @@
 {%- liquid
   assign title_1 = section.settings.title_1 | default: 'More Than Weight Loss. A Better Way'
   assign title_2 = section.settings.title_2 | default: 'to Feel Every Day'
+  assign title_1_escaped = title_1 | escape
+  assign title_1_desktop = title_1_escaped | replace: '. ', '.<br class="bt-ben__br-d-mid">'
 
   assign img_1 = section.settings.img_1
   assign img_2 = section.settings.img_2
@@ -19,7 +21,7 @@
 <section class="bt-wrap bt-ben">
   <div class="bt-container bt-ben__container">
     <h2 class="bt-ben__title">
-      <span class="bt-ben__w">{{ title_1 | escape }}</span>
+      <span class="bt-ben__w">{{ title_1_desktop }}</span>
       <br class="bt-ben__br-m">
       <span class="bt-ben__b"><br class="bt-ben__br-d"> {{ title_2 | escape }}</span>
     </h2>
@@ -82,6 +84,8 @@
   @media (min-width: 768px) { .bt-ben__br-m { display: none; } }
   .bt-ben__br-d { display: none; }
   @media (min-width: 768px) { .bt-ben__br-d { display: inline; } }
+  .bt-ben__br-d-mid { display: none; }
+  @media (min-width: 768px) { .bt-ben__br-d-mid { display: inline; } }
 
   .bt-ben__desktop { display: none; }
   .bt-ben__mobile { display: block; margin-top: 24px; }
