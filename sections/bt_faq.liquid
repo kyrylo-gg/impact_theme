@@ -19,7 +19,7 @@
             <span>{{ block.settings.question | escape }}</span>
             <span class="bt-faq__chev" aria-hidden="true">⌄</span>
           </summary>
-          <div class="bt-faq__a">{{ block.settings.answer | escape }}</div>
+          <div class="bt-faq__a">{{ block.settings.answer | escape | newline_to_br }}</div>
         </details>
       {%- endfor -%}
     </div>
