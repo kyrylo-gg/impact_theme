@@ -157,6 +157,15 @@
       ? String(config.shopCurrency).trim()
       : 'USD';
 
+    // On the non-localized root path, keep bundle builder in shop base currency (Liquid-configured)
+    // and avoid "smart" currency inference that can clash with Markets or currency switchers.
+    var lockCurrencyToConfig = false;
+    try {
+      if (routesRoot === '/' && presentmentCurrency && presentmentCurrency === shopBaseCurrency) {
+        lockCurrencyToConfig = true;
+      }
+    } catch (e) {}
+
     function detectPageCurrencyFromDom() {
       try {
         var dc = typeof document !== 'undefined' ? document : null;
@@ -193,112 +202,114 @@
     }
     try {
       if (typeof window !== 'undefined') {
-        // Prefer currency that the page itself declares (Markets presentment).
-        // This helps in cases where price amounts are already presentment (e.g. EUR),
-        // but Shopify.currency / header picker / analytics still show USD.
-        (function primeFromPageDeclaredCurrency() {
-          try {
-            var dc = typeof document !== 'undefined' ? document : null;
-            var cur = '';
+        if (!lockCurrencyToConfig) {
+          // Prefer currency that the page itself declares (Markets presentment).
+          // This helps in cases where price amounts are already presentment (e.g. EUR),
+          // but Shopify.currency / header picker / analytics still show USD.
+          (function primeFromPageDeclaredCurrency() {
+            try {
+              var dc = typeof document !== 'undefined' ? document : null;
+              var cur = '';
 
-            // OpenGraph / product meta currency (often reflects presentment)
-            if (dc && dc.querySelector) {
-              var m1 = dc.querySelector('meta[property="product:price:currency"]');
-              var m2 = dc.querySelector('meta[property="og:price:currency"]');
-              cur = (m1 && m1.getAttribute('content')) || (m2 && m2.getAttribute('content')) || '';
-              cur = String(cur || '').trim();
-            }
-
-            // PayPal in-context metadata currency
-            if (!cur && dc && dc.querySelector) {
-              var pp = dc.querySelector('meta#in-context-paypal-metadata');
-              cur = pp ? String(pp.getAttribute('data-currency') || '').trim() : '';
-            }
-
-            // Apple Pay capabilities JSON currencyCode
-            if (!cur && dc && dc.getElementById) {
-              var ap = dc.getElementById('apple-pay-shop-capabilities');
-              if (ap && ap.textContent) {
-                try {
-                  var apj = JSON.parse(ap.textContent);
-                  cur = apj && apj.currencyCode ? String(apj.currencyCode).trim() : '';
-                } catch (e) {}
+              // OpenGraph / product meta currency (often reflects presentment)
+              if (dc && dc.querySelector) {
+                var m1 = dc.querySelector('meta[property="product:price:currency"]');
+                var m2 = dc.querySelector('meta[property="og:price:currency"]');
+                cur = (m1 && m1.getAttribute('content')) || (m2 && m2.getAttribute('content')) || '';
+                cur = String(cur || '').trim();
               }
-            }
 
-            if (cur) {
-              presentmentCurrency = cur;
-              displayCurrency = cur;
-            }
-          } catch (e) {}
-        })();
+              // PayPal in-context metadata currency
+              if (!cur && dc && dc.querySelector) {
+                var pp = dc.querySelector('meta#in-context-paypal-metadata');
+                cur = pp ? String(pp.getAttribute('data-currency') || '').trim() : '';
+              }
 
-        // Last-resort: infer currency from visible price text on the page (outside bundle builder).
-        // Some setups mutate price text client-side without updating meta/analytics currency.
-        (function primeFromVisiblePriceText() {
-          try {
-            if (presentmentCurrency) return;
-            var dc = typeof document !== 'undefined' ? document : null;
-            if (!dc || !dc.querySelectorAll) return;
-            var candidates = dc.querySelectorAll('sale-price, compare-at-price, price-list, .price-list, .price, .money');
-            var best = '';
-            for (var i = 0; i < candidates.length; i++) {
-              var el = candidates[i];
-              // Skip bundle builder itself if already injected
-              if (el && el.closest && el.closest('#nass-bundle-builder')) continue;
-              var txt = (el && (el.textContent || el.innerText)) ? String(el.textContent || el.innerText) : '';
-              txt = txt.trim();
-              if (!txt) continue;
-              // Prefer explicit ISO codes if present
-              var m = txt.match(/\b[A-Z]{3}\b/);
-              if (m && m[0]) { best = m[0]; break; }
-              if (txt.indexOf('€') !== -1) { best = 'EUR'; break; }
-              if (txt.indexOf('£') !== -1) { best = 'GBP'; break; }
-              if (txt.indexOf('¥') !== -1) { best = 'JPY'; break; }
-            }
-            if (best) {
-              presentmentCurrency = best;
-              displayCurrency = best;
-            }
-          } catch (e) {}
-        })();
+              // Apple Pay capabilities JSON currencyCode
+              if (!cur && dc && dc.getElementById) {
+                var ap = dc.getElementById('apple-pay-shop-capabilities');
+                if (ap && ap.textContent) {
+                  try {
+                    var apj = JSON.parse(ap.textContent);
+                    cur = apj && apj.currencyCode ? String(apj.currencyCode).trim() : '';
+                  } catch (e) {}
+                }
+              }
 
-        // Prefer Shopify's rendered meta currency (Markets presentment) when available.
-        // This stays correct even if a header currency picker shows a different selection.
-        (function primeFromShopifyAnalyticsMeta() {
-          try {
-            var mc = window.ShopifyAnalytics && window.ShopifyAnalytics.meta && window.ShopifyAnalytics.meta.currency
-              ? String(window.ShopifyAnalytics.meta.currency).trim()
-              : '';
-            if (mc && !presentmentCurrency) {
-              presentmentCurrency = mc;
-              displayCurrency = mc;
-            }
-          } catch (e) {}
-        })();
+              if (cur) {
+                presentmentCurrency = cur;
+                displayCurrency = cur;
+              }
+            } catch (e) {}
+          })();
 
-        // If theme money format is already localized (Markets presentment), prefer it as source of truth.
-        // This covers cases where the header currency selector is out of sync with presentment pricing.
-        (function primeFromThemeMoneyFormat() {
-          try {
-            var tv = window.themeVariables && window.themeVariables.settings ? window.themeVariables.settings : null;
-            var mwcf = tv && typeof tv.moneyWithCurrencyFormat === 'string' ? tv.moneyWithCurrencyFormat : '';
-            var mf = tv && typeof tv.moneyFormat === 'string' ? tv.moneyFormat : '';
-            var s = String(mwcf || mf || '');
-            // Prefer explicit ISO code in moneyWithCurrencyFormat (e.g. "€{{amount}} EUR")
-            var m = s.match(/\b[A-Z]{3}\b/);
-            var inferred = m ? m[0] : '';
-            if (!inferred) {
-              if (s.indexOf('€') !== -1) inferred = 'EUR';
-              else if (s.indexOf('£') !== -1) inferred = 'GBP';
-              else if (s.indexOf('¥') !== -1) inferred = 'JPY';
-            }
-            if (inferred && !presentmentCurrency) {
-              presentmentCurrency = inferred;
-              displayCurrency = inferred;
-            }
-          } catch (e) {}
-        })();
+          // Last-resort: infer currency from visible price text on the page (outside bundle builder).
+          // Some setups mutate price text client-side without updating meta/analytics currency.
+          (function primeFromVisiblePriceText() {
+            try {
+              if (presentmentCurrency) return;
+              var dc = typeof document !== 'undefined' ? document : null;
+              if (!dc || !dc.querySelectorAll) return;
+              var candidates = dc.querySelectorAll('sale-price, compare-at-price, price-list, .price-list, .price, .money');
+              var best = '';
+              for (var i = 0; i < candidates.length; i++) {
+                var el = candidates[i];
+                // Skip bundle builder itself if already injected
+                if (el && el.closest && el.closest('#nass-bundle-builder')) continue;
+                var txt = (el && (el.textContent || el.innerText)) ? String(el.textContent || el.innerText) : '';
+                txt = txt.trim();
+                if (!txt) continue;
+                // Prefer explicit ISO codes if present
+                var m = txt.match(/\b[A-Z]{3}\b/);
+                if (m && m[0]) { best = m[0]; break; }
+                if (txt.indexOf('€') !== -1) { best = 'EUR'; break; }
+                if (txt.indexOf('£') !== -1) { best = 'GBP'; break; }
+                if (txt.indexOf('¥') !== -1) { best = 'JPY'; break; }
+              }
+              if (best) {
+                presentmentCurrency = best;
+                displayCurrency = best;
+              }
+            } catch (e) {}
+          })();
+
+          // Prefer Shopify's rendered meta currency (Markets presentment) when available.
+          // This stays correct even if a header currency picker shows a different selection.
+          (function primeFromShopifyAnalyticsMeta() {
+            try {
+              var mc = window.ShopifyAnalytics && window.ShopifyAnalytics.meta && window.ShopifyAnalytics.meta.currency
+                ? String(window.ShopifyAnalytics.meta.currency).trim()
+                : '';
+              if (mc && !presentmentCurrency) {
+                presentmentCurrency = mc;
+                displayCurrency = mc;
+              }
+            } catch (e) {}
+          })();
+
+          // If theme money format is already localized (Markets presentment), prefer it as source of truth.
+          // This covers cases where the header currency selector is out of sync with presentment pricing.
+          (function primeFromThemeMoneyFormat() {
+            try {
+              var tv = window.themeVariables && window.themeVariables.settings ? window.themeVariables.settings : null;
+              var mwcf = tv && typeof tv.moneyWithCurrencyFormat === 'string' ? tv.moneyWithCurrencyFormat : '';
+              var mf = tv && typeof tv.moneyFormat === 'string' ? tv.moneyFormat : '';
+              var s = String(mwcf || mf || '');
+              // Prefer explicit ISO code in moneyWithCurrencyFormat (e.g. "€{{amount}} EUR")
+              var m = s.match(/\b[A-Z]{3}\b/);
+              var inferred = m ? m[0] : '';
+              if (!inferred) {
+                if (s.indexOf('€') !== -1) inferred = 'EUR';
+                else if (s.indexOf('£') !== -1) inferred = 'GBP';
+                else if (s.indexOf('¥') !== -1) inferred = 'JPY';
+              }
+              if (inferred && !presentmentCurrency) {
+                presentmentCurrency = inferred;
+                displayCurrency = inferred;
+              }
+            } catch (e) {}
+          })();
+        }
 
         // Only trust Shopify.currency.active when Liquid presentment currency is not available.
         // In some setups, the currency picker can show a different currency than the actual presentment prices on the page.
@@ -318,6 +329,7 @@
     // Some currency switchers/Markets scripts update price text after page load.
     // Keep the bundle builder currency code in sync with the rendered page.
     (function bindDomCurrencyWatcher() {
+      if (lockCurrencyToConfig) return;
       var last = '';
       setInterval(function() {
         var cur = detectPageCurrencyFromDom();
