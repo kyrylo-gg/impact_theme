@@ -681,12 +681,15 @@
         orig = getVisualOriginalPrice(stepId, price, hasPack);
         final = getVisualFinalPrice(stepId, price, hasPack);
       }
-      // Product prices come from product JSON / Storefront API (shop base currency).
-      // Use active display currency here (not cart currency) to keep symbol/code consistent during switches.
-      var cur = getDisplayCurrency();
       var sourceCur = (p.priceRange && p.priceRange.minVariantPrice && p.priceRange.minVariantPrice.currencyCode)
         ? String(p.priceRange.minVariantPrice.currencyCode)
         : (presentmentCurrency || shopBaseCurrency || 'USD');
+      // Prefer the UI/display currency, but if the site currency picker is out of sync
+      // with actual presentment prices, fall back to the product price currency code.
+      var cur = getDisplayCurrency();
+      if (sourceCur && cur && sourceCur !== cur && sourceCur !== shopBaseCurrency && cur === shopBaseCurrency) {
+        cur = sourceCur;
+      }
       var img = (p.images && p.images.nodes && p.images.nodes[0]) ? getImageUrlOptimized(p.images.nodes[0].url) : '';
       var cardClass = 'bb-product-card' + (dis ? ' bb-product-card--disabled' : '');
       var busy = !!bbState.cartOperationInProgress;
@@ -796,6 +799,9 @@
         var sourceCur = (p.priceRange && p.priceRange.minVariantPrice && p.priceRange.minVariantPrice.currencyCode)
           ? String(p.priceRange.minVariantPrice.currencyCode)
           : (presentmentCurrency || shopBaseCurrency || 'USD');
+        if (sourceCur && cur && sourceCur !== cur && sourceCur !== shopBaseCurrency && cur === shopBaseCurrency) {
+          cur = sourceCur;
+        }
         var img = (p.images && p.images.nodes && p.images.nodes[0]) ? getImageUrlOptimized(p.images.nodes[0].url, 128) : '';
         var opts = '';
         if (p.variants && p.variants.nodes && p.variants.nodes[0] && p.variants.nodes[0].selectedOptions) {
