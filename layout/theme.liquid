@@ -111,6 +111,17 @@
         opacity: 0 !important;
         pointer-events: none !important;
       }
+
+      {% comment %} Hide teaser + sticky quick add while on BT_ChooseYourPath {% endcomment %}
+      body.bt-choose-path-active .custom-quick-add-main,
+      body.bt-choose-path-active .section-custom-quick-add,
+      body.bt-choose-path-active .animated-teaser,
+      body.bt-choose-path-active .kl-teaser-QYMpAD,
+      body.bt-choose-path-active .needsclick.kl-private-reset-css-Xuajs1 {
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+      }
     </style>
     {%- if template.name == 'page' and template.suffix == 'body-presale' -%}
     <style>
