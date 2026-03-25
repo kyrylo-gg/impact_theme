@@ -176,28 +176,21 @@
 
         if (typeof sessionStorage !== 'undefined') sessionStorage.setItem(key, '1');
 
-        // Use a real form submission (same as theme selector) so cookies/redirects are applied reliably.
-        var form = document.createElement('form');
-        form.method = 'post';
-        form.action = localizationUrl;
-        form.style.display = 'none';
+        var body = new URLSearchParams();
+        body.set('form_type', 'localization');
+        body.set('utf8', '✓');
+        body.set('_method', 'put');
+        body.set('country_code', 'US');
+        body.set('return_to', window.location.pathname + window.location.search + window.location.hash);
 
-        function addHidden(name, value) {
-          var input = document.createElement('input');
-          input.type = 'hidden';
-          input.name = name;
-          input.value = value;
-          form.appendChild(input);
-        }
-
-        addHidden('form_type', 'localization');
-        addHidden('utf8', '✓');
-        addHidden('_method', 'put');
-        addHidden('country_code', 'US');
-        addHidden('return_to', window.location.pathname + window.location.search + window.location.hash);
-
-        document.body.appendChild(form);
-        form.submit();
+        fetch(localizationUrl, {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+          body: body.toString()
+        }).then(function() {
+          window.location.reload();
+        }).catch(function() {});
       } catch (e) {}
     })();
 
