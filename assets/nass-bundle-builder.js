@@ -123,21 +123,6 @@
       checkoutUrl = 'https://' + shopDomain + '/checkout';
       console.log('[BB] localhost detected, using store checkout:', checkoutUrl);
     }
-    // Normalize checkout URL to avoid relative redirects like "/en-pl/products/en-pl/checkout".
-    // Accepts absolute URLs, absolute paths, and fixes relative paths by prefixing "/".
-    try {
-      if (typeof checkoutUrl === 'string') {
-        var cu = checkoutUrl.trim();
-        if (cu && cu.indexOf('http://') !== 0 && cu.indexOf('https://') !== 0) {
-          if (cu.indexOf('//') === 0) {
-            // protocol-relative URL, keep as-is
-          } else if (cu[0] !== '/') {
-            cu = '/' + cu;
-          }
-        }
-        checkoutUrl = cu || checkoutUrl;
-      }
-    } catch (e) {}
     const storefrontApiToken = ((config.storefrontApiToken || '').trim() || '568094b7f376083a4b0dc6fee4785741');
     const sizeChartConfigHandle = (config.sizeChartConfigHandle || 'size-chart-settings').trim();
     const sizeChartByProduct = (config && config.sizeChartByProduct && typeof config.sizeChartByProduct === 'object') ? config.sizeChartByProduct : {};
