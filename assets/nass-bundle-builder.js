@@ -168,8 +168,10 @@
         if (cart.currency) {
           var cc = String(cart.currency).trim();
           if (cc) {
+            // cart.js reflects the store's presentment currency and is more reliable than
+            // header/localization pickers that may lag or show a different selection.
             displayCurrency = cc;
-            if (!presentmentCurrency) presentmentCurrency = cc;
+            presentmentCurrency = cc;
           }
         }
         renderFooterSummary();
