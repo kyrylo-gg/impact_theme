@@ -27,9 +27,8 @@
     return s.replace(/\D/g, '') || s;
   }
 
-  function productJsonToInternal(raw, currencyCodeFallback) {
+  function productJsonToInternal(raw) {
     var v0 = (raw.variants && raw.variants[0]) || {};
-    var inferredCur = (currencyCodeFallback && String(currencyCodeFallback).trim()) ? String(currencyCodeFallback).trim() : 'USD';
     var opts = [];
     if (v0.option1) opts.push({ name: 'Size', value: v0.option1 });
     if (v0.option2) opts.push({ name: 'Color', value: v0.option2 });
@@ -39,14 +38,14 @@
       handle: raw.handle || '',
       tags: Array.isArray(raw.tags) ? raw.tags : String(raw.tags || '').split(',').map(function(t) { return String(t || '').trim(); }).filter(Boolean),
       availableForSale: v0.available !== false,
-      priceRange: { minVariantPrice: { amount: String(v0.price || '0'), currencyCode: inferredCur } },
-      compareAtPriceRange: { minVariantPrice: { amount: String(v0.compare_at_price || v0.price || '0'), currencyCode: inferredCur } },
+      priceRange: { minVariantPrice: { amount: String(v0.price || '0'), currencyCode: 'USD' } },
+      compareAtPriceRange: { minVariantPrice: { amount: String(v0.compare_at_price || v0.price || '0'), currencyCode: 'USD' } },
       images: { nodes: (raw.images || []).map(function(i) { return { url: i.src || '', altText: i.alt || '' }; }) },
       variants: { nodes: (raw.variants || []).map(function(v) {
         var o = [];
         if (v.option1) o.push({ name: 'Size', value: v.option1 });
         if (v.option2) o.push({ name: 'Color', value: v.option2 });
-        return { id: String(v.id), title: v.title || '', availableForSale: v.available !== false, price: { amount: String(v.price || '0'), currencyCode: inferredCur }, selectedOptions: o };
+        return { id: String(v.id), title: v.title || '', availableForSale: v.available !== false, price: { amount: String(v.price || '0'), currencyCode: 'USD' }, selectedOptions: o };
       }) },
     };
   }
@@ -132,20 +131,15 @@
     // 2) Shopify native multi-currency (Shopify.currency.active)
     // 3) Config-provided currency from Liquid (cart.currency / shop.currency)
     // 4) Fallback to shop base currency
-    var presentmentCurrency = (config && typeof config.presentmentCurrency === 'string' && config.presentmentCurrency.trim())
+    var displayCurrency = (config && typeof config.presentmentCurrency === 'string' && config.presentmentCurrency.trim())
       ? String(config.presentmentCurrency).trim()
-      : '';
-    var displayCurrency = presentmentCurrency
-      ? presentmentCurrency
       : ((config && typeof config.currency === 'string' && config.currency.trim()) ? String(config.currency).trim() : 'USD');
     var shopBaseCurrency = (config && typeof config.shopCurrency === 'string' && config.shopCurrency.trim())
       ? String(config.shopCurrency).trim()
       : 'USD';
     try {
       if (typeof window !== 'undefined') {
-        // Only trust Shopify.currency.active when Liquid presentment currency is not available.
-        // In some setups, the currency picker can show a different currency than the actual presentment prices on the page.
-        if (!presentmentCurrency && window.Shopify && window.Shopify.currency && window.Shopify.currency.active) {
+        if (window.Shopify && window.Shopify.currency && window.Shopify.currency.active) {
           displayCurrency = String(window.Shopify.currency.active).trim() || displayCurrency;
         }
       }
@@ -229,7 +223,6 @@
     }
 
     function getActiveCurrency() {
-      if (presentmentCurrency) return presentmentCurrency;
       try {
         if (typeof window !== 'undefined' && window.Shopify && window.Shopify.currency && window.Shopify.currency.active) {
           var active = String(window.Shopify.currency.active).trim();
@@ -519,8 +512,7 @@
         .then(function(data) {
           var map = {};
           (data.products || []).forEach(function(raw) {
-            // `/products.json` returns prices already in the current presentment currency.
-            var internal = productJsonToInternal(raw, presentmentCurrency || displayCurrency || shopBaseCurrency);
+            var internal = productJsonToInternal(raw);
             if (internal && internal.id) map[internal.id] = internal;
           });
           return map;
@@ -532,7 +524,6 @@
       var v0 = (sf.variants && sf.variants.edges && sf.variants.edges[0]) ? sf.variants.edges[0].node : null;
       var price = v0 && v0.price ? v0.price.amount : '0';
       var compareAt = v0 && v0.compareAtPrice ? v0.compareAtPrice.amount : price;
-      var cur = (v0 && v0.price && v0.price.currencyCode) ? String(v0.price.currencyCode) : (presentmentCurrency || displayCurrency || shopBaseCurrency || 'USD');
       var imgNodes = (sf.images && sf.images.edges) ? sf.images.edges.map(function(e) { return { url: e.node.url || '', altText: e.node.altText || '' }; }) : [];
       var varNodes = (sf.variants && sf.variants.edges) ? sf.variants.edges.map(function(e) {
         var v = e.node;
@@ -545,8 +536,8 @@
         handle: sf.handle || '',
         tags: Array.isArray(sf.tags) ? sf.tags : [],
         availableForSale: v0 ? v0.availableForSale !== false : true,
-        priceRange: { minVariantPrice: { amount: price, currencyCode: cur } },
-        compareAtPriceRange: { minVariantPrice: { amount: compareAt, currencyCode: cur } },
+        priceRange: { minVariantPrice: { amount: price, currencyCode: 'USD' } },
+        compareAtPriceRange: { minVariantPrice: { amount: compareAt, currencyCode: 'USD' } },
         images: { nodes: imgNodes },
         variants: { nodes: varNodes }
       };
@@ -664,14 +655,11 @@
       // Product prices come from product JSON / Storefront API (shop base currency).
       // Use active display currency here (not cart currency) to keep symbol/code consistent during switches.
       var cur = getDisplayCurrency();
-      var sourceCur = (p.priceRange && p.priceRange.minVariantPrice && p.priceRange.minVariantPrice.currencyCode)
-        ? String(p.priceRange.minVariantPrice.currencyCode)
-        : (presentmentCurrency || shopBaseCurrency || 'USD');
       var img = (p.images && p.images.nodes && p.images.nodes[0]) ? getImageUrlOptimized(p.images.nodes[0].url) : '';
       var cardClass = 'bb-product-card' + (dis ? ' bb-product-card--disabled' : '');
       var busy = !!bbState.cartOperationInProgress;
       var spinnerSvg = '<span class="bb-spinner" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10" stroke-dasharray="32 56"/></svg></span>';
-      var addBtnContent = busy ? spinnerSvg + '<span class="bb-btn-text">Adding...</span>' : 'Add for ' + formatMoney(final, cur, sourceCur);
+      var addBtnContent = busy ? spinnerSvg + '<span class="bb-btn-text">Adding...</span>' : 'Add for ' + formatMoney(final, cur);
       var removeBtnContent = busy ? spinnerSvg : '×';
       var btnHtml = dis
         ? '<button type="button" class="bb-product-btn bb-product-btn--disabled" disabled>Unavailable</button>'
@@ -680,12 +668,12 @@
           : '<button type="button" class="bb-product-btn bb-product-btn--add' + (busy ? ' bb-product-btn--loading' : '') + '"' + (busy ? ' disabled>' : ' data-bb-add data-step="' + stepId + '" data-product="' + productId + '">') + addBtnContent + '</button>';
       var priceHtml;
       if (hasDiscount) {
-        priceHtml = '<span class="bb-product-original">' + formatMoney(orig, cur, sourceCur) + '</span><span class="bb-product-final">' + formatMoney(final, cur, sourceCur) + '</span><span class="bb-product-badge">-60%</span>';
+        priceHtml = '<span class="bb-product-original">' + formatMoney(orig, cur) + '</span><span class="bb-product-final">' + formatMoney(final, cur) + '</span><span class="bb-product-badge">-60%</span>';
       } else if (compareAt && parseFloat(compareAt) > parseFloat(price)) {
         var pct = Math.round((1 - parseFloat(price) / parseFloat(compareAt)) * 100);
-        priceHtml = '<span class="bb-product-original">' + formatMoney(parseFloat(compareAt), cur, sourceCur) + '</span><span class="bb-product-final">' + formatMoney(parseFloat(price), cur, sourceCur) + '</span><span class="bb-product-badge">-' + pct + '%</span>';
+        priceHtml = '<span class="bb-product-original">' + formatMoney(parseFloat(compareAt), cur) + '</span><span class="bb-product-final">' + formatMoney(parseFloat(price), cur) + '</span><span class="bb-product-badge">-' + pct + '%</span>';
       } else {
-        priceHtml = '<span class="bb-product-final">' + formatMoney(final, cur, sourceCur) + '</span>';
+        priceHtml = '<span class="bb-product-final">' + formatMoney(final, cur) + '</span>';
       }
       var titleOverlay = '<div class="bb-product-title-overlay">' + (p.title || '') + '</div>';
       var zoomSvg = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>';
