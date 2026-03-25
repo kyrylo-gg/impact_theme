@@ -143,6 +143,29 @@
       : 'USD';
     try {
       if (typeof window !== 'undefined') {
+        // If theme money format is already localized (Markets presentment), prefer it as source of truth.
+        // This covers cases where the header currency selector is out of sync with presentment pricing.
+        (function primeFromThemeMoneyFormat() {
+          try {
+            var tv = window.themeVariables && window.themeVariables.settings ? window.themeVariables.settings : null;
+            var mwcf = tv && typeof tv.moneyWithCurrencyFormat === 'string' ? tv.moneyWithCurrencyFormat : '';
+            var mf = tv && typeof tv.moneyFormat === 'string' ? tv.moneyFormat : '';
+            var s = String(mwcf || mf || '');
+            // Prefer explicit ISO code in moneyWithCurrencyFormat (e.g. "€{{amount}} EUR")
+            var m = s.match(/\b[A-Z]{3}\b/);
+            var inferred = m ? m[0] : '';
+            if (!inferred) {
+              if (s.indexOf('€') !== -1) inferred = 'EUR';
+              else if (s.indexOf('£') !== -1) inferred = 'GBP';
+              else if (s.indexOf('¥') !== -1) inferred = 'JPY';
+            }
+            if (inferred) {
+              presentmentCurrency = inferred;
+              displayCurrency = inferred;
+            }
+          } catch (e) {}
+        })();
+
         // Only trust Shopify.currency.active when Liquid presentment currency is not available.
         // In some setups, the currency picker can show a different currency than the actual presentment prices on the page.
         if (!presentmentCurrency && window.Shopify && window.Shopify.currency && window.Shopify.currency.active) {
