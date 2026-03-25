@@ -737,32 +737,6 @@
         });
     }
 
-    function fetchCollectionProductsStorefront(handle, countryCode) {
-      if (!storefrontApiToken) return Promise.resolve({});
-      var url = 'https://' + shopDomain + '/api/2024-01/graphql.json';
-      var cc = (countryCode || '').trim() || 'US';
-      var query = 'query($handle:String!){collection(handle:$handle) @inContext(country:' + JSON.stringify(cc) + '){products(first:50){edges{node{id title handle tags images(first:10){edges{node{url altText}}}variants(first:20){edges{node{id title availableForSale price{amount currencyCode}compareAtPrice{amount currencyCode}selectedOptions{name value}}}}}}}}}';
-
-      return fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'X-Shopify-Storefront-Access-Token': storefrontApiToken },
-        body: JSON.stringify({ query: query, variables: { handle: String(handle) } })
-      })
-        .then(function(r) { return r.json(); })
-        .then(function(data) {
-          var edges = data && data.data && data.data.collection && data.data.collection.products && data.data.collection.products.edges;
-          edges = Array.isArray(edges) ? edges : [];
-          var map = {};
-          edges.forEach(function(e) {
-            var p = e && e.node;
-            var internal = p ? storefrontProductToInternal(p) : null;
-            if (internal && internal.id) map[internal.id] = internal;
-          });
-          return map;
-        })
-        .catch(function() { return {}; });
-    }
-
     function storefrontProductToInternal(sf) {
       if (!sf || !sf.id) return null;
       var v0 = (sf.variants && sf.variants.edges && sf.variants.edges[0]) ? sf.variants.edges[0].node : null;
@@ -792,7 +766,7 @@
       if (!storefrontApiToken) return Promise.resolve(null);
       var gid = String(productId).indexOf('gid://') === 0 ? productId : 'gid://shopify/Product/' + String(productId);
       var url = 'https://' + shopDomain + '/api/2024-01/graphql.json';
-      var query = 'query($id:ID!){product(id:$id) @inContext(country:"US"){id title handle images(first:10){edges{node{url altText}}}variants(first:20){edges{node{id title availableForSale price{amount currencyCode}compareAtPrice{amount currencyCode}selectedOptions{name value}}}}}}';
+      var query = 'query($id:ID!){product(id:$id){id title handle images(first:10){edges{node{url altText}}}variants(first:20){edges{node{id title availableForSale price{amount currencyCode}compareAtPrice{amount}selectedOptions{name value}}}}}}';
       return fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'X-Shopify-Storefront-Access-Token': storefrontApiToken },
@@ -810,9 +784,7 @@
         if (step.id !== 'review' && step.collectionHandle) handles.push(step.collectionHandle);
       });
       var unique = handles.filter(function(v,i,a){return a.indexOf(v)===i;});
-      var promises = unique.map(function(h){
-        return lockCurrencyToConfig ? fetchCollectionProductsStorefront(h, 'US') : fetchCollectionProductsJson(h);
-      });
+      var promises = unique.map(function(h){return fetchCollectionProductsJson(h);});
       return Promise.all(promises).then(function(results) {
         var byHandle = {};
         unique.forEach(function(h,i){ byHandle[h]=results[i]||{}; });
