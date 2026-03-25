@@ -479,18 +479,21 @@
         },
         "image_NGhq7k": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/Before_After_3.png"
           }
         },
         "image_zEcTn8": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/Before_After_4.png"
           }
         },
         "image_LNDw94": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/Before_After_2.png"
           }
