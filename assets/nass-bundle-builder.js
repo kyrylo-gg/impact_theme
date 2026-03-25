@@ -220,15 +220,10 @@
         if (cart.currency) {
           var cc = String(cart.currency).trim();
           if (cc) {
-            // cart.js can sometimes lag behind Markets presentment pricing on the page.
-            // Only let cart currency become authoritative if we haven't already inferred a presentment currency.
-            if (!presentmentCurrency) {
-              presentmentCurrency = cc;
-              displayCurrency = cc;
-            } else {
-              // Keep display currency aligned with the presentment currency we inferred from the page.
-              displayCurrency = presentmentCurrency;
-            }
+            // cart.js reflects the store's presentment currency and is more reliable than
+            // header/localization pickers that may lag or show a different selection.
+            displayCurrency = cc;
+            presentmentCurrency = cc;
           }
         }
         renderFooterSummary();
