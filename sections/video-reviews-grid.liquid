@@ -120,7 +120,41 @@
         </svg>
       </button>
 
-      <div class="video-reviews-grid__modal-player" data-player-container></div>
+      <div class="video-reviews-grid__modal-player">
+        <div class="video-reviews-grid__player-host" data-player-host></div>
+
+        <div class="video-reviews-grid__custom-controls" data-custom-controls>
+          <input
+            class="video-reviews-grid__progress"
+            type="range"
+            min="0"
+            max="1000"
+            value="0"
+            step="1"
+            aria-label="Seek"
+            data-progress
+            disabled
+          >
+
+          <button
+            class="video-reviews-grid__audio-toggle"
+            type="button"
+            aria-label="Toggle sound"
+            aria-pressed="false"
+            data-audio-toggle
+          >
+            <svg class="video-reviews-grid__audio-icon video-reviews-grid__audio-icon--on" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+              <path d="M3 10v4h4l5 4V6L7 10H3z"></path>
+              <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.74 2.5-2.26 2.5-4.02z" opacity=".9"></path>
+            </svg>
+            <svg class="video-reviews-grid__audio-icon video-reviews-grid__audio-icon--off" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+              <path d="M3 10v4h4l5 4V6L7 10H3z"></path>
+              <path d="M16.7 7.3l-1.4 1.4c.9.7 1.5 1.7 1.5 3.3s-.6 2.6-1.5 3.3l1.4 1.4c1.3-1.2 2.3-2.6 2.3-4.7s-1-3.5-2.3-4.7z" opacity=".9"></path>
+              <path d="M22 9l-2 2 2 2-1.4 1.4-2-2-2 2-1.4-1.4 2-2-2-2L15.2 7.6l2 2 2-2L22 9z" opacity=".35"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
       <p class="video-reviews-grid__modal-caption" data-caption-el></p>
     </div>
   </div>
@@ -133,13 +167,17 @@
 
     var modalEl = sectionEl.querySelector('#video-reviews-grid-modal-{{ section.id }}');
     var dialogEl = modalEl && modalEl.querySelector('.video-reviews-grid__modal-dialog');
-    var playerContainer = modalEl && modalEl.querySelector('[data-player-container]');
+    var playerHost = modalEl && modalEl.querySelector('[data-player-host]');
     var captionEl = modalEl && modalEl.querySelector('[data-caption-el]');
     var closeBtn = modalEl && modalEl.querySelector('[data-close]');
-    if (!modalEl || !dialogEl || !playerContainer || !closeBtn) return;
+    var customControlsEl = modalEl && modalEl.querySelector('[data-custom-controls]');
+    var progressRangeEl = modalEl && modalEl.querySelector('[data-progress]');
+    var audioToggleBtn = modalEl && modalEl.querySelector('[data-audio-toggle]');
+    if (!modalEl || !dialogEl || !playerHost || !closeBtn || !customControlsEl || !progressRangeEl || !audioToggleBtn) return;
 
     var activeEl = null;
     var currentPlayer = null;
+    var isVideoControlsSetup = false;
 
     function createIframe(url) {
       var iframe = document.createElement('iframe');
@@ -156,7 +194,7 @@
     function createLocalVideo(mp4Url, webmUrl) {
       var video = document.createElement('video');
       video.className = 'video-reviews-grid__player video-reviews-grid__player--video';
-      video.controls = true;
+      video.controls = false; // hide native iOS controls
       video.autoplay = true;
       video.playsInline = true;
       video.preload = 'auto';
@@ -184,10 +222,82 @@
       if (currentPlayer && currentPlayer.tagName === 'IFRAME') {
         try { currentPlayer.src = 'about:blank'; } catch (e) {}
       }
-      if (playerContainer) {
-        playerContainer.innerHTML = '';
+      if (playerHost) {
+        playerHost.innerHTML = '';
       }
       currentPlayer = null;
+      isVideoControlsSetup = false;
+      if (customControlsEl) customControlsEl.classList.remove('is-visible');
+      if (progressRangeEl) {
+        progressRangeEl.value = 0;
+        progressRangeEl.disabled = true;
+      }
+      if (audioToggleBtn) {
+        audioToggleBtn.dataset.muted = 'false';
+        audioToggleBtn.setAttribute('aria-pressed', 'true');
+        audioToggleBtn.disabled = true;
+      }
+    }
+
+    function updateAudioToggle(videoEl) {
+      var muted = !!videoEl.muted;
+      audioToggleBtn.dataset.muted = String(muted);
+      audioToggleBtn.setAttribute('aria-pressed', String(!muted));
+    }
+
+    function updateProgress(videoEl) {
+      if (!videoEl || !isFinite(videoEl.duration) || videoEl.duration <= 0) return;
+      var ratio = videoEl.currentTime / videoEl.duration;
+      var v = Math.max(0, Math.min(1, ratio));
+      progressRangeEl.value = String(Math.round(v * 1000));
+    }
+
+    function setupVideoControls(videoEl) {
+      if (isVideoControlsSetup) return;
+      isVideoControlsSetup = true;
+
+      // enable UI
+      progressRangeEl.disabled = false;
+      customControlsEl.classList.add('is-visible');
+      if (audioToggleBtn) audioToggleBtn.disabled = false;
+      updateAudioToggle(videoEl);
+
+      progressRangeEl.value = '0';
+
+      // Seek by range
+      progressRangeEl.oninput = function () {
+        if (!currentPlayer || currentPlayer.tagName !== 'VIDEO') return;
+        if (!isFinite(currentPlayer.duration) || currentPlayer.duration <= 0) return;
+        var ratio = Number(progressRangeEl.value) / 1000;
+        currentPlayer.currentTime = ratio * currentPlayer.duration;
+      };
+
+      videoEl.ontimeupdate = function () {
+        if (!currentPlayer || currentPlayer.tagName !== 'VIDEO') return;
+        updateProgress(videoEl);
+      };
+
+      videoEl.onloadedmetadata = function () {
+        if (!currentPlayer || currentPlayer.tagName !== 'VIDEO') return;
+        updateProgress(videoEl);
+      };
+
+      videoEl.onclick = function () {
+        // Tap on video toggles playback (no extra play/pause icon).
+        if (!currentPlayer || currentPlayer.tagName !== 'VIDEO') return;
+        if (videoEl.paused) {
+          try { videoEl.play(); } catch (e) {}
+        } else {
+          videoEl.pause();
+        }
+      };
+
+      audioToggleBtn.onclick = function () {
+        if (!currentPlayer || currentPlayer.tagName !== 'VIDEO') return;
+        videoEl.muted = !videoEl.muted;
+        updateAudioToggle(videoEl);
+        try { videoEl.play(); } catch (e) {}
+      };
     }
 
     function openModal(cardEl) {
@@ -228,9 +338,15 @@
       }
 
       currentPlayer = player;
-      playerContainer.appendChild(player);
+      playerHost.appendChild(player);
       if (currentPlayer && currentPlayer.tagName === 'VIDEO') {
         try { currentPlayer.play(); } catch (e) {}
+        setupVideoControls(currentPlayer);
+      } else {
+        // For iframes we keep design consistent: show the overlay, but disable interactions.
+        if (customControlsEl) customControlsEl.classList.add('is-visible');
+        if (progressRangeEl) progressRangeEl.disabled = true;
+        if (audioToggleBtn) audioToggleBtn.disabled = true;
       }
 
       // focus dialog for keyboard users
@@ -456,10 +572,12 @@
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     cursor: pointer;
+    z-index: 0;
   }
 
   .video-reviews-grid__modal-dialog {
     position: relative;
+    z-index: 1;
     /* Keep the dialog tight around vertical 9:16 video (like mobile) */
     width: min(420px, 92vw);
     padding: 14px;
@@ -492,6 +610,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 2;
   }
 
   .video-reviews-grid__modal-player {
@@ -500,6 +619,7 @@
     background: transparent;
     border-radius: 12px;
     overflow: hidden;
+    position: relative;
   }
 
   .video-reviews-grid__modal-caption {
@@ -513,6 +633,90 @@
     width: 100%;
     height: 100%;
     display: block;
+  }
+
+  .video-reviews-grid__custom-controls {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px 12px;
+    display: none;
+    align-items: center;
+    gap: 10px;
+    pointer-events: none; /* children will receive pointer events */
+  }
+
+  .video-reviews-grid__custom-controls.is-visible {
+    display: flex;
+  }
+
+  .video-reviews-grid__custom-controls > * {
+    pointer-events: auto;
+  }
+
+  .video-reviews-grid__progress {
+    flex: 1;
+    width: 100%;
+    height: 20px;
+    appearance: none;
+    background: transparent;
+    margin: 0;
+  }
+
+  .video-reviews-grid__progress::-webkit-slider-runnable-track {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 999px;
+  }
+
+  .video-reviews-grid__progress::-webkit-slider-thumb {
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 999px;
+    background: #ffffff;
+    border: 2px solid rgba(0, 0, 0, 0.25);
+    margin-top: -5px;
+  }
+
+  .video-reviews-grid__progress:disabled::-webkit-slider-runnable-track {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .video-reviews-grid__audio-toggle {
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(0, 0, 0, 0.25);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 1;
+  }
+
+  .video-reviews-grid__audio-toggle:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  .video-reviews-grid__audio-icon--on { display: none; }
+  .video-reviews-grid__audio-icon--off { display: inline-block; }
+
+  .video-reviews-grid__audio-toggle[data-muted="false"] .video-reviews-grid__audio-icon--on {
+    display: inline-block;
+  }
+  .video-reviews-grid__audio-toggle[data-muted="false"] .video-reviews-grid__audio-icon--off {
+    display: none;
+  }
+  .video-reviews-grid__audio-toggle[data-muted="true"] .video-reviews-grid__audio-icon--on {
+    display: none;
+  }
+  .video-reviews-grid__audio-toggle[data-muted="true"] .video-reviews-grid__audio-icon--off {
+    display: inline-block;
   }
 
   /* Desktop sizing: keep modal from being too large */
