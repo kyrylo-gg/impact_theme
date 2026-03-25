@@ -198,36 +198,6 @@
           } catch (e) {}
         })();
 
-        // Last-resort: infer currency from visible price text on the page (outside bundle builder).
-        // Some setups mutate price text client-side without updating meta/analytics currency.
-        (function primeFromVisiblePriceText() {
-          try {
-            if (presentmentCurrency) return;
-            var dc = typeof document !== 'undefined' ? document : null;
-            if (!dc || !dc.querySelectorAll) return;
-            var candidates = dc.querySelectorAll('sale-price, compare-at-price, price-list, .price-list, .price, .money');
-            var best = '';
-            for (var i = 0; i < candidates.length; i++) {
-              var el = candidates[i];
-              // Skip bundle builder itself if already injected
-              if (el && el.closest && el.closest('#nass-bundle-builder')) continue;
-              var txt = (el && (el.textContent || el.innerText)) ? String(el.textContent || el.innerText) : '';
-              txt = txt.trim();
-              if (!txt) continue;
-              // Prefer explicit ISO codes if present
-              var m = txt.match(/\b[A-Z]{3}\b/);
-              if (m && m[0]) { best = m[0]; break; }
-              if (txt.indexOf('€') !== -1) { best = 'EUR'; break; }
-              if (txt.indexOf('£') !== -1) { best = 'GBP'; break; }
-              if (txt.indexOf('¥') !== -1) { best = 'JPY'; break; }
-            }
-            if (best) {
-              presentmentCurrency = best;
-              displayCurrency = best;
-            }
-          } catch (e) {}
-        })();
-
         // Prefer Shopify's rendered meta currency (Markets presentment) when available.
         // This stays correct even if a header currency picker shows a different selection.
         (function primeFromShopifyAnalyticsMeta() {
