@@ -335,7 +335,7 @@
         discountCode: {{ section.settings.discount_code | json }},
         discountPromoText: {{ section.settings.discount_promo_text | default: 'Get 60% off all clothing with 4 Programs Bundle!' | json }},
         discountAppliedText: {{ section.settings.discount_applied_text | default: '60% off all clothing applied!' | json }},
-        checkoutUrl: {{ routes.root_url | remove_last: '/' | append: '/checkout' | json }},
+        checkoutUrl: {{ routes.root_url | append: '/checkout' | json }},
         currency: {{ cart.currency | default: shop.currency | json }},
         shopCurrency: {{ shop.currency | json }},
         presentmentCurrency: {{ localization.country.currency.iso_code | json }},
