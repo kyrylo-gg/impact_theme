@@ -671,22 +671,25 @@
         "testimonial_MmEdgf": {
           "type": "testimonial",
           "settings": {
-            "image": "shopify://shop_images/Frame_44-3.png",
-            "quote": "\"I finally stayed consistent.\""
+            "image": "shopify://shop_images/Frame_44-3-2.png",
+            "name": "Jessica Miller",
+            "quote": "I’m not gonna lie I usually quit after like week 2 😅 This is the first program that didn’t make me feel “behind” all the time. Starting Soft was exactly what I needed."
           }
         },
         "testimonial_kWLV7p": {
           "type": "testimonial",
           "settings": {
             "image": "shopify://shop_images/Frame_44-2.png",
-            "quote": "\"I finally stayed consistent.\""
+            "name": "Brianna Thompson",
+            "quote": "The Plan B days are EVERYTHING. Like… I had a low energy week and I didn’t fall off the wagon for once?? lol"
           }
         },
         "testimonial_BmVnQ7": {
           "type": "testimonial",
           "settings": {
             "image": "shopify://shop_images/Frame_44.png",
-            "quote": "“Plan B saved my routine.”"
+            "name": "Kim Davis",
+            "quote": "I have knee issues and most “challenges” wreck me tbh. Soft felt really joint friendly and I could actually keep going (without pain)."
           }
         }
       },
