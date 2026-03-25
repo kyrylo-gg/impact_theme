@@ -127,11 +127,13 @@
     const sizeChartByProduct = (config && config.sizeChartByProduct && typeof config.sizeChartByProduct === 'object') ? config.sizeChartByProduct : {};
 
     // Resolve display currency with priority:
-    // 1) Shopify native multi-currency (Shopify.currency.active)
-    // 2) BoosterApps currency switcher (baCurr.config.final_currency or user_curr)
+    // 1) Shopify Markets presentment currency from Liquid (localization.country.currency.iso_code)
+    // 2) Shopify native multi-currency (Shopify.currency.active)
     // 3) Config-provided currency from Liquid (cart.currency / shop.currency)
-    // 4) Fallback to shop base USD
-    var displayCurrency = 'USD';
+    // 4) Fallback to shop base currency
+    var displayCurrency = (config && typeof config.presentmentCurrency === 'string' && config.presentmentCurrency.trim())
+      ? String(config.presentmentCurrency).trim()
+      : ((config && typeof config.currency === 'string' && config.currency.trim()) ? String(config.currency).trim() : 'USD');
     var shopBaseCurrency = (config && typeof config.shopCurrency === 'string' && config.shopCurrency.trim())
       ? String(config.shopCurrency).trim()
       : 'USD';
@@ -139,17 +141,10 @@
       if (typeof window !== 'undefined') {
         if (window.Shopify && window.Shopify.currency && window.Shopify.currency.active) {
           displayCurrency = String(window.Shopify.currency.active).trim() || displayCurrency;
-        } else if (window.baCurr && window.baCurr.config) {
-          var baCfg = window.baCurr.config;
-          var boosterCur = (baCfg.final_currency || baCfg.user_curr || '').trim();
-          if (boosterCur) displayCurrency = boosterCur;
         }
       }
-      if (config.currency && typeof config.currency === 'string') {
-        var c = String(config.currency).trim();
-        if (c) displayCurrency = c;
-      }
     } catch (e) {}
+    if (!displayCurrency) displayCurrency = shopBaseCurrency || 'USD';
 
     if (!wizardEl || !ctaEl) {
       console.log('[BB] early return: missing wizard or cta', { hasWizard: !!wizardEl, hasCta: !!ctaEl });

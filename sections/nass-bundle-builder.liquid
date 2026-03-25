@@ -338,6 +338,8 @@
         checkoutUrl: {{ routes.root_url | append: 'checkout' | json }},
         currency: {{ cart.currency | default: shop.currency | json }},
         shopCurrency: {{ shop.currency | json }},
+        presentmentCurrency: {{ localization.country.currency.iso_code | json }},
+        presentmentCountry: {{ localization.country.iso_code | json }},
         storefrontApiToken: {{ section.settings.storefront_api_token | json }},
         sizeChartConfigHandle: {{ section.settings.size_chart_config_handle | default: 'size-chart-settings' | json }},
         sizeChartByProduct: {
