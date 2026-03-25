@@ -657,9 +657,7 @@
         orig = getVisualOriginalPrice(stepId, price, hasPack);
         final = getVisualFinalPrice(stepId, price, hasPack);
       }
-      // Product prices come from product JSON / Storefront API (shop base currency).
-      // Use active display currency here (not cart currency) to keep symbol/code consistent during switches.
-      var cur = getDisplayCurrency();
+      var cur = getCartCurrency();
       var img = (p.images && p.images.nodes && p.images.nodes[0]) ? getImageUrlOptimized(p.images.nodes[0].url) : '';
       var cardClass = 'bb-product-card' + (dis ? ' bb-product-card--disabled' : '');
       var busy = !!bbState.cartOperationInProgress;
