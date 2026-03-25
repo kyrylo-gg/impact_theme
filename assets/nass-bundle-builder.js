@@ -743,8 +743,10 @@
     function fetchCollectionProductsStorefront(handle, countryCode) {
       if (!storefrontApiToken) return Promise.resolve({});
       var url = 'https://' + shopDomain + '/api/2024-01/graphql.json';
-      // Note: `country` for @inContext is a CountryCode enum (no quotes).
-      var query = 'query($handle:String!){collection(handle:$handle) @inContext(country: US){products(first:50){edges{node{id title handle tags images(first:10){edges{node{url altText}}}variants(first:20){edges{node{id title availableForSale price{amount currencyCode}compareAtPrice{amount currencyCode}selectedOptions{name value}}}}}}}}}';
+      // Note: `@inContext` is a directive on the operation, not on the field.
+      // `country` is a CountryCode enum (no quotes).
+      var cc = (countryCode || '').trim() || 'US';
+      var query = 'query($handle:String!) @inContext(country: ' + cc + '){collection(handle:$handle){products(first:50){edges{node{id title handle tags images(first:10){edges{node{url altText}}}variants(first:20){edges{node{id title availableForSale price{amount currencyCode}compareAtPrice{amount currencyCode}selectedOptions{name value}}}}}}}}}';
 
       return fetch(url, {
         method: 'POST',
@@ -795,8 +797,8 @@
       if (!storefrontApiToken) return Promise.resolve(null);
       var gid = String(productId).indexOf('gid://') === 0 ? productId : 'gid://shopify/Product/' + String(productId);
       var url = 'https://' + shopDomain + '/api/2024-01/graphql.json';
-      // Note: `country` for @inContext is a CountryCode enum (no quotes).
-      var query = 'query($id:ID!){product(id:$id) @inContext(country: US){id title handle images(first:10){edges{node{url altText}}}variants(first:20){edges{node{id title availableForSale price{amount currencyCode}compareAtPrice{amount currencyCode}selectedOptions{name value}}}}}}';
+      // Note: `@inContext` is a directive on the operation, not on the field.
+      var query = 'query($id:ID!) @inContext(country: US){product(id:$id){id title handle images(first:10){edges{node{url altText}}}variants(first:20){edges{node{id title availableForSale price{amount currencyCode}compareAtPrice{amount currencyCode}selectedOptions{name value}}}}}}';
       return fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'X-Shopify-Storefront-Access-Token': storefrontApiToken },
