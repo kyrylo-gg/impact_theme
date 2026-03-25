@@ -156,41 +156,6 @@
     var shopBaseCurrency = (config && typeof config.shopCurrency === 'string' && config.shopCurrency.trim())
       ? String(config.shopCurrency).trim()
       : 'USD';
-
-    function detectPageCurrencyFromDom() {
-      try {
-        var dc = typeof document !== 'undefined' ? document : null;
-        if (!dc || !dc.querySelectorAll) return '';
-        var candidates = dc.querySelectorAll('sale-price, compare-at-price, price-list, .price-list, .price, .money');
-        for (var i = 0; i < candidates.length; i++) {
-          var el = candidates[i];
-          if (el && el.closest && el.closest('#nass-bundle-builder')) continue;
-          var txt = (el && (el.textContent || el.innerText)) ? String(el.textContent || el.innerText) : '';
-          txt = txt.trim();
-          if (!txt) continue;
-          var m = txt.match(/\b[A-Z]{3}\b/);
-          if (m && m[0]) return m[0];
-          if (txt.indexOf('€') !== -1) return 'EUR';
-          if (txt.indexOf('£') !== -1) return 'GBP';
-          if (txt.indexOf('¥') !== -1) return 'JPY';
-        }
-      } catch (e) {}
-      return '';
-    }
-
-    function syncCurrencyFromDomAndRerender() {
-      var domCur = detectPageCurrencyFromDom();
-      if (!domCur) return;
-      if (domCur === presentmentCurrency && domCur === displayCurrency) return;
-      presentmentCurrency = domCur;
-      displayCurrency = domCur;
-      // Re-render prices with the updated currency code.
-      try {
-        renderStep();
-        renderDiscountBanner();
-        renderFooterSummary();
-      } catch (e) {}
-    }
     try {
       if (typeof window !== 'undefined') {
         // Prefer currency that the page itself declares (Markets presentment).
@@ -314,22 +279,6 @@
       return;
     }
     console.log('[BB] elements found, continuing');
-
-    // Some currency switchers/Markets scripts update price text after page load.
-    // Keep the bundle builder currency code in sync with the rendered page.
-    (function bindDomCurrencyWatcher() {
-      var last = '';
-      setInterval(function() {
-        var cur = detectPageCurrencyFromDom();
-        if (!cur || cur === last) return;
-        last = cur;
-        syncCurrencyFromDomAndRerender();
-      }, 600);
-      // also run once shortly after init
-      setTimeout(function() {
-        syncCurrencyFromDomAndRerender();
-      }, 800);
-    })();
 
     // Prime cart currency early. It's the most reliable "presentment currency" source
     // and helps avoid mismatches when UI currency pickers lag behind actual market pricing.
