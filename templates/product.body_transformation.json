@@ -471,6 +471,12 @@
             "image": "shopify://shop_images/Before_After_1.png"
           }
         },
+        "image_VmYWHE": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/423548c4-279d-11f1-b32d-ae96f0561557.avif"
+          }
+        },
         "image_NGhq7k": {
           "type": "image",
           "settings": {
@@ -492,6 +498,7 @@
       },
       "block_order": [
         "image_cgnrit",
+        "image_VmYWHE",
         "image_NGhq7k",
         "image_zEcTn8",
         "image_LNDw94"
