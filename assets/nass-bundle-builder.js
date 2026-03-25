@@ -158,6 +158,24 @@
     }
     console.log('[BB] elements found, continuing');
 
+    // Prime cart currency early. It's the most reliable "presentment currency" source
+    // and helps avoid mismatches when UI currency pickers lag behind actual market pricing.
+    fetch(cartUrls.get)
+      .then(function(r) { return r.json(); })
+      .then(function(cart) {
+        if (!cart || typeof cart !== 'object') return;
+        bbState.cartData = cart;
+        if (cart.currency) {
+          var cc = String(cart.currency).trim();
+          if (cc) {
+            displayCurrency = cc;
+            if (!presentmentCurrency) presentmentCurrency = cc;
+          }
+        }
+        renderFooterSummary();
+      })
+      .catch(function() {});
+
     const imageViewerEl = sectionRoot.querySelector('[data-bb-image-viewer]');
     const imageViewerImgEl = sectionRoot.querySelector('[data-bb-image-viewer-img]');
     const imageViewerTitleEl = sectionRoot.querySelector('[data-bb-image-viewer-title]');
@@ -773,14 +791,17 @@
         if (!p) return;
         var hasPack = getHasProgramPack();
         var of = getItemOrigAndFinal(item, hasPack);
+        var sourceCur = (p.priceRange && p.priceRange.minVariantPrice && p.priceRange.minVariantPrice.currencyCode)
+          ? String(p.priceRange.minVariantPrice.currencyCode)
+          : (presentmentCurrency || shopBaseCurrency || 'USD');
         var img = (p.images && p.images.nodes && p.images.nodes[0]) ? getImageUrlOptimized(p.images.nodes[0].url, 128) : '';
         var opts = '';
         if (p.variants && p.variants.nodes && p.variants.nodes[0] && p.variants.nodes[0].selectedOptions) {
           opts = p.variants.nodes[0].selectedOptions.map(function(o){return o.value;}).join(' • ');
         }
         var priceHtml = of.orig > of.final
-          ? '<span class="bb-review-original">' + formatMoney(of.orig, cur) + '</span> <span class="bb-review-price">' + formatMoney(of.final, cur) + '</span>'
-          : '<span class="bb-review-price">' + formatMoney(of.final, cur) + '</span>';
+          ? '<span class="bb-review-original">' + formatMoney(of.orig, cur, sourceCur) + '</span> <span class="bb-review-price">' + formatMoney(of.final, cur, sourceCur) + '</span>'
+          : '<span class="bb-review-price">' + formatMoney(of.final, cur, sourceCur) + '</span>';
         html += '<div class="bb-review-item"><img class="bb-review-thumb" src="' + (img || '') + '" alt=""><div class="bb-review-info"><span class="bb-review-title">' + (p.title || '') + '</span>' + (opts ? '<span class="bb-review-opts">' + opts + '</span>' : '') + priceHtml + '</div><button type="button" class="bb-product-remove bb-product-remove--review' + (busy ? ' bb-product-btn--loading' : '') + '" data-bb-remove="' + item.productId + '" aria-label="Remove"' + (busy ? ' disabled' : '') + '>' + removeContent + '</button></div>';
       });
       html += '</div>';
