@@ -157,12 +157,15 @@
       ? String(config.shopCurrency).trim()
       : 'USD';
 
-    // On the non-localized root path, keep bundle builder in shop base currency (Liquid-configured)
-    // and avoid "smart" currency inference that can clash with Markets or currency switchers.
+    // On the non-localized root path, keep bundle builder in shop base currency (USD)
+    // regardless of geo/Markets presentment pricing shown elsewhere on the page.
+    // This is used specifically to force USD amounts + symbol on /products/... URLs.
     var lockCurrencyToConfig = false;
     try {
-      if (routesRoot === '/' && presentmentCurrency && presentmentCurrency === shopBaseCurrency) {
-        lockCurrencyToConfig = true;
+      lockCurrencyToConfig = (routesRoot === '/');
+      if (lockCurrencyToConfig) {
+        presentmentCurrency = shopBaseCurrency;
+        displayCurrency = shopBaseCurrency;
       }
     } catch (e) {}
 
