@@ -684,9 +684,12 @@
       var sourceCur = (p.priceRange && p.priceRange.minVariantPrice && p.priceRange.minVariantPrice.currencyCode)
         ? String(p.priceRange.minVariantPrice.currencyCode)
         : (presentmentCurrency || shopBaseCurrency || 'USD');
-      // If the product price already comes in a non-base currency (presentment),
-      // show the matching symbol/code. Otherwise, convert from base to UI currency.
-      var cur = (sourceCur && sourceCur !== shopBaseCurrency) ? sourceCur : getDisplayCurrency();
+      // Prefer the UI/display currency, but if the site currency picker is out of sync
+      // with actual presentment prices, fall back to the product price currency code.
+      var cur = getDisplayCurrency();
+      if (sourceCur && cur && sourceCur !== cur && sourceCur !== shopBaseCurrency && cur === shopBaseCurrency) {
+        cur = sourceCur;
+      }
       var img = (p.images && p.images.nodes && p.images.nodes[0]) ? getImageUrlOptimized(p.images.nodes[0].url) : '';
       var cardClass = 'bb-product-card' + (dis ? ' bb-product-card--disabled' : '');
       var busy = !!bbState.cartOperationInProgress;
@@ -796,16 +799,17 @@
         var sourceCur = (p.priceRange && p.priceRange.minVariantPrice && p.priceRange.minVariantPrice.currencyCode)
           ? String(p.priceRange.minVariantPrice.currencyCode)
           : (presentmentCurrency || shopBaseCurrency || 'USD');
-        // Keep review step symbol consistent with the item price currency when presentment is already applied.
-        var itemCur = (sourceCur && sourceCur !== shopBaseCurrency) ? sourceCur : cur;
+        if (sourceCur && cur && sourceCur !== cur && sourceCur !== shopBaseCurrency && cur === shopBaseCurrency) {
+          cur = sourceCur;
+        }
         var img = (p.images && p.images.nodes && p.images.nodes[0]) ? getImageUrlOptimized(p.images.nodes[0].url, 128) : '';
         var opts = '';
         if (p.variants && p.variants.nodes && p.variants.nodes[0] && p.variants.nodes[0].selectedOptions) {
           opts = p.variants.nodes[0].selectedOptions.map(function(o){return o.value;}).join(' • ');
         }
         var priceHtml = of.orig > of.final
-          ? '<span class="bb-review-original">' + formatMoney(of.orig, itemCur, sourceCur) + '</span> <span class="bb-review-price">' + formatMoney(of.final, itemCur, sourceCur) + '</span>'
-          : '<span class="bb-review-price">' + formatMoney(of.final, itemCur, sourceCur) + '</span>';
+          ? '<span class="bb-review-original">' + formatMoney(of.orig, cur, sourceCur) + '</span> <span class="bb-review-price">' + formatMoney(of.final, cur, sourceCur) + '</span>'
+          : '<span class="bb-review-price">' + formatMoney(of.final, cur, sourceCur) + '</span>';
         html += '<div class="bb-review-item"><img class="bb-review-thumb" src="' + (img || '') + '" alt=""><div class="bb-review-info"><span class="bb-review-title">' + (p.title || '') + '</span>' + (opts ? '<span class="bb-review-opts">' + opts + '</span>' : '') + priceHtml + '</div><button type="button" class="bb-product-remove bb-product-remove--review' + (busy ? ' bb-product-btn--loading' : '') + '" data-bb-remove="' + item.productId + '" aria-label="Remove"' + (busy ? ' disabled' : '') + '>' + removeContent + '</button></div>';
       });
       html += '</div>';
