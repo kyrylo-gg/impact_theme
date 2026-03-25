@@ -158,6 +158,46 @@
       : 'USD';
     try {
       if (typeof window !== 'undefined') {
+        // Prefer currency that the page itself declares (Markets presentment).
+        // This helps in cases where price amounts are already presentment (e.g. EUR),
+        // but Shopify.currency / header picker / analytics still show USD.
+        (function primeFromPageDeclaredCurrency() {
+          try {
+            var dc = typeof document !== 'undefined' ? document : null;
+            var cur = '';
+
+            // OpenGraph / product meta currency (often reflects presentment)
+            if (dc && dc.querySelector) {
+              var m1 = dc.querySelector('meta[property="product:price:currency"]');
+              var m2 = dc.querySelector('meta[property="og:price:currency"]');
+              cur = (m1 && m1.getAttribute('content')) || (m2 && m2.getAttribute('content')) || '';
+              cur = String(cur || '').trim();
+            }
+
+            // PayPal in-context metadata currency
+            if (!cur && dc && dc.querySelector) {
+              var pp = dc.querySelector('meta#in-context-paypal-metadata');
+              cur = pp ? String(pp.getAttribute('data-currency') || '').trim() : '';
+            }
+
+            // Apple Pay capabilities JSON currencyCode
+            if (!cur && dc && dc.getElementById) {
+              var ap = dc.getElementById('apple-pay-shop-capabilities');
+              if (ap && ap.textContent) {
+                try {
+                  var apj = JSON.parse(ap.textContent);
+                  cur = apj && apj.currencyCode ? String(apj.currencyCode).trim() : '';
+                } catch (e) {}
+              }
+            }
+
+            if (cur) {
+              presentmentCurrency = cur;
+              displayCurrency = cur;
+            }
+          } catch (e) {}
+        })();
+
         // Prefer Shopify's rendered meta currency (Markets presentment) when available.
         // This stays correct even if a header currency picker shows a different selection.
         (function primeFromShopifyAnalyticsMeta() {
@@ -165,7 +205,7 @@
             var mc = window.ShopifyAnalytics && window.ShopifyAnalytics.meta && window.ShopifyAnalytics.meta.currency
               ? String(window.ShopifyAnalytics.meta.currency).trim()
               : '';
-            if (mc) {
+            if (mc && !presentmentCurrency) {
               presentmentCurrency = mc;
               displayCurrency = mc;
             }
