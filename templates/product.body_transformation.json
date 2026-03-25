@@ -515,7 +515,7 @@
         "level_HRzwTt": {
           "type": "level",
           "settings": {
-            "image": "shopify://shop_images/bt_basic.png",
+            "image": "shopify://shop_images/Frame_41-2_e07c83cf-fb7b-41b3-bc4d-a87d5482690c.png",
             "duration": "4 weeks",
             "title": "Basic",
             "subtitle": "(Sculpt)",
@@ -528,7 +528,7 @@
         "level_pQWrEN": {
           "type": "level",
           "settings": {
-            "image": "shopify://shop_images/bthard.png",
+            "image": "shopify://shop_images/Frame_41-3.png",
             "duration": "4 weeks",
             "title": "Hard",
             "subtitle": "(Burn)",
