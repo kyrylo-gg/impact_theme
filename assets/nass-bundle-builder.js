@@ -92,7 +92,6 @@
       change: routesRoot + 'cart/change.js',
       clear: routesRoot + 'cart/clear.js'
     };
-    var localizationUrl = routesRoot + 'localization';
     var configSteps = Array.isArray(config.steps) ? config.steps : [];
     var stepsFromConfig = configSteps.map(function(s) {
       return {
@@ -162,49 +161,6 @@
     // Shopify Markets can still present EUR amounts on /products/... depending on geo,
     // and forcing USD requires reliable Storefront inContext querying which may not be available.
     var lockCurrencyToConfig = false;
-
-    // If user lands on a non-localized URL (/products/...) we want USD pricing even in EU.
-    // The only reliable way is to switch the active Market/country to US via /localization,
-    // so all storefront prices (and products.json) become USD.
-    (function enforceUsdOnRootUrls() {
-      try {
-        if (routesRoot !== '/') return;
-        if (shopBaseCurrency !== 'USD') return;
-        // If the rendered presentment currency is already USD, do nothing.
-        if (presentmentCurrency === 'USD' || displayCurrency === 'USD') return;
-        // Avoid infinite reload loops.
-        var key = 'bb:forced-usd';
-        if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem(key) === '1') return;
-        // Only enforce when we detect the page is showing a non-USD currency.
-        var detected = '';
-        try {
-          detected = (typeof document !== 'undefined' && document.querySelector)
-            ? (document.querySelector('meta[property="product:price:currency"]') && document.querySelector('meta[property="product:price:currency"]').getAttribute('content')) || ''
-            : '';
-        } catch (e) {}
-        detected = String(detected || '').trim();
-        if (!detected) return;
-        if (detected === 'USD') return;
-
-        if (typeof sessionStorage !== 'undefined') sessionStorage.setItem(key, '1');
-
-        var body = new URLSearchParams();
-        body.set('form_type', 'localization');
-        body.set('utf8', '✓');
-        body.set('_method', 'put');
-        body.set('country_code', 'US');
-        body.set('return_to', window.location.pathname + window.location.search + window.location.hash);
-
-        fetch(localizationUrl, {
-          method: 'POST',
-          credentials: 'same-origin',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
-          body: body.toString()
-        }).then(function() {
-          window.location.reload();
-        }).catch(function() {});
-      } catch (e) {}
-    })();
 
     function detectPageCurrencyFromDom() {
       try {
