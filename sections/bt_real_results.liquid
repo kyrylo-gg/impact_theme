@@ -92,8 +92,8 @@
 
   .bt-rr__carousel { margin-top: 32px; }
   @media (min-width: 768px) { .bt-rr__carousel { margin-top: 40px; } }
-  .bt-rr__track { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
-  @media (min-width: 768px) { .bt-rr__track { gap: 20px; } }
+  .bt-rr__track { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; justify-content: flex-start; }
+  @media (min-width: 768px) { .bt-rr__track { gap: 20px; justify-content: center; } }
   .bt-rr__track::-webkit-scrollbar { display: none; }
   .bt-rr__slide { flex: 0 0 auto; scroll-snap-align: start; width: 295px; }
   @media (min-width: 768px) { .bt-rr__slide { width: 381px; } }
