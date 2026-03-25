@@ -158,6 +158,20 @@
       : 'USD';
     try {
       if (typeof window !== 'undefined') {
+        // Prefer Shopify's rendered meta currency (Markets presentment) when available.
+        // This stays correct even if a header currency picker shows a different selection.
+        (function primeFromShopifyAnalyticsMeta() {
+          try {
+            var mc = window.ShopifyAnalytics && window.ShopifyAnalytics.meta && window.ShopifyAnalytics.meta.currency
+              ? String(window.ShopifyAnalytics.meta.currency).trim()
+              : '';
+            if (mc) {
+              presentmentCurrency = mc;
+              displayCurrency = mc;
+            }
+          } catch (e) {}
+        })();
+
         // If theme money format is already localized (Markets presentment), prefer it as source of truth.
         // This covers cases where the header currency selector is out of sync with presentment pricing.
         (function primeFromThemeMoneyFormat() {
@@ -174,7 +188,7 @@
               else if (s.indexOf('£') !== -1) inferred = 'GBP';
               else if (s.indexOf('¥') !== -1) inferred = 'JPY';
             }
-            if (inferred) {
+            if (inferred && !presentmentCurrency) {
               presentmentCurrency = inferred;
               displayCurrency = inferred;
             }
