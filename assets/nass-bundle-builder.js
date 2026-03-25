@@ -132,6 +132,9 @@
     // 3) Config-provided currency from Liquid (cart.currency / shop.currency)
     // 4) Fallback to shop base USD
     var displayCurrency = 'USD';
+    var shopBaseCurrency = (config && typeof config.shopCurrency === 'string' && config.shopCurrency.trim())
+      ? String(config.shopCurrency).trim()
+      : 'USD';
     try {
       if (typeof window !== 'undefined') {
         if (window.Shopify && window.Shopify.currency && window.Shopify.currency.active) {
@@ -224,13 +227,47 @@
       return parseFloat(realPrice) * 0.4;
     }
 
-    function formatMoney(amount, currency) {
-      return new Intl.NumberFormat('en-US', { style: 'currency', currency: currency || 'USD' }).format(amount);
+    function getActiveCurrency() {
+      try {
+        if (typeof window !== 'undefined' && window.Shopify && window.Shopify.currency && window.Shopify.currency.active) {
+          var active = String(window.Shopify.currency.active).trim();
+          if (active) return active;
+        }
+      } catch (e) {}
+      return getDisplayCurrency();
+    }
+
+    function getShopifyRate() {
+      try {
+        if (typeof window !== 'undefined' && window.Shopify && window.Shopify.currency && window.Shopify.currency.rate) {
+          var r = Number(window.Shopify.currency.rate);
+          if (isFinite(r) && r > 0) return r;
+        }
+      } catch (e) {}
+      return 1;
+    }
+
+    /**
+     * Format a money amount, converting from base -> active currency when possible.
+     * - `amount` is expected to be in `sourceCurrency` units (not cents).
+     * - When switching currencies in Shopify Markets, `Shopify.currency.rate` reflects base->active rate.
+     */
+    function formatMoney(amount, currency, sourceCurrency) {
+      var target = (currency || getDisplayCurrency() || 'USD');
+      var source = (sourceCurrency || shopBaseCurrency || 'USD');
+      var value = Number(amount || 0);
+
+      // Convert only when source is base currency and target is the active currency.
+      var activeCur = getActiveCurrency();
+      if (source !== target && source === shopBaseCurrency && target === activeCur) {
+        value = value * getShopifyRate();
+      }
+
+      return new Intl.NumberFormat('en-US', { style: 'currency', currency: target || 'USD' }).format(value);
     }
 
     /* Single source for UI currency: cart when loaded, else Booster/Shopify active, else config fallback. */
     function getDisplayCurrency() {
-      if (bbState.cartData && bbState.cartData.currency) return bbState.cartData.currency;
       try {
         if (typeof window !== 'undefined' && window.baCurr && window.baCurr.config) {
           var baCfg = window.baCurr.config;
@@ -242,6 +279,7 @@
           if (active) return active;
         }
       } catch (e) {}
+      if (bbState.cartData && bbState.cartData.currency) return bbState.cartData.currency;
       return displayCurrency;
     }
 
@@ -260,6 +298,31 @@
         return cart;
       });
     }
+
+    // Re-render prices when currency changes (symbol + conversion).
+    (function bindCurrencyWatcher() {
+      var lastCur = getDisplayCurrency();
+      setInterval(function() {
+        var nextCur = getDisplayCurrency();
+        if (!nextCur || nextCur === lastCur) return;
+        lastCur = nextCur;
+
+        // Refresh cart currency + totals and re-render UI.
+        fetch(cartUrls.get)
+          .then(function(r) { return r.json(); })
+          .then(function(cart) {
+            bbState.cartData = cart;
+            renderStep();
+            renderDiscountBanner();
+            renderFooterSummary();
+          })
+          .catch(function() {
+            renderStep();
+            renderDiscountBanner();
+            renderFooterSummary();
+          });
+      }, 600);
+    })();
 
     function addItem(stepId, productId, variantId, quantity) {
       if (bbState.cartOperationInProgress) return;
@@ -880,17 +943,17 @@
         discountPct = orig > 0 ? Math.round((discountAmt / orig) * 100) : 0;
       }
       var compactHtml = discountAmt > 0
-        ? '<span class="bb-wizard-summary-original">' + formatMoney(orig, cur) + '</span> ' + formatMoney(total, cur)
-        : formatMoney(total, cur);
+        ? '<span class="bb-wizard-summary-original">' + formatMoney(orig, cur, cur) + '</span> ' + formatMoney(total, cur, cur)
+        : formatMoney(total, cur, cur);
       if (compactEl) compactEl.innerHTML = compactHtml;
       var subtotalClass = 'bb-wizard-summary-line' + (discountAmt > 0 ? ' bb-wizard-summary-line--subtotal-crossed' : '');
       var subtotalHtml = discountAmt > 0
-        ? '<span>Subtotal</span><span class="bb-wizard-summary-original">' + formatMoney(orig, cur) + '</span>'
-        : '<span>Subtotal</span><span>' + formatMoney(orig, cur) + '</span>';
+        ? '<span>Subtotal</span><span class="bb-wizard-summary-original">' + formatMoney(orig, cur, cur) + '</span>'
+        : '<span>Subtotal</span><span>' + formatMoney(orig, cur, cur) + '</span>';
       var discountHtml = discountAmt > 0
-        ? '<div class="bb-wizard-summary-line bb-wizard-summary-line--discount"><span>Discount (' + discountPct + '%)</span><span>- ' + formatMoney(discountAmt, cur) + '</span></div>'
+        ? '<div class="bb-wizard-summary-line bb-wizard-summary-line--discount"><span>Discount (' + discountPct + '%)</span><span>- ' + formatMoney(discountAmt, cur, cur) + '</span></div>'
         : '<div class="bb-wizard-summary-line bb-wizard-summary-line--discount-placeholder"><span></span><span></span></div>';
-      var totalLineHtml = '<div class="bb-wizard-summary-line bb-wizard-summary-line--total"><span>Total</span><span>' + formatMoney(total, cur) + '</span></div>';
+      var totalLineHtml = '<div class="bb-wizard-summary-line bb-wizard-summary-line--total"><span>Total</span><span>' + formatMoney(total, cur, cur) + '</span></div>';
       /* Hierarchy: item count → subtotal → discount → total */
       var insert = document.createElement('div');
       insert.className = 'bb-wizard-summary';
