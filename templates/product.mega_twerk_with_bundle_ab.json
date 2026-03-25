@@ -466,6 +466,67 @@
         "heading": "The twerk program everyone's excited about"
       }
     },
+    "video_reviews_grid_main": {
+      "type": "video-reviews-grid",
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "thumbnail": "",
+            "video": "",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "thumbnail": "",
+            "video": "",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "thumbnail": "",
+            "video": "",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "thumbnail": "",
+            "video": "",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_5": {
+          "type": "review",
+          "settings": {
+            "thumbnail": "",
+            "video": "",
+            "external_video_url": "",
+            "caption": ""
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4",
+        "review_5"
+      ],
+      "settings": {
+        "heading": "Join Girls Who Already",
+        "heading_highlight": "Twerk Like Pros"
+      }
+    },
     "countdown_timer_Ab3XyZ": {
       "type": "countdown-timer",
       "settings": {
@@ -970,6 +1031,7 @@
     "student_progress_ez8yde",
     "twerk_makeovers_dHGL9w",
     "feedback_screenshots_main",
+    "video_reviews_grid_main",
     "countdown_timer_Ab3XyZ",
     "nass_bundle_builder",
     "features_main",

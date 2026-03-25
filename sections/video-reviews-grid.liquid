@@ -1,0 +1,596 @@
+{% comment %}
+  Video Reviews Grid
+  Lightweight UGC preview grid with click-to-load video playback.
+{% endcomment %}
+
+<section class="video-reviews-grid" id="shopify-section-{{ section.id }}" {{ section.shopify_attributes }}>
+  <div class="video-reviews-grid__inner">
+    {% if section.settings.heading != blank %}
+      <h2 class="video-reviews-grid__heading">
+        {{ section.settings.heading | escape }}
+        {% if section.settings.heading_highlight != blank %}
+          <span class="video-reviews-grid__heading-highlight">{{ section.settings.heading_highlight | escape }}</span>
+        {% endif %}
+      </h2>
+    {% endif %}
+
+    <div class="video-reviews-grid__grid" role="list">
+      {% for block in section.blocks %}
+        {% if block.type != 'review' %}
+          {% continue %}
+        {% endif %}
+
+        {% assign thumbnail = block.settings.thumbnail %}
+        {% assign local_video = block.settings.video %}
+        {% assign local_video_mp4 = blank %}
+        {% assign local_video_webm = blank %}
+
+        {% if local_video != blank and local_video.sources != blank %}
+          {% for source in local_video.sources %}
+            {% if source.mime_type == 'video/mp4' and local_video_mp4 == blank %}
+              {% assign local_video_mp4 = source.url %}
+            {% endif %}
+            {% if source.mime_type == 'video/webm' and local_video_webm == blank %}
+              {% assign local_video_webm = source.url %}
+            {% endif %}
+          {% endfor %}
+          {% if local_video_mp4 == blank %}
+            {% assign local_video_mp4 = local_video.sources[0].url %}
+          {% endif %}
+        {% endif %}
+
+        <article
+          class="video-reviews-grid__card"
+          role="listitem"
+          {{ block.shopify_attributes }}
+          {% if local_video_mp4 != blank %}data-video-mp4="{{ local_video_mp4 | escape }}"{% endif %}
+          {% if local_video_webm != blank %}data-video-webm="{{ local_video_webm | escape }}"{% endif %}
+          {% if block.settings.external_video_url != blank %}data-video-external="{{ block.settings.external_video_url | escape }}"{% endif %}
+          {% if block.settings.caption != blank %}data-caption="{{ block.settings.caption | escape }}"{% endif %}
+        >
+          <button class="video-reviews-grid__trigger" type="button" aria-label="Play video review">
+            <div class="video-reviews-grid__media">
+              {% if thumbnail != blank %}
+                <img
+                  class="video-reviews-grid__image"
+                  src="{{ thumbnail | image_url: width: 600 }}"
+                  srcset="
+                    {{ thumbnail | image_url: width: 240 }} 240w,
+                    {{ thumbnail | image_url: width: 360 }} 360w,
+                    {{ thumbnail | image_url: width: 480 }} 480w,
+                    {{ thumbnail | image_url: width: 600 }} 600w
+                  "
+                  sizes="(max-width: 767px) 30vw, 18vw"
+                  loading="lazy"
+                  width="{{ thumbnail.width }}"
+                  height="{{ thumbnail.height }}"
+                  alt="{{ block.settings.caption | escape }}"
+                >
+              {% elsif local_video != blank and local_video.preview_image != blank %}
+                <img
+                  class="video-reviews-grid__image"
+                  src="{{ local_video.preview_image | image_url: width: 600 }}"
+                  srcset="
+                    {{ local_video.preview_image | image_url: width: 240 }} 240w,
+                    {{ local_video.preview_image | image_url: width: 360 }} 360w,
+                    {{ local_video.preview_image | image_url: width: 480 }} 480w,
+                    {{ local_video.preview_image | image_url: width: 600 }} 600w
+                  "
+                  sizes="(max-width: 767px) 30vw, 18vw"
+                  loading="lazy"
+                  width="{{ local_video.preview_image.width }}"
+                  height="{{ local_video.preview_image.height }}"
+                  alt="{{ block.settings.caption | escape }}"
+                >
+              {% else %}
+                <div class="video-reviews-grid__placeholder">
+                  {{ 'image' | placeholder_svg_tag: 'video-reviews-grid__placeholder-svg' }}
+                </div>
+              {% endif %}
+
+              <div class="video-reviews-grid__overlay" aria-hidden="true"></div>
+              <span class="video-reviews-grid__play" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                  <path d="M8 5v14l11-7z"></path>
+                </svg>
+              </span>
+            </div>
+          </button>
+
+          {% if block.settings.caption != blank %}
+            <p class="video-reviews-grid__caption">{{ block.settings.caption | escape }}</p>
+          {% endif %}
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- One shared player modal (to keep DOM and initial payload small) -->
+  <div
+    class="video-reviews-grid__modal"
+    id="video-reviews-grid-modal-{{ section.id }}"
+    aria-hidden="true"
+  >
+    <button class="video-reviews-grid__modal-backdrop" type="button" aria-label="Close video modal"></button>
+    <div class="video-reviews-grid__modal-dialog" role="dialog" aria-modal="true" aria-label="Video review" tabindex="-1">
+      <button class="video-reviews-grid__modal-close" type="button" aria-label="Close" data-close>
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M18 6 6 18" />
+          <path d="M6 6l12 12" />
+        </svg>
+      </button>
+
+      <div class="video-reviews-grid__modal-player" data-player-container></div>
+      <p class="video-reviews-grid__modal-caption" data-caption-el></p>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var sectionEl = document.getElementById('shopify-section-{{ section.id }}');
+    if (!sectionEl) return;
+
+    var modalEl = sectionEl.querySelector('#video-reviews-grid-modal-{{ section.id }}');
+    var dialogEl = modalEl && modalEl.querySelector('.video-reviews-grid__modal-dialog');
+    var playerContainer = modalEl && modalEl.querySelector('[data-player-container]');
+    var captionEl = modalEl && modalEl.querySelector('[data-caption-el]');
+    var closeBtn = modalEl && modalEl.querySelector('[data-close]');
+    if (!modalEl || !dialogEl || !playerContainer || !closeBtn) return;
+
+    var activeEl = null;
+    var currentPlayer = null;
+
+    function createIframe(url) {
+      var iframe = document.createElement('iframe');
+      iframe.src = url;
+      // In a modal we want immediate loading after click.
+      iframe.loading = 'eager';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      iframe.allowFullscreen = true;
+      iframe.className = 'video-reviews-grid__player video-reviews-grid__player--iframe';
+      iframe.setAttribute('title', 'Video review');
+      return iframe;
+    }
+
+    function createLocalVideo(mp4Url, webmUrl) {
+      var video = document.createElement('video');
+      video.className = 'video-reviews-grid__player video-reviews-grid__player--video';
+      video.controls = true;
+      video.autoplay = true;
+      video.playsInline = true;
+      video.preload = 'auto';
+      video.muted = false;
+
+      if (webmUrl) {
+        var webmSource = document.createElement('source');
+        webmSource.src = webmUrl;
+        webmSource.type = 'video/webm';
+        video.appendChild(webmSource);
+      }
+      if (mp4Url) {
+        var mp4Source = document.createElement('source');
+        mp4Source.src = mp4Url;
+        mp4Source.type = 'video/mp4';
+        video.appendChild(mp4Source);
+      }
+      return video;
+    }
+
+    function stopAndRemovePlayer() {
+      if (currentPlayer && currentPlayer.tagName === 'VIDEO') {
+        try { currentPlayer.pause(); } catch (e) {}
+      }
+      if (currentPlayer && currentPlayer.tagName === 'IFRAME') {
+        try { currentPlayer.src = 'about:blank'; } catch (e) {}
+      }
+      if (playerContainer) {
+        playerContainer.innerHTML = '';
+      }
+      currentPlayer = null;
+    }
+
+    function openModal(cardEl) {
+      if (!cardEl) return;
+
+      activeEl = document.activeElement;
+      modalEl.classList.add('is-open');
+      modalEl.setAttribute('aria-hidden', 'false');
+
+      // lock background scroll
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+
+      // build player lazily
+      stopAndRemovePlayer();
+
+      var mp4Url = cardEl.dataset.videoMp4;
+      var webmUrl = cardEl.dataset.videoWebm;
+      var externalUrl = cardEl.dataset.videoExternal;
+
+      if (captionEl) {
+        captionEl.textContent = cardEl.dataset.caption ? String(cardEl.dataset.caption) : '';
+      }
+
+      var player = null;
+      if (externalUrl) {
+        player = createIframe(externalUrl);
+      } else if (mp4Url || webmUrl) {
+        player = createLocalVideo(mp4Url, webmUrl);
+      }
+
+      if (!player) {
+        modalEl.classList.remove('is-open');
+        modalEl.setAttribute('aria-hidden', 'true');
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
+        return;
+      }
+
+      currentPlayer = player;
+      playerContainer.appendChild(player);
+      if (currentPlayer && currentPlayer.tagName === 'VIDEO') {
+        try { currentPlayer.play(); } catch (e) {}
+      }
+
+      // focus dialog for keyboard users
+      dialogEl.focus();
+    }
+
+    function closeModal() {
+      modalEl.classList.remove('is-open');
+      modalEl.setAttribute('aria-hidden', 'true');
+
+      stopAndRemovePlayer();
+
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+
+      if (activeEl && typeof activeEl.focus === 'function') {
+        activeEl.focus();
+      }
+    }
+
+    sectionEl.addEventListener('click', function (event) {
+      var trigger = event.target.closest('.video-reviews-grid__trigger');
+      if (!trigger) return;
+      event.preventDefault();
+
+      var card = trigger.closest('.video-reviews-grid__card');
+      if (!card) return;
+      openModal(card);
+    });
+
+    closeBtn.addEventListener('click', function () {
+      closeModal();
+    });
+
+    // Close on backdrop click
+    var backdropBtn = modalEl.querySelector('.video-reviews-grid__modal-backdrop');
+    if (backdropBtn) {
+      backdropBtn.addEventListener('click', function () {
+        closeModal();
+      });
+    }
+
+    // Close on ESC
+    document.addEventListener('keydown', function (e) {
+      if (!modalEl.classList.contains('is-open')) return;
+      if (e.key === 'Escape' || e.key === 'Esc') {
+        closeModal();
+      }
+    });
+  })();
+</script>
+
+{% stylesheet %}
+  .video-reviews-grid {
+    --vr-primary: var(--nass-primary, hsl(224, 100%, 50%));
+    --vr-font-display: var(--font-heading--family, 'Anybody'), system-ui, sans-serif;
+  }
+
+  .video-reviews-grid {
+    padding: 32px 16px;
+  }
+
+  .video-reviews-grid__inner {
+    max-width: 1152px;
+    margin: 0 auto;
+  }
+
+  .video-reviews-grid__heading {
+    margin: 0 0 16px;
+    text-align: center;
+    font-size: 30px;
+    line-height: 100%;
+    text-transform: uppercase;
+    font-family: var(--vr-font-display);
+    font-weight: 900;
+    font-stretch: 150%;
+    letter-spacing: 0.03em;
+  }
+
+  .video-reviews-grid__heading-highlight {
+    color: var(--vr-primary);
+  }
+
+  @media (min-width: 768px) {
+    .video-reviews-grid__heading {
+      font-size: 48px;
+    }
+  }
+
+  .video-reviews-grid__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .video-reviews-grid__card {
+    min-width: 0;
+  }
+
+  .video-reviews-grid__trigger {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    text-align: left;
+    display: block;
+  }
+
+  .video-reviews-grid__media {
+    position: relative;
+    aspect-ratio: 9 / 16;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #ececec;
+  }
+
+  .video-reviews-grid__image,
+  .video-reviews-grid__player {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .video-reviews-grid__image {
+    object-fit: cover;
+  }
+
+  .video-reviews-grid__player {
+    background: transparent;
+    border: 0;
+  }
+
+  .video-reviews-grid__image {
+    transition: transform 300ms ease;
+  }
+
+  .video-reviews-grid__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.1);
+    transition: background-color 300ms ease;
+    pointer-events: none;
+  }
+
+  .video-reviews-grid__play {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(var(--text-color, 26 26 26));
+    pointer-events: none;
+    transition: background-color 300ms ease;
+  }
+
+  .video-reviews-grid__play svg {
+    margin-left: 2px;
+  }
+
+  .video-reviews-grid__card:hover .video-reviews-grid__image {
+    transform: scale(1.05);
+  }
+
+  .video-reviews-grid__card:hover .video-reviews-grid__overlay {
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .video-reviews-grid__card:hover .video-reviews-grid__play {
+    background: #fff;
+  }
+
+  .video-reviews-grid__caption {
+    margin: 8px 0 0;
+    font-size: 13px;
+    line-height: 1.35;
+  }
+
+  .video-reviews-grid__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .video-reviews-grid__placeholder-svg {
+    width: 42%;
+    height: auto;
+    opacity: 0.35;
+  }
+
+  /* Modal */
+  .video-reviews-grid__modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    overflow-y: auto;
+  }
+
+  .video-reviews-grid__modal.is-open {
+    display: flex;
+  }
+
+  .video-reviews-grid__modal-backdrop {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    cursor: pointer;
+  }
+
+  .video-reviews-grid__modal-dialog {
+    position: relative;
+    /* Keep the dialog tight around vertical 9:16 video (like mobile) */
+    width: min(420px, 92vw);
+    padding: 14px;
+    border-radius: 18px;
+    background: transparent;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    outline: none;
+    transform: translateY(10px) scale(0.985);
+    opacity: 0;
+    transition: transform 170ms ease, opacity 170ms ease;
+    will-change: transform, opacity;
+  }
+
+  .video-reviews-grid__modal.is-open .video-reviews-grid__modal-dialog {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+
+  .video-reviews-grid__modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+    border-radius: 999px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .video-reviews-grid__modal-player {
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    background: transparent;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .video-reviews-grid__modal-caption {
+    margin: 10px 2px 2px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 14px;
+    line-height: 1.35;
+  }
+
+  .video-reviews-grid__modal-dialog .video-reviews-grid__player {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* Desktop sizing: keep modal from being too large */
+  @media (min-width: 768px) {
+    .video-reviews-grid__modal-dialog {
+      width: min(460px, 92vw);
+    }
+
+    .video-reviews-grid__modal-player {
+      max-height: 78vh;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .video-reviews-grid__grid {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Video Reviews Grid",
+  "class": "video-reviews-grid-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "JOIN GIRLS WHO ALREADY"
+    },
+    {
+      "type": "text",
+      "id": "heading_highlight",
+      "label": "Highlighted word(s)",
+      "default": "TWERK LIKE PROS"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Video review",
+      "limit": 20,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "thumbnail",
+          "label": "Thumbnail"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Shopify-hosted video"
+        },
+        {
+          "type": "url",
+          "id": "external_video_url",
+          "label": "External embed URL (YouTube/Vimeo iframe URL)"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video Reviews Grid",
+      "blocks": [
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" }
+      ]
+    }
+  ]
+}
+{% endschema %}
