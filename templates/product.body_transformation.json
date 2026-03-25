@@ -468,26 +468,33 @@
         "image_cgnrit": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/464cbf43606d0cde8995166ea69097a71e6a28f2.png"
+            "image": "shopify://shop_images/Before_After_1.png"
           }
         },
         "image_NGhq7k": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/464cbf43606d0cde8995166ea69097a71e6a28f2.png"
+            "image": "shopify://shop_images/Before_After_3.png"
           }
         },
         "image_zEcTn8": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/464cbf43606d0cde8995166ea69097a71e6a28f2.png"
+            "image": "shopify://shop_images/Before_After_4.png"
+          }
+        },
+        "image_LNDw94": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Before_After_2.png"
           }
         }
       },
       "block_order": [
         "image_cgnrit",
         "image_NGhq7k",
-        "image_zEcTn8"
+        "image_zEcTn8",
+        "image_LNDw94"
       ],
       "settings": {
         "title_1": "Real Results",
