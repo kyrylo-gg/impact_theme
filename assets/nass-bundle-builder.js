@@ -234,7 +234,7 @@
           if (active) return active;
         }
       } catch (e) {}
-      return displayCurrency;
+      return getDisplayCurrency();
     }
 
     function getShopifyRate() {
@@ -252,28 +252,35 @@
      * - `amount` is expected to be in `sourceCurrency` units (not cents).
      * - When switching currencies in Shopify Markets, `Shopify.currency.rate` reflects base->active rate.
      */
-    function getDisplayCurrency() {
-      // Use ONE authoritative source for UI currency code.
-      return getActiveCurrency() || displayCurrency;
-    }
-
-    function getCartCurrency() {
-      // Cart values from cart.js are already in presentment currency.
-      if (bbState.cartData && bbState.cartData.currency) return bbState.cartData.currency;
-      return getDisplayCurrency();
-    }
-
     function formatMoney(amount, currency, sourceCurrency) {
       var target = (currency || getDisplayCurrency() || 'USD');
       var source = (sourceCurrency || shopBaseCurrency || 'USD');
       var value = Number(amount || 0);
 
-      // Convert base-currency amounts to active currency using Shopify rate.
-      if (source === shopBaseCurrency && target !== shopBaseCurrency) {
+      // Convert only when source is base currency and target is the active currency.
+      var activeCur = getActiveCurrency();
+      if (source !== target && source === shopBaseCurrency && target === activeCur) {
         value = value * getShopifyRate();
       }
 
       return new Intl.NumberFormat('en-US', { style: 'currency', currency: target || 'USD' }).format(value);
+    }
+
+    /* Single source for UI currency: cart when loaded, else Booster/Shopify active, else config fallback. */
+    function getDisplayCurrency() {
+      try {
+        if (typeof window !== 'undefined' && window.baCurr && window.baCurr.config) {
+          var baCfg = window.baCurr.config;
+          var boosterCur = (baCfg.final_currency || baCfg.user_curr || '').trim();
+          if (boosterCur) return boosterCur;
+        }
+        if (typeof window !== 'undefined' && window.Shopify && window.Shopify.currency && window.Shopify.currency.active) {
+          var active = String(window.Shopify.currency.active).trim();
+          if (active) return active;
+        }
+      } catch (e) {}
+      if (bbState.cartData && bbState.cartData.currency) return bbState.cartData.currency;
+      return displayCurrency;
     }
 
     function applyDiscountAndRefreshCart() {
@@ -294,15 +301,11 @@
 
     // Re-render prices when currency changes (symbol + conversion).
     (function bindCurrencyWatcher() {
-      var lastCur = getActiveCurrency();
-      var lastRate = getShopifyRate();
+      var lastCur = getDisplayCurrency();
       setInterval(function() {
-        var nextCur = getActiveCurrency();
-        var nextRate = getShopifyRate();
-        if (!nextCur) return;
-        if (nextCur === lastCur && nextRate === lastRate) return;
+        var nextCur = getDisplayCurrency();
+        if (!nextCur || nextCur === lastCur) return;
         lastCur = nextCur;
-        lastRate = nextRate;
 
         // Refresh cart currency + totals and re-render UI.
         fetch(cartUrls.get)
@@ -657,7 +660,7 @@
         orig = getVisualOriginalPrice(stepId, price, hasPack);
         final = getVisualFinalPrice(stepId, price, hasPack);
       }
-      var cur = getCartCurrency();
+      var cur = getDisplayCurrency();
       var img = (p.images && p.images.nodes && p.images.nodes[0]) ? getImageUrlOptimized(p.images.nodes[0].url) : '';
       var cardClass = 'bb-product-card' + (dis ? ' bb-product-card--disabled' : '');
       var busy = !!bbState.cartOperationInProgress;
@@ -930,10 +933,10 @@
         total = totals.total;
         discountAmt = totals.discount > 0 ? totals.discount : 0;
         discountPct = orig > 0 ? Math.round((discountAmt / orig) * 100) : 0;
-        cur = getCartCurrency();
+        if (cart && cart.currency) cur = cart.currency;
       } else if (cart && cart.item_count > 0) {
         itemCount = cart.item_count;
-        cur = cart.currency || getCartCurrency();
+        cur = cart.currency || cur;
         orig = (cart.original_total_price || 0) / 100;
         total = (cart.total_price || 0) / 100;
         discountAmt = (cart.total_discount || 0) / 100;
