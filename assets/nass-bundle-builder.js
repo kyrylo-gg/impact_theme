@@ -170,9 +170,21 @@
       try {
         if (routesRoot !== '/') return;
         if (shopBaseCurrency !== 'USD') return;
+        // If the rendered presentment currency is already USD, do nothing.
+        if (presentmentCurrency === 'USD' || displayCurrency === 'USD') return;
         // Avoid infinite reload loops.
         var key = 'bb:forced-usd';
         if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem(key) === '1') return;
+        // Only enforce when we detect the page is showing a non-USD currency.
+        var detected = '';
+        try {
+          detected = (typeof document !== 'undefined' && document.querySelector)
+            ? (document.querySelector('meta[property="product:price:currency"]') && document.querySelector('meta[property="product:price:currency"]').getAttribute('content')) || ''
+            : '';
+        } catch (e) {}
+        detected = String(detected || '').trim();
+        if (!detected) return;
+        if (detected === 'USD') return;
 
         if (typeof sessionStorage !== 'undefined') sessionStorage.setItem(key, '1');
 
