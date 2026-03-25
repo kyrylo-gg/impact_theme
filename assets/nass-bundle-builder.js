@@ -157,17 +157,10 @@
       ? String(config.shopCurrency).trim()
       : 'USD';
 
-    // On the non-localized root path, keep bundle builder in shop base currency (USD)
-    // regardless of geo/Markets presentment pricing shown elsewhere on the page.
-    // This is used specifically to force USD amounts + symbol on /products/... URLs.
+    // Do not force USD on non-localized pages.
+    // Shopify Markets can still present EUR amounts on /products/... depending on geo,
+    // and forcing USD requires reliable Storefront inContext querying which may not be available.
     var lockCurrencyToConfig = false;
-    try {
-      lockCurrencyToConfig = (routesRoot === '/');
-      if (lockCurrencyToConfig) {
-        presentmentCurrency = shopBaseCurrency;
-        displayCurrency = shopBaseCurrency;
-      }
-    } catch (e) {}
 
     function detectPageCurrencyFromDom() {
       try {
@@ -817,7 +810,7 @@
       });
       var unique = handles.filter(function(v,i,a){return a.indexOf(v)===i;});
       var promises = unique.map(function(h){
-        return lockCurrencyToConfig ? fetchCollectionProductsStorefront(h, 'US') : fetchCollectionProductsJson(h);
+        return fetchCollectionProductsJson(h);
       });
       return Promise.all(promises).then(function(results) {
         var byHandle = {};
