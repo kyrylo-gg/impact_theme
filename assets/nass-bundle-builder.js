@@ -92,7 +92,6 @@
       change: routesRoot + 'cart/change.js',
       clear: routesRoot + 'cart/clear.js'
     };
-    var localizationUrl = routesRoot + 'localization';
     var configSteps = Array.isArray(config.steps) ? config.steps : [];
     var stepsFromConfig = configSteps.map(function(s) {
       return {
@@ -163,78 +162,6 @@
     // and forcing USD requires reliable Storefront inContext querying which may not be available.
     var lockCurrencyToConfig = false;
 
-    // If user lands on a non-localized URL (/products/...) we want USD pricing even in EU.
-    // The only reliable way is to switch the active Market/country to US via /localization,
-    // so all storefront prices (and products.json) become USD.
-    (function enforceUsdOnRootUrls() {
-      try {
-        if (routesRoot !== '/') return;
-        if (shopBaseCurrency !== 'USD') return;
-        // Avoid infinite reload loops.
-        var key = 'bb:forced-usd';
-        if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem(key) === '1') return;
-
-        if (typeof sessionStorage !== 'undefined') sessionStorage.setItem(key, '1');
-
-        // Use a real form submission (same as theme selector) so cookies/redirects are applied reliably.
-        var form = document.createElement('form');
-        form.method = 'post';
-        form.action = localizationUrl;
-        form.style.display = 'none';
-
-        function addHidden(name, value) {
-          var input = document.createElement('input');
-          input.type = 'hidden';
-          input.name = name;
-          input.value = value;
-          form.appendChild(input);
-        }
-
-        addHidden('form_type', 'localization');
-        addHidden('utf8', '✓');
-        addHidden('_method', 'put');
-        addHidden('country_code', 'US');
-        addHidden('return_to', window.location.pathname + window.location.search + window.location.hash);
-
-        document.body.appendChild(form);
-        form.submit();
-      } catch (e) {}
-    })();
-
-    function detectPageCurrencyFromDom() {
-      try {
-        var dc = typeof document !== 'undefined' ? document : null;
-        if (!dc || !dc.querySelectorAll) return '';
-        var candidates = dc.querySelectorAll('sale-price, compare-at-price, price-list, .price-list, .price, .money');
-        for (var i = 0; i < candidates.length; i++) {
-          var el = candidates[i];
-          if (el && el.closest && el.closest('#nass-bundle-builder')) continue;
-          var txt = (el && (el.textContent || el.innerText)) ? String(el.textContent || el.innerText) : '';
-          txt = txt.trim();
-          if (!txt) continue;
-          var m = txt.match(/\b[A-Z]{3}\b/);
-          if (m && m[0]) return m[0];
-          if (txt.indexOf('€') !== -1) return 'EUR';
-          if (txt.indexOf('£') !== -1) return 'GBP';
-          if (txt.indexOf('¥') !== -1) return 'JPY';
-        }
-      } catch (e) {}
-      return '';
-    }
-
-    function syncCurrencyFromDomAndRerender() {
-      var domCur = detectPageCurrencyFromDom();
-      if (!domCur) return;
-      if (domCur === presentmentCurrency && domCur === displayCurrency) return;
-      presentmentCurrency = domCur;
-      displayCurrency = domCur;
-      // Re-render prices with the updated currency code.
-      try {
-        renderStep();
-        renderDiscountBanner();
-        renderFooterSummary();
-      } catch (e) {}
-    }
     try {
       if (typeof window !== 'undefined') {
         if (!lockCurrencyToConfig) {
@@ -278,36 +205,6 @@
             } catch (e) {}
           })();
 
-          // Last-resort: infer currency from visible price text on the page (outside bundle builder).
-          // Some setups mutate price text client-side without updating meta/analytics currency.
-          (function primeFromVisiblePriceText() {
-            try {
-              if (presentmentCurrency) return;
-              var dc = typeof document !== 'undefined' ? document : null;
-              if (!dc || !dc.querySelectorAll) return;
-              var candidates = dc.querySelectorAll('sale-price, compare-at-price, price-list, .price-list, .price, .money');
-              var best = '';
-              for (var i = 0; i < candidates.length; i++) {
-                var el = candidates[i];
-                // Skip bundle builder itself if already injected
-                if (el && el.closest && el.closest('#nass-bundle-builder')) continue;
-                var txt = (el && (el.textContent || el.innerText)) ? String(el.textContent || el.innerText) : '';
-                txt = txt.trim();
-                if (!txt) continue;
-                // Prefer explicit ISO codes if present
-                var m = txt.match(/\b[A-Z]{3}\b/);
-                if (m && m[0]) { best = m[0]; break; }
-                if (txt.indexOf('€') !== -1) { best = 'EUR'; break; }
-                if (txt.indexOf('£') !== -1) { best = 'GBP'; break; }
-                if (txt.indexOf('¥') !== -1) { best = 'JPY'; break; }
-              }
-              if (best) {
-                presentmentCurrency = best;
-                displayCurrency = best;
-              }
-            } catch (e) {}
-          })();
-
           // Prefer Shopify's rendered meta currency (Markets presentment) when available.
           // This stays correct even if a header currency picker shows a different selection.
           (function primeFromShopifyAnalyticsMeta() {
@@ -346,9 +243,8 @@
           })();
         }
 
-        // Only trust Shopify.currency.active when Liquid presentment currency is not available.
-        // In some setups, the currency picker can show a different currency than the actual presentment prices on the page.
-        if (!presentmentCurrency && window.Shopify && window.Shopify.currency && window.Shopify.currency.active) {
+        // Always prefer currently selected currency from Shopify picker/menu.
+        if (window.Shopify && window.Shopify.currency && window.Shopify.currency.active) {
           displayCurrency = String(window.Shopify.currency.active).trim() || displayCurrency;
         }
       }
@@ -360,23 +256,6 @@
       return;
     }
     console.log('[BB] elements found, continuing');
-
-    // Some currency switchers/Markets scripts update price text after page load.
-    // Keep the bundle builder currency code in sync with the rendered page.
-    (function bindDomCurrencyWatcher() {
-      if (lockCurrencyToConfig) return;
-      var last = '';
-      setInterval(function() {
-        var cur = detectPageCurrencyFromDom();
-        if (!cur || cur === last) return;
-        last = cur;
-        syncCurrencyFromDomAndRerender();
-      }, 600);
-      // also run once shortly after init
-      setTimeout(function() {
-        syncCurrencyFromDomAndRerender();
-      }, 800);
-    })();
 
     // Prime cart currency early. It's the most reliable "presentment currency" source
     // and helps avoid mismatches when UI currency pickers lag behind actual market pricing.
@@ -474,13 +353,13 @@
     }
 
     function getActiveCurrency() {
-      if (presentmentCurrency) return presentmentCurrency;
       try {
         if (typeof window !== 'undefined' && window.Shopify && window.Shopify.currency && window.Shopify.currency.active) {
           var active = String(window.Shopify.currency.active).trim();
           if (active) return active;
         }
       } catch (e) {}
+      if (presentmentCurrency) return presentmentCurrency;
       return displayCurrency;
     }
 
@@ -765,7 +644,7 @@
           var map = {};
           (data.products || []).forEach(function(raw) {
             // `/products.json` returns prices already in the current presentment currency.
-            var internal = productJsonToInternal(raw, presentmentCurrency || displayCurrency || shopBaseCurrency);
+            var internal = productJsonToInternal(raw, shopBaseCurrency);
             if (internal && internal.id) map[internal.id] = internal;
           });
           return map;
@@ -940,9 +819,7 @@
       var sourceCur = (p.priceRange && p.priceRange.minVariantPrice && p.priceRange.minVariantPrice.currencyCode)
         ? String(p.priceRange.minVariantPrice.currencyCode)
         : (presentmentCurrency || shopBaseCurrency || 'USD');
-      // If the product price already comes in a non-base currency (presentment),
-      // show the matching symbol/code. Otherwise, convert from base to UI currency.
-      var cur = (sourceCur && sourceCur !== shopBaseCurrency) ? sourceCur : getDisplayCurrency();
+      var cur = getDisplayCurrency();
       var img = (p.images && p.images.nodes && p.images.nodes[0]) ? getImageUrlOptimized(p.images.nodes[0].url) : '';
       var cardClass = 'bb-product-card' + (dis ? ' bb-product-card--disabled' : '');
       var busy = !!bbState.cartOperationInProgress;
@@ -1052,8 +929,7 @@
         var sourceCur = (p.priceRange && p.priceRange.minVariantPrice && p.priceRange.minVariantPrice.currencyCode)
           ? String(p.priceRange.minVariantPrice.currencyCode)
           : (presentmentCurrency || shopBaseCurrency || 'USD');
-        // Keep review step symbol consistent with the item price currency when presentment is already applied.
-        var itemCur = (sourceCur && sourceCur !== shopBaseCurrency) ? sourceCur : cur;
+        var itemCur = cur;
         var img = (p.images && p.images.nodes && p.images.nodes[0]) ? getImageUrlOptimized(p.images.nodes[0].url, 128) : '';
         var opts = '';
         if (p.variants && p.variants.nodes && p.variants.nodes[0] && p.variants.nodes[0].selectedOptions) {
