@@ -1721,6 +1721,7 @@
       wizardEl.classList.remove('bb-wizard-overlay--hidden');
       wizardEl.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
+      document.body.classList.add('bb-wizard-open');
       var clearPromise = fetch(cartUrls.clear, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -1773,6 +1774,7 @@
       wizardEl.classList.add('bb-wizard-overlay--hidden');
       wizardEl.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
+      document.body.classList.remove('bb-wizard-open');
       var modal = sectionRoot.querySelector('.bb-exit-modal');
       if (modal) modal.classList.remove('bb-exit-modal--visible');
     }
