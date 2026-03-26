@@ -15,17 +15,15 @@
         "heading_1": {
           "type": "heading",
           "settings": {
-            "text": "HAVE FUN AND BUILD A PERFECT BOOTY WITH TWERK WORKOUTS",
+            "text": "RECONNECT WITH YOUR BODY THIS EASTER",
             "heading_tag": "h2",
             "special_padding": ""
           }
         },
-        "heading_2": {
-          "type": "heading",
+        "subheading": {
+          "type": "subheading",
           "settings": {
-            "text": "ONLY $107<br>(SAVE $349)",
-            "heading_tag": "h2",
-            "special_padding": ""
+            "text": "Only $97 for All Booty Programs (Save $359)"
           }
         },
         "button_cta": {
@@ -33,24 +31,17 @@
           "settings": {
             "style": "outline",
             "size": "lg",
-            "text": "Get Offer Now!",
+            "text": "To the Limited Offer!",
             "url": "#nass-bundle-builder",
             "background": "",
             "text_color": "#ffffff"
-          }
-        },
-        "subheading": {
-          "type": "subheading",
-          "settings": {
-            "text": "Claim 60% off all clothing with Booty Pack!"
           }
         }
       },
       "block_order": [
         "heading_1",
-        "heading_2",
-        "button_cta",
-        "subheading"
+        "subheading",
+        "button_cta"
       ],
       "settings": {
         "full_width": false,
@@ -201,6 +192,38 @@
         "heading_highlight": "TWERK PROGRAM"
       }
     },
+    "student_progress_ez8yde": {
+      "type": "student-progress",
+      "blocks": {
+        "student_video_GKeqUQ": {
+          "type": "student_video",
+          "settings": {
+            "video": "shopify://files/videos/Progress 4x3  (1).webm"
+          }
+        },
+        "student_video_YiePwJ": {
+          "type": "student_video",
+          "settings": {
+            "video": "shopify://files/videos/profress 3_4 (1).webm"
+          }
+        },
+        "student_video_DrpmJz": {
+          "type": "student_video",
+          "settings": {
+            "video": "shopify://files/videos/progress 3_4 (1).webm"
+          }
+        }
+      },
+      "block_order": [
+        "student_video_GKeqUQ",
+        "student_video_YiePwJ",
+        "student_video_DrpmJz"
+      ],
+      "settings": {
+        "heading": "just 7 days to master",
+        "heading_highlight": "twerk moves"
+      }
+    },
     "social_proof_hPtKDy": {
       "type": "social-proof",
       "blocks": {
@@ -232,78 +255,6 @@
         "username": "@nastya_nass_",
         "video_desktop": "shopify://files/videos/NASS_talk desktop_1.webm",
         "video_mobile": "shopify://files/videos/NASS_talk mob_2.webm"
-      }
-    },
-    "student_progress_ez8yde": {
-      "type": "student-progress",
-      "blocks": {
-        "student_video_GKeqUQ": {
-          "type": "student_video",
-          "settings": {
-            "video": "shopify://files/videos/Progress 4x3  (1).webm"
-          }
-        },
-        "student_video_YiePwJ": {
-          "type": "student_video",
-          "settings": {
-            "video": "shopify://files/videos/profress 3_4 (1).webm"
-          }
-        },
-        "student_video_DrpmJz": {
-          "type": "student_video",
-          "settings": {
-            "video": "shopify://files/videos/progress 3_4 (1).webm"
-          }
-        }
-      },
-      "block_order": [
-        "student_video_GKeqUQ",
-        "student_video_YiePwJ",
-        "student_video_DrpmJz"
-      ],
-      "settings": {
-        "heading": "SEE HOW OUR",
-        "heading_highlight": "STUDENTS PERFORM"
-      }
-    },
-    "twerk_makeovers_dHGL9w": {
-      "type": "twerk-makeovers",
-      "blocks": {
-        "makeover_video_EHx74H": {
-          "type": "makeover_video",
-          "settings": {
-            "video": "shopify://files/videos/makeover-1.mp4"
-          }
-        },
-        "makeover_video_jMbjrF": {
-          "type": "makeover_video",
-          "settings": {
-            "video": "shopify://files/videos/makeover-2.mp4"
-          }
-        },
-        "makeover_video_nH6rxE": {
-          "type": "makeover_video",
-          "settings": {
-            "video": "shopify://files/videos/makeover-3.mp4"
-          }
-        },
-        "makeover_video_7jxidU": {
-          "type": "makeover_video",
-          "settings": {
-            "video": "shopify://files/videos/makeover-4.mp4"
-          }
-        }
-      },
-      "block_order": [
-        "makeover_video_EHx74H",
-        "makeover_video_jMbjrF",
-        "makeover_video_nH6rxE",
-        "makeover_video_7jxidU"
-      ],
-      "settings": {
-        "heading": "LOOK AT THESE INCREDIBLE",
-        "heading_highlight": "TWERK MAKEOVERS!",
-        "subtitle": "YOU CAN ACHIEVE THIS TOO!"
       }
     },
     "feedback_screenshots_main": {
@@ -472,7 +423,6 @@
         "review_1": {
           "type": "review",
           "settings": {
-            "thumbnail": "",
             "external_video_url": "",
             "caption": ""
           }
@@ -480,7 +430,6 @@
         "review_2": {
           "type": "review",
           "settings": {
-            "thumbnail": "",
             "external_video_url": "",
             "caption": ""
           }
@@ -488,7 +437,6 @@
         "review_3": {
           "type": "review",
           "settings": {
-            "thumbnail": "",
             "external_video_url": "",
             "caption": ""
           }
@@ -496,7 +444,6 @@
         "review_4": {
           "type": "review",
           "settings": {
-            "thumbnail": "",
             "external_video_url": "",
             "caption": ""
           }
@@ -504,7 +451,6 @@
         "review_5": {
           "type": "review",
           "settings": {
-            "thumbnail": "",
             "external_video_url": "",
             "caption": ""
           }
@@ -525,6 +471,7 @@
     "countdown_timer_Ab3XyZ": {
       "type": "countdown-timer",
       "settings": {
+        "countdown_mode": "fixed",
         "heading": "HURRY UP! THE SALE ENDS IN:",
         "initial_days": 0,
         "initial_hours": 16,
@@ -545,7 +492,7 @@
             "title": "Select programs",
             "collection": "bundle-programs",
             "is_programs_step": true,
-            "program_pack_product": "bundle-test"
+            "program_pack_product": "twerk-program-1"
           }
         },
         "step_shorts": {
@@ -583,6 +530,15 @@
             "is_programs_step": false,
             "program_pack_product": ""
           }
+        },
+        "bundle_step_gYAa6h": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "Choose equipment",
+            "collection": "bundle-equipment",
+            "is_programs_step": false,
+            "program_pack_product": ""
+          }
         }
       },
       "block_order": [
@@ -590,18 +546,23 @@
         "step_shorts",
         "step_leggings",
         "step_swimshorts",
-        "step_tops"
+        "step_tops",
+        "bundle_step_gYAa6h"
       ],
       "settings": {
         "image_1": "shopify://shop_images/Frame_7-6.png",
         "image_2": "shopify://shop_images/Frame_7-4.png",
         "image_3": "shopify://shop_images/padded_DSC09654_30427d69-c589-45c9-ab7f-2ec9f0e127e1.jpg",
         "enable_section": true,
+        "bb_description": "Mix programs, shorts, and tops. Get 60% off all clothing when you add the 4 Programs Bundle.",
+        "bb_promo_banner_text": "60% OFF ALL CLOTHING / with Program Pack purchase",
         "show_one_click_alternative": true,
         "one_click_product": "twerk-program-lovable",
         "one_click_label": "Twerk program",
         "program_pack_product": "bundle-test",
         "discount_code": "",
+        "discount_promo_text": "Get 60% off all clothing with 4 Programs Bundle!",
+        "discount_applied_text": "60% off all clothing applied!",
         "size_chart_config_handle": "size-chart-settings",
         "storefront_api_token": "568094b7f376083a4b0dc6fee4785741"
       }
@@ -649,6 +610,46 @@
         "feature_4"
       ],
       "settings": {}
+    },
+    "twerk_makeovers_dHGL9w": {
+      "type": "twerk-makeovers",
+      "blocks": {
+        "makeover_video_EHx74H": {
+          "type": "makeover_video",
+          "settings": {
+            "video": "shopify://files/videos/makeover-1.mp4"
+          }
+        },
+        "makeover_video_jMbjrF": {
+          "type": "makeover_video",
+          "settings": {
+            "video": "shopify://files/videos/makeover-2.mp4"
+          }
+        },
+        "makeover_video_nH6rxE": {
+          "type": "makeover_video",
+          "settings": {
+            "video": "shopify://files/videos/makeover-3.mp4"
+          }
+        },
+        "makeover_video_7jxidU": {
+          "type": "makeover_video",
+          "settings": {
+            "video": "shopify://files/videos/makeover-4.mp4"
+          }
+        }
+      },
+      "block_order": [
+        "makeover_video_EHx74H",
+        "makeover_video_jMbjrF",
+        "makeover_video_nH6rxE",
+        "makeover_video_7jxidU"
+      ],
+      "settings": {
+        "heading": "LOOK AT THESE INCREDIBLE",
+        "heading_highlight": "TWERK MAKEOVERS!",
+        "subtitle": "YOU CAN ACHIEVE THIS TOO!"
+      }
     },
     "testimonials_main": {
       "type": "nass-testimonials",
@@ -1022,14 +1023,14 @@
     "hero_video",
     "program_cards_ykQqNc",
     "twerk_lessons_MWt6Ji",
-    "social_proof_hPtKDy",
     "student_progress_ez8yde",
-    "twerk_makeovers_dHGL9w",
+    "social_proof_hPtKDy",
     "feedback_screenshots_main",
     "video_reviews_grid_main",
     "countdown_timer_Ab3XyZ",
     "nass_bundle_builder",
     "features_main",
+    "twerk_makeovers_dHGL9w",
     "testimonials_main",
     "faq_main",
     "email_signup_main",
