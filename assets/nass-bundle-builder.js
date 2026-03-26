@@ -85,6 +85,7 @@
       routesRoot = String(config.cartAddUrl).replace(/\/cart\/add\.js$/, '/').replace(/\/?$/, '/');
     }
     if (!routesRoot) routesRoot = '/';
+    var isLocalizedRoute = routesRoot !== '/';
     var cartUrls = {
       add: routesRoot + 'cart/add.js',
       get: routesRoot + 'cart.js',
@@ -156,6 +157,9 @@
     var shopBaseCurrency = (config && typeof config.shopCurrency === 'string' && config.shopCurrency.trim())
       ? String(config.shopCurrency).trim()
       : 'USD';
+    var productsJsonFallbackCurrency = isLocalizedRoute
+      ? (presentmentCurrency || shopBaseCurrency || 'USD')
+      : (shopBaseCurrency || 'USD');
 
     // Do not force USD on non-localized pages.
     // Shopify Markets can still present EUR amounts on /products/... depending on geo,
@@ -387,6 +391,14 @@
       // Cart values from cart.js are already in presentment currency.
       if (bbState.cartData && bbState.cartData.currency) return bbState.cartData.currency;
       return getDisplayCurrency();
+    }
+
+    function getProductSourceCurrency(product) {
+      var explicitCur = product && product.priceRange && product.priceRange.minVariantPrice && product.priceRange.minVariantPrice.currencyCode
+        ? String(product.priceRange.minVariantPrice.currencyCode).trim()
+        : '';
+      if (explicitCur) return explicitCur;
+      return productsJsonFallbackCurrency;
     }
 
     function formatMoney(amount, currency, sourceCurrency) {
@@ -661,7 +673,7 @@
           var map = {};
           (data.products || []).forEach(function(raw) {
             // `/products.json` returns prices already in the current presentment currency.
-            var internal = productJsonToInternal(raw, getDisplayCurrency() || shopBaseCurrency);
+            var internal = productJsonToInternal(raw, productsJsonFallbackCurrency);
             if (internal && internal.id) map[internal.id] = internal;
           });
           return map;
@@ -833,9 +845,7 @@
         orig = getVisualOriginalPrice(stepId, price, hasPack);
         final = getVisualFinalPrice(stepId, price, hasPack);
       }
-      var sourceCur = (p.priceRange && p.priceRange.minVariantPrice && p.priceRange.minVariantPrice.currencyCode)
-        ? String(p.priceRange.minVariantPrice.currencyCode)
-        : (getDisplayCurrency() || shopBaseCurrency || 'USD');
+      var sourceCur = getProductSourceCurrency(p);
       var cur = getDisplayCurrency();
       var img = (p.images && p.images.nodes && p.images.nodes[0]) ? getImageUrlOptimized(p.images.nodes[0].url) : '';
       var cardClass = 'bb-product-card' + (dis ? ' bb-product-card--disabled' : '');
@@ -943,9 +953,7 @@
         if (!p) return;
         var hasPack = getHasProgramPack();
         var of = getItemOrigAndFinal(item, hasPack);
-        var sourceCur = (p.priceRange && p.priceRange.minVariantPrice && p.priceRange.minVariantPrice.currencyCode)
-          ? String(p.priceRange.minVariantPrice.currencyCode)
-          : (getDisplayCurrency() || shopBaseCurrency || 'USD');
+        var sourceCur = getProductSourceCurrency(p);
         var itemCur = cur;
         var img = (p.images && p.images.nodes && p.images.nodes[0]) ? getImageUrlOptimized(p.images.nodes[0].url, 128) : '';
         var opts = '';
@@ -1090,9 +1098,7 @@
         var qty = item.quantity || 1;
         var of = getItemOrigAndFinal(item, hasPack);
         var p = bbState.productsById[item.productId];
-        var sourceCur = (p && p.priceRange && p.priceRange.minVariantPrice && p.priceRange.minVariantPrice.currencyCode)
-          ? String(p.priceRange.minVariantPrice.currencyCode)
-          : (getDisplayCurrency() || shopBaseCurrency || 'USD');
+        var sourceCur = getProductSourceCurrency(p);
         subtotal += convertMoneyAmount(of.orig, target, sourceCur) * qty;
         total += convertMoneyAmount(of.final, target, sourceCur) * qty;
       });
