@@ -447,9 +447,14 @@
           .then(function(r) { return r.json(); })
           .then(function(cart) {
             bbState.cartData = cart;
-            renderStep();
-            renderDiscountBanner();
-            renderFooterSummary();
+            // Reload product prices in the newly selected currency to avoid
+            // stale amount/symbol mismatches after localization redirects.
+            bbState.productsLoaded = false;
+            return loadAllProductsForSteps().then(function() {
+              renderStep();
+              renderDiscountBanner();
+              renderFooterSummary();
+            });
           })
           .catch(function() {
             renderStep();
@@ -656,7 +661,7 @@
           var map = {};
           (data.products || []).forEach(function(raw) {
             // `/products.json` returns prices already in the current presentment currency.
-            var internal = productJsonToInternal(raw, presentmentCurrency || displayCurrency || shopBaseCurrency);
+            var internal = productJsonToInternal(raw, getDisplayCurrency() || shopBaseCurrency);
             if (internal && internal.id) map[internal.id] = internal;
           });
           return map;
@@ -830,7 +835,7 @@
       }
       var sourceCur = (p.priceRange && p.priceRange.minVariantPrice && p.priceRange.minVariantPrice.currencyCode)
         ? String(p.priceRange.minVariantPrice.currencyCode)
-        : (presentmentCurrency || shopBaseCurrency || 'USD');
+        : (getDisplayCurrency() || shopBaseCurrency || 'USD');
       var cur = getDisplayCurrency();
       var img = (p.images && p.images.nodes && p.images.nodes[0]) ? getImageUrlOptimized(p.images.nodes[0].url) : '';
       var cardClass = 'bb-product-card' + (dis ? ' bb-product-card--disabled' : '');
@@ -940,7 +945,7 @@
         var of = getItemOrigAndFinal(item, hasPack);
         var sourceCur = (p.priceRange && p.priceRange.minVariantPrice && p.priceRange.minVariantPrice.currencyCode)
           ? String(p.priceRange.minVariantPrice.currencyCode)
-          : (presentmentCurrency || shopBaseCurrency || 'USD');
+          : (getDisplayCurrency() || shopBaseCurrency || 'USD');
         var itemCur = cur;
         var img = (p.images && p.images.nodes && p.images.nodes[0]) ? getImageUrlOptimized(p.images.nodes[0].url, 128) : '';
         var opts = '';
@@ -1087,7 +1092,7 @@
         var p = bbState.productsById[item.productId];
         var sourceCur = (p && p.priceRange && p.priceRange.minVariantPrice && p.priceRange.minVariantPrice.currencyCode)
           ? String(p.priceRange.minVariantPrice.currencyCode)
-          : (presentmentCurrency || shopBaseCurrency || 'USD');
+          : (getDisplayCurrency() || shopBaseCurrency || 'USD');
         subtotal += convertMoneyAmount(of.orig, target, sourceCur) * qty;
         total += convertMoneyAmount(of.final, target, sourceCur) * qty;
       });
