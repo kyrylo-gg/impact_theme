@@ -184,10 +184,12 @@
           </div>
           <div class="bb-wizard-summary-compact bb-wizard-footer-total-right" data-bb-footer-compact></div>
         </div>
+        <div class="bb-wizard-footer-you-save" data-bb-footer-you-save></div>
         <div class="bb-wizard-footer-buttons">
           <button type="button" class="bb-wizard-btn bb-wizard-btn--back" data-bb-back disabled>Back</button>
           <button type="button" class="bb-wizard-btn bb-wizard-btn--next" data-bb-next>Next</button>
         </div>
+        <div class="bb-wizard-footer-secure-slot" data-bb-secure-footer-slot></div>
       </footer>
     </div>
     <div class="bb-exit-modal" data-bb-exit-modal role="dialog" aria-modal="true" aria-labelledby="bb-exit-modal-title">
@@ -299,6 +301,11 @@
 {%- endif -%}
 
 <script src="{{ 'nass-bundle-builder.js' | asset_url }}" defer></script>
+{%- capture bb_secure_footer_payment_icons_html -%}
+  {%- for type in shop.enabled_payment_types -%}
+    {{- type | payment_type_svg_tag: class: 'bb-wizard-payment-icon' -}}
+  {%- endfor -%}
+{%- endcapture -%}
 <script>
 (function() {
   function run(retries) {
@@ -374,7 +381,10 @@
               {%- endfor -%}
             {%- endif -%}
           {%- endfor -%}
-        }
+        },
+        secureFooterGuaranteeText: {{ 'cart.general.money_back_guarantee' | t | json }},
+        secureFooterPaymentIconsHtml: {{ bb_secure_footer_payment_icons_html | strip_newlines | json }},
+        secureFooterShieldIconUrl: {{ 'bb-shield.svg' | asset_url | json }}
       });
   }
   if (document.readyState === 'loading') {
@@ -1710,6 +1720,14 @@
     gap: 0.5rem;
     flex-shrink: 0;
   }
+
+  .nass-bundle-builder .bb-wizard-footer-you-save {
+    width: 100%;
+    min-height: 0;
+    margin-top: -12px;
+    display: flex;
+    justify-content: flex-end;
+  }
   .nass-bundle-builder .bb-wizard-footer-total-left {
     display: flex;
     align-items: center;
@@ -1816,6 +1834,10 @@
     gap: 8px;
     justify-content: space-between;
     flex-shrink: 0;
+  }
+
+  .nass-bundle-builder .bb-wizard-footer-secure-slot {
+    width: 100%;
   }
 
   @media (max-width: 1440px), (max-height: 800px) {
@@ -2644,11 +2666,40 @@
     text-decoration: line-through;
     color: var(--bb-muted);
     font-weight: 500;
-    margin-right: 0.25em;
+  }
+
+  .nass-bundle-builder .bb-review-price-row {
+    display: flex;
+    align-items: start;
+    justify-content: flex-start;
+    gap: 2px;
+    flex-wrap: nowrap;
+  }
+
+  .nass-bundle-builder .bb-review-price-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    min-width: 0;
   }
 
   .nass-bundle-builder .bb-review-price {
     font-weight: 700;
+    align-self: flex-start;
+    white-space: nowrap;
+  }
+
+  .nass-bundle-builder .bb-review-discount-badge {
+    display: inline-block;
+    background: #FFF600;
+    color: #1a1a1a;
+    padding: 0.2em 0.6em;
+    border-radius: 9999px;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 1.2;
+    white-space: nowrap;
   }
 
   /* Footer summary */
@@ -2690,6 +2741,98 @@
   .nass-bundle-builder .bb-wizard-summary-line--total {
     font-weight: 700;
     font-size: 16px;
+    margin-bottom: 0;
+  }
+
+  .nass-bundle-builder .bb-wizard-you-save {
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px;
+    width: fit-content;
+  }
+
+  .nass-bundle-builder .bb-wizard-you-save-text {
+    font-size: 13px;
+    color: var(--bb-muted);
+  }
+
+  .nass-bundle-builder .bb-wizard-you-save-badge {
+    display: inline-block;
+    background: #FFF600;
+    color: #1a1a1a;
+    padding: 0.25em 0.6em;
+    border-radius: 9999px;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 1.2;
+  }
+
+  .nass-bundle-builder .bb-wizard-secure-footer {
+    margin-top: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .nass-bundle-builder .bb-wizard-guarantee {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--bb-muted);
+    font-size: 12px;
+  }
+
+  .nass-bundle-builder .bb-wizard-guarantee-shield {
+    display: inline-flex;
+    width: 18px;
+    line-height: 0;
+    flex-shrink: 0;
+  }
+
+  .nass-bundle-builder .bb-wizard-guarantee-shield svg {
+    width: 100%;
+    height: auto;
+  }
+
+  .nass-bundle-builder .bb-wizard-guarantee-shield-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .nass-bundle-builder .bb-wizard-payment-icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .nass-bundle-builder .bb-wizard-payment-icon {
+    height: 14px;
+    width: auto;
+  }
+
+  .nass-bundle-builder .bb-wizard-footer--review .bb-wizard-footer-buttons {
+    gap: 10px;
+  }
+
+  .nass-bundle-builder .bb-wizard-footer--review .bb-wizard-btn--next {
+    flex: 1.35;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 20px;
+  }
+
+  .nass-bundle-builder .bb-wizard-btn-arrow {
+    font-size: 16px;
+    line-height: 1;
   }
 
   /* Toast */

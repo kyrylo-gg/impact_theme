@@ -77,6 +77,15 @@
     const discountAppliedText = (config && typeof config.discountAppliedText === 'string' && config.discountAppliedText.trim())
       ? config.discountAppliedText.trim()
       : '60% off all clothing applied!';
+    const secureFooterGuaranteeText = (config && typeof config.secureFooterGuaranteeText === 'string' && config.secureFooterGuaranteeText.trim())
+      ? config.secureFooterGuaranteeText.trim()
+      : '30 days money back guarantee';
+    const secureFooterPaymentIconsHtml = (config && typeof config.secureFooterPaymentIconsHtml === 'string')
+      ? config.secureFooterPaymentIconsHtml
+      : '';
+    const secureFooterShieldIconUrl = (config && typeof config.secureFooterShieldIconUrl === 'string' && config.secureFooterShieldIconUrl.trim())
+      ? config.secureFooterShieldIconUrl.trim()
+      : '';
     const footerEl = sectionRoot.querySelector('[data-bb-wizard-footer]');
     var routesRoot = (typeof window !== 'undefined' && window.Shopify && window.Shopify.routes && window.Shopify.routes.root)
       ? String(window.Shopify.routes.root).replace(/\/?$/, '/')
@@ -958,12 +967,23 @@
         var itemCur = cur;
         var img = (p.images && p.images.nodes && p.images.nodes[0]) ? getImageUrlOptimized(p.images.nodes[0].url, 128) : '';
         var opts = '';
-        if (p.variants && p.variants.nodes && p.variants.nodes[0] && p.variants.nodes[0].selectedOptions) {
-          opts = p.variants.nodes[0].selectedOptions.map(function(o){return o.value;}).join(' • ');
+        var selectedVariant = null;
+        if (p.variants && p.variants.nodes && p.variants.nodes.length) {
+          selectedVariant = p.variants.nodes.find(function(v) { return String(v.id) === String(item.variantId); }) || p.variants.nodes[0];
         }
-        var priceHtml = of.orig > of.final
-          ? '<span class="bb-review-original">' + formatMoney(of.orig, itemCur, sourceCur) + '</span> <span class="bb-review-price">' + formatMoney(of.final, itemCur, sourceCur) + '</span>'
-          : '<span class="bb-review-price">' + formatMoney(of.final, itemCur, sourceCur) + '</span>';
+        if (selectedVariant && selectedVariant.selectedOptions) {
+          opts = selectedVariant.selectedOptions
+            .map(function(o) { return String((o && o.value) || '').trim(); })
+            .filter(function(v) { return v && v.toLowerCase() !== 'default title'; })
+            .join(' • ');
+        }
+        var priceHtml;
+        if (of.orig > of.final) {
+          var linePct = Math.max(1, Math.round((1 - (of.final / of.orig)) * 100));
+          priceHtml = '<div class="bb-review-price-row"><div class="bb-review-price-left"><span class="bb-review-original">' + formatMoney(of.orig, itemCur, sourceCur) + '</span><span class="bb-review-discount-badge">' + linePct + '% OFF</span></div><span class="bb-review-price">' + formatMoney(of.final, itemCur, sourceCur) + '</span></div>';
+        } else {
+          priceHtml = '<div class="bb-review-price-row"><span class="bb-review-price">' + formatMoney(of.final, itemCur, sourceCur) + '</span></div>';
+        }
         html += '<div class="bb-review-item"><img class="bb-review-thumb" src="' + (img || '') + '" alt=""><div class="bb-review-info"><span class="bb-review-title">' + (p.title || '') + '</span>' + (opts ? '<span class="bb-review-opts">' + opts + '</span>' : '') + priceHtml + '</div><button type="button" class="bb-product-remove bb-product-remove--review' + (busy ? ' bb-product-btn--loading' : '') + '" data-bb-remove="' + item.productId + '" aria-label="Remove"' + (busy ? ' disabled' : '') + '>' + removeContent + '</button></div>';
       });
       html += '</div>';
@@ -1111,6 +1131,8 @@
       var summary = footerEl.querySelector('.bb-wizard-summary');
       if (summary) summary.remove();
       var compactEl = footerEl.querySelector('[data-bb-footer-compact]');
+      var youSaveSlotEl = footerEl.querySelector('[data-bb-footer-you-save]');
+      var secureFooterSlotEl = footerEl.querySelector('[data-bb-secure-footer-slot]');
       var cart = bbState.cartData;
       var itemCount = 0;
       var cur = getDisplayCurrency();
@@ -1146,6 +1168,19 @@
         ? '<div class="bb-wizard-summary-line bb-wizard-summary-line--discount"><span>Discount (' + discountPct + '%)</span><span>- ' + formatMoney(discountAmt, cur, cur) + '</span></div>'
         : '<div class="bb-wizard-summary-line bb-wizard-summary-line--discount-placeholder"><span></span><span></span></div>';
       var totalLineHtml = '<div class="bb-wizard-summary-line bb-wizard-summary-line--total"><span>Total</span><span>' + formatMoney(total, cur, cur) + '</span></div>';
+      var youSaveHtml = discountAmt > 0
+        ? '<div class="bb-wizard-you-save"><span class="bb-wizard-you-save-text">You save:</span><span class="bb-wizard-you-save-badge">' + formatMoney(discountAmt, cur, cur) + '</span></div>'
+        : '';
+      if (youSaveSlotEl) youSaveSlotEl.innerHTML = youSaveHtml;
+      var secureFooterHtml = '';
+      if (bbState.steps[bbState.currentStepIndex] && bbState.steps[bbState.currentStepIndex].id === 'review') {
+        var shieldSvg = secureFooterShieldIconUrl
+          ? '<span class="bb-wizard-guarantee-shield" aria-hidden="true"><img class="bb-wizard-guarantee-shield-img" src="' + secureFooterShieldIconUrl + '" alt=""></span>'
+          : '<span class="bb-wizard-guarantee-shield" aria-hidden="true"></span>';
+        var paymentIcons = secureFooterPaymentIconsHtml ? '<div class="bb-wizard-payment-icons">' + secureFooterPaymentIconsHtml + '</div>' : '';
+        secureFooterHtml = '<div class="bb-wizard-secure-footer"><div class="bb-wizard-guarantee">' + shieldSvg + '<span class="bb-wizard-guarantee-text">' + escapeHtml(secureFooterGuaranteeText) + '</span></div>' + paymentIcons + '</div>';
+      }
+      if (secureFooterSlotEl) secureFooterSlotEl.innerHTML = secureFooterHtml;
       /* Hierarchy: item count → subtotal → discount → total */
       var insert = document.createElement('div');
       insert.className = 'bb-wizard-summary';
@@ -1795,9 +1830,15 @@
       renderDiscountBanner();
       renderFooterSummary();
       if (backBtn) backBtn.disabled = index === 0;
+      var isReviewStep = step && step.id === 'review';
+      if (footerEl) footerEl.classList.toggle('bb-wizard-footer--review', !!isReviewStep);
       if (nextBtn) {
         nextBtn.disabled = false;
-        nextBtn.textContent = index === len - 1 ? 'Add to cart' : 'Next';
+        if (index === len - 1) {
+          nextBtn.innerHTML = '<span class="bb-wizard-btn-text">Add to cart</span><span class="bb-wizard-btn-arrow" aria-hidden="true">→</span>';
+        } else {
+          nextBtn.textContent = 'Next';
+        }
       }
       if (index + 1 < len && bbState.steps[index + 1].id !== 'review') {
         preloadStepImages(index + 1);
