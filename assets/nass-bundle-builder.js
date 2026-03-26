@@ -402,6 +402,18 @@
       return new Intl.NumberFormat('en-US', { style: 'currency', currency: target || 'USD' }).format(value);
     }
 
+    function convertMoneyAmount(amount, targetCurrency, sourceCurrency) {
+      var target = (targetCurrency || getDisplayCurrency() || 'USD');
+      var source = (sourceCurrency || shopBaseCurrency || 'USD');
+      var value = Number(amount || 0);
+
+      if (source === shopBaseCurrency && target !== shopBaseCurrency) {
+        value = value * getShopifyRate();
+      }
+
+      return value;
+    }
+
     function applyDiscountAndRefreshCart() {
       var code = (getHasProgramPack() && discountCode) ? discountCode : '';
       return fetch(cartUrls.update, {
@@ -637,14 +649,14 @@
     }
 
     function fetchCollectionProductsJson(handle) {
-      var url = 'https://' + shopDomain + '/collections/' + encodeURIComponent(handle) + '/products.json?limit=50';
-      return fetch(url)
+      var url = 'https://' + shopDomain + '/collections/' + encodeURIComponent(handle) + '/products.json?limit=50&_bb_ts=' + Date.now();
+      return fetch(url, { cache: 'no-store' })
         .then(function(r) { return r.json(); })
         .then(function(data) {
           var map = {};
           (data.products || []).forEach(function(raw) {
             // `/products.json` returns prices already in the current presentment currency.
-            var internal = productJsonToInternal(raw, shopBaseCurrency);
+            var internal = productJsonToInternal(raw, presentmentCurrency || displayCurrency || shopBaseCurrency);
             if (internal && internal.id) map[internal.id] = internal;
           });
           return map;
@@ -1065,14 +1077,19 @@
       return { orig: orig, final: final };
     }
 
-    function getSummaryTotals() {
+    function getSummaryTotals(targetCurrency) {
       var subtotal = 0, total = 0;
       var hasPack = getHasProgramPack();
+      var target = targetCurrency || getDisplayCurrency();
       bbState.selectedItems.forEach(function(item) {
         var qty = item.quantity || 1;
         var of = getItemOrigAndFinal(item, hasPack);
-        subtotal += of.orig * qty;
-        total += of.final * qty;
+        var p = bbState.productsById[item.productId];
+        var sourceCur = (p && p.priceRange && p.priceRange.minVariantPrice && p.priceRange.minVariantPrice.currencyCode)
+          ? String(p.priceRange.minVariantPrice.currencyCode)
+          : (presentmentCurrency || shopBaseCurrency || 'USD');
+        subtotal += convertMoneyAmount(of.orig, target, sourceCur) * qty;
+        total += convertMoneyAmount(of.final, target, sourceCur) * qty;
       });
       return { subtotal: subtotal, total: total, discount: subtotal - total };
     }
@@ -1090,13 +1107,13 @@
       var discountAmt = 0;
       var discountPct = 0;
       if (bbState.selectedItems.length > 0) {
-        var totals = getSummaryTotals();
+        cur = getDisplayCurrency();
+        var totals = getSummaryTotals(cur);
         itemCount = bbState.selectedItems.reduce(function(s, i) { return s + (i.quantity || 1); }, 0);
         orig = totals.subtotal;
         total = totals.total;
         discountAmt = totals.discount > 0 ? totals.discount : 0;
         discountPct = orig > 0 ? Math.round((discountAmt / orig) * 100) : 0;
-        cur = getCartCurrency();
       } else if (cart && cart.item_count > 0) {
         itemCount = cart.item_count;
         cur = cart.currency || getCartCurrency();
