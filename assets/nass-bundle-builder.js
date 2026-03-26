@@ -666,14 +666,15 @@
     }
 
     function fetchCollectionProductsJson(handle) {
-      var url = 'https://' + shopDomain + '/collections/' + encodeURIComponent(handle) + '/products.json?limit=50&_bb_ts=' + Date.now();
+      var selectedCurrency = getDisplayCurrency() || productsJsonFallbackCurrency || shopBaseCurrency || 'USD';
+      var url = 'https://' + shopDomain + '/collections/' + encodeURIComponent(handle) + '/products.json?limit=50&currency=' + encodeURIComponent(selectedCurrency) + '&_bb_ts=' + Date.now();
       return fetch(url, { cache: 'no-store' })
         .then(function(r) { return r.json(); })
         .then(function(data) {
           var map = {};
           (data.products || []).forEach(function(raw) {
             // `/products.json` returns prices already in the current presentment currency.
-            var internal = productJsonToInternal(raw, productsJsonFallbackCurrency);
+            var internal = productJsonToInternal(raw, selectedCurrency);
             if (internal && internal.id) map[internal.id] = internal;
           });
           return map;
