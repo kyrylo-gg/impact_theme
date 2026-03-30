@@ -6,10 +6,10 @@
 <section class="twerk-makeovers">
   <div class="twerk-makeovers__container">
     <div class="twerk-makeovers__header">
-      <h2 class="twerk-makeovers__title">
+      <div class="twerk-makeovers__title">
         {{ section.settings.heading | default: "LOOK AT THESE INCREDIBLE" | escape }}
         <span class="twerk-makeovers__title-highlight">{{ section.settings.heading_highlight | default: "TWERK MAKEOVERS!" | escape }}</span>
-      </h2>
+      </div>
       {% if section.settings.subtitle != blank %}
         <p class="twerk-makeovers__subtitle">{{ section.settings.subtitle | escape }}</p>
       {% endif %}

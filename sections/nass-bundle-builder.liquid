@@ -18,7 +18,7 @@
       {%- comment -%} Heading block {%- endcomment -%}
       <div class="bb-heading">
         <span class="bb-badge-pill">Save up to 82%</span>
-        <h2 class="bb-title">BUILD YOUR <span class="bb-title-accent">PERFECT BUNDLE!</span></h2>
+        <div class="bb-title">BUILD YOUR <span class="bb-title-accent">PERFECT BUNDLE!</span></div>
         {% if section.settings.bb_description != blank %}
           <p class="bb-description">{{ section.settings.bb_description }}</p>
         {% endif %}
@@ -74,7 +74,7 @@
             {%- endif -%}
           </div>
 
-          <h3 class="bb-card-title">CUSTOM BUNDLE BUILDER</h3>
+          <div class="bb-card-title">CUSTOM BUNDLE BUILDER</div>
           <p class="bb-card-subtitle">Programs + Shorts + Leggings + Tops</p>
 
           {% if section.settings.bb_promo_banner_text != blank %}
@@ -159,7 +159,7 @@
             <div class="bb-wizard-progress-bar" data-bb-progress-bar role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="6" aria-label="Step 1 of 6"></div>
             <p class="bb-wizard-progress-text" data-bb-step-text>Step 1 of 6</p>
           </div>
-          <h3 class="bb-wizard-title" data-bb-wizard-title>Select programs</h3>
+          <div class="bb-wizard-title" data-bb-wizard-title>Select programs</div>
         </div>
         <button type="button" class="bb-wizard-close" data-bb-close aria-label="Close">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
@@ -195,7 +195,7 @@
     <div class="bb-exit-modal" data-bb-exit-modal role="dialog" aria-modal="true" aria-labelledby="bb-exit-modal-title">
       <div class="bb-exit-modal-backdrop"></div>
       <div class="bb-exit-modal-panel">
-        <h3 id="bb-exit-modal-title" class="bb-exit-modal-title">Are you sure?</h3>
+        <div id="bb-exit-modal-title" class="bb-exit-modal-title">Are you sure?</div>
         <p class="bb-exit-modal-text">You will lose your cart progress. Confirm exit?</p>
         <div class="bb-exit-modal-buttons">
           <button type="button" class="bb-wizard-btn bb-wizard-btn--back" data-bb-exit-stay>Stay</button>
@@ -215,7 +215,7 @@
           </button>
         </div>
         <div class="bb-variant-modal-body">
-          <h3 class="bb-variant-modal-title" data-bb-variant-modal-title></h3>
+          <div class="bb-variant-modal-title" data-bb-variant-modal-title></div>
           <div class="bb-variant-modal-pills" data-bb-variant-modal-options></div>
           <button type="button" class="bb-variant-size-chart-link" data-bb-variant-modal-size-guide style="display:none;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M2 14h4M10 8h4M18 16h4"/></svg>
@@ -249,7 +249,7 @@
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
           </div>
           <div class="bb-image-viewer-dots" data-bb-image-viewer-dots style="display:none;"></div>
-          <h3 class="bb-image-viewer-title" data-bb-image-viewer-title></h3>
+          <div class="bb-image-viewer-title" data-bb-image-viewer-title></div>
         </div>
       </div>
     </div>
@@ -259,7 +259,7 @@
       <div class="bb-size-chart-backdrop" data-bb-size-chart-close aria-label="Close"></div>
       <div class="bb-size-chart-panel">
         <div class="bb-size-chart-header">
-          <h3 class="bb-size-chart-title">FIND YOUR SIZE</h3>
+          <div class="bb-size-chart-title">FIND YOUR SIZE</div>
           <button type="button" class="bb-size-chart-close" data-bb-size-chart-close aria-label="Close">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
           </button>
@@ -285,7 +285,7 @@
             <div class="bb-size-chart-result" data-bb-sc-result style="display:none;"></div>
           </div>
           <div class="bb-size-chart-table-wrap" data-bb-sc-table-wrap>
-            <h4 class="bb-size-chart-table-heading">SIZE&nbsp;&amp;&nbsp;FIT in <span data-bb-sc-table-unit>INCH</span></h4>
+            <div class="bb-size-chart-table-heading">SIZE&nbsp;&amp;&nbsp;FIT in <span data-bb-sc-table-unit>INCH</span></div>
             <div class="bb-size-chart-table-scroll">
               <table class="bb-size-chart-table" data-bb-sc-table></table>
             </div>

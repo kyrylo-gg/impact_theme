@@ -7,10 +7,10 @@
 <section class="program-cards program-cards-section">
   <div class="program-cards__container">
     <div class="program-cards__header">
-      <h2 class="program-cards__title">
+      <div class="program-cards__title">
         {{ section.settings.heading | default: 'WHAT DOES THIS PACK' }}
         <span class="program-cards__title-highlight">{{ section.settings.heading_highlight | default: 'INCLUDE?' }}</span>
-      </h2>
+      </div>
       <div class="program-cards__divider"></div>
     </div>
 
@@ -36,7 +36,7 @@
               </div>
 
               <div class="program-cards__card-content">
-                <h3 class="program-cards__card-title">{{ block.settings.title }}</h3>
+                <div class="program-cards__card-title">{{ block.settings.title }}</div>
                 {% if block.settings.duration != blank %}
                   <span class="program-cards__card-badge">{{ block.settings.duration }}</span>
                 {% endif %}

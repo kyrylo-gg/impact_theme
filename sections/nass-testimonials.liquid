@@ -10,9 +10,9 @@
 >
   <div class="testimonials__container">
     <header class="testimonials__header">
-      <h2 class="testimonials__heading">
+      <div class="testimonials__heading">
         JOIN <span class="testimonials__heading-count">{{ section.settings.heading_count | default: '40,000+' | escape }}</span> CONFIDENT GIRLS
-      </h2>
+      </div>
       {% if section.settings.subtitle != blank %}
         <p class="testimonials__subtitle">{{ section.settings.subtitle | escape }}</p>
       {% endif %}
@@ -41,7 +41,7 @@
             </div>
 
             {% if block.settings.title != blank %}
-              <h3 class="testimonials__card-title">{{ block.settings.title | escape }}</h3>
+              <div class="testimonials__card-title">{{ block.settings.title | escape }}</div>
             {% endif %}
 
             <div class="testimonials__quote-block">

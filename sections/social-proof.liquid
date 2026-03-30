@@ -11,10 +11,10 @@
 
   <div class="social-proof__container">
     <div class="social-proof__header">
-      <h2 class="social-proof__title">
+      <div class="social-proof__title">
         {{ section.settings.heading | default: "LEARN FROM A" | escape }}
         <span class="social-proof__title-highlight">{{ section.settings.heading_highlight | default: "WORLD CLASS DANCER" | escape }}</span>
-      </h2>
+      </div>
     </div>
 
     <div class="social-proof__card-wrapper">
@@ -42,7 +42,7 @@
           </div>
         </div>
 
-        <h3 class="social-proof__username">{{ section.settings.username | default: "@nastya_nass_" | escape }}</h3>
+        <div class="social-proof__username">{{ section.settings.username | default: "@nastya_nass_" | escape }}</div>
 
         <div class="social-proof__stats">
           {% for block in section.blocks %}

@@ -21,7 +21,7 @@
             {% endcase %}
           </div>
 
-          <h3 class="features__title">{{ block.settings.title | escape }}</h3>
+          <div class="features__title">{{ block.settings.title | escape }}</div>
 
           {% if block.settings.description != blank %}
             <p class="features__description">{{ block.settings.description | escape }}</p>

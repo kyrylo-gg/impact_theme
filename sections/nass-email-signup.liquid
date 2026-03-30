@@ -6,10 +6,10 @@
 <section class="email-signup" data-section-id="{{ section.id }}" {{ section.shopify_attributes }}>
   <div class="email-signup__container">
 
-    <h2 class="email-signup__heading">
+    <div class="email-signup__heading">
       {{ section.settings.heading_line1 | default: 'JOIN THE NASS' | escape }}<br>
       {{ section.settings.heading_line2 | default: 'COMMUNITY' | escape }}
-    </h2>
+    </div>
 
     <div class="email-signup__badge">
       <span class="email-signup__badge-line1">{{ section.settings.badge_line1 | default: 'RECEIVE 10% OFF' | escape }}</span>
@@ -41,7 +41,7 @@
 
     <div class="email-signup__success" aria-live="polite">
       <svg class="email-signup__success-icon" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
-      <h3 class="email-signup__success-heading">{{ section.settings.success_heading | default: "You're in!" | escape }}</h3>
+      <div class="email-signup__success-heading">{{ section.settings.success_heading | default: "You're in!" | escape }}</div>
       <p class="email-signup__success-text">{{ section.settings.success_message | default: 'Check your email for your exclusive discount code.' | escape }}</p>
     </div>
 

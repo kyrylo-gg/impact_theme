@@ -7,10 +7,10 @@
 <section class="twerk-lessons twerk-lessons-section">
   <div class="twerk-lessons__container">
     <div class="twerk-lessons__header">
-      <h2 class="twerk-lessons__title">
+      <div class="twerk-lessons__title">
         {{ section.settings.heading | default: "WHAT'S INSIDE THE" | escape }}
         <span class="twerk-lessons__title-highlight">{{ section.settings.heading_highlight | default: 'TWERK PROGRAM' | escape }}</span>
-      </h2>
+      </div>
       <div class="twerk-lessons__divider"></div>
     </div>
 
@@ -41,7 +41,7 @@
               </div>
 
               <div class="twerk-lessons__card-content">
-                <h3 class="twerk-lessons__card-title">{{ block.settings.title | escape }}</h3>
+                <div class="twerk-lessons__card-title">{{ block.settings.title | escape }}</div>
                 {% if block.settings.description != blank %}
                   <p class="twerk-lessons__card-description">{{ block.settings.description | escape }}</p>
                 {% endif %}
