@@ -1,11 +1,27 @@
 {%- render 'section-spacing-collapsing' -%}
 
 {%- assign text_position = section.settings.text_position -%}
+{%- assign is_mega_twerk_with_seo_template = false -%}
+{%- if request.page_type == 'product' and template.suffix == 'mega_twerk_with_seo' -%}
+  {%- assign is_mega_twerk_with_seo_template = true -%}
+{%- endif -%}
 
 <style>
   #shopify-section-{{ section.id }} {
     --section-stack-intro: {% if text_position == 'center' %}60%{% else %}50%{% endif %};
     --section-stack-main: {% if text_position == 'center' %}60%{% else %}50%{% endif %};
+  }
+
+  #shopify-section-{{ section.id }} .faq-title-text {
+    font-family: var(--heading-font-family);
+    font-weight: var(--heading-font-weight);
+    font-style: var(--heading-font-style);
+    letter-spacing: var(--heading-letter-spacing);
+    text-transform: var(--heading-text-transform);
+    overflow-wrap: anywhere;
+    display: block;
+    font-size: var(--text-h2);
+    line-height: 1.1;
   }
 </style>
 
@@ -17,7 +33,11 @@
       {%- endif -%}
 
       {%- if section.settings.title != blank -%}
-        <span class="h2">
+        {%- assign faq_title_class = 'h2' -%}
+        {%- if is_mega_twerk_with_seo_template -%}
+          {%- assign faq_title_class = 'faq-title-text' -%}
+        {%- endif -%}
+        <span class="{{ faq_title_class }}">
           {%- render 'styled-text', content: section.settings.title, text_color: section.settings.heading_color, gradient: section.settings.heading_gradient -%}
         </span>
       {%- endif -%}
