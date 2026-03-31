@@ -49,11 +49,47 @@
 (function(){
   var root = document.querySelector('[data-bt-pain]');
   if (!root) return;
-  root.querySelectorAll('[data-bt-flip]').forEach(function(btn){
+  var cards = root.querySelectorAll('[data-bt-flip]');
+
+  cards.forEach(function(btn){
     btn.addEventListener('click', function(){
+      btn.classList.remove('is-peek');
       btn.classList.toggle('is-flipped');
     });
   });
+
+  var firstCard = cards[0];
+  if (!firstCard) return;
+
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) return;
+
+  function runPeekOnce() {
+    if (firstCard.dataset.peekPlayed === 'true') return;
+    if (firstCard.classList.contains('is-flipped')) return;
+    firstCard.dataset.peekPlayed = 'true';
+    firstCard.classList.remove('is-peek');
+    void firstCard.offsetWidth;
+    firstCard.classList.add('is-peek');
+  }
+
+  firstCard.addEventListener('animationend', function(e) {
+    if (e.animationName === 'bt-pain-peek') firstCard.classList.remove('is-peek');
+  });
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          runPeekOnce();
+          io.disconnect();
+        }
+      });
+    }, { threshold: 0.45 });
+    io.observe(firstCard);
+  } else {
+    setTimeout(runPeekOnce, 700);
+  }
 })();
 </script>
 
@@ -81,6 +117,15 @@
 
   .bt-pain__inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 500ms ease-out; }
   .bt-pain__card.is-flipped .bt-pain__inner { transform: rotateY(180deg); }
+  .bt-pain__card.is-peek:not(.is-flipped) .bt-pain__inner { animation: bt-pain-peek 1800ms cubic-bezier(0.22, 1, 0.36, 1) 1; }
+
+  @keyframes bt-pain-peek {
+    0% { transform: rotateY(0deg); }
+    25% { transform: rotateY(36deg); }
+    50% { transform: rotateY(0deg); }
+    75% { transform: rotateY(-36deg); }
+    100% { transform: rotateY(0deg); }
+  }
 
   .bt-pain__face { position: absolute; inset: 0; border-radius: 30px; display: flex; flex-direction: column; align-items: center; padding-top: 28px; box-sizing: border-box; backface-visibility: hidden; -webkit-backface-visibility: hidden; overflow: hidden; }
   @media (min-width: 768px) { .bt-pain__face { padding-top: 48px; } }

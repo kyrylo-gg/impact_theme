@@ -197,6 +197,53 @@
 
   layoutBg();
   setCardHeight();
+
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) return;
+
+  var toggle = root.querySelector('.bt-nr2__toggle');
+  if (!toggle) return;
+
+  function getCurrentBgX() {
+    var tr = bg.style.transform || '';
+    var m = tr.match(/translateX\(([-\d.]+)px\)/);
+    if (m && m[1] != null) return parseFloat(m[1]) || 0;
+    return 0;
+  }
+
+  function runPillHintOnce() {
+    if (toggle.dataset.hintPlayed === 'true') return;
+    if (!bg) return;
+    toggle.dataset.hintPlayed = 'true';
+    var x = getCurrentBgX();
+    var delta = 10;
+    if (!bg.animate) return;
+    bg.animate([
+      { transform: 'translateX(' + x + 'px)' },
+      { transform: 'translateX(' + (x + delta) + 'px)' },
+      { transform: 'translateX(' + x + 'px)' },
+      { transform: 'translateX(' + (x - delta) + 'px)' },
+      { transform: 'translateX(' + x + 'px)' }
+    ], {
+      duration: 1200,
+      easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+      iterations: 1
+    });
+  }
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          runPillHintOnce();
+          io.disconnect();
+        }
+      });
+    }, { threshold: 0.45 });
+    io.observe(toggle);
+  } else {
+    setTimeout(runPillHintOnce, 700);
+  }
 })();
 </script>
 
