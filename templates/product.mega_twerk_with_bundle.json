@@ -595,8 +595,18 @@
           "type": "bundle_step",
           "disabled": true,
           "settings": {
-            "title": "",
-            "collection": "",
+            "title": "Choose Twerk and Booty Essentials",
+            "collection": "bundle-2a",
+            "is_programs_step": false,
+            "program_pack_product": ""
+          }
+        },
+        "bundle_step_KMpd7k": {
+          "type": "bundle_step",
+          "disabled": true,
+          "settings": {
+            "title": "Add More Booty Shorts",
+            "collection": "bundle-3a",
             "is_programs_step": false,
             "program_pack_product": ""
           }
@@ -650,6 +660,7 @@
       "block_order": [
         "step_programs",
         "bundle_step_r34gCq",
+        "bundle_step_KMpd7k",
         "step_shorts",
         "step_leggings",
         "step_swimshorts",
