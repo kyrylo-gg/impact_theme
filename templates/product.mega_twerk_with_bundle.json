@@ -611,6 +611,26 @@
             "program_pack_product": ""
           }
         },
+        "bundle_step_Dh9wMj": {
+          "type": "bundle_step",
+          "disabled": true,
+          "settings": {
+            "title": "",
+            "collection": "",
+            "is_programs_step": false,
+            "program_pack_product": ""
+          }
+        },
+        "bundle_step_7y3j3a": {
+          "type": "bundle_step",
+          "disabled": true,
+          "settings": {
+            "title": "",
+            "collection": "",
+            "is_programs_step": false,
+            "program_pack_product": ""
+          }
+        },
         "step_shorts": {
           "type": "bundle_step",
           "settings": {
@@ -661,6 +681,8 @@
         "step_programs",
         "bundle_step_r34gCq",
         "bundle_step_KMpd7k",
+        "bundle_step_Dh9wMj",
+        "bundle_step_7y3j3a",
         "step_shorts",
         "step_leggings",
         "step_swimshorts",
