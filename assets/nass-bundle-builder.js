@@ -1824,6 +1824,8 @@
       bbState.isOpen = true;
       bbState.currentStepIndex = 0;
       bbState.steps = applyStepOverride(bbState.baseSteps);
+      bbState.productsLoaded = false;
+      bbState.productsById = {};
       bbState.selectedItems = [];
       bbState.cartData = null;
       bbState.hasProgramPack = false;
