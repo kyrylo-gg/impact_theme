@@ -307,6 +307,15 @@
       isOpen: false,
       currentStepIndex: 0,
       steps: stepsFromConfig,
+      baseSteps: stepsFromConfig.map(function(step) {
+        return {
+          id: step.id,
+          title: step.title,
+          collectionHandle: step.collectionHandle,
+          isProgramsStep: !!step.isProgramsStep,
+          productIds: []
+        };
+      }),
       productsById: {},
       selectedItems: [],
       hasProgramPack: false,
@@ -316,6 +325,105 @@
       cartData: null,
       sizeFilter: null,
     };
+
+    function buildStepMap(steps) {
+      var map = {};
+      (steps || []).forEach(function(step) {
+        if (!step || !step.id) return;
+        map[String(step.id)] = {
+          id: String(step.id),
+          title: step.title || 'Step',
+          collectionHandle: (step.collectionHandle || '').trim(),
+          isProgramsStep: !!step.isProgramsStep,
+          productIds: []
+        };
+      });
+      return map;
+    }
+
+    function normalizeOverrideFromWindow() {
+      if (typeof window === 'undefined') return null;
+      var raw = window.__NASS_BB_STEP_OVERRIDE;
+      if (!raw) return null;
+      if (Array.isArray(raw)) {
+        return raw.map(function(id) { return { id: String(id) }; });
+      }
+      if (Array.isArray(raw.steps) && raw.steps.length) {
+        return raw.steps
+          .map(function(step) {
+            if (!step || !step.id) return null;
+            return {
+              id: String(step.id),
+              title: step.title || '',
+              collectionHandle: (step.collectionHandle || '').trim(),
+              isProgramsStep: !!step.isProgramsStep
+            };
+          })
+          .filter(Boolean);
+      }
+      var includeStepIds = raw.includeStepIds;
+      if (!Array.isArray(includeStepIds) || !includeStepIds.length) return null;
+      return includeStepIds.map(function(id) { return { id: String(id) }; });
+    }
+
+    function applyStepOverride(baseSteps) {
+      var overrideSteps = normalizeOverrideFromWindow();
+      if (!overrideSteps) {
+        return (baseSteps || []).map(function(step) {
+          return {
+            id: step.id,
+            title: step.title,
+            collectionHandle: step.collectionHandle,
+            isProgramsStep: !!step.isProgramsStep,
+            productIds: []
+          };
+        });
+      }
+
+      var stepMap = buildStepMap(baseSteps);
+      var resolved = [];
+
+      overrideSteps.forEach(function(overrideStep) {
+        var normalizedId = String(overrideStep.id);
+        if (normalizedId === 'review') return;
+        var existing = stepMap[normalizedId];
+        if (existing) {
+          resolved.push({
+            id: existing.id,
+            title: existing.title,
+            collectionHandle: existing.collectionHandle,
+            isProgramsStep: !!existing.isProgramsStep,
+            productIds: []
+          });
+        } else {
+          resolved.push({
+            id: normalizedId,
+            title: overrideStep.title || 'Step',
+            collectionHandle: (overrideStep.collectionHandle || '').trim(),
+            isProgramsStep: !!overrideStep.isProgramsStep,
+            productIds: []
+          });
+        }
+      });
+
+      var reviewStep = stepMap.review || {
+        id: 'review',
+        title: 'Review your bundle',
+        collectionHandle: '',
+        isProgramsStep: false,
+        productIds: []
+      };
+
+      resolved.push({
+        id: 'review',
+        title: reviewStep.title || 'Review your bundle',
+        collectionHandle: '',
+        isProgramsStep: false,
+        productIds: []
+      });
+
+      return resolved;
+    }
 
     function isProgramPack(productId) {
       if (!productId || !resolvedProgramPackNumId) return false;
@@ -1715,6 +1823,7 @@
       }
       bbState.isOpen = true;
       bbState.currentStepIndex = 0;
+      bbState.steps = applyStepOverride(bbState.baseSteps);
       bbState.selectedItems = [];
       bbState.cartData = null;
       bbState.hasProgramPack = false;
