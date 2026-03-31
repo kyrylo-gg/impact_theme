@@ -114,6 +114,9 @@
     ? root.querySelector('.bt-nr2__tab.is-active').getAttribute('data-bt-nr2-tab')
     : 'a';
   var animTimer = null;
+  var hintTimer = null;
+  var hintEnabled = true;
+  var toggleInView = false;
 
   function layoutBg(){
     var active = root.querySelector('.bt-nr2__tab.is-active');
@@ -187,7 +190,14 @@
   }
 
   tabs.forEach(function(t){
-    t.addEventListener('click', function(){ setActive(t.getAttribute('data-bt-nr2-tab')); });
+    t.addEventListener('click', function(){
+      hintEnabled = false;
+      if (hintTimer) {
+        window.clearTimeout(hintTimer);
+        hintTimer = null;
+      }
+      setActive(t.getAttribute('data-bt-nr2-tab'));
+    });
   });
 
   window.addEventListener('resize', function(){
@@ -212,6 +222,7 @@
   }
 
   function runPillHintOnce() {
+    if (!hintEnabled) return;
     if (toggle.dataset.hintAnimating === 'true') return;
     if (!bg) return;
     toggle.dataset.hintAnimating = 'true';
@@ -232,6 +243,12 @@
     });
     anim.onfinish = function() {
       toggle.dataset.hintAnimating = 'false';
+      if (hintEnabled && toggleInView) {
+        if (hintTimer) window.clearTimeout(hintTimer);
+        hintTimer = window.setTimeout(function() {
+          runPillHintOnce();
+        }, 2000);
+      }
     };
   }
 
@@ -239,13 +256,23 @@
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
         if (entry.isIntersecting) {
+          toggleInView = true;
           runPillHintOnce();
+        } else {
+          toggleInView = false;
+          if (hintTimer) {
+            window.clearTimeout(hintTimer);
+            hintTimer = null;
+          }
         }
       });
     }, { threshold: 0.35 });
     io.observe(toggle);
   } else {
-    setTimeout(runPillHintOnce, 700);
+    setTimeout(function() {
+      toggleInView = true;
+      runPillHintOnce();
+    }, 700);
   }
 })();
 </script>
