@@ -65,16 +65,19 @@
   if (reduceMotion) return;
 
   function runPeekOnce() {
-    if (firstCard.dataset.peekPlayed === 'true') return;
+    if (firstCard.dataset.peekAnimating === 'true') return;
     if (firstCard.classList.contains('is-flipped')) return;
-    firstCard.dataset.peekPlayed = 'true';
+    firstCard.dataset.peekAnimating = 'true';
     firstCard.classList.remove('is-peek');
     void firstCard.offsetWidth;
     firstCard.classList.add('is-peek');
   }
 
   firstCard.addEventListener('animationend', function(e) {
-    if (e.animationName === 'bt-pain-peek') firstCard.classList.remove('is-peek');
+    if (e.animationName === 'bt-pain-peek') {
+      firstCard.classList.remove('is-peek');
+      firstCard.dataset.peekAnimating = 'false';
+    }
   });
 
   if ('IntersectionObserver' in window) {
@@ -82,7 +85,6 @@
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
           runPeekOnce();
-          io.disconnect();
         }
       });
     }, { threshold: 0.45 });

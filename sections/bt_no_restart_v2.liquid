@@ -212,23 +212,27 @@
   }
 
   function runPillHintOnce() {
-    if (toggle.dataset.hintPlayed === 'true') return;
+    if (toggle.dataset.hintAnimating === 'true') return;
     if (!bg) return;
-    toggle.dataset.hintPlayed = 'true';
+    toggle.dataset.hintAnimating = 'true';
     var x = getCurrentBgX();
-    var delta = 10;
+    var delta = 18;
+    var dir = activeKey === 'b' ? -1 : 1;
+    var target = x + (delta * dir);
     if (!bg.animate) return;
-    bg.animate([
+    var anim = bg.animate([
       { transform: 'translateX(' + x + 'px)' },
-      { transform: 'translateX(' + (x + delta) + 'px)' },
-      { transform: 'translateX(' + x + 'px)' },
-      { transform: 'translateX(' + (x - delta) + 'px)' },
+      { transform: 'translateX(' + target + 'px)' },
+      { transform: 'translateX(' + (x + (delta * 0.4 * dir)) + 'px)' },
       { transform: 'translateX(' + x + 'px)' }
     ], {
-      duration: 1200,
+      duration: 2200,
       easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
       iterations: 1
     });
+    anim.onfinish = function() {
+      toggle.dataset.hintAnimating = 'false';
+    };
   }
 
   if ('IntersectionObserver' in window) {
@@ -236,10 +240,9 @@
       entries.forEach(function(entry){
         if (entry.isIntersecting) {
           runPillHintOnce();
-          io.disconnect();
         }
       });
-    }, { threshold: 0.45 });
+    }, { threshold: 0.35 });
     io.observe(toggle);
   } else {
     setTimeout(runPillHintOnce, 700);
