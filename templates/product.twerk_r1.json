@@ -20,7 +20,8 @@
           "type": "heading",
           "settings": {
             "text": "TWERK PROGRAM FOR $39. DON'T MISS OUT!",
-            "heading_tag": "h1"
+            "heading_tag": "h1",
+            "special_padding": ""
           }
         },
         "207b5d77-26c1-498f-b02a-9f5a7ec2fe2c": {
@@ -122,14 +123,16 @@
           "type": "heading",
           "settings": {
             "text": "Master your twerk peformance anywhere",
-            "heading_tag": "h6"
+            "heading_tag": "h6",
+            "special_padding": ""
           }
         },
         "e06625ed-7166-4cbe-b1c0-7732f4977782": {
           "type": "heading",
           "settings": {
             "text": "VIEW IT ONLINE ON ANY SCREEN",
-            "heading_tag": "h1"
+            "heading_tag": "h1",
+            "special_padding": ""
           }
         }
       },
@@ -167,12 +170,14 @@
         "template--14907164164170__6a17e412-5781-464f-a3ba-e01d3b965529-richtext-1": {
           "type": "richtext",
           "settings": {
+            "seo_optimization": true,
             "content": "<h2><strong>LEARN TWERK<br/>FROM A WORLD CLASS DANCER</strong></h2>"
           }
         },
         "d3ed3992-3582-40bb-8c2c-37e5e4cb737d": {
           "type": "richtext",
           "settings": {
+            "seo_optimization": true,
             "content": "<p>Instagram <em>@nastya_nass_</em> 7M Followers</p>"
           }
         }
@@ -421,7 +426,8 @@
           "type": "heading",
           "settings": {
             "text": "COMBO BONUS!",
-            "heading_tag": "h1"
+            "heading_tag": "h1",
+            "special_padding": ""
           }
         },
         "subheading_kt9RLR": {
@@ -469,7 +475,7 @@
           "settings": {
             "title": "Select programs",
             "badge_text": "Lifetime access",
-            "show_general_badge": true,
+            "show_general_badge": false,
             "general_badge_text": "Select 1 more program  and grab 2 free fitness products next!",
             "products": [
               "twerk-program-1-r",
@@ -478,47 +484,6 @@
               "advanced-gym-program",
               "weight-loss-program"
             ]
-          }
-        },
-        "extra_step_XQdgty": {
-          "type": "extra_step",
-          "settings": {
-            "title": "Choose Your Free Leggings",
-            "badge_text": "",
-            "products": [
-              "essential-leggings-black-2",
-              "essential-leggings-blue-1",
-              "essential-leggings-khaki-1",
-              "essential-leggings-pink-1",
-              "purple-essential-leggings"
-            ],
-            "first_is_free": true,
-            "allow_next": true,
-            "enable_filters": true,
-            "filters_title": "Size Filter",
-            "size_chart": "muse-leggings"
-          }
-        },
-        "extra_step_VNxhfp": {
-          "type": "extra_step",
-          "settings": {
-            "title": "Choose Your Free Top",
-            "badge_text": "",
-            "products": [
-              "essential-top-black",
-              "blue-essential-top",
-              "khaki-essential-top",
-              "pink-essential-top",
-              "purple-essential-top",
-              "muse-top-blue",
-              "muse-top-black",
-              "muse-top-fuchsia"
-            ],
-            "first_is_free": true,
-            "allow_next": true,
-            "enable_filters": true,
-            "filters_title": "Size Filter",
-            "size_chart": "muse-top"
           }
         },
         "step_dc6qpt": {
@@ -576,8 +541,10 @@
             "badge_text": "Сomplete your outfit with 50% off",
             "products": [
               "top-navy",
-              "top-pink",
-              "top-white"
+              "top-white",
+              "deep-ocean-top",
+              "pearl-white-top",
+              "peony-top"
             ],
             "first_is_free": false,
             "first_shown_is_free": false,
@@ -599,6 +566,8 @@
               "ankle-strap-2",
               "rubber-booty-band-set-1",
               "stretching-band-set-1",
+              "booty-band-set-1",
+              "nλss-knee-pads",
               "gym-gloves"
             ],
             "first_is_free": false,
@@ -613,8 +582,6 @@
       },
       "block_order": [
         "programs_step_LpNbpi",
-        "extra_step_XQdgty",
-        "extra_step_VNxhfp",
         "step_dc6qpt",
         "step_RQNyqp",
         "step_4TeBqm",
@@ -623,15 +590,15 @@
       "settings": {
         "title": "<p>Get everything you need <br/>to start, in one bundle!</p>",
         "main_product": "",
-        "free_extras_badge": true,
+        "free_extras_badge": false,
         "duration": "1 Week",
         "save_for_program": "Save 75%",
         "save_for_bundle": "Save up to 75%",
         "extras_description": "<p>+ courseS <br/>+ Shorts<br/>+ EQIPMENT</p>",
         "group_products_in_cart": true,
-        "show_extra_steps": true,
+        "show_extra_steps": false,
         "allow_one_free": "no",
-        "allow_two_free": "both",
+        "allow_two_free": "no",
         "hide_variations": false
       }
     },
@@ -807,6 +774,7 @@
         "template--14907164164170__4fc8f1a7-2ac1-41a3-80dc-02e94a393b25-richtext-1": {
           "type": "richtext",
           "settings": {
+            "seo_optimization": true,
             "content": "<h2><strong>OUR CUSTOMERS SAY...</strong></h2>"
           }
         }
