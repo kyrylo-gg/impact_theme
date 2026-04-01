@@ -489,7 +489,7 @@
         "step_GjzMKc": {
           "type": "step",
           "settings": {
-            "title": "Check out our latest arrivals!",
+            "title": "Choose Lounge Shorts",
             "badge_text": "30% off exclusively in this bundle",
             "products": [
               "lounge-black",
@@ -512,15 +512,15 @@
         "step_dc6qpt": {
           "type": "step",
           "settings": {
-            "title": "Check out our latest arrivals!",
+            "title": "Choose Sport Shorts",
             "badge_text": "30% off exclusively in this bundle",
             "products": [
-              "black-noir",
-              "cosmic-blue",
               "gray-paint",
-              "blush-breeze-1",
               "blush-breeze",
-              "safari-heat"
+              "safari-heat",
+              "cosmic-blue",
+              "blush-breeze-1",
+              "black-noir"
             ],
             "first_is_free": false,
             "first_shown_is_free": false,
@@ -534,19 +534,19 @@
         "step_RQNyqp": {
           "type": "step",
           "settings": {
-            "title": "Choose Your Nass Shorts",
+            "title": "Choose Booty Shorts",
             "badge_text": "30% off exclusively in this bundle",
             "products": [
               "petal-splash",
+              "mystic-zebra",
+              "neon-drift",
+              "terra-speckle",
+              "solid-black",
+              "cosmic-nebula",
               "shadow-ninja",
               "pinky-zebra",
-              "neon-drift",
-              "cosmic-nebula",
-              "terra-speckle",
-              "mystic-zebra",
               "sunny-ani",
-              "perfect-black",
-              "solid-black"
+              "perfect-black"
             ],
             "first_is_free": false,
             "first_shown_is_free": false,
@@ -560,7 +560,7 @@
         "step_4TeBqm": {
           "type": "step",
           "settings": {
-            "title": "Select Top",
+            "title": "Select Tps",
             "badge_text": "30% off exclusively in this bundle",
             "products": [
               "top-navy",
