@@ -500,13 +500,13 @@
               "apex-stripe",
               "caution-zone"
             ],
-            "first_is_free": true,
+            "first_is_free": false,
             "first_shown_is_free": false,
-            "allow_next": false,
+            "allow_next": true,
             "hide_when_extra": false,
-            "enable_filters": false,
+            "enable_filters": true,
             "filters_title": "Size Filter",
-            "size_chart": ""
+            "size_chart": "lounge-shorts"
           }
         },
         "step_dc6qpt": {
