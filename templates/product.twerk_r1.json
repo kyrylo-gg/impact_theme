@@ -560,7 +560,7 @@
         "step_4TeBqm": {
           "type": "step",
           "settings": {
-            "title": "Select Tps",
+            "title": "Select Tops",
             "badge_text": "30% off exclusively in this bundle",
             "products": [
               "top-navy",
@@ -575,7 +575,7 @@
             "hide_when_extra": false,
             "enable_filters": true,
             "filters_title": "Size Filter",
-            "size_chart": "tank-top"
+            "size_chart": "lounge-top"
           }
         },
         "step_hdVqLW": {
