@@ -486,11 +486,34 @@
             ]
           }
         },
+        "step_GjzMKc": {
+          "type": "step",
+          "settings": {
+            "title": "Check out our latest arrivals!",
+            "badge_text": "30% off exclusively in this bundle",
+            "products": [
+              "lounge-black",
+              "lounge-gray",
+              "lounge-mauve",
+              "nomad-weave",
+              "prism-shift",
+              "apex-stripe",
+              "caution-zone"
+            ],
+            "first_is_free": true,
+            "first_shown_is_free": false,
+            "allow_next": false,
+            "hide_when_extra": false,
+            "enable_filters": false,
+            "filters_title": "Size Filter",
+            "size_chart": ""
+          }
+        },
         "step_dc6qpt": {
           "type": "step",
           "settings": {
             "title": "Check out our latest arrivals!",
-            "badge_text": "20% off exclusively in this bundle",
+            "badge_text": "30% off exclusively in this bundle",
             "products": [
               "black-noir",
               "cosmic-blue",
@@ -512,7 +535,7 @@
           "type": "step",
           "settings": {
             "title": "Choose Your Nass Shorts",
-            "badge_text": "20% off exclusively in this bundle",
+            "badge_text": "30% off exclusively in this bundle",
             "products": [
               "petal-splash",
               "shadow-ninja",
@@ -538,7 +561,7 @@
           "type": "step",
           "settings": {
             "title": "Select Top",
-            "badge_text": "Сomplete your outfit with 50% off",
+            "badge_text": "30% off exclusively in this bundle",
             "products": [
               "top-navy",
               "top-white",
@@ -557,7 +580,6 @@
         },
         "step_hdVqLW": {
           "type": "step",
-          "disabled": true,
           "settings": {
             "title": "Select Equipment",
             "badge_text": "Add equipment for your booty workouts",
@@ -582,13 +604,14 @@
       },
       "block_order": [
         "programs_step_LpNbpi",
+        "step_GjzMKc",
         "step_dc6qpt",
         "step_RQNyqp",
         "step_4TeBqm",
         "step_hdVqLW"
       ],
       "settings": {
-        "title": "<p>Get everything you need <br/>to start, in one bundle!</p>",
+        "title": "<p>FREE US SHIPPING ON ORDER OVER $140</p>",
         "main_product": "",
         "free_extras_badge": false,
         "duration": "1 Week",
@@ -599,7 +622,7 @@
         "show_extra_steps": false,
         "allow_one_free": "no",
         "allow_two_free": "no",
-        "hide_variations": false
+        "hide_variations": true
       }
     },
     "main": {
