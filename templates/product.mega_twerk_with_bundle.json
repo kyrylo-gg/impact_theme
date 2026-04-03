@@ -594,7 +594,6 @@
         },
         "bundle_step_r34gCq": {
           "type": "bundle_step",
-          "disabled": true,
           "settings": {
             "title": "Choose Booty Essentials",
             "collection": "bundle-2a",
@@ -604,7 +603,6 @@
         },
         "bundle_step_KMpd7k": {
           "type": "bundle_step",
-          "disabled": true,
           "settings": {
             "title": "Add More Booty Shorts",
             "collection": "bundle-3a",
@@ -652,6 +650,7 @@
         },
         "step_swimshorts": {
           "type": "bundle_step",
+          "disabled": true,
           "settings": {
             "title": "Add Booty shorts",
             "collection": "bundle-swim-shorts",
@@ -670,6 +669,7 @@
         },
         "bundle_step_bb96UU": {
           "type": "bundle_step",
+          "disabled": true,
           "settings": {
             "title": "Workout Equipment",
             "collection": "bundle-equipment",
