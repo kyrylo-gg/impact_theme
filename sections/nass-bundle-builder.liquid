@@ -2875,30 +2875,24 @@
 
   /* Intelligems A/B: countdown relocated — match bb-card / CTA width, compact desktop layout */
   /*
-   * Variant A: timer sits beside .bb-card (not inside). max-width on the moved section alone
-   * can still read wider than the card; use one centered column = same width as .bb-card (768px cap).
+   * Variant A: timer is a sibling of .bb-heading / .bb-card — constrain ONLY the countdown section
+   * to .bb-card width (768px). Do not use grid on .bb-container (that shrank heading + card).
    */
-  html.ig-ct-var-a #nass-bundle-builder .bb-container {
-    display: grid;
-    grid-template-columns: minmax(0, min(100%, 768px));
-    justify-content: center;
-    width: 100%;
-  }
-
-  html.ig-ct-var-a #nass-bundle-builder .bb-container > * {
-    min-width: 0;
-  }
-
-  html.ig-ct-var-a #nass-bundle-builder .bb-container > .shopify-section,
-  html.ig-ct-var-a #nass-bundle-builder .bb-container > .shopify-section .countdown-timer {
+  html.ig-ct-var-a #nass-bundle-builder .bb-container > .shopify-section.countdown-timer-section,
+  html.ig-ct-var-a #nass-bundle-builder .bb-container > .shopify-section.countdown-timer-section .countdown-timer {
     box-sizing: border-box;
   }
 
-  html.ig-ct-var-a #nass-bundle-builder .bb-container > .shopify-section {
+  html.ig-ct-var-a #nass-bundle-builder .bb-container > .shopify-section.countdown-timer-section {
     width: 100%;
-    max-width: none;
-    margin-left: 0;
-    margin-right: 0;
+    max-width: 768px;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 0;
+  }
+
+  html.ig-ct-var-a #nass-bundle-builder .bb-container > .shopify-section.countdown-timer-section .countdown-timer {
+    max-width: 100%;
   }
 
   html.ig-ct-var-b #nass-bundle-builder .bb-cta-block > .shopify-section,
