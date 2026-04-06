@@ -95,7 +95,7 @@
         "timer_42j3k2": {
           "type": "timer",
           "settings": {
-            "timer_type": "cancel_date",
+            "timer_type": "daily",
             "cancel_date": "05-04-2026 23:59",
             "cancel_time": 6,
             "cancel_action": "none",
