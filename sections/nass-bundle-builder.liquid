@@ -2874,6 +2874,21 @@
   }
 
   /* Intelligems A/B: countdown relocated — match bb-card / CTA width, compact desktop layout */
+  /*
+   * Variant A: timer sits beside .bb-card (not inside). max-width on the moved section alone
+   * can still read wider than the card; use one centered column = same width as .bb-card (768px cap).
+   */
+  html.ig-ct-var-a #nass-bundle-builder .bb-container {
+    display: grid;
+    grid-template-columns: minmax(0, min(100%, 768px));
+    justify-content: center;
+    width: 100%;
+  }
+
+  html.ig-ct-var-a #nass-bundle-builder .bb-container > * {
+    min-width: 0;
+  }
+
   html.ig-ct-var-a #nass-bundle-builder .bb-container > .shopify-section,
   html.ig-ct-var-a #nass-bundle-builder .bb-container > .shopify-section .countdown-timer {
     box-sizing: border-box;
@@ -2881,9 +2896,9 @@
 
   html.ig-ct-var-a #nass-bundle-builder .bb-container > .shopify-section {
     width: 100%;
-    max-width: 768px;
-    margin-left: auto;
-    margin-right: auto;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   html.ig-ct-var-b #nass-bundle-builder .bb-cta-block > .shopify-section,
