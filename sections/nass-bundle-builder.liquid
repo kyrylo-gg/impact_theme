@@ -2898,13 +2898,14 @@
   }
 
   @media (min-width: 768px) {
+    /* Desktop: same shell as variant B (radius, padding, colors) for both A and B */
     html.ig-ct-var-a #nass-bundle-builder .countdown-timer,
     html.ig-ct-var-b #nass-bundle-builder .countdown-timer {
       --ct-highlight: var(--bb-highlight, #ebff00);
       --ct-highlight-fg: #000000;
       margin-top: 0;
       padding: 20px 18px;
-      border-radius: var(--bb-radius-lg, 24px);
+      border-radius: var(--bb-radius, 20px);
       background-color: var(--ct-highlight);
     }
 
@@ -2915,7 +2916,6 @@
     html.ig-ct-var-b #nass-bundle-builder .countdown-timer {
       margin-top: 12px;
       margin-bottom: 12px;
-      border-radius: var(--bb-radius, 20px);
     }
 
     html.ig-ct-var-a #nass-bundle-builder .countdown-timer__container,
