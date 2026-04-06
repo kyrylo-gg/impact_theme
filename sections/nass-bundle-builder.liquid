@@ -2872,6 +2872,140 @@
     opacity: 1;
     transform: translateX(-50%) translateY(0);
   }
+
+  /* Intelligems A/B: countdown relocated — match bb-card / CTA width, compact desktop layout */
+  html.ig-ct-var-a #nass-bundle-builder .bb-container > .shopify-section,
+  html.ig-ct-var-a #nass-bundle-builder .bb-container > .shopify-section .countdown-timer {
+    box-sizing: border-box;
+  }
+
+  html.ig-ct-var-a #nass-bundle-builder .bb-container > .shopify-section {
+    width: 100%;
+    max-width: 768px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  html.ig-ct-var-b #nass-bundle-builder .bb-cta-block > .shopify-section,
+  html.ig-ct-var-b #nass-bundle-builder .bb-cta-block > .shopify-section .countdown-timer {
+    box-sizing: border-box;
+  }
+
+  html.ig-ct-var-b #nass-bundle-builder .bb-cta-block > .shopify-section {
+    width: 100%;
+    max-width: 100%;
+    align-self: stretch;
+  }
+
+  @media (min-width: 768px) {
+    html.ig-ct-var-a #nass-bundle-builder .countdown-timer,
+    html.ig-ct-var-b #nass-bundle-builder .countdown-timer {
+      --ct-highlight: var(--bb-highlight, #ebff00);
+      --ct-highlight-fg: #000000;
+      margin-top: 0;
+      padding: 20px 18px;
+      border-radius: var(--bb-radius-lg, 24px);
+      background-color: var(--ct-highlight);
+    }
+
+    html.ig-ct-var-a #nass-bundle-builder .countdown-timer {
+      margin-bottom: 12px;
+    }
+
+    html.ig-ct-var-b #nass-bundle-builder .countdown-timer {
+      margin-top: 12px;
+      margin-bottom: 12px;
+      border-radius: var(--bb-radius, 20px);
+    }
+
+    html.ig-ct-var-a #nass-bundle-builder .countdown-timer__container,
+    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__container {
+      max-width: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    html.ig-ct-var-a #nass-bundle-builder .countdown-timer__inner,
+    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__inner {
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px 16px;
+    }
+
+    html.ig-ct-var-a #nass-bundle-builder .countdown-timer__text,
+    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__text {
+      flex: 1 1 0;
+      min-width: 0;
+      max-width: min(46%, 320px);
+    }
+
+    html.ig-ct-var-a #nass-bundle-builder .countdown-timer__heading,
+    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__heading {
+      font-size: clamp(15px, 1.65vw, 20px);
+      line-height: 1.08;
+      text-align: left;
+      letter-spacing: 0.02em;
+      font-stretch: normal;
+    }
+
+    html.ig-ct-var-a #nass-bundle-builder .countdown-timer__blocks,
+    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__blocks {
+      flex: 0 1 auto;
+      min-width: 0;
+      gap: 4px;
+      align-items: center;
+    }
+
+    html.ig-ct-var-a #nass-bundle-builder .countdown-timer__value-wrap,
+    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__value-wrap {
+      padding: 6px 8px;
+      border-radius: 12px;
+    }
+
+    html.ig-ct-var-a #nass-bundle-builder .countdown-timer__value,
+    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__value {
+      font-size: clamp(16px, 2.2vw, 22px);
+      line-height: 1;
+    }
+
+    html.ig-ct-var-a #nass-bundle-builder .countdown-timer__separator,
+    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__separator {
+      font-size: clamp(14px, 1.8vw, 18px);
+      margin-top: 0;
+      align-self: center;
+    }
+
+    html.ig-ct-var-a #nass-bundle-builder .countdown-timer__label,
+    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__label {
+      font-size: 8px;
+      margin-top: 4px;
+      letter-spacing: 0.08em;
+    }
+  }
+
+  @media (min-width: 990px) {
+    html.ig-ct-var-a #nass-bundle-builder .countdown-timer__heading,
+    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__heading {
+      font-size: 22px;
+    }
+
+    html.ig-ct-var-a #nass-bundle-builder .countdown-timer__value,
+    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__value {
+      font-size: 24px;
+    }
+
+    html.ig-ct-var-a #nass-bundle-builder .countdown-timer__separator,
+    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__separator {
+      font-size: 20px;
+    }
+
+    html.ig-ct-var-a #nass-bundle-builder .countdown-timer__value-wrap,
+    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__value-wrap {
+      padding: 8px 10px;
+    }
+  }
 {% endstylesheet %}
 
 {%- comment -%}
