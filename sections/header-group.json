@@ -154,7 +154,7 @@
       "type": "header",
       "settings": {
         "enable_sticky": true,
-        "enable_sticky_timer": false,
+        "enable_sticky_timer": true,
         "hide_on_scroll": false,
         "logo": "{{shop.brand.logo}}",
         "logo_max_width": 90,
