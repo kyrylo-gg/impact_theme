@@ -37,7 +37,7 @@
     transition: top 0.15s;
   }
 
-  body:not(.scroll-up) #shopify-section-{{ section.id }}:has([data-timer-placement]) {
+  body:not(.scroll-up) #shopify-section-{{ section.id }}:has([data-timer-placement] > .ts-timer-bar) {
     top: calc(-1 * var(--timer-height));
   }
 
@@ -442,13 +442,17 @@
   const block = document.querySelector('.shopify-section-group-header-group .ts-timer-bar');
   let lastScrollY = window.scrollY;
 
+  // Reset timer offset by default to avoid stale values
+  // when the timer section is hidden in theme editor.
+  document.documentElement.style.setProperty('--timer-height', '0px');
+
   if (target && block) {
     target.appendChild(block);
 
     document.documentElement.style.setProperty('--timer-height', Math.round(target.clientHeight) + 'px');
     document.addEventListener("DOMContentLoaded", () => {
       document.documentElement.style.setProperty('--timer-height', Math.round(target.clientHeight) + 'px');
-    })
+    });
   
     window.addEventListener('scroll', () => {
       const currentScrollY = window.scrollY;
@@ -461,6 +465,8 @@
   
       lastScrollY = currentScrollY;
     });
+  } else {
+    document.body.classList.remove('scroll-up');
   }
 </script>
 
