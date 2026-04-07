@@ -127,6 +127,7 @@
         "timer_42j3k2",
         "button"
       ],
+      "disabled": true,
       "settings": {
         "enable_max_width": true,
         "max_width": 1280,
