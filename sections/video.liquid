@@ -182,7 +182,15 @@
 
               {%- when 'subheading' -%}
                 {%- if block.settings.text != blank -%}
-                  <p class="bold" {{ block.shopify_attributes }}>{{ block.settings.text | escape | newline_to_br }}</p>
+                  {%- assign subheading_text = block.settings.text
+                    | replace: '<s>', '|s_open|'
+                    | replace: '</s>', '|s_close|'
+                    | escape
+                    | newline_to_br
+                    | replace: '|s_open|', '<s>'
+                    | replace: '|s_close|', '</s>'
+                  -%}
+                  <p class="bold" {{ block.shopify_attributes }}>{{ subheading_text }}</p>
                 {%- endif -%}
 
               {%- when 'heading' -%}
@@ -209,7 +217,17 @@
                   {%- endif -%}
 
                   <p class="{{ heading_class }}" {{ block.shopify_attributes }} {% if block.settings.special_padding != blank %} style="margin-top: {{ block.settings.special_padding }}px !important;" {% endif %}>
-                    {{ block.settings.text | replace: '<br>', '\n' | escape | replace: '\n', '<br />' | replace: '|br|', '<br>' }}
+                    {{
+                      block.settings.text
+                      | replace: '<s>', '|s_open|'
+                      | replace: '</s>', '|s_close|'
+                      | replace: '<br>', '\n'
+                      | escape
+                      | replace: '\n', '<br />'
+                      | replace: '|br|', '<br>'
+                      | replace: '|s_open|', '<s>'
+                      | replace: '|s_close|', '</s>'
+                    }}
                   </p>
                 {%- endif -%}
 
