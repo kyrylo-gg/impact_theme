@@ -84,7 +84,6 @@
         },
         "subtitle": {
           "type": "subtitle",
-          "disabled": true,
           "settings": {
             "label": "",
             "color": "#000000",
