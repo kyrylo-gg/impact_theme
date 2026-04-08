@@ -240,6 +240,44 @@
       justify-content: space-between;
     }
 
+    /* С таймером: три колонки — таймер | цена по центру | кнопка */
+    .custom-quick-add-block--with-timer {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      justify-content: stretch;
+      column-gap: 8px;
+    }
+
+    .custom-quick-add-block--with-timer .custom-quick-add-main {
+      display: contents;
+      flex: unset;
+      min-width: 0;
+    }
+
+    .custom-quick-add-block--with-timer .custom-quick-add-main__price {
+      justify-self: center;
+      text-align: center;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .custom-quick-add-block--with-timer .custom-quick-add-main .price,
+    .custom-quick-add-block--with-timer .custom-quick-add-main .price-list {
+      justify-content: center;
+      flex-direction: row;
+      width: auto;
+      max-width: 100%;
+    }
+
+    .custom-quick-add-block--with-timer .custom-quick-add-button {
+      justify-self: end;
+    }
+
+    .custom-quick-add-block--with-timer ts-timer.countdown-timer.timer-desktop {
+      justify-self: start;
+    }
+
     /* Таймер — слева в розовом блоке */
     .timer-desktop {
       display: flex !important;
@@ -310,7 +348,7 @@
       color: #000000 !important;
       font-weight: 500;
       font-size: 13px;
-      line-height: 100%;
+      line-height: 1.2;
     }
 
     .custom-quick-add-main .price-list .money {
@@ -320,6 +358,31 @@
     .custom-quick-add-main .price-list {
       min-width: 0;
       gap: 4px;
+    }
+
+    /* Тема задаёт .price-list { align-items: baseline } — на мобильном это поднимает compare-at выше sale */
+    #shopify-section-{{ section.id }} .custom-quick-add-main .price-list {
+      align-items: center;
+      flex-wrap: nowrap;
+    }
+
+    #shopify-section-{{ section.id }} .custom-quick-add-main .price-list sale-price,
+    #shopify-section-{{ section.id }} .custom-quick-add-main .price-list compare-at-price {
+      display: inline-flex;
+      align-items: center;
+      line-height: 1.2;
+      margin: 0;
+      vertical-align: middle;
+    }
+
+    #shopify-section-{{ section.id }} .custom-quick-add-main .price-list sale-price {
+      position: relative;
+      top: 2px;
+    }
+
+    #shopify-section-{{ section.id }} .custom-quick-add-main .price-list compare-at-price {
+      position: relative;
+      top: 1px;
     }
 
     .custom-quick-add-button {
@@ -475,7 +538,10 @@
 
 <div id="quick-add-sticky-{{ section.id }}" class="custom-quick-add">
 
-  <div class="custom-quick-add-block" style="background:{{ section.settings.block_background }}">
+  <div
+    class="custom-quick-add-block{% if section.settings.timer_enabled %} custom-quick-add-block--with-timer{% endif %}"
+    style="background:{{ section.settings.block_background }}"
+  >
     {% if section.settings.timer_enabled %}
       <ts-timer
         data-timer="{{ timer_type }}"
