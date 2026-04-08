@@ -109,6 +109,153 @@
         "heading_highlight": "INCLUDE?"
       }
     },
+    "video_reviews_grid_eUBYtz": {
+      "type": "video-reviews-grid",
+      "blocks": {
+        "review_fjPVfR": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/reel.webm",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_DFkbec": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/0325-ezgif.com-gif-maker.webm",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_imdgMd": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/reel-3.webm",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_jheBQP": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/reel-4.webm",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_rkBgGi": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/reel-5.webm",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_tWXQPm": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/reel-6.webm",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_mEeYte": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/reel-7.webm",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_hrM4Yi": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/03251-ezgif.com-gif-maker.webm",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_9V8APB": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/reel-9.webm",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_j8BLPg": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/reel-10.webm",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_X7bPFt": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/03252-ezgif.com-gif-maker.webm",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_PL9H8A": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/reel-12.webm",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_TEieRi": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/reel-13.webm",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_arm87k": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/reel-14.webm",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_P4VJ6j": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/reel-15.webm",
+            "external_video_url": "",
+            "caption": ""
+          }
+        }
+      },
+      "block_order": [
+        "review_fjPVfR",
+        "review_DFkbec",
+        "review_imdgMd",
+        "review_jheBQP",
+        "review_rkBgGi",
+        "review_tWXQPm",
+        "review_mEeYte",
+        "review_hrM4Yi",
+        "review_9V8APB",
+        "review_j8BLPg",
+        "review_X7bPFt",
+        "review_PL9H8A",
+        "review_TEieRi",
+        "review_arm87k",
+        "review_P4VJ6j"
+      ],
+      "name": "Video Reviews Grid",
+      "settings": {
+        "heading": "JOIN GIRLS WHO ALREADY",
+        "heading_highlight": "TWERK LIKE PROS"
+      }
+    },
     "twerk_lessons_MWt6Ji": {
       "type": "twerk-lessons",
       "blocks": {
@@ -996,6 +1143,7 @@
   "order": [
     "hero_video",
     "program_cards_ykQqNc",
+    "video_reviews_grid_eUBYtz",
     "twerk_lessons_MWt6Ji",
     "student_progress_ez8yde",
     "social_proof_hPtKDy",
