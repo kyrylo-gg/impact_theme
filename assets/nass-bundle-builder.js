@@ -1853,7 +1853,7 @@
         })
         .then(function() {
           goToStep(0);
-          tryPreselectFirstProgramsItem();
+          tryPreselectProgramsItem();
         })
         .catch(function(err) {
           // #region agent log
@@ -1862,21 +1862,34 @@
           bbState.cartData = { item_count: 0, items: [], total_price: 0, currency: displayCurrency };
           return loadAllProductsForSteps().then(function() {
             goToStep(0);
-            tryPreselectFirstProgramsItem();
+            tryPreselectProgramsItem();
           });
         })
         .finally(clearCtaLoading);
     }
 
-    function tryPreselectFirstProgramsItem() {
+    function tryPreselectProgramsItem() {
       try {
         if (typeof window === 'undefined') return;
-        if (!window.__bt_bb_preselect_first) return;
+        var targetIndex = null;
+        if (typeof window.__bt_bb_preselect_program_index === 'number' && isFinite(window.__bt_bb_preselect_program_index)) {
+          targetIndex = Math.max(0, Math.floor(window.__bt_bb_preselect_program_index));
+        } else if (window.__bt_bb_preselect_second) {
+          targetIndex = 1;
+        } else if (window.__bt_bb_preselect_first) {
+          targetIndex = 0;
+        }
+        if (targetIndex === null) return;
+
+        window.__bt_bb_preselect_program_index = null;
+        window.__bt_bb_preselect_second = false;
         window.__bt_bb_preselect_first = false;
+
         var programsStep = bbState.steps.find(function(s) { return s && s.isProgramsStep; });
         if (!programsStep || !programsStep.productIds || !programsStep.productIds.length) return;
-        var firstPid = programsStep.productIds[0];
-        addItem(programsStep.id, firstPid, null, 1);
+        if (targetIndex >= programsStep.productIds.length) return;
+        var targetPid = programsStep.productIds[targetIndex];
+        addItem(programsStep.id, targetPid, null, 1);
       } catch (e) {}
     }
 
@@ -1974,49 +1987,22 @@
       window.NassBundleBuilder.openWizard = openWizard;
     }
 
-    /* One-Click Purchase: clear cart → add variant → redirect to checkout */
+    /* One-Click alternative: open wizard and preselect second program */
     var oneClickBtns = sectionRoot.querySelectorAll('[data-bb-one-click]');
     oneClickBtns.forEach(function(btn) {
       btn.addEventListener('click', function() {
-        var variantId = btn.getAttribute('data-variant-id');
-        if (!variantId) { showToast('Error: product not configured.'); return; }
-        var variantNum = String(variantId).replace(/.*\/(\d+)$/, '$1') || String(variantId);
-        var variantIdNum = parseInt(variantNum, 10) || variantNum;
         btn.disabled = true;
         btn.classList.add('bb-cta-one-click__btn--loading');
-        btn.innerHTML = '<span class="bb-cta-one-click__spinner" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10" stroke-dasharray="32 56"/></svg></span><span class="bb-cta-one-click__btn-text">Adding...</span>';
-        fetch(cartUrls.clear, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'same-origin',
-          body: JSON.stringify({})
-        })
-          .then(function(r) { return r.ok ? r.json() : Promise.reject(new Error('Clear failed')); })
-          .then(function() {
-            return fetch(cartUrls.add, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              credentials: 'same-origin',
-              body: JSON.stringify({ items: [{ id: variantIdNum, quantity: 1 }] })
-            });
-          })
-          .then(function(r) {
-            return r.text().then(function(text) {
-              var data;
-              try { data = JSON.parse(text); } catch (e) { data = {}; }
-              if (!r.ok) return Promise.reject(new Error(data.message || data.description || 'Add to cart failed'));
-              return data;
-            });
-          })
-          .then(function() {
-            window.location.href = checkoutUrl;
-          })
-          .catch(function(err) {
-            btn.disabled = false;
-            btn.classList.remove('bb-cta-one-click__btn--loading');
-            btn.innerHTML = '<span class="bb-cta-one-click__btn-text">One-Click Purchase</span>';
-            showToast(err && err.message ? err.message : 'Error. Please try again.');
-          });
+        btn.innerHTML = '<span class="bb-cta-one-click__spinner" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10" stroke-dasharray="32 56"/></svg></span><span class="bb-cta-one-click__btn-text">Opening...</span>';
+
+        window.__bt_bb_preselect_program_index = 1;
+        openWizard();
+
+        setTimeout(function() {
+          btn.disabled = false;
+          btn.classList.remove('bb-cta-one-click__btn--loading');
+          btn.innerHTML = '<span class="bb-cta-one-click__btn-text">One-Click Purchase</span>';
+        }, 1200);
       });
     });
 
