@@ -2001,7 +2001,7 @@
         setTimeout(function() {
           btn.disabled = false;
           btn.classList.remove('bb-cta-one-click__btn--loading');
-          btn.innerHTML = '<span class="bb-cta-one-click__btn-text">One-Click Purchase</span>';
+          btn.innerHTML = '<span class="bb-cta-one-click__btn-text">Only Twerk Program</span>';
         }, 1200);
       });
     });
