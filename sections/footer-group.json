@@ -27,33 +27,6 @@
         "hide_on_cart": true
       }
     },
-    "rich_text_GDzDx6": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_im9ket": {
-          "type": "heading",
-          "settings": {
-            "text": "NASS PROGRAMS",
-            "heading_tag": "h1",
-            "text_color": "",
-            "gradient": ""
-          }
-        }
-      },
-      "block_order": [
-        "heading_im9ket"
-      ],
-      "disabled": true,
-      "name": "Rich text",
-      "settings": {
-        "full_width": true,
-        "content_width": "small",
-        "text_position": "center",
-        "background": "",
-        "background_gradient": "",
-        "text_color": ""
-      }
-    },
     "custom_html_ATfNTn": {
       "type": "custom-html",
       "settings": {
@@ -118,7 +91,6 @@
   },
   "order": [
     "custom_html_ACCcbL",
-    "rich_text_GDzDx6",
     "custom_html_ATfNTn",
     "footer"
   ]
