@@ -43,6 +43,7 @@
         "subheading",
         "button_cta"
       ],
+      "disabled": true,
       "settings": {
         "full_width": false,
         "allow_transparent_header": false,
@@ -61,6 +62,8 @@
     "hero_banner_main": {
       "type": "hero-banner",
       "settings": {
+        "video": "shopify://files/videos/Video2_NASS_b25922ad-a72c-44e1-808a-919d96bd1575.mp4",
+        "mobile_video": "shopify://files/videos/Video2_NASS_mob_7615f44d-acfa-45c8-a526-61045f542690.mp4",
         "badge_text": "Join NASS B-Day Sale",
         "heading": "CELEBRATE YOUR BOOTY PERFECTION",
         "price_text": "ONLY $97 INSTEAD $456",
