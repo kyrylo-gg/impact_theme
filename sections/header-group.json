@@ -76,7 +76,7 @@
         "title": {
           "type": "title",
           "settings": {
-            "label": "Get 2+1 on All Clothing  This Easter 🐰",
+            "label": "Special B-Day Booty Offer!All programs for just $97",
             "color": "#000000",
             "desk_font_size": 25,
             "mob_font_size": 13
@@ -84,6 +84,7 @@
         },
         "subtitle": {
           "type": "subtitle",
+          "disabled": true,
           "settings": {
             "label": "",
             "color": "#000000",
@@ -127,7 +128,6 @@
         "timer_42j3k2",
         "button"
       ],
-      "disabled": true,
       "settings": {
         "enable_max_width": true,
         "max_width": 1280,
@@ -142,8 +142,8 @@
         "mob_content_height_type": "adapt-content",
         "mob_content_height": 300,
         "background_type": "color",
-        "desk_bg_color": "#FEDADC",
-        "mob_bg_color": "#FEDADC",
+        "desk_bg_color": "#FFB6E3",
+        "mob_bg_color": "#FFB6E3",
         "hidden_templates": "product.mega_twerk-program-main,product.26_twerk_mainmenu,product.26_pinterest,product.mega_twerk-program-mainab,product.mega_twerk_with_bundle,product.mega_twerk_no_bundle,product.mega_twerk_with_pin,product.mega_twerk_with_seo,product.body_transformation,product.mega_twerk_with_bundle_ab,product.mega_twerk_with_bundle_cd",
         "desk_indent_top": 0,
         "desk_indent_bottom": 0,
