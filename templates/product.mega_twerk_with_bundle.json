@@ -695,6 +695,8 @@
         "image_2": "shopify://shop_images/Frame_7-4.png",
         "image_3": "shopify://shop_images/padded_DSC09654_30427d69-c589-45c9-ab7f-2ec9f0e127e1.jpg",
         "enable_section": true,
+        "bb_title_prefix": "CELEBRATE",
+        "bb_title_accent": "6 YEARS OF NASS!",
         "bb_description": "Mix programs, shorts, and tops. Get 60% off all clothing when you add the 4 Programs Bundle.",
         "bb_promo_banner_text": "60% OFF ALL CLOTHING / with Program Pack purchase",
         "show_one_click_alternative": true,
