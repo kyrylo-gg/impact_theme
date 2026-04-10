@@ -43,6 +43,7 @@
         "subheading",
         "button_cta"
       ],
+      "disabled": true,
       "settings": {
         "full_width": false,
         "allow_transparent_header": false,
@@ -56,6 +57,20 @@
         "text_color": "#ffffff",
         "overlay_color": "#000000",
         "overlay_opacity": 0
+      }
+    },
+    "hero_banner_BdMJmz": {
+      "type": "hero-banner",
+      "name": "Hero Banner",
+      "settings": {
+        "video": "shopify://files/videos/Video2_NASS_b25922ad-a72c-44e1-808a-919d96bd1575.mp4",
+        "mobile_video": "shopify://files/videos/Video2_NASS_mob_7615f44d-acfa-45c8-a526-61045f542690.mp4",
+        "badge_text": "Join NASS B-Day Sale",
+        "heading": "CELEBRATE YOUR BOOTY PERFECTION",
+        "price_text": "ONLY $97 INSTEAD OF $456",
+        "cta_text": "Order Twerk Pack",
+        "cta_url": "",
+        "deadline_text": "Offer ends April 19"
       }
     },
     "program_cards_ykQqNc": {
@@ -1151,6 +1166,7 @@
   },
   "order": [
     "hero_video",
+    "hero_banner_BdMJmz",
     "program_cards_ykQqNc",
     "video_reviews_grid_eUBYtz",
     "twerk_lessons_MWt6Ji",
