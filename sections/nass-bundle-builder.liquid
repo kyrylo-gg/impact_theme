@@ -18,7 +18,10 @@
       {%- comment -%} Heading block {%- endcomment -%}
       <div class="bb-heading">
         <span class="bb-badge-pill">Save up to 82%</span>
-        <div class="bb-title">BUILD YOUR <span class="bb-title-accent">PERFECT BOOTY!</span></div>
+        <div class="bb-title">
+          {{ section.settings.bb_title_prefix | default: 'BUILD YOUR' | escape }}
+          <span class="bb-title-accent">{{ section.settings.bb_title_accent | default: 'PERFECT BOOTY!' | escape }}</span>
+        </div>
         {% if section.settings.bb_description != blank %}
           <p class="bb-description">{{ section.settings.bb_description }}</p>
         {% endif %}
@@ -391,6 +394,113 @@
     document.addEventListener('DOMContentLoaded', function() { run(0); });
   } else {
     run(0);
+  }
+})();
+</script>
+
+<script>
+(() => {
+  const sectionId = {{ section.id | json }};
+  const sectionRoot = document.getElementById('shopify-section-' + sectionId);
+  if (!sectionRoot) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  let hasPlayed = false;
+
+  function launchConfetti() {
+    if (hasPlayed) return;
+    hasPlayed = true;
+
+    const colors = ['#0038FF', '#FAFF00', '#FFFFFF', '#7EA0FF'];
+    const pieces = 180;
+    const durationMs = 3000;
+    const gravity = 0.12;
+    const drag = 0.992;
+
+    const layer = document.createElement('div');
+    layer.setAttribute('aria-hidden', 'true');
+    layer.style.position = 'fixed';
+    layer.style.inset = '0';
+    layer.style.pointerEvents = 'none';
+    layer.style.zIndex = '40';
+    layer.style.overflow = 'hidden';
+    document.body.appendChild(layer);
+
+    const confetti = [];
+    for (let i = 0; i < pieces; i += 1) {
+      const node = document.createElement('span');
+      const size = 5 + Math.random() * 8;
+      const startX = window.innerWidth * (0.1 + Math.random() * 0.8);
+      const startY = -20 - Math.random() * 40;
+      const tilt = Math.random() * 360;
+      const vx = (Math.random() - 0.5) * 8;
+      const vy = 2 + Math.random() * 3.5;
+      const spin = (Math.random() - 0.5) * 12;
+
+      node.style.position = 'absolute';
+      node.style.left = '0';
+      node.style.top = '0';
+      node.style.width = `${size}px`;
+      node.style.height = `${size * 0.6}px`;
+      node.style.background = colors[i % colors.length];
+      node.style.borderRadius = '2px';
+      node.style.willChange = 'transform, opacity';
+      layer.appendChild(node);
+
+      confetti.push({ node, x: startX, y: startY, vx, vy, tilt, spin });
+    }
+
+    const start = performance.now();
+    function frame(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / durationMs, 1);
+
+      for (let i = 0; i < confetti.length; i += 1) {
+        const p = confetti[i];
+        p.vx *= drag;
+        p.vy = p.vy * drag + gravity;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.tilt += p.spin;
+
+        const fade = 1 - progress;
+        p.node.style.opacity = String(fade);
+        p.node.style.transform = `translate3d(${p.x}px, ${p.y}px, 0) rotate(${p.tilt}deg)`;
+      }
+
+      if (progress < 1) {
+        requestAnimationFrame(frame);
+      } else {
+        layer.remove();
+      }
+    }
+
+    requestAnimationFrame(frame);
+  }
+
+  function observeSection() {
+    if (!('IntersectionObserver' in window)) {
+      launchConfetti();
+      return;
+    }
+
+    const target = sectionRoot.querySelector('.bb-section') || sectionRoot;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.35) {
+          launchConfetti();
+          observer.disconnect();
+        }
+      });
+    }, { threshold: [0.35] });
+
+    observer.observe(target);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', observeSection, { once: true });
+  } else {
+    observeSection();
   }
 })();
 </script>
@@ -3048,6 +3158,18 @@
       "id": "enable_section",
       "label": "Enable Bundle Builder",
       "default": true
+    },
+    {
+      "type": "text",
+      "id": "bb_title_prefix",
+      "label": "Heading text (before accent)",
+      "default": "BUILD YOUR"
+    },
+    {
+      "type": "text",
+      "id": "bb_title_accent",
+      "label": "Heading accent text",
+      "default": "PERFECT BOOTY!"
     },
     {
       "type": "text",

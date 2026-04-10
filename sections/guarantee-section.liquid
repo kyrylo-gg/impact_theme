@@ -1,0 +1,311 @@
+<section class="guarantee-section" id="guarantee-section-{{ section.id }}">
+  <div class="guarantee-section__container">
+    <div class="guarantee-section__card">
+      <div class="guarantee-section__top-bar"></div>
+      <div class="guarantee-section__radial"></div>
+
+      <div class="guarantee-section__content">
+        <div class="guarantee-section__icon-wrap" aria-hidden="true">
+          <span class="guarantee-section__icon-bg">
+            {% if section.settings.icon_image != blank %}
+              {{
+                section.settings.icon_image
+                | image_url: width: 220
+                | image_tag: class: 'guarantee-section__icon guarantee-section__icon--image', loading: 'lazy'
+              }}
+            {% else %}
+              {{ 'shield-guarantee.svg' | asset_url | image_tag: class: 'guarantee-section__icon', loading: 'lazy' }}
+            {% endif %}
+          </span>
+        </div>
+
+        <h2 class="guarantee-section__title">
+          COMPLETE THE FULL TWERK PROGRAM
+          <span>&amp; WE'LL BACK YOU UP</span>
+        </h2>
+
+        <div class="guarantee-section__copy">
+          <p>We believe in this program and we believe in you.</p>
+          <p>
+            If you complete the full Twerk Program, we'll
+            <u>give you your money back</u>.
+          </p>
+          <p>
+            <strong>Here's all we ask:</strong> Finish every lesson, post an honest review on your social media, and tag
+            <strong>@NASS</strong> - then reach out to us and we'll refund you in full - or apply the amount toward your next purchase. Your choice.
+          </p>
+        </div>
+
+        <div class="guarantee-section__badge">We're that confident you'll love the results.</div>
+
+        <div class="guarantee-section__terms guarantee-section__terms--desktop">
+          <p>
+            <strong>Terms:</strong> Refund is available upon full completion of the Twerk Program and posting a public 10-second video review on Instagram with @NASS tagged.
+          </p>
+          <p>If you don't have an account, just reach out to us at support@nasswear.com</p>
+        </div>
+
+        <div class="guarantee-section__terms guarantee-section__terms--mobile">
+          <p>
+            <strong>Terms:</strong> Refund is available upon full completion of the Twerk Program and posting a public review on any social media platform with @NASS tagged.
+          </p>
+        </div>
+
+        <a class="guarantee-section__cta" href="#nass-bundle-builder">Join Twerk Community</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .guarantee-section {
+    background: #fff;
+    padding: 48px 0;
+  }
+
+  .guarantee-section__container {
+    max-width: 1216px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  .guarantee-section__card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 30px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    background: linear-gradient(180deg, #ebf0ff 0%, #fffffe 100%);
+  }
+
+  .guarantee-section__top-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: #0038ff;
+    z-index: 3;
+  }
+
+  .guarantee-section__radial {
+    pointer-events: none;
+    position: absolute;
+    z-index: 1;
+    width: 1319px;
+    height: 824px;
+    top: -107px;
+    left: -68px;
+    background: radial-gradient(ellipse 50% 50% at 50% 50%, #f3f6ff 54%, rgba(243, 246, 255, 0.49) 81%, rgba(243, 246, 255, 0) 100%);
+  }
+
+  .guarantee-section__content {
+    position: relative;
+    z-index: 2;
+    padding: 48px 24px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 24px;
+  }
+
+  .guarantee-section__icon-wrap {
+    display: flex;
+    justify-content: center;
+  }
+
+  .guarantee-section__icon-bg {
+    width: 150px;
+    height: 150px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .guarantee-section__icon {
+    width: 150px;
+    height: auto;
+  }
+
+  .guarantee-section__icon--image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .guarantee-section__title {
+    margin: 0;
+    text-transform: uppercase;
+    font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-weight: 900;
+    font-size: 48px;
+    line-height: 1;
+    letter-spacing: 0.01em;
+    color: #000;
+    max-width: 980px;
+  }
+
+  .guarantee-section__title span {
+    color: #0038ff;
+    display: block;
+  }
+
+  .guarantee-section__copy {
+    max-width: 607px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    color: #000;
+    font-size: 16px;
+    line-height: 1.5;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 500;
+  }
+
+  .guarantee-section__copy p {
+    margin: 0;
+  }
+
+  .guarantee-section__badge {
+    background: #f9ff00;
+    border-radius: 10px;
+    padding: 16px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+    max-width: 718px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .guarantee-section__terms {
+    background: #ecf0fe;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 56, 255, 0.5);
+    box-shadow: 0 6px 28px rgba(0, 56, 255, 0.3);
+    padding: 16px 20px;
+    max-width: 718px;
+    width: 100%;
+    text-align: left;
+    color: #000;
+    font-size: 14px;
+    line-height: 1.45;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 500;
+  }
+
+  .guarantee-section__terms p {
+    margin: 0;
+  }
+
+  .guarantee-section__terms p + p {
+    margin-top: 8px;
+  }
+
+  .guarantee-section__terms--mobile {
+    display: none;
+  }
+
+  .guarantee-section__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 718px;
+    height: 64px;
+    border-radius: 20px;
+    background: #0038ff;
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+    transition: opacity 0.2s ease;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  .guarantee-section__cta:hover {
+    opacity: 0.9;
+  }
+
+  @media (min-width: 768px) {
+    .guarantee-section__badge {
+      width: auto;
+      max-width: none;
+    }
+
+    .guarantee-section__terms {
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .guarantee-section {
+      padding: 32px 0;
+    }
+
+    .guarantee-section__radial {
+      width: 331px;
+      height: 1146px;
+      left: 6px;
+      top: -155px;
+    }
+
+    .guarantee-section__content {
+      padding: 36px 12px 24px;
+      gap: 20px;
+    }
+
+    .guarantee-section__icon-bg {
+      width: 92px;
+      height: 92px;
+    }
+
+    .guarantee-section__icon {
+      width: 92px;
+    }
+
+    .guarantee-section__title {
+      font-size: 30px;
+      max-width: 309px;
+    }
+
+    .guarantee-section__copy,
+    .guarantee-section__badge,
+    .guarantee-section__terms,
+    .guarantee-section__cta {
+      max-width: 319px;
+    }
+
+    .guarantee-section__badge {
+      text-align: center;
+    }
+
+    .guarantee-section__terms--desktop {
+      display: none;
+    }
+
+    .guarantee-section__terms--mobile {
+      display: block;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Guarantee Section",
+  "class": "guarantee-section-wrapper",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "icon_image",
+      "label": "Guarantee icon image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Guarantee Section"
+    }
+  ]
+}
+{% endschema %}

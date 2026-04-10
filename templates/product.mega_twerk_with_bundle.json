@@ -1024,6 +1024,10 @@
         "enable_judgeme_badge": true
       }
     },
+    "guarantee_section_main": {
+      "type": "guarantee-section",
+      "settings": {}
+    },
     "faq_main": {
       "type": "faq",
       "blocks": {
@@ -1173,6 +1177,7 @@
     "features_main",
     "twerk_makeovers_dHGL9w",
     "testimonials_main",
+    "guarantee_section_main",
     "faq_main",
     "email_signup_main",
     "custom_quick_add_QEqWLc"
