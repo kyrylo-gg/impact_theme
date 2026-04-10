@@ -15,7 +15,7 @@
         "heading_1": {
           "type": "heading",
           "settings": {
-            "text": "FEEL YOUR GLUTES WITH MEGA TWERK PACK",
+            "text": "CELEBRATE YOUR PERFECT BOOTY WITH NASS",
             "heading_tag": "h1",
             "special_padding": ""
           }
@@ -651,6 +651,8 @@
         "image_2": "shopify://shop_images/Frame_7-4.png",
         "image_3": "shopify://shop_images/padded_DSC09654_30427d69-c589-45c9-ab7f-2ec9f0e127e1.jpg",
         "enable_section": true,
+        "bb_title_prefix": "CELEBRATE",
+        "bb_title_accent": "6 YEARS OF NASS!",
         "bb_description": "Mix programs, shorts, and tops. Get 60% off all clothing when you add the 4 Programs Bundle.",
         "bb_promo_banner_text": "60% OFF ALL CLOTHING / with Program Pack purchase",
         "show_one_click_alternative": true,
@@ -662,6 +664,13 @@
         "discount_applied_text": "60% off all clothing applied!",
         "size_chart_config_handle": "size-chart-settings",
         "storefront_api_token": "568094b7f376083a4b0dc6fee4785741"
+      }
+    },
+    "guarantee_section_NUgCiH": {
+      "type": "guarantee-section",
+      "name": "Guarantee Section",
+      "settings": {
+        "icon_image": "shopify://shop_images/Frame_16.png"
       }
     },
     "features_main": {
@@ -1150,6 +1159,7 @@
     "feedback_screenshots_main",
     "countdown_timer_Ab3XyZ",
     "nass_bundle_builder",
+    "guarantee_section_NUgCiH",
     "features_main",
     "twerk_makeovers_dHGL9w",
     "testimonials_main",
