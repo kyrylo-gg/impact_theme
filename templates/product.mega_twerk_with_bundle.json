@@ -76,7 +76,6 @@
     },
     "hero_banner_starburst": {
       "type": "hero-banner-2",
-      "disabled": true,
       "settings": {
         "video": "shopify://files/videos/Banner Landing NASS desktop (1).webm",
         "mobile_video": "shopify://files/videos/Banner Landing NASS mobile (1) (1).webm",
