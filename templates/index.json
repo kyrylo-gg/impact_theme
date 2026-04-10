@@ -15,8 +15,8 @@
         "image_aEp4BX": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Banner_3_Desk_32ea18e3-1eb7-44b1-8f34-0e90da4f013e.png",
-            "mobile_image": "shopify://shop_images/Banner_3_Mobile_92fbdb09-9ff1-43d6-aab7-95041c72220a.png",
+            "image": "shopify://shop_images/Banner_1_Desk_cbe50b26-855c-421a-91dc-7183b76c6d00.png",
+            "mobile_image": "shopify://shop_images/Banner_1_Mobile_c9b22c9f-787d-4e55-a46d-ff01d73e519e.png",
             "content_max_width": 780,
             "mobile_text_position": "place-self-end-start text-start",
             "desktop_text_position": "sm:place-self-end-start sm:text-start",
@@ -36,10 +36,9 @@
         },
         "80655a36-c320-42b3-984e-3e96b1a32056": {
           "type": "image",
-          "disabled": true,
           "settings": {
-            "image": "shopify://shop_images/Banner_1_Desk_e4f1653e-7679-4874-b799-c26911554d1c.png",
-            "mobile_image": "shopify://shop_images/Banner_1_Mobile_7dffc49f-ba5e-4463-b6cb-6fe327b70543.png",
+            "image": "shopify://shop_images/Banner_2_Desk_4c066146-315e-42e2-ada7-f8976ee479cc.png",
+            "mobile_image": "shopify://shop_images/Banner_2_Mobile_df76706f-cc07-4837-b9a6-b002dd6ce0ed.png",
             "content_max_width": 780,
             "mobile_text_position": "place-self-end-start text-start",
             "desktop_text_position": "sm:place-self-end-start sm:text-start",
