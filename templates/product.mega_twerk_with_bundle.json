@@ -64,6 +64,8 @@
       "settings": {
         "video": "shopify://files/videos/Banner Landing NASS desktop (1).webm",
         "mobile_video": "shopify://files/videos/Banner Landing NASS mobile (1) (1).webm",
+        "badge_use_theme_starburst": false,
+        "badge_image_alt": "Join NASS B-Day Sale promotional badge",
         "badge_text": "Join NASS B-Day Sale",
         "heading": "CELEBRATE YOUR BOOTY PERFECTION",
         "price_text": "ONLY $97 INSTEAD OF $456",
@@ -74,16 +76,17 @@
     },
     "hero_banner_starburst": {
       "type": "hero-banner-2",
+      "disabled": true,
       "settings": {
         "video": "shopify://files/videos/Banner Landing NASS desktop (1).webm",
         "mobile_video": "shopify://files/videos/Banner Landing NASS mobile (1) (1).webm",
         "use_theme_starburst": true,
+        "starburst_alt": "Join NASS B-Day Sale promotional badge",
         "heading": "CELEBRATE YOUR BOOTY PERFECTION",
         "price_text": "ONLY $97 INSTEAD OF $456",
         "cta_text": "Order Twerk Pack",
         "cta_url": "#nass-bundle-builder",
-        "deadline_text": "Offer ends April 19",
-        "starburst_alt": "Join NASS B-Day Sale promotional badge"
+        "deadline_text": "Offer ends April 19"
       }
     },
     "program_cards_ykQqNc": {
@@ -712,6 +715,17 @@
         "bb_title_accent": "6 YEARS OF NASS!",
         "bb_description": "Mix programs, shorts, and tops. Get 60% off all clothing when you add the 4 Programs Bundle.",
         "bb_promo_banner_text": "60% OFF ALL CLOTHING / with Program Pack purchase",
+        "bb_show_countdown": true,
+        "bb_countdown_mode": "daily_kyiv_10am",
+        "bb_countdown_heading": "HURRY UP! THE SALE ENDS IN:",
+        "bb_initial_days": 0,
+        "bb_initial_hours": 16,
+        "bb_initial_minutes": 11,
+        "bb_initial_seconds": 20,
+        "bb_label_days": "Days",
+        "bb_label_hours": "Hours",
+        "bb_label_minutes": "Minutes",
+        "bb_label_seconds": "Seconds",
         "show_one_click_alternative": true,
         "one_click_product": "twerk-program-lovable",
         "one_click_label": "Twerk program",
