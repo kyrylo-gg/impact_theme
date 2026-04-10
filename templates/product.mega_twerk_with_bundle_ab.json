@@ -468,21 +468,6 @@
         "heading_highlight": "Twerk Like Pros"
       }
     },
-    "countdown_timer_Ab3XyZ": {
-      "type": "countdown-timer",
-      "settings": {
-        "countdown_mode": "fixed",
-        "heading": "HURRY UP! THE SALE ENDS IN:",
-        "initial_days": 0,
-        "initial_hours": 16,
-        "initial_minutes": 11,
-        "initial_seconds": 20,
-        "label_days": "Days",
-        "label_hours": "Hours",
-        "label_minutes": "Minutes",
-        "label_seconds": "Seconds"
-      }
-    },
     "nass_bundle_builder": {
       "type": "nass-bundle-builder",
       "blocks": {
@@ -563,6 +548,7 @@
         "discount_code": "",
         "discount_promo_text": "Get 60% off all clothing with 4 Programs Bundle!",
         "discount_applied_text": "60% off all clothing applied!",
+        "bb_countdown_mode": "fixed",
         "size_chart_config_handle": "size-chart-settings",
         "storefront_api_token": "568094b7f376083a4b0dc6fee4785741"
       }
@@ -1027,7 +1013,6 @@
     "social_proof_hPtKDy",
     "feedback_screenshots_main",
     "video_reviews_grid_main",
-    "countdown_timer_Ab3XyZ",
     "nass_bundle_builder",
     "features_main",
     "twerk_makeovers_dHGL9w",

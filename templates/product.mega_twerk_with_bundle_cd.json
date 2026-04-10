@@ -564,21 +564,6 @@
         "heading_highlight": "TWERK LIKE PROS"
       }
     },
-    "countdown_timer_Ab3XyZ": {
-      "type": "countdown-timer",
-      "settings": {
-        "countdown_mode": "daily_kyiv_10am",
-        "heading": "HURRY UP! THE SALE ENDS IN:",
-        "initial_days": 0,
-        "initial_hours": 16,
-        "initial_minutes": 11,
-        "initial_seconds": 20,
-        "label_days": "Days",
-        "label_hours": "Hours",
-        "label_minutes": "Minutes",
-        "label_seconds": "Seconds"
-      }
-    },
     "nass_bundle_builder": {
       "type": "nass-bundle-builder",
       "blocks": {
@@ -1123,7 +1108,6 @@
     "social_proof_hPtKDy",
     "feedback_screenshots_main",
     "video_reviews_grid_qJDr4j",
-    "countdown_timer_Ab3XyZ",
     "nass_bundle_builder",
     "features_main",
     "twerk_makeovers_dHGL9w",

@@ -580,21 +580,6 @@
         "heading_highlight": "excited about"
       }
     },
-    "countdown_timer_Ab3XyZ": {
-      "type": "countdown-timer",
-      "settings": {
-        "countdown_mode": "daily_kyiv_10am",
-        "heading": "HURRY UP! THE SALE ENDS IN:",
-        "initial_days": 0,
-        "initial_hours": 16,
-        "initial_minutes": 11,
-        "initial_seconds": 20,
-        "label_days": "Days",
-        "label_hours": "Hours",
-        "label_minutes": "Minutes",
-        "label_seconds": "Seconds"
-      }
-    },
     "nass_bundle_builder": {
       "type": "nass-bundle-builder",
       "blocks": {
@@ -1173,7 +1158,6 @@
     "student_progress_ez8yde",
     "social_proof_hPtKDy",
     "feedback_screenshots_main",
-    "countdown_timer_Ab3XyZ",
     "nass_bundle_builder",
     "guarantee_section_NUgCiH",
     "features_main",

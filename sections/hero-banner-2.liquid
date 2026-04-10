@@ -1,11 +1,17 @@
-<section class="hero-banner-section" id="hero-banner-{{ section.id }}">
-  <div class="hero-banner-section__container">
-    <div class="hero-banner-section__card">
+<section class="hero-banner-2" id="hero-banner-2-{{ section.id }}">
+  <div class="hero-banner-2__container">
+    <div class="hero-banner-2__card">
       {% if section.settings.video != blank %}
+        {% liquid
+          assign hb2_mobile = section.settings.mobile_video
+          if hb2_mobile == blank
+            assign hb2_mobile = section.settings.video
+          endif
+        %}
         {{
           section.settings.video
           | video_tag:
-            class: 'hero-banner-section__video hero-banner-section__video--desktop',
+            class: 'hero-banner-2__video hero-banner-2__video--desktop',
             autoplay: true,
             loop: true,
             muted: true,
@@ -13,12 +19,10 @@
             preload: 'metadata',
             playsinline: true
         }}
-      {% endif %}
-      {% if section.settings.mobile_video != blank %}
         {{
-          section.settings.mobile_video
+          hb2_mobile
           | video_tag:
-            class: 'hero-banner-section__video hero-banner-section__video--mobile',
+            class: 'hero-banner-2__video hero-banner-2__video--mobile',
             autoplay: true,
             loop: true,
             muted: true,
@@ -28,44 +32,42 @@
         }}
       {% endif %}
 
-      <div class="hero-banner-section__content">
-        {% if section.settings.badge_image != blank %}
-          <div class="hero-banner-section__badge-image-wrap">
+      <div class="hero-banner-2__content">
+        {% if section.settings.starburst_image != blank %}
+          <div class="hero-banner-2__starburst-wrap">
             {{
-              section.settings.badge_image
+              section.settings.starburst_image
               | image_url: width: 220
               | image_tag:
-                class: 'hero-banner-section__badge-image',
-                alt: section.settings.badge_image_alt | default: 'Join NASS B-Day Sale',
-                loading: 'lazy'
+                class: 'hero-banner-2__starburst',
+                loading: 'lazy',
+                alt: section.settings.starburst_alt | default: 'Join NASS B-Day Sale' | escape
             }}
           </div>
-        {% elsif section.settings.badge_use_theme_starburst %}
-          <div class="hero-banner-section__badge-image-wrap">
+        {% elsif section.settings.use_theme_starburst %}
+          <div class="hero-banner-2__starburst-wrap">
             <img
               src="{{ 'nass-bday-starburst-badge.png' | asset_url }}"
-              alt="{{ section.settings.badge_image_alt | default: 'Join NASS B-Day Sale' | escape }}"
-              class="hero-banner-section__badge-image"
+              alt="{{ section.settings.starburst_alt | default: 'Join NASS B-Day Sale promotional badge' | escape }}"
+              class="hero-banner-2__starburst"
               width="110"
               height="110"
               loading="lazy"
             >
           </div>
-        {% elsif section.settings.badge_text != blank %}
-          <div class="hero-banner-section__badge">{{ section.settings.badge_text | escape }}</div>
         {% endif %}
 
         {% if section.settings.heading != blank %}
-          <h2 class="hero-banner-section__heading">{{ section.settings.heading | escape }}</h2>
+          <h2 class="hero-banner-2__heading">{{ section.settings.heading | escape }}</h2>
         {% endif %}
 
         {% if section.settings.price_text != blank %}
-          <p class="hero-banner-section__price">{{ section.settings.price_text | escape }}</p>
+          <p class="hero-banner-2__price">{{ section.settings.price_text | escape }}</p>
         {% endif %}
 
         {% if section.settings.cta_text != blank %}
           <a
-            class="hero-banner-section__cta"
+            class="hero-banner-2__cta"
             href="{{ section.settings.cta_url | default: '#nass-bundle-builder' }}"
           >
             {{ section.settings.cta_text | escape }}
@@ -73,7 +75,7 @@
         {% endif %}
 
         {% if section.settings.deadline_text != blank %}
-          <p class="hero-banner-section__deadline">{{ section.settings.deadline_text | escape }}</p>
+          <p class="hero-banner-2__deadline">{{ section.settings.deadline_text | escape }}</p>
         {% endif %}
       </div>
     </div>
@@ -82,13 +84,13 @@
 
 {% stylesheet %}
   /* Keep entire section below sticky header (header uses z-index: 10). */
-  .shopify-section.hero-banner-section-wrapper {
+  .shopify-section.hero-banner-2-section-wrapper {
     position: relative;
     z-index: 0;
     isolation: isolate;
   }
 
-  .hero-banner-section {
+  .hero-banner-2 {
     position: relative;
     z-index: 0;
     isolation: isolate;
@@ -96,19 +98,19 @@
     padding: 32px 16px;
   }
 
-  .hero-banner-section__container {
+  .hero-banner-2__container {
     max-width: 1184px;
     margin: 0 auto;
   }
 
-  .hero-banner-section__card {
+  .hero-banner-2__card {
     position: relative;
     height: 560px;
     border-radius: 30px;
     overflow: hidden;
   }
 
-  .hero-banner-section__video {
+  .hero-banner-2__video {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -117,11 +119,11 @@
     z-index: 0;
   }
 
-  .hero-banner-section__video--mobile {
+  .hero-banner-2__video--mobile {
     display: none;
   }
 
-  .hero-banner-section__content {
+  .hero-banner-2__content {
     position: relative;
     z-index: 1;
     height: 100%;
@@ -133,36 +135,19 @@
     padding: 0 24px;
   }
 
-  .hero-banner-section__badge-image-wrap {
+  .hero-banner-2__starburst-wrap {
     margin-top: 28px;
     margin-bottom: auto;
     line-height: 0;
   }
 
-  .hero-banner-section__badge-image {
+  .hero-banner-2__starburst {
     width: 100px;
     height: 100px;
     object-fit: contain;
   }
 
-  .hero-banner-section__badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 28px;
-    margin-bottom: auto;
-    border-radius: 45px;
-    padding: 8px 14px;
-    background: #faff00;
-    color: #000;
-    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', 'Helvetica Neue', Arial, sans-serif;
-    font-weight: 500;
-    font-size: 14px;
-    letter-spacing: 0.42px;
-    backdrop-filter: blur(50px);
-  }
-
-  .hero-banner-section__heading {
+  .hero-banner-2__heading {
     margin: 0 0 16px;
     max-width: 787px;
     color: #fff;
@@ -174,7 +159,7 @@
     letter-spacing: 0.84px;
   }
 
-  .hero-banner-section__price {
+  .hero-banner-2__price {
     margin: 0 0 auto;
     color: #fff;
     font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', 'Helvetica Neue', Arial, sans-serif;
@@ -183,30 +168,38 @@
     letter-spacing: 0.48px;
   }
 
-  .hero-banner-section__cta {
+  .hero-banner-2__cta {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 8px;
-    border: 2px solid #fff;
-    border-radius: 45px;
-    padding: 13px 24px;
-    color: #fff;
+    border: none;
+    border-radius: 9999px;
+    padding: 14px 40px;
+    min-height: 48px;
+    color: #000;
     text-decoration: none;
+    text-transform: none;
     font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', 'Helvetica Neue', Arial, sans-serif;
     font-size: 16px;
-    font-weight: 900;
-    letter-spacing: 0.48px;
-    backdrop-filter: none;
-    transition: none;
-    background: none;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    background: #ffff33;
+    box-shadow: none;
+    transition: filter 0.2s ease;
   }
 
-  .hero-banner-section__cta:hover {
-    background: none;
+  .hero-banner-2__cta:hover {
+    filter: brightness(0.95);
   }
 
-  .hero-banner-section__deadline {
+  .hero-banner-2__cta:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+  }
+
+  .hero-banner-2__deadline {
     margin: 0 0 28px;
     color: #fff;
     font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', 'Helvetica Neue', Arial, sans-serif;
@@ -216,51 +209,47 @@
   }
 
   @media (min-width: 768px) {
-    .hero-banner-section {
+    .hero-banner-2 {
       padding-top: 48px;
       padding-bottom: 48px;
     }
 
-    .hero-banner-section__badge {
-      margin-top: 64px;
-      padding: 10px 20px;
-      letter-spacing: 0.36px;
-    }
-
-    .hero-banner-section__badge-image-wrap {
+    .hero-banner-2__starburst-wrap {
       margin-top: 64px;
     }
 
-    .hero-banner-section__badge-image {
+    .hero-banner-2__starburst {
       width: 110px;
       height: 110px;
     }
 
-    .hero-banner-section__heading {
+    .hero-banner-2__heading {
       font-size: 48px;
       letter-spacing: 1.44px;
     }
 
-    .hero-banner-section__price {
+    .hero-banner-2__price {
       font-size: 18px;
       letter-spacing: 0.54px;
     }
 
-    .hero-banner-section__cta {
-      padding: 14px 32px;
+    .hero-banner-2__cta {
+      padding: 16px 56px;
+      min-height: 52px;
+      font-size: 18px;
     }
 
-    .hero-banner-section__deadline {
+    .hero-banner-2__deadline {
       margin-bottom: 48px;
     }
   }
 
   @media (max-width: 767px) {
-    .hero-banner-section__video--desktop {
+    .hero-banner-2__video--desktop {
       display: none;
     }
 
-    .hero-banner-section__video--mobile {
+    .hero-banner-2__video--mobile {
       display: block;
     }
   }
@@ -268,8 +257,8 @@
 
 {% schema %}
 {
-  "name": "Hero Banner",
-  "class": "hero-banner-section-wrapper",
+  "name": "Hero Banner 2",
+  "class": "hero-banner-2-section-wrapper",
   "settings": [
     {
       "type": "video",
@@ -283,29 +272,22 @@
     },
     {
       "type": "checkbox",
-      "id": "badge_use_theme_starburst",
+      "id": "use_theme_starburst",
       "label": "Use theme starburst badge image",
       "default": false,
-      "info": "Shows nass-bday-starburst-badge.png instead of Badge text. Ignored if Badge image is set."
+      "info": "Shows nass-bday-starburst-badge.png. Ignored if Starburst badge image is set."
     },
     {
       "type": "image_picker",
-      "id": "badge_image",
-      "label": "Badge image",
-      "info": "Optional. Replaces Badge text (and theme starburst) when set."
+      "id": "starburst_image",
+      "label": "Starburst badge image",
+      "info": "Optional PNG with text baked in. Overrides theme starburst when set."
     },
     {
       "type": "text",
-      "id": "badge_image_alt",
-      "label": "Badge image alt text",
+      "id": "starburst_alt",
+      "label": "Starburst image alt text",
       "default": "Join NASS B-Day Sale promotional badge"
-    },
-    {
-      "type": "text",
-      "id": "badge_text",
-      "label": "Badge text",
-      "default": "Join NASS B-Day Sale",
-      "info": "Shown when no badge image and theme starburst is off."
     },
     {
       "type": "text",
@@ -339,7 +321,7 @@
   ],
   "presets": [
     {
-      "name": "Hero Banner"
+      "name": "Hero Banner 2"
     }
   ]
 }

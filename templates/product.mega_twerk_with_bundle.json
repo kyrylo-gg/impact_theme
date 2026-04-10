@@ -72,6 +72,20 @@
         "deadline_text": "Offer ends April 19"
       }
     },
+    "hero_banner_starburst": {
+      "type": "hero-banner-2",
+      "settings": {
+        "video": "shopify://files/videos/Banner Landing NASS desktop (1).webm",
+        "mobile_video": "shopify://files/videos/Banner Landing NASS mobile (1) (1).webm",
+        "use_theme_starburst": true,
+        "heading": "CELEBRATE YOUR BOOTY PERFECTION",
+        "price_text": "ONLY $97 INSTEAD OF $456",
+        "cta_text": "Order Twerk Pack",
+        "cta_url": "#nass-bundle-builder",
+        "deadline_text": "Offer ends April 19",
+        "starburst_alt": "Join NASS B-Day Sale promotional badge"
+      }
+    },
     "program_cards_ykQqNc": {
       "type": "program-cards",
       "blocks": {
@@ -577,21 +591,6 @@
       "settings": {
         "heading": "The twerk program everyone's",
         "heading_highlight": "excited about"
-      }
-    },
-    "countdown_timer_Ab3XyZ": {
-      "type": "countdown-timer",
-      "settings": {
-        "countdown_mode": "daily_kyiv_10am",
-        "heading": "HURRY UP! THE SALE ENDS IN:",
-        "initial_days": 0,
-        "initial_hours": 16,
-        "initial_minutes": 11,
-        "initial_seconds": 20,
-        "label_days": "Days",
-        "label_hours": "Hours",
-        "label_minutes": "Minutes",
-        "label_seconds": "Seconds"
       }
     },
     "nass_bundle_builder": {
@@ -1185,13 +1184,13 @@
   "order": [
     "hero_video",
     "hero_banner_main",
+    "hero_banner_starburst",
     "program_cards_ykQqNc",
     "video_reviews_grid_qJDr4j",
     "twerk_lessons_MWt6Ji",
     "student_progress_ez8yde",
     "social_proof_hPtKDy",
     "feedback_screenshots_main",
-    "countdown_timer_Ab3XyZ",
     "nass_bundle_builder",
     "guarantee_section_main",
     "features_main",

@@ -5,6 +5,13 @@
 
 {% liquid
   assign show_section = section.settings.enable_section
+  assign bb_countdown_on = false
+  assign bb_countdown_mode = section.settings.bb_countdown_mode | default: 'daily_kyiv_10am'
+  if show_section
+    unless section.settings.bb_show_countdown == false
+      assign bb_countdown_on = true
+    endunless
+  endif
 %}
 
 {%- if show_section -%}
@@ -13,7 +20,7 @@
   class="nass-bundle-builder"
   {{ section.shopify_attributes }}
 >
-  <div class="bb-section" id="nass-bundle-builder">
+  <div class="bb-section{% if bb_countdown_on %} bb-countdown-inline{% endif %}" id="nass-bundle-builder">
     <div class="bb-container">
       {%- comment -%} Heading block {%- endcomment -%}
       <div class="bb-heading">
@@ -26,6 +33,68 @@
           <p class="bb-description">{{ section.settings.bb_description }}</p>
         {% endif %}
       </div>
+
+      {%- if bb_countdown_on -%}
+        <div
+          class="bb-bundle-countdown twerk-bundle-anchor"
+          id="twerk-bundle"
+          data-bb-bundle-countdown
+        >
+          <div
+            class="countdown-timer"
+            {% if bb_countdown_mode == 'daily_kyiv_10am' %}
+              data-countdown-mode="daily_kyiv_10am"
+            {% endif %}
+          >
+            <div class="countdown-timer__container">
+              <div class="countdown-timer__inner">
+                <div class="countdown-timer__text">
+                  <p class="countdown-timer__heading">
+                    {{ section.settings.bb_countdown_heading | default: 'HURRY UP! THE SALE ENDS IN:' | escape }}
+                  </p>
+                </div>
+                <div class="countdown-timer__blocks">
+                  <div class="countdown-timer__block">
+                    <div class="countdown-timer__value-wrap">
+                      <span class="countdown-timer__value" data-countdown-days>
+                        {{- section.settings.bb_initial_days | default: 0 | prepend: '00' | slice: -2, 2 -}}
+                      </span>
+                    </div>
+                    <span class="countdown-timer__label">{{ section.settings.bb_label_days | default: 'Days' | escape }}</span>
+                  </div>
+                  <span class="countdown-timer__separator">:</span>
+                  <div class="countdown-timer__block">
+                    <div class="countdown-timer__value-wrap">
+                      <span class="countdown-timer__value" data-countdown-hours>
+                        {{- section.settings.bb_initial_hours | default: 16 | prepend: '00' | slice: -2, 2 -}}
+                      </span>
+                    </div>
+                    <span class="countdown-timer__label">{{ section.settings.bb_label_hours | default: 'Hours' | escape }}</span>
+                  </div>
+                  <span class="countdown-timer__separator">:</span>
+                  <div class="countdown-timer__block">
+                    <div class="countdown-timer__value-wrap">
+                      <span class="countdown-timer__value" data-countdown-minutes>
+                        {{- section.settings.bb_initial_minutes | default: 11 | prepend: '00' | slice: -2, 2 -}}
+                      </span>
+                    </div>
+                    <span class="countdown-timer__label">{{ section.settings.bb_label_minutes | default: 'Minutes' | escape }}</span>
+                  </div>
+                  <span class="countdown-timer__separator">:</span>
+                  <div class="countdown-timer__block">
+                    <div class="countdown-timer__value-wrap">
+                      <span class="countdown-timer__value" data-countdown-seconds>
+                        {{- section.settings.bb_initial_seconds | default: 20 | prepend: '00' | slice: -2, 2 -}}
+                      </span>
+                    </div>
+                    <span class="countdown-timer__label">{{ section.settings.bb_label_seconds | default: 'Seconds' | escape }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
 
       {%- comment -%} Landing Card {%- endcomment -%}
       <div class="bb-card">
@@ -504,6 +573,104 @@
   }
 })();
 </script>
+
+{%- if bb_countdown_on -%}
+<script>
+(function () {
+  var sectionId = {{ section.id | json }};
+  function start() {
+    var root = document.getElementById('shopify-section-' + sectionId);
+    if (!root) return;
+    var wrap = root.querySelector('[data-bb-bundle-countdown]');
+    if (!wrap) return;
+    var sectionEl = wrap.querySelector('.countdown-timer');
+    if (!sectionEl) return;
+
+    var daysEl = sectionEl.querySelector('[data-countdown-days]');
+    var hoursEl = sectionEl.querySelector('[data-countdown-hours]');
+    var minutesEl = sectionEl.querySelector('[data-countdown-minutes]');
+    var secondsEl = sectionEl.querySelector('[data-countdown-seconds]');
+    if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
+
+    var dailyMode = sectionEl.getAttribute('data-countdown-mode') === 'daily_kyiv_10am';
+
+    function pad(n) { return n < 10 ? '0' + n : String(n); }
+
+    function getSecondsUntilNext10amKyiv() {
+      var now = new Date();
+      var formatter = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'Europe/Kyiv',
+        hour: '2-digit', hour12: false,
+        minute: '2-digit', second: '2-digit'
+      });
+      var parts = formatter.formatToParts(now);
+      var hour = 0, minute = 0, second = 0;
+      parts.forEach(function (p) {
+        if (p.type === 'hour') hour = parseInt(p.value, 10);
+        if (p.type === 'minute') minute = parseInt(p.value, 10);
+        if (p.type === 'second') second = parseInt(p.value, 10);
+      });
+      var secSinceMidnight = hour * 3600 + minute * 60 + second;
+      var tenAmSec = 10 * 3600;
+      if (secSinceMidnight < tenAmSec) return tenAmSec - secSinceMidnight;
+      return (24 * 3600 - secSinceMidnight) + tenAmSec;
+    }
+
+    var total;
+    if (dailyMode) {
+      total = getSecondsUntilNext10amKyiv();
+    } else {
+      total =
+        parseInt(daysEl.textContent, 10) * 86400 +
+        parseInt(hoursEl.textContent, 10) * 3600 +
+        parseInt(minutesEl.textContent, 10) * 60 +
+        parseInt(secondsEl.textContent, 10);
+    }
+
+    function tick() {
+      if (total <= 0) {
+        if (dailyMode) {
+          total = 24 * 3600;
+        } else {
+          return;
+        }
+      } else {
+        total--;
+      }
+
+      var d = Math.floor(total / 86400);
+      var h = Math.floor((total % 86400) / 3600);
+      var m = Math.floor((total % 3600) / 60);
+      var s = total % 60;
+
+      daysEl.textContent = pad(d);
+      hoursEl.textContent = pad(h);
+      minutesEl.textContent = pad(m);
+      secondsEl.textContent = pad(s);
+    }
+
+    if (dailyMode) {
+      var d0 = Math.floor(total / 86400);
+      var h0 = Math.floor((total % 86400) / 3600);
+      var m0 = Math.floor((total % 3600) / 60);
+      var s0 = total % 60;
+      daysEl.textContent = pad(d0);
+      hoursEl.textContent = pad(h0);
+      minutesEl.textContent = pad(m0);
+      secondsEl.textContent = pad(s0);
+    }
+
+    setInterval(tick, 1000);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start, { once: true });
+  } else {
+    start();
+  }
+})();
+</script>
+{%- endif -%}
 
 {% stylesheet %}
   /* ========================================
@@ -2983,17 +3150,155 @@
     transform: translateX(-50%) translateY(0);
   }
 
+  /* Inline countdown in bundle (no separate Countdown Timer section) */
+  .nass-bundle-builder .bb-bundle-countdown {
+    width: 100%;
+    max-width: 768px;
+    margin: 16px auto 0;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .nass-bundle-builder .bb-bundle-countdown .countdown-timer {
+    --ct-highlight: var(--nass-highlight, #FAFF00);
+    --ct-highlight-fg: #000000;
+    --ct-block-bg: #ffffff;
+    --ct-block-border: hsl(0, 0%, 20%);
+    --ct-value-color: #000000;
+    --ct-label-color: #000000;
+    --ct-font-display: var(--font-heading--family, 'Anybody'), system-ui, sans-serif;
+    --ct-font-body: var(--font-body--family, 'Avenir Next'), 'Avenir', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    margin-top: 0;
+    padding: 32px 0;
+    background-color: var(--ct-highlight);
+    overflow: hidden;
+    border-radius: 24px;
+  }
+
+  .nass-bundle-builder .bb-bundle-countdown .countdown-timer__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  .nass-bundle-builder .bb-bundle-countdown .countdown-timer__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .nass-bundle-builder .bb-bundle-countdown .countdown-timer__heading {
+    font-family: var(--ct-font-display);
+    font-weight: 900;
+    font-stretch: 150%;
+    letter-spacing: 0.03em;
+    line-height: 100%;
+    text-transform: uppercase;
+    color: var(--ct-highlight-fg);
+    font-size: 20px;
+    margin: 0;
+    text-align: center;
+  }
+
+  .nass-bundle-builder .bb-bundle-countdown .countdown-timer__blocks {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .nass-bundle-builder .bb-bundle-countdown .countdown-timer__block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nass-bundle-builder .bb-bundle-countdown .countdown-timer__value-wrap {
+    background-color: var(--ct-block-bg);
+    border: 1px solid var(--ct-block-border);
+    border-radius: 20px;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nass-bundle-builder .bb-bundle-countdown .countdown-timer__value {
+    font-family: var(--ct-font-body);
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--ct-value-color);
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+    line-height: 1;
+  }
+
+  .nass-bundle-builder .bb-bundle-countdown .countdown-timer__label {
+    color: var(--ct-label-color);
+    font-size: 10px;
+    margin-top: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-family: var(--ct-font-body);
+  }
+
+  .nass-bundle-builder .bb-bundle-countdown .countdown-timer__separator {
+    font-family: var(--ct-font-display);
+    font-weight: 900;
+    font-size: 18px;
+    color: var(--ct-highlight-fg);
+    align-self: flex-start;
+    margin-top: 8px;
+  }
+
+  @media (min-width: 576px) {
+    .nass-bundle-builder .bb-bundle-countdown .countdown-timer {
+      padding: 48px 0;
+    }
+
+    .nass-bundle-builder .bb-bundle-countdown .countdown-timer__blocks {
+      gap: 12px;
+    }
+
+    .nass-bundle-builder .bb-bundle-countdown .countdown-timer__value-wrap {
+      padding: 12px 20px;
+    }
+
+    .nass-bundle-builder .bb-bundle-countdown .countdown-timer__value {
+      font-size: 24px;
+    }
+
+    .nass-bundle-builder .bb-bundle-countdown .countdown-timer__separator {
+      font-size: 24px;
+      margin-top: 12px;
+    }
+
+    .nass-bundle-builder .bb-bundle-countdown .countdown-timer__label {
+      font-size: 12px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .nass-bundle-builder .bb-bundle-countdown .countdown-timer__heading {
+      font-size: 30px;
+    }
+  }
+
   /* Intelligems A/B: countdown relocated — match bb-card / CTA width, compact desktop layout */
   /*
    * Variant A: timer is a sibling of .bb-heading / .bb-card — constrain ONLY the countdown section
    * to .bb-card width (768px). Do not use grid on .bb-container (that shrank heading + card).
    */
   html.ig-ct-var-a #nass-bundle-builder .bb-container > .shopify-section.countdown-timer-section,
-  html.ig-ct-var-a #nass-bundle-builder .bb-container > .shopify-section.countdown-timer-section .countdown-timer {
+  html.ig-ct-var-a #nass-bundle-builder .bb-container > .shopify-section.countdown-timer-section .countdown-timer,
+  #nass-bundle-builder.bb-countdown-inline .bb-bundle-countdown,
+  #nass-bundle-builder.bb-countdown-inline .bb-bundle-countdown .countdown-timer {
     box-sizing: border-box;
   }
 
-  html.ig-ct-var-a #nass-bundle-builder .bb-container > .shopify-section.countdown-timer-section {
+  html.ig-ct-var-a #nass-bundle-builder .bb-container > .shopify-section.countdown-timer-section,
+  #nass-bundle-builder.bb-countdown-inline .bb-bundle-countdown {
     width: 100%;
     max-width: 768px;
     margin-left: auto;
@@ -3001,7 +3306,8 @@
     min-width: 0;
   }
 
-  html.ig-ct-var-a #nass-bundle-builder .bb-container > .shopify-section.countdown-timer-section .countdown-timer {
+  html.ig-ct-var-a #nass-bundle-builder .bb-container > .shopify-section.countdown-timer-section .countdown-timer,
+  #nass-bundle-builder.bb-countdown-inline .bb-bundle-countdown .countdown-timer {
     max-width: 100%;
   }
 
@@ -3019,7 +3325,8 @@
   @media (min-width: 768px) {
     /* Desktop: same shell as variant B (radius, padding, colors) for both A and B */
     html.ig-ct-var-a #nass-bundle-builder .countdown-timer,
-    html.ig-ct-var-b #nass-bundle-builder .countdown-timer {
+    html.ig-ct-var-b #nass-bundle-builder .countdown-timer,
+    #nass-bundle-builder.bb-countdown-inline .countdown-timer {
       --ct-highlight: var(--bb-highlight, #ebff00);
       --ct-highlight-fg: #000000;
       margin-top: 0;
@@ -3028,7 +3335,8 @@
       background-color: var(--ct-highlight);
     }
 
-    html.ig-ct-var-a #nass-bundle-builder .countdown-timer {
+    html.ig-ct-var-a #nass-bundle-builder .countdown-timer,
+    #nass-bundle-builder.bb-countdown-inline .countdown-timer {
       margin-bottom: 12px;
     }
 
@@ -3038,14 +3346,16 @@
     }
 
     html.ig-ct-var-a #nass-bundle-builder .countdown-timer__container,
-    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__container {
+    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__container,
+    #nass-bundle-builder.bb-countdown-inline .countdown-timer__container {
       max-width: none;
       margin: 0;
       padding: 0;
     }
 
     html.ig-ct-var-a #nass-bundle-builder .countdown-timer__inner,
-    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__inner {
+    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__inner,
+    #nass-bundle-builder.bb-countdown-inline .countdown-timer__inner {
       flex-direction: row;
       flex-wrap: nowrap;
       justify-content: space-between;
@@ -3054,14 +3364,16 @@
     }
 
     html.ig-ct-var-a #nass-bundle-builder .countdown-timer__text,
-    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__text {
+    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__text,
+    #nass-bundle-builder.bb-countdown-inline .countdown-timer__text {
       flex: 1 1 0;
       min-width: 0;
       max-width: min(46%, 320px);
     }
 
     html.ig-ct-var-a #nass-bundle-builder .countdown-timer__heading,
-    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__heading {
+    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__heading,
+    #nass-bundle-builder.bb-countdown-inline .countdown-timer__heading {
       font-size: clamp(15px, 1.65vw, 20px);
       line-height: 1.08;
       text-align: left;
@@ -3070,7 +3382,8 @@
     }
 
     html.ig-ct-var-a #nass-bundle-builder .countdown-timer__blocks,
-    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__blocks {
+    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__blocks,
+    #nass-bundle-builder.bb-countdown-inline .countdown-timer__blocks {
       flex: 0 1 auto;
       min-width: 0;
       gap: 4px;
@@ -3078,26 +3391,30 @@
     }
 
     html.ig-ct-var-a #nass-bundle-builder .countdown-timer__value-wrap,
-    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__value-wrap {
+    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__value-wrap,
+    #nass-bundle-builder.bb-countdown-inline .countdown-timer__value-wrap {
       padding: 6px 8px;
       border-radius: 12px;
     }
 
     html.ig-ct-var-a #nass-bundle-builder .countdown-timer__value,
-    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__value {
+    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__value,
+    #nass-bundle-builder.bb-countdown-inline .countdown-timer__value {
       font-size: clamp(16px, 2.2vw, 22px);
       line-height: 1;
     }
 
     html.ig-ct-var-a #nass-bundle-builder .countdown-timer__separator,
-    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__separator {
+    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__separator,
+    #nass-bundle-builder.bb-countdown-inline .countdown-timer__separator {
       font-size: clamp(14px, 1.8vw, 18px);
       margin-top: 0;
       align-self: center;
     }
 
     html.ig-ct-var-a #nass-bundle-builder .countdown-timer__label,
-    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__label {
+    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__label,
+    #nass-bundle-builder.bb-countdown-inline .countdown-timer__label {
       font-size: 8px;
       margin-top: 4px;
       letter-spacing: 0.08em;
@@ -3106,22 +3423,26 @@
 
   @media (min-width: 990px) {
     html.ig-ct-var-a #nass-bundle-builder .countdown-timer__heading,
-    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__heading {
+    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__heading,
+    #nass-bundle-builder.bb-countdown-inline .countdown-timer__heading {
       font-size: 22px;
     }
 
     html.ig-ct-var-a #nass-bundle-builder .countdown-timer__value,
-    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__value {
+    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__value,
+    #nass-bundle-builder.bb-countdown-inline .countdown-timer__value {
       font-size: 24px;
     }
 
     html.ig-ct-var-a #nass-bundle-builder .countdown-timer__separator,
-    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__separator {
+    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__separator,
+    #nass-bundle-builder.bb-countdown-inline .countdown-timer__separator {
       font-size: 20px;
     }
 
     html.ig-ct-var-a #nass-bundle-builder .countdown-timer__value-wrap,
-    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__value-wrap {
+    html.ig-ct-var-b #nass-bundle-builder .countdown-timer__value-wrap,
+    #nass-bundle-builder.bb-countdown-inline .countdown-timer__value-wrap {
       padding: 8px 10px;
     }
   }
@@ -3182,6 +3503,93 @@
       "id": "bb_promo_banner_text",
       "label": "Promo banner text",
       "default": "60% OFF ALL CLOTHING / with Program Pack purchase"
+    },
+    {
+      "type": "header",
+      "content": "Countdown timer (above bundle card)"
+    },
+    {
+      "type": "checkbox",
+      "id": "bb_show_countdown",
+      "label": "Show countdown above bundle card",
+      "default": true,
+      "info": "Built into the bundle — no separate Countdown Timer section needed. Turn off to hide the timer on this template only."
+    },
+    {
+      "type": "select",
+      "id": "bb_countdown_mode",
+      "label": "Countdown mode",
+      "options": [
+        { "value": "fixed", "label": "Fixed (start from initial values)" },
+        { "value": "daily_kyiv_10am", "label": "Daily: until 10:00 AM Kyiv" }
+      ],
+      "default": "daily_kyiv_10am"
+    },
+    {
+      "type": "text",
+      "id": "bb_countdown_heading",
+      "label": "Countdown heading",
+      "default": "HURRY UP! THE SALE ENDS IN:"
+    },
+    {
+      "type": "range",
+      "id": "bb_initial_days",
+      "label": "Starting days (fixed mode)",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "bb_initial_hours",
+      "label": "Starting hours",
+      "min": 0,
+      "max": 23,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "bb_initial_minutes",
+      "label": "Starting minutes",
+      "min": 0,
+      "max": 59,
+      "step": 1,
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "bb_initial_seconds",
+      "label": "Starting seconds",
+      "min": 0,
+      "max": 59,
+      "step": 1,
+      "default": 20
+    },
+    {
+      "type": "text",
+      "id": "bb_label_days",
+      "label": "Label: Days",
+      "default": "Days"
+    },
+    {
+      "type": "text",
+      "id": "bb_label_hours",
+      "label": "Label: Hours",
+      "default": "Hours"
+    },
+    {
+      "type": "text",
+      "id": "bb_label_minutes",
+      "label": "Label: Minutes",
+      "default": "Minutes"
+    },
+    {
+      "type": "text",
+      "id": "bb_label_seconds",
+      "label": "Label: Seconds",
+      "default": "Seconds"
     },
     {
       "type": "header",
