@@ -710,6 +710,12 @@
         "storefront_api_token": "568094b7f376083a4b0dc6fee4785741"
       }
     },
+    "guarantee_section_main": {
+      "type": "guarantee-section",
+      "settings": {
+        "icon_image": "shopify://shop_images/Frame_16.png"
+      }
+    },
     "features_main": {
       "type": "features",
       "blocks": {
@@ -1026,10 +1032,6 @@
         "enable_judgeme_badge": true
       }
     },
-    "guarantee_section_main": {
-      "type": "guarantee-section",
-      "settings": {}
-    },
     "faq_main": {
       "type": "faq",
       "blocks": {
@@ -1176,10 +1178,10 @@
     "feedback_screenshots_main",
     "countdown_timer_Ab3XyZ",
     "nass_bundle_builder",
+    "guarantee_section_main",
     "features_main",
     "twerk_makeovers_dHGL9w",
     "testimonials_main",
-    "guarantee_section_main",
     "faq_main",
     "email_signup_main",
     "custom_quick_add_QEqWLc"
