@@ -1,0 +1,273 @@
+<section class="hero-banner-section" id="hero-banner-{{ section.id }}">
+  <div class="hero-banner-section__container">
+    <div class="hero-banner-section__card">
+      {% if section.settings.video != blank %}
+        {{
+          section.settings.video
+          | video_tag:
+            class: 'hero-banner-section__video hero-banner-section__video--desktop',
+            autoplay: true,
+            loop: true,
+            muted: true,
+            controls: false,
+            preload: 'metadata',
+            playsinline: true
+        }}
+      {% endif %}
+      {% if section.settings.mobile_video != blank %}
+        {{
+          section.settings.mobile_video
+          | video_tag:
+            class: 'hero-banner-section__video hero-banner-section__video--mobile',
+            autoplay: true,
+            loop: true,
+            muted: true,
+            controls: false,
+            preload: 'metadata',
+            playsinline: true
+        }}
+      {% endif %}
+
+      <div class="hero-banner-section__content">
+        {% if section.settings.badge_text != blank %}
+          <div class="hero-banner-section__badge">{{ section.settings.badge_text | escape }}</div>
+        {% endif %}
+
+        {% if section.settings.heading != blank %}
+          <h2 class="hero-banner-section__heading">{{ section.settings.heading | escape }}</h2>
+        {% endif %}
+
+        {% if section.settings.price_text != blank %}
+          <p class="hero-banner-section__price">{{ section.settings.price_text | escape }}</p>
+        {% endif %}
+
+        {% if section.settings.cta_text != blank %}
+          <a
+            class="hero-banner-section__cta"
+            href="{{ section.settings.cta_url | default: '#nass-bundle-builder' }}"
+          >
+            {{ section.settings.cta_text | escape }}
+          </a>
+        {% endif %}
+
+        {% if section.settings.deadline_text != blank %}
+          <p class="hero-banner-section__deadline">{{ section.settings.deadline_text | escape }}</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .hero-banner-section {
+    width: 100%;
+    padding: 32px 16px;
+  }
+
+  .hero-banner-section__container {
+    max-width: 1184px;
+    margin: 0 auto;
+  }
+
+  .hero-banner-section__card {
+    position: relative;
+    height: 560px;
+    border-radius: 30px;
+    overflow: hidden;
+  }
+
+  .hero-banner-section__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+
+  .hero-banner-section__video--mobile {
+    display: none;
+  }
+
+  .hero-banner-section__content {
+    position: relative;
+    z-index: 10;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 24px;
+  }
+
+  .hero-banner-section__badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 28px;
+    margin-bottom: auto;
+    border-radius: 45px;
+    padding: 8px 14px;
+    background: #faff00;
+    color: #000;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.42px;
+    backdrop-filter: blur(50px);
+  }
+
+  .hero-banner-section__heading {
+    margin: 0 0 16px;
+    max-width: 787px;
+    color: #fff;
+    text-transform: uppercase;
+    font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-weight: 900;
+    font-size: 34px;
+    line-height: 1.1;
+    letter-spacing: 0.84px;
+  }
+
+  .hero-banner-section__price {
+    margin: 0 0 auto;
+    color: #fff;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.48px;
+  }
+
+  .hero-banner-section__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+    border: 2px solid #fff;
+    border-radius: 45px;
+    padding: 13px 24px;
+    color: #fff;
+    text-decoration: none;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 900;
+    letter-spacing: 0.48px;
+    backdrop-filter: none;
+    transition: none;
+    background: none;
+  }
+
+  .hero-banner-section__cta:hover {
+    background: none;
+  }
+
+  .hero-banner-section__deadline {
+    margin: 0 0 28px;
+    color: #fff;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.42px;
+  }
+
+  @media (min-width: 768px) {
+    .hero-banner-section {
+      padding-top: 48px;
+      padding-bottom: 48px;
+    }
+
+    .hero-banner-section__badge {
+      margin-top: 64px;
+      padding: 10px 20px;
+      letter-spacing: 0.36px;
+    }
+
+    .hero-banner-section__heading {
+      font-size: 48px;
+      letter-spacing: 1.44px;
+    }
+
+    .hero-banner-section__price {
+      font-size: 18px;
+      letter-spacing: 0.54px;
+    }
+
+    .hero-banner-section__cta {
+      padding: 14px 32px;
+    }
+
+    .hero-banner-section__deadline {
+      margin-bottom: 48px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .hero-banner-section__video--desktop {
+      display: none;
+    }
+
+    .hero-banner-section__video--mobile {
+      display: block;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "class": "hero-banner-section-wrapper",
+  "settings": [
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Desktop video"
+    },
+    {
+      "type": "video",
+      "id": "mobile_video",
+      "label": "Mobile video"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "Join NASS B-Day Sale"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "CELEBRATE YOUR BOOTY PERFECTION"
+    },
+    {
+      "type": "text",
+      "id": "price_text",
+      "label": "Price text",
+      "default": "ONLY $97 INSTEAD $456"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "Order Twerk Pack"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL"
+    },
+    {
+      "type": "text",
+      "id": "deadline_text",
+      "label": "Deadline text",
+      "default": "Offer ends April 19"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner"
+    }
+  ]
+}
+{% endschema %}

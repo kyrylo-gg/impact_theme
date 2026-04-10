@@ -58,6 +58,17 @@
         "overlay_opacity": 0
       }
     },
+    "hero_banner_main": {
+      "type": "hero-banner",
+      "settings": {
+        "badge_text": "Join NASS B-Day Sale",
+        "heading": "CELEBRATE YOUR BOOTY PERFECTION",
+        "price_text": "ONLY $97 INSTEAD $456",
+        "cta_text": "Order Twerk Pack",
+        "cta_url": "#nass-bundle-builder",
+        "deadline_text": "Offer ends April 19"
+      }
+    },
     "program_cards_ykQqNc": {
       "type": "program-cards",
       "blocks": {
@@ -1170,6 +1181,7 @@
   },
   "order": [
     "hero_video",
+    "hero_banner_main",
     "program_cards_ykQqNc",
     "video_reviews_grid_qJDr4j",
     "twerk_lessons_MWt6Ji",
