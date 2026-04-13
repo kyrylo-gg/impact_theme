@@ -905,12 +905,13 @@
           if (resolvedProgramPackNumId) {
             var existingKey = Object.keys(bbState.productsById).find(function(k) { return String(toNumericId(gidToNum(k) || k)) === String(resolvedProgramPackNumId); });
             if (existingKey) {
-              programsStep.productIds = [existingKey].concat(programsStep.productIds.filter(function(id) { return String(toNumericId(gidToNum(id) || id)) !== String(resolvedProgramPackNumId); }));
+              // Keep collection order intact; only ensure the pack product is available in productsById.
             } else if (programPackId && storefrontApiToken) {
               return fetchProductByIdStorefront(programPackId).then(function(internal) {
                 if (internal && internal.id) {
                   bbState.productsById[internal.id] = internal;
-                  programsStep.productIds = [internal.id].concat(programsStep.productIds);
+                  // If pack product is absent from the collection, add it without moving existing items.
+                  programsStep.productIds = programsStep.productIds.concat([internal.id]);
                 }
               }).then(function() { return Promise.resolve(); });
             }
