@@ -62,28 +62,14 @@
     "hero_banner_main": {
       "type": "hero-banner",
       "settings": {
-        "video": "shopify://files/videos/Banner Landing NASS desktop (1).webm",
-        "mobile_video": "shopify://files/videos/Banner Landing NASS mobile (1) (1).webm",
+        "video": "shopify://files/videos/Video2_NASS_b25922ad-a72c-44e1-808a-919d96bd1575.mp4",
+        "mobile_video": "shopify://files/videos/Video2_NASS_mob_7615f44d-acfa-45c8-a526-61045f542690.mp4",
         "badge_use_theme_starburst": false,
         "badge_image_alt": "Join NASS B-Day Sale promotional badge",
         "badge_text": "Join NASS B-Day Sale",
-        "heading": "CELEBRATE YOUR BOOTY PERFECTION",
-        "price_text": "ONLY $97 INSTEAD OF $456",
-        "cta_text": "Order Twerk Pack",
-        "cta_url": "#nass-bundle-builder",
-        "deadline_text": "Offer ends April 19"
-      }
-    },
-    "hero_banner_starburst": {
-      "type": "hero-banner-2",
-      "settings": {
-        "video": "shopify://files/videos/Banner Landing NASS desktop (1).webm",
-        "mobile_video": "shopify://files/videos/Banner Landing NASS mobile (1) (1).webm",
-        "use_theme_starburst": true,
-        "starburst_alt": "Join NASS B-Day Sale promotional badge",
-        "heading": "CELEBRATE YOUR BOOTY PERFECTION",
-        "price_text": "ONLY $97 INSTEAD OF $456",
-        "cta_text": "Order Twerk Pack",
+        "heading": "Shake Your Booty with the Twerk Program",
+        "price_text": "Start your 7-day training for just $59 (You save $100)",
+        "cta_text": "Order Twerk Program",
         "cta_url": "#nass-bundle-builder",
         "deadline_text": "Offer ends April 19"
       }
@@ -134,6 +120,7 @@
         "program_card_LQPeBc",
         "program_card_kXCJYU"
       ],
+      "disabled": true,
       "settings": {
         "heading": "WHAT DOES THE BOOTY PACK",
         "heading_highlight": "INCLUDE?"
@@ -725,7 +712,7 @@
         "bb_label_hours": "Hours",
         "bb_label_minutes": "Minutes",
         "bb_label_seconds": "Seconds",
-        "show_one_click_alternative": true,
+        "show_one_click_alternative": false,
         "one_click_product": "twerk-program-lovable",
         "one_click_label": "Twerk program",
         "program_pack_product": "bundle-test",
@@ -1197,7 +1184,6 @@
   "order": [
     "hero_video",
     "hero_banner_main",
-    "hero_banner_starburst",
     "program_cards_ykQqNc",
     "video_reviews_grid_qJDr4j",
     "twerk_lessons_MWt6Ji",
