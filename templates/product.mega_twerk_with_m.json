@@ -1157,7 +1157,7 @@
       "type": "custom-quick-add",
       "name": "TS Sticky Add",
       "settings": {
-        "product": "twerk-program-1",
+        "product": "twerk-program-3",
         "button_link": "#nass-bundle-builder",
         "button_text": "Shop now",
         "background_button": "#faff00",
@@ -1166,7 +1166,7 @@
         "block_background": "#ffb6e3",
         "sublime_text": "<p>Celebrate NASS B-Day Together!</p>",
         "sublime_text_color": "#1a1a1a",
-        "timer_enabled": true,
+        "timer_enabled": false,
         "timer_type": "daily",
         "cancel_date": "01-01-2026 12:00",
         "cancel_time": 0,
