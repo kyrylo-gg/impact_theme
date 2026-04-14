@@ -6,12 +6,12 @@
 <section class="video-reviews-grid" id="shopify-section-{{ section.id }}" {{ section.shopify_attributes }}>
   <div class="video-reviews-grid__inner">
     {% if section.settings.heading != blank %}
-      <h2 class="video-reviews-grid__heading">
+      <div class="video-reviews-grid__heading">
         {{ section.settings.heading | escape }}
         {% if section.settings.heading_highlight != blank %}
           <span class="video-reviews-grid__heading-highlight">{{ section.settings.heading_highlight | escape }}</span>
         {% endif %}
-      </h2>
+      </div>
     {% endif %}
 
     <div class="video-reviews-grid__grid" role="list">
