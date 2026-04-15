@@ -732,7 +732,7 @@
         "bb_label_hours": "Hours",
         "bb_label_minutes": "Minutes",
         "bb_label_seconds": "Seconds",
-        "show_one_click_alternative": true,
+        "show_one_click_alternative": false,
         "one_click_product": "twerk-program-lovable",
         "one_click_label": "Twerk program",
         "program_pack_product": "bundle-test",
