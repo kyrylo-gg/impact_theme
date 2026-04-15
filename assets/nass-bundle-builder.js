@@ -988,10 +988,13 @@
       }
       var titleOverlay = '<div class="bb-product-title-overlay">' + (p.title || '') + '</div>';
       var badgeLabel = '';
-      if (step && step.isProgramsStep && step.productIds && step.productIds.length) {
-        var productIndex = step.productIds.indexOf(productId);
-        if (productIndex === 0) badgeLabel = 'Best Value';
-        if (productIndex === 1) badgeLabel = 'Bestseller';
+      if (step && step.isProgramsStep) {
+        var normalizedTitle = String(p.title || '').toLowerCase().replace(/\s+/g, ' ').trim();
+        if (normalizedTitle.indexOf('mega twerk bundle') !== -1) {
+          badgeLabel = 'Best Value';
+        } else if (normalizedTitle.indexOf('twerk program') !== -1) {
+          badgeLabel = 'Bestseller';
+        }
       }
       var badgeHtml = badgeLabel ? '<div class="bb-product-top-badge" aria-hidden="true">' + badgeLabel + '</div>' : '';
       var zoomSvg = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>';
