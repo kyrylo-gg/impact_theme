@@ -365,16 +365,16 @@
             "video": "shopify://files/videos/3.webm"
           }
         },
-        "student_video_d4K4xi": {
-          "type": "student_video",
-          "settings": {
-            "video": "shopify://files/videos/1 (1).webm"
-          }
-        },
         "student_video_icRymq": {
           "type": "student_video",
           "settings": {
             "video": "shopify://files/videos/2.webm"
+          }
+        },
+        "student_video_d4K4xi": {
+          "type": "student_video",
+          "settings": {
+            "video": "shopify://files/videos/1 (1).webm"
           }
         },
         "student_video_GKeqUQ": {
@@ -398,8 +398,8 @@
       },
       "block_order": [
         "student_video_hqgjby",
-        "student_video_d4K4xi",
         "student_video_icRymq",
+        "student_video_d4K4xi",
         "student_video_GKeqUQ",
         "student_video_YiePwJ",
         "student_video_DrpmJz"
