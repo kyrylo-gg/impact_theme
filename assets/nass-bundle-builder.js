@@ -37,6 +37,7 @@
       id: String(raw.id),
       title: raw.title || '',
       handle: raw.handle || '',
+      descriptionHtml: raw.body_html || raw.description || '',
       tags: Array.isArray(raw.tags) ? raw.tags : String(raw.tags || '').split(',').map(function(t) { return String(t || '').trim(); }).filter(Boolean),
       availableForSale: v0.available !== false,
       priceRange: { minVariantPrice: { amount: String(v0.price || '0'), currencyCode: inferredCur } },
@@ -86,6 +87,8 @@
     const secureFooterShieldIconUrl = (config && typeof config.secureFooterShieldIconUrl === 'string' && config.secureFooterShieldIconUrl.trim())
       ? config.secureFooterShieldIconUrl.trim()
       : '';
+    const templateSuffix = String((config && config.templateSuffix) || '').toLowerCase().trim();
+    const isBundlesDescriptionTemplate = templateSuffix === 'mega_twerk_with_bundles' || templateSuffix === 'mega_twerk_with_bundleseo';
     const footerEl = sectionRoot.querySelector('[data-bb-wizard-footer]');
     var routesRoot = (typeof window !== 'undefined' && window.Shopify && window.Shopify.routes && window.Shopify.routes.root)
       ? String(window.Shopify.routes.root).replace(/\/?$/, '/')
@@ -298,6 +301,7 @@
     const imageViewerEl = sectionRoot.querySelector('[data-bb-image-viewer]');
     const imageViewerImgEl = sectionRoot.querySelector('[data-bb-image-viewer-img]');
     const imageViewerTitleEl = sectionRoot.querySelector('[data-bb-image-viewer-title]');
+    const imageViewerDescriptionEl = sectionRoot.querySelector('[data-bb-image-viewer-description]');
     const imageViewerPrevEl = sectionRoot.querySelector('[data-bb-image-viewer-prev]');
     const imageViewerNextEl = sectionRoot.querySelector('[data-bb-image-viewer-next]');
     const imageViewerDotsEl = sectionRoot.querySelector('[data-bb-image-viewer-dots]');
@@ -470,7 +474,7 @@
       var selectedProduct = bbState.productsById[selectedProgramItem.productId];
       if (!selectedProduct) return '';
       var title = normalizeForMatch(selectedProduct.title);
-      if (title.indexOf('vip bundle') !== -1 || title.indexOf('twerk essential bundle') !== -1) {
+      if (title.indexOf('vip bundle') !== -1 || title.indexOf('twerk essential bundle') !== -1 || title.indexOf('twerk essential kit') !== -1) {
         return 'vip_or_essential';
       }
       if (title.indexOf('booty builder bundle') !== -1) {
@@ -483,7 +487,7 @@
       var p = bbState.productsById[productId];
       if (!p) return '';
       var title = normalizeForMatch(p.title);
-      if (title.indexOf('vip bundle') !== -1 || title.indexOf('twerk essential bundle') !== -1) {
+      if (title.indexOf('vip bundle') !== -1 || title.indexOf('twerk essential bundle') !== -1 || title.indexOf('twerk essential kit') !== -1) {
         return 'vip_or_essential';
       }
       if (title.indexOf('booty builder bundle') !== -1) {
@@ -962,14 +966,41 @@
       if (imageViewerEl) imageViewerEl.classList.remove('bb-image-viewer-modal--hidden');
     }
 
+    function openProgramDescriptionPopup(productId) {
+      if (!productId) return;
+      var p = bbState.productsById[productId];
+      if (!p || !imageViewerEl || !imageViewerImgEl || !imageViewerTitleEl) return;
+      var nodes = (p.images && p.images.nodes) || [];
+      var node = nodes[0] || null;
+      var imgWidth = (typeof window !== 'undefined' && window.innerWidth < 768) ? 600 : 1200;
+      imageViewerImgEl.src = node ? getImageUrlOptimized(node.url, imgWidth) : '';
+      imageViewerImgEl.alt = p.title || '';
+      imageViewerTitleEl.textContent = p.title || '';
+      imageViewerTitleEl.style.display = '';
+      if (imageViewerPrevEl) imageViewerPrevEl.style.display = 'none';
+      if (imageViewerNextEl) imageViewerNextEl.style.display = 'none';
+      if (imageViewerDotsEl) imageViewerDotsEl.style.display = 'none';
+      if (imageViewerDescriptionEl) {
+        var rawDescription = String(p.descriptionHtml || '').trim();
+        imageViewerDescriptionEl.innerHTML = rawDescription || '<p>No description available for this product.</p>';
+        imageViewerDescriptionEl.style.display = '';
+      }
+      imageViewerEl.classList.add('bb-image-viewer-modal--text-only');
+      imageViewerEl.classList.remove('bb-image-viewer-modal--hidden');
+    }
+
     function closeImageViewer() {
       imageViewerState = { productId: null, imageIndex: 0 };
-      if (imageViewerEl) imageViewerEl.classList.add('bb-image-viewer-modal--hidden');
+      if (imageViewerEl) {
+        imageViewerEl.classList.add('bb-image-viewer-modal--hidden');
+        imageViewerEl.classList.remove('bb-image-viewer-modal--text-only');
+      }
     }
 
     function renderImageViewer() {
       var p = imageViewerState.productId ? bbState.productsById[imageViewerState.productId] : null;
       if (!p || !imageViewerImgEl || !imageViewerTitleEl) return;
+      if (imageViewerEl) imageViewerEl.classList.remove('bb-image-viewer-modal--text-only');
       var nodes = (p.images && p.images.nodes) || [];
       var idx = Math.max(0, Math.min(imageViewerState.imageIndex, nodes.length - 1));
       var node = nodes[idx];
@@ -977,6 +1008,11 @@
       imageViewerImgEl.src = node ? getImageUrlOptimized(node.url, imgWidth) : '';
       imageViewerImgEl.alt = p.title || '';
       imageViewerTitleEl.textContent = p.title || '';
+      imageViewerTitleEl.style.display = '';
+      if (imageViewerDescriptionEl) {
+        imageViewerDescriptionEl.style.display = 'none';
+        imageViewerDescriptionEl.innerHTML = '';
+      }
       if (imageViewerPrevEl && imageViewerNextEl && imageViewerDotsEl) {
         var hasMultiple = nodes.length > 1;
         imageViewerPrevEl.style.display = hasMultiple ? '' : 'none';
@@ -1010,6 +1046,12 @@
       var total = p.images.nodes.length;
       imageViewerState.imageIndex = (imageViewerState.imageIndex - 1 + total) % total;
       renderImageViewer();
+    }
+
+    function shouldOpenProgramDescriptionPopup(stepId) {
+      if (!isBundlesDescriptionTemplate) return false;
+      var step = bbState.steps.find(function(s) { return String(s.id) === String(stepId); });
+      return !!(step && step.isProgramsStep);
     }
 
     function fetchCollectionProductsJson(handle) {
@@ -1420,7 +1462,12 @@
         wrap.addEventListener('click', function(e) {
           if (e.target.closest && e.target.closest('[data-bb-zoom]')) return;
           e.stopPropagation();
-          openImageViewer(wrap.getAttribute('data-product'));
+          var productId = wrap.getAttribute('data-product');
+          if (shouldOpenProgramDescriptionPopup(step.id)) {
+            openProgramDescriptionPopup(productId);
+          } else {
+            openImageViewer(productId);
+          }
         });
       });
     }
