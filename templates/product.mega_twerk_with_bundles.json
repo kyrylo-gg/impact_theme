@@ -67,9 +67,9 @@
         "badge_use_theme_starburst": false,
         "badge_image_alt": "Join NASS B-Day Sale promotional badge",
         "badge_text": "Join NASS B-Day Sale",
-        "heading": "CELEBRATE YOUR BOOTY PERFECTION",
-        "price_text": "ONLY $97 INSTEAD OF $456",
-        "cta_text": "Order Twerk Pack",
+        "heading": "STOP WATCHING. START TWERKING.",
+        "price_text": "Join thousands of women who stopped watching and started moving.",
+        "cta_text": " Let's Do This",
         "cta_url": "#nass-bundle-builder",
         "deadline_text": "Offer ends April 19"
       }
@@ -86,43 +86,43 @@
             "duration": "7 Days"
           }
         },
-        "program_card_6rgVPi": {
-          "type": "program_card",
-          "settings": {
-            "title": "body transformation",
-            "description": "12-week structured program designed to deliver confident and reliable weight loss results.",
-            "image": "shopify://shop_images/booty_band_program_a55ac736-c2f1-4155-b953-1c676e9852a3.jpg",
-            "duration": "12 Weeks"
-          }
-        },
         "program_card_LQPeBc": {
           "type": "program_card",
           "settings": {
-            "title": "Booty Program",
+            "title": "Home Booty Program",
             "description": "The most effective booty-building workouts which you can do at the comfort of your home.",
-            "image": "shopify://shop_images/booty_band_212_960ff3e2-8ea3-40f1-bbbb-47f51f001ad1.jpg",
+            "image": "shopify://shop_images/Frame_1.png",
             "duration": "8 Weeks"
           }
         },
         "program_card_kXCJYU": {
           "type": "program_card",
           "settings": {
-            "title": "Booty Band Program",
+            "title": "Home Booty Band Program",
             "description": "Great variety of booty-building exercises which you can perform with resistance band.",
             "image": "shopify://shop_images/stretching_band_set_0bd6ad28-abd3-424a-9f72-b4323b52ac50.jpg",
             "duration": "8 Weeks"
+          }
+        },
+        "program_card_6rgVPi": {
+          "type": "program_card",
+          "settings": {
+            "title": "body transformation",
+            "description": "Three levels, one complete journey. Start soft, build your foundation, and push to the hard level. Transform your body at your own pace.",
+            "image": "shopify://shop_images/booty_band_program_a55ac736-c2f1-4155-b953-1c676e9852a3.jpg",
+            "duration": "3 Months"
           }
         }
       },
       "block_order": [
         "program_card_CxChpM",
-        "program_card_6rgVPi",
         "program_card_LQPeBc",
-        "program_card_kXCJYU"
+        "program_card_kXCJYU",
+        "program_card_6rgVPi"
       ],
       "settings": {
-        "heading": "WHAT DOES THE BOOTY PACK",
-        "heading_highlight": "INCLUDE?"
+        "heading": "MORE PROGRAMS.",
+        "heading_highlight": "ONE SPECIAL PRICE!"
       }
     },
     "video_reviews_grid_qJDr4j": {
@@ -719,7 +719,7 @@
         "enable_section": true,
         "bb_title_prefix": "CELEBRATE",
         "bb_title_accent": "6 YEARS OF NASS!",
-        "bb_description": "Mix programs, shorts, and tops. Get 60% off all clothing when you add the 4 Programs Bundle.",
+        "bb_description": "Mix programs, shorts, and tops. Get 60% off all clothing when you purchase the VIP Bundle.",
         "bb_promo_banner_text": "60% OFF ALL CLOTHING / with VIP Bundle purchase",
         "bb_show_countdown": true,
         "bb_countdown_mode": "daily_kyiv_10am",
