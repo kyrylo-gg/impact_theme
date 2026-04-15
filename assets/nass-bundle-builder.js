@@ -989,10 +989,10 @@
       var titleOverlay = '<div class="bb-product-title-overlay">' + (p.title || '') + '</div>';
       var badgeLabel = '';
       if (step && step.isProgramsStep) {
-        var normalizedTitle = String(p.title || '').toLowerCase().replace(/\s+/g, ' ').trim();
-        if (normalizedTitle.indexOf('mega twerk') !== -1) {
+        var normalizedHandle = String(p.handle || '').toLowerCase().replace(/\s+/g, ' ').trim();
+        if (normalizedHandle.indexOf('mega-twerk') !== -1) {
           badgeLabel = 'Best Value';
-        } else if (normalizedTitle.indexOf('twerk program') !== -1) {
+        } else if (normalizedHandle.indexOf('twerk-program') !== -1) {
           badgeLabel = 'Bestseller';
         }
       }
