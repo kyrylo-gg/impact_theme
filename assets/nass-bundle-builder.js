@@ -89,6 +89,7 @@
       : '';
     const templateSuffix = String((config && config.templateSuffix) || '').toLowerCase().trim();
     const isBundlesDescriptionTemplate = templateSuffix === 'mega_twerk_with_bundles' || templateSuffix === 'mega_twerk_with_bundleseo';
+    const isSingleProgramSelectionTemplate = isBundlesDescriptionTemplate;
     const footerEl = sectionRoot.querySelector('[data-bb-wizard-footer]');
     var routesRoot = (typeof window !== 'undefined' && window.Shopify && window.Shopify.routes && window.Shopify.routes.root)
       ? String(window.Shopify.routes.root).replace(/\/?$/, '/')
@@ -665,6 +666,12 @@
     function isDisabled(stepId, productId) {
       var step = bbState.steps.find(function(s) { return String(s.id) === String(stepId); });
       if (!step || !step.isProgramsStep) return false;
+      if (isSingleProgramSelectionTemplate) {
+        var selectedProgramsItem = bbState.selectedItems.find(function(item) {
+          return String(item.stepId) === String(step.id);
+        });
+        if (selectedProgramsItem && String(selectedProgramsItem.productId) !== String(productId)) return true;
+      }
       if (!resolvedProgramPackNumId) return false;
       var packSelected = getHasProgramPack();
       var thisIsPack = isProgramPack(productId);
