@@ -609,9 +609,9 @@
           "type": "bundle_step",
           "settings": {
             "title": "Select programs",
-            "collection": "bundle-programs",
+            "collection": "bundle_bundle",
             "is_programs_step": true,
-            "program_pack_product": "bundle-test"
+            "program_pack_product": "vip-bundle"
           }
         },
         "bundle_step_bb96UU": {
