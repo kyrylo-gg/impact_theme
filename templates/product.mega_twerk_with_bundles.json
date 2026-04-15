@@ -358,10 +358,10 @@
     "student_progress_ez8yde": {
       "type": "student-progress",
       "blocks": {
-        "student_video_WGHzTQ": {
+        "student_video_3HEaRn": {
           "type": "student_video",
           "settings": {
-            "video": "shopify://files/videos/1 (1).webm"
+            "video": "shopify://files/videos/3.webm"
           }
         },
         "student_video_MHVfCM": {
@@ -370,10 +370,10 @@
             "video": "shopify://files/videos/2.webm"
           }
         },
-        "student_video_3HEaRn": {
+        "student_video_WGHzTQ": {
           "type": "student_video",
           "settings": {
-            "video": "shopify://files/videos/3.webm"
+            "video": "shopify://files/videos/1 (1).webm"
           }
         },
         "student_video_GKeqUQ": {
@@ -396,9 +396,9 @@
         }
       },
       "block_order": [
-        "student_video_WGHzTQ",
-        "student_video_MHVfCM",
         "student_video_3HEaRn",
+        "student_video_MHVfCM",
+        "student_video_WGHzTQ",
         "student_video_GKeqUQ",
         "student_video_YiePwJ",
         "student_video_DrpmJz"
