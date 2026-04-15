@@ -2614,9 +2614,9 @@
     border-radius: var(--bb-radius);
   }
 
-  /* A/B badge markup is rendered by JS, visibility toggled by Intelligems class on <html> */
+  /* Badge markup is rendered by JS for matched program products */
   .nass-bundle-builder .bb-product-top-badge {
-    display: none;
+    display: inline-block;
     position: absolute;
     top: 8px;
     left: 8px;
@@ -2632,10 +2632,6 @@
     padding: 7px 10px;
     pointer-events: none;
     white-space: nowrap;
-  }
-
-  html.ig-bb-badges-on .nass-bundle-builder .bb-product-top-badge {
-    display: inline-block;
   }
 
   .nass-bundle-builder .bb-product-zoom {
