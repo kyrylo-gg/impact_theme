@@ -918,12 +918,24 @@
       bbState.hasProgramPack = getHasProgramPack();
       renderStep();
       renderDiscountBanner();
-      fetch(cartUrls.change, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: lineKey || String(variantNum), quantity: 0 })
-      })
-        .then(function(r) { return r.json(); })
+      function changeCartRemoveById(idValue) {
+        return fetch(cartUrls.change, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: idValue, quantity: 0 })
+        }).then(function(r) { return r.json(); });
+      }
+
+      // Some cart line keys can become stale after cart recalculations;
+      // retry removal by variant id before failing the action.
+      changeCartRemoveById(lineKey || String(variantNum))
+        .then(function(data) {
+          var isBadRequest = data && (data.status === 422 || data.status === 400 || (data.status && String(data.status).indexOf('bad_request') >= 0));
+          if (isBadRequest && lineKey) {
+            return changeCartRemoveById(String(variantNum));
+          }
+          return data;
+        })
         .then(function(data) {
           if (data.status === 422 || data.status === 400 || (data.status && String(data.status).indexOf('bad_request') >= 0)) {
             bbState.cartOperationInProgress = false;
