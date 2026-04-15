@@ -618,7 +618,7 @@
           "type": "bundle_step",
           "settings": {
             "title": "Workout Equipment",
-            "collection": "bundle-equipment",
+            "collection": "bundle-equipment-copy",
             "is_programs_step": false,
             "program_pack_product": ""
           }
