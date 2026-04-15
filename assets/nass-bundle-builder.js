@@ -580,11 +580,26 @@
       itemsToRemove.forEach(function(item) {
         chain = chain.then(function() {
           var variantNum = String(item.variantId).replace(/.*\/(\d+)$/, '$1') || item.variantId;
-          return fetch(cartUrls.change, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id: item.lineKey || String(variantNum), quantity: 0 })
-          }).catch(function() { return null; });
+          function changeRemove(idValue) {
+            return fetch(cartUrls.change, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ id: idValue, quantity: 0 })
+            }).then(function(r) { return r.json(); });
+          }
+          return changeRemove(item.lineKey || String(variantNum))
+            .then(function(data) {
+              var isBadRequest = data && (data.status === 422 || data.status === 400 || (data.status && String(data.status).indexOf('bad_request') >= 0));
+              if (isBadRequest && item.lineKey) {
+                return changeRemove(String(variantNum));
+              }
+              return data;
+            })
+            .then(function(data) {
+              var failed = data && (data.status === 422 || data.status === 400 || (data.status && String(data.status).indexOf('bad_request') >= 0));
+              if (failed) return Promise.reject(new Error('remove_failed'));
+              return data;
+            });
         });
       });
       return chain
