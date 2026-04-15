@@ -990,9 +990,12 @@
       var badgeLabel = '';
       if (step && step.isProgramsStep) {
         var normalizedHandle = String(p.handle || '').toLowerCase().replace(/\s+/g, ' ').trim();
-        if (normalizedHandle.indexOf('mega-twerk') !== -1) {
+        var hasMegaTwerk = normalizedHandle.indexOf('mega') !== -1 && normalizedHandle.indexOf('twerk') !== -1;
+        var hasPackOrBundle = normalizedHandle.indexOf('pack') !== -1 || normalizedHandle.indexOf('bundle') !== -1;
+        var hasTwerkProgram = normalizedHandle.indexOf('twerk') !== -1 && normalizedHandle.indexOf('program') !== -1;
+        if (hasMegaTwerk && hasPackOrBundle) {
           badgeLabel = 'Best Value';
-        } else if (normalizedHandle.indexOf('twerk-program') !== -1) {
+        } else if (hasTwerkProgram) {
           badgeLabel = 'Bestseller';
         }
       }
