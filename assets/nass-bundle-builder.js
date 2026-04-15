@@ -987,9 +987,16 @@
         priceHtml = '<span class="bb-product-final">' + formatMoney(final, cur, sourceCur) + '</span>';
       }
       var titleOverlay = '<div class="bb-product-title-overlay">' + (p.title || '') + '</div>';
+      var badgeLabel = '';
+      if (step && step.isProgramsStep && step.productIds && step.productIds.length) {
+        var productIndex = step.productIds.indexOf(productId);
+        if (productIndex === 0) badgeLabel = 'Best Value';
+        if (productIndex === 1) badgeLabel = 'Bestseller';
+      }
+      var badgeHtml = badgeLabel ? '<div class="bb-product-top-badge" aria-hidden="true">' + badgeLabel + '</div>' : '';
       var zoomSvg = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>';
       var zoomBtn = !sel ? '<button type="button" class="bb-product-zoom-btn" data-bb-zoom data-product="' + (productId || '').replace(/"/g, '&quot;') + '" aria-label="View larger">' + zoomSvg + '</button>' : '';
-      return '<div class="' + cardClass + '" data-product="' + productId + '"><div class="bb-product-img-wrap" data-product="' + (productId || '').replace(/"/g, '&quot;') + '"><img class="bb-product-img" src="' + (img || '') + '" alt="" loading="lazy">' + zoomBtn + titleOverlay + '</div><div class="bb-product-price">' + priceHtml + '</div><div class="bb-product-actions">' + btnHtml + '</div></div>';
+      return '<div class="' + cardClass + '" data-product="' + productId + '"><div class="bb-product-img-wrap" data-product="' + (productId || '').replace(/"/g, '&quot;') + '">' + badgeHtml + '<img class="bb-product-img" src="' + (img || '') + '" alt="" loading="lazy">' + zoomBtn + titleOverlay + '</div><div class="bb-product-price">' + priceHtml + '</div><div class="bb-product-actions">' + btnHtml + '</div></div>';
     }
 
     function isClothingStep(stepId) {
