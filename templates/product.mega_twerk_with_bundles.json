@@ -74,21 +74,6 @@
         "deadline_text": "Offer ends April 19"
       }
     },
-    "hero_banner_starburst": {
-      "type": "hero-banner-2",
-      "disabled": true,
-      "settings": {
-        "video": "shopify://files/videos/Banner Landing NASS desktop (1).webm",
-        "mobile_video": "shopify://files/videos/Banner Landing NASS mobile (1) (1).webm",
-        "use_theme_starburst": true,
-        "starburst_alt": "Join NASS B-Day Sale promotional badge",
-        "heading": "CELEBRATE YOUR BOOTY PERFECTION",
-        "price_text": "ONLY $97 INSTEAD OF $456",
-        "cta_text": "Order Twerk Pack",
-        "cta_url": "#nass-bundle-builder",
-        "deadline_text": "Offer ends April 19"
-      }
-    },
     "program_cards_ykQqNc": {
       "type": "program-cards",
       "blocks": {
@@ -629,8 +614,18 @@
             "program_pack_product": "bundle-test"
           }
         },
+        "bundle_step_bb96UU": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "Workout Equipment",
+            "collection": "bundle-equipment",
+            "is_programs_step": false,
+            "program_pack_product": ""
+          }
+        },
         "bundle_step_r34gCq": {
           "type": "bundle_step",
+          "disabled": true,
           "settings": {
             "title": "Choose twerk Essentials",
             "collection": "bundle-2a",
@@ -641,8 +636,8 @@
         "bundle_step_KMpd7k": {
           "type": "bundle_step",
           "settings": {
-            "title": "Add More Booty Shorts",
-            "collection": "bundle-3a",
+            "title": "Add  Booty Shorts",
+            "collection": "bundle-swim-shorts",
             "is_programs_step": false,
             "program_pack_product": ""
           }
@@ -703,20 +698,11 @@
             "is_programs_step": false,
             "program_pack_product": ""
           }
-        },
-        "bundle_step_bb96UU": {
-          "type": "bundle_step",
-          "disabled": true,
-          "settings": {
-            "title": "Workout Equipment",
-            "collection": "bundle-equipment",
-            "is_programs_step": false,
-            "program_pack_product": ""
-          }
         }
       },
       "block_order": [
         "step_programs",
+        "bundle_step_bb96UU",
         "bundle_step_r34gCq",
         "bundle_step_KMpd7k",
         "bundle_step_Dh9wMj",
@@ -724,8 +710,7 @@
         "step_shorts",
         "step_leggings",
         "step_swimshorts",
-        "step_tops",
-        "bundle_step_bb96UU"
+        "step_tops"
       ],
       "settings": {
         "image_1": "shopify://shop_images/Frame_7-6.png",
@@ -1219,7 +1204,6 @@
   "order": [
     "hero_video",
     "hero_banner_main",
-    "hero_banner_starburst",
     "program_cards_ykQqNc",
     "video_reviews_grid_qJDr4j",
     "twerk_lessons_MWt6Ji",
