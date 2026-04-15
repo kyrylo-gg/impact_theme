@@ -212,6 +212,24 @@
     "student_progress_ez8yde": {
       "type": "student-progress",
       "blocks": {
+        "student_video_9innw3": {
+          "type": "student_video",
+          "settings": {
+            "video": "shopify://files/videos/3.webm"
+          }
+        },
+        "student_video_nkakLM": {
+          "type": "student_video",
+          "settings": {
+            "video": "shopify://files/videos/1 (1).webm"
+          }
+        },
+        "student_video_kXyEhi": {
+          "type": "student_video",
+          "settings": {
+            "video": "shopify://files/videos/2.webm"
+          }
+        },
         "student_video_GKeqUQ": {
           "type": "student_video",
           "settings": {
@@ -232,6 +250,9 @@
         }
       },
       "block_order": [
+        "student_video_9innw3",
+        "student_video_nkakLM",
+        "student_video_kXyEhi",
         "student_video_GKeqUQ",
         "student_video_YiePwJ",
         "student_video_DrpmJz"
