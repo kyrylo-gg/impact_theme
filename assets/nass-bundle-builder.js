@@ -990,7 +990,7 @@
       var badgeLabel = '';
       if (step && step.isProgramsStep) {
         var normalizedTitle = String(p.title || '').toLowerCase().replace(/\s+/g, ' ').trim();
-        if (normalizedTitle.indexOf('mega twerk bundle') !== -1) {
+        if (normalizedTitle.indexOf('mega twerk pack') !== -1) {
           badgeLabel = 'Best Value';
         } else if (normalizedTitle.indexOf('twerk program') !== -1) {
           badgeLabel = 'Bestseller';
