@@ -443,6 +443,221 @@
       });
     }
 
+    function normalizeForMatch(val) {
+      return String(val || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+    }
+
+    function stepIsWorkoutEquipment(stepId) {
+      var step = bbState.steps.find(function(s) { return String(s.id) === String(stepId); });
+      if (!step) return false;
+      var title = normalizeForMatch(step.title);
+      var handle = normalizeForMatch(step.collectionHandle);
+      if (title.indexOf('workout equipment') !== -1) return true;
+      if (title.indexOf('choose equipment') !== -1) return true;
+      if (title.indexOf('equipment') !== -1) return true;
+      if (handle.indexOf('bundle equipment') !== -1) return true;
+      if (handle.indexOf('equipment') !== -1) return true;
+      return false;
+    }
+
+    function getSelectedBundleRuleMode() {
+      var programsStep = bbState.steps.find(function(s) { return s && s.isProgramsStep; });
+      if (!programsStep) return '';
+      var selectedProgramItem = bbState.selectedItems.find(function(item) {
+        return String(item.stepId) === String(programsStep.id);
+      });
+      if (!selectedProgramItem) return '';
+      var selectedProduct = bbState.productsById[selectedProgramItem.productId];
+      if (!selectedProduct) return '';
+      var title = normalizeForMatch(selectedProduct.title);
+      if (title.indexOf('vip bundle') !== -1 || title.indexOf('twerk essential bundle') !== -1) {
+        return 'vip_or_essential';
+      }
+      if (title.indexOf('booty builder bundle') !== -1) {
+        return 'booty_builder';
+      }
+      return '';
+    }
+
+    function getBundleRuleModeByProductId(productId) {
+      var p = bbState.productsById[productId];
+      if (!p) return '';
+      var title = normalizeForMatch(p.title);
+      if (title.indexOf('vip bundle') !== -1 || title.indexOf('twerk essential bundle') !== -1) {
+        return 'vip_or_essential';
+      }
+      if (title.indexOf('booty builder bundle') !== -1) {
+        return 'booty_builder';
+      }
+      return '';
+    }
+
+    function isRuleTriggerBundleProduct(productId) {
+      return !!getBundleRuleModeByProductId(productId);
+    }
+
+    function getRuleTargetByProductForMode(stepId, product, mode) {
+      if (!stepIsWorkoutEquipment(stepId) || !product) return null;
+      if (!mode) return null;
+      var title = normalizeForMatch(product.title);
+      var handle = normalizeForMatch(product.handle);
+      var isBootyBandSet = title.indexOf('booty band set') !== -1 || title.indexOf('booty band') !== -1 || handle.indexOf('booty band set') !== -1 || handle.indexOf('booty-band-set') !== -1 || handle.indexOf('booty-band') !== -1;
+      if (isBootyBandSet) return { free: true, mode: mode, type: 'booty_band' };
+      var isKneePads = title.indexOf('knee pads') !== -1 || title.indexOf('knee pad') !== -1 || handle.indexOf('knee pads') !== -1 || handle.indexOf('knee-pads') !== -1 || handle.indexOf('knee-pad') !== -1;
+      if (isKneePads && mode === 'vip_or_essential') return { free: true, mode: mode, type: 'knee_pads' };
+      return null;
+    }
+
+    function getRuleTargetByProduct(stepId, product) {
+      return getRuleTargetByProductForMode(stepId, product, getSelectedBundleRuleMode());
+    }
+
+    function applyWorkoutEquipmentAutoAdd(step) {
+      if (!step || !step.id || !stepIsWorkoutEquipment(step.id)) return;
+      var mode = getSelectedBundleRuleMode();
+      if (!mode || !Array.isArray(step.productIds) || !step.productIds.length) return;
+      var bootyBandProductId = null;
+      step.productIds.forEach(function(pid) {
+        if (bootyBandProductId) return;
+        var rule = getRuleTargetByProduct(step.id, bbState.productsById[pid]);
+        if (rule && rule.type === 'booty_band') bootyBandProductId = pid;
+      });
+      if (!bootyBandProductId || isSelected(bootyBandProductId) || bbState.cartOperationInProgress) return;
+      addItem(step.id, bootyBandProductId, null, 1, { autoAddedByRule: true });
+    }
+
+    function getAllowedAutoAddedEquipmentProductIds() {
+      var allowed = {};
+      var mode = getSelectedBundleRuleMode();
+      if (!mode) return allowed;
+      bbState.steps.forEach(function(step) {
+        if (!step || !step.id || !stepIsWorkoutEquipment(step.id)) return;
+        (step.productIds || []).forEach(function(pid) {
+          var rule = getRuleTargetByProduct(step.id, bbState.productsById[pid]);
+          if (!rule) return;
+          if (rule.type === 'booty_band' || rule.type === 'knee_pads') allowed[String(pid)] = true;
+        });
+      });
+      return allowed;
+    }
+
+    function removeRuleLinkedEquipmentItemsForMode(mode) {
+      if (!mode) return Promise.resolve();
+      var idsToRemove = [];
+      bbState.selectedItems.forEach(function(item) {
+        if (!stepIsWorkoutEquipment(item.stepId)) return;
+        var product = bbState.productsById[item.productId];
+        var rule = getRuleTargetByProductForMode(item.stepId, product, mode);
+        if (!rule) return;
+        idsToRemove.push(String(item.productId));
+      });
+      if (!idsToRemove.length) return Promise.resolve();
+      return removeItemsByProductIds(idsToRemove);
+    }
+
+    function removeItemsByProductIds(productIds) {
+      if (!Array.isArray(productIds) || !productIds.length) return Promise.resolve();
+      var idsSet = {};
+      productIds.forEach(function(pid) { idsSet[String(pid)] = true; });
+      var itemsToRemove = bbState.selectedItems.filter(function(item) {
+        return !!idsSet[String(item.productId)];
+      });
+      if (!itemsToRemove.length) return Promise.resolve();
+      var prevItems = bbState.selectedItems.slice();
+      bbState.selectedItems = bbState.selectedItems.filter(function(item) {
+        return !idsSet[String(item.productId)];
+      });
+      bbState.hasProgramPack = getHasProgramPack();
+      renderStep();
+      renderDiscountBanner();
+      renderFooterSummary();
+      var chain = Promise.resolve();
+      itemsToRemove.forEach(function(item) {
+        chain = chain.then(function() {
+          var variantNum = String(item.variantId).replace(/.*\/(\d+)$/, '$1') || item.variantId;
+          return fetch(cartUrls.change, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: item.lineKey || String(variantNum), quantity: 0 })
+          }).catch(function() { return null; });
+        });
+      });
+      return chain
+        .then(function() {
+          return applyDiscountAndRefreshCart().catch(function() { renderFooterSummary(); });
+        })
+        .catch(function() {
+          bbState.selectedItems = prevItems;
+          bbState.hasProgramPack = getHasProgramPack();
+          renderStep();
+          renderDiscountBanner();
+          renderFooterSummary();
+        });
+    }
+
+    function cleanupAutoAddedEquipmentItems() {
+      if (bbState.cartOperationInProgress) return Promise.resolve();
+      var allowedIds = getAllowedAutoAddedEquipmentProductIds();
+      var staleAutoAddedIds = bbState.selectedItems
+        .filter(function(item) {
+          return !!item.autoAddedByRule && stepIsWorkoutEquipment(item.stepId) && !allowedIds[String(item.productId)];
+        })
+        .map(function(item) { return String(item.productId); });
+      if (!staleAutoAddedIds.length) return Promise.resolve();
+      return removeItemsByProductIds(staleAutoAddedIds);
+    }
+
+    function hasRequiredKneePadsSelectionForVipEssential(step) {
+      if (!step || !step.id || !stepIsWorkoutEquipment(step.id)) return true;
+      if (getSelectedBundleRuleMode() !== 'vip_or_essential') return true;
+      var kneePadsProductId = null;
+      (step.productIds || []).forEach(function(pid) {
+        if (kneePadsProductId) return;
+        var rule = getRuleTargetByProduct(step.id, bbState.productsById[pid]);
+        if (rule && rule.type === 'knee_pads') kneePadsProductId = pid;
+      });
+      if (!kneePadsProductId) return true;
+      var selectedKneePads = bbState.selectedItems.find(function(item) {
+        return String(item.productId) === String(kneePadsProductId);
+      });
+      if (!selectedKneePads) return false;
+      var product = bbState.productsById[kneePadsProductId];
+      var variants = (product && product.variants && product.variants.nodes) || [];
+      if (!variants.length) return true;
+      var hasSizeVariants = variants.some(function(v) {
+        return (v.selectedOptions || []).some(function(o) {
+          return String((o && o.name) || '').toLowerCase() === 'size' && String((o && o.value) || '').trim() !== '';
+        });
+      });
+      if (!hasSizeVariants) return true;
+      var selectedVariant = variants.find(function(v) { return String(v.id) === String(selectedKneePads.variantId); });
+      if (!selectedVariant) return false;
+      return (selectedVariant.selectedOptions || []).some(function(o) {
+        if (String((o && o.name) || '').toLowerCase() !== 'size') return false;
+        var val = String((o && o.value) || '').trim().toLowerCase();
+        return !!val && val !== 'default title';
+      });
+    }
+
+    function animateKneePadsSelectSizeButton() {
+      if (typeof document === 'undefined') return;
+      var styleId = 'bb-knee-pads-attention-style';
+      if (!document.getElementById(styleId)) {
+        var styleEl = document.createElement('style');
+        styleEl.id = styleId;
+        styleEl.textContent = '@keyframes bbKneePadsButtonBounce{0%{transform:translateY(0)}25%{transform:translateY(-5px)}50%{transform:translateY(0)}75%{transform:translateY(-3px)}100%{transform:translateY(0)}}.bb-product-btn--attention{animation:bbKneePadsButtonBounce .45s ease-in-out 2;box-shadow:0 0 0 2px rgba(0,56,255,.2);}';
+        document.head.appendChild(styleEl);
+      }
+      var btn = contentEl ? contentEl.querySelector('[data-bb-knee-pads-size-btn="true"]') : null;
+      if (!btn) return;
+      btn.classList.remove('bb-product-btn--attention');
+      try { void btn.offsetWidth; } catch (e) {}
+      btn.classList.add('bb-product-btn--attention');
+      setTimeout(function() {
+        btn.classList.remove('bb-product-btn--attention');
+      }, 1200);
+    }
+
     function isDisabled(stepId, productId) {
       var step = bbState.steps.find(function(s) { return String(s.id) === String(stepId); });
       if (!step || !step.isProgramsStep) return false;
@@ -593,7 +808,7 @@
       }, 600);
     })();
 
-    function addItem(stepId, productId, variantId, quantity) {
+    function addItem(stepId, productId, variantId, quantity, options) {
       if (bbState.cartOperationInProgress) return;
       var p = bbState.productsById[productId];
       if (!p) return;
@@ -606,7 +821,8 @@
       if (!vid) return;
       var qty = Math.max(1, parseInt(quantity, 10) || 1);
       if (isSelected(productId)) return;
-      bbState.selectedItems.push({ stepId: stepId, productId: productId, variantId: vid, quantity: qty, lineKey: null });
+      var isAutoAddedByRule = !!(options && options.autoAddedByRule);
+      bbState.selectedItems.push({ stepId: stepId, productId: productId, variantId: vid, quantity: qty, lineKey: null, autoAddedByRule: isAutoAddedByRule });
       bbState.hasProgramPack = getHasProgramPack();
       renderStep();
       renderDiscountBanner();
@@ -676,6 +892,10 @@
       if (bbState.cartOperationInProgress) return;
       var item = bbState.selectedItems.find(function(i) { return String(i.productId) === String(productId); });
       if (!item) return;
+      var removedStep = bbState.steps.find(function(s) { return String(s.id) === String(item.stepId); });
+      var isProgramsStepRemoval = !!(removedStep && removedStep.isProgramsStep);
+      var isRuleTriggerBundleRemoval = isRuleTriggerBundleProduct(productId);
+      var removedBundleRuleMode = getBundleRuleModeByProductId(productId);
       bbState.cartOperationInProgress = true;
       renderStep();
       var lineKey = item.lineKey;
@@ -707,7 +927,17 @@
           renderStep();
           renderDiscountBanner();
           renderFooterSummary();
-          applyDiscountAndRefreshCart().catch(function() { renderFooterSummary(); });
+          applyDiscountAndRefreshCart()
+            .catch(function() { renderFooterSummary(); })
+            .then(function() {
+              if (isRuleTriggerBundleRemoval) {
+                return removeRuleLinkedEquipmentItemsForMode(removedBundleRuleMode).then(function() {
+                  return cleanupAutoAddedEquipmentItems();
+                });
+              }
+              if (isProgramsStepRemoval || isRuleTriggerBundleRemoval) return cleanupAutoAddedEquipmentItems();
+              return null;
+            });
         })
         .catch(function(err) {
           bbState.cartOperationInProgress = false;
@@ -951,6 +1181,7 @@
       if (!p) return '';
       var sel = isSelected(productId);
       var dis = isDisabled(stepId, productId);
+      var ruleTarget = getRuleTargetByProduct(stepId, p);
       var price = p.priceRange && p.priceRange.minVariantPrice ? p.priceRange.minVariantPrice.amount : '0';
       var compareAt = p.compareAtPriceRange && p.compareAtPriceRange.minVariantPrice ? p.compareAtPriceRange.minVariantPrice.amount : null;
       var hasPack = getHasProgramPack();
@@ -964,19 +1195,26 @@
         orig = getVisualOriginalPrice(stepId, price, hasPack);
         final = getVisualFinalPrice(stepId, price, hasPack);
       }
+      if (ruleTarget && ruleTarget.free) {
+        orig = 0;
+        final = 0;
+        hasDiscount = false;
+        compareAt = null;
+      }
       var sourceCur = getProductSourceCurrency(p);
       var cur = getDisplayCurrency();
       var img = (p.images && p.images.nodes && p.images.nodes[0]) ? getImageUrlOptimized(p.images.nodes[0].url) : '';
       var cardClass = 'bb-product-card' + (dis ? ' bb-product-card--disabled' : '');
       var busy = !!bbState.cartOperationInProgress;
       var spinnerSvg = '<span class="bb-spinner" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10" stroke-dasharray="32 56"/></svg></span>';
-      var addBtnContent = busy ? spinnerSvg + '<span class="bb-btn-text">Adding...</span>' : 'Add for ' + formatMoney(final, cur, sourceCur);
+      var addBtnLabel = (ruleTarget && ruleTarget.type === 'knee_pads') ? 'Select your size' : ('Add for ' + formatMoney(final, cur, sourceCur));
+      var addBtnContent = busy ? spinnerSvg + '<span class="bb-btn-text">Adding...</span>' : addBtnLabel;
       var removeBtnContent = busy ? spinnerSvg : '×';
       var btnHtml = dis
         ? '<button type="button" class="bb-product-btn bb-product-btn--disabled" disabled>Unavailable</button>'
         : sel
           ? '<button type="button" class="bb-product-btn bb-product-btn--added" disabled>Added</button><button type="button" class="bb-product-remove' + (busy ? ' bb-product-btn--loading' : '') + '" data-bb-remove="' + productId + '" aria-label="Remove"' + (busy ? ' disabled' : '') + '>' + removeBtnContent + '</button>'
-          : '<button type="button" class="bb-product-btn bb-product-btn--add' + (busy ? ' bb-product-btn--loading' : '') + '"' + (busy ? ' disabled>' : ' data-bb-add data-step="' + stepId + '" data-product="' + productId + '">') + addBtnContent + '</button>';
+          : '<button type="button" class="bb-product-btn bb-product-btn--add' + (busy ? ' bb-product-btn--loading' : '') + '"' + (busy ? ' disabled>' : ' data-bb-add data-step="' + stepId + '" data-product="' + productId + '"' + ((ruleTarget && ruleTarget.type === 'knee_pads') ? ' data-bb-knee-pads-size-btn="true"' : '') + '>') + addBtnContent + '</button>';
       var priceHtml;
       if (hasDiscount) {
         priceHtml = '<span class="bb-product-original">' + formatMoney(orig, cur, sourceCur) + '</span><span class="bb-product-final">' + formatMoney(final, cur, sourceCur) + '</span><span class="bb-product-badge">-60%</span>';
@@ -1219,6 +1457,8 @@
     function getItemOrigAndFinal(item, hasPack) {
       var p = bbState.productsById[item.productId];
       if (!p) return { orig: 0, final: 0 };
+      var ruleTarget = getRuleTargetByProduct(item.stepId, p);
+      if (ruleTarget && ruleTarget.free) return { orig: 0, final: 0 };
       var price = p.priceRange && p.priceRange.minVariantPrice ? parseFloat(p.priceRange.minVariantPrice.amount) : 0;
       var compareAt = p.compareAtPriceRange && p.compareAtPriceRange.minVariantPrice ? parseFloat(p.compareAtPriceRange.minVariantPrice.amount) : null;
       var step = bbState.steps.find(function(s) { return s.id === item.stepId; });
@@ -1987,6 +2227,7 @@
           nextBtn.textContent = 'Next';
         }
       }
+      applyWorkoutEquipmentAutoAdd(step);
       if (index + 1 < len && bbState.steps[index + 1].id !== 'review') {
         preloadStepImages(index + 1);
       }
@@ -2044,6 +2285,12 @@
     if (exitBtn) exitBtn.addEventListener('click', confirmExitWizard);
     if (nextBtn) {
       nextBtn.addEventListener('click', function() {
+        var currentStep = bbState.steps[bbState.currentStepIndex];
+        if (!hasRequiredKneePadsSelectionForVipEssential(currentStep)) {
+          animateKneePadsSelectSizeButton();
+          showToast('Please select the size of Knee Pads to continue');
+          return;
+        }
         if (bbState.currentStepIndex < bbState.steps.length - 1) goToStep(bbState.currentStepIndex + 1);
         else submitBundle();
       });
