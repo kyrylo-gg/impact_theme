@@ -723,6 +723,7 @@
     },
     "guarantee_section_main": {
       "type": "guarantee-section",
+      "disabled": true,
       "settings": {
         "icon_image": "shopify://shop_images/Frame_16.png"
       }
