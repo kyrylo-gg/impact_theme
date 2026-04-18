@@ -15,8 +15,8 @@
         "image_aEp4BX": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Banner_1_Desk-2.png",
-            "mobile_image": "shopify://shop_images/Banner_1_Mobile-2.png",
+            "image": "shopify://shop_images/Banner_1_Desk-3.png",
+            "mobile_image": "shopify://shop_images/Banner_1_Mobile-3.png",
             "content_max_width": 780,
             "mobile_text_position": "place-self-end-start text-start",
             "desktop_text_position": "sm:place-self-end-start sm:text-start",
