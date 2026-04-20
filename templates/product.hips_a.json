@@ -12,6 +12,10 @@
     "hips_hero_banner": {
       "type": "hips-hero-banner",
       "settings": {
+        "video_desktop": "shopify://files/videos/Desk 4.mp4",
+        "video_mobile": "shopify://files/videos/Mob 4.mp4",
+        "overlay_opacity_desktop": 10,
+        "overlay_opacity_mobile": 30,
         "tag_text": "Nastya Nass · Hip Mobility Program",
         "eyebrow": "Your body can move like this",
         "heading_main": "Let me show you",
@@ -21,6 +25,7 @@
         "price_new": "$99",
         "cta_label_main": "Get the",
         "cta_label_accent": "complete system",
+        "cta_url": "",
         "trust_line": "40,000+ students · Lifetime access · No equipment · Any device"
       }
     },
@@ -30,7 +35,9 @@
         "intro": "Your hips are not stiff because you are inflexible",
         "heading_part1": "They are stiff",
         "heading_part2": "because you sit",
+        "image_left": "shopify://shop_images/Frame_580.png",
         "label_left": "Locked hips",
+        "image_right": "shopify://shop_images/Frame_581.png",
         "label_right": "Open hips",
         "body_main": "<p>Eight hours a day in a chair compresses your hips and trains your body to stay locked. Stretching helps for a day.</p>",
         "body_bold": "<p>Progressive movement changes the signal permanently.</p>",
@@ -40,12 +47,14 @@
     "hip_mobility": {
       "type": "hip-mobility",
       "settings": {
+        "video_mobile": "shopify://files/videos/Mob 1.mp4",
+        "video_desktop": "shopify://files/videos/Desk 1.mp4",
         "eyebrow": "Hip Mobility is not a softer option",
         "headline_lead": "It is the step that",
         "headline_accent": "makes everything else possible",
         "body": "<p>Mobility work helps your hips move freely and gives your body control where it matters most. <strong>4 weeks to unlock, 7 days to perform.</strong></p>",
         "footnote": "Nastya built this program because she saw what happened without it.",
-        "accent_color": "#FAFF00"
+        "accent_color": "#faff00"
       }
     },
     "about_founder": {
@@ -53,14 +62,16 @@
       "settings": {
         "heading_lead": "I have spent my whole life learning",
         "heading_accent": "how hips move",
+        "main_image": "shopify://shop_images/Frame_344.png",
         "blue_label": "This is the program I wish I had given everyone first",
         "quote": "<p>I spent years helping women fix pain and movement limits after they had already worked through tougher plans. This program is the foundation I wish they had first.</p>",
+        "stats_image": "shopify://shop_images/Frame_343.png",
         "stat_1_value": "40K+",
         "stat_1_label": "students across all programs",
         "stat_2_value": "6M+",
         "stat_2_label": "followers",
-        "accent_color": "#0038FF",
-        "highlight_color": "#FAFF00"
+        "accent_color": "#0038ff",
+        "highlight_color": "#faff00"
       }
     },
     "program_contents": {
@@ -69,6 +80,7 @@
         "program_card_1": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/Frame_5_5471b8c6-5678-4e09-8d03-91630b128711.png",
             "badge": "10 min",
             "title": "Workouts",
             "body": "Focused sessions to improve hip control and movement quality."
@@ -77,6 +89,7 @@
         "program_card_2": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/Frame_6_4440fd4e-7126-4ca9-a83f-df192b9b17e9.png",
             "badge": "8 min",
             "title": "Stretching",
             "body": "Targeted mobility routines that reduce stiffness where you feel it most."
@@ -85,6 +98,7 @@
         "program_card_3": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/Frame_7_304ac20a-47fc-4123-ab39-4a50bc6e4b7f.png",
             "badge": "8 min",
             "title": "Meditation",
             "body": "Simple reset sessions to improve consistency and body awareness."
@@ -93,6 +107,7 @@
         "program_card_4": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/Frame_8.png",
             "badge": "",
             "title": "4 weekly articles",
             "body": "Clear guidance on posture, routine, and progression between sessions."
@@ -119,7 +134,8 @@
           "settings": {
             "tab": "Week 1",
             "title": "Reset and unlock",
-            "body": "You start with mobility basics and activation work that helps your hips move safely and freely."
+            "body": "You start with mobility basics and activation work that helps your hips move safely and freely.",
+            "image": "shopify://shop_images/Frame_583-5.png"
           }
         },
         "week_2": {
@@ -127,7 +143,8 @@
           "settings": {
             "tab": "Week 2",
             "title": "Build control",
-            "body": "This week improves stability and rhythm so your movement feels cleaner and more natural."
+            "body": "This week improves stability and rhythm so your movement feels cleaner and more natural.",
+            "image": "shopify://shop_images/Frame_583-6.png"
           }
         },
         "week_3": {
@@ -135,7 +152,8 @@
           "settings": {
             "tab": "Week 3",
             "title": "Add performance",
-            "body": "You layer speed and range while keeping control, so power does not replace technique."
+            "body": "You layer speed and range while keeping control, so power does not replace technique.",
+            "image": "shopify://shop_images/Frame_583-7.png"
           }
         },
         "week_4": {
@@ -143,7 +161,8 @@
           "settings": {
             "tab": "Week 4",
             "title": "Lock in results",
-            "body": "You combine everything into repeatable sessions and leave with a clear long-term plan."
+            "body": "You combine everything into repeatable sessions and leave with a clear long-term plan.",
+            "image": "shopify://shop_images/Frame_583-8.png"
           }
         }
       },
@@ -162,20 +181,90 @@
     "why_this_works": {
       "type": "why-this-works",
       "blocks": {
-        "other_1": { "type": "row_other", "settings": { "text": "Random routines with no progression" } },
-        "other_2": { "type": "row_other", "settings": { "text": "Only stretching, no movement transfer" } },
-        "other_3": { "type": "row_other", "settings": { "text": "Too hard too soon for stiff hips" } },
-        "other_4": { "type": "row_other", "settings": { "text": "No structure for consistency" } },
-        "other_5": { "type": "row_other", "settings": { "text": "Technique is not explained clearly" } },
-        "other_6": { "type": "row_other", "settings": { "text": "No support after the first week" } },
-        "other_7": { "type": "row_other", "settings": { "text": "Looks good on paper, hard in real life" } },
-        "this_1": { "type": "row_this", "settings": { "text": "Step-by-step progression for real bodies" } },
-        "this_2": { "type": "row_this", "settings": { "text": "Mobility + control + performance combined" } },
-        "this_3": { "type": "row_this", "settings": { "text": "Short sessions you can actually sustain" } },
-        "this_4": { "type": "row_this", "settings": { "text": "Clear structure for every week" } },
-        "this_5": { "type": "row_this", "settings": { "text": "Technique cues built into each step" } },
-        "this_6": { "type": "row_this", "settings": { "text": "Designed from 40K+ student outcomes" } },
-        "this_7": { "type": "row_this", "settings": { "text": "Built to create results that stick" } }
+        "other_1": {
+          "type": "row_other",
+          "settings": {
+            "text": "Random routines with no progression"
+          }
+        },
+        "other_2": {
+          "type": "row_other",
+          "settings": {
+            "text": "Only stretching, no movement transfer"
+          }
+        },
+        "other_3": {
+          "type": "row_other",
+          "settings": {
+            "text": "Too hard too soon for stiff hips"
+          }
+        },
+        "other_4": {
+          "type": "row_other",
+          "settings": {
+            "text": "No structure for consistency"
+          }
+        },
+        "other_5": {
+          "type": "row_other",
+          "settings": {
+            "text": "Technique is not explained clearly"
+          }
+        },
+        "other_6": {
+          "type": "row_other",
+          "settings": {
+            "text": "No support after the first week"
+          }
+        },
+        "other_7": {
+          "type": "row_other",
+          "settings": {
+            "text": "Looks good on paper, hard in real life"
+          }
+        },
+        "this_1": {
+          "type": "row_this",
+          "settings": {
+            "text": "Step-by-step progression for real bodies"
+          }
+        },
+        "this_2": {
+          "type": "row_this",
+          "settings": {
+            "text": "Mobility + control + performance combined"
+          }
+        },
+        "this_3": {
+          "type": "row_this",
+          "settings": {
+            "text": "Short sessions you can actually sustain"
+          }
+        },
+        "this_4": {
+          "type": "row_this",
+          "settings": {
+            "text": "Clear structure for every week"
+          }
+        },
+        "this_5": {
+          "type": "row_this",
+          "settings": {
+            "text": "Technique cues built into each step"
+          }
+        },
+        "this_6": {
+          "type": "row_this",
+          "settings": {
+            "text": "Designed from 40K+ student outcomes"
+          }
+        },
+        "this_7": {
+          "type": "row_this",
+          "settings": {
+            "text": "Built to create results that stick"
+          }
+        }
       },
       "block_order": [
         "other_1",
@@ -196,7 +285,9 @@
       "settings": {
         "eyebrow": "Why most programs fail.",
         "heading": "Why this one works",
-        "subheading": "<p>What is missing from every other hip mobility program.</p>"
+        "subheading": "<p>What is missing from every other hip mobility program.</p>",
+        "left_image": "shopify://shop_images/other.png",
+        "right_image": "shopify://shop_images/hip.png"
       }
     },
     "everything_in_pocket": {
@@ -229,21 +320,68 @@
       "settings": {
         "heading_lead": "Everything",
         "heading_accent": "in your pocket.",
-        "body": "<p>Your full program is always with you, so you can train from any device without missing a step.</p>"
+        "body": "<p>Your full program is always with you, so you can train from any device without missing a step.</p>",
+        "phone_image": "shopify://shop_images/iPhone_12_Pro_1.png",
+        "checkmark_image": "shopify://shop_images/Checkmark.png"
       }
     },
     "program_for_you": {
       "type": "program-for-you",
       "blocks": {
-        "yes_1": { "type": "yes_item", "settings": { "text": "You feel stiff after long hours of sitting." } },
-        "yes_2": { "type": "yes_item", "settings": { "text": "You want better hip mobility without pain." } },
-        "yes_3": { "type": "yes_item", "settings": { "text": "You need a plan that is short and structured." } },
-        "yes_4": { "type": "yes_item", "settings": { "text": "You want real guidance, not random workouts." } },
-        "yes_5": { "type": "yes_item", "settings": { "text": "You want confidence in movement and performance." } },
-        "yes_6": { "type": "yes_item", "settings": { "text": "You want visible progress in a month." } },
-        "no_1": { "type": "no_item", "settings": { "text": "You are looking for overnight results." } },
-        "no_2": { "type": "no_item", "settings": { "text": "You do not want to follow a weekly plan." } },
-        "no_3": { "type": "no_item", "settings": { "text": "You are not ready to practice consistently." } }
+        "yes_1": {
+          "type": "yes_item",
+          "settings": {
+            "text": "You feel stiff after long hours of sitting."
+          }
+        },
+        "yes_2": {
+          "type": "yes_item",
+          "settings": {
+            "text": "You want better hip mobility without pain."
+          }
+        },
+        "yes_3": {
+          "type": "yes_item",
+          "settings": {
+            "text": "You need a plan that is short and structured."
+          }
+        },
+        "yes_4": {
+          "type": "yes_item",
+          "settings": {
+            "text": "You want real guidance, not random workouts."
+          }
+        },
+        "yes_5": {
+          "type": "yes_item",
+          "settings": {
+            "text": "You want confidence in movement and performance."
+          }
+        },
+        "yes_6": {
+          "type": "yes_item",
+          "settings": {
+            "text": "You want visible progress in a month."
+          }
+        },
+        "no_1": {
+          "type": "no_item",
+          "settings": {
+            "text": "You are looking for overnight results."
+          }
+        },
+        "no_2": {
+          "type": "no_item",
+          "settings": {
+            "text": "You do not want to follow a weekly plan."
+          }
+        },
+        "no_3": {
+          "type": "no_item",
+          "settings": {
+            "text": "You are not ready to practice consistently."
+          }
+        }
       },
       "block_order": [
         "yes_1",
@@ -261,7 +399,8 @@
         "heading_accent": "is for you if",
         "yes_label": "This is for you:",
         "no_label": "This is not for you:",
-        "closing": "<p>If these points sound like you, this is exactly where your progress starts.</p>"
+        "closing": "<p>If these points sound like you, this is exactly where your progress starts.</p>",
+        "photo": "shopify://shop_images/Frame_360.png"
       }
     },
     "hips_testimonials": {
@@ -270,6 +409,7 @@
         "testimonial_1": {
           "type": "testimonial",
           "settings": {
+            "avatar": "shopify://shop_images/Frame_295-2.png",
             "name": "Bosede",
             "role": "Program student",
             "quote": "<p>I finally understood how to move my hips without forcing it. The structure made everything click.</p>",
@@ -280,6 +420,7 @@
         "testimonial_2": {
           "type": "testimonial",
           "settings": {
+            "avatar": "shopify://shop_images/Frame_295-3.png",
             "name": "Elizabeth",
             "role": "Program student",
             "quote": "<p>I thought flexibility alone was enough. This program gave me control and real progress week by week.</p>",
@@ -290,6 +431,7 @@
         "testimonial_3": {
           "type": "testimonial",
           "settings": {
+            "avatar": "shopify://shop_images/Frame_295.png",
             "name": "Heather",
             "role": "Program student",
             "quote": "<p>Short sessions made it easy to stick with. By the end of week four, my body felt completely different.</p>",
@@ -340,6 +482,7 @@
       "settings": {
         "heading_lead": "The complete system.",
         "heading_accent": "4 weeks to unlock, 7 days to perform.",
+        "boxes_image": "shopify://shop_images/Frame_41_1b168e62-62f3-45f4-8160-7d1a9a0e23a5.png",
         "banner_text": "Hip Mobility + Twerk Program",
         "card1_title": "Hip Mobility Program",
         "card1_pill": "4 weeks",
@@ -349,6 +492,7 @@
         "cta_label": "Get the complete system",
         "price_old": "$318",
         "price_new": "$99",
+        "cta_url": "",
         "trust_1": "30-Day Money-Back Guarantee",
         "trust_2": "Lifetime access",
         "subnote": "No deadline, no subscription, any device"
@@ -357,11 +501,13 @@
     "body_ready_cta": {
       "type": "body-ready-cta",
       "settings": {
+        "boxes_image": "shopify://shop_images/Frame_41_1b168e62-62f3-45f4-8160-7d1a9a0e23a5.png",
         "eyebrow": "Your body is ready to unlock",
         "headline": "The complete system is waiting",
         "price_old": "$318",
         "price_new": "$99",
         "cta_label": "Get the complete system",
+        "cta_url": "",
         "subnote": "Lifetime access · Any device · Start today."
       }
     },
@@ -421,6 +567,7 @@
         "buy_buttons",
         "description"
       ],
+      "disabled": true,
       "settings": {
         "full_width": true,
         "show_fixed_add_to_cart": true,
