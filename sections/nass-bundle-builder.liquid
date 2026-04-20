@@ -147,7 +147,7 @@
           </div>
 
           <div class="bb-card-title">CUSTOM BUNDLE BUILDER</div>
-          <p class="bb-card-subtitle">{{ section.settings.bb_card_subtitle | default: 'Programs + Shorts + Leggings + Tops' | escape }}</p>
+          <p class="bb-card-subtitle">Programs + Shorts + Leggings + Tops</p>
 
           {% if section.settings.bb_promo_banner_text != blank %}
             <div class="bb-promo-banner">
@@ -227,12 +227,10 @@
     <div class="bb-wizard-panel">
       <header class="bb-wizard-header" data-bb-wizard-header>
         <div class="bb-wizard-header-main">
-          {% unless section.settings.quick_bundle_mode %}
-            <div class="bb-wizard-progress" data-bb-progress>
-              <div class="bb-wizard-progress-bar" data-bb-progress-bar role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="6" aria-label="Step 1 of 6"></div>
-              <p class="bb-wizard-progress-text" data-bb-step-text>Step 1 of 6</p>
-            </div>
-          {% endunless %}
+          <div class="bb-wizard-progress" data-bb-progress>
+            <div class="bb-wizard-progress-bar" data-bb-progress-bar role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="6" aria-label="Step 1 of 6"></div>
+            <p class="bb-wizard-progress-text" data-bb-step-text>Step 1 of 6</p>
+          </div>
           <div class="bb-wizard-title" data-bb-wizard-title>Select programs</div>
         </div>
         <button type="button" class="bb-wizard-close" data-bb-close aria-label="Close">
@@ -241,7 +239,7 @@
       </header>
 
       <div class="bb-wizard-discount" data-bb-wizard-discount>
-        <span class="bb-wizard-discount-text">{{ section.settings.discount_promo_text | escape }}</span>
+        <span class="bb-wizard-discount-text">{{ section.settings.discount_promo_text | default: 'Get 60% off all clothing with 4 Programs Bundle!' | escape }}</span>
       </div>
 
       <div class="bb-wizard-content" data-bb-wizard-content>
@@ -261,7 +259,7 @@
         <div class="bb-wizard-footer-you-save" data-bb-footer-you-save></div>
         <div class="bb-wizard-footer-buttons">
           <button type="button" class="bb-wizard-btn bb-wizard-btn--back" data-bb-back disabled>Back</button>
-          <button type="button" class="bb-wizard-btn bb-wizard-btn--next" data-bb-next>{% if section.settings.quick_bundle_mode %}Checkout{% else %}Next{% endif %}</button>
+          <button type="button" class="bb-wizard-btn bb-wizard-btn--next" data-bb-next>Next</button>
         </div>
         <div class="bb-wizard-footer-secure-slot" data-bb-secure-footer-slot></div>
       </footer>
@@ -295,12 +293,12 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M2 14h4M10 8h4M18 16h4"/></svg>
             Size chart
           </button>
-          <div class="bb-variant-modal-qty" style="display:none;">
+          <div class="bb-variant-modal-qty">
             <button type="button" class="bb-variant-qty-btn" data-bb-variant-qty-minus aria-label="Decrease">−</button>
             <span class="bb-variant-qty-value" data-bb-variant-qty-value>1</span>
             <button type="button" class="bb-variant-qty-btn" data-bb-variant-qty-plus aria-label="Increase">+</button>
           </div>
-          <button type="button" class="bb-variant-modal-add" data-bb-variant-modal-add>Checkout</button>
+          <button type="button" class="bb-variant-modal-add" data-bb-variant-modal-add>Add to bundle <span aria-hidden="true">+</span></button>
         </div>
       </div>
     </div>
@@ -416,9 +414,8 @@
         {%- comment -%} Program pack product ID: required for mutual exclusion on step 1 (Pack vs other programs). Set in section or in the programs-step block. {%- endcomment -%}
         programPackProductId: {%- assign pp_id = '' -%}{%- if section.settings.program_pack_product -%}{%- assign pp_id = section.settings.program_pack_product.id -%}{%- endif -%}{%- for b in step_blocks -%}{%- if b.settings.is_programs_step and b.settings.program_pack_product -%}{%- assign pp_id = b.settings.program_pack_product.id -%}{%- break -%}{%- endif -%}{%- endfor -%}{%- if pp_id != blank -%}{{ pp_id | json }}{%- else -%}null{%- endif -%},
         discountCode: {{ section.settings.discount_code | json }},
-        discountPromoText: {{ section.settings.discount_promo_text | json }},
-        discountAppliedText: {{ section.settings.discount_applied_text | json }},
-        quickBundleMode: {{ section.settings.quick_bundle_mode | json }},
+        discountPromoText: {{ section.settings.discount_promo_text | default: 'Get 60% off all clothing with 4 Programs Bundle!' | json }},
+        discountAppliedText: {{ section.settings.discount_applied_text | default: '60% off all clothing applied!' | json }},
         checkoutUrl: {{ routes.root_url | append: '/' | append: 'checkout' | replace: '//', '/' | json }},
         currency: {{ cart.currency | default: shop.currency | json }},
         shopCurrency: {{ shop.currency | json }},
@@ -3570,18 +3567,6 @@
       "id": "bb_description",
       "label": "Description text",
       "default": "Mix programs, shorts, and tops. Get 60% off all clothing when you add the 4 Programs Bundle."
-    },
-    {
-      "type": "text",
-      "id": "bb_card_subtitle",
-      "label": "Card subtitle text",
-      "default": "Programs + Shorts + Leggings + Tops"
-    },
-    {
-      "type": "checkbox",
-      "id": "quick_bundle_mode",
-      "label": "Quick bundle mode (hide progress, checkout button)",
-      "default": false
     },
     {
       "type": "text",
