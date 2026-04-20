@@ -757,6 +757,7 @@
         },
         "bundle_step_bb96UU": {
           "type": "bundle_step",
+          "disabled": true,
           "settings": {
             "title": "Workout Equipment",
             "collection": "bundle-equipment-copy",
