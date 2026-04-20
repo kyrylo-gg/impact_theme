@@ -609,7 +609,7 @@
           "type": "bundle_step",
           "settings": {
             "title": "Select programs",
-            "collection": "bundle_bundle",
+            "collection": "bundle_bundle-copy",
             "is_programs_step": true,
             "program_pack_product": "vip-bundle"
           }
