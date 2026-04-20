@@ -1689,6 +1689,9 @@
           if (discountCode && getHasProgramPack()) {
             checkoutHref += (checkoutUrl.indexOf('?') >= 0 ? '&' : '?') + 'discount=' + encodeURIComponent(discountCode);
           }
+          if (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+            checkoutHref += (checkoutHref.indexOf('?') >= 0 ? '&' : '?') + 'skip_shop_pay=true';
+          }
           window.location.href = checkoutHref;
         })
         .catch(function() {
