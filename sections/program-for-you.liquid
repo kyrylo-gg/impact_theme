@@ -1,0 +1,171 @@
+<section class="program-for-you" id="program-for-you-{{ section.id }}">
+  <div class="program-for-you__container">
+    <h2 class="program-for-you__heading">
+      <span class="program-for-you__heading-lead">{{ section.settings.heading_lead | escape }}</span>
+      <span class="program-for-you__heading-accent"> {{ section.settings.heading_accent | escape }}</span>
+    </h2>
+
+    <p class="program-for-you__label">{{ section.settings.yes_label | escape }}</p>
+
+    {% liquid
+      assign yes_items = section.blocks | where: 'type', 'yes_item'
+      assign no_items = section.blocks | where: 'type', 'no_item'
+    %}
+
+    <div class="program-for-you__top-grid">
+      <div class="program-for-you__yes-grid">
+        {% for block in yes_items %}
+          <article class="program-for-you__card" {{ block.shopify_attributes }}>
+            <span class="program-for-you__icon" aria-hidden="true">✅</span>
+            <p class="program-for-you__text">{{ block.settings.text | escape }}</p>
+          </article>
+        {% endfor %}
+      </div>
+
+      <div class="program-for-you__photo-card">
+        {% if section.settings.photo != blank %}
+          {{
+            section.settings.photo
+            | image_url: width: 1000
+            | image_tag:
+              class: 'program-for-you__photo',
+              loading: 'lazy',
+              alt: 'Program preview'
+          }}
+        {% endif %}
+      </div>
+    </div>
+
+    <p class="program-for-you__label">{{ section.settings.no_label | escape }}</p>
+    <div class="program-for-you__no-grid">
+      {% for block in no_items %}
+        <article class="program-for-you__card" {{ block.shopify_attributes }}>
+          <span class="program-for-you__icon" aria-hidden="true">❌</span>
+          <p class="program-for-you__text">{{ block.settings.text | escape }}</p>
+        </article>
+      {% endfor %}
+    </div>
+
+    <div class="program-for-you__closing rte">{{ section.settings.closing }}</div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .program-for-you { padding: 40px 16px; }
+  .program-for-you__container { max-width: 1184px; margin: 0 auto; }
+  .program-for-you__heading {
+    margin: 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-size: clamp(24px, 3.4vw, 40px);
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+  }
+  .program-for-you__heading-lead { color: #000; font-weight: 600; }
+  .program-for-you__heading-accent { color: #0038ff; font-weight: 900; }
+  .program-for-you__label {
+    margin: 16px 0 10px;
+    color: #000;
+    text-align: center;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: clamp(16px, 2vw, 24px);
+    font-weight: 500;
+  }
+  .program-for-you__top-grid { display: grid; gap: 8px; }
+  .program-for-you__yes-grid { display: grid; gap: 8px; }
+  .program-for-you__no-grid { display: grid; gap: 8px; margin: 0 auto; max-width: 984px; }
+  .program-for-you__card {
+    border-radius: 30px;
+    background: #f5f5f5;
+    padding: 24px 20px;
+    text-align: center;
+  }
+  .program-for-you__icon { font-size: 21px; line-height: 1; }
+  .program-for-you__text {
+    margin: 10px 0 0;
+    color: #000;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: clamp(14px, 1.7vw, 18px);
+    line-height: 1.35;
+    font-weight: 500;
+  }
+  .program-for-you__photo-card {
+    background: #f5f5f5;
+    border-radius: 30px;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+  }
+  .program-for-you__photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .program-for-you__closing {
+    margin-top: 14px;
+    text-align: center;
+    color: #000;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: clamp(16px, 2vw, 24px);
+    line-height: 1.3;
+    font-weight: 800;
+  }
+  .program-for-you__closing p { margin: 0; }
+  @media (min-width: 768px) {
+    .program-for-you { padding: 64px 32px; }
+    .program-for-you__top-grid { grid-template-columns: minmax(0, 694fr) minmax(0, 482fr); gap: 12px; }
+    .program-for-you__yes-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .program-for-you__no-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .program-for-you__card { padding: 28px 26px; }
+    .program-for-you__icon { font-size: 25px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Program For You",
+  "settings": [
+    { "type": "text", "id": "heading_lead", "label": "Heading lead", "default": "This program" },
+    { "type": "text", "id": "heading_accent", "label": "Heading accent", "default": "is for you if" },
+    { "type": "text", "id": "yes_label", "label": "Yes section label", "default": "This is for you:" },
+    { "type": "text", "id": "no_label", "label": "No section label", "default": "This is not for you:" },
+    {
+      "type": "richtext",
+      "id": "closing",
+      "label": "Closing line",
+      "default": "<p>If these points sound like you, this is exactly where your progress starts.</p>"
+    },
+    { "type": "image_picker", "id": "photo", "label": "Photo" }
+  ],
+  "blocks": [
+    {
+      "type": "yes_item",
+      "name": "Yes item",
+      "limit": 6,
+      "settings": [{ "type": "text", "id": "text", "label": "Text" }]
+    },
+    {
+      "type": "no_item",
+      "name": "No item",
+      "limit": 3,
+      "settings": [{ "type": "text", "id": "text", "label": "Text" }]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Program For You",
+      "blocks": [
+        { "type": "yes_item" },
+        { "type": "yes_item" },
+        { "type": "yes_item" },
+        { "type": "yes_item" },
+        { "type": "yes_item" },
+        { "type": "yes_item" },
+        { "type": "no_item" },
+        { "type": "no_item" },
+        { "type": "no_item" }
+      ]
+    }
+  ]
+}
+{% endschema %}

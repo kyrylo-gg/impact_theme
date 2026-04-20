@@ -1,0 +1,451 @@
+<section class="hips-hero-banner" id="hips-hero-banner-{{ section.id }}">
+  <div class="hips-hero-banner__container">
+    <div class="hips-hero-banner__card">
+      {% liquid
+        assign desktop_video = section.settings.video_desktop
+        assign mobile_video = section.settings.video_mobile
+        if mobile_video == blank
+          assign mobile_video = desktop_video
+        endif
+      %}
+
+      {% if desktop_video != blank %}
+        {{
+          desktop_video
+          | video_tag:
+            class: 'hips-hero-banner__video hips-hero-banner__video--desktop',
+            autoplay: true,
+            muted: true,
+            loop: true,
+            controls: false,
+            preload: 'metadata',
+            playsinline: true
+        }}
+      {% endif %}
+
+      {% if mobile_video != blank %}
+        {{
+          mobile_video
+          | video_tag:
+            class: 'hips-hero-banner__video hips-hero-banner__video--mobile',
+            autoplay: true,
+            muted: true,
+            loop: true,
+            controls: false,
+            preload: 'metadata',
+            playsinline: true
+        }}
+      {% endif %}
+
+      <div
+        class="hips-hero-banner__overlay hips-hero-banner__overlay--flat"
+        style="--overlay-mobile-opacity: {{ section.settings.overlay_opacity_mobile | times: 0.01 }}; --overlay-desktop-opacity: {{ section.settings.overlay_opacity_desktop | times: 0.01 }};"
+        aria-hidden="true"
+      ></div>
+      <div class="hips-hero-banner__overlay hips-hero-banner__overlay--gradient" aria-hidden="true"></div>
+
+      <div class="hips-hero-banner__content">
+        {% if section.settings.tag_text != blank %}
+          <p class="hips-hero-banner__tag">{{ section.settings.tag_text | escape }}</p>
+        {% endif %}
+
+        <div class="hips-hero-banner__center">
+          {% if section.settings.eyebrow != blank %}
+            <p class="hips-hero-banner__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+          {% endif %}
+
+          {% if section.settings.heading_main != blank or section.settings.heading_accent != blank %}
+            <h1 class="hips-hero-banner__title">
+              {% if section.settings.heading_main != blank %}
+                <span>{{ section.settings.heading_main | escape }}</span>
+              {% endif %}
+              {% if section.settings.heading_accent != blank %}
+                <span class="hips-hero-banner__title-accent"> {{ section.settings.heading_accent | escape }}</span>
+              {% endif %}
+            </h1>
+          {% endif %}
+
+          <span class="hips-hero-banner__underline" aria-hidden="true"></span>
+
+          {% if section.settings.subcopy != blank %}
+            <div class="hips-hero-banner__subcopy rte">{{ section.settings.subcopy }}</div>
+          {% endif %}
+        </div>
+
+        <div class="hips-hero-banner__bottom" id="buy">
+          {% if section.settings.price_old != blank or section.settings.price_new != blank %}
+            <p class="hips-hero-banner__price">
+              {% if section.settings.price_old != blank %}
+                <span class="hips-hero-banner__price-old">{{ section.settings.price_old | escape }}</span>
+              {% endif %}
+              {% if section.settings.price_new != blank %}
+                <span class="hips-hero-banner__price-new">{{ section.settings.price_new | escape }}</span>
+              {% endif %}
+            </p>
+          {% endif %}
+
+          {% if section.settings.cta_label_main != blank or section.settings.cta_label_accent != blank %}
+            <a class="hips-hero-banner__cta" href="{{ section.settings.cta_url | default: '#buy' }}">
+              {% if section.settings.cta_label_main != blank %}
+                <span>{{ section.settings.cta_label_main | escape }}</span>
+              {% endif %}
+              {% if section.settings.cta_label_accent != blank %}
+                <span class="hips-hero-banner__cta-accent"> {{ section.settings.cta_label_accent | escape }}</span>
+              {% endif %}
+              <span class="hips-hero-banner__cta-arrow" aria-hidden="true">-></span>
+            </a>
+          {% endif %}
+
+          {% if section.settings.trust_line != blank %}
+            <p class="hips-hero-banner__trust">{{ section.settings.trust_line | escape }}</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .hips-hero-banner {
+    width: 100%;
+    padding: 24px 16px;
+  }
+
+  .hips-hero-banner__container {
+    max-width: 1184px;
+    margin: 0 auto;
+  }
+
+  .hips-hero-banner__card {
+    position: relative;
+    border-radius: 30px;
+    overflow: hidden;
+    aspect-ratio: 335 / 560;
+    background: #000;
+  }
+
+  .hips-hero-banner__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hips-hero-banner__video--desktop {
+    display: none;
+  }
+
+  .hips-hero-banner__overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .hips-hero-banner__overlay--flat {
+    background: #000;
+    opacity: var(--overlay-mobile-opacity, 0.3);
+    z-index: 1;
+  }
+
+  .hips-hero-banner__overlay--gradient {
+    display: none;
+    z-index: 2;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+  }
+
+  .hips-hero-banner__content {
+    position: relative;
+    z-index: 3;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    color: #fff;
+  }
+
+  .hips-hero-banner__tag {
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #fbff00;
+    color: #000;
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: clamp(14px, 2.2vw, 18px);
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  .hips-hero-banner__center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hips-hero-banner__eyebrow {
+    margin: 0;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: clamp(16px, 2.8vw, 24px);
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  .hips-hero-banner__title {
+    margin: 0;
+    text-transform: uppercase;
+    font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-size: clamp(24px, 3.6vw, 35px);
+    font-weight: 600;
+    line-height: 1.04;
+    letter-spacing: 0.02em;
+  }
+
+  .hips-hero-banner__title-accent {
+    color: #faff00;
+    font-weight: 900;
+  }
+
+  .hips-hero-banner__underline {
+    display: none;
+    width: 64px;
+    height: 4px;
+    border-radius: 999px;
+    background: #faff00;
+  }
+
+  .hips-hero-banner__subcopy {
+    margin: 0;
+    max-width: 700px;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: clamp(16px, 2.2vw, 21px);
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  .hips-hero-banner__subcopy p {
+    margin: 0;
+  }
+
+  .hips-hero-banner__bottom {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .hips-hero-banner__price {
+    margin: 0;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 10px;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: clamp(18px, 2.3vw, 21px);
+    line-height: 1.2;
+  }
+
+  .hips-hero-banner__price-old {
+    text-decoration: line-through;
+    opacity: 0.9;
+    font-weight: 500;
+  }
+
+  .hips-hero-banner__price-new {
+    color: #faff00;
+    font-weight: 800;
+  }
+
+  .hips-hero-banner__cta {
+    width: 100%;
+    min-height: 60px;
+    border-radius: 999px;
+    background: #000;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    text-align: center;
+    text-decoration: none;
+    padding: 12px 20px;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: clamp(16px, 2.1vw, 18px);
+    font-weight: 800;
+    line-height: 1.2;
+    transition: transform 0.2s ease;
+  }
+
+  .hips-hero-banner__cta:hover {
+    transform: scale(1.02);
+  }
+
+  .hips-hero-banner__cta-accent {
+    color: #faff00;
+  }
+
+  .hips-hero-banner__cta-arrow {
+    margin-left: 2px;
+  }
+
+  .hips-hero-banner__trust {
+    margin: 0;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: clamp(14px, 1.9vw, 16px);
+    line-height: 1.2;
+    font-weight: 500;
+  }
+
+  @media (min-width: 768px) {
+    .hips-hero-banner {
+      padding: 24px 32px;
+    }
+
+    .hips-hero-banner__card {
+      aspect-ratio: 1184 / 570;
+    }
+
+    .hips-hero-banner__video--desktop {
+      display: block;
+    }
+
+    .hips-hero-banner__video--mobile {
+      display: none;
+    }
+
+    .hips-hero-banner__overlay--flat {
+      opacity: var(--overlay-desktop-opacity, 0.1);
+    }
+
+    .hips-hero-banner__overlay--gradient {
+      display: block;
+    }
+
+    .hips-hero-banner__content {
+      padding: 40px 24px;
+    }
+
+    .hips-hero-banner__underline {
+      display: inline-block;
+    }
+
+    .hips-hero-banner__bottom {
+      max-width: none;
+    }
+
+    .hips-hero-banner__cta {
+      width: auto;
+      min-width: 295px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .hips-hero-banner__video--desktop {
+      display: none;
+    }
+
+    .hips-hero-banner__video--mobile {
+      display: block;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Hips Hero Banner",
+  "class": "hips-hero-banner-wrapper",
+  "tag": "section",
+  "settings": [
+    { "type": "header", "content": "Background" },
+    { "type": "video", "id": "video_desktop", "label": "Desktop video" },
+    { "type": "video", "id": "video_mobile", "label": "Mobile video" },
+    {
+      "type": "range",
+      "id": "overlay_opacity_desktop",
+      "label": "Desktop overlay opacity (%)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity_mobile",
+      "label": "Mobile overlay opacity (%)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 30
+    },
+    { "type": "header", "content": "Top tag" },
+    {
+      "type": "text",
+      "id": "tag_text",
+      "label": "Tag text",
+      "default": "Nastya Nass · Hip Mobility Program"
+    },
+    { "type": "header", "content": "Headline" },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Your body can move like this"
+    },
+    {
+      "type": "text",
+      "id": "heading_main",
+      "label": "Heading main",
+      "default": "Let me show you"
+    },
+    {
+      "type": "text",
+      "id": "heading_accent",
+      "label": "Heading accent",
+      "default": "where to start"
+    },
+    {
+      "type": "richtext",
+      "id": "subcopy",
+      "label": "Subcopy",
+      "default": "<p><strong>4 weeks</strong> to unlock your hips, move without pain, and feel amazing in your body.</p>"
+    },
+    { "type": "header", "content": "Pricing" },
+    { "type": "text", "id": "price_old", "label": "Old price", "default": "$318" },
+    { "type": "text", "id": "price_new", "label": "New price", "default": "$99" },
+    { "type": "header", "content": "CTA" },
+    {
+      "type": "text",
+      "id": "cta_label_main",
+      "label": "CTA label",
+      "default": "Get the"
+    },
+    {
+      "type": "text",
+      "id": "cta_label_accent",
+      "label": "CTA accent label",
+      "default": "complete system"
+    },
+    { "type": "url", "id": "cta_url", "label": "CTA URL" },
+    { "type": "header", "content": "Trust line" },
+    {
+      "type": "text",
+      "id": "trust_line",
+      "label": "Trust line",
+      "default": "40,000+ students · Lifetime access · No equipment · Any device"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hips Hero Banner"
+    }
+  ]
+}
+{% endschema %}

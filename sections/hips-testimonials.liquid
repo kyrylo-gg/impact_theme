@@ -1,0 +1,193 @@
+<section class="hips-testimonials" id="hips-testimonials-{{ section.id }}">
+  <div class="hips-testimonials__container">
+    <h2 class="hips-testimonials__heading">
+      <span class="hips-testimonials__heading-lead">{{ section.settings.heading_lead | escape }}</span>
+      <span class="hips-testimonials__heading-accent"> {{ section.settings.heading_accent | escape }}</span>
+    </h2>
+    <div class="hips-testimonials__subheading rte">{{ section.settings.subheading }}</div>
+
+    <div class="hips-testimonials__grid">
+      {% for block in section.blocks %}
+        <article class="hips-testimonials__card" {{ block.shopify_attributes }}>
+          <div class="hips-testimonials__top">
+            {% if block.settings.avatar != blank %}
+              {{
+                block.settings.avatar
+                | image_url: width: 120
+                | image_tag:
+                  class: 'hips-testimonials__avatar',
+                  loading: 'lazy',
+                  alt: block.settings.name
+              }}
+            {% endif %}
+            <div class="hips-testimonials__meta">
+              <p class="hips-testimonials__name">{{ block.settings.name | escape }}</p>
+              <p class="hips-testimonials__role">{{ block.settings.role | escape }}</p>
+              <p class="hips-testimonials__stars" aria-label="5 stars">★★★★★</p>
+            </div>
+          </div>
+
+          <div class="hips-testimonials__quote rte">{{ block.settings.quote }}</div>
+          <div class="hips-testimonials__divider"></div>
+
+          <div class="hips-testimonials__info">
+            <p class="hips-testimonials__info-label">She came with:</p>
+            <div class="hips-testimonials__info-body rte">{{ block.settings.came_with }}</div>
+          </div>
+
+          <div class="hips-testimonials__info">
+            <p class="hips-testimonials__info-label">What changed:</p>
+            <div class="hips-testimonials__info-body rte">{{ block.settings.changed }}</div>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+
+    <div class="hips-testimonials__footer rte">{{ section.settings.footer_line }}</div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .hips-testimonials { padding: 40px 16px; }
+  .hips-testimonials__container { max-width: 1183px; margin: 0 auto; }
+  .hips-testimonials__heading {
+    margin: 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-size: clamp(24px, 3.4vw, 40px);
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+  }
+  .hips-testimonials__heading-lead { color: #000; font-weight: 600; }
+  .hips-testimonials__heading-accent { color: #0038ff; font-weight: 900; }
+  .hips-testimonials__subheading {
+    margin-top: 12px;
+    text-align: center;
+    color: #000;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: clamp(16px, 2vw, 24px);
+    font-weight: 800;
+    line-height: 1.35;
+  }
+  .hips-testimonials__subheading p { margin: 0; }
+  .hips-testimonials__grid { margin-top: 16px; display: grid; gap: 16px; }
+  .hips-testimonials__card {
+    border: 1px solid #f0f0f0;
+    border-radius: 30px;
+    background: #fff;
+    padding: 20px;
+  }
+  .hips-testimonials__top { display: flex; gap: 12px; align-items: center; }
+  .hips-testimonials__avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    object-fit: cover;
+  }
+  .hips-testimonials__name {
+    margin: 0;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: clamp(18px, 2vw, 21px);
+    font-weight: 800;
+    color: #000;
+    line-height: 1.2;
+  }
+  .hips-testimonials__role {
+    margin: 2px 0 0;
+    color: #666;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: clamp(14px, 1.6vw, 16px);
+    font-weight: 500;
+    line-height: 1.2;
+  }
+  .hips-testimonials__stars { margin: 4px 0 0; color: #facc15; font-size: 16px; line-height: 1; }
+  .hips-testimonials__quote {
+    margin-top: 12px;
+    color: #000;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: clamp(16px, 1.8vw, 18px);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  .hips-testimonials__quote p { margin: 0; }
+  .hips-testimonials__divider { margin: 12px 0; height: 1px; background: rgba(0, 0, 0, 0.06); }
+  .hips-testimonials__info {
+    border-radius: 10px;
+    background: rgba(249, 234, 218, 0.5);
+    padding: 16px;
+  }
+  .hips-testimonials__info + .hips-testimonials__info { margin-top: 10px; }
+  .hips-testimonials__info-label {
+    margin: 0;
+    color: #000;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+  .hips-testimonials__info-body {
+    margin-top: 6px;
+    color: rgba(0, 0, 0, 0.75);
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.35;
+    white-space: pre-line;
+  }
+  .hips-testimonials__info-body p { margin: 0; }
+  .hips-testimonials__footer {
+    margin-top: 16px;
+    text-align: center;
+    color: #000;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: clamp(16px, 1.9vw, 21px);
+    font-weight: 500;
+    line-height: 1.3;
+  }
+  .hips-testimonials__footer p { margin: 0; }
+  @media (min-width: 768px) {
+    .hips-testimonials { padding: 64px 32px; }
+    .hips-testimonials__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+    .hips-testimonials__card { padding: 24px; }
+    .hips-testimonials__avatar { width: 52px; height: 52px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Hips Testimonials",
+  "settings": [
+    { "type": "text", "id": "heading_lead", "label": "Heading lead", "default": "What happens when" },
+    { "type": "text", "id": "heading_accent", "label": "Heading accent", "default": "your hips actually unlock" },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "<p>From women who started exactly where you are.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "footer_line",
+      "label": "Footer line",
+      "default": "<p>40,000+ students. Women in 50+ countries. Lifetime access.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "limit": 3,
+      "settings": [
+        { "type": "image_picker", "id": "avatar", "label": "Avatar" },
+        { "type": "text", "id": "name", "label": "Name" },
+        { "type": "text", "id": "role", "label": "Role" },
+        { "type": "richtext", "id": "quote", "label": "Quote" },
+        { "type": "richtext", "id": "came_with", "label": "She came with" },
+        { "type": "richtext", "id": "changed", "label": "What changed" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Hips Testimonials", "blocks": [{ "type": "testimonial" }, { "type": "testimonial" }, { "type": "testimonial" }] }]
+}
+{% endschema %}

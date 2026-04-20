@@ -1,0 +1,334 @@
+<section class="about-founder" id="about-founder-{{ section.id }}" style="--about-founder-accent: {{ section.settings.accent_color }}; --about-founder-highlight: {{ section.settings.highlight_color }};">
+  <div class="about-founder__container">
+    <h2 class="about-founder__heading">
+      <span class="about-founder__heading-lead">{{ section.settings.heading_lead | escape }}</span>
+      <span class="about-founder__heading-accent"> {{ section.settings.heading_accent | escape }}</span>
+    </h2>
+
+    <div class="about-founder__grid">
+      <div class="about-founder__main-wrap">
+        <article class="about-founder__main-card">
+          {% if section.settings.main_image != blank %}
+            {{
+              section.settings.main_image
+              | image_url: width: 1400
+              | image_tag:
+                class: 'about-founder__image',
+                loading: 'lazy',
+                alt: 'Nastya Nass'
+            }}
+          {% endif %}
+
+          <div class="about-founder__main-gradient" aria-hidden="true"></div>
+          <span class="about-founder__peach" aria-hidden="true">🍑</span>
+          <div class="about-founder__blue-label">{{ section.settings.blue_label | escape }}</div>
+          <div class="about-founder__quote-desktop rte">{{ section.settings.quote }}</div>
+        </article>
+
+        <div class="about-founder__quote-mobile rte">{{ section.settings.quote }}</div>
+      </div>
+
+      <article class="about-founder__stats-card">
+        {% if section.settings.stats_image != blank %}
+          {{
+            section.settings.stats_image
+            | image_url: width: 900
+            | image_tag:
+              class: 'about-founder__image',
+              loading: 'lazy',
+              alt: 'Program community'
+          }}
+        {% endif %}
+        <div class="about-founder__stats-gradient" aria-hidden="true"></div>
+
+        <div class="about-founder__stats-cluster">
+          <div class="about-founder__stat about-founder__stat--glass">
+            <p class="about-founder__stat-value">{{ section.settings.stat_1_value | escape }}</p>
+            <p class="about-founder__stat-label">{{ section.settings.stat_1_label | escape }}</p>
+          </div>
+          <div class="about-founder__stat about-founder__stat--highlight">
+            <p class="about-founder__stat-value">{{ section.settings.stat_2_value | escape }}</p>
+            <p class="about-founder__stat-label">{{ section.settings.stat_2_label | escape }}</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .about-founder {
+    padding: 40px 16px;
+  }
+
+  .about-founder__container {
+    max-width: 1184px;
+    margin: 0 auto;
+  }
+
+  .about-founder__heading {
+    margin: 0 0 20px;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-size: clamp(24px, 3.4vw, 40px);
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+  }
+
+  .about-founder__heading-lead {
+    font-weight: 600;
+    color: #000;
+  }
+
+  .about-founder__heading-accent {
+    color: var(--about-founder-accent, #0038ff);
+    font-weight: 900;
+  }
+
+  .about-founder__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .about-founder__main-card,
+  .about-founder__stats-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 30px;
+    background: #000;
+  }
+
+  .about-founder__main-card {
+    aspect-ratio: 335 / 500;
+  }
+
+  .about-founder__stats-card {
+    aspect-ratio: 335 / 460;
+  }
+
+  .about-founder__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .about-founder__main-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 55%);
+  }
+
+  .about-founder__stats-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 55%);
+  }
+
+  .about-founder__peach {
+    position: absolute;
+    left: 14px;
+    top: 14px;
+    font-size: 44px;
+    transform: rotate(15deg);
+  }
+
+  .about-founder__blue-label {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    border-radius: 30px;
+    background: var(--about-founder-accent, #0038ff);
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-size: clamp(18px, 2.1vw, 21px);
+    line-height: 1.1;
+    font-weight: 600;
+    padding: 14px 16px;
+  }
+
+  .about-founder__quote-desktop {
+    display: none;
+  }
+
+  .about-founder__quote-mobile {
+    margin-top: 12px;
+    border-radius: 30px;
+    background: #f5f5f5;
+    padding: 16px;
+    color: #000;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.35;
+    font-weight: 500;
+  }
+
+  .about-founder__quote-mobile p,
+  .about-founder__quote-desktop p {
+    margin: 0;
+  }
+
+  .about-founder__stats-cluster {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .about-founder__stat {
+    border-radius: 30px;
+    padding: 12px 16px;
+    max-width: 280px;
+  }
+
+  .about-founder__stat--glass {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+  }
+
+  .about-founder__stat--highlight {
+    color: #000;
+    background: var(--about-founder-highlight, #faff00);
+    margin-bottom: -8px;
+  }
+
+  .about-founder__stat-value {
+    margin: 0;
+    font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-size: 26px;
+    line-height: 1;
+    font-weight: 900;
+  }
+
+  .about-founder__stat-label {
+    margin: 4px 0 0;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.2;
+    font-weight: 600;
+  }
+
+  @media (min-width: 768px) {
+    .about-founder {
+      padding: 64px 32px;
+    }
+
+    .about-founder__heading {
+      margin-bottom: 24px;
+    }
+
+    .about-founder__grid {
+      grid-template-columns: minmax(0, 795fr) minmax(0, 381fr);
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .about-founder__main-card,
+    .about-founder__stats-card {
+      aspect-ratio: auto;
+      min-height: 520px;
+    }
+
+    .about-founder__main-gradient {
+      background: linear-gradient(to right, rgba(0, 0, 0, 0.62) 0%, rgba(0, 0, 0, 0) 55%);
+    }
+
+    .about-founder__peach {
+      left: 20px;
+      top: 18px;
+      font-size: 60px;
+    }
+
+    .about-founder__blue-label {
+      left: 20px;
+      right: auto;
+      bottom: 20px;
+      width: min(88%, 440px);
+      text-align: left;
+      padding: 14px 18px;
+    }
+
+    .about-founder__quote-mobile {
+      display: none;
+    }
+
+    .about-founder__quote-desktop {
+      display: block;
+      position: absolute;
+      right: 20px;
+      bottom: 20px;
+      max-width: 360px;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(16px);
+      padding: 16px 18px;
+      color: #fff;
+      font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.35;
+      font-weight: 500;
+    }
+
+    .about-founder__stats-cluster {
+      left: 20px;
+      right: 20px;
+      bottom: 20px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "About Founder",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading_lead",
+      "label": "Heading lead",
+      "default": "I have spent my whole life learning"
+    },
+    {
+      "type": "text",
+      "id": "heading_accent",
+      "label": "Heading accent",
+      "default": "how hips move"
+    },
+    { "type": "image_picker", "id": "main_image", "label": "Main card image" },
+    {
+      "type": "text",
+      "id": "blue_label",
+      "label": "Blue label text",
+      "default": "This is the program I wish I had given everyone first"
+    },
+    {
+      "type": "richtext",
+      "id": "quote",
+      "label": "Founder quote",
+      "default": "<p>I spent years helping women fix pain and movement limits after they had already worked through tougher plans. This program is the foundation I wish they had first.</p>"
+    },
+    { "type": "image_picker", "id": "stats_image", "label": "Stats card image" },
+    { "type": "text", "id": "stat_1_value", "label": "Stat 1 value", "default": "40K+" },
+    {
+      "type": "text",
+      "id": "stat_1_label",
+      "label": "Stat 1 label",
+      "default": "students across all programs"
+    },
+    { "type": "text", "id": "stat_2_value", "label": "Stat 2 value", "default": "6M+" },
+    { "type": "text", "id": "stat_2_label", "label": "Stat 2 label", "default": "followers" },
+    { "type": "color", "id": "accent_color", "label": "Heading accent color", "default": "#0038FF" },
+    { "type": "color", "id": "highlight_color", "label": "Highlight badge color", "default": "#FAFF00" }
+  ],
+  "presets": [{ "name": "About Founder" }]
+}
+{% endschema %}

@@ -1,0 +1,304 @@
+<section class="program-contents" id="program-contents-{{ section.id }}">
+  <div class="program-contents__container">
+    <h2 class="program-contents__heading">
+      <span class="program-contents__heading-lead">{{ section.settings.heading_lead | escape }}</span>
+      <span class="program-contents__heading-accent"> {{ section.settings.heading_accent | escape }}</span>
+    </h2>
+    <p class="program-contents__subheading">{{ section.settings.subheading | escape }}</p>
+  </div>
+
+  <div class="program-contents__scroller-wrap">
+    <div class="program-contents__scroller" data-program-scroller>
+      {% for block in section.blocks %}
+        <article class="program-contents__card" {{ block.shopify_attributes }} data-program-card>
+          {% if block.settings.image != blank %}
+            {{
+              block.settings.image
+              | image_url: width: 1000
+              | image_tag:
+                class: 'program-contents__image',
+                loading: 'lazy',
+                alt: block.settings.title
+            }}
+          {% endif %}
+          <div class="program-contents__gradient" aria-hidden="true"></div>
+
+          {% if block.settings.badge != blank %}
+            <div class="program-contents__badge">
+              <span class="program-contents__badge-value">{{ block.settings.badge | escape }}</span>
+              <span>each</span>
+            </div>
+          {% endif %}
+
+          <div class="program-contents__text">
+            <h3 class="program-contents__card-title">{{ block.settings.title | escape }}</h3>
+            <p class="program-contents__card-body">{{ block.settings.body | escape }}</p>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="program-contents__indicator" data-program-indicator>
+    {% for block in section.blocks %}
+      <button
+        type="button"
+        class="program-contents__dot{% if forloop.first %} is-active{% endif %}"
+        data-program-dot="{{ forloop.index0 }}"
+        aria-label="Go to card {{ forloop.index }}"
+      ></button>
+    {% endfor %}
+  </div>
+</section>
+
+<script>
+  (() => {
+    const section = document.getElementById('program-contents-{{ section.id }}');
+    if (!section) return;
+    const scroller = section.querySelector('[data-program-scroller]');
+    const cards = section.querySelectorAll('[data-program-card]');
+    const dots = section.querySelectorAll('[data-program-dot]');
+    if (!scroller || !cards.length || !dots.length) return;
+
+    const setActive = (index) => {
+      dots.forEach((dot, i) => dot.classList.toggle('is-active', i === index));
+    };
+
+    const getIndex = () => {
+      const cardWidth = cards[0].getBoundingClientRect().width + 16;
+      if (!cardWidth) return 0;
+      return Math.max(0, Math.min(cards.length - 1, Math.round(scroller.scrollLeft / cardWidth)));
+    };
+
+    let ticking = false;
+    scroller.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(() => {
+        setActive(getIndex());
+        ticking = false;
+      });
+    });
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        cards[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+      });
+    });
+  })();
+</script>
+
+{% stylesheet %}
+  .program-contents {
+    padding: 40px 0;
+  }
+
+  .program-contents__container {
+    max-width: 1184px;
+    margin: 0 auto;
+    padding: 0 16px;
+    text-align: center;
+  }
+
+  .program-contents__heading {
+    margin: 0;
+    text-transform: uppercase;
+    font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-size: clamp(24px, 3.4vw, 40px);
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+  }
+
+  .program-contents__heading-lead {
+    color: #000;
+    font-weight: 600;
+  }
+
+  .program-contents__heading-accent {
+    color: #0038ff;
+    font-weight: 900;
+  }
+
+  .program-contents__subheading {
+    margin: 12px 0 0;
+    color: #000;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: clamp(16px, 2.1vw, 24px);
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  .program-contents__scroller-wrap {
+    margin-top: 22px;
+  }
+
+  .program-contents__scroller {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 0 16px;
+    scrollbar-width: none;
+  }
+
+  .program-contents__scroller::-webkit-scrollbar {
+    display: none;
+  }
+
+  .program-contents__card {
+    position: relative;
+    flex: 0 0 78%;
+    scroll-snap-align: start;
+    border-radius: 30px;
+    overflow: hidden;
+    background: #000;
+    aspect-ratio: 300 / 457;
+  }
+
+  .program-contents__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .program-contents__gradient {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 60%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+  }
+
+  .program-contents__badge {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    border-radius: 999px;
+    background: #000;
+    color: #fff;
+    padding: 7px 12px;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 4px;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: clamp(14px, 1.7vw, 18px);
+    font-weight: 800;
+  }
+
+  .program-contents__badge-value {
+    color: #faff00;
+  }
+
+  .program-contents__text {
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: 14px;
+  }
+
+  .program-contents__card-title {
+    margin: 0;
+    text-transform: uppercase;
+    color: #faff00;
+    font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-size: clamp(20px, 2.1vw, 26px);
+    font-weight: 600;
+    line-height: 1.05;
+  }
+
+  .program-contents__card-body {
+    margin: 8px 0 0;
+    color: #fff;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: clamp(15px, 1.7vw, 18px);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .program-contents__indicator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  .program-contents__dot {
+    width: 20px;
+    height: 3px;
+    border: 0;
+    padding: 0;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+  }
+
+  .program-contents__dot.is-active {
+    width: 45px;
+    background: rgba(0, 0, 0, 0.6);
+  }
+
+  @media (min-width: 640px) {
+    .program-contents__card {
+      flex-basis: 60%;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .program-contents {
+      padding: 64px 0;
+    }
+
+    .program-contents__container {
+      padding: 0 32px;
+    }
+
+    .program-contents__scroller {
+      max-width: 1184px;
+      margin: 0 auto;
+      padding: 0 32px;
+      gap: 20px;
+    }
+
+    .program-contents__card {
+      flex: 1 1 calc(25% - 15px);
+      aspect-ratio: 381 / 620;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Program Contents",
+  "settings": [
+    { "type": "text", "id": "heading_lead", "label": "Heading lead", "default": "Everything your hips need." },
+    { "type": "text", "id": "heading_accent", "label": "Heading accent", "default": "Nothing they don't." },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "24 sessions. 4 weeks. Built to progress, not repeat."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Program Card",
+      "limit": 4,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Card image" },
+        { "type": "text", "id": "badge", "label": "Duration badge (optional)" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "body", "label": "Body" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Program Contents",
+      "blocks": [{ "type": "card" }, { "type": "card" }, { "type": "card" }, { "type": "card" }]
+    }
+  ]
+}
+{% endschema %}

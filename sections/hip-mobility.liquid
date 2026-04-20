@@ -1,0 +1,234 @@
+<section class="hip-mobility" id="hip-mobility-{{ section.id }}">
+  <div class="hip-mobility__container">
+    <div class="hip-mobility__card" style="--hip-mobility-accent: {{ section.settings.accent_color }};">
+      {% if section.settings.video_desktop != blank %}
+        {{
+          section.settings.video_desktop
+          | video_tag:
+            class: 'hip-mobility__video hip-mobility__video--desktop',
+            autoplay: true,
+            muted: true,
+            loop: true,
+            controls: false,
+            preload: 'metadata',
+            playsinline: true
+        }}
+      {% endif %}
+
+      {% if section.settings.video_mobile != blank %}
+        {{
+          section.settings.video_mobile
+          | video_tag:
+            class: 'hip-mobility__video hip-mobility__video--mobile',
+            autoplay: true,
+            muted: true,
+            loop: true,
+            controls: false,
+            preload: 'metadata',
+            playsinline: true
+        }}
+      {% endif %}
+
+      <div class="hip-mobility__gradient" aria-hidden="true"></div>
+
+      <div class="hip-mobility__content">
+        <p class="hip-mobility__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        <h2 class="hip-mobility__headline">
+          <span>{{ section.settings.headline_lead | escape }}</span>
+          <span class="hip-mobility__headline-accent"> {{ section.settings.headline_accent | escape }}</span>
+        </h2>
+        <span class="hip-mobility__underline" aria-hidden="true"></span>
+        <div class="hip-mobility__body rte">{{ section.settings.body }}</div>
+      </div>
+    </div>
+
+    <p class="hip-mobility__footnote">{{ section.settings.footnote | escape }}</p>
+  </div>
+</section>
+
+{% stylesheet %}
+  .hip-mobility {
+    padding: 40px 16px;
+  }
+
+  .hip-mobility__container {
+    max-width: 1184px;
+    margin: 0 auto;
+  }
+
+  .hip-mobility__card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 30px;
+    background: #000;
+    aspect-ratio: 335 / 560;
+  }
+
+  .hip-mobility__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hip-mobility__video--desktop {
+    display: none;
+  }
+
+  .hip-mobility__gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.34) 63%, rgba(0, 0, 0, 0) 100%);
+  }
+
+  .hip-mobility__content {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 24px 18px 32px;
+    text-align: center;
+    color: #fff;
+  }
+
+  .hip-mobility__eyebrow {
+    margin: 0;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: clamp(16px, 1.6vw, 24px);
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  .hip-mobility__headline {
+    margin: 10px 0 0;
+    text-transform: uppercase;
+    font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-size: clamp(24px, 2.8vw, 35px);
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+    font-weight: 600;
+  }
+
+  .hip-mobility__headline-accent {
+    color: var(--hip-mobility-accent, #faff00);
+    font-weight: 900;
+  }
+
+  .hip-mobility__underline {
+    display: none;
+    width: 88px;
+    height: 3px;
+    border-radius: 999px;
+    margin: 14px auto 0;
+    background: var(--hip-mobility-accent, #faff00);
+  }
+
+  .hip-mobility__body {
+    margin-top: 12px;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: clamp(16px, 2vw, 21px);
+    line-height: 1.3;
+    font-weight: 500;
+  }
+
+  .hip-mobility__body p {
+    margin: 0;
+  }
+
+  .hip-mobility__body strong {
+    font-weight: 800;
+  }
+
+  .hip-mobility__footnote {
+    margin: 24px 0 0;
+    text-align: center;
+    color: #666;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: clamp(14px, 1.8vw, 18px);
+    font-weight: 500;
+    line-height: 1.25;
+  }
+
+  @media (min-width: 768px) {
+    .hip-mobility {
+      padding: 64px 32px;
+    }
+
+    .hip-mobility__card {
+      aspect-ratio: 1184 / 570;
+    }
+
+    .hip-mobility__video--desktop {
+      display: block;
+    }
+
+    .hip-mobility__video--mobile {
+      display: none;
+    }
+
+    .hip-mobility__content {
+      padding: 24px 40px 48px;
+    }
+
+    .hip-mobility__underline {
+      display: inline-block;
+    }
+
+    .hip-mobility__footnote {
+      margin-top: 32px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .hip-mobility__video--desktop {
+      display: none;
+    }
+
+    .hip-mobility__video--mobile {
+      display: block;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Hip Mobility",
+  "settings": [
+    { "type": "video", "id": "video_mobile", "label": "Mobile background video" },
+    { "type": "video", "id": "video_desktop", "label": "Desktop background video" },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Hip Mobility is not a softer option"
+    },
+    {
+      "type": "text",
+      "id": "headline_lead",
+      "label": "Headline lead",
+      "default": "It is the step that"
+    },
+    {
+      "type": "text",
+      "id": "headline_accent",
+      "label": "Headline accent",
+      "default": "makes everything else possible"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body copy",
+      "default": "<p>Mobility work helps your hips move freely and gives your body control where it matters most. <strong>4 weeks to unlock, 7 days to perform.</strong></p>"
+    },
+    {
+      "type": "text",
+      "id": "footnote",
+      "label": "Footnote",
+      "default": "Nastya built this program because she saw what happened without it."
+    },
+    { "type": "color", "id": "accent_color", "label": "Accent color", "default": "#FAFF00" }
+  ],
+  "presets": [{ "name": "Hip Mobility" }]
+}
+{% endschema %}

@@ -1,0 +1,252 @@
+<section class="complete-system" id="complete-system-{{ section.id }}">
+  <div class="complete-system__container">
+    <h2 class="complete-system__heading">
+      <span class="complete-system__heading-lead">{{ section.settings.heading_lead | escape }}</span>
+      <span class="complete-system__heading-accent"> {{ section.settings.heading_accent | escape }}</span>
+    </h2>
+
+    <div class="complete-system__card">
+      <div class="complete-system__grid">
+        <div class="complete-system__image-card">
+          {% if section.settings.boxes_image != blank %}
+            {{
+              section.settings.boxes_image
+              | image_url: width: 1200
+              | image_tag:
+                class: 'complete-system__image',
+                loading: 'lazy',
+                alt: 'Program boxes'
+            }}
+          {% endif %}
+        </div>
+
+        <div class="complete-system__banner">{{ section.settings.banner_text | escape }}</div>
+
+        <div class="complete-system__purple-card">
+          <h3 class="complete-system__purple-title">{{ section.settings.card1_title | escape }}</h3>
+          <ul class="complete-system__checklist">
+            {% for block in section.blocks %}
+              <li class="complete-system__check-item" {{ block.shopify_attributes }}>
+                <span class="complete-system__check-icon" aria-hidden="true">✓</span>
+                <span>{{ block.settings.text | escape }}</span>
+              </li>
+            {% endfor %}
+          </ul>
+          <span class="complete-system__pill">{{ section.settings.card1_pill | escape }}</span>
+        </div>
+      </div>
+
+      <div class="complete-system__purple-card complete-system__purple-card--second">
+        <h3 class="complete-system__purple-title">{{ section.settings.card2_title | escape }}</h3>
+        <div class="complete-system__card2-body rte">{{ section.settings.card2_body }}</div>
+        <span class="complete-system__pill">{{ section.settings.card2_pill | escape }}</span>
+      </div>
+    </div>
+
+    <a class="complete-system__cta" href="{{ section.settings.cta_url | default: '#buy' }}">
+      <span>{{ section.settings.cta_label | escape }}</span>
+      <span class="complete-system__price-old">{{ section.settings.price_old | escape }}</span>
+      <span class="complete-system__price-new">{{ section.settings.price_new | escape }}</span>
+    </a>
+
+    <div class="complete-system__trust-row">
+      <p>🛡 {{ section.settings.trust_1 | escape }}</p>
+      <p>✅ {{ section.settings.trust_2 | escape }}</p>
+    </div>
+    <p class="complete-system__subnote">{{ section.settings.subnote | escape }}</p>
+  </div>
+</section>
+
+{% stylesheet %}
+  .complete-system { padding: 40px 16px; }
+  .complete-system__container { max-width: 855px; margin: 0 auto; }
+  .complete-system__heading {
+    margin: 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-size: clamp(24px, 3.4vw, 40px);
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+  }
+  .complete-system__heading-lead { color: #000; font-weight: 600; }
+  .complete-system__heading-accent { color: #0038ff; font-weight: 900; }
+  .complete-system__card {
+    margin-top: 14px;
+    border-radius: 30px;
+    background: #fff;
+    box-shadow: 0 6px 28px rgba(0, 0, 0, 0.15);
+    padding: 12px;
+  }
+  .complete-system__grid { display: grid; gap: 10px; }
+  .complete-system__image-card {
+    border-radius: 18px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    background: #fff;
+    overflow: hidden;
+    order: 1;
+  }
+  .complete-system__image { width: 100%; height: 100%; object-fit: cover; }
+  .complete-system__banner {
+    order: 2;
+    border-radius: 20px;
+    background: #faff00;
+    padding: 16px;
+    text-align: center;
+    color: #000;
+    text-transform: uppercase;
+    font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-size: clamp(18px, 2vw, 20px);
+    line-height: 1.1;
+    font-weight: 600;
+  }
+  .complete-system__purple-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    padding: 20px;
+    background: linear-gradient(270deg, rgba(0, 56, 255, 0.65) 0%, rgba(0, 56, 255, 0) 100%), #b8a7d3;
+  }
+  .complete-system__purple-title {
+    margin: 0;
+    color: #fff;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: clamp(16px, 2vw, 21px);
+    font-weight: 800;
+    line-height: 1.2;
+  }
+  .complete-system__checklist { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 8px; }
+  .complete-system__check-item {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    color: #fff;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.35;
+    font-weight: 500;
+  }
+  .complete-system__check-icon {
+    width: 20px; height: 20px; border-radius: 999px; background: #faff00; color: #000;
+    display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800;
+    flex: 0 0 20px;
+  }
+  .complete-system__pill {
+    margin-top: 12px;
+    display: inline-flex;
+    border-radius: 999px;
+    background: #fff;
+    color: #0038ff;
+    padding: 8px 14px;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: clamp(14px, 1.7vw, 18px);
+    font-weight: 800;
+    line-height: 1.2;
+  }
+  .complete-system__card2-body {
+    margin-top: 10px;
+    color: #fff;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.35;
+    font-weight: 500;
+  }
+  .complete-system__card2-body p { margin: 0; }
+  .complete-system__purple-card--second { margin-top: 10px; }
+  .complete-system__cta {
+    margin-top: 14px;
+    border-radius: 999px;
+    background: #000;
+    color: #fff;
+    min-height: 64px;
+    padding: 16px 22px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    text-decoration: none;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: clamp(16px, 1.8vw, 21px);
+    font-weight: 800;
+    line-height: 1.2;
+  }
+  .complete-system__price-old { text-decoration: line-through; opacity: 0.5; }
+  .complete-system__price-new { color: #faff00; }
+  .complete-system__trust-row {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+  }
+  .complete-system__trust-row p,
+  .complete-system__subnote {
+    margin: 0;
+    color: #000;
+    text-align: center;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: clamp(14px, 1.7vw, 16px);
+    line-height: 1.3;
+    font-weight: 500;
+  }
+  .complete-system__subnote { margin-top: 6px; }
+  @media (min-width: 768px) {
+    .complete-system { padding: 64px 32px; }
+    .complete-system__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      align-items: stretch;
+    }
+    .complete-system__image-card { order: 2; grid-row: span 2; }
+    .complete-system__banner { order: 1; }
+    .complete-system__trust-row { flex-direction: row; justify-content: center; gap: 24px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Complete System",
+  "settings": [
+    { "type": "text", "id": "heading_lead", "label": "Heading lead", "default": "The complete system." },
+    {
+      "type": "text",
+      "id": "heading_accent",
+      "label": "Heading accent",
+      "default": "4 weeks to unlock, 7 days to perform."
+    },
+    { "type": "image_picker", "id": "boxes_image", "label": "Boxes image" },
+    { "type": "text", "id": "banner_text", "label": "Banner text", "default": "Hip Mobility + Twerk Program" },
+    { "type": "text", "id": "card1_title", "label": "Card 1 title", "default": "Hip Mobility Program" },
+    { "type": "text", "id": "card1_pill", "label": "Card 1 pill", "default": "4 weeks" },
+    { "type": "text", "id": "card2_title", "label": "Card 2 title", "default": "Twerk Program" },
+    { "type": "text", "id": "card2_pill", "label": "Card 2 pill", "default": "7 days" },
+    {
+      "type": "richtext",
+      "id": "card2_body",
+      "label": "Card 2 body",
+      "default": "<p>Short, focused sessions designed to make movement feel natural, confident, and fun.</p>"
+    },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Get the complete system" },
+    { "type": "text", "id": "price_old", "label": "Old price", "default": "$318" },
+    { "type": "text", "id": "price_new", "label": "New price", "default": "$99" },
+    { "type": "url", "id": "cta_url", "label": "CTA URL" },
+    { "type": "text", "id": "trust_1", "label": "Trust line 1", "default": "30-Day Money-Back Guarantee" },
+    { "type": "text", "id": "trust_2", "label": "Trust line 2", "default": "Lifetime access" },
+    {
+      "type": "text",
+      "id": "subnote",
+      "label": "Subnote",
+      "default": "No deadline, no subscription, any device"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "checklist_item",
+      "name": "Checklist item",
+      "settings": [{ "type": "text", "id": "text", "label": "Text" }]
+    }
+  ],
+  "presets": [{ "name": "Complete System", "blocks": [{ "type": "checklist_item" }, { "type": "checklist_item" }, { "type": "checklist_item" }] }]
+}
+{% endschema %}

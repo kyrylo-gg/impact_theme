@@ -1,0 +1,278 @@
+<section class="four-weeks" id="four-weeks-{{ section.id }}">
+  <div class="four-weeks__container">
+    <h2 class="four-weeks__heading">
+      <span class="four-weeks__heading-lead">{{ section.settings.heading_lead | escape }}</span>
+      <span class="four-weeks__heading-accent"> {{ section.settings.heading_accent | escape }}</span>
+    </h2>
+    <div class="four-weeks__subheading rte">{{ section.settings.subheading }}</div>
+
+    <div class="four-weeks__tabs" role="tablist" aria-label="Program weeks">
+      {% for block in section.blocks %}
+        <button
+          type="button"
+          role="tab"
+          class="four-weeks__tab{% if forloop.first %} is-active{% endif %}"
+          id="four-weeks-tab-{{ section.id }}-{{ block.id }}"
+          aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+          aria-controls="four-weeks-panel-{{ section.id }}"
+          data-week-tab="{{ forloop.index0 }}"
+          {{ block.shopify_attributes }}
+        >
+          {{ block.settings.tab | default: 'Week' | escape }}
+        </button>
+      {% endfor %}
+    </div>
+
+    <div
+      class="four-weeks__panel"
+      id="four-weeks-panel-{{ section.id }}"
+      role="tabpanel"
+      aria-labelledby="four-weeks-tab-{{ section.id }}-{{ section.blocks.first.id }}"
+    >
+      {% for block in section.blocks %}
+        <div class="four-weeks__item{% if forloop.first %} is-active{% endif %}" data-week-panel="{{ forloop.index0 }}">
+          <div class="four-weeks__item-content">
+            <h3 class="four-weeks__item-title">{{ block.settings.title | escape }}</h3>
+            <p class="four-weeks__item-body">{{ block.settings.body | escape }}</p>
+          </div>
+          <div class="four-weeks__image-wrap">
+            {% if block.settings.image != blank %}
+              {{
+                block.settings.image
+                | image_url: width: 900
+                | image_tag:
+                  class: 'four-weeks__image',
+                  loading: 'lazy',
+                  alt: block.settings.title
+              }}
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<script>
+  (() => {
+    const section = document.getElementById('four-weeks-{{ section.id }}');
+    if (!section) return;
+    const tabs = section.querySelectorAll('[data-week-tab]');
+    const panels = section.querySelectorAll('[data-week-panel]');
+    if (!tabs.length || !panels.length) return;
+
+    const setActive = (index) => {
+      tabs.forEach((tab, i) => {
+        const active = i === index;
+        tab.classList.toggle('is-active', active);
+        tab.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+      panels.forEach((panel, i) => panel.classList.toggle('is-active', i === index));
+    };
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => setActive(index));
+    });
+  })();
+</script>
+
+{% stylesheet %}
+  .four-weeks {
+    padding: 40px 16px;
+  }
+
+  .four-weeks__container {
+    max-width: 782px;
+    margin: 0 auto;
+  }
+
+  .four-weeks__heading {
+    margin: 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-size: clamp(24px, 3.4vw, 40px);
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+  }
+
+  .four-weeks__heading-lead {
+    color: #000;
+    font-weight: 600;
+  }
+
+  .four-weeks__heading-accent {
+    color: #0038ff;
+    font-weight: 900;
+  }
+
+  .four-weeks__subheading {
+    margin: 12px 0 0;
+    text-align: center;
+    color: #000;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: clamp(16px, 2vw, 24px);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .four-weeks__subheading p {
+    margin: 0;
+  }
+
+  .four-weeks__tabs {
+    margin-top: 18px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 30px;
+    background: #fff;
+    padding: 8px;
+    display: grid;
+    gap: 8px;
+  }
+
+  .four-weeks__tab {
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: #000;
+    padding: 12px 16px;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+  }
+
+  .four-weeks__tab:hover {
+    background: #f5f5f5;
+  }
+
+  .four-weeks__tab.is-active {
+    background: #0038ff;
+    color: #fff;
+  }
+
+  .four-weeks__panel {
+    margin-top: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 30px;
+    background: #fff;
+    padding: 16px;
+  }
+
+  .four-weeks__item {
+    display: none;
+  }
+
+  .four-weeks__item.is-active {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .four-weeks__item-title {
+    margin: 0;
+    text-transform: uppercase;
+    font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-size: clamp(20px, 2.3vw, 26px);
+    line-height: 1.05;
+    font-weight: 600;
+    color: #000;
+  }
+
+  .four-weeks__item-body {
+    margin: 8px 0 0;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: clamp(14px, 1.7vw, 18px);
+    line-height: 1.45;
+    color: #000;
+    font-weight: 500;
+  }
+
+  .four-weeks__image-wrap {
+    border-radius: 15px;
+    overflow: hidden;
+    background: #000;
+    min-height: 180px;
+  }
+
+  .four-weeks__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (min-width: 768px) {
+    .four-weeks {
+      padding: 64px 32px;
+    }
+
+    .four-weeks__tabs {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .four-weeks__tab {
+      font-size: 21px;
+      padding: 12px;
+    }
+
+    .four-weeks__panel {
+      padding: 28px;
+    }
+
+    .four-weeks__item.is-active {
+      flex-direction: row;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .four-weeks__item-content {
+      flex: 1 1 0;
+    }
+
+    .four-weeks__image-wrap {
+      flex: 0 0 350px;
+      min-height: 182px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Four Weeks",
+  "settings": [
+    { "type": "text", "id": "heading_lead", "label": "Heading lead", "default": "Four weeks." },
+    {
+      "type": "text",
+      "id": "heading_accent",
+      "label": "Heading accent",
+      "default": "Each one builds on the last."
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "<p>The plan is progressive by design. Each week prepares your body for the next one.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "week",
+      "name": "Week",
+      "limit": 4,
+      "settings": [
+        { "type": "text", "id": "tab", "label": "Tab label", "default": "Week 1" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "body", "label": "Body" },
+        { "type": "image_picker", "id": "image", "label": "Image" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Four Weeks",
+      "blocks": [{ "type": "week" }, { "type": "week" }, { "type": "week" }, { "type": "week" }]
+    }
+  ]
+}
+{% endschema %}
