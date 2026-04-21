@@ -578,43 +578,50 @@
         "faq_xjPW8N": {
           "type": "faq",
           "settings": {
-            "question": "Is this program good for women 35+ / 40+ / 50+?",
-            "answer": "Yes! The program is designed for women of all ages and fitness levels. Each level adapts to your body's needs."
+            "question": "How long is each workout?",
+            "answer": "Just 10 minutes. Stretching sessions are also 10 min, and meditations are 8 min."
           }
         },
         "faq_g6bMLP": {
           "type": "faq",
           "settings": {
-            "question": "Do I have to do jumping or HIIT?",
-            "answer": "No jumping or HIIT required. The workouts are joint-friendly and designed for sustainable progress."
-          }
-        },
-        "faq_pgXqyz": {
-          "type": "faq",
-          "settings": {
-            "question": "What if I have low-energy days or PMS?",
-            "answer": "That's exactly what Plan B is for. On tough days, switch to a gentler flow and stay on track without burning out."
-          }
-        },
-        "faq_7TQqPP": {
-          "type": "faq",
-          "settings": {
-            "question": "How many days per week is it?",
-            "answer": "The program is designed for 3–5 days per week, depending on your level and schedule."
+            "question": "How many days per week do I need to train?",
+            "answer": "3 workouts + 1 stretching + 1 meditation per week — so about 5 short sessions."
           }
         },
         "faq_JEktxm": {
           "type": "faq",
           "settings": {
-            "question": "How long is each workout?",
-            "answer": "Workouts range from 20 to 40 minutes depending on the level."
+            "question": "I sit 8+ hours a day — is 10 min enough?",
+            "answer": "Yes, when done consistently. The program also teaches you micro-movements to use throughout your day, not just during workouts."
+          }
+        },
+        "faq_pgXqyz": {
+          "type": "faq",
+          "settings": {
+            "question": "Do I need equipment?",
+            "answer": "No equipment needed. Just your body and a comfortable surface to sit/lie on."
+          }
+        },
+        "faq_7TQqPP": {
+          "type": "faq",
+          "settings": {
+            "question": "Will this help with hip pain?",
+            "answer": "Yes — it's designed to reduce pain and stiffness. However, if you have an acute injury or sharp pain, consult a doctor first."
+          }
+        },
+        "faq_EiT4tX": {
+          "type": "faq",
+          "settings": {
+            "question": "What if I miss a day?",
+            "answer": "No need to restart. Simply pick up where you left off — consistency over perfection."
           }
         },
         "faq_W8PnVU": {
           "type": "faq",
           "settings": {
-            "question": "Do I need equipment?",
-            "answer": "Minimal equipment — a set of dumbbells and a mat are enough to get started."
+            "question": "Can I combine this with my current routine?",
+            "answer": "Absolutely. It works as a warm-up, cool-down, or standalone session alongside any training style."
           }
         },
         "faq_4ftEPa": {
@@ -630,25 +637,18 @@
             "question": "Is it a one-time purchase or subscription?",
             "answer": "It's a one-time purchase. Pay once, access forever."
           }
-        },
-        "faq_EiT4tX": {
-          "type": "faq",
-          "settings": {
-            "question": "What if I'm a complete beginner?",
-            "answer": "Start with the Soft level — it's built specifically for beginners with zero fitness experience."
-          }
         }
       },
       "block_order": [
         "faq_xjPW8N",
         "faq_g6bMLP",
+        "faq_JEktxm",
         "faq_pgXqyz",
         "faq_7TQqPP",
-        "faq_JEktxm",
+        "faq_EiT4tX",
         "faq_W8PnVU",
         "faq_4ftEPa",
-        "faq_X3JRVH",
-        "faq_EiT4tX"
+        "faq_X3JRVH"
       ],
       "name": "BT_FAQ",
       "settings": {
