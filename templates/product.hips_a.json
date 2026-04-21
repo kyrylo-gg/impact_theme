@@ -20,7 +20,7 @@
         "eyebrow": "Your body can move like this",
         "heading_main": "Let me show you",
         "heading_accent": "where to start",
-        "subcopy": "<p><strong>4 weeks</strong> to unlock your hips, move without pain, and feel amazing in your body.</p>",
+        "subcopy": "<p>4 weeks to unlock your hips. Then 7 days to feel what Twerk is actually supposed to feel like.</p>",
         "price_old": "$318",
         "price_new": "$99",
         "cta_label_main": "Get the",
@@ -124,7 +124,7 @@
         "eyebrow": "Hip Mobility is not a softer option",
         "headline_lead": "It is the step that",
         "headline_accent": "makes everything else possible",
-        "body": "<p>Mobility work helps your hips move freely and gives your body control where it matters most. <strong>4 weeks to unlock, 7 days to perform.</strong></p>",
+        "body": "<p>The Twerk program works. But locked hips make week one a wall. Hip Mobility removes that wall. 4 weeks to unlock, 7 days to perform.</p>",
         "footnote": "Nastya built this program because she saw what happened without it.",
         "accent_color": "#faff00"
       }
@@ -486,7 +486,7 @@
             "avatar": "shopify://shop_images/Frame_295-2.png",
             "name": "Bosede",
             "role": "real estate broker, 43",
-            "quote": "<p>“Im so happy I finally get to learn with the master of twerk, online. Can't wait to reach that level of experience like Nastya”</p>",
+            "quote": "<p><em>\"I wanted to be more playful and feel more confident in my body. I saw it on Facebook and thought: 'this is something that will help me.\"</em></p>",
             "came_with": "<p>Not a pain problem.</p><p>A body confidence problem.</p>",
             "changed": "<p>Found a program that spoke to how she wanted to feel, not just how she wanted to move.</p>"
           }
@@ -529,10 +529,16 @@
     "complete_system": {
       "type": "complete-system",
       "blocks": {
+        "checklist_item_K6rRzN": {
+          "type": "checklist_item",
+          "settings": {
+            "text": "12 progressive workouts · ·  · 4 weekly articles"
+          }
+        },
         "check_1": {
           "type": "checklist_item",
           "settings": {
-            "text": "24 guided sessions with clear weekly progression"
+            "text": "4 stretching sessions"
           }
         },
         "check_2": {
@@ -544,11 +550,12 @@
         "check_3": {
           "type": "checklist_item",
           "settings": {
-            "text": "Designed for real schedules and any fitness level"
+            "text": "4 weekly articles"
           }
         }
       },
       "block_order": [
+        "checklist_item_K6rRzN",
         "check_1",
         "check_2",
         "check_3"
