@@ -231,7 +231,10 @@
             <div class="bb-wizard-progress-bar" data-bb-progress-bar role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="6" aria-label="Step 1 of 6"></div>
             <p class="bb-wizard-progress-text" data-bb-step-text>Step 1 of 6</p>
           </div>
-          <div class="bb-wizard-title" data-bb-wizard-title>Select programs</div>
+          <div class="bb-wizard-title-row">
+            <div class="bb-wizard-title" data-bb-wizard-title>Select programs</div>
+            <div class="bb-wizard-title-actions" data-bb-size-filter-slot></div>
+          </div>
         </div>
         <button type="button" class="bb-wizard-close" data-bb-close aria-label="Close">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
@@ -1860,6 +1863,22 @@
     letter-spacing: 0.03em;
     margin: 0;
     color: var(--color-foreground, #000);
+  }
+  .nass-bundle-builder .bb-wizard-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: 12px;
+  }
+  .nass-bundle-builder .bb-wizard-title-row .bb-wizard-title {
+    min-width: 0;
+  }
+  .nass-bundle-builder .bb-wizard-title-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-shrink: 0;
   }
 
   @media (min-width: 768px) {

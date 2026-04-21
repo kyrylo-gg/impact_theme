@@ -68,6 +68,7 @@
     const backBtn = sectionRoot.querySelector('[data-bb-back]');
     const nextBtn = sectionRoot.querySelector('[data-bb-next]');
     const titleEl = sectionRoot.querySelector('[data-bb-wizard-title]');
+    const sizeFilterSlotEl = sectionRoot.querySelector('[data-bb-size-filter-slot]');
     const progressBarEl = sectionRoot.querySelector('[data-bb-progress-bar]');
     const stepTextEl = sectionRoot.querySelector('[data-bb-step-text]');
     const contentEl = sectionRoot.querySelector('[data-bb-wizard-content]');
@@ -1382,22 +1383,27 @@
       return html;
     }
 
-    function renderSizeFilterBar(stepId) {
+    function renderSizeFilterTrigger(stepId) {
       var sizes = getSizesForStep(stepId);
       if (!sizes.length) return '';
       var active = bbState.sizeFilter;
       var label = active ? active : 'All';
       var iconSvg = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M2 14h4M10 8h4M18 16h4"/></svg>';
-      var html = '<div class="bb-size-filter">';
-      html += '<button type="button" class="bb-size-filter-trigger' + (active ? ' bb-size-filter-trigger--active' : '') + '" data-bb-size-filter-open aria-label="Filter by size">' + iconSvg + '<span class="bb-size-filter-trigger-label">Size: ' + (label || 'All') + '</span></button>';
-      html += '<div class="bb-size-filter-sheet bb-size-filter-sheet--hidden" data-bb-size-filter-sheet role="dialog" aria-label="Choose size">';
+      return '<button type="button" class="bb-size-filter-trigger' + (active ? ' bb-size-filter-trigger--active' : '') + '" data-bb-size-filter-open aria-label="Filter by size">' + iconSvg + '<span class="bb-size-filter-trigger-label">Size: ' + (label || 'All') + '</span></button>';
+    }
+
+    function renderSizeFilterSheet(stepId) {
+      var sizes = getSizesForStep(stepId);
+      if (!sizes.length) return '';
+      var active = bbState.sizeFilter;
+      var html = '<div class="bb-size-filter-sheet bb-size-filter-sheet--hidden" data-bb-size-filter-sheet role="dialog" aria-label="Choose size">';
       html += '<div class="bb-size-filter-sheet-backdrop" data-bb-size-filter-close></div>';
       html += '<div class="bb-size-filter-sheet-panel"><h3 class="bb-size-filter-sheet-title">Filter by size</h3><div class="bb-size-filter-pills">';
       html += '<button type="button" class="bb-size-filter-pill' + (!active ? ' bb-size-filter-pill--active' : '') + '" data-bb-size-filter="">All</button>';
       sizes.forEach(function(s) {
         html += '<button type="button" class="bb-size-filter-pill' + (active === s ? ' bb-size-filter-pill--active' : '') + '" data-bb-size-filter="' + (s || '').replace(/"/g, '&quot;') + '">' + (s || '') + '</button>';
       });
-      html += '</div></div></div></div>';
+      html += '</div></div></div>';
       return html;
     }
 
@@ -1448,11 +1454,16 @@
       var scrollLeft = scrollRow ? scrollRow.scrollLeft : 0;
       var step = bbState.steps[bbState.currentStepIndex];
       if (step.id === 'review') {
+        if (sizeFilterSlotEl) sizeFilterSlotEl.innerHTML = '';
         contentEl.innerHTML = renderReviewStep();
       } else {
         var filteredIds = getFilteredProductIds(step.id, bbState.sizeFilter);
-        var sizeFilterHtml = isClothingStep(step.id) ? renderSizeFilterBar(step.id) : '';
-        contentEl.innerHTML = sizeFilterHtml + renderProductStep(step.id, filteredIds);
+        var hasSizeFilter = isClothingStep(step.id);
+        if (sizeFilterSlotEl) {
+          sizeFilterSlotEl.innerHTML = hasSizeFilter ? renderSizeFilterTrigger(step.id) : '';
+        }
+        var sizeFilterSheetHtml = hasSizeFilter ? renderSizeFilterSheet(step.id) : '';
+        contentEl.innerHTML = sizeFilterSheetHtml + renderProductStep(step.id, filteredIds);
       }
       contentEl.scrollTop = scrollTop;
       var newScrollRow = contentEl.querySelector('.bb-product-scroll');
@@ -1476,7 +1487,7 @@
           removeItem(btn.getAttribute('data-bb-remove'));
         });
       });
-      contentEl.querySelectorAll('[data-bb-size-filter-open]').forEach(function(btn) {
+      sectionRoot.querySelectorAll('[data-bb-size-filter-open]').forEach(function(btn) {
         btn.addEventListener('click', function() {
           var sheet = contentEl.querySelector('[data-bb-size-filter-sheet]');
           if (sheet) sheet.classList.remove('bb-size-filter-sheet--hidden');
