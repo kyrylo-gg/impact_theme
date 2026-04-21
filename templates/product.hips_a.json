@@ -47,8 +47,8 @@
           "settings": {
             "emoji": "🪑",
             "text": "You sit for an hour and stand up feeling ten years older.",
-            "back_emoji": "😉",
-            "back_text": "This system gives you a simple way to continue, so you don't restart.",
+            "back_emoji": "🤸",
+            "back_text": "You stand up from your desk and your body just moves. No stiffness, no bracing, no recovery time.",
             "variant": "blue"
           }
         },
@@ -58,7 +58,7 @@
             "emoji": "😔",
             "text": "In every workout, your hips are the ceiling. Squats, lunges, anything. Something tightens and stops you.",
             "back_emoji": "🙌",
-            "back_text": "You'll have a built-in low-energy option, so you can stay consistent.",
+            "back_text": "Your hips stop being the thing that holds you back. You go deeper, move fuller, feel the whole exercise.",
             "variant": "purple"
           }
         },
@@ -68,7 +68,7 @@
             "emoji": "😭",
             "text": "You stretch. It helps for a day.Then you are back to the same place.",
             "back_emoji": "😌",
-            "back_text": "You'll always have a minimum effective option that still counts.",
+            "back_text": "Every week builds on the last. By week four, movements that were impossible in week one feel natural.",
             "variant": "blue"
           }
         },
@@ -77,8 +77,8 @@
           "settings": {
             "emoji": "🤷‍♀️",
             "text": "You want to move more freely, feel lighter in your body, but you do not know where to actually start.",
-            "back_emoji": "🤸",
-            "back_text": "You start joint-friendly and level up only when you're ready.",
+            "back_emoji": "🧘‍♀️️",
+            "back_text": "You walk differently. You carry yourself differently. Freedom in your hips changes how you feel in your whole body.",
             "variant": "purple"
           }
         }
