@@ -202,9 +202,9 @@
         function initHipsABundleOpen() {
           if (!document.body || !document.body.classList.contains('product--hips_a')) return;
 
-          /* hips_a: normalize CTA anchors to Complete System button */
+          /* hips_a: normalize CTA anchors to Complete System section */
           document.querySelectorAll('.hips-hero-banner__cta, .body-ready-cta__button').forEach(function(link) {
-            link.setAttribute('href', '#buy');
+            link.setAttribute('href', '#complete-system');
           });
 
           function tryOpenBundleWizard(maxRetries) {
