@@ -7,7 +7,7 @@
   assign title_1 = section.settings.title_1 | default: "You're Not Lazy."
   assign title_2 = section.settings.title_2 | default: "You Just Need a Better System."
   assign subtitle = section.settings.subtitle | default: "Tap what feels true for you."
-  assign bottom_1 = section.settings.bottom_1 | default: "If any of that felt familiar, you're in the right place."
+  assign bottom_1 = section.settings.bottom_1
   assign bottom_2 = section.settings.bottom_2 | default: "Here's who built this system — and why it's different."
 -%}
 
@@ -43,7 +43,9 @@
       {%- endfor -%}
     </div>
 
-    <p class="bt-pain__bottom">{{ bottom_1 | escape }}</p>
+    {%- unless bottom_1 == blank -%}
+      <p class="bt-pain__bottom">{{ bottom_1 | escape }}</p>
+    {%- endunless -%}
     <p class="bt-pain__bottom bt-pain__bottom--muted">{{ bottom_2 | escape }}</p>
   </div>
 </section>

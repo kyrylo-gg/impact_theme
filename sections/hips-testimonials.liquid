@@ -28,16 +28,19 @@
           </div>
 
           <div class="hips-testimonials__quote rte">{{ block.settings.quote }}</div>
-          <div class="hips-testimonials__divider"></div>
 
-          <div class="hips-testimonials__info">
-            <p class="hips-testimonials__info-label">She came with:</p>
-            <div class="hips-testimonials__info-body rte">{{ block.settings.came_with }}</div>
-          </div>
+          <div class="hips-testimonials__bottom">
+            <div class="hips-testimonials__divider"></div>
 
-          <div class="hips-testimonials__info">
-            <p class="hips-testimonials__info-label">What changed:</p>
-            <div class="hips-testimonials__info-body rte">{{ block.settings.changed }}</div>
+            <div class="hips-testimonials__info">
+              <p class="hips-testimonials__info-label">She came with:</p>
+              <div class="hips-testimonials__info-body rte">{{ block.settings.came_with }}</div>
+            </div>
+
+            <div class="hips-testimonials__info">
+              <p class="hips-testimonials__info-label">What changed:</p>
+              <div class="hips-testimonials__info-body rte">{{ block.settings.changed }}</div>
+            </div>
           </div>
         </article>
       {% endfor %}
@@ -112,6 +115,7 @@
     line-height: 1.4;
   }
   .hips-testimonials__quote p { margin: 0; }
+  .hips-testimonials__bottom { margin-top: 12px; }
   .hips-testimonials__divider { margin: 12px 0; height: 1px; background: rgba(0, 0, 0, 0.06); }
   .hips-testimonials__info {
     border-radius: 10px;
@@ -149,8 +153,24 @@
   .hips-testimonials__footer p { margin: 0; }
   @media (min-width: 768px) {
     .hips-testimonials { padding: 64px 32px; }
-    .hips-testimonials__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
-    .hips-testimonials__card { padding: 24px; }
+    .hips-testimonials__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+      grid-auto-rows: 1fr;
+      align-items: stretch;
+    }
+    .hips-testimonials__card {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .hips-testimonials__bottom { margin-top: auto; }
+    .hips-testimonials__info {
+      min-height: 96px;
+      display: flex;
+      flex-direction: column;
+    }
     .hips-testimonials__avatar { width: 52px; height: 52px; }
   }
 {% endstylesheet %}
