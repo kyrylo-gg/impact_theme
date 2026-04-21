@@ -173,9 +173,9 @@
           "type": "card",
           "settings": {
             "image": "shopify://shop_images/Frame_7_304ac20a-47fc-4123-ab39-4a50bc6e4b7f.png",
-            "badge": "8 min",
-            "title": "Meditation",
-            "body": "Simple reset sessions to improve consistency and body awareness."
+            "badge": "8 min each",
+            "title": "4 meditation sessions",
+            "body": "Hip tension is not just physical. It lives in the nervous system. Each meditation works at that level, not just the muscle."
           }
         },
         "program_card_4": {
@@ -184,7 +184,7 @@
             "image": "shopify://shop_images/Frame_8.png",
             "badge": "",
             "title": "4 weekly articles",
-            "body": "Clear guidance on posture, routine, and progression between sessions."
+            "body": "The why behind each week. Understanding what your body is doing makes you more consistent and more in control."
           }
         }
       },
