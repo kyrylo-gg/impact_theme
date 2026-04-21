@@ -405,55 +405,55 @@
         "yes_1": {
           "type": "yes_item",
           "settings": {
-            "text": "You feel stiff after long hours of sitting."
+            "text": "You sit for most of your working day and feel it in your hips and lower back."
           }
         },
         "yes_2": {
           "type": "yes_item",
           "settings": {
-            "text": "You want better hip mobility without pain."
+            "text": "You have tried stretching, yoga, or random routines and the results never lasted. "
           }
         },
         "yes_3": {
           "type": "yes_item",
           "settings": {
-            "text": "You need a plan that is short and structured."
+            "text": "You want a structured program with a clear progression, not exercises to figure out yourself."
           }
         },
         "yes_4": {
           "type": "yes_item",
           "settings": {
-            "text": "You want real guidance, not random workouts."
+            "text": "You are a complete beginner or somewhere in the middle. Either way, you start at week one."
           }
         },
         "yes_5": {
           "type": "yes_item",
           "settings": {
-            "text": "You want confidence in movement and performance."
+            "text": "You want to feel more free and confident in how your body moves, not just fix a problem."
           }
         },
         "yes_6": {
           "type": "yes_item",
           "settings": {
-            "text": "You want visible progress in a month."
+            "text": "You have 10 to 30 minutes a few times a week. That is enough."
           }
         },
         "no_1": {
           "type": "no_item",
           "settings": {
-            "text": "You are looking for overnight results."
+            "text": "You are looking for a weight loss or body transformation program. This is not that. "
           }
         },
         "no_2": {
           "type": "no_item",
           "settings": {
-            "text": "You do not want to follow a weekly plan."
+            "text": "You need rehabilitation after a serious injury. See a physiotherapist first. "
           }
         },
         "no_3": {
           "type": "no_item",
           "settings": {
-            "text": "You are not ready to practice consistently."
+            "text": "You want an intense, high-output training program. This is slow and controlled by design."
           }
         }
       },
@@ -473,7 +473,7 @@
         "heading_accent": "is for you if",
         "yes_label": "This is for you:",
         "no_label": "This is not for you:",
-        "closing": "<p>If these points sound like you, this is exactly where your progress starts.</p>",
+        "closing": "<p>If you are still reading, you are exactly who this is for.</p>",
         "photo": "shopify://shop_images/Frame_360.png"
       }
     },
