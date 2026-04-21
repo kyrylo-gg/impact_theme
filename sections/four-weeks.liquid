@@ -239,13 +239,14 @@
   .four-weeks__image-wrap {
     border-radius: 15px;
     overflow: hidden;
-    background: #000;
-    min-height: 180px;
+    background: transparent;
+    min-height: 0;
   }
 
   .four-weeks__image {
     width: 100%;
-    height: 100%;
+    height: auto;
+    display: block;
     object-fit: cover;
   }
 
@@ -281,6 +282,11 @@
     .four-weeks__image-wrap {
       flex: 0 0 350px;
       min-height: 182px;
+      background: #000;
+    }
+
+    .four-weeks__image {
+      height: 100%;
     }
   }
 {% endstylesheet %}
