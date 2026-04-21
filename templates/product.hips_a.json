@@ -156,17 +156,17 @@
           "settings": {
             "image": "shopify://shop_images/Frame_5_5471b8c6-5678-4e09-8d03-91630b128711.png",
             "badge": "10 min",
-            "title": "Workouts",
-            "body": "Focused sessions to improve hip control and movement quality."
+            "title": "12 progressive workouts",
+            "body": "Discover the art of twerking with our easy-to-follow 7-day program, suitable for all skill levels, ages, and body types."
           }
         },
         "program_card_2": {
           "type": "card",
           "settings": {
             "image": "shopify://shop_images/Frame_6_4440fd4e-7126-4ca9-a83f-df192b9b17e9.png",
-            "badge": "8 min",
-            "title": "Stretching",
-            "body": "Targeted mobility routines that reduce stiffness where you feel it most."
+            "badge": "10 min each",
+            "title": "4 stretching sessions",
+            "body": "Active, intentional lengthening after each weekly cycle. Locks in the range your workouts opened so your body keeps it."
           }
         },
         "program_card_3": {
