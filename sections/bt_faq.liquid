@@ -10,7 +10,10 @@
 
 <section class="bt-wrap bt-faq">
   <div class="bt-container bt-faq__container">
-    <h2 class="bt-faq__title">{{ title | escape }}</h2>
+    <h2 class="bt-faq__title">
+      <span class="bt-faq__title-lead">Questions.</span>
+      <span class="bt-faq__title-accent">Answered.</span>
+    </h2>
 
     <div class="bt-faq__list">
       {%- for block in section.blocks -%}
@@ -35,6 +38,10 @@
   @media (min-width: 768px) { .bt-container { max-width: 782px; } }
 
   .bt-faq__title { margin: 0; font-family: 'Anybody', sans-serif; font-weight: 900; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 24px; color: #111; line-height: 1.05; }
+  .bt-faq__title-lead,
+  .bt-faq__title-accent { display: block; }
+  .bt-faq__title-lead { color: #111; }
+  .bt-faq__title-accent { color: #0038FF; }
   @media (min-width: 768px) { .bt-faq__title { font-size: 45px; } }
 
   .bt-faq__list { margin-top: 32px; display: flex; flex-direction: column; gap: 16px; text-align: left; }

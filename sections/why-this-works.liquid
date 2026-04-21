@@ -57,6 +57,32 @@
   </div>
 </section>
 
+<script>
+  (() => {
+    const section = document.getElementById('why-this-works-{{ section.id }}');
+    if (!section) return;
+    const leftItems = Array.from(section.querySelectorAll('.why-this-works__col--left .why-this-works__item'));
+    const rightItems = Array.from(section.querySelectorAll('.why-this-works__col--right .why-this-works__item'));
+    if (!leftItems.length || !rightItems.length) return;
+
+    const syncPairHeights = () => {
+      const pairs = Math.min(leftItems.length, rightItems.length);
+      for (let i = 0; i < pairs; i += 1) {
+        leftItems[i].style.minHeight = '';
+        rightItems[i].style.minHeight = '';
+      }
+      for (let i = 0; i < pairs; i += 1) {
+        const maxHeight = Math.max(leftItems[i].offsetHeight, rightItems[i].offsetHeight);
+        leftItems[i].style.minHeight = `${maxHeight}px`;
+        rightItems[i].style.minHeight = `${maxHeight}px`;
+      }
+    };
+
+    syncPairHeights();
+    window.addEventListener('resize', syncPairHeights);
+  })();
+</script>
+
 {% stylesheet %}
   .why-this-works {
     padding: 40px 16px;
@@ -73,7 +99,7 @@
     color: #000;
     font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
     font-size: clamp(16px, 2vw, 24px);
-    font-weight: 800;
+    font-weight: 500;
     line-height: 1.2;
   }
 
@@ -82,6 +108,7 @@
     text-transform: uppercase;
     color: #0038ff;
     font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-stretch: 150%;
     font-size: clamp(24px, 3.4vw, 40px);
     font-weight: 900;
     line-height: 1.05;
@@ -103,21 +130,23 @@
 
   .why-this-works__card {
     margin-top: 18px;
-    border-radius: 30px;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    background: #fff;
-    box-shadow: 0 50px 28px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
   }
 
   .why-this-works__grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
   }
 
   .why-this-works__col {
     position: relative;
     padding-top: clamp(140px, 42vw, 260px);
+    border-radius: 30px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 18px 28px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
 
   .why-this-works__col--left {
@@ -141,6 +170,9 @@
     list-style: none;
     margin: 0;
     padding: 10px 10px 14px;
+    display: grid;
+    align-content: start;
+    flex: 1 1 auto;
   }
 
   .why-this-works__item {
@@ -154,6 +186,7 @@
     font-size: clamp(14px, 1.8vw, 18px);
     line-height: 1.35;
     font-weight: 500;
+    text-align: center;
   }
 
   .why-this-works__icon {

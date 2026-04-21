@@ -90,6 +90,12 @@
       }
     }
   {%- endif -%}
+
+  /* Keep bullet/number marker and list text on same line in blog content */
+  #shopify-section-{{ section.id }} .article-content .prose li > p {
+    display: inline;
+    margin: 0;
+  }
 </style>
 
 <div class="article" {% if section.settings.allow_transparent_header %}allow-transparent-header{% endif %}>

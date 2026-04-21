@@ -72,7 +72,7 @@
           {% endif %}
         </div>
 
-        <div class="hips-hero-banner__bottom" id="buy">
+        <div class="hips-hero-banner__bottom" id="hero-buy">
           {% if section.settings.price_old != blank or section.settings.price_new != blank %}
             <p class="hips-hero-banner__price">
               {% if section.settings.price_old != blank %}
@@ -201,6 +201,7 @@
     margin: 0;
     text-transform: uppercase;
     font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-stretch: 150%;
     font-size: clamp(24px, 3.6vw, 35px);
     font-weight: 600;
     line-height: 1.04;

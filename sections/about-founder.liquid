@@ -1,28 +1,50 @@
 <section class="about-founder" id="about-founder-{{ section.id }}" style="--about-founder-accent: {{ section.settings.accent_color }}; --about-founder-highlight: {{ section.settings.highlight_color }};">
   <div class="about-founder__container">
     <h2 class="about-founder__heading">
-      <span class="about-founder__heading-lead">{{ section.settings.heading_lead | escape }}</span>
-      <span class="about-founder__heading-accent"> {{ section.settings.heading_accent | escape }}</span>
+      <span class="about-founder__heading-lead">{{ section.settings.heading_lead | escape }}</span><span class="about-founder__heading-accent">{{ section.settings.heading_accent | escape }}</span>
     </h2>
 
     <div class="about-founder__grid">
       <div class="about-founder__main-wrap">
         <article class="about-founder__main-card">
+          {% if section.settings.main_image_mobile != blank %}
+            {{
+              section.settings.main_image_mobile
+              | image_url: width: 1000
+              | image_tag:
+                class: 'about-founder__image about-founder__image--main-mobile',
+                loading: 'lazy',
+                alt: 'Nastya Nass'
+            }}
+          {% endif %}
           {% if section.settings.main_image != blank %}
             {{
               section.settings.main_image
               | image_url: width: 1400
               | image_tag:
-                class: 'about-founder__image',
+                class: 'about-founder__image about-founder__image--main-desktop',
                 loading: 'lazy',
                 alt: 'Nastya Nass'
             }}
           {% endif %}
 
           <div class="about-founder__main-gradient" aria-hidden="true"></div>
-          <span class="about-founder__peach" aria-hidden="true">🍑</span>
-          <div class="about-founder__blue-label">{{ section.settings.blue_label | escape }}</div>
-          <div class="about-founder__quote-desktop rte">{{ section.settings.quote }}</div>
+          <div class="about-founder__main-stack">
+            <div class="about-founder__blue-label">
+              <div class="about-founder__blue-label-text">
+                {%- assign blue_join = section.settings.blue_label | strip | newline_to_br | replace: '<br />', '|||LINE|||' | replace: '<br/>', '|||LINE|||' | replace: '<br>', '|||LINE|||' -%}
+                {%- assign blue_lines = blue_join | split: '|||LINE|||' -%}
+                {%- for line in blue_lines -%}
+                  {%- assign line_clean = line | strip -%}
+                  {%- if line_clean != blank -%}
+                    <span class="about-founder__blue-label-line">{{ line_clean | escape }}</span>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+              <span class="about-founder__peach" aria-hidden="true">🍑</span>
+            </div>
+            <div class="about-founder__quote-desktop rte">{{ section.settings.quote }}</div>
+          </div>
         </article>
 
         <div class="about-founder__quote-mobile rte">{{ section.settings.quote }}</div>
@@ -42,11 +64,35 @@
         <div class="about-founder__stats-gradient" aria-hidden="true"></div>
 
         <div class="about-founder__stats-cluster">
-          <div class="about-founder__stat about-founder__stat--glass">
+          <div class="about-founder__stat about-founder__stat--glass about-founder__stat--left">
+            {% if section.settings.checkmark_image != blank %}
+              {{
+                section.settings.checkmark_image
+                | image_url: width: 80
+                | image_tag:
+                  class: 'about-founder__stat-checkmark',
+                  loading: 'lazy',
+                  alt: ''
+              }}
+            {% else %}
+              <span class="about-founder__stat-checkmark about-founder__stat-checkmark--fallback">✓</span>
+            {% endif %}
             <p class="about-founder__stat-value">{{ section.settings.stat_1_value | escape }}</p>
             <p class="about-founder__stat-label">{{ section.settings.stat_1_label | escape }}</p>
           </div>
-          <div class="about-founder__stat about-founder__stat--highlight">
+          <div class="about-founder__stat about-founder__stat--highlight about-founder__stat--right">
+            {% if section.settings.checkmark_image != blank %}
+              {{
+                section.settings.checkmark_image
+                | image_url: width: 80
+                | image_tag:
+                  class: 'about-founder__stat-checkmark',
+                  loading: 'lazy',
+                  alt: ''
+              }}
+            {% else %}
+              <span class="about-founder__stat-checkmark about-founder__stat-checkmark--fallback">✓</span>
+            {% endif %}
             <p class="about-founder__stat-value">{{ section.settings.stat_2_value | escape }}</p>
             <p class="about-founder__stat-label">{{ section.settings.stat_2_label | escape }}</p>
           </div>
@@ -68,12 +114,23 @@
 
   .about-founder__heading {
     margin: 0 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.35em;
     text-align: center;
     text-transform: uppercase;
     font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-stretch: 150%;
     font-size: clamp(24px, 3.4vw, 40px);
     line-height: 1.05;
     letter-spacing: 0.02em;
+  }
+
+  .about-founder__heading-lead,
+  .about-founder__heading-accent {
+    display: inline-block;
   }
 
   .about-founder__heading-lead {
@@ -115,9 +172,18 @@
     object-position: center;
   }
 
+  .about-founder__image--main-desktop {
+    display: none;
+  }
+
+  .about-founder__image--main-mobile {
+    display: block;
+  }
+
   .about-founder__main-gradient {
     position: absolute;
     inset: 0;
+    z-index: 1;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 55%);
   }
 
@@ -127,33 +193,78 @@
     background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 55%);
   }
 
-  .about-founder__peach {
-    position: absolute;
-    left: 14px;
-    top: 14px;
-    font-size: 44px;
-    transform: rotate(15deg);
-  }
-
-  .about-founder__blue-label {
+  .about-founder__main-stack {
     position: absolute;
     left: 12px;
     right: 12px;
     bottom: 12px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: stretch;
+    gap: 0;
+    pointer-events: none;
+  }
+
+  .about-founder__main-stack > * {
+    pointer-events: auto;
+  }
+
+  .about-founder__blue-label {
+    position: relative;
+    z-index: 4;
+    align-self: stretch;
+    margin-bottom: 0;
+    width: auto;
     border-radius: 30px;
     background: var(--about-founder-accent, #0038ff);
     color: #fff;
-    text-align: center;
+    text-align: left;
     text-transform: uppercase;
     font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-stretch: 150%;
     font-size: clamp(18px, 2.1vw, 21px);
     line-height: 1.1;
     font-weight: 600;
-    padding: 14px 16px;
+    /* Tight bottom: peach sits in corner without a tall empty blue band under the last line */
+    padding: 14px 44px 10px 16px;
+  }
+
+  .about-founder__blue-label-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* One textarea row = one visual row (no auto-wrap inside a row) */
+  .about-founder__blue-label-line {
+    display: block;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 767px) {
+    .about-founder__blue-label-line {
+      white-space: normal;
+    }
+  }
+
+  .about-founder__blue-label .about-founder__peach {
+    position: absolute;
+    right: 22px;
+    bottom: calc(50% - 22px);
+    left: auto;
+    top: auto;
+    font-size: 54px;
+    line-height: 1;
+    transform: rotate(14deg);
+    pointer-events: none;
   }
 
   .about-founder__quote-desktop {
     display: none;
+    position: relative;
+    z-index: 3;
   }
 
   .about-founder__quote-mobile {
@@ -173,21 +284,49 @@
     margin: 0;
   }
 
+  .about-founder__quote-mobile p + p,
+  .about-founder__quote-desktop p + p {
+    margin-top: 0.85em;
+  }
+
   .about-founder__stats-cluster {
     position: absolute;
     left: 12px;
     right: 12px;
     bottom: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: flex-start;
+    top: 12px;
   }
 
   .about-founder__stat {
+    position: absolute;
     border-radius: 30px;
-    padding: 12px 16px;
+    padding: 12px 14px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: auto;
     max-width: 280px;
+  }
+
+  .about-founder__stat-checkmark {
+    position: absolute;
+    left: -4px;
+    top: -4px;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+  }
+
+  .about-founder__stat-checkmark--fallback {
+    border-radius: 999px;
+    background: #000;
+    color: #faff00;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1;
   }
 
   .about-founder__stat--glass {
@@ -199,90 +338,139 @@
   .about-founder__stat--highlight {
     color: #000;
     background: var(--about-founder-highlight, #faff00);
-    margin-bottom: -8px;
+  }
+
+  .about-founder__stat--left {
+    left: 34px;
+    bottom: 16px;
+    max-width: min(68%, 250px);
+  }
+
+  .about-founder__stat--right {
+    right: 22px;
+    bottom: 104px;
+    max-width: min(58%, 220px);
   }
 
   .about-founder__stat-value {
     margin: 0;
     font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-stretch: 150%;
     font-size: 26px;
     line-height: 1;
-    font-weight: 900;
+    font-weight: 500;
   }
 
   .about-founder__stat-label {
     margin: 4px 0 0;
+    display: inline-block;
     font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
     font-size: 16px;
     line-height: 1.2;
-    font-weight: 600;
+    font-weight: 500;
   }
 
   @media (min-width: 768px) {
+    .about-founder__image--main-desktop {
+      display: block;
+    }
+
+    .about-founder__image--main-mobile {
+      display: none;
+    }
+
     .about-founder {
       padding: 64px 32px;
     }
 
     .about-founder__heading {
       margin-bottom: 24px;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      gap: 0.08em;
+      align-items: center;
     }
 
     .about-founder__grid {
       grid-template-columns: minmax(0, 795fr) minmax(0, 381fr);
       gap: 20px;
-      align-items: stretch;
+      align-items: start;
     }
 
     .about-founder__main-card,
     .about-founder__stats-card {
-      aspect-ratio: auto;
-      min-height: 520px;
+      min-height: 0;
+    }
+
+    .about-founder__main-card {
+      aspect-ratio: 795 / 520;
+    }
+
+    .about-founder__stats-card {
+      aspect-ratio: 381 / 520;
     }
 
     .about-founder__main-gradient {
       background: linear-gradient(to right, rgba(0, 0, 0, 0.62) 0%, rgba(0, 0, 0, 0) 55%);
     }
 
-    .about-founder__peach {
+    .about-founder__main-stack {
       left: 20px;
-      top: 18px;
-      font-size: 60px;
+      right: auto;
+      bottom: 36px;
+      width: min(100%, 560px);
+      align-items: flex-start;
+      gap: 12px;
     }
 
     .about-founder__blue-label {
-      left: 20px;
-      right: auto;
-      bottom: 20px;
-      width: min(88%, 440px);
-      text-align: left;
-      padding: 14px 18px;
+      align-self: flex-start;
+      width: fit-content;
+      /* Wide enough for 3 nowrap lines (Anybody + stretch); still under quote stack width */
+      max-width: min(100%, 520px);
+      margin-bottom: 0;
+      padding: 12px 52px 8px 16px;
+    }
+
+    .about-founder__blue-label .about-founder__peach {
+      right: 6px;
+      bottom: 0;
+      font-size: 52px;
     }
 
     .about-founder__quote-mobile {
       display: none;
     }
 
+    .about-founder__quote-desktop,
+    .about-founder__quote-desktop p {
+      text-align: left;
+    }
+
     .about-founder__quote-desktop {
       display: block;
-      position: absolute;
-      right: 20px;
-      bottom: 20px;
-      max-width: 360px;
+      align-self: stretch;
+      width: 100%;
+      max-width: none;
       border-radius: 30px;
-      background: rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(16px);
-      padding: 16px 18px;
+      padding: 18px 22px 22px;
       color: #fff;
       font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
       font-size: 16px;
       line-height: 1.35;
       font-weight: 500;
+      background: linear-gradient(145deg, rgba(120, 60, 200, 0.42) 0%, rgba(40, 10, 90, 0.5) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
     }
 
     .about-founder__stats-cluster {
-      left: 20px;
-      right: 20px;
-      bottom: 20px;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      top: 12px;
     }
   }
 {% endstylesheet %}
@@ -304,11 +492,13 @@
       "default": "how hips move"
     },
     { "type": "image_picker", "id": "main_image", "label": "Main card image" },
+    { "type": "image_picker", "id": "main_image_mobile", "label": "Main card image (mobile)" },
     {
-      "type": "text",
+      "type": "textarea",
       "id": "blue_label",
       "label": "Blue label text",
-      "default": "This is the program I wish I had given everyone first"
+      "info": "Three lines: press Enter after each line (e.g. line 1, line 2, line 3). Shown in caps on the site.",
+      "default": "This is the program\nI wish I had given\neveryone first"
     },
     {
       "type": "richtext",
@@ -317,6 +507,7 @@
       "default": "<p>I spent years helping women fix pain and movement limits after they had already worked through tougher plans. This program is the foundation I wish they had first.</p>"
     },
     { "type": "image_picker", "id": "stats_image", "label": "Stats card image" },
+    { "type": "image_picker", "id": "checkmark_image", "label": "Checkmark image" },
     { "type": "text", "id": "stat_1_value", "label": "Stat 1 value", "default": "40K+" },
     {
       "type": "text",

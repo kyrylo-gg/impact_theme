@@ -3,7 +3,7 @@
     <div class="everything-in-pocket__mobile-head">
       <h2 class="everything-in-pocket__heading">
         <span class="everything-in-pocket__heading-lead">{{ section.settings.heading_lead | escape }}</span>
-        <span class="everything-in-pocket__heading-accent"> {{ section.settings.heading_accent | escape }}</span>
+        <span class="everything-in-pocket__heading-accent">{{ section.settings.heading_accent | escape }}</span>
       </h2>
       <div class="everything-in-pocket__body rte">{{ section.settings.body }}</div>
     </div>
@@ -28,7 +28,7 @@
       <div class="everything-in-pocket__right">
         <h2 class="everything-in-pocket__heading everything-in-pocket__heading--desktop">
           <span class="everything-in-pocket__heading-lead">{{ section.settings.heading_lead | escape }}</span>
-          <span class="everything-in-pocket__heading-accent"> {{ section.settings.heading_accent | escape }}</span>
+          <span class="everything-in-pocket__heading-accent">{{ section.settings.heading_accent | escape }}</span>
         </h2>
         <div class="everything-in-pocket__body everything-in-pocket__body--desktop rte">{{ section.settings.body }}</div>
 
@@ -68,19 +68,23 @@
 
   .everything-in-pocket__heading {
     margin: 0;
+    text-align: center;
     text-transform: uppercase;
     font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-stretch: 150%;
     font-size: 24px;
     line-height: 1.05;
     letter-spacing: 0.02em;
   }
 
   .everything-in-pocket__heading-lead {
+    display: block;
     color: #000;
     font-weight: 600;
   }
 
   .everything-in-pocket__heading-accent {
+    display: block;
     color: #0038ff;
     font-weight: 900;
   }
@@ -106,6 +110,11 @@
 
   .everything-in-pocket__left {
     position: relative;
+    padding-bottom: 84px;
+  }
+
+  .everything-in-pocket__right {
+    margin-top: 10px;
   }
 
   .everything-in-pocket__beige-card {
@@ -140,6 +149,10 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px;
+  }
+
+  .everything-in-pocket__feature:nth-child(3) {
+    grid-column: 1 / -1;
   }
 
   .everything-in-pocket__feature {
@@ -208,6 +221,7 @@
 
     .everything-in-pocket__heading {
       font-size: clamp(32px, 3.2vw, 40px);
+      text-align: left;
     }
 
     .everything-in-pocket__body {
@@ -218,6 +232,18 @@
       margin-top: 14px;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 9px;
+    }
+
+    .everything-in-pocket__left {
+      padding-bottom: 0;
+    }
+
+    .everything-in-pocket__right {
+      margin-top: 0;
+    }
+
+    .everything-in-pocket__feature:nth-child(3) {
+      grid-column: auto;
     }
 
     .everything-in-pocket__feature {

@@ -19,7 +19,37 @@
       <div class="body-ready-cta__right">
         <div class="body-ready-cta__yellow">
           <p class="body-ready-cta__eyebrow">{{ section.settings.eyebrow | escape }}</p>
-          <h2 class="body-ready-cta__headline">{{ section.settings.headline | escape }}</h2>
+          {%- assign headline_parts = section.settings.headline | strip | split: ' system is ' -%}
+          <h2 class="body-ready-cta__headline">
+            {% if headline_parts.size == 2 %}
+              <span>{{ headline_parts[0] | escape }}</span><br>
+              <span>system is</span><br>
+              <span>{{ headline_parts[1] | escape }}</span>
+            {% else %}
+              {{ section.settings.headline | escape }}
+            {% endif %}
+          </h2>
+
+          <div class="body-ready-cta__starburst" aria-hidden="true">
+            {% if section.settings.badge_image != blank %}
+              {{
+                section.settings.badge_image
+                | image_url: width: 260
+                | image_tag:
+                  class: 'body-ready-cta__badge-image',
+                  loading: 'lazy',
+                  alt: ''
+              }}
+            {% else %}
+              <svg viewBox="0 0 120 120" class="body-ready-cta__starburst-shape">
+                <polygon points="60,2 68,17 82,8 84,24 100,20 95,35 112,36 101,49 116,56 101,64 112,77 95,79 100,94 84,90 82,106 68,97 60,112 52,97 38,106 36,90 20,94 25,79 8,77 19,64 4,56 19,49 8,36 25,35 20,20 36,24 38,8 52,17" />
+              </svg>
+              <div class="body-ready-cta__starburst-content">
+                <p class="body-ready-cta__price-new">{{ section.settings.price_new | escape }}</p>
+                <p class="body-ready-cta__price-old">{{ section.settings.price_old | escape }}</p>
+              </div>
+            {% endif %}
+          </div>
         </div>
 
         {% liquid
@@ -36,15 +66,6 @@
         <p class="body-ready-cta__subnote">{{ section.settings.subnote | escape }}</p>
       </div>
 
-      <div class="body-ready-cta__starburst" aria-hidden="true">
-        <svg viewBox="0 0 120 120" class="body-ready-cta__starburst-shape">
-          <polygon points="60,2 68,17 82,8 84,24 100,20 95,35 112,36 101,49 116,56 101,64 112,77 95,79 100,94 84,90 82,106 68,97 60,112 52,97 38,106 36,90 20,94 25,79 8,77 19,64 4,56 19,49 8,36 25,35 20,20 36,24 38,8 52,17" />
-        </svg>
-        <div class="body-ready-cta__starburst-content">
-          <p class="body-ready-cta__price-new">{{ section.settings.price_new | escape }}</p>
-          <p class="body-ready-cta__price-old">{{ section.settings.price_old | escape }}</p>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -78,9 +99,11 @@
   }
   .body-ready-cta__right { position: relative; z-index: 2; margin-top: 8px; }
   .body-ready-cta__yellow {
+    position: relative;
     border-radius: 16px;
     background: #fbff00;
-    padding: 12px 14px;
+    padding: 12px 14px 14px 14px;
+    margin-bottom: 40px;
   }
   .body-ready-cta__eyebrow {
     margin: 0;
@@ -95,12 +118,16 @@
     color: #000;
     text-transform: uppercase;
     font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-stretch: 150%;
     font-size: 22px;
     line-height: 1.05;
     font-weight: 900;
   }
+  .body-ready-cta__headline span {
+    white-space: nowrap;
+  }
   .body-ready-cta__button {
-    margin-top: 10px;
+    margin-top: 16px;
     min-height: 58px;
     border-radius: 999px;
     background: #000;
@@ -129,12 +156,18 @@
   }
   .body-ready-cta__starburst {
     position: absolute;
-    right: 12px;
-    top: 44%;
+    right: 8px;
+    bottom: -46px;
     transform: rotate(7deg);
     width: 92px;
     height: 92px;
     z-index: 3;
+  }
+  .body-ready-cta__badge-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
   .body-ready-cta__starburst-shape {
     width: 100%;
@@ -154,6 +187,7 @@
     margin: 0;
     color: #fff;
     font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-stretch: 150%;
     font-size: 26px;
     font-weight: 900;
     line-height: 1;
@@ -176,20 +210,16 @@
       align-items: center;
       padding: 20px 24px;
     }
-    .body-ready-cta__floor {
-      top: 310px;
-      bottom: auto;
-      height: auto;
-      min-height: 190px;
-    }
+    .body-ready-cta__floor { display: none; }
     .body-ready-cta__boxes-wrap {
       justify-content: flex-start;
       margin-left: -16px;
       align-self: end;
     }
-    .body-ready-cta__boxes { width: min(110%, 620px); }
+    .body-ready-cta__boxes { width: min(102%, 580px); }
     .body-ready-cta__right { margin-top: 0; }
-    .body-ready-cta__yellow { border-radius: 30px; padding: 20px 24px; }
+    .body-ready-cta__yellow { border-radius: 30px; padding: 20px 156px 22px 24px; }
+    .body-ready-cta__yellow { margin-bottom: 0; }
     .body-ready-cta__eyebrow { font-size: 24px; }
     .body-ready-cta__headline { font-size: 38px; }
     .body-ready-cta__button {
@@ -203,8 +233,8 @@
     .body-ready-cta__starburst {
       width: 126px;
       height: 126px;
-      right: 30px;
-      top: 30px;
+      right: 18px;
+      bottom: -63px;
     }
     .body-ready-cta__price-new { font-size: 34px; }
     .body-ready-cta__price-old { font-size: 16px; }
@@ -216,6 +246,7 @@
   "name": "Body Ready CTA",
   "settings": [
     { "type": "image_picker", "id": "boxes_image", "label": "Boxes image" },
+    { "type": "image_picker", "id": "badge_image", "label": "Price badge image" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Your body is ready to unlock" },
     { "type": "text", "id": "headline", "label": "Headline", "default": "The complete system is waiting" },
     { "type": "text", "id": "price_old", "label": "Old price", "default": "$318" },

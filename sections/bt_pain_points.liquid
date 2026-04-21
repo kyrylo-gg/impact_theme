@@ -11,7 +11,10 @@
   assign bottom_2 = section.settings.bottom_2 | default: "Here's who built this system — and why it's different."
 -%}
 
-<section class="bt-wrap bt-pain" data-bt-pain>
+<section
+  class="bt-wrap bt-pain{% if template.name == 'product' and template.suffix == 'hips_a' %} bt-pain--hips-a{% endif %}"
+  data-bt-pain
+>
   <div class="bt-container">
     <h2 class="bt-pain__title">
       <span class="bt-pain__title-w">{{ title_1 | escape }}</span><br>
@@ -103,6 +106,7 @@
 
   .bt-pain__title { margin: 0; text-align: center; font-family: 'Anybody', sans-serif; font-weight: 600; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 24px; line-height: 1.05; color: #111; }
   @media (min-width: 768px) { .bt-pain__title { font-size: 45px; } }
+  @media (min-width: 768px) { .bt-pain--hips-a .bt-pain__title { font-size: 40px; } }
   .bt-pain__title-b { color: #0038FF; font-weight: 900; }
 
   .bt-pain__divider { width: 48px; height: 3px; background: #0038FF; margin: 12px auto 0; }
@@ -150,6 +154,37 @@
 
   .bt-pain__text { margin: 0; padding: 0 24px; text-align: center; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; color: #111; font-size: 14px; max-width: 240px; }
   @media (min-width: 768px) { .bt-pain__text { font-size: 18px; } }
+
+  /* product.hips_a: wider copy on flip cards (longer EN strings; default 240px + 24px pad felt too narrow) */
+  .bt-pain--hips-a .bt-pain__text {
+    max-width: none;
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  @media (min-width: 768px) {
+    .bt-pain--hips-a .bt-pain__text {
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+
+    /* Exactly 5 cards: 3 + 2 — center the bottom pair (same width as 3-col layout) */
+    .bt-pain__grid:has(.bt-pain__card:nth-child(5):last-child) {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+    .bt-pain__grid:has(.bt-pain__card:nth-child(5):last-child) .bt-pain__card {
+      grid-column: span 2;
+    }
+    .bt-pain__grid:has(.bt-pain__card:nth-child(5):last-child) .bt-pain__card:nth-child(4) {
+      grid-column: 2 / span 2;
+      grid-row: 2;
+    }
+    .bt-pain__grid:has(.bt-pain__card:nth-child(5):last-child) .bt-pain__card:nth-child(5) {
+      grid-column: 4 / span 2;
+      grid-row: 2;
+    }
+  }
 
   .bt-pain__bottom { margin: 40px 0 0; text-align: center; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 14px; color: #111; }
   @media (min-width: 768px) { .bt-pain__bottom { margin-top: 48px; font-size: 18px; } }

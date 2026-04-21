@@ -13,30 +13,94 @@
 
       <div class="why-stiff__cards">
         <article class="why-stiff__card">
-          {% if section.settings.image_left != blank %}
-            {{
-              section.settings.image_left
-              | image_url: width: 900
-              | image_tag:
-                class: 'why-stiff__image',
-                loading: 'lazy',
-                alt: section.settings.label_left
-            }}
+          {%- liquid
+            assign img_left_d = section.settings.image_left
+            assign img_left_m = section.settings.image_left_mobile
+          -%}
+          {% if img_left_d != blank or img_left_m != blank %}
+            {% if img_left_m != blank and img_left_d != blank %}
+              {{
+                img_left_m
+                | image_url: width: 800
+                | image_tag:
+                  class: 'why-stiff__image why-stiff__image--mobile',
+                  loading: 'lazy',
+                  alt: section.settings.label_left
+              }}
+              {{
+                img_left_d
+                | image_url: width: 1200
+                | image_tag:
+                  class: 'why-stiff__image why-stiff__image--desktop',
+                  loading: 'lazy',
+                  alt: section.settings.label_left
+              }}
+            {% elsif img_left_m != blank %}
+              {{
+                img_left_m
+                | image_url: width: 900
+                | image_tag:
+                  class: 'why-stiff__image',
+                  loading: 'lazy',
+                  alt: section.settings.label_left
+              }}
+            {% else %}
+              {{
+                img_left_d
+                | image_url: width: 900
+                | image_tag:
+                  class: 'why-stiff__image',
+                  loading: 'lazy',
+                  alt: section.settings.label_left
+              }}
+            {% endif %}
           {% endif %}
           <div class="why-stiff__card-gradient" aria-hidden="true"></div>
           <span class="why-stiff__pill">{{ section.settings.label_left | escape }}</span>
         </article>
 
         <article class="why-stiff__card">
-          {% if section.settings.image_right != blank %}
-            {{
-              section.settings.image_right
-              | image_url: width: 900
-              | image_tag:
-                class: 'why-stiff__image',
-                loading: 'lazy',
-                alt: section.settings.label_right
-            }}
+          {%- liquid
+            assign img_right_d = section.settings.image_right
+            assign img_right_m = section.settings.image_right_mobile
+          -%}
+          {% if img_right_d != blank or img_right_m != blank %}
+            {% if img_right_m != blank and img_right_d != blank %}
+              {{
+                img_right_m
+                | image_url: width: 800
+                | image_tag:
+                  class: 'why-stiff__image why-stiff__image--mobile',
+                  loading: 'lazy',
+                  alt: section.settings.label_right
+              }}
+              {{
+                img_right_d
+                | image_url: width: 1200
+                | image_tag:
+                  class: 'why-stiff__image why-stiff__image--desktop',
+                  loading: 'lazy',
+                  alt: section.settings.label_right
+              }}
+            {% elsif img_right_m != blank %}
+              {{
+                img_right_m
+                | image_url: width: 900
+                | image_tag:
+                  class: 'why-stiff__image',
+                  loading: 'lazy',
+                  alt: section.settings.label_right
+              }}
+            {% else %}
+              {{
+                img_right_d
+                | image_url: width: 900
+                | image_tag:
+                  class: 'why-stiff__image',
+                  loading: 'lazy',
+                  alt: section.settings.label_right
+              }}
+            {% endif %}
           {% endif %}
           <div class="why-stiff__card-gradient" aria-hidden="true"></div>
           <span class="why-stiff__pill">{{ section.settings.label_right | escape }}</span>
@@ -72,7 +136,7 @@
     margin: 0;
     font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
     font-size: clamp(16px, 2.6vw, 24px);
-    font-weight: 800;
+    font-weight: 500;
     line-height: 1.2;
     color: #000;
   }
@@ -81,6 +145,7 @@
     margin: 10px 0 0;
     text-transform: uppercase;
     font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-stretch: 150%;
     font-size: clamp(24px, 4.2vw, 40px);
     line-height: 1.05;
     letter-spacing: 0.02em;
@@ -130,11 +195,32 @@
     background: #000;
   }
 
+  .why-stiff__card > .why-stiff__image {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
   .why-stiff__image {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
+  }
+
+  .why-stiff__image--desktop {
+    display: none;
+  }
+  .why-stiff__image--mobile {
+    display: block;
+  }
+  @media (min-width: 768px) {
+    .why-stiff__image--mobile {
+      display: none;
+    }
+    .why-stiff__image--desktop {
+      display: block;
+    }
   }
 
   .why-stiff__card-gradient {
@@ -143,13 +229,15 @@
     right: 0;
     bottom: 0;
     height: 40%;
+    z-index: 1;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));
   }
 
   .why-stiff__pill {
     position: absolute;
     left: 12px;
-    bottom: 12px;
+    top: 12px;
+    z-index: 2;
     border-radius: 999px;
     background: #faff00;
     color: #000;
@@ -208,9 +296,19 @@
       margin-bottom: 26px;
     }
 
+    /* Match intro to body copy / bold line (e.g. Progressive movement…) on desktop */
+    .why-stiff__intro {
+      font-size: clamp(16px, 2.2vw, 21px);
+      line-height: 1.3;
+    }
+
     .why-stiff__heading-part,
     .why-stiff__heading-accent {
       display: inline;
+    }
+
+    .why-stiff__heading {
+      font-size: clamp(24px, 3.4vw, 40px);
     }
 
     .why-stiff__cards {
@@ -224,7 +322,7 @@
 
     .why-stiff__pill {
       left: 18px;
-      bottom: 18px;
+      top: 18px;
       padding: 8px 14px;
     }
 
@@ -262,14 +360,26 @@
       "label": "Heading accent part",
       "default": "because you sit"
     },
-    { "type": "image_picker", "id": "image_left", "label": "Left card image" },
+    { "type": "image_picker", "id": "image_left", "label": "Left card image (desktop)" },
+    {
+      "type": "image_picker",
+      "id": "image_left_mobile",
+      "label": "Left card image (mobile)",
+      "info": "Optional. If set together with the desktop image, mobile shows below 768px only."
+    },
     {
       "type": "text",
       "id": "label_left",
       "label": "Left card label",
       "default": "Locked hips"
     },
-    { "type": "image_picker", "id": "image_right", "label": "Right card image" },
+    { "type": "image_picker", "id": "image_right", "label": "Right card image (desktop)" },
+    {
+      "type": "image_picker",
+      "id": "image_right_mobile",
+      "label": "Right card image (mobile)",
+      "info": "Optional. If set together with the desktop image, mobile shows below 768px only."
+    },
     {
       "type": "text",
       "id": "label_right",

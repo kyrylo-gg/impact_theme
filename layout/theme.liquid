@@ -51,8 +51,10 @@
     {%- if template.name == 'page' and template.suffix == 'body-presale' -%}
       {% render 'nass-fonts' %}
     {%- endif -%}
-    {%- if template.name == 'product' and template.suffix == 'body_transformation' -%}
-      {% render 'bt-body-transformation-fonts' %}
+    {%- if template.name == 'product' -%}
+      {%- if template.suffix == 'body_transformation' or template.suffix == 'hips_a' -%}
+        {% render 'bt-body-transformation-fonts' %}
+      {%- endif -%}
     {%- endif -%}
 
     {%- unless settings.heading_font.system? -%}
@@ -130,6 +132,119 @@
       .body-presale-page .shopify-section:last-child { margin-bottom: 0; }
       .body-presale-page .bp-section { margin-bottom: 0; }
     </style>
+    {%- endif -%}
+
+    {%- if template.name == 'product' and template.suffix == 'hips_a' -%}
+    <style>
+      /**
+       * product.hips_a: same typography stack as Body Transformation (BT) sections.
+       * Sections use var(--font-heading--family, 'Anybody') / var(--font-body--family, 'Avenir Next'…).
+       * Variable Anybody + Nunito load from bt-body-transformation-fonts (see head above).
+       * Scoped to main so theme header outside main keeps shop defaults.
+       */
+      body.product--hips_a main#main.anchor {
+        --font-heading--family: 'Anybody';
+        --font-body--family: Avenir, 'Nunito Sans', system-ui, sans-serif;
+      }
+
+      /* hips_a: keep bundle builder hidden; open via CTA click (wizard overlay) */
+      body.product--hips_a .nass-bundle-builder .bb-section {
+        display: none !important;
+      }
+
+      @media (min-width: 768px) {
+        /* hips_a only: keep BT_PainPoints heading size aligned with page sections */
+        body.product--hips_a main#main.anchor .bt-pain__title {
+          font-size: clamp(24px, 3.4vw, 40px) !important;
+        }
+      }
+
+      /* BT_PainPoints-like divider under black/blue section headings on hips_a */
+      body.product--hips_a main#main.anchor :is(
+        .hips-hero-banner__heading,
+        .why-stiff__heading,
+        .hip-mobility__heading,
+        .about-founder__heading,
+        .program-contents__heading,
+        .four-weeks__heading,
+        .everything-in-pocket__heading,
+        .program-for-you__heading,
+        .complete-system__heading,
+        .body-ready-cta__heading,
+        .bt-faq__title
+      )::after {
+        content: '';
+        display: block;
+        width: 48px;
+        height: 3px;
+        margin: 12px auto 0;
+        background: #0038ff;
+        border-radius: 999px;
+      }
+
+      /* Desktop exception: this heading is left-aligned by design */
+      @media (min-width: 768px) {
+        /* On hips_a desktop: accent line always starts on new line */
+        body.product--hips_a main#main.anchor [class$='__heading-accent'],
+        body.product--hips_a main#main.anchor [class*='__heading-accent '] {
+          display: block !important;
+        }
+
+        body.product--hips_a main#main.anchor .everything-in-pocket__heading--desktop::after {
+          margin-left: 0;
+          margin-right: auto;
+          margin-top: 16px;
+        }
+      }
+    </style>
+    <script>
+      (function() {
+        function initHipsABundleOpen() {
+          if (!document.body || !document.body.classList.contains('product--hips_a')) return;
+
+          /* hips_a: normalize CTA anchors to Complete System button */
+          document.querySelectorAll('.hips-hero-banner__cta, .body-ready-cta__button').forEach(function(link) {
+            link.setAttribute('href', '#buy');
+          });
+
+          function tryOpenBundleWizard(maxRetries) {
+            maxRetries = typeof maxRetries === 'number' ? maxRetries : 20;
+            var retries = 0;
+            function tick() {
+              var bb = (window.NassBundleBuilder && typeof window.NassBundleBuilder.openWizard === 'function')
+                ? window.NassBundleBuilder
+                : null;
+              if (bb) {
+                bb.openWizard();
+                return;
+              }
+              if (retries >= maxRetries) {
+                window.location.hash = '#nass-bundle-builder';
+                return;
+              }
+              retries += 1;
+              window.location.hash = '#nass-bundle-builder';
+              setTimeout(tick, 100);
+            }
+            tick();
+          }
+
+          document.addEventListener('click', function(e) {
+            var trigger = e.target.closest('.complete-system__cta');
+            if (!trigger) return;
+            e.preventDefault();
+            window.__bt_bb_preselect_first = true;
+            tryOpenBundleWizard(25);
+          });
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initHipsABundleOpen);
+        } else {
+          initHipsABundleOpen();
+        }
+      })();
+    </script>
     {%- endif -%}
 
     {% render 'ts-base' %}

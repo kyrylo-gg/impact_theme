@@ -57,9 +57,19 @@
   (() => {
     const section = document.getElementById('four-weeks-{{ section.id }}');
     if (!section) return;
+    const tabsWrap = section.querySelector('.four-weeks__tabs');
     const tabs = section.querySelectorAll('[data-week-tab]');
     const panels = section.querySelectorAll('[data-week-panel]');
-    if (!tabs.length || !panels.length) return;
+    if (!tabsWrap || !tabs.length || !panels.length) return;
+
+    const movePill = (index) => {
+      const activeTab = tabs[index];
+      if (!activeTab) return;
+      tabsWrap.style.setProperty('--four-weeks-pill-x', `${activeTab.offsetLeft}px`);
+      tabsWrap.style.setProperty('--four-weeks-pill-y', `${activeTab.offsetTop}px`);
+      tabsWrap.style.setProperty('--four-weeks-pill-w', `${activeTab.offsetWidth}px`);
+      tabsWrap.style.setProperty('--four-weeks-pill-h', `${activeTab.offsetHeight}px`);
+    };
 
     const setActive = (index) => {
       tabs.forEach((tab, i) => {
@@ -68,10 +78,18 @@
         tab.setAttribute('aria-selected', active ? 'true' : 'false');
       });
       panels.forEach((panel, i) => panel.classList.toggle('is-active', i === index));
+      movePill(index);
     };
 
     tabs.forEach((tab, index) => {
       tab.addEventListener('click', () => setActive(index));
+    });
+
+    const activeIndex = Array.from(tabs).findIndex((tab) => tab.classList.contains('is-active'));
+    setActive(activeIndex >= 0 ? activeIndex : 0);
+    window.addEventListener('resize', () => {
+      const index = Array.from(tabs).findIndex((tab) => tab.classList.contains('is-active'));
+      movePill(index >= 0 ? index : 0);
     });
   })();
 </script>
@@ -91,6 +109,7 @@
     text-align: center;
     text-transform: uppercase;
     font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-stretch: 150%;
     font-size: clamp(24px, 3.4vw, 40px);
     line-height: 1.05;
     letter-spacing: 0.02em;
@@ -122,20 +141,48 @@
 
   .four-weeks__tabs {
     margin-top: 18px;
+    position: relative;
     border: 1px solid rgba(0, 0, 0, 0.12);
     border-radius: 30px;
     background: #fff;
     padding: 8px;
     display: grid;
     gap: 8px;
+    overflow: hidden;
+    --four-weeks-pill-x: 0px;
+    --four-weeks-pill-y: 0px;
+    --four-weeks-pill-w: 0px;
+    --four-weeks-pill-h: 0px;
+  }
+
+  .four-weeks__tabs::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: var(--four-weeks-pill-w);
+    height: var(--four-weeks-pill-h);
+    transform: translate(var(--four-weeks-pill-x), var(--four-weeks-pill-y));
+    border-radius: 999px;
+    background: #0038ff;
+    transition: transform 240ms ease, width 240ms ease, height 240ms ease;
+    pointer-events: none;
+    z-index: 0;
   }
 
   .four-weeks__tab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    z-index: 1;
     border: 0;
     border-radius: 999px;
     background: transparent;
     color: #000;
     padding: 12px 16px;
+    text-align: center;
     font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
     font-size: 14px;
     font-weight: 800;
@@ -147,7 +194,7 @@
   }
 
   .four-weeks__tab.is-active {
-    background: #0038ff;
+    background: transparent;
     color: #fff;
   }
 
@@ -173,6 +220,7 @@
     margin: 0;
     text-transform: uppercase;
     font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-stretch: 150%;
     font-size: clamp(20px, 2.3vw, 26px);
     line-height: 1.05;
     font-weight: 600;

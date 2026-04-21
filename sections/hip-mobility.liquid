@@ -34,8 +34,7 @@
       <div class="hip-mobility__content">
         <p class="hip-mobility__eyebrow">{{ section.settings.eyebrow | escape }}</p>
         <h2 class="hip-mobility__headline">
-          <span>{{ section.settings.headline_lead | escape }}</span>
-          <span class="hip-mobility__headline-accent"> {{ section.settings.headline_accent | escape }}</span>
+          <span class="hip-mobility__headline-lead">{{ section.settings.headline_lead | escape }}</span><span class="hip-mobility__headline-accent">{{ section.settings.headline_accent | escape }}</span>
         </h2>
         <span class="hip-mobility__underline" aria-hidden="true"></span>
         <div class="hip-mobility__body rte">{{ section.settings.body }}</div>
@@ -102,12 +101,23 @@
 
   .hip-mobility__headline {
     margin: 10px 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.35em;
     text-transform: uppercase;
     font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-stretch: 150%;
     font-size: clamp(24px, 2.8vw, 35px);
     line-height: 1.05;
     letter-spacing: 0.02em;
     font-weight: 600;
+  }
+
+  .hip-mobility__headline-lead,
+  .hip-mobility__headline-accent {
+    display: inline-block;
   }
 
   .hip-mobility__headline-accent {
@@ -169,6 +179,14 @@
 
     .hip-mobility__content {
       padding: 24px 40px 48px;
+    }
+
+    /* Two lines: lead / accent (matches copy: “It is the step that” + “makes everything else possible”) */
+    .hip-mobility__headline {
+      flex-direction: column;
+      flex-wrap: nowrap;
+      gap: 0.08em;
+      align-items: center;
     }
 
     .hip-mobility__underline {

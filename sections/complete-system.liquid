@@ -7,51 +7,65 @@
 
     <div class="complete-system__card">
       <div class="complete-system__grid">
-        <div class="complete-system__image-card">
-          {% if section.settings.boxes_image != blank %}
-            {{
-              section.settings.boxes_image
-              | image_url: width: 1200
-              | image_tag:
-                class: 'complete-system__image',
-                loading: 'lazy',
-                alt: 'Program boxes'
-            }}
-          {% endif %}
+        <div class="complete-system__col complete-system__col--left">
+          <div class="complete-system__image-card">
+            {% if section.settings.boxes_image != blank %}
+              {{
+                section.settings.boxes_image
+                | image_url: width: 1200
+                | image_tag:
+                  class: 'complete-system__image',
+                  loading: 'lazy',
+                  alt: 'Program boxes'
+              }}
+            {% endif %}
+          </div>
         </div>
 
-        <div class="complete-system__banner">{{ section.settings.banner_text | escape }}</div>
+        <div class="complete-system__col complete-system__col--right">
+          <div class="complete-system__banner">{{ section.settings.banner_text | escape }}</div>
 
-        <div class="complete-system__purple-card">
-          <h3 class="complete-system__purple-title">{{ section.settings.card1_title | escape }}</h3>
-          <ul class="complete-system__checklist">
-            {% for block in section.blocks %}
-              <li class="complete-system__check-item" {{ block.shopify_attributes }}>
-                <span class="complete-system__check-icon" aria-hidden="true">✓</span>
-                <span>{{ block.settings.text | escape }}</span>
-              </li>
-            {% endfor %}
-          </ul>
-          <span class="complete-system__pill">{{ section.settings.card1_pill | escape }}</span>
+          <div class="complete-system__purple-card complete-system__purple-card--first">
+            <div class="complete-system__card-head">
+              <h3 class="complete-system__purple-title">{{ section.settings.card1_title | escape }}</h3>
+              <span class="complete-system__pill">{{ section.settings.card1_pill | escape }}</span>
+            </div>
+            <ul class="complete-system__checklist">
+              {% for block in section.blocks %}
+                <li class="complete-system__check-item" {{ block.shopify_attributes }}>
+                  <span class="complete-system__check-icon" aria-hidden="true">✓</span>
+                  <span>{{ block.settings.text | escape }}</span>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+
+          <div class="complete-system__purple-card complete-system__purple-card--second">
+            <div class="complete-system__card-head">
+              <h3 class="complete-system__purple-title">{{ section.settings.card2_title | escape }}</h3>
+              <span class="complete-system__pill">{{ section.settings.card2_pill | escape }}</span>
+            </div>
+            <div class="complete-system__card2-body rte">{{ section.settings.card2_body }}</div>
+          </div>
         </div>
-      </div>
-
-      <div class="complete-system__purple-card complete-system__purple-card--second">
-        <h3 class="complete-system__purple-title">{{ section.settings.card2_title | escape }}</h3>
-        <div class="complete-system__card2-body rte">{{ section.settings.card2_body }}</div>
-        <span class="complete-system__pill">{{ section.settings.card2_pill | escape }}</span>
       </div>
     </div>
 
-    <a class="complete-system__cta" href="{{ section.settings.cta_url | default: '#buy' }}">
+    <a id="buy" class="complete-system__cta" href="{{ section.settings.cta_url | default: '#buy' }}">
       <span>{{ section.settings.cta_label | escape }}</span>
       <span class="complete-system__price-old">{{ section.settings.price_old | escape }}</span>
       <span class="complete-system__price-new">{{ section.settings.price_new | escape }}</span>
     </a>
 
     <div class="complete-system__trust-row">
-      <p>🛡 {{ section.settings.trust_1 | escape }}</p>
-      <p>✅ {{ section.settings.trust_2 | escape }}</p>
+      <p class="complete-system__trust-item">
+        <span class="complete-system__trust-icon" aria-hidden="true"></span>
+        <span>{{ section.settings.trust_1 | escape }}</span>
+      </p>
+      <p class="complete-system__trust-item">
+        <span class="complete-system__trust-icon" aria-hidden="true"></span>
+        <span>{{ section.settings.trust_2 | escape }}</span>
+      </p>
     </div>
     <p class="complete-system__subnote">{{ section.settings.subnote | escape }}</p>
   </div>
@@ -65,12 +79,13 @@
     text-align: center;
     text-transform: uppercase;
     font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-stretch: 150%;
     font-size: clamp(24px, 3.4vw, 40px);
     line-height: 1.05;
     letter-spacing: 0.02em;
   }
   .complete-system__heading-lead { color: #000; font-weight: 600; }
-  .complete-system__heading-accent { color: #0038ff; font-weight: 900; }
+  .complete-system__heading-accent { display: block; color: #0038ff; font-weight: 900; }
   .complete-system__card {
     margin-top: 14px;
     border-radius: 30px;
@@ -78,17 +93,23 @@
     box-shadow: 0 6px 28px rgba(0, 0, 0, 0.15);
     padding: 12px;
   }
-  .complete-system__grid { display: grid; gap: 10px; }
+  .complete-system__grid {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr;
+  }
+  .complete-system__col {
+    display: grid;
+    gap: 10px;
+  }
   .complete-system__image-card {
     border-radius: 18px;
     border: 1px solid rgba(0, 0, 0, 0.06);
     background: #fff;
     overflow: hidden;
-    order: 1;
   }
   .complete-system__image { width: 100%; height: 100%; object-fit: cover; }
   .complete-system__banner {
-    order: 2;
     border-radius: 20px;
     background: #faff00;
     padding: 16px;
@@ -96,6 +117,7 @@
     color: #000;
     text-transform: uppercase;
     font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-stretch: 150%;
     font-size: clamp(18px, 2vw, 20px);
     line-height: 1.1;
     font-weight: 600;
@@ -115,6 +137,12 @@
     font-weight: 800;
     line-height: 1.2;
   }
+  .complete-system__card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
   .complete-system__checklist { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 8px; }
   .complete-system__check-item {
     display: flex;
@@ -132,7 +160,7 @@
     flex: 0 0 20px;
   }
   .complete-system__pill {
-    margin-top: 12px;
+    margin-top: 0;
     display: inline-flex;
     border-radius: 999px;
     background: #fff;
@@ -152,7 +180,7 @@
     font-weight: 500;
   }
   .complete-system__card2-body p { margin: 0; }
-  .complete-system__purple-card--second { margin-top: 10px; }
+  .complete-system__purple-card--second { margin-top: 0; }
   .complete-system__cta {
     margin-top: 14px;
     border-radius: 999px;
@@ -180,6 +208,20 @@
     gap: 6px;
     align-items: center;
   }
+  .complete-system__trust-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .complete-system__trust-icon {
+    width: 12px;
+    height: 15px;
+    flex: 0 0 12px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='15' viewBox='0 0 12 15' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M5.83295 0.0169435C5.71983 0.0608664 5.57027 0.144138 5.23264 0.351162C3.87624 1.18286 3.0821 1.62077 2.13607 2.05867C1.67621 2.27155 1.30613 2.41728 0.796213 2.58632C0.549435 2.66813 0.319738 2.74928 0.285752 2.76665C0.200778 2.8101 0.0694452 2.95847 0.0345048 3.05051C0.00804097 3.12023 0.00514655 3.20065 0.00082074 3.98739C-0.00178747 4.46073 0.00202937 5.87356 0.00931327 7.12702C0.0212252 9.17779 0.0251693 9.41283 0.0485637 9.47376C0.114182 9.64467 0.533977 10.367 0.796484 10.7607C1.31617 11.5401 2.06142 12.3857 2.82732 13.0652C3.24698 13.4374 3.30995 13.4894 3.65025 13.7447C4.44047 14.3375 5.10795 14.7151 5.80331 14.9627C5.87928 14.9898 5.94068 14.9989 6.0483 14.9994L6.19193 15L6.49361 14.8515C7.46736 14.372 8.29806 13.8419 8.96067 13.277C9.77079 12.5863 10.6637 11.5735 11.2983 10.6252C11.7239 9.98933 11.9002 9.64296 11.9645 9.316C12.0043 9.11374 12.0065 8.82775 11.9912 5.87595C11.9784 3.3922 11.9749 3.15154 11.9503 3.07569C11.9193 2.97999 11.8416 2.87114 11.7697 2.82253C11.7422 2.80401 11.5171 2.72012 11.2694 2.63611C9.76357 2.12547 8.33739 1.4044 6.58036 0.265357C6.21423 0.027988 6.17243 0.00841708 6.01664 0.00119753C5.93348 -0.00265927 5.86928 0.00285498 5.83295 0.0169435ZM5.76156 1.35054C4.96168 1.87898 3.68875 2.59096 2.82732 2.99172C2.33248 3.22195 1.88617 3.40645 1.30057 3.62289L1.13358 3.68462L1.1228 3.8121C1.11688 3.88221 1.10424 5.01552 1.09471 6.33054C1.07547 8.98747 1.07167 8.8622 1.18 9.14058C1.33424 9.53687 1.50638 9.82994 1.90181 10.3695C2.3945 11.0417 3.11831 11.8492 3.57039 12.2309C4.4055 12.9359 4.70546 13.1448 5.63362 13.6677C6.00645 13.8778 5.99146 13.877 6.33826 13.703C6.93603 13.403 7.49127 13.0383 8.10089 12.5452C8.65034 12.1008 9.17618 11.5823 9.62771 11.0396C9.96995 10.6283 10.1374 10.4029 10.4213 9.97181C10.7925 9.40797 10.8379 9.32471 10.9077 9.07933L10.9462 8.94386L10.9427 6.99953C10.9407 5.93014 10.9345 4.75171 10.9289 4.3808L10.9185 3.70642L10.8354 3.66957C10.7897 3.64932 10.6564 3.59508 10.5391 3.54904C9.6793 3.21149 9.41296 3.09572 8.81507 2.79967C8.11973 2.45538 7.40723 2.05443 6.52672 1.51192C5.98504 1.17818 6.01338 1.18417 5.76156 1.35054ZM8.01839 5.75507C7.98258 5.7663 7.92494 5.79145 7.89032 5.81096C7.8557 5.83045 7.32973 6.34972 6.72153 6.96486C5.90275 7.79297 5.59448 8.09489 5.53403 8.12785L5.45238 8.17239L4.86979 7.58243C4.54936 7.25796 4.24807 6.96646 4.20023 6.93463C4.15239 6.90282 4.07376 6.86288 4.02548 6.84587C3.94873 6.81883 3.92285 6.81703 3.81943 6.83144C3.67673 6.85133 3.60637 6.8853 3.49315 6.98901C3.36769 7.1039 3.33096 7.18763 3.32314 7.37666C3.31226 7.63899 3.27129 7.58598 4.2237 8.54194C4.67591 8.99583 5.08683 9.39712 5.13686 9.43369C5.26616 9.52822 5.35869 9.56207 5.4912 9.56333C5.62606 9.56462 5.73149 9.52273 5.86521 9.41474C6.0036 9.30299 8.60534 6.67383 8.65381 6.59676C8.78075 6.39493 8.76415 6.10293 8.6161 5.93398C8.46648 5.7632 8.22392 5.6906 8.01839 5.75507Z' fill='black'/%3E%3C/svg%3E");
+  }
   .complete-system__trust-row p,
   .complete-system__subnote {
     margin: 0;
@@ -193,13 +235,19 @@
   .complete-system__subnote { margin-top: 6px; }
   @media (min-width: 768px) {
     .complete-system { padding: 64px 32px; }
+    .complete-system__heading-accent { display: inline; }
     .complete-system__grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 10px;
-      align-items: stretch;
+      align-items: start;
     }
-    .complete-system__image-card { order: 2; grid-row: span 2; }
-    .complete-system__banner { order: 1; }
+    .complete-system__col--left {
+      min-height: 100%;
+      justify-content: center;
+    }
+    .complete-system__checklist {
+      gap: 14px;
+    }
     .complete-system__trust-row { flex-direction: row; justify-content: center; gap: 24px; }
   }
 {% endstylesheet %}

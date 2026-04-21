@@ -41,12 +41,13 @@
 
   <div class="program-contents__indicator" data-program-indicator>
     {% for block in section.blocks %}
-      <button
-        type="button"
+      <span
         class="program-contents__dot{% if forloop.first %} is-active{% endif %}"
         data-program-dot="{{ forloop.index0 }}"
+        role="button"
+        tabindex="0"
         aria-label="Go to card {{ forloop.index }}"
-      ></button>
+      ></span>
     {% endfor %}
   </div>
 </section>
@@ -57,17 +58,42 @@
     if (!section) return;
     const scroller = section.querySelector('[data-program-scroller]');
     const cards = section.querySelectorAll('[data-program-card]');
-    const dots = section.querySelectorAll('[data-program-dot]');
-    if (!scroller || !cards.length || !dots.length) return;
+    const dotsWrap = section.querySelector('[data-program-indicator]');
+    if (!scroller || !cards.length || !dotsWrap) return;
+
+    dotsWrap.innerHTML = '';
+    cards.forEach((_, index) => {
+      const dot = document.createElement('span');
+      dot.className = `program-contents__dot${index === 0 ? ' is-active' : ''}`;
+      dot.setAttribute('data-program-dot', String(index));
+      dot.setAttribute('role', 'button');
+      dot.setAttribute('tabindex', '0');
+      dot.setAttribute('aria-label', `Go to card ${index + 1}`);
+      dotsWrap.appendChild(dot);
+    });
+    const dots = Array.from(dotsWrap.querySelectorAll('[data-program-dot]'));
 
     const setActive = (index) => {
       dots.forEach((dot, i) => dot.classList.toggle('is-active', i === index));
     };
 
     const getIndex = () => {
-      const cardWidth = cards[0].getBoundingClientRect().width + 16;
-      if (!cardWidth) return 0;
-      return Math.max(0, Math.min(cards.length - 1, Math.round(scroller.scrollLeft / cardWidth)));
+      const scrollerRect = scroller.getBoundingClientRect();
+      const scrollerCenter = scrollerRect.left + scrollerRect.width / 2;
+      let bestIndex = 0;
+      let bestDistance = Number.POSITIVE_INFINITY;
+
+      cards.forEach((card, index) => {
+        const rect = card.getBoundingClientRect();
+        const center = rect.left + rect.width / 2;
+        const distance = Math.abs(center - scrollerCenter);
+        if (distance < bestDistance) {
+          bestDistance = distance;
+          bestIndex = index;
+        }
+      });
+
+      return bestIndex;
     };
 
     let ticking = false;
@@ -81,8 +107,15 @@
     });
 
     dots.forEach((dot, index) => {
-      dot.addEventListener('click', () => {
-        cards[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+      const goToCard = () => {
+        cards[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      };
+      dot.addEventListener('click', goToCard);
+      dot.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          goToCard();
+        }
       });
     });
   })();
@@ -104,6 +137,7 @@
     margin: 0;
     text-transform: uppercase;
     font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-stretch: 150%;
     font-size: clamp(24px, 3.4vw, 40px);
     line-height: 1.05;
     letter-spacing: 0.02em;
@@ -133,12 +167,14 @@
   }
 
   .program-contents__scroller {
+    --program-contents-mobile-card-width: min(82vw, 320px);
     display: flex;
     gap: 16px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    padding: 0 16px;
+    padding-inline: calc((100vw - var(--program-contents-mobile-card-width)) / 2);
     scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 
   .program-contents__scroller::-webkit-scrollbar {
@@ -147,12 +183,12 @@
 
   .program-contents__card {
     position: relative;
-    flex: 0 0 78%;
-    scroll-snap-align: start;
+    flex: 0 0 var(--program-contents-mobile-card-width);
+    scroll-snap-align: center;
     border-radius: 30px;
     overflow: hidden;
     background: #000;
-    aspect-ratio: 300 / 457;
+    aspect-ratio: 381 / 620;
   }
 
   .program-contents__image {
@@ -202,6 +238,7 @@
     text-transform: uppercase;
     color: #faff00;
     font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-stretch: 150%;
     font-size: clamp(20px, 2.1vw, 26px);
     font-weight: 600;
     line-height: 1.05;
@@ -221,22 +258,23 @@
     justify-content: center;
     align-items: center;
     gap: 8px;
-    margin-top: 14px;
+    margin-top: 24px;
   }
 
   .program-contents__dot {
+    display: block;
+    flex: 0 0 auto;
     width: 20px;
-    height: 3px;
-    border: 0;
-    padding: 0;
+    height: 2px;
     border-radius: 999px;
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(138, 138, 138, 0.4);
     cursor: pointer;
+    transition: width 150ms ease, background 150ms ease;
   }
 
   .program-contents__dot.is-active {
-    width: 45px;
-    background: rgba(0, 0, 0, 0.6);
+    width: 40px;
+    background: #8a8a8a;
   }
 
   @media (min-width: 640px) {
@@ -254,6 +292,19 @@
       padding: 0 32px;
     }
 
+    .program-contents__indicator {
+      margin-top: 40px;
+    }
+
+    .program-contents__dot {
+      width: 28px;
+      height: 3px;
+    }
+
+    .program-contents__dot.is-active {
+      width: 50px;
+    }
+
     .program-contents__scroller {
       max-width: 1184px;
       margin: 0 auto;
@@ -262,7 +313,8 @@
     }
 
     .program-contents__card {
-      flex: 1 1 calc(25% - 15px);
+      flex: 0 0 calc((100% - 40px) / 3);
+      scroll-snap-align: start;
       aspect-ratio: 381 / 620;
     }
   }
