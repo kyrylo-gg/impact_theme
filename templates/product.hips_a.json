@@ -29,6 +29,87 @@
         "trust_line": "40,000+ students · Lifetime access · No equipment · Any device"
       }
     },
+    "bt_pain_points_3wVjJN": {
+      "type": "bt_pain_points",
+      "blocks": {
+        "card_JtGBMw": {
+          "type": "card",
+          "settings": {
+            "emoji": "😤",
+            "text": "I miss a few workouts… and then I quit for weeks.",
+            "back_emoji": "😉",
+            "back_text": "This system gives you a simple way to continue, so you don't restart.",
+            "variant": "blue"
+          }
+        },
+        "card_Jt3KrT": {
+          "type": "card",
+          "settings": {
+            "emoji": "😢",
+            "text": "PMS hits — and my routine falls apart every month.",
+            "back_emoji": "🙌",
+            "back_text": "You'll have a built-in low-energy option, so you can stay consistent.",
+            "variant": "purple"
+          }
+        },
+        "card_RVGWLg": {
+          "type": "card",
+          "settings": {
+            "emoji": "📅",
+            "text": "I can't stick to long workouts — my schedule is chaos.",
+            "back_emoji": "😌",
+            "back_text": "You'll always have a minimum effective option that still counts.",
+            "variant": "blue"
+          }
+        },
+        "card_hEPCnK": {
+          "type": "card",
+          "settings": {
+            "emoji": "😬",
+            "text": "Jumping/HIIT hurts my knees — or feels too intense.",
+            "back_emoji": "🤸",
+            "back_text": "You start joint-friendly and level up only when you're ready.",
+            "variant": "purple"
+          }
+        },
+        "card_HffLgj": {
+          "type": "card",
+          "settings": {
+            "emoji": "🤷‍♀️",
+            "text": "I don't know what to do — so I do random workouts.",
+            "back_emoji": "😄",
+            "back_text": "You'll follow a clear roadmap: Build → Sculpt → Burn, step by step.",
+            "variant": "blue"
+          }
+        },
+        "card_wj6DFX": {
+          "type": "card",
+          "settings": {
+            "emoji": "😭",
+            "text": "I want to look tighter, but I hate \"punishment\" workouts.",
+            "back_emoji": "⚡️",
+            "back_text": "This is consistency-first training — results without extremes.",
+            "variant": "purple"
+          }
+        }
+      },
+      "block_order": [
+        "card_JtGBMw",
+        "card_Jt3KrT",
+        "card_RVGWLg",
+        "card_hEPCnK",
+        "card_HffLgj",
+        "card_wj6DFX"
+      ],
+      "name": "BT_PainPoints",
+      "settings": {
+        "title_1": "You're Not Lazy.",
+        "title_2": "You Just Need a Better System.",
+        "subtitle": "Tap what feels true for you.",
+        "bottom_1": "If any of that felt familiar, you're in the right place.",
+        "bottom_2": "Here's who built this system — and why it's different."
+      }
+    },
     "why_stiff": {
       "type": "why-stiff",
       "settings": {
@@ -498,6 +579,90 @@
         "subnote": "No deadline, no subscription, any device"
       }
     },
+    "bt_faq_Kwt9rB": {
+      "type": "bt_faq",
+      "blocks": {
+        "faq_xjPW8N": {
+          "type": "faq",
+          "settings": {
+            "question": "Is this program good for women 35+ / 40+ / 50+?",
+            "answer": "Yes! The program is designed for women of all ages and fitness levels. Each level adapts to your body's needs."
+          }
+        },
+        "faq_g6bMLP": {
+          "type": "faq",
+          "settings": {
+            "question": "Do I have to do jumping or HIIT?",
+            "answer": "No jumping or HIIT required. The workouts are joint-friendly and designed for sustainable progress."
+          }
+        },
+        "faq_pgXqyz": {
+          "type": "faq",
+          "settings": {
+            "question": "What if I have low-energy days or PMS?",
+            "answer": "That's exactly what Plan B is for. On tough days, switch to a gentler flow and stay on track without burning out."
+          }
+        },
+        "faq_7TQqPP": {
+          "type": "faq",
+          "settings": {
+            "question": "How many days per week is it?",
+            "answer": "The program is designed for 3–5 days per week, depending on your level and schedule."
+          }
+        },
+        "faq_JEktxm": {
+          "type": "faq",
+          "settings": {
+            "question": "How long is each workout?",
+            "answer": "Workouts range from 20 to 40 minutes depending on the level."
+          }
+        },
+        "faq_W8PnVU": {
+          "type": "faq",
+          "settings": {
+            "question": "Do I need equipment?",
+            "answer": "Minimal equipment — a set of dumbbells and a mat are enough to get started."
+          }
+        },
+        "faq_4ftEPa": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I access the program?",
+            "answer": "You'll get instant access through our app. Works on any device — phone, tablet, or computer."
+          }
+        },
+        "faq_X3JRVH": {
+          "type": "faq",
+          "settings": {
+            "question": "Is it a one-time purchase or subscription?",
+            "answer": "It's a one-time purchase. Pay once, access forever."
+          }
+        },
+        "faq_EiT4tX": {
+          "type": "faq",
+          "settings": {
+            "question": "What if I'm a complete beginner?",
+            "answer": "Start with the Soft level — it's built specifically for beginners with zero fitness experience."
+          }
+        }
+      },
+      "block_order": [
+        "faq_xjPW8N",
+        "faq_g6bMLP",
+        "faq_pgXqyz",
+        "faq_7TQqPP",
+        "faq_JEktxm",
+        "faq_W8PnVU",
+        "faq_4ftEPa",
+        "faq_X3JRVH",
+        "faq_EiT4tX"
+      ],
+      "name": "BT_FAQ",
+      "settings": {
+        "title": "FAQ",
+        "footer": "If you're ready, your best starting point is the one you'll stick with."
+      }
+    },
     "body_ready_cta": {
       "type": "body-ready-cta",
       "settings": {
@@ -589,6 +754,7 @@
   },
   "order": [
     "hips_hero_banner",
+    "bt_pain_points_3wVjJN",
     "why_stiff",
     "hip_mobility",
     "about_founder",
@@ -599,6 +765,7 @@
     "program_for_you",
     "hips_testimonials",
     "complete_system",
+    "bt_faq_Kwt9rB",
     "body_ready_cta",
     "main"
   ]
