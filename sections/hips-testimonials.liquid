@@ -4,6 +4,7 @@
       <span class="hips-testimonials__heading-lead">{{ section.settings.heading_lead | escape }}</span>
       <span class="hips-testimonials__heading-accent"> {{ section.settings.heading_accent | escape }}</span>
     </h2>
+    <div class="hips-testimonials__heading-line" aria-hidden="true"></div>
     <div class="hips-testimonials__subheading rte">{{ section.settings.subheading }}</div>
 
     <div class="hips-testimonials__grid">
@@ -65,6 +66,13 @@
   }
   .hips-testimonials__heading-lead { color: #000; font-weight: 600; }
   .hips-testimonials__heading-accent { color: #0038ff; font-weight: 900; }
+  .hips-testimonials__heading-line {
+    width: 64px;
+    height: 4px;
+    margin: 12px auto 0;
+    border-radius: 999px;
+    background: #0038ff;
+  }
   .hips-testimonials__subheading {
     margin-top: 12px;
     text-align: center;

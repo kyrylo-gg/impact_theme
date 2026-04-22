@@ -2,6 +2,7 @@
   <div class="why-this-works__container">
     <p class="why-this-works__eyebrow">{{ section.settings.eyebrow | escape }}</p>
     <h2 class="why-this-works__heading">{{ section.settings.heading | escape }}</h2>
+    <div class="why-this-works__heading-line" aria-hidden="true"></div>
     <div class="why-this-works__subheading rte">{{ section.settings.subheading }}</div>
 
     {% liquid
@@ -113,6 +114,13 @@
     font-weight: 900;
     line-height: 1.05;
     letter-spacing: 0.02em;
+  }
+  .why-this-works__heading-line {
+    width: 64px;
+    height: 4px;
+    margin: 12px auto 0;
+    border-radius: 999px;
+    background: #0038ff;
   }
 
   .why-this-works__subheading {

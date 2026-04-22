@@ -247,6 +247,11 @@
     .about-founder__blue-label-line {
       white-space: normal;
     }
+
+    .about-founder__blue-label .about-founder__peach {
+      top: -27px;
+      bottom: auto;
+    }
   }
 
   .about-founder__blue-label .about-founder__peach {
@@ -434,7 +439,7 @@
 
     .about-founder__blue-label .about-founder__peach {
       right: 6px;
-      bottom: 0;
+      bottom: -20px;
       font-size: 52px;
     }
 
@@ -467,10 +472,92 @@
     }
 
     .about-founder__stats-cluster {
-      left: 12px;
-      right: 12px;
-      bottom: 12px;
-      top: 12px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+    }
+
+    /* Relative positioning from Figma (381x420 artboard) */
+    .about-founder__stat--left {
+      left: 34.12%;
+      top: 67.38%;
+      bottom: auto;
+      width: 40.94%;
+      max-width: none;
+      padding: 19px 20px;
+    }
+
+    .about-founder__stat--left .about-founder__stat-label {
+      max-width: 13ch;
+    }
+
+    .about-founder__stat--right {
+      left: 64.04%;
+      top: 54.05%;
+      right: auto;
+      bottom: auto;
+      width: 28.61%;
+      max-width: none;
+      padding: 20px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .about-founder__heading {
+      gap: 0;
+    }
+
+    .about-founder__heading::after {
+      content: none !important;
+    }
+
+    .about-founder__heading-accent {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .about-founder__heading-accent::after {
+      content: '';
+      width: 64px;
+      height: 4px;
+      margin-top: 10px;
+      border-radius: 999px;
+      background: var(--about-founder-accent, #0038ff);
+    }
+
+    .about-founder__blue-label .about-founder__peach {
+      top: -20px;
+      bottom: auto;
+      font-size: 60px;
+    }
+
+    /* Mobile stats card: relative positioning from Figma (335x420) */
+    .about-founder__stats-cluster {
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+    }
+
+    .about-founder__stat--left {
+      left: 27.46%;
+      top: 69.29%;
+      bottom: auto;
+      width: 46.57%;
+      max-width: none;
+      padding: 19px 20px;
+    }
+
+    .about-founder__stat--right {
+      left: 61.49%;
+      top: 55.95%;
+      right: auto;
+      bottom: auto;
+      width: 32.54%;
+      max-width: none;
+      padding: 20px;
     }
   }
 {% endstylesheet %}
