@@ -12,8 +12,8 @@
     "hips_hero_banner": {
       "type": "hips-hero-banner",
       "settings": {
-        "video_desktop": "shopify://files/videos/Desk 4.mp4",
-        "video_mobile": "shopify://files/videos/Mob 4.mp4",
+        "video_desktop": "shopify://files/videos/Desk 2.mp4",
+        "video_mobile": "shopify://files/videos/Mob 2.mp4",
         "overlay_opacity_desktop": 10,
         "overlay_opacity_mobile": 30,
         "tag_text": "Hip Mobility Program · 4 weeks",
