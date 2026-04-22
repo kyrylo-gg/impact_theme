@@ -5,7 +5,7 @@
 
 {%- liquid
   assign title = section.settings.title | default: 'FAQ'
-  assign footer = section.settings.footer | default: "If you&#39;re ready, your best starting point is the one you&#39;ll stick with."
+  assign footer = section.settings.footer
 -%}
 
 <section class="bt-wrap bt-faq">
@@ -27,7 +27,9 @@
       {%- endfor -%}
     </div>
 
-    <p class="bt-faq__footer">{{ footer }}</p>
+    {%- if footer != blank -%}
+      <p class="bt-faq__footer">{{ footer }}</p>
+    {%- endif -%}
   </div>
 </section>
 
