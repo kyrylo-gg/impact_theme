@@ -623,6 +623,13 @@
             "question": "Can I get a refund?",
             "answer": "We offer a 30-day money-back guarantee. No questions asked."
           }
+        },
+        "faq_CEENjQ": {
+          "type": "faq",
+          "settings": {
+            "question": "Do I need to do Hip Mobility before Twerk?",
+            "answer": ""
+          }
         }
       },
       "block_order": [
@@ -631,7 +638,8 @@
         "faq_g6bMLP",
         "faq_JEktxm",
         "faq_4ftEPa",
-        "faq_EzejkF"
+        "faq_EzejkF",
+        "faq_CEENjQ"
       ],
       "name": "BT_FAQ",
       "settings": {
