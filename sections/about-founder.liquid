@@ -244,8 +244,22 @@
   }
 
   @media (max-width: 767px) {
+    .about-founder__blue-label-text {
+      display: block;
+      max-width: 15ch;
+    }
+
     .about-founder__blue-label-line {
+      display: inline;
       white-space: normal;
+    }
+
+    .about-founder__blue-label-line::after {
+      content: ' ';
+    }
+
+    .about-founder__blue-label-line:last-child::after {
+      content: '';
     }
 
     .about-founder__blue-label .about-founder__peach {
