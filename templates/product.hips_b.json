@@ -121,11 +121,11 @@
       "settings": {
         "video_mobile": "shopify://files/videos/Mob 1.mp4",
         "video_desktop": "shopify://files/videos/Desk 1.mp4",
-        "eyebrow": "Hip Mobility is not a softer option",
-        "headline_lead": "It is the step that",
-        "headline_accent": "makes everything else possible",
-        "body": "<p>The Twerk program works. But locked hips make week one a wall. Hip Mobility removes that wall. <strong>4 weeks to unlock, 7 days to perform.</strong></p>",
-        "footnote": "Nastya built this program because she saw what happened without it.",
+        "eyebrow": "Not yoga. Not physiotherapy.",
+        "headline_lead": "Not another routine",
+        "headline_accent": "that works for a week",
+        "body": "<p>Most programs are built for athletes. This one is built for a body that sits. Progressive movement designed around your actual life.</p>",
+        "footnote": "The program is taught by someone who has spent her life understandingexactly how hips move.",
         "accent_color": "#faff00"
       }
     },
