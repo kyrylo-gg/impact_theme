@@ -585,22 +585,8 @@
         "faq_xjPW8N": {
           "type": "faq",
           "settings": {
-            "question": "How long is each workout?",
-            "answer": "Just 10 minutes. Stretching sessions are also 10 min, and meditations are 8 min."
-          }
-        },
-        "faq_g6bMLP": {
-          "type": "faq",
-          "settings": {
-            "question": "How many days per week do I need to train?",
-            "answer": "3 workouts + 1 stretching + 1 meditation per week — so about 5 short sessions."
-          }
-        },
-        "faq_JEktxm": {
-          "type": "faq",
-          "settings": {
-            "question": "I sit 8+ hours a day — is 10 min enough?",
-            "answer": "Yes, when done consistently. The program also teaches you micro-movements to use throughout your day, not just during workouts."
+            "question": "Is this suitable for complete beginners?",
+            "answer": "Yes, 100%. The program starts with gentle, foundational movements and builds gradually over 4 weeks."
           }
         },
         "faq_pgXqyz": {
@@ -608,6 +594,20 @@
           "settings": {
             "question": "Do I need equipment?",
             "answer": "No equipment needed. Just your body and a comfortable surface to sit/lie on."
+          }
+        },
+        "faq_g6bMLP": {
+          "type": "faq",
+          "settings": {
+            "question": "How long is each workout?",
+            "answer": "Just 10 minutes. Stretching sessions are also 10 min, and meditations are 8 min."
+          }
+        },
+        "faq_JEktxm": {
+          "type": "faq",
+          "settings": {
+            "question": "BAD KNEES",
+            "answer": ""
           }
         },
         "faq_7TQqPP": {
@@ -634,8 +634,8 @@
         "faq_4ftEPa": {
           "type": "faq",
           "settings": {
-            "question": "How do I access the program?",
-            "answer": "You'll get instant access through our app. Works on any device — phone, tablet, or computer."
+            "question": "What happens after I buy?",
+            "answer": "You'll get instant access to the program through our app. Works on any device — phone, tablet, or computer."
           }
         },
         "faq_X3JRVH": {
@@ -648,9 +648,9 @@
       },
       "block_order": [
         "faq_xjPW8N",
+        "faq_pgXqyz",
         "faq_g6bMLP",
         "faq_JEktxm",
-        "faq_pgXqyz",
         "faq_7TQqPP",
         "faq_EiT4tX",
         "faq_W8PnVU",
