@@ -644,7 +644,7 @@
       "name": "BT_FAQ",
       "settings": {
         "title": "FAQ",
-        "footer": "If you're ready, your best starting point is the one you'll stick with."
+        "footer": ""
       }
     },
     "body_ready_cta": {
