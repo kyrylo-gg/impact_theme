@@ -36,9 +36,9 @@
           "type": "card",
           "settings": {
             "emoji": "😫",
-            "text": "You wake up stiff. Not injured, just locked. Like your body forgot how to move overnight.",
+            "text": "You wake up stiff. Not injured, just locked.      Like your body forgot how to move overnight.",
             "back_emoji": "🤩",
-            "back_text": "You wake up and your body is ready.Loose, warm, already in motion before the day starts.",
+            "back_text": "You wake up and your body is ready. Loose, warm, already in motion before the day starts.",
             "variant": "blue"
           }
         },
