@@ -132,8 +132,8 @@
     "about_founder": {
       "type": "about-founder",
       "settings": {
-        "heading_lead": "I have spent my whole life learning",
-        "heading_accent": "how hips move",
+        "heading_lead": "\"I have spent my whole life learning",
+        "heading_accent": "how hips move\"",
         "main_image": "shopify://shop_images/Frame_344.png",
         "main_image_mobile": "shopify://shop_images/Frame_346.png",
         "blue_label": "This is the program\nI wish I had given\neveryone first",
