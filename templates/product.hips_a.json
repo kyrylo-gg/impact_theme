@@ -610,27 +610,6 @@
             "answer": ""
           }
         },
-        "faq_7TQqPP": {
-          "type": "faq",
-          "settings": {
-            "question": "Will this help with hip pain?",
-            "answer": "Yes — it's designed to reduce pain and stiffness. However, if you have an acute injury or sharp pain, consult a doctor first."
-          }
-        },
-        "faq_EiT4tX": {
-          "type": "faq",
-          "settings": {
-            "question": "What if I miss a day?",
-            "answer": "No need to restart. Simply pick up where you left off — consistency over perfection."
-          }
-        },
-        "faq_W8PnVU": {
-          "type": "faq",
-          "settings": {
-            "question": "Can I combine this with my current routine?",
-            "answer": "Absolutely. It works as a warm-up, cool-down, or standalone session alongside any training style."
-          }
-        },
         "faq_4ftEPa": {
           "type": "faq",
           "settings": {
@@ -638,11 +617,11 @@
             "answer": "You'll get instant access to the program through our app. Works on any device — phone, tablet, or computer."
           }
         },
-        "faq_X3JRVH": {
+        "faq_EzejkF": {
           "type": "faq",
           "settings": {
-            "question": "Is it a one-time purchase or subscription?",
-            "answer": "It's a one-time purchase. Pay once, access forever."
+            "question": "Can I get a refund?",
+            "answer": "We offer a 30-day money-back guarantee. No questions asked."
           }
         }
       },
@@ -651,11 +630,8 @@
         "faq_pgXqyz",
         "faq_g6bMLP",
         "faq_JEktxm",
-        "faq_7TQqPP",
-        "faq_EiT4tX",
-        "faq_W8PnVU",
         "faq_4ftEPa",
-        "faq_X3JRVH"
+        "faq_EzejkF"
       ],
       "name": "BT_FAQ",
       "settings": {
