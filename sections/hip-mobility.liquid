@@ -33,9 +33,15 @@
 
       <div class="hip-mobility__content">
         <p class="hip-mobility__eyebrow">{{ section.settings.eyebrow | escape }}</p>
-        <h2 class="hip-mobility__headline">
-          <span class="hip-mobility__headline-lead">{{ section.settings.headline_lead | escape }}</span><span class="hip-mobility__headline-accent">{{ section.settings.headline_accent | escape }}</span>
-        </h2>
+        {% if template.name == 'product' and template.suffix == 'hips_a_ceo' %}
+          <div class="hip-mobility__headline">
+            <span class="hip-mobility__headline-lead">{{ section.settings.headline_lead | escape }}</span><span class="hip-mobility__headline-accent">{{ section.settings.headline_accent | escape }}</span>
+          </div>
+        {% else %}
+          <h2 class="hip-mobility__headline">
+            <span class="hip-mobility__headline-lead">{{ section.settings.headline_lead | escape }}</span><span class="hip-mobility__headline-accent">{{ section.settings.headline_accent | escape }}</span>
+          </h2>
+        {% endif %}
         <span class="hip-mobility__underline" aria-hidden="true"></span>
         <div class="hip-mobility__body rte">{{ section.settings.body }}</div>
       </div>

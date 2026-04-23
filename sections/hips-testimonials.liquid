@@ -1,9 +1,16 @@
 <section class="hips-testimonials" id="hips-testimonials-{{ section.id }}">
   <div class="hips-testimonials__container">
-    <h2 class="hips-testimonials__heading">
-      <span class="hips-testimonials__heading-lead">{{ section.settings.heading_lead | escape }}</span>
-      <span class="hips-testimonials__heading-accent"> {{ section.settings.heading_accent | escape }}</span>
-    </h2>
+    {% if template.name == 'product' and template.suffix == 'hips_a_ceo' %}
+      <div class="hips-testimonials__heading">
+        <span class="hips-testimonials__heading-lead">{{ section.settings.heading_lead | escape }}</span>
+        <span class="hips-testimonials__heading-accent"> {{ section.settings.heading_accent | escape }}</span>
+      </div>
+    {% else %}
+      <h2 class="hips-testimonials__heading">
+        <span class="hips-testimonials__heading-lead">{{ section.settings.heading_lead | escape }}</span>
+        <span class="hips-testimonials__heading-accent"> {{ section.settings.heading_accent | escape }}</span>
+      </h2>
+    {% endif %}
     <div class="hips-testimonials__heading-line" aria-hidden="true"></div>
     <div class="hips-testimonials__subheading rte">{{ section.settings.subheading }}</div>
 

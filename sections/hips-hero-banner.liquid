@@ -55,14 +55,25 @@
           {% endif %}
 
           {% if section.settings.heading_main != blank or section.settings.heading_accent != blank %}
-            <h1 class="hips-hero-banner__title">
-              {% if section.settings.heading_main != blank %}
-                <span>{{ section.settings.heading_main | escape }}</span>
-              {% endif %}
-              {% if section.settings.heading_accent != blank %}
-                <span class="hips-hero-banner__title-accent"> {{ section.settings.heading_accent | escape }}</span>
-              {% endif %}
-            </h1>
+            {% if template.name == 'product' and template.suffix == 'hips_a_ceo' %}
+              <div class="hips-hero-banner__title">
+                {% if section.settings.heading_main != blank %}
+                  <span>{{ section.settings.heading_main | escape }}</span>
+                {% endif %}
+                {% if section.settings.heading_accent != blank %}
+                  <span class="hips-hero-banner__title-accent"> {{ section.settings.heading_accent | escape }}</span>
+                {% endif %}
+              </div>
+            {% else %}
+              <h1 class="hips-hero-banner__title">
+                {% if section.settings.heading_main != blank %}
+                  <span>{{ section.settings.heading_main | escape }}</span>
+                {% endif %}
+                {% if section.settings.heading_accent != blank %}
+                  <span class="hips-hero-banner__title-accent"> {{ section.settings.heading_accent | escape }}</span>
+                {% endif %}
+              </h1>
+            {% endif %}
           {% endif %}
 
           <span class="hips-hero-banner__underline" aria-hidden="true"></span>

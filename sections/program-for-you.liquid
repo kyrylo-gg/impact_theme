@@ -1,9 +1,16 @@
 <section class="program-for-you" id="program-for-you-{{ section.id }}">
   <div class="program-for-you__container">
-    <h2 class="program-for-you__heading">
-      <span class="program-for-you__heading-lead">{{ section.settings.heading_lead | escape }}</span>
-      <span class="program-for-you__heading-accent"> {{ section.settings.heading_accent | escape }}</span>
-    </h2>
+    {% if template.name == 'product' and template.suffix == 'hips_a_ceo' %}
+      <div class="program-for-you__heading">
+        <span class="program-for-you__heading-lead">{{ section.settings.heading_lead | escape }}</span>
+        <span class="program-for-you__heading-accent"> {{ section.settings.heading_accent | escape }}</span>
+      </div>
+    {% else %}
+      <h2 class="program-for-you__heading">
+        <span class="program-for-you__heading-lead">{{ section.settings.heading_lead | escape }}</span>
+        <span class="program-for-you__heading-accent"> {{ section.settings.heading_accent | escape }}</span>
+      </h2>
+    {% endif %}
 
     <p class="program-for-you__label">{{ section.settings.yes_label | escape }}</p>
 

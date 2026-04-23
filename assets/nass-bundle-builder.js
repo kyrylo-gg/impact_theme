@@ -100,6 +100,15 @@
       || templateSuffix === 'hips-b'
       || templateSuffix === 'hips-c';
     const isSingleProgramSelectionTemplate = isBundlesDescriptionTemplate || isHipsSingleProgramTemplate;
+    const isHipsBootyBuilderAutoAddTemplate = templateSuffix === 'hips_a'
+      || templateSuffix === 'hips_a_ceo'
+      || templateSuffix === 'hips_b'
+      || templateSuffix === 'hips_c'
+      || templateSuffix === 'hips-a'
+      || templateSuffix === 'hips-a-ceo'
+      || templateSuffix === 'hips-b'
+      || templateSuffix === 'hips-c';
+    const allowBootyBuilderRuleMode = isBundlesDescriptionTemplate || isHipsBootyBuilderAutoAddTemplate;
     const bodyClassName = (typeof document !== 'undefined' && document.body && document.body.className)
       ? String(document.body.className).toLowerCase()
       : '';
@@ -529,7 +538,7 @@
       ) {
         return 'vip_or_essential';
       }
-      if (title.indexOf('booty builder bundle') !== -1) {
+      if (allowBootyBuilderRuleMode && title.indexOf('booty builder bundle') !== -1) {
         return 'booty_builder';
       }
       return '';
@@ -547,7 +556,7 @@
       ) {
         return 'vip_or_essential';
       }
-      if (title.indexOf('booty builder bundle') !== -1) {
+      if (allowBootyBuilderRuleMode && title.indexOf('booty builder bundle') !== -1) {
         return 'booty_builder';
       }
       return '';

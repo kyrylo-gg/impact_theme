@@ -14,10 +14,17 @@
     {% if section.settings.intro_line != blank %}
       <p class="complete-system__intro">{{ section.settings.intro_line | escape }}</p>
     {% endif %}
-    <h2 class="complete-system__heading">
-      <span class="complete-system__heading-lead">{{ section.settings.heading_lead | escape }}</span>
-      <span class="complete-system__heading-accent"> {{ section.settings.heading_accent | escape }}</span>
-    </h2>
+    {% if template.name == 'product' and template.suffix == 'hips_a_ceo' %}
+      <div class="complete-system__heading">
+        <span class="complete-system__heading-lead">{{ section.settings.heading_lead | escape }}</span>
+        <span class="complete-system__heading-accent"> {{ section.settings.heading_accent | escape }}</span>
+      </div>
+    {% else %}
+      <h2 class="complete-system__heading">
+        <span class="complete-system__heading-lead">{{ section.settings.heading_lead | escape }}</span>
+        <span class="complete-system__heading-accent"> {{ section.settings.heading_accent | escape }}</span>
+      </h2>
+    {% endif %}
 
     <div class="complete-system__card">
       <div class="complete-system__grid">
@@ -43,7 +50,11 @@
 
           <div class="complete-system__purple-card complete-system__purple-card--first">
             <div class="complete-system__card-head">
-              <h3 class="complete-system__purple-title">{{ section.settings.card1_title | escape }}</h3>
+              {% if template.name == 'product' and template.suffix == 'hips_a_ceo' %}
+                <div class="complete-system__purple-title">{{ section.settings.card1_title | escape }}</div>
+              {% else %}
+                <h3 class="complete-system__purple-title">{{ section.settings.card1_title | escape }}</h3>
+              {% endif %}
               <span class="complete-system__pill">{{ section.settings.card1_pill | escape }}</span>
             </div>
             <ul class="complete-system__checklist">
@@ -59,7 +70,11 @@
           {% if has_card2 %}
             <div class="complete-system__purple-card complete-system__purple-card--second">
               <div class="complete-system__card-head">
-                <h3 class="complete-system__purple-title">{{ section.settings.card2_title | escape }}</h3>
+                {% if template.name == 'product' and template.suffix == 'hips_a_ceo' %}
+                  <div class="complete-system__purple-title">{{ section.settings.card2_title | escape }}</div>
+                {% else %}
+                  <h3 class="complete-system__purple-title">{{ section.settings.card2_title | escape }}</h3>
+                {% endif %}
                 <span class="complete-system__pill">{{ section.settings.card2_pill | escape }}</span>
               </div>
               {% if card2_body_plain != blank %}

@@ -13,9 +13,15 @@
     {% if about_intro != blank %}
       <p class="about-founder__intro">{{ about_intro | escape }}</p>
     {% endif %}
-    <h2 class="about-founder__heading">
-      <span class="about-founder__heading-lead">{{ section.settings.heading_lead | escape }}</span><span class="about-founder__heading-accent">{{ section.settings.heading_accent | escape }}</span>
-    </h2>
+    {% if template.name == 'product' and template.suffix == 'hips_a_ceo' %}
+      <div class="about-founder__heading">
+        <span class="about-founder__heading-lead">{{ section.settings.heading_lead | escape }}</span><span class="about-founder__heading-accent">{{ section.settings.heading_accent | escape }}</span>
+      </div>
+    {% else %}
+      <h2 class="about-founder__heading">
+        <span class="about-founder__heading-lead">{{ section.settings.heading_lead | escape }}</span><span class="about-founder__heading-accent">{{ section.settings.heading_accent | escape }}</span>
+      </h2>
+    {% endif %}
 
     <div class="about-founder__grid">
       <div class="about-founder__main-wrap">

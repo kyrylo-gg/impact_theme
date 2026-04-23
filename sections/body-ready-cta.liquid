@@ -20,15 +20,27 @@
         <div class="body-ready-cta__yellow">
           <p class="body-ready-cta__eyebrow">{{ section.settings.eyebrow | escape }}</p>
           {%- assign headline_parts = section.settings.headline | strip | split: ' system is ' -%}
-          <h2 class="body-ready-cta__headline">
-            {% if headline_parts.size == 2 %}
-              <span>{{ headline_parts[0] | escape }}</span><br>
-              <span>system is</span><br>
-              <span>{{ headline_parts[1] | escape }}</span>
-            {% else %}
-              {{ section.settings.headline | escape }}
-            {% endif %}
-          </h2>
+          {% if template.name == 'product' and template.suffix == 'hips_a_ceo' %}
+            <div class="body-ready-cta__headline">
+              {% if headline_parts.size == 2 %}
+                <span>{{ headline_parts[0] | escape }}</span><br>
+                <span>system is</span><br>
+                <span>{{ headline_parts[1] | escape }}</span>
+              {% else %}
+                {{ section.settings.headline | escape }}
+              {% endif %}
+            </div>
+          {% else %}
+            <h2 class="body-ready-cta__headline">
+              {% if headline_parts.size == 2 %}
+                <span>{{ headline_parts[0] | escape }}</span><br>
+                <span>system is</span><br>
+                <span>{{ headline_parts[1] | escape }}</span>
+              {% else %}
+                {{ section.settings.headline | escape }}
+              {% endif %}
+            </h2>
+          {% endif %}
 
           <div class="body-ready-cta__starburst" aria-hidden="true">
             {% if section.settings.badge_image != blank %}

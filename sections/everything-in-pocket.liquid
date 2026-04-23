@@ -1,10 +1,17 @@
 <section class="everything-in-pocket" id="everything-in-pocket-{{ section.id }}">
   <div class="everything-in-pocket__container">
     <div class="everything-in-pocket__mobile-head">
-      <h2 class="everything-in-pocket__heading">
-        <span class="everything-in-pocket__heading-lead">{{ section.settings.heading_lead | escape }}</span>
-        <span class="everything-in-pocket__heading-accent">{{ section.settings.heading_accent | escape }}</span>
-      </h2>
+      {% if template.name == 'product' and template.suffix == 'hips_a_ceo' %}
+        <div class="everything-in-pocket__heading">
+          <span class="everything-in-pocket__heading-lead">{{ section.settings.heading_lead | escape }}</span>
+          <span class="everything-in-pocket__heading-accent">{{ section.settings.heading_accent | escape }}</span>
+        </div>
+      {% else %}
+        <h2 class="everything-in-pocket__heading">
+          <span class="everything-in-pocket__heading-lead">{{ section.settings.heading_lead | escape }}</span>
+          <span class="everything-in-pocket__heading-accent">{{ section.settings.heading_accent | escape }}</span>
+        </h2>
+      {% endif %}
       <div class="everything-in-pocket__body rte">{{ section.settings.body }}</div>
     </div>
 
@@ -26,10 +33,17 @@
       </div>
 
       <div class="everything-in-pocket__right">
-        <h2 class="everything-in-pocket__heading everything-in-pocket__heading--desktop">
-          <span class="everything-in-pocket__heading-lead">{{ section.settings.heading_lead | escape }}</span>
-          <span class="everything-in-pocket__heading-accent">{{ section.settings.heading_accent | escape }}</span>
-        </h2>
+        {% if template.name == 'product' and template.suffix == 'hips_a_ceo' %}
+          <div class="everything-in-pocket__heading everything-in-pocket__heading--desktop">
+            <span class="everything-in-pocket__heading-lead">{{ section.settings.heading_lead | escape }}</span>
+            <span class="everything-in-pocket__heading-accent">{{ section.settings.heading_accent | escape }}</span>
+          </div>
+        {% else %}
+          <h2 class="everything-in-pocket__heading everything-in-pocket__heading--desktop">
+            <span class="everything-in-pocket__heading-lead">{{ section.settings.heading_lead | escape }}</span>
+            <span class="everything-in-pocket__heading-accent">{{ section.settings.heading_accent | escape }}</span>
+          </h2>
+        {% endif %}
         <div class="everything-in-pocket__body everything-in-pocket__body--desktop rte">{{ section.settings.body }}</div>
 
         <div class="everything-in-pocket__features">

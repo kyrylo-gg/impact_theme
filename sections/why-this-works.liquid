@@ -1,7 +1,11 @@
 <section class="why-this-works" id="why-this-works-{{ section.id }}">
   <div class="why-this-works__container">
     <p class="why-this-works__eyebrow">{{ section.settings.eyebrow | escape }}</p>
-    <h2 class="why-this-works__heading">{{ section.settings.heading | escape }}</h2>
+    {% if template.name == 'product' and template.suffix == 'hips_a_ceo' %}
+      <div class="why-this-works__heading">{{ section.settings.heading | escape }}</div>
+    {% else %}
+      <h2 class="why-this-works__heading">{{ section.settings.heading | escape }}</h2>
+    {% endif %}
     <div class="why-this-works__heading-line" aria-hidden="true"></div>
     <div class="why-this-works__subheading rte">{{ section.settings.subheading }}</div>
 

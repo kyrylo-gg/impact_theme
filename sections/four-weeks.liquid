@@ -1,9 +1,16 @@
 <section class="four-weeks" id="four-weeks-{{ section.id }}">
   <div class="four-weeks__container">
-    <h2 class="four-weeks__heading">
-      <span class="four-weeks__heading-lead">{{ section.settings.heading_lead | escape }}</span>
-      <span class="four-weeks__heading-accent"> {{ section.settings.heading_accent | escape }}</span>
-    </h2>
+    {% if template.name == 'product' and template.suffix == 'hips_a_ceo' %}
+      <div class="four-weeks__heading">
+        <span class="four-weeks__heading-lead">{{ section.settings.heading_lead | escape }}</span>
+        <span class="four-weeks__heading-accent"> {{ section.settings.heading_accent | escape }}</span>
+      </div>
+    {% else %}
+      <h2 class="four-weeks__heading">
+        <span class="four-weeks__heading-lead">{{ section.settings.heading_lead | escape }}</span>
+        <span class="four-weeks__heading-accent"> {{ section.settings.heading_accent | escape }}</span>
+      </h2>
+    {% endif %}
     <div class="four-weeks__subheading rte">{{ section.settings.subheading }}</div>
 
     <div class="four-weeks__tabs" role="tablist" aria-label="Program weeks">
@@ -32,7 +39,11 @@
       {% for block in section.blocks %}
         <div class="four-weeks__item{% if forloop.first %} is-active{% endif %}" data-week-panel="{{ forloop.index0 }}">
           <div class="four-weeks__item-content">
-            <h3 class="four-weeks__item-title">{{ block.settings.title | escape }}</h3>
+            {% if template.name == 'product' and template.suffix == 'hips_a_ceo' %}
+              <div class="four-weeks__item-title">{{ block.settings.title | escape }}</div>
+            {% else %}
+              <h3 class="four-weeks__item-title">{{ block.settings.title | escape }}</h3>
+            {% endif %}
             <p class="four-weeks__item-body">{{ block.settings.body | escape }}</p>
           </div>
           <div class="four-weeks__image-wrap">

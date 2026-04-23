@@ -10,10 +10,17 @@
 
 <section class="bt-wrap bt-faq">
   <div class="bt-container bt-faq__container">
-    <h2 class="bt-faq__title">
-      <span class="bt-faq__title-lead">Questions.</span>
-      <span class="bt-faq__title-accent">Answered.</span>
-    </h2>
+    {% if template.name == 'product' and template.suffix == 'hips_a_ceo' %}
+      <div class="bt-faq__title">
+        <span class="bt-faq__title-lead">Questions.</span>
+        <span class="bt-faq__title-accent">Answered.</span>
+      </div>
+    {% else %}
+      <h2 class="bt-faq__title">
+        <span class="bt-faq__title-lead">Questions.</span>
+        <span class="bt-faq__title-accent">Answered.</span>
+      </h2>
+    {% endif %}
 
     <div class="bt-faq__list">
       {%- for block in section.blocks -%}

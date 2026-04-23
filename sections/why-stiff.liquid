@@ -2,10 +2,17 @@
   <div class="why-stiff__container">
     <header class="why-stiff__header">
       <p class="why-stiff__intro">{{ section.settings.intro | escape }}</p>
-      <h2 class="why-stiff__heading">
-        <span class="why-stiff__heading-part">{{ section.settings.heading_part1 | escape }}</span>
-        <span class="why-stiff__heading-accent">{{ section.settings.heading_part2 | escape }}</span>
-      </h2>
+      {% if template.name == 'product' and template.suffix == 'hips_a_ceo' %}
+        <div class="why-stiff__heading">
+          <span class="why-stiff__heading-part">{{ section.settings.heading_part1 | escape }}</span>
+          <span class="why-stiff__heading-accent">{{ section.settings.heading_part2 | escape }}</span>
+        </div>
+      {% else %}
+        <h2 class="why-stiff__heading">
+          <span class="why-stiff__heading-part">{{ section.settings.heading_part1 | escape }}</span>
+          <span class="why-stiff__heading-accent">{{ section.settings.heading_part2 | escape }}</span>
+        </h2>
+      {% endif %}
     </header>
 
     <div class="why-stiff__visual">

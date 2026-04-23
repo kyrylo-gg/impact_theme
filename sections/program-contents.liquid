@@ -1,9 +1,16 @@
 <section class="program-contents" id="program-contents-{{ section.id }}">
   <div class="program-contents__container">
-    <h2 class="program-contents__heading">
-      <span class="program-contents__heading-lead">{{ section.settings.heading_lead | escape }}</span>
-      <span class="program-contents__heading-accent"> {{ section.settings.heading_accent | escape }}</span>
-    </h2>
+    {% if template.name == 'product' and template.suffix == 'hips_a_ceo' %}
+      <div class="program-contents__heading">
+        <span class="program-contents__heading-lead">{{ section.settings.heading_lead | escape }}</span>
+        <span class="program-contents__heading-accent"> {{ section.settings.heading_accent | escape }}</span>
+      </div>
+    {% else %}
+      <h2 class="program-contents__heading">
+        <span class="program-contents__heading-lead">{{ section.settings.heading_lead | escape }}</span>
+        <span class="program-contents__heading-accent"> {{ section.settings.heading_accent | escape }}</span>
+      </h2>
+    {% endif %}
     <p class="program-contents__subheading">{{ section.settings.subheading | escape }}</p>
   </div>
 
@@ -31,7 +38,11 @@
           {% endif %}
 
           <div class="program-contents__text">
-            <h3 class="program-contents__card-title">{{ block.settings.title | escape }}</h3>
+            {% if template.name == 'product' and template.suffix == 'hips_a_ceo' %}
+              <div class="program-contents__card-title">{{ block.settings.title | escape }}</div>
+            {% else %}
+              <h3 class="program-contents__card-title">{{ block.settings.title | escape }}</h3>
+            {% endif %}
             <p class="program-contents__card-body">{{ block.settings.body | escape }}</p>
           </div>
         </article>
