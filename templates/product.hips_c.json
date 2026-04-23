@@ -195,39 +195,11 @@
     "bt_faq_Kwt9rB": {
       "type": "bt_faq",
       "blocks": {
-        "faq_xjPW8N": {
-          "type": "faq",
-          "settings": {
-            "question": "Do I need any experience or flexibility to start?",
-            "answer": "No. Week one is built for a body that has never done this before. You start where you are."
-          }
-        },
-        "faq_pgXqyz": {
-          "type": "faq",
-          "settings": {
-            "question": "Do I need equipment?",
-            "answer": "Nothing. No mat, no bands, no weights. Floor space and your body."
-          }
-        },
-        "faq_g6bMLP": {
-          "type": "faq",
-          "settings": {
-            "question": "How much time does it take each week?",
-            "answer": "Each session is 10 to 28 minutes. Three to four sessions per week completes the program in four weeks."
-          }
-        },
-        "faq_JEktxm": {
-          "type": "faq",
-          "settings": {
-            "question": "I have bad knees. Can I still do this?",
-            "answer": "The program is low impact, slow, and controlled. No jumping, no high intensity. If you have a specific injury or post-surgery condition, check with your doctor first."
-          }
-        },
         "faq_4ftEPa": {
           "type": "faq",
           "settings": {
-            "question": "What happens after I buy?",
-            "answer": "You get instant access to the full program on any device. Lifetime access. No subscription, no expiry date."
+            "question": "Will this actually help me with Twerk?",
+            "answer": "Yes — that is exactly what it is built for. Most students who complete Hip Mobility before or between Twerk sessions say the movements that felt like a wall start to feel accessible. The foundation changes everything downstream."
           }
         },
         "faq_EzejkF": {
@@ -246,10 +218,6 @@
         }
       },
       "block_order": [
-        "faq_xjPW8N",
-        "faq_pgXqyz",
-        "faq_g6bMLP",
-        "faq_JEktxm",
         "faq_4ftEPa",
         "faq_EzejkF",
         "faq_CEENjQ"
