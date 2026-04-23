@@ -666,10 +666,10 @@
         "show_one_click_alternative": false,
         "one_click_product": "",
         "one_click_label": "Only Twerk program",
-        "program_pack_product": "",
-        "program_pack_product_secondary": "",
+        "program_pack_product": "vip-bundle",
+        "program_pack_product_secondary": "all-in-one-bundle",
         "discount_code": "",
-        "discount_promo_text": "Get 60% off all clothing with 4 Programs Bundle!",
+        "discount_promo_text": "60% off all clothing with Vip or All-In-One Bundle!",
         "discount_applied_text": "60% off all clothing applied!",
         "size_chart_config_handle": "size-chart-settings",
         "storefront_api_token": ""
