@@ -495,17 +495,6 @@
             "changed": "<p>Found a program that spoke to how she wanted to feel, not just how she wanted to move.</p>"
           }
         },
-        "testimonial_2": {
-          "type": "testimonial",
-          "settings": {
-            "avatar": "shopify://shop_images/Frame_295-3.png",
-            "name": "Elizabeth",
-            "role": "yoga teacher, 40s",
-            "quote": "<p>\"I've had chronic back pain that I know is related to stuff in my hips. I was surprised at how quickly it helped me get some insight about what I was holding.\"</p>",
-            "came_with": "<p>Years of chronic back pain unresolved through yoga.</p>",
-            "changed": "<p>Connected her hip tension to her back pain within the first week.</p>"
-          }
-        },
         "testimonial_3": {
           "type": "testimonial",
           "settings": {
@@ -516,12 +505,23 @@
             "came_with": "<p>Post-surgery recovery.<br/>Wanted movement, not physiotherapy.</p>",
             "changed": "<p>Found a program that took her body seriously without treating her like a patient.</p>"
           }
+        },
+        "testimonial_2": {
+          "type": "testimonial",
+          "settings": {
+            "avatar": "shopify://shop_images/Frame_295-3.png",
+            "name": "Elizabeth",
+            "role": "yoga teacher, 40s",
+            "quote": "<p>\"I've had chronic back pain that I know is related to stuff in my hips. I was surprised at how quickly it helped me get some insight about what I was holding.\"</p>",
+            "came_with": "<p>Years of chronic back pain unresolved through yoga.</p>",
+            "changed": "<p>Connected her hip tension to her back pain within the first week.</p>"
+          }
         }
       },
       "block_order": [
         "testimonial_1",
-        "testimonial_2",
-        "testimonial_3"
+        "testimonial_3",
+        "testimonial_2"
       ],
       "settings": {
         "heading_lead": "What happens when",
