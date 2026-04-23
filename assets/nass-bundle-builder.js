@@ -79,6 +79,7 @@
     const discountAppliedText = (config && typeof config.discountAppliedText === 'string' && config.discountAppliedText.trim())
       ? config.discountAppliedText.trim()
       : '60% off all clothing applied!';
+    const showDiscountBanner = !(config && config.showDiscountBanner === false);
     const secureFooterGuaranteeText = (config && typeof config.secureFooterGuaranteeText === 'string' && config.secureFooterGuaranteeText.trim())
       ? config.secureFooterGuaranteeText.trim()
       : '30 days money back guarantee';
@@ -90,7 +91,37 @@
       : '';
     const templateSuffix = String((config && config.templateSuffix) || '').toLowerCase().trim();
     const isBundlesDescriptionTemplate = templateSuffix === 'mega_twerk_with_bundles' || templateSuffix === 'mega_twerk_with_bundleseo';
-    const isSingleProgramSelectionTemplate = isBundlesDescriptionTemplate;
+    const isHipsSingleProgramTemplate = templateSuffix === 'hips_a'
+      || templateSuffix === 'hips_a_ceo'
+      || templateSuffix === 'hips_b'
+      || templateSuffix === 'hips_c'
+      || templateSuffix === 'hips-a'
+      || templateSuffix === 'hips-a-ceo'
+      || templateSuffix === 'hips-b'
+      || templateSuffix === 'hips-c';
+    const isSingleProgramSelectionTemplate = isBundlesDescriptionTemplate || isHipsSingleProgramTemplate;
+    const bodyClassName = (typeof document !== 'undefined' && document.body && document.body.className)
+      ? String(document.body.className).toLowerCase()
+      : '';
+    const bodyHasHipsNoPreselectClass = (
+      bodyClassName.indexOf('product--hips_a') >= 0
+      || bodyClassName.indexOf('product--hips-a') >= 0
+      || bodyClassName.indexOf('product--hips_ab') >= 0
+      || bodyClassName.indexOf('product--hips-ab') >= 0
+      || bodyClassName.indexOf('product--hips_b') >= 0
+      || bodyClassName.indexOf('product--hips-b') >= 0
+      || bodyClassName.indexOf('product--hips_c') >= 0
+      || bodyClassName.indexOf('product--hips-c') >= 0
+    );
+    const suffixStartsWithHipsA = templateSuffix.indexOf('hips_a') === 0 || templateSuffix.indexOf('hips-a') === 0;
+    const disableProgramsPreselect = suffixStartsWithHipsA
+      || templateSuffix === 'hips_ab'
+      || templateSuffix === 'hips-ab'
+      || templateSuffix === 'hips_b'
+      || templateSuffix === 'hips-b'
+      || templateSuffix === 'hips_c'
+      || templateSuffix === 'hips-c'
+      || bodyHasHipsNoPreselectClass;
     const footerEl = sectionRoot.querySelector('[data-bb-wizard-footer]');
     var routesRoot = (typeof window !== 'undefined' && window.Shopify && window.Shopify.routes && window.Shopify.routes.root)
       ? String(window.Shopify.routes.root).replace(/\/?$/, '/')
@@ -1580,6 +1611,10 @@
 
     function renderDiscountBanner() {
       if (!discountEl) return;
+      if (!showDiscountBanner) {
+        discountEl.style.display = 'none';
+        return;
+      }
       var hasPack = getHasProgramPack();
       if (hasPack) {
         discountEl.className = 'bb-wizard-discount bb-wizard-discount--applied';
@@ -2267,6 +2302,14 @@
 
     function tryPreselectProgramsItem() {
       try {
+        if (disableProgramsPreselect) {
+          if (typeof window !== 'undefined') {
+            window.__bt_bb_preselect_program_index = null;
+            window.__bt_bb_preselect_second = false;
+            window.__bt_bb_preselect_first = false;
+          }
+          return;
+        }
         if (typeof window === 'undefined') return;
         var targetIndex = null;
         if (typeof window.__bt_bb_preselect_program_index === 'number' && isFinite(window.__bt_bb_preselect_program_index)) {

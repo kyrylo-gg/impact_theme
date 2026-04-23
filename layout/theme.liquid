@@ -52,7 +52,7 @@
       {% render 'nass-fonts' %}
     {%- endif -%}
     {%- if template.name == 'product' -%}
-      {%- if template.suffix == 'body_transformation' or template.suffix == 'hips_a' or template.suffix == 'hips_b' or template.suffix == 'hips_c' -%}
+      {%- if template.suffix == 'body_transformation' or template.suffix == 'hips_a' or template.suffix == 'hips_a_ceo' or template.suffix == 'hips_b' or template.suffix == 'hips_c' -%}
         {% render 'bt-body-transformation-fonts' %}
       {%- endif -%}
     {%- endif -%}
@@ -134,7 +134,7 @@
     </style>
     {%- endif -%}
 
-    {%- if template.name == 'product' and (template.suffix == 'hips_a' or template.suffix == 'hips_b' or template.suffix == 'hips_c') -%}
+    {%- if template.name == 'product' and (template.suffix == 'hips_a' or template.suffix == 'hips_a_ceo' or template.suffix == 'hips_b' or template.suffix == 'hips_c') -%}
     <style>
       /**
        * product.hips_a: same typography stack as Body Transformation (BT) sections.
@@ -143,6 +143,7 @@
        * Scoped to main so theme header outside main keeps shop defaults.
        */
       body.product--hips_a main#main.anchor,
+      body.product--hips_a_ceo main#main.anchor,
       body.product--hips_b main#main.anchor,
       body.product--hips_c main#main.anchor {
         --font-heading--family: 'Anybody';
@@ -151,12 +152,14 @@
 
       /* hips_a: keep bundle builder hidden; open via CTA click (wizard overlay) */
       body.product--hips_a .nass-bundle-builder .bb-section,
+      body.product--hips_a_ceo .nass-bundle-builder .bb-section,
       body.product--hips_b .nass-bundle-builder .bb-section,
       body.product--hips_c .nass-bundle-builder .bb-section {
         display: none !important;
       }
 
       body.product--hips_a main#main.anchor .shopify-section-group-footer-group .shopify-section--custom-liquid,
+      body.product--hips_a_ceo main#main.anchor .shopify-section-group-footer-group .shopify-section--custom-liquid,
       body.product--hips_b main#main.anchor .shopify-section-group-footer-group .shopify-section--custom-liquid,
       body.product--hips_c main#main.anchor .shopify-section-group-footer-group .shopify-section--custom-liquid {
         display: none !important;
@@ -253,7 +256,7 @@
     <script>
       (function() {
         function initHipsABundleOpen() {
-          if (!document.body || !(document.body.classList.contains('product--hips_a') || document.body.classList.contains('product--hips_b') || document.body.classList.contains('product--hips_c'))) return;
+          if (!document.body || !(document.body.classList.contains('product--hips_a') || document.body.classList.contains('product--hips_a_ceo') || document.body.classList.contains('product--hips_b') || document.body.classList.contains('product--hips_c'))) return;
 
           /* hips_a: normalize CTA anchors to Complete System section */
           document.querySelectorAll('.hips-hero-banner__cta, .body-ready-cta__button').forEach(function(link) {
@@ -286,7 +289,8 @@
             var trigger = e.target.closest('.complete-system__cta');
             if (!trigger) return;
             e.preventDefault();
-            window.__bt_bb_preselect_first = true;
+            var shouldPreselectFirst = document.body.classList.contains('product--hips_b');
+            window.__bt_bb_preselect_first = shouldPreselectFirst;
             tryOpenBundleWizard(25);
           });
         }

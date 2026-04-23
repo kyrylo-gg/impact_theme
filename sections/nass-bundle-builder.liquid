@@ -241,9 +241,11 @@
         </button>
       </header>
 
-      <div class="bb-wizard-discount" data-bb-wizard-discount>
-        <span class="bb-wizard-discount-text">{{ section.settings.discount_promo_text | default: 'Get 60% off all clothing with 4 Programs Bundle!' | escape }}</span>
-      </div>
+      {%- if section.settings.show_discount_banner -%}
+        <div class="bb-wizard-discount" data-bb-wizard-discount>
+          <span class="bb-wizard-discount-text">{{ section.settings.discount_promo_text | default: 'Get 60% off all clothing with 4 Programs Bundle!' | escape }}</span>
+        </div>
+      {%- endif -%}
 
       <div class="bb-wizard-content" data-bb-wizard-content>
         <p class="bb-wizard-placeholder" data-bb-wizard-placeholder>Step 1 of 6 — programs</p>
@@ -434,6 +436,7 @@
         programPackProductId: {%- if pp_primary != blank -%}{{ pp_primary | json }}{%- elsif pp_secondary != blank -%}{{ pp_secondary | json }}{%- else -%}null{%- endif -%},
         programPackProductIds: [{%- if pp_primary != blank -%}{{ pp_primary | json }}{%- endif -%}{%- if pp_primary != blank and pp_secondary != blank -%}, {%- endif -%}{%- if pp_secondary != blank -%}{{ pp_secondary | json }}{%- endif -%}],
         discountCode: {{ section.settings.discount_code | json }},
+        showDiscountBanner: {{ section.settings.show_discount_banner | json }},
         discountPromoText: {{ section.settings.discount_promo_text | default: 'Get 60% off all clothing with 4 Programs Bundle!' | json }},
         discountAppliedText: {{ section.settings.discount_applied_text | default: '60% off all clothing applied!' | json }},
         checkoutUrl: {{ routes.root_url | append: '/' | append: 'checkout' | replace: '//', '/' | json }},
@@ -3742,6 +3745,12 @@
       "id": "discount_code",
       "label": "Discount code for 60% off (when Program Pack in bundle)",
       "info": "Create this discount in Shopify Admin (Discounts). When customer adds bundle with Program Pack, they'll be sent to checkout with this code applied."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_discount_banner",
+      "label": "Show wizard discount banner",
+      "default": true
     },
     {
       "type": "text",
