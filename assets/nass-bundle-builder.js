@@ -127,11 +127,25 @@
         { id: 'review', title: 'Review your bundle', collectionHandle: '', isProgramsStep: false, productIds: [] },
       ];
     }
-    var programPackId = (config.programPackProductId != null && config.programPackProductId !== '')
-      ? String(config.programPackProductId)
-      : null;
-    var programPackNumId = programPackId ? toNumericId(gidToNum(programPackId) || programPackId) : '';
-    var resolvedProgramPackNumId = programPackNumId || '';
+    var programPackIds = [];
+    if (Array.isArray(config.programPackProductIds)) {
+      config.programPackProductIds.forEach(function(id) {
+        if (id != null && String(id).trim() !== '') programPackIds.push(String(id).trim());
+      });
+    }
+    if (config.programPackProductId != null && String(config.programPackProductId).trim() !== '') {
+      programPackIds.push(String(config.programPackProductId).trim());
+    }
+    programPackIds = programPackIds.filter(function(id, index, arr) {
+      return arr.indexOf(id) === index;
+    });
+    var programPackNumIds = programPackIds
+      .map(function(id) {
+        var num = toNumericId(gidToNum(id) || id);
+        return num ? String(num) : '';
+      })
+      .filter(function(id) { return !!id; });
+    var resolvedProgramPackNumIds = programPackNumIds.slice();
     const discountCode = (config.discountCode || '').trim();
     var checkoutUrl = config.checkoutUrl || '/checkout';
     if (shopDomain && (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'))) {
@@ -432,9 +446,9 @@
     }
 
     function isProgramPack(productId) {
-      if (!productId || !resolvedProgramPackNumId) return false;
+      if (!productId || !resolvedProgramPackNumIds.length) return false;
       var a = toNumericId(gidToNum(String(productId)) || String(productId));
-      return !!a && String(a) === String(resolvedProgramPackNumId);
+      return !!a && resolvedProgramPackNumIds.indexOf(String(a)) >= 0;
     }
 
     function getHasProgramPack() {
@@ -688,7 +702,7 @@
         });
         if (selectedProgramsItem && String(selectedProgramsItem.productId) !== String(productId)) return true;
       }
-      if (!resolvedProgramPackNumId) return false;
+      if (!resolvedProgramPackNumIds.length) return false;
       var packSelected = getHasProgramPack();
       var thisIsPack = isProgramPack(productId);
       var otherSelected = bbState.selectedItems.some(function(item) {
@@ -1198,8 +1212,8 @@
         var programsStep = bbState.steps.find(function(s) { return s.isProgramsStep; });
         if (programsStep) {
           if (!programsStep.productIds) programsStep.productIds = [];
-          if (programsStep.productIds.length > 0) {
-          if (!resolvedProgramPackNumId) {
+
+          if (!resolvedProgramPackNumIds.length && programsStep.productIds.length > 0) {
             var bundleLike = programsStep.productIds.find(function(pid) {
               var p = bbState.productsById[pid];
               if (!p || !p.title) return false;
@@ -1207,29 +1221,35 @@
               var h = (p.handle || '').toLowerCase();
               return (t.indexOf('bundle') >= 0 && (t.indexOf('4') >= 0 || t.indexOf('nass') >= 0 || t.indexOf('program') >= 0)) || h.indexOf('bundle') >= 0;
             });
-            if (bundleLike) resolvedProgramPackNumId = toNumericId(gidToNum(String(bundleLike)) || String(bundleLike)) || '';
-          }
-          if (resolvedProgramPackNumId) {
-            var existingKey = Object.keys(bbState.productsById).find(function(k) { return String(toNumericId(gidToNum(k) || k)) === String(resolvedProgramPackNumId); });
-            if (existingKey) {
-              // Keep collection order intact; only ensure the pack product is available in productsById.
-            } else if (programPackId && storefrontApiToken) {
-              return fetchProductByIdStorefront(programPackId).then(function(internal) {
-                if (internal && internal.id) {
-                  bbState.productsById[internal.id] = internal;
-                  // If pack product is absent from the collection, add it without moving existing items.
-                  programsStep.productIds = programsStep.productIds.concat([internal.id]);
-                }
-              }).then(function() { return Promise.resolve(); });
+            if (bundleLike) {
+              var fallbackNum = toNumericId(gidToNum(String(bundleLike)) || String(bundleLike)) || '';
+              if (fallbackNum) resolvedProgramPackNumIds = [String(fallbackNum)];
             }
           }
-          } else if (resolvedProgramPackNumId && programPackId && storefrontApiToken) {
-            return fetchProductByIdStorefront(programPackId).then(function(internal) {
-              if (internal && internal.id) {
-                bbState.productsById[internal.id] = internal;
-                programsStep.productIds = [internal.id];
-              }
-            }).then(function() { return Promise.resolve(); });
+
+          if (resolvedProgramPackNumIds.length && storefrontApiToken) {
+            var existingNumIds = Object.keys(bbState.productsById).map(function(k) {
+              return String(toNumericId(gidToNum(k) || k) || '');
+            });
+            var idsToFetch = programPackIds.filter(function(id) {
+              var num = String(toNumericId(gidToNum(id) || id) || '');
+              return num && existingNumIds.indexOf(num) === -1;
+            });
+            if (idsToFetch.length) {
+              return Promise.all(idsToFetch.map(function(id) {
+                return fetchProductByIdStorefront(id);
+              })).then(function(internals) {
+                internals.forEach(function(internal) {
+                  if (internal && internal.id) {
+                    bbState.productsById[internal.id] = internal;
+                    if (programsStep.productIds.indexOf(internal.id) === -1) {
+                      // If configured pack product is absent from collection, append it.
+                      programsStep.productIds.push(internal.id);
+                    }
+                  }
+                });
+              }).then(function() { return Promise.resolve(); });
+            }
           }
         }
       }).then(function() {

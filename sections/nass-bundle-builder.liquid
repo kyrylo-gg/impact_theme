@@ -409,13 +409,30 @@
             title: {{ block.settings.title | default: "Step" | json }},
             collectionHandle: {%- if block.settings.collection -%}{{ block.settings.collection.handle | json }}{%- else -%}""{%- endif -%},
             isProgramsStep: {{ block.settings.is_programs_step | json }},
-            programPackProductId: {%- if block.settings.is_programs_step and block.settings.program_pack_product -%}{{ block.settings.program_pack_product.id | json }}{%- else -%}null{%- endif -%}
+            programPackProductId: {%- if block.settings.is_programs_step and block.settings.program_pack_product -%}{{ block.settings.program_pack_product.id | json }}{%- else -%}null{%- endif -%},
+            programPackProductIdSecondary: {%- if block.settings.is_programs_step and block.settings.program_pack_product_secondary -%}{{ block.settings.program_pack_product_secondary.id | json }}{%- else -%}null{%- endif -%}
           }{%- unless forloop.last -%},{%- endunless -%}
           {%- endfor -%},
           { id: "review", title: "Review your bundle", collectionHandle: "", isProgramsStep: false }
         ],
-        {%- comment -%} Program pack product ID: required for mutual exclusion on step 1 (Pack vs other programs). Set in section or in the programs-step block. {%- endcomment -%}
-        programPackProductId: {%- assign pp_id = '' -%}{%- if section.settings.program_pack_product -%}{%- assign pp_id = section.settings.program_pack_product.id -%}{%- endif -%}{%- for b in step_blocks -%}{%- if b.settings.is_programs_step and b.settings.program_pack_product -%}{%- assign pp_id = b.settings.program_pack_product.id -%}{%- break -%}{%- endif -%}{%- endfor -%}{%- if pp_id != blank -%}{{ pp_id | json }}{%- else -%}null{%- endif -%},
+        {%- comment -%} Program pack products: mutual exclusion + 60% discount trigger on Programs step. Step-level settings override section-level defaults. {%- endcomment -%}
+        {%- assign pp_primary = '' -%}
+        {%- assign pp_secondary = '' -%}
+        {%- assign has_step_pp_override = false -%}
+        {%- for b in step_blocks -%}
+        {%- if b.settings.is_programs_step and b.settings.program_pack_product or b.settings.is_programs_step and b.settings.program_pack_product_secondary -%}
+            {%- assign has_step_pp_override = true -%}
+            {%- if b.settings.program_pack_product -%}{%- assign pp_primary = b.settings.program_pack_product.id -%}{%- endif -%}
+            {%- if b.settings.program_pack_product_secondary -%}{%- assign pp_secondary = b.settings.program_pack_product_secondary.id -%}{%- endif -%}
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- unless has_step_pp_override -%}
+          {%- if section.settings.program_pack_product -%}{%- assign pp_primary = section.settings.program_pack_product.id -%}{%- endif -%}
+          {%- if section.settings.program_pack_product_secondary -%}{%- assign pp_secondary = section.settings.program_pack_product_secondary.id -%}{%- endif -%}
+        {%- endunless -%}
+        programPackProductId: {%- if pp_primary != blank -%}{{ pp_primary | json }}{%- elsif pp_secondary != blank -%}{{ pp_secondary | json }}{%- else -%}null{%- endif -%},
+        programPackProductIds: [{%- if pp_primary != blank -%}{{ pp_primary | json }}{%- endif -%}{%- if pp_primary != blank and pp_secondary != blank -%}, {%- endif -%}{%- if pp_secondary != blank -%}{{ pp_secondary | json }}{%- endif -%}],
         discountCode: {{ section.settings.discount_code | json }},
         discountPromoText: {{ section.settings.discount_promo_text | default: 'Get 60% off all clothing with 4 Programs Bundle!' | json }},
         discountAppliedText: {{ section.settings.discount_applied_text | default: '60% off all clothing applied!' | json }},
@@ -3715,6 +3732,12 @@
       "info": "Required for mutual exclusion (when selected, other programs are disabled) and 60% discount. Select the NASS BUNDLE / 4 Programs Bundle product."
     },
     {
+      "type": "product",
+      "id": "program_pack_product_secondary",
+      "label": "Program Pack / 4 Programs Bundle product #2",
+      "info": "Optional second bundle product for the same mutual exclusion and 60% discount logic."
+    },
+    {
       "type": "text",
       "id": "discount_code",
       "label": "Discount code for 60% off (when Program Pack in bundle)",
@@ -3776,6 +3799,12 @@
           "id": "program_pack_product",
           "label": "4 Programs Bundle product (mutual exclusion)",
           "info": "For Programs step: select the NASS BUNDLE / 4 Programs Bundle product. When selected, other programs are disabled (and vice versa). Overrides section setting."
+        },
+        {
+          "type": "product",
+          "id": "program_pack_product_secondary",
+          "label": "4 Programs Bundle product #2 (mutual exclusion)",
+          "info": "Optional second bundle product for the same Programs-step mutual exclusion. Overrides section setting."
         }
       ]
     }
