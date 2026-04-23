@@ -119,8 +119,8 @@
     "hip_mobility": {
       "type": "hip-mobility",
       "settings": {
-        "video_mobile": "shopify://files/videos/Mob 1.mp4",
-        "video_desktop": "shopify://files/videos/Desk 1.mp4",
+        "video_mobile": "shopify://files/videos/Desk 3.mp4",
+        "video_desktop": "shopify://files/videos/Mob 3.mp4",
         "eyebrow": "Not yoga. Not physiotherapy.",
         "headline_lead": "Not another",
         "headline_accent": "routine that works for a week",
