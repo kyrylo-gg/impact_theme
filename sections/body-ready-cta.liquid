@@ -60,7 +60,7 @@
         <a class="body-ready-cta__button" href="{{ section.settings.cta_url | default: '#buy' }}">
           <span>{{ cta_main | default: section.settings.cta_label | escape }}</span>
           <span class="body-ready-cta__button-accent">{{ cta_last | escape }}</span>
-          <span aria-hidden="true">-></span>
+          <span class="body-ready-cta__button-arrow" aria-hidden="true"></span>
         </a>
 
         <p class="body-ready-cta__subnote">{{ section.settings.subnote | escape }}</p>
@@ -145,6 +145,17 @@
     line-height: 1.2;
   }
   .body-ready-cta__button-accent { color: #faff00; }
+  .body-ready-cta__button-arrow {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-left: 2px;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAAMBJREFUeAHt2NENgjAQxvGvhgEcgREYgRHcAEZwA8skugkjOIJuwAjnNfqAxD5h+h3k/smRlBd+CZA0BVYmIkedUacBuw/mLu8mOkoBvXyXUC2Y/UClOjBz1B5QkzVU46gVqDOYZVAXMHPUHlCPHKrSxRXle+rUs3VUB0IIQ0g82CkeYKtQ6eWG8tU67eLeoK8sonSZjzqCUea3j2DkmC1jONuPDKYHI31wZw0jjnHMVjGnBYR7RiTWDqxmqPFfmBfK4r52LAhvvwAAAABJRU5ErkJggg==");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    flex: 0 0 18px;
+  }
   .body-ready-cta__subnote {
     margin: 10px 0 0;
     text-align: center;
@@ -242,13 +253,14 @@
     body.product--hips_b .body-ready-cta__boxes-wrap,
     body.product--hips_c .body-ready-cta__boxes-wrap {
       margin-left: 0;
-      align-self: end;
+      align-self: center;
       display: inline-flex;
       align-items: center;
       justify-content: flex-start;
-      width: min(100%, 384px);
-      max-width: 384px;
+      width: min(100%, 456px);
+      max-width: 456px;
       border-radius: 30px;
+      border: 1px solid rgba(0, 0, 0, 0.06);
       background: #f2f2f2;
       overflow: hidden;
       padding: 0;
@@ -257,7 +269,7 @@
     body.product--hips_b .body-ready-cta__boxes,
     body.product--hips_c .body-ready-cta__boxes {
       display: block;
-      width: 406px;
+      width: 482px;
       max-width: none;
       margin: 0;
     }
@@ -282,6 +294,25 @@
     .body-ready-cta__yellow {
       position: relative;
       z-index: 2;
+    }
+
+    body.product--hips_a .body-ready-cta__boxes-wrap {
+      border: none !important;
+      box-shadow: none !important;
+      outline: none !important;
+      background: transparent !important;
+      border-radius: 0 !important;
+      overflow: hidden !important;
+      margin-top: 0 !important;
+      padding: 0 !important;
+    }
+
+    body.product--hips_a .body-ready-cta__boxes {
+      width: calc(100% + 16px);
+      max-width: none;
+      margin-left: -8px;
+      margin-right: -8px;
+      clip-path: inset(8px 8px 0 8px);
     }
 
     body.product--hips_b .body-ready-cta__yellow,
