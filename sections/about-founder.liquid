@@ -2,7 +2,7 @@
   <div class="about-founder__container">
     {%- liquid
       assign about_intro = section.settings.intro
-      if template.name == 'product' and (template.suffix == 'hips_b' or template.suffix == 'hips_c')
+      if template.name == 'product' and template.suffix == 'hips_b' or template.name == 'product' and template.suffix == 'hips_c'
         if section.settings.intro_hips_b != blank
           assign about_intro = section.settings.intro_hips_b
         elsif about_intro == blank
@@ -46,10 +46,10 @@
             <div class="about-founder__blue-label">
               {%- liquid
                 assign prelabel_text = section.settings.prelabel_text
-                if template.name == 'product' and (template.suffix == 'hips_b' or template.suffix == 'hips_c') and section.settings.prelabel_text_hips_b != blank
+                if template.name == 'product' and template.suffix == 'hips_b' and section.settings.prelabel_text_hips_b != blank or template.name == 'product' and template.suffix == 'hips_c' and section.settings.prelabel_text_hips_b != blank
                   assign prelabel_text = section.settings.prelabel_text_hips_b
                 endif
-                if template.name == 'product' and (template.suffix == 'hips_b' or template.suffix == 'hips_c')
+                if template.name == 'product' and template.suffix == 'hips_b' or template.name == 'product' and template.suffix == 'hips_c'
                   assign prelabel_text = prelabel_text | replace: 'You may know Nastya Nass.', 'You may know Nastya Nass.<br class="about-founder__prelabel-mobile-break">'
                 endif
               -%}

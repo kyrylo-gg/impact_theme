@@ -68,25 +68,44 @@
           <span class="hips-hero-banner__underline" aria-hidden="true"></span>
 
           {% if section.settings.subcopy != blank %}
-            <div class="hips-hero-banner__subcopy rte">{{ section.settings.subcopy }}</div>
+            {%- liquid
+              assign subcopy_html = section.settings.subcopy
+              if template.name == 'product' and template.suffix == 'hips_c'
+                assign subcopy_html = subcopy_html | replace: 'The foundation I should have given you from the start. 4 weeks', 'The foundation I should have given you from the start.<br class="hips-hero-banner__desktop-break"> 4 weeks'
+              endif
+            -%}
+            <div class="hips-hero-banner__subcopy rte">{{ subcopy_html }}</div>
           {% endif %}
         </div>
 
         <div class="hips-hero-banner__bottom" id="hero-buy">
           {% liquid
             assign is_hips_b_template = false
+            assign is_hips_c_template = false
             assign has_hero_prices = false
             if template.name == 'product'
-              if template.suffix == 'hips_b' or template.suffix == 'hips_c'
+              if template.suffix == 'hips_b'
                 assign is_hips_b_template = true
+              elsif template.suffix == 'hips_c'
+                assign is_hips_c_template = true
               endif
             endif
             if section.settings.price_old != blank or section.settings.price_new != blank
               assign has_hero_prices = true
             endif
           %}
-          {% if has_hero_prices and is_hips_b_template == false %}
+          {% if has_hero_prices and is_hips_b_template == false and is_hips_c_template == false %}
             <p class="hips-hero-banner__price">
+              {% if section.settings.price_old != blank %}
+                <span class="hips-hero-banner__price-old">{{ section.settings.price_old | escape }}</span>
+              {% endif %}
+              {% if section.settings.price_new != blank %}
+                <span class="hips-hero-banner__price-new">{{ section.settings.price_new | escape }}</span>
+              {% endif %}
+            </p>
+          {% endif %}
+          {% if has_hero_prices and is_hips_c_template %}
+            <p class="hips-hero-banner__price hips-hero-banner__price--hips-c-mobile">
               {% if section.settings.price_old != blank %}
                 <span class="hips-hero-banner__price-old">{{ section.settings.price_old | escape }}</span>
               {% endif %}
@@ -113,10 +132,24 @@
                 {% elsif section.settings.cta_label_accent != blank %}
                   <span class="hips-hero-banner__cta-accent"> {{ section.settings.cta_label_accent | escape }}</span>
                 {% endif %}
+              {% elsif is_hips_c_template %}
+                {% if section.settings.cta_label_accent != blank %}
+                  <span class="hips-hero-banner__cta-accent"> {{ section.settings.cta_label_accent | escape }}</span>
+                {% endif %}
+                {% if has_hero_prices %}
+                  <span class="hips-hero-banner__cta-prices hips-hero-banner__cta-prices--hips-c-desktop">
+                    {% if section.settings.price_old != blank %}
+                      <span class="hips-hero-banner__price-old">{{ section.settings.price_old | escape }}</span>
+                    {% endif %}
+                    {% if section.settings.price_new != blank %}
+                      <span class="hips-hero-banner__price-new">{{ section.settings.price_new | escape }}</span>
+                    {% endif %}
+                  </span>
+                {% endif %}
               {% elsif section.settings.cta_label_accent != blank %}
                 <span class="hips-hero-banner__cta-accent"> {{ section.settings.cta_label_accent | escape }}</span>
               {% endif %}
-              <span class="hips-hero-banner__cta-arrow" aria-hidden="true">-></span>
+              <span class="hips-hero-banner__cta-arrow" aria-hidden="true"></span>
             </a>
           {% endif %}
 
@@ -262,6 +295,10 @@
     display: inline;
   }
 
+  .hips-hero-banner__subcopy .hips-hero-banner__desktop-break {
+    display: none;
+  }
+
   .hips-hero-banner__bottom {
     width: 100%;
     max-width: 420px;
@@ -327,8 +364,35 @@
     opacity: 1;
   }
 
+  .hips-hero-banner__cta-prices {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+
+  .hips-hero-banner__cta-prices .hips-hero-banner__price-old {
+    color: #9ca3af;
+    opacity: 1;
+  }
+
+  .hips-hero-banner__price--hips-c-mobile {
+    display: flex;
+  }
+
+  .hips-hero-banner__cta-prices--hips-c-desktop {
+    display: none;
+  }
+
   .hips-hero-banner__cta-arrow {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
     margin-left: 2px;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAAMBJREFUeAHt2NENgjAQxvGvhgEcgREYgRHcAEZwA8skugkjOIJuwAjnNfqAxD5h+h3k/smRlBd+CZA0BVYmIkedUacBuw/mLu8mOkoBvXyXUC2Y/UClOjBz1B5QkzVU46gVqDOYZVAXMHPUHlCPHKrSxRXle+rUs3VUB0IIQ0g82CkeYKtQ6eWG8tU67eLeoK8sonSZjzqCUea3j2DkmC1jONuPDKYHI31wZw0jjnHMVjGnBYR7RiTWDqxmqPFfmBfK4r52LAhvvwAAAABJRU5ErkJggg==");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    flex: 0 0 18px;
   }
 
   .hips-hero-banner__trust {
@@ -384,6 +448,22 @@
     .hips-hero-banner__subcopy br {
       display: none;
     }
+
+    .hips-hero-banner__subcopy .hips-hero-banner__desktop-break {
+      display: block;
+    }
+
+    .hips-hero-banner__price--hips-c-mobile {
+      display: none;
+    }
+
+    .hips-hero-banner__cta-prices--hips-c-desktop {
+      display: inline-flex;
+    }
+
+    body.product--hips_c .hips-hero-banner__cta-accent {
+      color: #fff;
+    }
   }
 
   @media (max-width: 767px) {
@@ -393,6 +473,28 @@
 
     .hips-hero-banner__video--mobile {
       display: block;
+    }
+
+    .hips-hero-banner__cta {
+      justify-content: flex-start;
+      text-align: left;
+      gap: 10px;
+    }
+
+    .hips-hero-banner__cta-arrow {
+      margin-left: auto;
+      margin-right: 0;
+    }
+
+    body.product--hips_b .hips-hero-banner__cta > span:first-child,
+    body.product--hips_b .hips-hero-banner__cta-accent {
+      white-space: nowrap;
+    }
+
+    body.product--hips_b .hips-hero-banner__cta-accent {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
     }
   }
 {% endstylesheet %}

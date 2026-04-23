@@ -4,7 +4,7 @@
       <div class="what-changes-twerk__glow" aria-hidden="true"></div>
       <div class="what-changes-twerk__content">
         <h2 class="what-changes-twerk__heading">
-          <span class="what-changes-twerk__heading-black">{{ section.settings.heading_part_1 | escape }}</span><span class="what-changes-twerk__heading-blue">{{ section.settings.heading_part_2 | escape }}</span><span class="what-changes-twerk__heading-black"> </span><span class="what-changes-twerk__heading-blue">{{ section.settings.heading_part_4 | escape }}</span>
+          <span class="what-changes-twerk__heading-black">{{ section.settings.heading_part_1 | escape }}</span><span class="what-changes-twerk__heading-blue">{{ section.settings.heading_part_2 | escape }}</span><span class="what-changes-twerk__heading-black"> </span><span class="what-changes-twerk__heading-blue what-changes-twerk__heading-blue--new-line">{{ section.settings.heading_part_4 | escape }}</span>
         </h2>
         <span class="what-changes-twerk__underline" aria-hidden="true"></span>
         {% if section.settings.body_1 != blank %}
@@ -69,6 +69,9 @@
   .what-changes-twerk__heading-blue {
     color: #0038ff;
     font-weight: 900;
+  }
+  .what-changes-twerk__heading-blue--new-line {
+    display: block;
   }
   .what-changes-twerk__underline {
     display: block;
