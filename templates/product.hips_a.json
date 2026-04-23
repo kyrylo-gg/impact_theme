@@ -132,11 +132,15 @@
     "about_founder": {
       "type": "about-founder",
       "settings": {
+        "intro": "",
+        "intro_hips_b": "",
         "heading_lead": "\"I have spent my whole life learning",
         "heading_accent": "how hips move\"",
         "main_image": "shopify://shop_images/Frame_344.png",
         "main_image_mobile": "shopify://shop_images/Frame_346.png",
         "blue_label": "This is the program\nI wish I had given\neveryone first",
+        "prelabel_text": "",
+        "prelabel_text_hips_b": "",
         "quote": "<p>“Twerk was never just a dance for me. It was the result of years of understanding what the body can do when it is truly free. When your hips are open, everything changes. How you move, how you carry yourself, how you feel walking into a room.<br/><br/>I built this program because I kept seeing the same thing. People trying to move the way they wanted to and their hips stopping them before they even started.”</p>",
         "stats_image": "shopify://shop_images/Frame_343.png",
         "checkmark_image": "shopify://shop_images/Checkmark.png",
@@ -561,6 +565,7 @@
         "check_3"
       ],
       "settings": {
+        "intro_line": "Intro line",
         "heading_lead": "The complete system.",
         "heading_accent": "4 weeks to unlock, 7 days to perform.",
         "boxes_image": "shopify://shop_images/Frame_41_1b168e62-62f3-45f4-8160-7d1a9a0e23a5.png",
