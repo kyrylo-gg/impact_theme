@@ -56,10 +56,32 @@
           assign cta_parts = section.settings.cta_label | split: ' '
           assign cta_last = cta_parts | last
           assign cta_main = section.settings.cta_label | remove: cta_last | strip
+          assign is_hips_b_template = false
+          if template.name == 'product' and template.suffix == 'hips_b'
+            assign is_hips_b_template = true
+          endif
+          assign has_button_prices = false
+          if section.settings.price_old != blank or section.settings.price_new != blank
+            assign has_button_prices = true
+          endif
         %}
         <a class="body-ready-cta__button" href="{{ section.settings.cta_url | default: '#buy' }}">
-          <span>{{ cta_main | default: section.settings.cta_label | escape }}</span>
-          <span class="body-ready-cta__button-accent">{{ cta_last | escape }}</span>
+          {% if is_hips_b_template %}
+            <span>{{ section.settings.cta_label | escape }}</span>
+            {% if has_button_prices %}
+              <span class="body-ready-cta__button-prices">
+                {% if section.settings.price_old != blank %}
+                  <span class="body-ready-cta__button-price-old">{{ section.settings.price_old | escape }}</span>
+                {% endif %}
+                {% if section.settings.price_new != blank %}
+                  <span class="body-ready-cta__button-price-new">{{ section.settings.price_new | escape }}</span>
+                {% endif %}
+              </span>
+            {% endif %}
+          {% else %}
+            <span>{{ cta_main | default: section.settings.cta_label | escape }}</span>
+            <span class="body-ready-cta__button-accent">{{ cta_last | escape }}</span>
+          {% endif %}
           <span class="body-ready-cta__button-arrow" aria-hidden="true"></span>
         </a>
 
@@ -145,6 +167,20 @@
     line-height: 1.2;
   }
   .body-ready-cta__button-accent { color: #faff00; }
+  .body-ready-cta__button-prices {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  .body-ready-cta__button-price-old {
+    color: #9ca3af;
+    text-decoration: line-through;
+    font-weight: 500;
+  }
+  .body-ready-cta__button-price-new {
+    color: #faff00;
+    font-weight: 800;
+  }
   .body-ready-cta__button-arrow {
     display: inline-block;
     width: 18px;
