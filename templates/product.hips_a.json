@@ -620,8 +620,8 @@
         "bundle_step_gKgGWE": {
           "type": "bundle_step",
           "settings": {
-            "title": "Add swim shorts",
-            "collection": "",
+            "title": "Add booty shorts",
+            "collection": "bundle-swim-shorts",
             "is_programs_step": false,
             "program_pack_product": "",
             "program_pack_product_secondary": ""
@@ -630,8 +630,8 @@
         "bundle_step_dmMm6q": {
           "type": "bundle_step",
           "settings": {
-            "title": "Select top",
-            "collection": "",
+            "title": "leggings & tops",
+            "collection": "bundle-leggings-tops",
             "is_programs_step": false,
             "program_pack_product": "",
             "program_pack_product_secondary": ""
