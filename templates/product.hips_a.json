@@ -601,7 +601,7 @@
           "type": "bundle_step",
           "settings": {
             "title": "Choose lounge shorts",
-            "collection": "",
+            "collection": "bundle-lounge-shorts",
             "is_programs_step": false,
             "program_pack_product": "",
             "program_pack_product_secondary": ""
