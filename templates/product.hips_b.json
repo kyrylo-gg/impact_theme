@@ -584,6 +584,91 @@
         "subnote": "No deadline, no subscription, any device"
       }
     },
+    "nass_bundle_builder_3dqdDB": {
+      "type": "nass-bundle-builder",
+      "blocks": {
+        "bundle_step_9JpWYp": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "Select programs",
+            "collection": "",
+            "is_programs_step": true,
+            "program_pack_product": ""
+          }
+        },
+        "bundle_step_YmxnyE": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "Choose lounge shorts",
+            "collection": "",
+            "is_programs_step": false,
+            "program_pack_product": ""
+          }
+        },
+        "bundle_step_LqwfL9": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "Add sport shorts",
+            "collection": "",
+            "is_programs_step": false,
+            "program_pack_product": ""
+          }
+        },
+        "bundle_step_xUpX8h": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "Add swim shorts",
+            "collection": "",
+            "is_programs_step": false,
+            "program_pack_product": ""
+          }
+        },
+        "bundle_step_nfPhdr": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "Select top",
+            "collection": "",
+            "is_programs_step": false,
+            "program_pack_product": ""
+          }
+        }
+      },
+      "block_order": [
+        "bundle_step_9JpWYp",
+        "bundle_step_YmxnyE",
+        "bundle_step_LqwfL9",
+        "bundle_step_xUpX8h",
+        "bundle_step_nfPhdr"
+      ],
+      "name": "Bundle Builder",
+      "settings": {
+        "enable_section": true,
+        "bb_title_prefix": "BUILD YOUR",
+        "bb_title_accent": "PERFECT BOOTY!",
+        "bb_description": "Mix programs, shorts, and tops. Get 60% off all clothing when you add the 4 Programs Bundle.",
+        "bb_promo_banner_text": "60% OFF ALL CLOTHING / with Program Pack purchase",
+        "bb_show_countdown": true,
+        "bb_countdown_mode": "daily_kyiv_10am",
+        "bb_countdown_heading": "HURRY UP! THE SALE ENDS IN:",
+        "bb_initial_days": 0,
+        "bb_initial_hours": 16,
+        "bb_initial_minutes": 11,
+        "bb_initial_seconds": 20,
+        "bb_label_days": "Days",
+        "bb_label_hours": "Hours",
+        "bb_label_minutes": "Minutes",
+        "bb_label_seconds": "Seconds",
+        "show_one_click_alternative": false,
+        "one_click_product": "",
+        "one_click_label": "Only Twerk program",
+        "program_pack_product": "",
+        "discount_code": "",
+        "discount_promo_text": "Get 60% off all clothing with 4 Programs Bundle!",
+        "discount_applied_text": "60% off all clothing applied!",
+        "size_chart_config_handle": "size-chart-settings",
+        "storefront_api_token": ""
+      }
+    },
     "bt_faq_Kwt9rB": {
       "type": "bt_faq",
       "blocks": {
@@ -755,6 +840,7 @@
     "program_for_you",
     "hips_testimonials",
     "complete_system",
+    "nass_bundle_builder_3dqdDB",
     "bt_faq_Kwt9rB",
     "body_ready_cta",
     "main"
