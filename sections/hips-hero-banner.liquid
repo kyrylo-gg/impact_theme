@@ -104,16 +104,6 @@
               {% endif %}
             </p>
           {% endif %}
-          {% if has_hero_prices and is_hips_c_template %}
-            <p class="hips-hero-banner__price hips-hero-banner__price--hips-c-mobile">
-              {% if section.settings.price_old != blank %}
-                <span class="hips-hero-banner__price-old">{{ section.settings.price_old | escape }}</span>
-              {% endif %}
-              {% if section.settings.price_new != blank %}
-                <span class="hips-hero-banner__price-new">{{ section.settings.price_new | escape }}</span>
-              {% endif %}
-            </p>
-          {% endif %}
           {% if section.settings.cta_label_main != blank or section.settings.cta_label_accent != blank %}
             <a class="hips-hero-banner__cta" href="{{ section.settings.cta_url | default: '#buy' }}">
               {% if section.settings.cta_label_main != blank %}
@@ -375,12 +365,8 @@
     opacity: 1;
   }
 
-  .hips-hero-banner__price--hips-c-mobile {
-    display: flex;
-  }
-
   .hips-hero-banner__cta-prices--hips-c-desktop {
-    display: none;
+    display: inline-flex;
   }
 
   .hips-hero-banner__cta-arrow {
@@ -453,10 +439,6 @@
       display: block;
     }
 
-    .hips-hero-banner__price--hips-c-mobile {
-      display: none;
-    }
-
     .hips-hero-banner__cta-prices--hips-c-desktop {
       display: inline-flex;
     }
@@ -495,6 +477,17 @@
       display: inline-flex;
       align-items: baseline;
       gap: 6px;
+    }
+
+    body.product--hips_c .hips-hero-banner__cta,
+    body.product--hips_c .hips-hero-banner__cta > span:first-child,
+    body.product--hips_c .hips-hero-banner__cta-accent,
+    body.product--hips_c .hips-hero-banner__cta-prices {
+      white-space: nowrap;
+    }
+
+    body.product--hips_c .hips-hero-banner__cta-arrow {
+      display: none;
     }
   }
 {% endstylesheet %}
