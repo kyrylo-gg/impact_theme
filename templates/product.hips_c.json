@@ -158,20 +158,27 @@
           "settings": {
             "text": "4 weekly articles"
           }
+        },
+        "checklist_item_fY8NRF": {
+          "type": "checklist_item",
+          "settings": {
+            "text": "Lifetime access"
+          }
         }
       },
       "block_order": [
         "checklist_item_K6rRzN",
         "check_1",
         "check_2",
-        "check_3"
+        "check_3",
+        "checklist_item_fY8NRF"
       ],
       "settings": {
-        "heading_lead": "Your whole body",
-        "heading_accent": "moves differently",
+        "heading_lead": "Yours at the",
+        "heading_accent": "loyalty price",
         "boxes_image": "shopify://shop_images/Frame_41_1b168e62-62f3-45f4-8160-7d1a9a0e23a5.png",
         "banner_text": "",
-        "card1_title": "Hip\nMobility\nProgram",
+        "card1_title": "HipMobilityProgram",
         "card1_pill": "4 weeks",
         "card2_title": "",
         "card2_pill": "",
