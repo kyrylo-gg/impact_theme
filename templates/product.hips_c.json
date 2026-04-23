@@ -200,7 +200,7 @@
           "type": "bundle_step",
           "settings": {
             "title": "Select programs",
-            "collection": "",
+            "collection": "hips-b-copy",
             "is_programs_step": true,
             "program_pack_product": "",
             "program_pack_product_secondary": ""
