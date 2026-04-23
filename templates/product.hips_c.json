@@ -16,17 +16,17 @@
         "video_mobile": "shopify://files/videos/Mob 2.mp4",
         "overlay_opacity_desktop": 10,
         "overlay_opacity_mobile": 30,
-        "tag_text": "Hip Mobility Program · 4 weeks",
-        "eyebrow": "You were not built to sit 8 hours a day",
+        "tag_text": "Nastya Nass · Hip Mobility Program",
+        "eyebrow": "I used to give everyone Twerk first",
         "heading_main": "",
-        "heading_accent": " Your hips know it",
-        "subcopy": "<p> 4 weeks to unlock your hips. No hour-long sessions. No experience needed.</p>",
+        "heading_accent": "That was wrong",
+        "subcopy": "<p>The foundation I should have given you from the start. 4 weeks to unlock your hips. Then go back to Twerk and feel what it was always supposed to feel like.</p>",
         "price_old": "$159",
-        "price_new": "$79",
-        "cta_label_main": "Unlock my hips for",
+        "price_new": "$69",
+        "cta_label_main": "Build the foundation",
         "cta_label_accent": "",
         "cta_url": "",
-        "trust_line": "40,000+ students · Lifetime access · No equipment · Any device"
+        "trust_line": "Exclusive to students · Lifetime access · Any device"
       }
     },
     "bt_pain_points_3wVjJN": {
@@ -132,13 +132,10 @@
     "about_founder": {
       "type": "about-founder",
       "settings": {
-        "intro": "Taught by Nastya Nass",
-        "intro_hips_b": "Taught by Nastya Nass",
         "heading_lead": "what a free body",
         "heading_accent": "actually looks like",
         "main_image": "shopify://shop_images/Frame_344.png",
         "main_image_mobile": "shopify://shop_images/Frame_346.png",
-        "prelabel_text_hips_b": "<p>She has spent years teaching women how to unlock their hips.</p>",
         "blue_label": "Either way, her \n work speaks\n  clearly",
         "quote": "<p>She has spent years teaching women how to unlock their hips and move in a way that feels completely their own.</p><p> Six million followers did not come from a fitness formula. They came from the real thing — a woman who understands hip movement from the inside out.</p>",
         "stats_image": "shopify://shop_images/Frame_343.png",
@@ -582,6 +579,40 @@
         "subnote": "No deadline, no subscription, any device"
       }
     },
+    "it_was_foundation_wQm9Kp": {
+      "type": "it-was-your-foundation",
+      "name": "It Was Your Foundation",
+      "settings": {
+        "eyebrow": "It was not your effort",
+        "heading_lead": "It was your",
+        "heading_accent": "foundation",
+        "body_1": "<p>You committed to Twerk. You showed up and gave it your attention.</p>",
+        "body_2": "<p>That is not your problem. It is a sequence problem. Hip Mobility is the step that should have come first.</p>"
+      }
+    },
+    "four_weeks_open_n8Pm2": {
+      "type": "four-weeks-to-open",
+      "name": "Four Weeks To Open",
+      "settings": {
+        "video_desktop": "shopify://files/videos/Desk 1.mp4",
+        "video_mobile": "shopify://files/videos/Mob 1.mp4",
+        "heading_lead": "4 weeks to open",
+        "heading_accent": "what Twerk needs to work",
+        "body": "<p>After four weeks, your hips are not fighting you anymore. Twerk finally has the range and control it was always meant to have.</p>"
+      }
+    },
+    "what_changes_twerk_rL4vK": {
+      "type": "what-changes-back-to-twerk",
+      "name": "What Changes Back Twerk",
+      "settings": {
+        "heading_part_1": "What changes",
+        "heading_part_2": "when you",
+        "heading_part_4": "go back to Twerk",
+        "body_1": "<p>After four weeks, go back to Twerk with hips that actually cooperate.</p>",
+        "body_2": "<p>That is the moment the program clicks.</p>",
+        "tagline": "<p>You already paid for the value — now your body can use it.</p>"
+      }
+    },
     "bt_faq_Kwt9rB": {
       "type": "bt_faq",
       "blocks": {
@@ -664,45 +695,11 @@
         "subnote": "Lifetime access · Any device · Start today."
       }
     },
-    "it_was_foundation_wQm9Kp": {
-      "type": "it-was-your-foundation",
-      "name": "It Was Your Foundation",
-      "settings": {
-        "eyebrow": "It was not your effort",
-        "heading_lead": "It was your ",
-        "heading_accent": "foundation",
-        "body_1": "<p>You committed to Twerk. You showed up and gave it your attention.</p>",
-        "body_2": "<p>That is not your problem. It is a sequence problem. Hip Mobility is the step that should have come first.</p>"
-      }
-    },
-    "four_weeks_open_n8Pm2": {
-      "type": "four-weeks-to-open",
-      "name": "Four Weeks To Open",
-      "settings": {
-        "video_desktop": "shopify://files/videos/Desk 1.mp4",
-        "video_mobile": "shopify://files/videos/Mob 1.mp4",
-        "heading_lead": "4 weeks to open ",
-        "heading_accent": "what Twerk needs to work",
-        "body": "<p>After four weeks, your hips are not fighting you anymore. Twerk finally has the range and control it was always meant to have.</p>"
-      }
-    },
-    "what_changes_twerk_rL4vK": {
-      "type": "what-changes-back-to-twerk",
-      "name": "What Changes Back Twerk",
-      "settings": {
-        "heading_part_1": "What changes ",
-        "heading_part_2": "when you",
-        "heading_part_4": "go back to Twerk",
-        "body_1": "<p>After four weeks, go back to Twerk with hips that actually cooperate.</p>",
-        "body_2": "<p>That is the moment the program clicks.</p>",
-        "tagline": "<p>You already paid for the value — now your body can use it.</p>"
-      }
-    },
     "from_someone_like_you_mN3hT": {
       "type": "from-someone-like-you",
       "name": "From Someone Like You",
       "settings": {
-        "heading_lead": "From someone ",
+        "heading_lead": "From someone",
         "heading_accent": "who came the same way you did",
         "avatar": "shopify://shop_images/Frame_295.png",
         "name": "Heather V.",
