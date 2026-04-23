@@ -209,8 +209,8 @@
         "bundle_step_KibxbJ": {
           "type": "bundle_step",
           "settings": {
-            "title": "Choose lounge shorts",
-            "collection": "",
+            "title": "Choose equipment",
+            "collection": "bundle-equipment-copy",
             "is_programs_step": false,
             "program_pack_product": "",
             "program_pack_product_secondary": ""
@@ -220,7 +220,7 @@
           "type": "bundle_step",
           "settings": {
             "title": "Add sport shorts",
-            "collection": "",
+            "collection": "bundle-sport-shorts",
             "is_programs_step": false,
             "program_pack_product": "",
             "program_pack_product_secondary": ""
