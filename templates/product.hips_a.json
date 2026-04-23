@@ -611,7 +611,7 @@
           "type": "bundle_step",
           "settings": {
             "title": "Add sport shorts",
-            "collection": "",
+            "collection": "bundle-sport-shorts",
             "is_programs_step": false,
             "program_pack_product": "",
             "program_pack_product_secondary": ""
