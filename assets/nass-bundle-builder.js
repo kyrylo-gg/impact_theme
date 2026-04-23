@@ -490,7 +490,12 @@
       var selectedProduct = bbState.productsById[selectedProgramItem.productId];
       if (!selectedProduct) return '';
       var title = normalizeForMatch(selectedProduct.title);
-      if (title.indexOf('vip bundle') !== -1 || title.indexOf('twerk essential bundle') !== -1 || title.indexOf('twerk essential kit') !== -1) {
+      if (
+        title.indexOf('vip bundle') !== -1 ||
+        title.indexOf('twerk essential bundle') !== -1 ||
+        title.indexOf('twerk essential kit') !== -1 ||
+        title.indexOf('all in one bundle') !== -1
+      ) {
         return 'vip_or_essential';
       }
       if (title.indexOf('booty builder bundle') !== -1) {
@@ -503,7 +508,12 @@
       var p = bbState.productsById[productId];
       if (!p) return '';
       var title = normalizeForMatch(p.title);
-      if (title.indexOf('vip bundle') !== -1 || title.indexOf('twerk essential bundle') !== -1 || title.indexOf('twerk essential kit') !== -1) {
+      if (
+        title.indexOf('vip bundle') !== -1 ||
+        title.indexOf('twerk essential bundle') !== -1 ||
+        title.indexOf('twerk essential kit') !== -1 ||
+        title.indexOf('all in one bundle') !== -1
+      ) {
         return 'vip_or_essential';
       }
       if (title.indexOf('booty builder bundle') !== -1) {
@@ -1328,25 +1338,31 @@
         var normalizedTitle = String(p.title || '').toLowerCase().replace(/\s+/g, ' ').trim();
         var hasVipBundle = normalizedHandle.indexOf('vip') !== -1 && normalizedHandle.indexOf('bundle') !== -1;
         var hasBootyBuilderBundle = normalizedHandle.indexOf('booty') !== -1 && normalizedHandle.indexOf('builder') !== -1 && normalizedHandle.indexOf('bundle') !== -1;
+        var hasHipOpenerBundle = normalizedHandle.indexOf('hip') !== -1 && normalizedHandle.indexOf('opener') !== -1 && normalizedHandle.indexOf('bundle') !== -1;
+        var hasTwerkEssentialKit = normalizedHandle.indexOf('twerk') !== -1 && normalizedHandle.indexOf('essential') !== -1 && normalizedHandle.indexOf('kit') !== -1;
         var hasMegaTwerk = normalizedHandle.indexOf('mega') !== -1 && normalizedHandle.indexOf('twerk') !== -1;
         var hasPackOrBundle = normalizedHandle.indexOf('pack') !== -1 || normalizedHandle.indexOf('bundle') !== -1;
         var hasTwerkProgram = normalizedHandle.indexOf('twerk') !== -1 && normalizedHandle.indexOf('program') !== -1;
         var titleIsVipBundle = normalizedTitle.indexOf('vip bundle') !== -1;
         var titleIsBootyBuilderBundle = normalizedTitle.indexOf('booty builder bundle') !== -1;
+        var titleIsHipOpenerBundle = normalizedTitle.indexOf('hip opener bundle') !== -1;
+        var titleIsTwerkEssentialKit = normalizedTitle.indexOf('twerk essential kit') !== -1;
         var titleIsMegaPack = normalizedTitle.indexOf('mega twerk') !== -1 && (normalizedTitle.indexOf('pack') !== -1 || normalizedTitle.indexOf('bundle') !== -1);
         var titleIsTwerkProgram = normalizedTitle.indexOf('twerk program') !== -1;
         if (hasVipBundle || titleIsVipBundle) {
           badgeLabel = 'Best Value';
+        } else if (hasBootyBuilderBundle || titleIsBootyBuilderBundle) {
+          badgeLabel = 'Booty-Focused';
+        } else if (hasHipOpenerBundle || titleIsHipOpenerBundle) {
+          badgeLabel = 'Bestseller';
+        } else if (hasTwerkEssentialKit || titleIsTwerkEssentialKit) {
+          badgeLabel = 'Bestseller';
         } else if (hasMegaTwerk && hasPackOrBundle) {
           badgeLabel = 'Best Value';
         } else if (titleIsMegaPack) {
           badgeLabel = 'Best Value';
-        } else if (hasBootyBuilderBundle || titleIsBootyBuilderBundle) {
-          badgeLabel = 'Bestseller';
-        } else if (hasTwerkProgram) {
-          badgeLabel = 'Bestseller';
-        } else if (titleIsTwerkProgram) {
-          badgeLabel = 'Bestseller';
+        } else if (hasTwerkProgram || titleIsTwerkProgram) {
+          badgeLabel = '';
         }
       }
       var badgeHtml = badgeLabel ? '<div class="bb-product-top-badge" aria-hidden="true">' + badgeLabel + '</div>' : '';
