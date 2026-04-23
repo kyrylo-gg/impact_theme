@@ -593,7 +593,8 @@
             "title": "Select programs",
             "collection": "",
             "is_programs_step": true,
-            "program_pack_product": ""
+            "program_pack_product": "",
+            "program_pack_product_secondary": ""
           }
         },
         "bundle_step_YmxnyE": {
@@ -602,7 +603,8 @@
             "title": "Choose lounge shorts",
             "collection": "",
             "is_programs_step": false,
-            "program_pack_product": ""
+            "program_pack_product": "",
+            "program_pack_product_secondary": ""
           }
         },
         "bundle_step_LqwfL9": {
@@ -611,7 +613,8 @@
             "title": "Add sport shorts",
             "collection": "",
             "is_programs_step": false,
-            "program_pack_product": ""
+            "program_pack_product": "",
+            "program_pack_product_secondary": ""
           }
         },
         "bundle_step_xUpX8h": {
@@ -620,7 +623,8 @@
             "title": "Add swim shorts",
             "collection": "",
             "is_programs_step": false,
-            "program_pack_product": ""
+            "program_pack_product": "",
+            "program_pack_product_secondary": ""
           }
         },
         "bundle_step_nfPhdr": {
@@ -629,7 +633,8 @@
             "title": "Select top",
             "collection": "",
             "is_programs_step": false,
-            "program_pack_product": ""
+            "program_pack_product": "",
+            "program_pack_product_secondary": ""
           }
         }
       },
@@ -662,8 +667,9 @@
         "one_click_product": "",
         "one_click_label": "Only Twerk program",
         "program_pack_product": "",
+        "program_pack_product_secondary": "",
         "discount_code": "",
-        "discount_promo_text": "Get 60% off all clothing with 4 Programs Bundle!",
+        "discount_promo_text": "60% off all clothing with Vip or All-In-One Bundle!",
         "discount_applied_text": "60% off all clothing applied!",
         "size_chart_config_handle": "size-chart-settings",
         "storefront_api_token": ""
