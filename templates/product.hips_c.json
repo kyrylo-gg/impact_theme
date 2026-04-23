@@ -216,6 +216,16 @@
             "program_pack_product_secondary": ""
           }
         },
+        "bundle_step_nNTFin": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "add lounge shorts",
+            "collection": "bundle-lounge-shorts",
+            "is_programs_step": false,
+            "program_pack_product": "",
+            "program_pack_product_secondary": ""
+          }
+        },
         "bundle_step_PqaWhD": {
           "type": "bundle_step",
           "settings": {
@@ -239,8 +249,8 @@
         "bundle_step_FePmR3": {
           "type": "bundle_step",
           "settings": {
-            "title": "Select top",
-            "collection": "",
+            "title": "leggings & tops",
+            "collection": "bundle-leggings-tops",
             "is_programs_step": false,
             "program_pack_product": "",
             "program_pack_product_secondary": ""
@@ -250,6 +260,7 @@
       "block_order": [
         "bundle_step_QrFztQ",
         "bundle_step_KibxbJ",
+        "bundle_step_nNTFin",
         "bundle_step_PqaWhD",
         "bundle_step_4WRBDL",
         "bundle_step_FePmR3"
