@@ -1,4 +1,15 @@
 <section class="complete-system" id="complete-system">
+  {%- liquid
+    assign card2_body_plain = section.settings.card2_body | strip_html | strip
+    assign has_banner_text = false
+    if section.settings.banner_text != blank
+      assign has_banner_text = true
+    endif
+    assign has_card2 = false
+    if section.settings.card2_title != blank or section.settings.card2_pill != blank or card2_body_plain != blank
+      assign has_card2 = true
+    endif
+  -%}
   <div class="complete-system__container">
     <h2 class="complete-system__heading">
       <span class="complete-system__heading-lead">{{ section.settings.heading_lead | escape }}</span>
@@ -23,7 +34,9 @@
         </div>
 
         <div class="complete-system__col complete-system__col--right">
-          <div class="complete-system__banner">{{ section.settings.banner_text | escape }}</div>
+          {% if has_banner_text %}
+            <div class="complete-system__banner">{{ section.settings.banner_text | escape }}</div>
+          {% endif %}
 
           <div class="complete-system__purple-card complete-system__purple-card--first">
             <div class="complete-system__card-head">
@@ -40,13 +53,17 @@
             </ul>
           </div>
 
-          <div class="complete-system__purple-card complete-system__purple-card--second">
-            <div class="complete-system__card-head">
-              <h3 class="complete-system__purple-title">{{ section.settings.card2_title | escape }}</h3>
-              <span class="complete-system__pill">{{ section.settings.card2_pill | escape }}</span>
+          {% if has_card2 %}
+            <div class="complete-system__purple-card complete-system__purple-card--second">
+              <div class="complete-system__card-head">
+                <h3 class="complete-system__purple-title">{{ section.settings.card2_title | escape }}</h3>
+                <span class="complete-system__pill">{{ section.settings.card2_pill | escape }}</span>
+              </div>
+              {% if card2_body_plain != blank %}
+                <div class="complete-system__card2-body rte">{{ section.settings.card2_body }}</div>
+              {% endif %}
             </div>
-            <div class="complete-system__card2-body rte">{{ section.settings.card2_body }}</div>
-          </div>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -137,6 +154,17 @@
     font-weight: 800;
     line-height: 1.2;
   }
+  body.product--hips_b .complete-system__purple-card--first .complete-system__purple-title,
+  body.product--hips_c .complete-system__purple-card--first .complete-system__purple-title {
+    text-transform: uppercase;
+    color: #fff;
+    font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-stretch: 150%;
+    font-size: clamp(20px, 2.1vw, 26px);
+    font-weight: 600;
+    line-height: 1.05;
+    white-space: pre-line;
+  }
   .complete-system__card-head {
     display: flex;
     align-items: center;
@@ -170,6 +198,7 @@
     font-size: clamp(14px, 1.7vw, 18px);
     font-weight: 800;
     line-height: 1.2;
+    white-space: nowrap;
   }
   .complete-system__card2-body {
     margin-top: 10px;
@@ -249,6 +278,56 @@
       gap: 14px;
     }
     .complete-system__trust-row { flex-direction: row; justify-content: center; gap: 24px; }
+
+    body.product--hips_b .complete-system__col--right,
+    body.product--hips_c .complete-system__col--right {
+      height: 100%;
+    }
+
+    body.product--hips_b .complete-system__purple-card--first,
+    body.product--hips_c .complete-system__purple-card--first {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body.product--hips_b .complete-system__purple-card--first .complete-system__card-head,
+    body.product--hips_c .complete-system__purple-card--first .complete-system__card-head {
+      margin-bottom: 18px;
+    }
+
+    body.product--hips_b .complete-system__purple-card--first .complete-system__checklist,
+    body.product--hips_c .complete-system__purple-card--first .complete-system__checklist {
+      margin-top: auto;
+      gap: 16px;
+    }
+
+    body.product--hips_b .complete-system__purple-card--first .complete-system__check-item,
+    body.product--hips_c .complete-system__purple-card--first .complete-system__check-item {
+      font-size: 18px;
+      line-height: 1.4;
+    }
+
+    body.product--hips_b .complete-system__cta,
+    body.product--hips_c .complete-system__cta {
+      display: flex;
+      min-height: 56px;
+      width: fit-content;
+      min-width: 360px;
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 12px;
+      padding-right: 12px;
+      padding-top: 12px;
+      padding-bottom: 12px;
+    }
+  }
+  @media (max-width: 767px) {
+    body.product--hips_b .complete-system__heading-accent,
+    body.product--hips_c .complete-system__heading-accent {
+      display: inline;
+    }
   }
 {% endstylesheet %}
 

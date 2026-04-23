@@ -1,0 +1,129 @@
+<section class="it-was-foundation" id="it-was-foundation-{{ section.id }}" {{ section.shopify_attributes }}>
+  <div class="it-was-foundation__container">
+    {% if section.settings.eyebrow != blank %}
+      <p class="it-was-foundation__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+    {% endif %}
+    <h2 class="it-was-foundation__heading">
+      <span class="it-was-foundation__heading-lead">{{ section.settings.heading_lead | escape }}</span><span class="it-was-foundation__heading-accent">{{ section.settings.heading_accent | escape }}</span>
+    </h2>
+    <span class="it-was-foundation__underline" aria-hidden="true"></span>
+    <div class="it-was-foundation__body">
+      {% if section.settings.body_1 != blank %}
+        <div class="it-was-foundation__body-block rte">{{ section.settings.body_1 }}</div>
+      {% endif %}
+      {% if section.settings.body_2 != blank %}
+        <div class="it-was-foundation__body-block rte">{{ section.settings.body_2 }}</div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .it-was-foundation {
+    padding: 40px 16px;
+  }
+  .it-was-foundation__container {
+    max-width: 682px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .it-was-foundation__eyebrow {
+    margin: 0;
+    color: #000;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: clamp(16px, 1.4vw, 24px);
+    font-weight: 800;
+    line-height: 1.2;
+  }
+  .it-was-foundation__heading {
+    margin: 12px 0 0;
+    text-transform: uppercase;
+    font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-stretch: 150%;
+    font-size: clamp(24px, 3.4vw, 40px);
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+  }
+  .it-was-foundation__heading-lead {
+    color: #000;
+    font-weight: 600;
+  }
+  .it-was-foundation__heading-accent {
+    color: #0038ff;
+    font-weight: 900;
+  }
+  .it-was-foundation__underline {
+    display: block;
+    width: 64px;
+    height: 4px;
+    margin: 10px auto 0;
+    border-radius: 999px;
+    background: #0038ff;
+  }
+  .it-was-foundation__body {
+    margin-top: 24px;
+    color: #000;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: clamp(16px, 1.3vw, 21px);
+    font-weight: 500;
+    line-height: 1.5;
+    max-width: 682px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .it-was-foundation__body-block p {
+    margin: 0;
+  }
+  .it-was-foundation__body-block + .it-was-foundation__body-block {
+    margin-top: 20px;
+  }
+  .it-was-foundation__body .it-was-foundation__break-desktop {
+    display: none;
+  }
+  @media (min-width: 768px) {
+    .it-was-foundation {
+      padding: 64px 32px;
+    }
+    .it-was-foundation__eyebrow {
+      margin-top: 0;
+    }
+    .it-was-foundation__heading {
+      margin-top: 16px;
+    }
+    .it-was-foundation__body {
+      margin-top: 32px;
+    }
+    .it-was-foundation__body-block + .it-was-foundation__body-block {
+      margin-top: 24px;
+    }
+    .it-was-foundation__body .it-was-foundation__break-desktop {
+      display: inline;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "It Was Your Foundation",
+  "tag": "section",
+  "class": "it-was-foundation-wrapper",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "It was not your effort" },
+    { "type": "text", "id": "heading_lead", "label": "Heading lead", "default": "It was your " },
+    { "type": "text", "id": "heading_accent", "label": "Heading accent", "default": "foundation" },
+    {
+      "type": "richtext",
+      "id": "body_1",
+      "label": "Body paragraph 1",
+      "default": "<p>You committed to Twerk. You showed up and gave it your attention.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "body_2",
+      "label": "Body paragraph 2",
+      "default": "<p>That is not your problem. It is a sequence problem. Hip Mobility is the step that should have come first.</p>"
+    }
+  ],
+  "presets": [{ "name": "It Was Your Foundation" }]
+}
+{% endschema %}

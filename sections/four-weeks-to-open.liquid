@@ -1,0 +1,220 @@
+<section class="four-weeks-open" id="four-weeks-open-{{ section.id }}" {{ section.shopify_attributes }}>
+  <div class="four-weeks-open__container">
+    {% liquid
+      assign desktop_video = section.settings.video_desktop
+      assign mobile_video = section.settings.video_mobile
+      if mobile_video == blank
+        assign mobile_video = desktop_video
+      endif
+    %}
+
+    <div class="four-weeks-open__desktop">
+      <div class="four-weeks-open__card four-weeks-open__card--desktop">
+        {% if desktop_video != blank %}
+          {{
+            desktop_video
+            | video_tag:
+              class: 'four-weeks-open__video',
+              autoplay: true,
+              muted: true,
+              loop: true,
+              controls: false,
+              preload: 'metadata',
+              playsinline: true
+          }}
+        {% endif %}
+        <div class="four-weeks-open__gradient four-weeks-open__gradient--desktop" aria-hidden="true"></div>
+        <h2 class="four-weeks-open__heading four-weeks-open__heading--desktop">
+          <span class="four-weeks-open__heading-lead">{{ section.settings.heading_lead | escape }}</span><span class="four-weeks-open__heading-accent">{{ section.settings.heading_accent | escape }}</span>
+        </h2>
+        {% if section.settings.body != blank %}
+          <div class="four-weeks-open__glass rte">{{ section.settings.body }}</div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="four-weeks-open__mobile">
+      <div class="four-weeks-open__card four-weeks-open__card--video-mobile">
+        {% if mobile_video != blank %}
+          {{
+            mobile_video
+            | video_tag:
+              class: 'four-weeks-open__video',
+              autoplay: true,
+              muted: true,
+              loop: true,
+              controls: false,
+              preload: 'metadata',
+              playsinline: true
+          }}
+        {% endif %}
+        <div class="four-weeks-open__gradient four-weeks-open__gradient--mobile" aria-hidden="true"></div>
+        <div class="four-weeks-open__heading-wrap">
+          <h2 class="four-weeks-open__heading four-weeks-open__heading--mobile">
+            <span class="four-weeks-open__heading-lead">{{ section.settings.heading_lead | escape }}</span><span class="four-weeks-open__heading-accent">{{ section.settings.heading_accent | escape }}</span>
+          </h2>
+        </div>
+      </div>
+      {% if section.settings.body != blank %}
+        <div class="four-weeks-open__body-card rte">{{ section.settings.body }}</div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .four-weeks-open {
+    padding: 40px 16px;
+  }
+  .four-weeks-open__container {
+    max-width: 1184px;
+    margin: 0 auto;
+  }
+  .four-weeks-open__desktop {
+    display: none;
+  }
+  .four-weeks-open__mobile {
+    display: block;
+  }
+  .four-weeks-open__card {
+    position: relative;
+    border-radius: 30px;
+    overflow: hidden;
+    background: #000;
+  }
+  .four-weeks-open__card--desktop {
+    aspect-ratio: 1184 / 554;
+  }
+  .four-weeks-open__card--video-mobile {
+    aspect-ratio: 335 / 560;
+  }
+  .four-weeks-open__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .four-weeks-open__gradient--mobile {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 70%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5), transparent);
+    pointer-events: none;
+  }
+  .four-weeks-open__gradient--desktop {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.2), transparent);
+    pointer-events: none;
+  }
+  .four-weeks-open__heading {
+    margin: 0;
+    text-transform: uppercase;
+    font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-stretch: 150%;
+    line-height: 1.1;
+  }
+  .four-weeks-open__heading-wrap {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    bottom: 20px;
+    z-index: 2;
+    text-align: center;
+  }
+  .four-weeks-open__heading--mobile {
+    font-size: clamp(20px, 6vw, 28px);
+    color: #fff;
+  }
+  .four-weeks-open__heading-lead {
+    font-weight: 600;
+    color: #fff;
+  }
+  .four-weeks-open__heading-accent {
+    font-weight: 900;
+    color: #faff00;
+  }
+  .four-weeks-open__body-card {
+    margin-top: 8px;
+    border-radius: 30px;
+    background: #f5f5f5;
+    padding: 16px;
+    color: #000;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+  .four-weeks-open__body-card p {
+    margin: 0;
+  }
+  .four-weeks-open__heading--desktop {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    z-index: 2;
+    max-width: 490px;
+    font-size: clamp(24px, 2.6vw, 35px);
+    text-align: left;
+  }
+  .four-weeks-open__glass {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    z-index: 2;
+    max-width: 600px;
+    padding: 20px;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    color: #fff;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: clamp(14px, 1.1vw, 18px);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+  .four-weeks-open__glass p {
+    margin: 0;
+  }
+  @media (min-width: 768px) {
+    .four-weeks-open {
+      padding: 64px 32px;
+    }
+    .four-weeks-open__desktop {
+      display: block;
+    }
+    .four-weeks-open__mobile {
+      display: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Four Weeks To Open",
+  "tag": "section",
+  "class": "four-weeks-open-wrapper",
+  "settings": [
+    { "type": "video", "id": "video_desktop", "label": "Desktop video" },
+    { "type": "video", "id": "video_mobile", "label": "Mobile video" },
+    { "type": "text", "id": "heading_lead", "label": "Heading lead", "default": "4 weeks to open " },
+    {
+      "type": "text",
+      "id": "heading_accent",
+      "label": "Heading accent",
+      "default": "what Twerk needs to work"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>After four weeks, your hips are not fighting you anymore. Twerk finally has the range and control it was always meant to have.</p>"
+    }
+  ],
+  "presets": [{ "name": "Four Weeks To Open" }]
+}
+{% endschema %}

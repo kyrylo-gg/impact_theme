@@ -664,6 +664,57 @@
         "subnote": "Lifetime access · Any device · Start today."
       }
     },
+    "it_was_foundation_wQm9Kp": {
+      "type": "it-was-your-foundation",
+      "name": "It Was Your Foundation",
+      "settings": {
+        "eyebrow": "It was not your effort",
+        "heading_lead": "It was your ",
+        "heading_accent": "foundation",
+        "body_1": "<p>You committed to Twerk. You showed up and gave it your attention.</p>",
+        "body_2": "<p>That is not your problem. It is a sequence problem. Hip Mobility is the step that should have come first.</p>"
+      }
+    },
+    "four_weeks_open_n8Pm2": {
+      "type": "four-weeks-to-open",
+      "name": "Four Weeks To Open",
+      "settings": {
+        "video_desktop": "shopify://files/videos/Desk 1.mp4",
+        "video_mobile": "shopify://files/videos/Mob 1.mp4",
+        "heading_lead": "4 weeks to open ",
+        "heading_accent": "what Twerk needs to work",
+        "body": "<p>After four weeks, your hips are not fighting you anymore. Twerk finally has the range and control it was always meant to have.</p>"
+      }
+    },
+    "what_changes_twerk_rL4vK": {
+      "type": "what-changes-back-to-twerk",
+      "name": "What Changes Back Twerk",
+      "settings": {
+        "heading_part_1": "What changes ",
+        "heading_part_2": "when you",
+        "heading_part_4": "go back to Twerk",
+        "body_1": "<p>After four weeks, go back to Twerk with hips that actually cooperate.</p>",
+        "body_2": "<p>That is the moment the program clicks.</p>",
+        "tagline": "<p>You already paid for the value — now your body can use it.</p>"
+      }
+    },
+    "from_someone_like_you_mN3hT": {
+      "type": "from-someone-like-you",
+      "name": "From Someone Like You",
+      "settings": {
+        "heading_lead": "From someone ",
+        "heading_accent": "who came the same way you did",
+        "avatar": "shopify://shop_images/Frame_295.png",
+        "name": "Heather V.",
+        "role": "health coach, 42",
+        "rating": 5,
+        "quote": "<p>\"I had a back surgery a year ago. I wanted a fun video that also helps with my back. Hip mobility was the goal.\"</p>",
+        "came_label": "She came with:",
+        "came_with": "<p>Post-surgery recovery. Wanted movement, not physiotherapy.</p>",
+        "changed_label": "What changed:",
+        "changed": "<p>Found a program that took her body seriously without treating her like a patient.</p>"
+      }
+    },
     "main": {
       "type": "main-product",
       "blocks": {
@@ -753,8 +804,12 @@
     "program_for_you",
     "hips_testimonials",
     "complete_system",
+    "it_was_foundation_wQm9Kp",
+    "four_weeks_open_n8Pm2",
+    "what_changes_twerk_rL4vK",
     "bt_faq_Kwt9rB",
     "body_ready_cta",
+    "from_someone_like_you_mN3hT",
     "main"
   ]
 }

@@ -12,10 +12,10 @@
   assign is_hips_a_like = false
   assign is_hips_b_like = false
   if template.name == 'product'
-    if template.suffix == 'hips_a' or template.suffix == 'hips_b' or template.suffix == 'hips_b-2'
+    if template.suffix == 'hips_a' or template.suffix == 'hips_b' or template.suffix == 'hips_c' or template.suffix == 'hips_b-2'
       assign is_hips_a_like = true
     endif
-    if template.suffix == 'hips_b' or template.suffix == 'hips_b-2'
+    if template.suffix == 'hips_b' or template.suffix == 'hips_c' or template.suffix == 'hips_b-2'
       assign is_hips_b_like = true
     endif
   endif
@@ -204,6 +204,7 @@
     padding-right: 10px !important;
   }
   body.product--hips_b .bt-pain .bt-pain__text,
+  body.product--hips_c .bt-pain .bt-pain__text,
   body.product--hips_b-2 .bt-pain .bt-pain__text {
     max-width: none !important;
     width: 100% !important;
@@ -225,6 +226,7 @@
       padding-right: 12px !important;
     }
     body.product--hips_b .bt-pain .bt-pain__text,
+    body.product--hips_c .bt-pain .bt-pain__text,
     body.product--hips_b-2 .bt-pain .bt-pain__text {
       padding-left: 2px !important;
       padding-right: 2px !important;

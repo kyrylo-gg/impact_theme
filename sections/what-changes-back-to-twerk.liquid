@@ -1,0 +1,150 @@
+<section class="what-changes-twerk" id="what-changes-twerk-{{ section.id }}" {{ section.shopify_attributes }}>
+  <div class="what-changes-twerk__container">
+    <div class="what-changes-twerk__card">
+      <div class="what-changes-twerk__glow" aria-hidden="true"></div>
+      <div class="what-changes-twerk__content">
+        <h2 class="what-changes-twerk__heading">
+          <span class="what-changes-twerk__heading-black">{{ section.settings.heading_part_1 | escape }}</span><span class="what-changes-twerk__heading-blue">{{ section.settings.heading_part_2 | escape }}</span><span class="what-changes-twerk__heading-black"> </span><span class="what-changes-twerk__heading-blue">{{ section.settings.heading_part_4 | escape }}</span>
+        </h2>
+        <span class="what-changes-twerk__underline" aria-hidden="true"></span>
+        {% if section.settings.body_1 != blank %}
+          <div class="what-changes-twerk__body rte">{{ section.settings.body_1 }}</div>
+        {% endif %}
+        {% if section.settings.body_2 != blank %}
+          <div class="what-changes-twerk__body rte">{{ section.settings.body_2 }}</div>
+        {% endif %}
+        {% if section.settings.tagline != blank %}
+          <div class="what-changes-twerk__tagline rte">{{ section.settings.tagline }}</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .what-changes-twerk {
+    padding: 40px 16px;
+  }
+  .what-changes-twerk__container {
+    max-width: 1184px;
+    margin: 0 auto;
+  }
+  .what-changes-twerk__card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 30px;
+    background: rgba(249, 234, 218, 0.5);
+    padding: 40px 20px;
+  }
+  .what-changes-twerk__glow {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 110%;
+    height: 140%;
+    pointer-events: none;
+    background: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 70%);
+  }
+  .what-changes-twerk__content {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .what-changes-twerk__heading {
+    margin: 0;
+    text-transform: uppercase;
+    font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-stretch: 150%;
+    font-size: clamp(24px, 3.4vw, 40px);
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+  }
+  .what-changes-twerk__heading-black {
+    color: #000;
+    font-weight: 600;
+  }
+  .what-changes-twerk__heading-blue {
+    color: #0038ff;
+    font-weight: 900;
+  }
+  .what-changes-twerk__underline {
+    display: block;
+    width: 64px;
+    height: 4px;
+    margin: 10px auto 0;
+    border-radius: 999px;
+    background: #0038ff;
+  }
+  .what-changes-twerk__body,
+  .what-changes-twerk__tagline {
+    margin-top: 24px;
+    color: #000;
+    font-family: var(--font-body--family, 'Avenir Next'), 'Avenir Next', 'Avenir', Arial, sans-serif;
+    font-size: clamp(16px, 1.3vw, 21px);
+    font-weight: 500;
+    line-height: 1.5;
+    max-width: 682px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .what-changes-twerk__body + .what-changes-twerk__body {
+    margin-top: 20px;
+  }
+  .what-changes-twerk__tagline {
+    font-weight: 800;
+  }
+  .what-changes-twerk__body p,
+  .what-changes-twerk__tagline p {
+    margin: 0;
+  }
+  @media (min-width: 768px) {
+    .what-changes-twerk {
+      padding: 64px 32px;
+    }
+    .what-changes-twerk__card {
+      padding: 48px 48px;
+    }
+    .what-changes-twerk__body,
+    .what-changes-twerk__tagline {
+      margin-top: 32px;
+    }
+    .what-changes-twerk__body + .what-changes-twerk__body {
+      margin-top: 24px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "What Changes Back Twerk",
+  "tag": "section",
+  "class": "what-changes-twerk-wrapper",
+  "settings": [
+    { "type": "text", "id": "heading_part_1", "label": "Heading (black)", "default": "What changes " },
+    { "type": "text", "id": "heading_part_2", "label": "Heading (blue)", "default": "when you" },
+    { "type": "text", "id": "heading_part_4", "label": "Heading (blue)", "default": "go back to Twerk" },
+    {
+      "type": "richtext",
+      "id": "body_1",
+      "label": "Body paragraph 1",
+      "default": "<p>After four weeks, go back to Twerk with hips that actually cooperate.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "body_2",
+      "label": "Body paragraph 2",
+      "default": "<p>That is the moment the program clicks.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "<p>You already paid for the value — now your body can use it.</p>"
+    }
+  ],
+  "presets": [{ "name": "What Changes Back Twerk" }]
+}
+{% endschema %}

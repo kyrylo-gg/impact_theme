@@ -52,7 +52,7 @@
       {% render 'nass-fonts' %}
     {%- endif -%}
     {%- if template.name == 'product' -%}
-      {%- if template.suffix == 'body_transformation' or template.suffix == 'hips_a' or template.suffix == 'hips_b' -%}
+      {%- if template.suffix == 'body_transformation' or template.suffix == 'hips_a' or template.suffix == 'hips_b' or template.suffix == 'hips_c' -%}
         {% render 'bt-body-transformation-fonts' %}
       {%- endif -%}
     {%- endif -%}
@@ -134,7 +134,7 @@
     </style>
     {%- endif -%}
 
-    {%- if template.name == 'product' and (template.suffix == 'hips_a' or template.suffix == 'hips_b') -%}
+    {%- if template.name == 'product' and (template.suffix == 'hips_a' or template.suffix == 'hips_b' or template.suffix == 'hips_c') -%}
     <style>
       /**
        * product.hips_a: same typography stack as Body Transformation (BT) sections.
@@ -143,21 +143,24 @@
        * Scoped to main so theme header outside main keeps shop defaults.
        */
       body.product--hips_a main#main.anchor,
-      body.product--hips_b main#main.anchor {
+      body.product--hips_b main#main.anchor,
+      body.product--hips_c main#main.anchor {
         --font-heading--family: 'Anybody';
         --font-body--family: Avenir, 'Nunito Sans', system-ui, sans-serif;
       }
 
       /* hips_a: keep bundle builder hidden; open via CTA click (wizard overlay) */
       body.product--hips_a .nass-bundle-builder .bb-section,
-      body.product--hips_b .nass-bundle-builder .bb-section {
+      body.product--hips_b .nass-bundle-builder .bb-section,
+      body.product--hips_c .nass-bundle-builder .bb-section {
         display: none !important;
       }
 
       @media (min-width: 768px) {
         /* hips_a only: keep BT_PainPoints heading size aligned with page sections */
         body.product--hips_a main#main.anchor .bt-pain__title,
-        body.product--hips_b main#main.anchor .bt-pain__title {
+        body.product--hips_b main#main.anchor .bt-pain__title,
+        body.product--hips_c main#main.anchor .bt-pain__title {
           font-size: clamp(24px, 3.4vw, 40px) !important;
         }
       }
@@ -188,6 +191,19 @@
         .complete-system__heading,
         .body-ready-cta__heading,
         .bt-faq__title
+      )::after,
+      body.product--hips_c main#main.anchor :is(
+        .hips-hero-banner__heading,
+        .why-stiff__heading,
+        .hip-mobility__heading,
+        .about-founder__heading,
+        .program-contents__heading,
+        .four-weeks__heading,
+        .everything-in-pocket__heading,
+        .program-for-you__heading,
+        .complete-system__heading,
+        .body-ready-cta__heading,
+        .bt-faq__title
       )::after {
         content: '';
         display: block;
@@ -204,12 +220,15 @@
         body.product--hips_a main#main.anchor [class$='__heading-accent'],
         body.product--hips_a main#main.anchor [class*='__heading-accent '],
         body.product--hips_b main#main.anchor [class$='__heading-accent'],
-        body.product--hips_b main#main.anchor [class*='__heading-accent '] {
+        body.product--hips_b main#main.anchor [class*='__heading-accent '],
+        body.product--hips_c main#main.anchor [class$='__heading-accent'],
+        body.product--hips_c main#main.anchor [class*='__heading-accent '] {
           display: block !important;
         }
 
         body.product--hips_a main#main.anchor .everything-in-pocket__heading--desktop::after,
-        body.product--hips_b main#main.anchor .everything-in-pocket__heading--desktop::after {
+        body.product--hips_b main#main.anchor .everything-in-pocket__heading--desktop::after,
+        body.product--hips_c main#main.anchor .everything-in-pocket__heading--desktop::after {
           margin-left: 0;
           margin-right: auto;
           margin-top: 16px;
@@ -219,7 +238,7 @@
     <script>
       (function() {
         function initHipsABundleOpen() {
-          if (!document.body || !(document.body.classList.contains('product--hips_a') || document.body.classList.contains('product--hips_b'))) return;
+          if (!document.body || !(document.body.classList.contains('product--hips_a') || document.body.classList.contains('product--hips_b') || document.body.classList.contains('product--hips_c'))) return;
 
           /* hips_a: normalize CTA anchors to Complete System section */
           document.querySelectorAll('.hips-hero-banner__cta, .body-ready-cta__button').forEach(function(link) {
