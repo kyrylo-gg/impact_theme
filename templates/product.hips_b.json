@@ -122,8 +122,8 @@
         "video_mobile": "shopify://files/videos/Mob 1.mp4",
         "video_desktop": "shopify://files/videos/Desk 1.mp4",
         "eyebrow": "Not yoga. Not physiotherapy.",
-        "headline_lead": "Not another routine",
-        "headline_accent": "that works for a week",
+        "headline_lead": "Not another",
+        "headline_accent": "routine that works for a week",
         "body": "<p>Most programs are built for athletes. This one is built for a body that sits. Progressive movement designed around your actual life.</p>",
         "footnote": "The program is taught by someone who has spent her life understandingexactly how hips move.",
         "accent_color": "#faff00"
@@ -132,11 +132,15 @@
     "about_founder": {
       "type": "about-founder",
       "settings": {
+        "intro": "Intro line",
+        "intro_hips_b": "Intro line",
         "heading_lead": "what a free body",
         "heading_accent": "actually looks like",
         "main_image": "shopify://shop_images/Frame_344.png",
         "main_image_mobile": "shopify://shop_images/Frame_346.png",
         "blue_label": "Either way, her \n work speaks\n  clearly",
+        "prelabel_text": "<p></p>",
+        "prelabel_text_hips_b": "<p></p>",
         "quote": "<p>She has spent years teaching women how to unlock their hips and move in a way that feels completely their own.</p><p> Six million followers did not come from a fitness formula. They came from the real thing — a woman who understands hip movement from the inside out.</p>",
         "stats_image": "shopify://shop_images/Frame_343.png",
         "checkmark_image": "shopify://shop_images/Checkmark.png",
@@ -561,6 +565,7 @@
         "check_3"
       ],
       "settings": {
+        "intro_line": "Intro line",
         "heading_lead": "Your whole body",
         "heading_accent": "moves differently",
         "boxes_image": "shopify://shop_images/Frame_4111607-1ba773963318.png",
