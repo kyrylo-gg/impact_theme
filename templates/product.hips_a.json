@@ -848,10 +848,10 @@
       "type": "custom-quick-add",
       "name": "TS Sticky Add",
       "settings": {
-        "product": "",
+        "product": "hip-mobility-a",
         "button_link": "",
         "button_text": "Shop now",
-        "background_button": "#FAFF00",
+        "background_button": "#faff00",
         "text_color_button": "#1a1a1a",
         "block_text_color": "#1a1a1a",
         "block_background": "#ffb6e3",
