@@ -91,11 +91,20 @@
 
         <div class="hips-hero-banner__bottom" id="hero-buy">
           {% liquid
+            assign is_hips_a_template = false
+            assign is_hips_a_ceo_template = false
             assign is_hips_b_template = false
             assign is_hips_c_template = false
+            assign is_hips_a_like_template = false
             assign has_hero_prices = false
             if template.name == 'product'
-              if template.suffix == 'hips_b'
+              if template.suffix == 'hips_a'
+                assign is_hips_a_template = true
+                assign is_hips_a_like_template = true
+              elsif template.suffix == 'hips_a_ceo'
+                assign is_hips_a_ceo_template = true
+                assign is_hips_a_like_template = true
+              elsif template.suffix == 'hips_b'
                 assign is_hips_b_template = true
               elsif template.suffix == 'hips_c'
                 assign is_hips_c_template = true
@@ -132,6 +141,22 @@
                   </span>
                 {% elsif section.settings.cta_label_accent != blank %}
                   <span class="hips-hero-banner__cta-accent"> {{ section.settings.cta_label_accent | escape }}</span>
+                {% endif %}
+              {% elsif is_hips_a_like_template %}
+                {% if section.settings.cta_label_accent != blank %}
+                  <span class="hips-hero-banner__cta-accent hips-hero-banner__cta-accent--hips-a-desktop">
+                    {{ section.settings.cta_label_accent | escape }}
+                  </span>
+                {% endif %}
+                {% if has_hero_prices %}
+                  <span class="hips-hero-banner__cta-accent hips-hero-banner__cta-accent--hips-a-mobile-prices">
+                    {% if section.settings.price_old != blank %}
+                      <span class="hips-hero-banner__price-old">{{ section.settings.price_old | escape }}</span>
+                    {% endif %}
+                    {% if section.settings.price_new != blank %}
+                      <span class="hips-hero-banner__price-new">{{ section.settings.price_new | escape }}</span>
+                    {% endif %}
+                  </span>
                 {% endif %}
               {% elsif is_hips_c_template %}
                 {% if section.settings.cta_label_accent != blank %}
@@ -498,6 +523,71 @@
     }
 
     body.product--hips_c .hips-hero-banner__cta-arrow {
+      display: none;
+    }
+
+    body.product--hips_a .hips-hero-banner__price,
+    body.product--hips_a_ceo .hips-hero-banner__price,
+    body.product--hips_ceo .hips-hero-banner__price {
+      display: none;
+    }
+
+    body.product--hips_a .hips-hero-banner__cta-arrow,
+    body.product--hips_a_ceo .hips-hero-banner__cta-arrow,
+    body.product--hips_ceo .hips-hero-banner__cta-arrow {
+      display: none;
+    }
+
+    body.product--hips_a .hips-hero-banner__cta > span:first-child,
+    body.product--hips_a_ceo .hips-hero-banner__cta > span:first-child,
+    body.product--hips_ceo .hips-hero-banner__cta > span:first-child,
+    body.product--hips_a .hips-hero-banner__cta-accent,
+    body.product--hips_a_ceo .hips-hero-banner__cta-accent,
+    body.product--hips_ceo .hips-hero-banner__cta-accent {
+      white-space: nowrap;
+    }
+
+    body.product--hips_a .hips-hero-banner__cta,
+    body.product--hips_a_ceo .hips-hero-banner__cta,
+    body.product--hips_ceo .hips-hero-banner__cta {
+      justify-content: center;
+      gap: 6px;
+      padding-left: 16px;
+      padding-right: 16px;
+      font-size: 16px;
+    }
+
+    body.product--hips_a .hips-hero-banner__cta > span:first-child,
+    body.product--hips_a_ceo .hips-hero-banner__cta > span:first-child,
+    body.product--hips_ceo .hips-hero-banner__cta > span:first-child {
+      font-size: 0.95em;
+    }
+
+    body.product--hips_a .hips-hero-banner__cta-accent--hips-a-desktop,
+    body.product--hips_a_ceo .hips-hero-banner__cta-accent--hips-a-desktop,
+    body.product--hips_ceo .hips-hero-banner__cta-accent--hips-a-desktop {
+      display: none;
+    }
+
+    body.product--hips_a .hips-hero-banner__cta-accent--hips-a-mobile-prices,
+    body.product--hips_a_ceo .hips-hero-banner__cta-accent--hips-a-mobile-prices,
+    body.product--hips_ceo .hips-hero-banner__cta-accent--hips-a-mobile-prices {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    body.product--hips_a .hips-hero-banner__cta-accent--hips-a-desktop,
+    body.product--hips_a_ceo .hips-hero-banner__cta-accent--hips-a-desktop,
+    body.product--hips_ceo .hips-hero-banner__cta-accent--hips-a-desktop {
+      display: inline;
+    }
+
+    body.product--hips_a .hips-hero-banner__cta-accent--hips-a-mobile-prices,
+    body.product--hips_a_ceo .hips-hero-banner__cta-accent--hips-a-mobile-prices,
+    body.product--hips_ceo .hips-hero-banner__cta-accent--hips-a-mobile-prices {
       display: none;
     }
   }

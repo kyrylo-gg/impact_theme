@@ -110,7 +110,11 @@
             <polygon points="0,18 24,18 12,32" fill="currentColor"></polygon>
           </svg>
         {%- endif -%}
-        <h2 class="nass-banner__title">{{ section.settings.title | escape }}</h2>
+        {% if template.name == 'product' and template.suffix == 'hips_a_ceo' %}
+          <div class="nass-banner__title">{{ section.settings.title | escape }}</div>
+        {% else %}
+          <h2 class="nass-banner__title">{{ section.settings.title | escape }}</h2>
+        {% endif %}
         {%- if section.settings.show_arrows -%}
           <svg class="nass-arrow nass-arrow--right" viewBox="0 0 24 32" aria-hidden="true">
             <rect x="9" y="0" width="6" height="20" fill="currentColor"></rect>

@@ -1474,7 +1474,7 @@
       var active = bbState.sizeFilter;
       var html = '<div class="bb-size-filter-sheet bb-size-filter-sheet--hidden" data-bb-size-filter-sheet role="dialog" aria-label="Choose size">';
       html += '<div class="bb-size-filter-sheet-backdrop" data-bb-size-filter-close></div>';
-      html += '<div class="bb-size-filter-sheet-panel"><h3 class="bb-size-filter-sheet-title">Filter by size</h3><div class="bb-size-filter-pills">';
+      html += '<div class="bb-size-filter-sheet-panel"><div class="bb-size-filter-sheet-title">Filter by size</div><div class="bb-size-filter-pills">';
       html += '<button type="button" class="bb-size-filter-pill' + (!active ? ' bb-size-filter-pill--active' : '') + '" data-bb-size-filter="">All</button>';
       sizes.forEach(function(s) {
         html += '<button type="button" class="bb-size-filter-pill' + (active === s ? ' bb-size-filter-pill--active' : '') + '" data-bb-size-filter="' + (s || '').replace(/"/g, '&quot;') + '">' + (s || '') + '</button>';
