@@ -15,8 +15,8 @@
         "image_aEp4BX": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Banner_1_Desk-4.png",
-            "mobile_image": "shopify://shop_images/Banner_1_Mobile-4.png",
+            "image": "shopify://shop_images/Banner_1_Desk_d0c3d749-9ad9-4c04-972a-c29d8709d953.png",
+            "mobile_image": "shopify://shop_images/Banner_1_Mobile_60bc6c4e-9ad8-4d8e-a301-24dbc0fd7cd7.png",
             "content_max_width": 780,
             "mobile_text_position": "place-self-end-start text-start",
             "desktop_text_position": "sm:place-self-end-start sm:text-start",
@@ -24,7 +24,7 @@
             "title": "",
             "heading_tag": "h1",
             "button_text": "",
-            "button_link": "https://www.nasswear.com/products/twerk-program",
+            "button_link": "https://www.nasswear.com/products/hip-mobility-bundle",
             "text_color": "#ffffff",
             "button_background": "#ffffff",
             "button_text_color": "#000000",
