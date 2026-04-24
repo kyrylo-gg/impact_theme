@@ -536,6 +536,24 @@
   %}
 {% endif %}
 
+{%- liquid
+  assign is_hips_complete_system_anchor_template = false
+  if template.name == 'product' and template.suffix == 'hips_a_ceo'
+    assign is_hips_complete_system_anchor_template = true
+  elsif template.name == 'product' and template.suffix == 'hips_a'
+    assign is_hips_complete_system_anchor_template = true
+  elsif template.name == 'product' and template.suffix == 'hips_b'
+    assign is_hips_complete_system_anchor_template = true
+  elsif template.name == 'product' and template.suffix == 'hips_c'
+    assign is_hips_complete_system_anchor_template = true
+  endif
+
+  assign sticky_cta_href = section.settings.button_link
+  if is_hips_complete_system_anchor_template
+    assign sticky_cta_href = '#complete-system'
+  endif
+-%}
+
 <div id="quick-add-sticky-{{ section.id }}" class="custom-quick-add">
 
   <div
@@ -622,7 +640,7 @@
         {% endif %}
       </div>
       <a
-        href="{{ section.settings.button_link }}"
+        href="{{ sticky_cta_href }}"
         class="custom-quick-add-button"
         style="background:{{ section.settings.background_button }}; color:{{ section.settings.text_color_button }}"
       >
