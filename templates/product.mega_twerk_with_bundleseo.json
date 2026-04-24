@@ -602,6 +602,32 @@
         "heading_highlight": "excited about"
       }
     },
+    "nass_countdown_CGt6fM": {
+      "type": "nass-countdown",
+      "name": "NASS Countdown Banner",
+      "settings": {
+        "show_announcement": true,
+        "announcement_highlight": "Limited Dance Day Offer:",
+        "announcement_text": "Best NASS Programs at only $149",
+        "marquee_speed": 30,
+        "title": "JOIN NASS TODAY",
+        "show_arrows": true,
+        "end_date": "2026-05-31 23:59",
+        "label_days": "Days",
+        "label_hours": "Hours",
+        "label_minutes": "Minutes",
+        "label_seconds": "Seconds",
+        "expired_text": "Offer ended",
+        "show_stickers": true,
+        "sticker_image": "shopify://shop_images/Frame_538.png",
+        "sticker_link": "",
+        "show_confetti": true,
+        "bg_color": "#0038FF",
+        "bar_bg_color": "#000000",
+        "accent_color": "#FFF600",
+        "text_color": "#FFFFFF"
+      }
+    },
     "nass_bundle_builder": {
       "type": "nass-bundle-builder",
       "blocks": {
@@ -612,7 +638,7 @@
             "collection": "bundle_bundle-copy",
             "is_programs_step": true,
             "program_pack_product": "vip-bundle",
-            "program_pack_product_secondary": ""
+            "program_pack_product_secondary": "all-in-one-bundle"
           }
         },
         "bundle_step_bb96UU": {
@@ -731,7 +757,7 @@
         "bb_title_accent": "THIS DANCE DAY!",
         "bb_description": "Mix programs, shorts, and tops. Get 60% off all clothing when you purchase the VIP Bundle or All-In-One Bundles",
         "bb_promo_banner_text": "60% OFF ALL CLOTHING / with VIP  or All-In One Bundle purchase",
-        "bb_show_countdown": true,
+        "bb_show_countdown": false,
         "bb_countdown_mode": "daily_kyiv_10am",
         "bb_countdown_heading": "HURRY UP! THE SALE ENDS IN:",
         "bb_initial_days": 0,
@@ -1247,6 +1273,7 @@
     "student_progress_ez8yde",
     "social_proof_hPtKDy",
     "feedback_screenshots_main",
+    "nass_countdown_CGt6fM",
     "nass_bundle_builder",
     "guarantee_section_main",
     "features_main",
