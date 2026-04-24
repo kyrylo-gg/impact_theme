@@ -289,6 +289,7 @@
         "program_pack_product": "",
         "program_pack_product_secondary": "",
         "discount_code": "",
+        "show_discount_banner": true,
         "discount_promo_text": "60% off all clothing with Vip or All-In-One Bundle!",
         "discount_applied_text": "60% off all clothing applied!",
         "size_chart_config_handle": "size-chart-settings",
@@ -419,6 +420,33 @@
         "input_background": "rgba(0,0,0,0)",
         "input_text_color": ""
       }
+    },
+    "custom_quick_add_qD4XLc": {
+      "type": "custom-quick-add",
+      "name": "TS Sticky Add",
+      "settings": {
+        "product": "hip-mobility-c",
+        "button_link": "",
+        "button_text": "Shop now",
+        "background_button": "#FAFF00",
+        "text_color_button": "#1a1a1a",
+        "block_text_color": "#1a1a1a",
+        "block_background": "#ffb6e3",
+        "sublime_text": "<p>Celebrate Dance Day with NASS</p>",
+        "sublime_text_color": "#1a1a1a",
+        "timer_enabled": true,
+        "timer_type": "daily",
+        "cancel_date": "01-01-2026 12:00",
+        "cancel_time": 0,
+        "cancel_minutes": 29,
+        "cancel_action": "none",
+        "countdown_background": "#313131",
+        "countdown_color": "#ffffff",
+        "mobile_countdown_background": "#313131",
+        "mobile_countdown_color": "#ffffff",
+        "labels_color": "#000000",
+        "mobile_labels_color": "#ffffff"
+      }
     }
   },
   "order": [
@@ -432,6 +460,7 @@
     "nass_bundle_builder_GXKPmx",
     "bt_faq_Kwt9rB",
     "body_ready_cta",
-    "main"
+    "main",
+    "custom_quick_add_qD4XLc"
   ]
 }
