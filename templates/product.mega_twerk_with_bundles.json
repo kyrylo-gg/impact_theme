@@ -602,6 +602,32 @@
         "heading_highlight": "excited about"
       }
     },
+    "nass_countdown_Pc6APp": {
+      "type": "nass-countdown",
+      "name": "NASS Countdown Banner",
+      "settings": {
+        "show_announcement": true,
+        "announcement_highlight": "Limited Dance Day Offer:",
+        "announcement_text": "Best NASS Programs at only $199",
+        "marquee_speed": 30,
+        "title": "JOIN NASS TODAY",
+        "show_arrows": true,
+        "end_date": "2026-05-31 23:59",
+        "label_days": "Days",
+        "label_hours": "Hours",
+        "label_minutes": "Minutes",
+        "label_seconds": "Seconds",
+        "expired_text": "Offer ended",
+        "show_stickers": true,
+        "sticker_image": "shopify://shop_images/Frame_538.png",
+        "sticker_link": "",
+        "show_confetti": true,
+        "bg_color": "#0038FF",
+        "bar_bg_color": "#000000",
+        "accent_color": "#FFF600",
+        "text_color": "#FFFFFF"
+      }
+    },
     "nass_bundle_builder": {
       "type": "nass-bundle-builder",
       "blocks": {
@@ -1199,6 +1225,7 @@
     "student_progress_ez8yde",
     "social_proof_hPtKDy",
     "feedback_screenshots_main",
+    "nass_countdown_Pc6APp",
     "nass_bundle_builder",
     "guarantee_section_main",
     "features_main",
