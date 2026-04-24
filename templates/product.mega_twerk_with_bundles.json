@@ -649,7 +649,7 @@
             "collection": "bundle_bundle-copy",
             "is_programs_step": true,
             "program_pack_product": "vip-bundle",
-            "program_pack_product_secondary": ""
+            "program_pack_product_secondary": "all-in-one-bundle"
           }
         },
         "bundle_step_8GzNaR": {
@@ -747,8 +747,8 @@
         "show_one_click_alternative": false,
         "one_click_product": "twerk-program-lovable",
         "one_click_label": "Twerk program",
-        "program_pack_product": "bundle-test",
-        "program_pack_product_secondary": "",
+        "program_pack_product": "vip-bundle",
+        "program_pack_product_secondary": "all-in-one-bundle",
         "discount_code": "",
         "show_discount_banner": true,
         "discount_promo_text": "Get 60% off all clothing with VIP Bundle!",
