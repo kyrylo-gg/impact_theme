@@ -99,26 +99,8 @@ function showToast(message, type = 'success') {
 }
 
 function triggerConfetti() {
-  import('https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/+esm')
-    .then((confetti) => {
-      const count = 200;
-      const defaults = { origin: { y: 0.7 }, zIndex: 9999 };
-      const fire = (ratio, opts) =>
-        confetti.default({ ...defaults, ...opts, particleCount: Math.floor(count * ratio) });
-      // Left burst
-      fire(0.25, { spread: 26, startVelocity: 55, origin: { x: 0.2, y: 0.7 } });
-      fire(0.2, { spread: 60, origin: { x: 0.2, y: 0.7 } });
-      fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8, origin: { x: 0.2, y: 0.7 } });
-      fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2, origin: { x: 0.2, y: 0.7 } });
-      fire(0.1, { spread: 120, startVelocity: 45, origin: { x: 0.2, y: 0.7 } });
-      // Right burst
-      fire(0.25, { spread: 26, startVelocity: 55, origin: { x: 0.8, y: 0.7 } });
-      fire(0.2, { spread: 60, origin: { x: 0.8, y: 0.7 } });
-      fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8, origin: { x: 0.8, y: 0.7 } });
-      fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2, origin: { x: 0.8, y: 0.7 } });
-      fire(0.1, { spread: 120, startVelocity: 45, origin: { x: 0.8, y: 0.7 } });
-    })
-    .catch(() => {});
+  // Confetti animation intentionally disabled for all templates.
+  return;
 }
 
 function openCartDrawer() {
