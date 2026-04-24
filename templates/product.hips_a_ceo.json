@@ -867,6 +867,33 @@
         "background_gradient": "",
         "text_color": ""
       }
+    },
+    "custom_quick_add_9WihwW": {
+      "type": "custom-quick-add",
+      "name": "TS Sticky Add",
+      "settings": {
+        "product": "hip-mobility-a",
+        "button_link": "",
+        "button_text": "Shop now",
+        "background_button": "#FAFF00",
+        "text_color_button": "#1a1a1a",
+        "block_text_color": "#1a1a1a",
+        "block_background": "#ffb6e3",
+        "sublime_text": "<p>Celebrate Dance Day with NASS</p>",
+        "sublime_text_color": "#1a1a1a",
+        "timer_enabled": true,
+        "timer_type": "daily",
+        "cancel_date": "01-01-2026 12:00",
+        "cancel_time": 0,
+        "cancel_minutes": 29,
+        "cancel_action": "none",
+        "countdown_background": "#313131",
+        "countdown_color": "#ffffff",
+        "mobile_countdown_background": "#313131",
+        "mobile_countdown_color": "#ffffff",
+        "labels_color": "#000000",
+        "mobile_labels_color": "#ffffff"
+      }
     }
   },
   "order": [
@@ -886,6 +913,7 @@
     "bt_faq_Kwt9rB",
     "body_ready_cta",
     "main",
-    "rich_text_B9fTmc"
+    "rich_text_B9fTmc",
+    "custom_quick_add_9WihwW"
   ]
 }
