@@ -66,12 +66,12 @@
         "mobile_video": "shopify://files/videos/Banner Landing NASS mobile (1) (1).webm",
         "badge_use_theme_starburst": false,
         "badge_image_alt": "Join NASS B-Day Sale promotional badge",
-        "badge_text": "Join NASS B-Day Sale",
-        "heading": "STOP WATCHING. START TWERKING.",
-        "price_text": "Join thousands of women who stopped watching and started moving.",
-        "cta_text": " Let's Do This",
+        "badge_text": "Dance Day Celebration",
+        "heading": "GET ALL NASS PROGRAMS AT DANCE DAY PRICES",
+        "price_text": "Get That Booty & Twerk Like Never Before",
+        "cta_text": "Unlock NASS Offers",
         "cta_url": "#nass-bundle-builder",
-        "deadline_text": "Offer ends April 24"
+        "deadline_text": "Offer ends April 30"
       }
     },
     "program_cards_ykQqNc": {
@@ -612,7 +612,8 @@
             "title": "Select programs",
             "collection": "bundle_bundle",
             "is_programs_step": true,
-            "program_pack_product": "vip-bundle"
+            "program_pack_product": "vip-bundle",
+            "program_pack_product_secondary": ""
           }
         },
         "bundle_step_nVt7LF": {
@@ -621,7 +622,8 @@
             "title": "Select programs",
             "collection": "bundle_bundle-copy",
             "is_programs_step": true,
-            "program_pack_product": "vip-bundle"
+            "program_pack_product": "vip-bundle",
+            "program_pack_product_secondary": ""
           }
         },
         "bundle_step_8GzNaR": {
@@ -631,7 +633,8 @@
             "title": "Select programs",
             "collection": "bundle-programs-ab-a-copy",
             "is_programs_step": true,
-            "program_pack_product": "vip-bundle"
+            "program_pack_product": "vip-bundle",
+            "program_pack_product_secondary": ""
           }
         },
         "bundle_step_bb96UU": {
@@ -640,7 +643,8 @@
             "title": "Workout Equipment",
             "collection": "bundle-equipment-copy",
             "is_programs_step": false,
-            "program_pack_product": ""
+            "program_pack_product": "",
+            "program_pack_product_secondary": ""
           }
         },
         "bundle_step_KMpd7k": {
@@ -649,7 +653,8 @@
             "title": "Add  Booty Shorts",
             "collection": "bundle-swim-shorts",
             "is_programs_step": false,
-            "program_pack_product": ""
+            "program_pack_product": "",
+            "program_pack_product_secondary": ""
           }
         },
         "step_shorts": {
@@ -658,7 +663,8 @@
             "title": "Add Lounge shorts",
             "collection": "bundle-lounge-shorts",
             "is_programs_step": false,
-            "program_pack_product": ""
+            "program_pack_product": "",
+            "program_pack_product_secondary": ""
           }
         },
         "step_leggings": {
@@ -667,7 +673,8 @@
             "title": "Add sport shorts",
             "collection": "bundle-sport-shorts",
             "is_programs_step": false,
-            "program_pack_product": ""
+            "program_pack_product": "",
+            "program_pack_product_secondary": ""
           }
         },
         "step_tops": {
@@ -676,7 +683,8 @@
             "title": "Leggings and Tops",
             "collection": "bundle-leggings-tops",
             "is_programs_step": false,
-            "program_pack_product": ""
+            "program_pack_product": "",
+            "program_pack_product_secondary": ""
           }
         }
       },
@@ -695,8 +703,8 @@
         "image_2": "shopify://shop_images/Frame_7-4.png",
         "image_3": "shopify://shop_images/padded_DSC09654_30427d69-c589-45c9-ab7f-2ec9f0e127e1.jpg",
         "enable_section": true,
-        "bb_title_prefix": "CELEBRATE",
-        "bb_title_accent": "6 YEARS OF NASS!",
+        "bb_title_prefix": "SHAKE YOUR BOOTY",
+        "bb_title_accent": "THIS DANCE DAY!",
         "bb_description": "Mix programs, shorts, and tops. Get 60% off all clothing when you purchase the VIP Bundle.",
         "bb_promo_banner_text": "60% OFF ALL CLOTHING / with VIP Bundle purchase",
         "bb_show_countdown": true,
@@ -714,7 +722,9 @@
         "one_click_product": "twerk-program-lovable",
         "one_click_label": "Twerk program",
         "program_pack_product": "bundle-test",
+        "program_pack_product_secondary": "",
         "discount_code": "",
+        "show_discount_banner": true,
         "discount_promo_text": "Get 60% off all clothing with VIP Bundle!",
         "discount_applied_text": "60% off all clothing applied!",
         "size_chart_config_handle": "size-chart-settings",
