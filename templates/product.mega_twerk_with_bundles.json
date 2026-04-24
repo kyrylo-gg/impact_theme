@@ -733,7 +733,7 @@
         "bb_title_accent": "THIS DANCE DAY!",
         "bb_description": "Mix programs, shorts, and tops. Get 60% off all clothing when you purchase the VIP Bundle or All-In-One Bundles",
         "bb_promo_banner_text": "60% OFF ALL CLOTHING / with VIP  or All-In One Bundle purchase",
-        "bb_show_countdown": true,
+        "bb_show_countdown": false,
         "bb_countdown_mode": "daily_kyiv_10am",
         "bb_countdown_heading": "HURRY UP! THE SALE ENDS IN:",
         "bb_initial_days": 0,
