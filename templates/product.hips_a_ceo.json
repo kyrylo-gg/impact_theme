@@ -530,6 +530,32 @@
         "footer_line": "<p>40,000+ students. Women in 50+ countries. Lifetime access.</p>"
       }
     },
+    "nass_countdown_Q4NYkM": {
+      "type": "nass-countdown",
+      "name": "NASS Countdown Banner",
+      "settings": {
+        "show_announcement": true,
+        "announcement_highlight": "Limited Dance Day Offer:",
+        "announcement_text": "Best NASS Programs at only $199",
+        "marquee_speed": 30,
+        "title": "JOIN NASS TODAY",
+        "show_arrows": true,
+        "end_date": "2026-05-31 23:59",
+        "label_days": "Days",
+        "label_hours": "Hours",
+        "label_minutes": "Minutes",
+        "label_seconds": "Seconds",
+        "expired_text": "Offer ended",
+        "show_stickers": true,
+        "sticker_image": "shopify://shop_images/Frame_538.png",
+        "sticker_link": "",
+        "show_confetti": true,
+        "bg_color": "#0038FF",
+        "bar_bg_color": "#000000",
+        "accent_color": "#FFF600",
+        "text_color": "#FFFFFF"
+      }
+    },
     "complete_system": {
       "type": "complete-system",
       "blocks": {
@@ -875,7 +901,7 @@
         "product": "hip-mobility-a",
         "button_link": "",
         "button_text": "Shop now",
-        "background_button": "#FAFF00",
+        "background_button": "#faff00",
         "text_color_button": "#1a1a1a",
         "block_text_color": "#1a1a1a",
         "block_background": "#ffb6e3",
@@ -908,6 +934,7 @@
     "everything_in_pocket",
     "program_for_you",
     "hips_testimonials",
+    "nass_countdown_Q4NYkM",
     "complete_system",
     "nass_bundle_builder_giBqBr",
     "bt_faq_Kwt9rB",
