@@ -617,7 +617,7 @@
           "type": "bundle_step",
           "settings": {
             "title": "Select programs",
-            "collection": "hips-a",
+            "collection": "hips-a-copy-1",
             "is_programs_step": true,
             "program_pack_product": "vip-bundle",
             "program_pack_product_secondary": "all-in-one-bundle"
