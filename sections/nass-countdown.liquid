@@ -1,0 +1,196 @@
+{%- liquid
+  assign end_iso = section.settings.end_date | strip | replace: ' ', 'T'
+-%}
+
+<section
+  class="nass-countdown"
+  data-section-id="{{ section.id }}"
+  data-mode="daily_kyiv_10am"
+  data-end="{{ end_iso | escape }}"
+  data-expired-text="{{ section.settings.expired_text | escape }}"
+  style="
+    --nass-bg: {{ section.settings.bg_color }};
+    --nass-bar-bg: {{ section.settings.bar_bg_color }};
+    --nass-accent: {{ section.settings.accent_color }};
+    --nass-text: {{ section.settings.text_color }};
+    --nass-marquee-duration: {{ section.settings.marquee_speed }}s;
+  "
+>
+  {%- if section.settings.show_announcement -%}
+    <div class="nass-announcement" role="region" aria-label="Promotional announcement">
+      <div class="nass-marquee">
+        <div class="nass-marquee__track">
+          {%- for i in (1..12) -%}
+            <span class="nass-marquee__item">
+              <span class="nass-marquee__hl">{{ section.settings.announcement_highlight | escape }}</span>
+              {{ section.settings.announcement_text | escape }}
+            </span>
+          {%- endfor -%}
+        </div>
+        <div class="nass-marquee__track" aria-hidden="true">
+          {%- for i in (1..12) -%}
+            <span class="nass-marquee__item">
+              <span class="nass-marquee__hl">{{ section.settings.announcement_highlight | escape }}</span>
+              {{ section.settings.announcement_text | escape }}
+            </span>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <div class="nass-banner">
+    {%- if section.settings.show_confetti -%}
+      {%- if section.settings.confetti_image != blank -%}
+        {{
+          section.settings.confetti_image
+          | image_url: width: 1600
+          | image_tag:
+            class: 'nass-banner__confetti',
+            loading: 'lazy',
+            widths: '800,1200,1600',
+            alt: ''
+        }}
+      {%- else -%}
+        <div class="nass-banner__confetti-css" aria-hidden="true">
+          {%- for i in (1..90) -%}
+            {%- liquid
+              assign left = i | times: 37 | modulo: 100
+              assign top = i | times: 29 | plus: 11 | modulo: 100
+              assign rotate = i | times: 19 | modulo: 120 | minus: 60
+            -%}
+            <span style="left: {{ left }}%; top: {{ top }}%; transform: rotate({{ rotate }}deg);"></span>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+
+    <div class="nass-banner__overlay" aria-hidden="true"></div>
+
+    {%- if section.settings.show_stickers and section.settings.sticker_image != blank -%}
+      {%- assign sticker_tag = 'div' -%}
+      {%- if section.settings.sticker_link != blank -%}
+        {%- assign sticker_tag = 'a' -%}
+      {%- endif -%}
+
+      <{{ sticker_tag }}
+        class="nass-sticker nass-sticker--left"
+        {% if sticker_tag == 'a' %}href="{{ section.settings.sticker_link }}" aria-label="Get special price"{% endif %}
+      >
+        {{
+          section.settings.sticker_image
+          | image_url: width: 300
+          | image_tag:
+            loading: 'lazy',
+            widths: '160,240,300',
+            alt: 'Get special price'
+        }}
+      </{{ sticker_tag }}>
+
+      <{{ sticker_tag }}
+        class="nass-sticker nass-sticker--right"
+        {% if sticker_tag == 'a' %}href="{{ section.settings.sticker_link }}" aria-label="Get special price"{% endif %}
+      >
+        {{
+          section.settings.sticker_image
+          | image_url: width: 300
+          | image_tag:
+            loading: 'lazy',
+            widths: '160,240,300',
+            alt: 'Get special price'
+        }}
+      </{{ sticker_tag }}>
+    {%- endif -%}
+
+    <div class="nass-banner__inner">
+      <div class="nass-banner__title-row">
+        {%- if section.settings.show_arrows -%}
+          <svg class="nass-arrow nass-arrow--left" viewBox="0 0 24 32" aria-hidden="true">
+            <rect x="9" y="0" width="6" height="20" fill="currentColor"></rect>
+            <polygon points="0,18 24,18 12,32" fill="currentColor"></polygon>
+          </svg>
+        {%- endif -%}
+        <h2 class="nass-banner__title">{{ section.settings.title | escape }}</h2>
+        {%- if section.settings.show_arrows -%}
+          <svg class="nass-arrow nass-arrow--right" viewBox="0 0 24 32" aria-hidden="true">
+            <rect x="9" y="0" width="6" height="20" fill="currentColor"></rect>
+            <polygon points="0,18 24,18 12,32" fill="currentColor"></polygon>
+          </svg>
+        {%- endif -%}
+      </div>
+
+      <div class="nass-timer" role="timer" aria-live="polite">
+        <div class="nass-timer__unit">
+          <div class="nass-timer__box"><span data-unit="days">00</span></div>
+          <div class="nass-timer__label">{{ section.settings.label_days | escape }}</div>
+        </div>
+        <span class="nass-timer__sep" aria-hidden="true">:</span>
+        <div class="nass-timer__unit">
+          <div class="nass-timer__box"><span data-unit="hours">00</span></div>
+          <div class="nass-timer__label">{{ section.settings.label_hours | escape }}</div>
+        </div>
+        <span class="nass-timer__sep" aria-hidden="true">:</span>
+        <div class="nass-timer__unit">
+          <div class="nass-timer__box"><span data-unit="minutes">00</span></div>
+          <div class="nass-timer__label">{{ section.settings.label_minutes | escape }}</div>
+        </div>
+        <span class="nass-timer__sep" aria-hidden="true">:</span>
+        <div class="nass-timer__unit">
+          <div class="nass-timer__box"><span data-unit="seconds">00</span></div>
+          <div class="nass-timer__label">{{ section.settings.label_seconds | escape }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ 'nass-countdown.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'nass-countdown.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "NASS Countdown Banner",
+  "tag": "section",
+  "class": "nass-countdown-section",
+  "enabled_on": {
+    "templates": ["*"]
+  },
+  "settings": [
+    { "type": "header", "content": "Announcement Bar" },
+    { "type": "checkbox", "id": "show_announcement", "label": "Show announcement bar", "default": true },
+    { "type": "text", "id": "announcement_highlight", "label": "Highlighted text (yellow)", "default": "Limited Spring Offer:" },
+    { "type": "text", "id": "announcement_text", "label": "Announcement text (white)", "default": "Booty Programs for Only $107" },
+    { "type": "range", "id": "marquee_speed", "min": 10, "max": 120, "step": 5, "unit": "s", "label": "Marquee duration (lower = faster)", "default": 30 },
+
+    { "type": "header", "content": "Countdown Banner" },
+    { "type": "text", "id": "title", "label": "Title", "default": "JOIN NASS TODAY" },
+    { "type": "checkbox", "id": "show_arrows", "label": "Show arrows around title", "default": true },
+
+    { "type": "header", "content": "Countdown Timer" },
+    { "type": "text", "id": "end_date", "label": "End date (YYYY-MM-DD HH:MM, store timezone)", "info": "Example: 2026-05-31 23:59", "default": "2026-05-31 23:59" },
+    { "type": "text", "id": "label_days", "label": "Days label", "default": "Days" },
+    { "type": "text", "id": "label_hours", "label": "Hours label", "default": "Hours" },
+    { "type": "text", "id": "label_minutes", "label": "Minutes label", "default": "Minutes" },
+    { "type": "text", "id": "label_seconds", "label": "Seconds label", "default": "Seconds" },
+    { "type": "text", "id": "expired_text", "label": "Text shown when timer expires", "default": "Offer ended" },
+
+    { "type": "header", "content": "Sticker Badges" },
+    { "type": "checkbox", "id": "show_stickers", "label": "Show sticker badges", "default": true },
+    { "type": "image_picker", "id": "sticker_image", "label": "Sticker image (PNG with transparent background)", "info": "Yellow star badge with text. Used on both sides on desktop, top-right only on mobile." },
+    { "type": "url", "id": "sticker_link", "label": "Sticker link (optional)" },
+
+    { "type": "header", "content": "Background Confetti" },
+    { "type": "checkbox", "id": "show_confetti", "label": "Show confetti background", "default": true },
+    { "type": "image_picker", "id": "confetti_image", "label": "Confetti image (optional)", "info": "If empty, CSS-generated gold confetti is used." },
+
+    { "type": "header", "content": "Colors (override)" },
+    { "type": "color", "id": "bg_color", "label": "Banner background", "default": "#0038FF" },
+    { "type": "color", "id": "bar_bg_color", "label": "Announcement bg", "default": "#000000" },
+    { "type": "color", "id": "accent_color", "label": "Accent yellow", "default": "#FFF600" },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#FFFFFF" }
+  ],
+  "presets": [
+    { "name": "NASS Countdown Banner" }
+  ]
+}
+{% endschema %}
