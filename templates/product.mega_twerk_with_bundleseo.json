@@ -602,6 +602,32 @@
         "heading_highlight": "excited about"
       }
     },
+    "nass_countdown_NypKK7": {
+      "type": "nass-countdown",
+      "name": "NASS Countdown Banner",
+      "settings": {
+        "show_announcement": true,
+        "announcement_highlight": "Limited Dance Day Offer:",
+        "announcement_text": "Best Nass Programs for Only $149",
+        "marquee_speed": 30,
+        "title": "JOIN NASS TODAY",
+        "show_arrows": true,
+        "end_date": "2026-05-31 23:59",
+        "label_days": "Days",
+        "label_hours": "Hours",
+        "label_minutes": "Minutes",
+        "label_seconds": "Seconds",
+        "expired_text": "Offer ended",
+        "show_stickers": true,
+        "sticker_image": "shopify://shop_images/Frame_538.png",
+        "sticker_link": "",
+        "show_confetti": true,
+        "bg_color": "#0038ff",
+        "bar_bg_color": "#000000",
+        "accent_color": "#fff600",
+        "text_color": "#ffffff"
+      }
+    },
     "nass_bundle_builder": {
       "type": "nass-bundle-builder",
       "blocks": {
@@ -753,32 +779,6 @@
         "discount_applied_text": "60% off all clothing applied!",
         "size_chart_config_handle": "size-chart-settings",
         "storefront_api_token": "568094b7f376083a4b0dc6fee4785741"
-      }
-    },
-    "nass_countdown_NypKK7": {
-      "type": "nass-countdown",
-      "name": "NASS Countdown Banner",
-      "settings": {
-        "show_announcement": true,
-        "announcement_highlight": "Limited Dance Day Offer:",
-        "announcement_text": "Best Nass Programs for Only $149",
-        "marquee_speed": 30,
-        "title": "JOIN NASS TODAY",
-        "show_arrows": true,
-        "end_date": "2026-05-31 23:59",
-        "label_days": "Days",
-        "label_hours": "Hours",
-        "label_minutes": "Minutes",
-        "label_seconds": "Seconds",
-        "expired_text": "Offer ended",
-        "show_stickers": true,
-        "sticker_image": "shopify://shop_images/Frame_538.png",
-        "sticker_link": "",
-        "show_confetti": true,
-        "bg_color": "#0038FF",
-        "bar_bg_color": "#000000",
-        "accent_color": "#FFF600",
-        "text_color": "#FFFFFF"
       }
     },
     "guarantee_section_main": {
@@ -1273,8 +1273,8 @@
     "student_progress_ez8yde",
     "social_proof_hPtKDy",
     "feedback_screenshots_main",
-    "nass_bundle_builder",
     "nass_countdown_NypKK7",
+    "nass_bundle_builder",
     "guarantee_section_main",
     "features_main",
     "twerk_makeovers_dHGL9w",
