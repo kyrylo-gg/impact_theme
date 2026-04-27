@@ -608,7 +608,7 @@
       "settings": {
         "show_announcement": true,
         "announcement_highlight": "Limited Dance Day Offer:",
-        "announcement_text": "Best NASS Programs at only $199",
+        "announcement_text": "Best NASS Programs at only $149",
         "marquee_speed": 30,
         "title": "JOIN NASS TODAY",
         "show_arrows": true,
@@ -622,10 +622,10 @@
         "sticker_image": "shopify://shop_images/Frame_538.png",
         "sticker_link": "",
         "show_confetti": true,
-        "bg_color": "#0038FF",
+        "bg_color": "#0038ff",
         "bar_bg_color": "#000000",
-        "accent_color": "#FFF600",
-        "text_color": "#FFFFFF"
+        "accent_color": "#fff600",
+        "text_color": "#ffffff"
       }
     },
     "nass_bundle_builder": {
@@ -1192,7 +1192,7 @@
       "type": "custom-quick-add",
       "name": "TS Sticky Add",
       "settings": {
-        "product": "all-in-one-bundle",
+        "product": "vip-bundle",
         "button_link": "#nass-bundle-builder",
         "button_text": "Shop now",
         "background_button": "#faff00",
