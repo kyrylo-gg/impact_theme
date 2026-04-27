@@ -152,10 +152,10 @@
         "sticker_image": "shopify://shop_images/Frame_538.png",
         "sticker_link": "",
         "show_confetti": true,
-        "bg_color": "#0038FF",
+        "bg_color": "#0038ff",
         "bar_bg_color": "#000000",
-        "accent_color": "#FFF600",
-        "text_color": "#FFFFFF"
+        "accent_color": "#fff600",
+        "text_color": "#ffffff"
       }
     },
     "complete_system": {
@@ -315,7 +315,7 @@
         "program_pack_product": "",
         "program_pack_product_secondary": "",
         "discount_code": "",
-        "show_discount_banner": true,
+        "show_discount_banner": false,
         "discount_promo_text": "60% off all clothing with Vip or All-In-One Bundle!",
         "discount_applied_text": "60% off all clothing applied!",
         "size_chart_config_handle": "size-chart-settings",
