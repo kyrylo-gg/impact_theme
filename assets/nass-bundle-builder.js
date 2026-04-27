@@ -91,6 +91,16 @@
       : '';
     const templateSuffix = String((config && config.templateSuffix) || '').toLowerCase().trim();
     const isBundlesDescriptionTemplate = templateSuffix === 'mega_twerk_with_bundles' || templateSuffix === 'mega_twerk_with_bundleseo';
+    const isHipsProgramDescriptionTemplate = templateSuffix === 'hips_a'
+      || templateSuffix === 'hips_a_ceo'
+      || templateSuffix === 'hips_ceo'
+      || templateSuffix === 'hips_b'
+      || templateSuffix === 'hips_c'
+      || templateSuffix === 'hips-a'
+      || templateSuffix === 'hips-a-ceo'
+      || templateSuffix === 'hips-ceo'
+      || templateSuffix === 'hips-b'
+      || templateSuffix === 'hips-c';
     const isHipsSingleProgramTemplate = templateSuffix === 'hips_a'
       || templateSuffix === 'hips_a_ceo'
       || templateSuffix === 'hips_b'
@@ -1148,7 +1158,7 @@
     }
 
     function shouldOpenProgramDescriptionPopup(stepId) {
-      if (!isBundlesDescriptionTemplate) return false;
+      if (!isBundlesDescriptionTemplate && !isHipsProgramDescriptionTemplate) return false;
       var step = bbState.steps.find(function(s) { return String(s.id) === String(stepId); });
       return !!(step && step.isProgramsStep);
     }
