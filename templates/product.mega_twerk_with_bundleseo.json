@@ -772,6 +772,7 @@
         "label_seconds": "Seconds",
         "expired_text": "Offer ended",
         "show_stickers": true,
+        "sticker_image": "shopify://shop_images/Frame_538.png",
         "sticker_link": "",
         "show_confetti": true,
         "bg_color": "#0038FF",
