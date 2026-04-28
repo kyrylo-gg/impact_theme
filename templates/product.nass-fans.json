@@ -378,18 +378,21 @@
         },
         "student_video_GKeqUQ": {
           "type": "student_video",
+          "disabled": true,
           "settings": {
             "video": "shopify://files/videos/Progress 4x3  (1).webm"
           }
         },
         "student_video_YiePwJ": {
           "type": "student_video",
+          "disabled": true,
           "settings": {
             "video": "shopify://files/videos/profress 3_4 (1).webm"
           }
         },
         "student_video_DrpmJz": {
           "type": "student_video",
+          "disabled": true,
           "settings": {
             "video": "shopify://files/videos/progress 3_4 (1).webm"
           }
