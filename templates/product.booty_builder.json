@@ -77,15 +77,6 @@
     "program_cards_ykQqNc": {
       "type": "program-cards",
       "blocks": {
-        "program_card_CxChpM": {
-          "type": "program_card",
-          "settings": {
-            "title": "Twerk Program",
-            "description": "Discover the art of twerking with our easy-to-follow 7-day program for all skill levels.",
-            "image": "shopify://shop_images/booty_band_asdasd_00345cad-3c6c-41b3-8e62-3953cf2c00ed.jpg",
-            "duration": "7 Days"
-          }
-        },
         "program_card_LQPeBc": {
           "type": "program_card",
           "settings": {
@@ -93,6 +84,15 @@
             "description": "The most effective bootyworkouts which you can do at the comfort of your home.",
             "image": "shopify://shop_images/Frame_1.png",
             "duration": "8 Weeks"
+          }
+        },
+        "program_card_CxChpM": {
+          "type": "program_card",
+          "settings": {
+            "title": "Twerk Program",
+            "description": "Discover the art of twerking with our easy-to-follow 7-day program for all skill levels.",
+            "image": "shopify://shop_images/booty_band_asdasd_00345cad-3c6c-41b3-8e62-3953cf2c00ed.jpg",
+            "duration": "7 Days"
           }
         },
         "program_card_kXCJYU": {
@@ -115,8 +115,8 @@
         }
       },
       "block_order": [
-        "program_card_CxChpM",
         "program_card_LQPeBc",
+        "program_card_CxChpM",
         "program_card_kXCJYU",
         "program_card_6rgVPi"
       ],
