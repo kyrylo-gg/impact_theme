@@ -74,6 +74,89 @@
         "deadline_text": "Offer ends April 30"
       }
     },
+    "twerk_lessons_MWt6Ji": {
+      "type": "twerk-lessons",
+      "blocks": {
+        "lesson_card_xxm8fk": {
+          "type": "lesson_card",
+          "settings": {
+            "title": "Lesson One",
+            "description": "Booty jiggle and combo routine",
+            "video": "shopify://files/videos/Lesson 1 demo (optimized 2) (online-video-cutter.com).webm"
+          }
+        },
+        "lesson_card_F44HFT": {
+          "type": "lesson_card",
+          "settings": {
+            "title": "Lesson Two",
+            "description": "Hip tick, whine, puppy tail moves",
+            "video": "shopify://files/videos/Lesson demo 2 (optimized) (online-video-cutter.com)_f5e19739-0831-436d-8231-14d60ca2a91b.webm"
+          }
+        },
+        "lesson_card_HW9zGg": {
+          "type": "lesson_card",
+          "settings": {
+            "title": "Lesson Three",
+            "description": "Hip whine and whine combos",
+            "video": "shopify://files/videos/lesson 3 demo (optimized) (online-video-cutter.com)_2c846ba2-91ff-4e1b-a9a8-ca0ae7208e3c.webm"
+          }
+        },
+        "lesson_card_hBAFUG": {
+          "type": "lesson_card",
+          "settings": {
+            "title": "Lesson Four",
+            "description": "Glute activation and booty pop",
+            "video": "shopify://files/videos/Lesson 4 demo (1) (online-video-cutter.com)_97ebf2f7-8050-4239-bf40-ae15b5cb0620.webm"
+          }
+        },
+        "lesson_card_hQKaB4": {
+          "type": "lesson_card",
+          "settings": {
+            "title": "Lesson Five",
+            "description": "Twerk on toes in new positions",
+            "video": "shopify://files/videos/Lesson demo 5 (1) (online-video-cutter.com)_b94585f5-7c4c-44ea-8820-97891cef43af.webm"
+          }
+        },
+        "lesson_card_iAfUnn": {
+          "type": "lesson_card",
+          "settings": {
+            "title": "Lesson Six",
+            "description": "Dog position twerking and combos",
+            "video": "shopify://files/videos/Demo 6.webm"
+          }
+        },
+        "lesson_card_MzDK73": {
+          "type": "lesson_card",
+          "settings": {
+            "title": "Lesson Seven",
+            "description": "Booty isolation and ground combos",
+            "video": "shopify://files/videos/Lesson demo 5 (1) (online-video-cutter.com)_b94585f5-7c4c-44ea-8820-97891cef43af.webm"
+          }
+        },
+        "lesson_card_BQBQhm": {
+          "type": "lesson_card",
+          "settings": {
+            "title": "Bonus!",
+            "description": "Learn to clap your booty",
+            "video": "shopify://files/videos/Lesson bonus demo (optimized)_f0a7b2ef-553d-41e2-afe4-9801f861da5f.webm"
+          }
+        }
+      },
+      "block_order": [
+        "lesson_card_xxm8fk",
+        "lesson_card_F44HFT",
+        "lesson_card_HW9zGg",
+        "lesson_card_hBAFUG",
+        "lesson_card_hQKaB4",
+        "lesson_card_iAfUnn",
+        "lesson_card_MzDK73",
+        "lesson_card_BQBQhm"
+      ],
+      "settings": {
+        "heading": "WHAT'S INSIDE THE",
+        "heading_highlight": "TWERK PROGRAM"
+      }
+    },
     "program_cards_ykQqNc": {
       "type": "program-cards",
       "blocks": {
@@ -271,89 +354,6 @@
       "settings": {
         "heading": "JOIN GIRLS WHO ALREADY",
         "heading_highlight": "TWERK LIKE PROS"
-      }
-    },
-    "twerk_lessons_MWt6Ji": {
-      "type": "twerk-lessons",
-      "blocks": {
-        "lesson_card_xxm8fk": {
-          "type": "lesson_card",
-          "settings": {
-            "title": "Lesson One",
-            "description": "Booty jiggle and combo routine",
-            "video": "shopify://files/videos/Lesson 1 demo (optimized 2) (online-video-cutter.com).webm"
-          }
-        },
-        "lesson_card_F44HFT": {
-          "type": "lesson_card",
-          "settings": {
-            "title": "Lesson Two",
-            "description": "Hip tick, whine, puppy tail moves",
-            "video": "shopify://files/videos/Lesson demo 2 (optimized) (online-video-cutter.com)_f5e19739-0831-436d-8231-14d60ca2a91b.webm"
-          }
-        },
-        "lesson_card_HW9zGg": {
-          "type": "lesson_card",
-          "settings": {
-            "title": "Lesson Three",
-            "description": "Hip whine and whine combos",
-            "video": "shopify://files/videos/lesson 3 demo (optimized) (online-video-cutter.com)_2c846ba2-91ff-4e1b-a9a8-ca0ae7208e3c.webm"
-          }
-        },
-        "lesson_card_hBAFUG": {
-          "type": "lesson_card",
-          "settings": {
-            "title": "Lesson Four",
-            "description": "Glute activation and booty pop",
-            "video": "shopify://files/videos/Lesson 4 demo (1) (online-video-cutter.com)_97ebf2f7-8050-4239-bf40-ae15b5cb0620.webm"
-          }
-        },
-        "lesson_card_hQKaB4": {
-          "type": "lesson_card",
-          "settings": {
-            "title": "Lesson Five",
-            "description": "Twerk on toes in new positions",
-            "video": "shopify://files/videos/Lesson demo 5 (1) (online-video-cutter.com)_b94585f5-7c4c-44ea-8820-97891cef43af.webm"
-          }
-        },
-        "lesson_card_iAfUnn": {
-          "type": "lesson_card",
-          "settings": {
-            "title": "Lesson Six",
-            "description": "Dog position twerking and combos",
-            "video": "shopify://files/videos/Demo 6.webm"
-          }
-        },
-        "lesson_card_MzDK73": {
-          "type": "lesson_card",
-          "settings": {
-            "title": "Lesson Seven",
-            "description": "Booty isolation and ground combos",
-            "video": "shopify://files/videos/Lesson demo 5 (1) (online-video-cutter.com)_b94585f5-7c4c-44ea-8820-97891cef43af.webm"
-          }
-        },
-        "lesson_card_BQBQhm": {
-          "type": "lesson_card",
-          "settings": {
-            "title": "Bonus!",
-            "description": "Learn to clap your booty",
-            "video": "shopify://files/videos/Lesson bonus demo (optimized)_f0a7b2ef-553d-41e2-afe4-9801f861da5f.webm"
-          }
-        }
-      },
-      "block_order": [
-        "lesson_card_xxm8fk",
-        "lesson_card_F44HFT",
-        "lesson_card_HW9zGg",
-        "lesson_card_hBAFUG",
-        "lesson_card_hQKaB4",
-        "lesson_card_iAfUnn",
-        "lesson_card_MzDK73",
-        "lesson_card_BQBQhm"
-      ],
-      "settings": {
-        "heading": "WHAT'S INSIDE THE",
-        "heading_highlight": "TWERK PROGRAM"
       }
     },
     "student_progress_ez8yde": {
@@ -676,7 +676,7 @@
           "type": "single_row",
           "settings": {
             "label": "7-Day Twerk Program",
-            "price": "$59",
+            "price": "$39",
             "was": "$159"
           }
         },
@@ -701,16 +701,16 @@
       "settings": {
         "bundle_bg": "#e94f76",
         "flash_text": "Flash Dance Day Sale",
-        "bundle_product": "vip-bundle",
+        "bundle_product": "twerk-essential-bundle",
         "bundle_title": "Twerk Essential Kit",
         "bundle_total": "$79",
         "bundle_was": "$276",
         "ships_label": "Immediate access",
         "timer_text": "after purchase",
-        "single_product": "twerk-program-lovable",
+        "single_product": "twerk-program-3",
         "single_title": "7-Day Twerk Program",
-        "single_price": "$59",
-        "single_total": "$59",
+        "single_price": "$39",
+        "single_total": "$39",
         "access_label": "Immediate access",
         "access_after": "after purchase",
         "cta_label": "Add to Cart",
@@ -1331,7 +1331,7 @@
       "type": "custom-quick-add",
       "name": "TS Sticky Add",
       "settings": {
-        "product": "vip-bundle",
+        "product": "twerk-essential-bundle",
         "button_link": "#nass-bundle-builder",
         "button_text": "Shop now",
         "background_button": "#faff00",
