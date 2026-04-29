@@ -62,8 +62,8 @@
     "hero_banner_main": {
       "type": "hero-banner",
       "settings": {
-        "video": "shopify://files/videos/Banner Landing NASS desktop (1).webm",
-        "mobile_video": "shopify://files/videos/Banner Landing NASS mobile (1) (1).webm",
+        "video": "shopify://files/videos/Original format (1562x1080)_13cab976-b9fa-4c18-993b-a062167994b4.webm",
+        "mobile_video": "shopify://files/videos/Original format (1562x1080)_13cab976-b9fa-4c18-993b-a062167994b4.webm",
         "badge_use_theme_starburst": false,
         "badge_image_alt": "Join NASS B-Day Sale promotional badge",
         "badge_text": "Dance Day Celebration",
@@ -72,96 +72,6 @@
         "cta_text": "Unlock NASS Offers",
         "cta_url": "#nass-twerk-offer-block",
         "deadline_text": "Offer ends April 30"
-      }
-    },
-    "nass_offer_block_main": {
-      "type": "nass-offer-block",
-      "blocks": {
-        "bundle_row_1": {
-          "type": "bundle_row",
-          "settings": {
-            "label": "7-Day Twerk Program",
-            "price": "$59",
-            "was": "$159"
-          }
-        },
-        "bundle_row_2": {
-          "type": "bundle_row",
-          "settings": {
-            "label": "Stretching Routine",
-            "price": "$20",
-            "was": "$69"
-          }
-        },
-        "bundle_row_3": {
-          "type": "bundle_row",
-          "settings": {
-            "label": "Knee Pads",
-            "price": "Free",
-            "was": "$29"
-          }
-        },
-        "bundle_row_4": {
-          "type": "bundle_row",
-          "settings": {
-            "label": "Booty Band Set",
-            "price": "Free",
-            "was": "$19"
-          }
-        },
-        "bundle_row_5": {
-          "type": "bundle_row",
-          "settings": {
-            "label": "Lifetime Access to NASS App",
-            "price": "",
-            "was": ""
-          }
-        },
-        "single_row_1": {
-          "type": "single_row",
-          "settings": {
-            "label": "7-Day Twerk Program",
-            "price": "$59",
-            "was": "$159"
-          }
-        },
-        "single_row_2": {
-          "type": "single_row",
-          "settings": {
-            "label": "Lifetime Access to NASS App",
-            "price": "",
-            "was": ""
-          }
-        }
-      },
-      "block_order": [
-        "bundle_row_1",
-        "bundle_row_2",
-        "bundle_row_3",
-        "bundle_row_4",
-        "bundle_row_5",
-        "single_row_1",
-        "single_row_2"
-      ],
-      "settings": {
-        "bundle_bg": "#E94F76",
-        "flash_text": "Flash Dance Day Sale",
-        "bundle_product": "vip-bundle",
-        "bundle_title": "Twerk Essential Kit",
-        "bundle_total": "$79",
-        "bundle_was": "$276",
-        "ships_label": "Immediate access",
-        "timer_text": "after purchase",
-        "single_product": "twerk-program-lovable",
-        "single_title": "7-Day Twerk Program",
-        "single_price": "$59",
-        "single_total": "$59",
-        "access_label": "Immediate access",
-        "access_after": "after purchase",
-        "cta_label": "Add to Cart",
-        "total_label": "Total Price",
-        "trust_a": "30-Day Money-Back Guarantee",
-        "trust_b": "World-Famous support"
       }
     },
     "program_cards_ykQqNc": {
@@ -716,6 +626,96 @@
         "bar_bg_color": "#000000",
         "accent_color": "#fff600",
         "text_color": "#ffffff"
+      }
+    },
+    "nass_offer_block_main": {
+      "type": "nass-offer-block",
+      "blocks": {
+        "bundle_row_1": {
+          "type": "bundle_row",
+          "settings": {
+            "label": "7-Day Twerk Program",
+            "price": "$59",
+            "was": "$159"
+          }
+        },
+        "bundle_row_2": {
+          "type": "bundle_row",
+          "settings": {
+            "label": "Stretching Routine",
+            "price": "$20",
+            "was": "$69"
+          }
+        },
+        "bundle_row_3": {
+          "type": "bundle_row",
+          "settings": {
+            "label": "Knee Pads",
+            "price": "Free",
+            "was": "$29"
+          }
+        },
+        "bundle_row_4": {
+          "type": "bundle_row",
+          "settings": {
+            "label": "Booty Band Set",
+            "price": "Free",
+            "was": "$19"
+          }
+        },
+        "bundle_row_5": {
+          "type": "bundle_row",
+          "settings": {
+            "label": "Lifetime Access to NASS App",
+            "price": "",
+            "was": ""
+          }
+        },
+        "single_row_1": {
+          "type": "single_row",
+          "settings": {
+            "label": "7-Day Twerk Program",
+            "price": "$59",
+            "was": "$159"
+          }
+        },
+        "single_row_2": {
+          "type": "single_row",
+          "settings": {
+            "label": "Lifetime Access to NASS App",
+            "price": "",
+            "was": ""
+          }
+        }
+      },
+      "block_order": [
+        "bundle_row_1",
+        "bundle_row_2",
+        "bundle_row_3",
+        "bundle_row_4",
+        "bundle_row_5",
+        "single_row_1",
+        "single_row_2"
+      ],
+      "settings": {
+        "bundle_bg": "#e94f76",
+        "flash_text": "Flash Dance Day Sale",
+        "bundle_product": "vip-bundle",
+        "bundle_title": "Twerk Essential Kit",
+        "bundle_total": "$79",
+        "bundle_was": "$276",
+        "ships_label": "Immediate access",
+        "timer_text": "after purchase",
+        "single_product": "twerk-program-lovable",
+        "single_title": "7-Day Twerk Program",
+        "single_price": "$59",
+        "single_total": "$59",
+        "access_label": "Immediate access",
+        "access_after": "after purchase",
+        "cta_label": "Add to Cart",
+        "total_label": "Total Price",
+        "trust_a": "30-Day Money-Back Guarantee",
+        "trust_b": "World-Famous support"
       }
     },
     "nass_bundle_builder": {
@@ -1357,7 +1357,6 @@
   "order": [
     "hero_video",
     "hero_banner_main",
-    "nass_offer_block_main",
     "program_cards_ykQqNc",
     "video_reviews_grid_qJDr4j",
     "twerk_lessons_MWt6Ji",
@@ -1365,6 +1364,7 @@
     "social_proof_hPtKDy",
     "feedback_screenshots_main",
     "nass_countdown_NypKK7",
+    "nass_offer_block_main",
     "nass_bundle_builder",
     "guarantee_section_main",
     "features_main",
