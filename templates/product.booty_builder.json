@@ -87,24 +87,24 @@
             "duration": "8 Weeks"
           }
         },
-        "program_card_CxChpM": {
-          "type": "program_card",
-          "settings": {
-            "title": "Twerk Program",
-            "description": "Discover the art of twerking with our easy-to-follow 7-day program for all skill levels.",
-            "image": "shopify://shop_images/booty_band_asdasd_00345cad-3c6c-41b3-8e62-3953cf2c00ed.jpg",
-            "level_badge": "advanced",
-            "duration": "7 Days"
-          }
-        },
         "program_card_kXCJYU": {
           "type": "program_card",
           "settings": {
             "title": "Home Booty Band Program",
             "description": "Great variety of booty-building exercises which you can perform with resistance band.",
             "image": "shopify://shop_images/stretching_band_set_0bd6ad28-abd3-424a-9f72-b4323b52ac50.jpg",
-            "level_badge": "7 day bonus",
+            "level_badge": "advanced",
             "duration": "8 Weeks"
+          }
+        },
+        "program_card_CxChpM": {
+          "type": "program_card",
+          "settings": {
+            "title": "Twerk Program",
+            "description": "Discover the art of twerking with our easy-to-follow 7-day program for all skill levels.",
+            "image": "shopify://shop_images/booty_band_asdasd_00345cad-3c6c-41b3-8e62-3953cf2c00ed.jpg",
+            "level_badge": "7 day bonus",
+            "duration": "7 Days"
           }
         },
         "program_card_6rgVPi": {
@@ -113,14 +113,15 @@
             "title": "body transformation",
             "description": "12-week structured program designed to deliver confident and reliable weight loss results.",
             "image": "shopify://shop_images/booty_band_program_a55ac736-c2f1-4155-b953-1c676e9852a3.jpg",
+            "level_badge": "",
             "duration": "3 Months"
           }
         }
       },
       "block_order": [
         "program_card_LQPeBc",
-        "program_card_CxChpM",
         "program_card_kXCJYU",
+        "program_card_CxChpM",
         "program_card_6rgVPi"
       ],
       "settings": {
