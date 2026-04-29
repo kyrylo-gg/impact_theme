@@ -120,6 +120,7 @@
         "program_card_kXCJYU",
         "program_card_6rgVPi"
       ],
+      "disabled": true,
       "settings": {
         "heading": "MORE PROGRAMS.",
         "heading_highlight": "ONE SPECIAL PRICE!"
@@ -1357,9 +1358,9 @@
   "order": [
     "hero_video",
     "hero_banner_main",
+    "twerk_lessons_MWt6Ji",
     "program_cards_ykQqNc",
     "video_reviews_grid_qJDr4j",
-    "twerk_lessons_MWt6Ji",
     "student_progress_ez8yde",
     "social_proof_hPtKDy",
     "feedback_screenshots_main",
