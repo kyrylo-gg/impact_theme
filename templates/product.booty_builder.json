@@ -83,6 +83,7 @@
             "title": "Home Booty Program",
             "description": "The most effective bootyworkouts which you can do at the comfort of your home.",
             "image": "shopify://shop_images/Frame_1.png",
+            "level_badge": "beginner",
             "duration": "8 Weeks"
           }
         },
@@ -92,6 +93,7 @@
             "title": "Twerk Program",
             "description": "Discover the art of twerking with our easy-to-follow 7-day program for all skill levels.",
             "image": "shopify://shop_images/booty_band_asdasd_00345cad-3c6c-41b3-8e62-3953cf2c00ed.jpg",
+            "level_badge": "advanced",
             "duration": "7 Days"
           }
         },
@@ -101,6 +103,7 @@
             "title": "Home Booty Band Program",
             "description": "Great variety of booty-building exercises which you can perform with resistance band.",
             "image": "shopify://shop_images/stretching_band_set_0bd6ad28-abd3-424a-9f72-b4323b52ac50.jpg",
+            "level_badge": "7 day bonus",
             "duration": "8 Weeks"
           }
         },

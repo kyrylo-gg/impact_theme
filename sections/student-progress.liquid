@@ -3,7 +3,12 @@
   Horizontal scroll of student video cards. Pure Liquid + CSS + vanilla JS.
 {% endcomment %}
 
-<section class="student-progress">
+{% assign is_twerk_essential_template = false %}
+{% if request.page_type == 'product' and template.suffix == 'twerk_essential' %}
+  {% assign is_twerk_essential_template = true %}
+{% endif %}
+
+<section class="student-progress{% if is_twerk_essential_template %} student-progress--twerk-essential{% endif %}" id="student-progress-{{ section.id }}">
   <div class="student-progress__container">
     <div class="student-progress__header">
       <div class="student-progress__title">
@@ -17,23 +22,78 @@
       <div class="student-progress__row">
         {% for block in section.blocks %}
           {% if block.type == 'student_video' %}
-            <div class="student-progress__card" {{ block.shopify_attributes }}>
-              {% if block.settings.video != blank %}
-                {{
-                  block.settings.video
-                  | video_tag:
-                    class: 'student-progress__video',
-                    autoplay: false,
-                    loop: true,
-                    muted: true,
-                    controls: false,
-                    preload: 'none',
-                    image_size: '800x'
-                }}
+            {% assign local_video = block.settings.video %}
+            {% assign local_video_mp4 = blank %}
+            {% assign local_video_webm = blank %}
+            {% if local_video != blank and local_video.sources != blank %}
+              {% for source in local_video.sources %}
+                {% if source.mime_type == 'video/mp4' and local_video_mp4 == blank %}
+                  {% assign local_video_mp4 = source.url %}
+                {% endif %}
+                {% if source.mime_type == 'video/webm' and local_video_webm == blank %}
+                  {% assign local_video_webm = source.url %}
+                {% endif %}
+              {% endfor %}
+              {% if local_video_mp4 == blank %}
+                {% assign local_video_mp4 = local_video.sources[0].url %}
+              {% endif %}
+            {% endif %}
+
+            <div
+              class="student-progress__card"
+              {{ block.shopify_attributes }}
+              {% if is_twerk_essential_template and local_video_mp4 != blank %}data-video-mp4="{{ local_video_mp4 | escape }}"{% endif %}
+              {% if is_twerk_essential_template and local_video_webm != blank %}data-video-webm="{{ local_video_webm | escape }}"{% endif %}
+            >
+              {% if is_twerk_essential_template %}
+                <button class="student-progress__trigger" type="button" aria-label="Play student progress video">
+                  <div class="student-progress__media">
+                    {% if local_video != blank and local_video.preview_image != blank %}
+                      <img
+                        class="student-progress__image"
+                        src="{{ local_video.preview_image | image_url: width: 600 }}"
+                        srcset="
+                          {{ local_video.preview_image | image_url: width: 240 }} 240w,
+                          {{ local_video.preview_image | image_url: width: 360 }} 360w,
+                          {{ local_video.preview_image | image_url: width: 480 }} 480w,
+                          {{ local_video.preview_image | image_url: width: 600 }} 600w
+                        "
+                        sizes="(max-width: 767px) 30vw, 30vw"
+                        loading="lazy"
+                        width="{{ local_video.preview_image.width }}"
+                        height="{{ local_video.preview_image.height }}"
+                        alt="Student progress video preview"
+                      >
+                    {% else %}
+                      <div class="student-progress__placeholder">
+                        {{ 'image' | placeholder_svg_tag: 'student-progress__placeholder-svg' }}
+                      </div>
+                    {% endif %}
+                    <span class="student-progress__play" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M8 5v14l11-7z"></path>
+                      </svg>
+                    </span>
+                  </div>
+                </button>
               {% else %}
-                <div class="student-progress__placeholder">
-                  {{ 'image' | placeholder_svg_tag: 'student-progress__placeholder-svg' }}
-                </div>
+                {% if block.settings.video != blank %}
+                  {{
+                    block.settings.video
+                    | video_tag:
+                      class: 'student-progress__video',
+                      autoplay: false,
+                      loop: true,
+                      muted: true,
+                      controls: false,
+                      preload: 'none',
+                      image_size: '800x'
+                  }}
+                {% else %}
+                  <div class="student-progress__placeholder">
+                    {{ 'image' | placeholder_svg_tag: 'student-progress__placeholder-svg' }}
+                  </div>
+                {% endif %}
               {% endif %}
             </div>
           {% endif %}
@@ -41,9 +101,122 @@
       </div>
     </div>
   </div>
+
+  {% if is_twerk_essential_template %}
+    <div class="student-progress__modal" id="student-progress-modal-{{ section.id }}" aria-hidden="true">
+      <button class="student-progress__modal-backdrop" type="button" aria-label="Close video modal"></button>
+      <div class="student-progress__modal-dialog" role="dialog" aria-modal="true" aria-label="Student progress video" tabindex="-1">
+        <button class="student-progress__modal-close" type="button" aria-label="Close" data-close>
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M18 6 6 18" />
+            <path d="M6 6l12 12" />
+          </svg>
+        </button>
+        <div class="student-progress__modal-player">
+          <div class="student-progress__player-host" data-player-host></div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
 </section>
 
-<script src="{{ 'student-progress-video-lazy.js' | asset_url }}" defer></script>
+{% unless is_twerk_essential_template %}
+  <script src="{{ 'student-progress-video-lazy.js' | asset_url }}" defer></script>
+{% endunless %}
+{% if is_twerk_essential_template %}
+  <script>
+    (function () {
+      var sectionEl = document.getElementById('student-progress-{{ section.id }}');
+      if (!sectionEl) return;
+
+      var modalEl = sectionEl.querySelector('#student-progress-modal-{{ section.id }}');
+      var dialogEl = modalEl && modalEl.querySelector('.student-progress__modal-dialog');
+      var playerHost = modalEl && modalEl.querySelector('[data-player-host]');
+      var closeBtn = modalEl && modalEl.querySelector('[data-close]');
+      var backdrop = modalEl && modalEl.querySelector('.student-progress__modal-backdrop');
+      if (!modalEl || !dialogEl || !playerHost || !closeBtn || !backdrop) return;
+
+      var activeEl = null;
+      var currentVideo = null;
+
+      function clearPlayer() {
+        if (currentVideo) {
+          try { currentVideo.pause(); } catch (e) {}
+        }
+        playerHost.innerHTML = '';
+        currentVideo = null;
+      }
+
+      function createVideo(mp4Url, webmUrl) {
+        var video = document.createElement('video');
+        video.className = 'student-progress__player';
+        video.controls = true;
+        video.autoplay = true;
+        video.playsInline = true;
+        video.preload = 'auto';
+        video.muted = false;
+
+        if (webmUrl) {
+          var webmSource = document.createElement('source');
+          webmSource.src = webmUrl;
+          webmSource.type = 'video/webm';
+          video.appendChild(webmSource);
+        }
+        if (mp4Url) {
+          var mp4Source = document.createElement('source');
+          mp4Source.src = mp4Url;
+          mp4Source.type = 'video/mp4';
+          video.appendChild(mp4Source);
+        }
+        return video;
+      }
+
+      function openModal(cardEl) {
+        if (!cardEl) return;
+        var mp4Url = cardEl.dataset.videoMp4;
+        var webmUrl = cardEl.dataset.videoWebm;
+        if (!mp4Url && !webmUrl) return;
+
+        activeEl = document.activeElement;
+        clearPlayer();
+
+        currentVideo = createVideo(mp4Url, webmUrl);
+        playerHost.appendChild(currentVideo);
+        try { currentVideo.play(); } catch (e) {}
+
+        modalEl.classList.add('is-open');
+        modalEl.setAttribute('aria-hidden', 'false');
+        document.documentElement.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden';
+        dialogEl.focus();
+      }
+
+      function closeModal() {
+        modalEl.classList.remove('is-open');
+        modalEl.setAttribute('aria-hidden', 'true');
+        clearPlayer();
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
+        if (activeEl && typeof activeEl.focus === 'function') activeEl.focus();
+      }
+
+      sectionEl.addEventListener('click', function (event) {
+        var trigger = event.target.closest('.student-progress__trigger');
+        if (!trigger) return;
+        event.preventDefault();
+        openModal(trigger.closest('.student-progress__card'));
+      });
+
+      closeBtn.addEventListener('click', closeModal);
+      backdrop.addEventListener('click', closeModal);
+
+      document.addEventListener('keydown', function (event) {
+        if (!modalEl.classList.contains('is-open')) return;
+        if (event.key === 'Escape' || event.key === 'Esc') closeModal();
+      });
+    })();
+  </script>
+{% endif %}
 
 {% stylesheet %}
   .student-progress {
@@ -155,6 +328,46 @@
     display: block;
   }
 
+  .student-progress__trigger {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    display: block;
+  }
+
+  .student-progress__media {
+    position: relative;
+    aspect-ratio: 9 / 16;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #ececec;
+  }
+
+  .student-progress__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .student-progress__play {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1a1a1a;
+    pointer-events: none;
+  }
+
   .student-progress__placeholder {
     width: 100%;
     aspect-ratio: 9 / 16;
@@ -203,6 +416,116 @@
     --sp-foreground: hsl(0, 0%, 100%);
     --sp-card-bg: hsl(0, 0%, 6%);
     --sp-border: hsl(0, 0%, 20%);
+  }
+
+  .student-progress--twerk-essential .student-progress__scroll-wrapper {
+    overflow: visible;
+    margin: 0;
+    padding: 0;
+  }
+
+  .student-progress--twerk-essential .student-progress__row {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    padding-bottom: 0;
+  }
+
+  .student-progress--twerk-essential .student-progress__card {
+    width: auto;
+    border-radius: 8px;
+    border: 0;
+    background: transparent;
+  }
+
+  .student-progress--twerk-essential .student-progress__media,
+  .student-progress--twerk-essential .student-progress__placeholder {
+    border-radius: 8px;
+  }
+
+  @media (min-width: 768px) {
+    .student-progress--twerk-essential .student-progress__media {
+      aspect-ratio: auto;
+      background: transparent;
+    }
+
+    .student-progress--twerk-essential .student-progress__image {
+      height: auto;
+      object-fit: contain;
+      background: transparent;
+    }
+  }
+
+  .student-progress__modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+
+  .student-progress__modal.is-open {
+    display: flex;
+  }
+
+  .student-progress__modal-backdrop {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: rgba(0, 0, 0, 0.45);
+    cursor: pointer;
+  }
+
+  .student-progress__modal-dialog {
+    position: relative;
+    z-index: 1;
+    width: min(420px, 92vw);
+    padding: 14px;
+    border-radius: 18px;
+    background: transparent;
+    outline: none;
+  }
+
+  .student-progress__modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+    border-radius: 999px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+  }
+
+  .student-progress__modal-player {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    background: transparent;
+  }
+
+  .student-progress__player-host {
+    width: 100%;
+    height: 100%;
+  }
+
+  .student-progress__player {
+    width: 100%;
+    height: auto;
+    max-height: 85vh;
+    display: block;
+    object-fit: contain;
   }
 {% endstylesheet %}
 

@@ -16,6 +16,11 @@
 
     <div class="program-cards__scroll-wrapper">
       <div class="program-cards__scroll-row">
+        {% assign is_booty_builder_template = false %}
+        {% if request.page_type == 'product' and template.suffix == 'booty_builder' %}
+          {% assign is_booty_builder_template = true %}
+        {% endif %}
+
         {% for block in section.blocks %}
           {% if block.type == 'program_card' %}
             <div class="program-cards__card" {{ block.shopify_attributes }}>
@@ -36,6 +41,9 @@
               </div>
 
               <div class="program-cards__card-content">
+                {% if is_booty_builder_template and block.settings.level_badge != blank %}
+                  <span class="program-cards__card-level-badge">{{ block.settings.level_badge }}</span>
+                {% endif %}
                 <div class="program-cards__card-title">{{ block.settings.title }}</div>
                 {% if block.settings.duration != blank %}
                   <span class="program-cards__card-badge">{{ block.settings.duration }}</span>
@@ -193,6 +201,20 @@
     font-size: 20px;
   }
 
+  .program-cards__card-level-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    background-color: var(--pc-highlight);
+    color: #000000;
+    font-family: var(--pc-font-body);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
   .program-cards__card-badge {
     display: inline-block;
     padding: 4px 12px;
@@ -300,6 +322,11 @@
         },
         {
           "type": "text",
+          "id": "level_badge",
+          "label": "Level Badge Title"
+        },
+        {
+          "type": "text",
           "id": "duration",
           "label": "Duration Badge",
           "default": "8 Weeks"
@@ -316,6 +343,7 @@
           "settings": {
             "title": "Twerk Program",
             "description": "Discover the art of twerking with our easy-to-follow 7-day program for all skill levels.",
+            "level_badge": "Beginner",
             "duration": "7 Days"
           }
         },
@@ -324,6 +352,7 @@
           "settings": {
             "title": "Weight Loss Program",
             "description": "Weight Loss Program will guide you on how to sculpt the better version of yourself.",
+            "level_badge": "Advanced",
             "duration": "8 Weeks"
           }
         },
@@ -332,6 +361,7 @@
           "settings": {
             "title": "Booty Program",
             "description": "The most effective booty-building workouts which you can do at the comfort of your home.",
+            "level_badge": "7 Day Bonus",
             "duration": "8 Weeks"
           }
         },
