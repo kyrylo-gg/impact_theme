@@ -118,7 +118,11 @@
       || templateSuffix === 'hips-a-ceo'
       || templateSuffix === 'hips-b'
       || templateSuffix === 'hips-c';
-    const allowBootyBuilderRuleMode = isBundlesDescriptionTemplate || isHipsBootyBuilderAutoAddTemplate;
+    const isBootyBuilderRuleTemplate = templateSuffix === 'nass-fans'
+      || templateSuffix === 'twerk_essential'
+      || templateSuffix === 'booty_builder'
+      || templateSuffix === 'booty-builder';
+    const allowBootyBuilderRuleMode = true;
     const bodyClassName = (typeof document !== 'undefined' && document.body && document.body.className)
       ? String(document.body.className).toLowerCase()
       : '';
@@ -540,6 +544,14 @@
       var selectedProduct = bbState.productsById[selectedProgramItem.productId];
       if (!selectedProduct) return '';
       var title = normalizeForMatch(selectedProduct.title);
+      var handle = normalizeForMatch(selectedProduct.handle);
+      var isBootyBuilderBundle = (
+        (title.indexOf('booty builder bundle') !== -1)
+        || (title.indexOf('booty builder') !== -1)
+        || ((title.indexOf('booty builder') !== -1) && (title.indexOf('bundle') !== -1 || title.indexOf('pack') !== -1))
+        || (handle.indexOf('booty builder') !== -1)
+        || ((handle.indexOf('booty builder') !== -1) && (handle.indexOf('bundle') !== -1 || handle.indexOf('pack') !== -1))
+      );
       if (
         title.indexOf('vip bundle') !== -1 ||
         title.indexOf('twerk essential bundle') !== -1 ||
@@ -548,7 +560,7 @@
       ) {
         return 'vip_or_essential';
       }
-      if (allowBootyBuilderRuleMode && title.indexOf('booty builder bundle') !== -1) {
+      if (allowBootyBuilderRuleMode && isBootyBuilderBundle) {
         return 'booty_builder';
       }
       return '';
@@ -558,6 +570,14 @@
       var p = bbState.productsById[productId];
       if (!p) return '';
       var title = normalizeForMatch(p.title);
+      var handle = normalizeForMatch(p.handle);
+      var isBootyBuilderBundle = (
+        (title.indexOf('booty builder bundle') !== -1)
+        || (title.indexOf('booty builder') !== -1)
+        || ((title.indexOf('booty builder') !== -1) && (title.indexOf('bundle') !== -1 || title.indexOf('pack') !== -1))
+        || (handle.indexOf('booty builder') !== -1)
+        || ((handle.indexOf('booty builder') !== -1) && (handle.indexOf('bundle') !== -1 || handle.indexOf('pack') !== -1))
+      );
       if (
         title.indexOf('vip bundle') !== -1 ||
         title.indexOf('twerk essential bundle') !== -1 ||
@@ -566,7 +586,7 @@
       ) {
         return 'vip_or_essential';
       }
-      if (allowBootyBuilderRuleMode && title.indexOf('booty builder bundle') !== -1) {
+      if (allowBootyBuilderRuleMode && isBootyBuilderBundle) {
         return 'booty_builder';
       }
       return '';
@@ -581,10 +601,28 @@
       if (!mode) return null;
       var title = normalizeForMatch(product.title);
       var handle = normalizeForMatch(product.handle);
-      var isBootyBandSet = title.indexOf('booty band set') !== -1 || title.indexOf('booty band') !== -1 || handle.indexOf('booty band set') !== -1 || handle.indexOf('booty-band-set') !== -1 || handle.indexOf('booty-band') !== -1;
+      var isBootyBandSet = (
+        title.indexOf('booty band set') !== -1
+        || title.indexOf('booty bands set') !== -1
+        || title.indexOf('booty band') !== -1
+        || title.indexOf('booty bands') !== -1
+        || title.indexOf('resistance band set') !== -1
+        || title.indexOf('band set') !== -1
+        || (title.indexOf('booty') !== -1 && title.indexOf('band') !== -1)
+        || handle.indexOf('booty band set') !== -1
+        || handle.indexOf('booty-band-set') !== -1
+        || handle.indexOf('booty-bands-set') !== -1
+        || handle.indexOf('booty-band') !== -1
+        || handle.indexOf('booty-bands') !== -1
+        || handle.indexOf('resistance-band-set') !== -1
+        || (handle.indexOf('booty') !== -1 && handle.indexOf('band') !== -1)
+      );
       if (isBootyBandSet) return { free: true, mode: mode, type: 'booty_band' };
       var isKneePads = title.indexOf('knee pads') !== -1 || title.indexOf('knee pad') !== -1 || handle.indexOf('knee pads') !== -1 || handle.indexOf('knee-pads') !== -1 || handle.indexOf('knee-pad') !== -1;
       if (isKneePads && mode === 'vip_or_essential') return { free: true, mode: mode, type: 'knee_pads' };
+      if (mode === 'booty_builder' && (title.indexOf('band') !== -1 || handle.indexOf('band') !== -1)) {
+        return { free: true, mode: mode, type: 'booty_band' };
+      }
       return null;
     }
 
@@ -596,6 +634,15 @@
       if (!step || !step.id || !stepIsWorkoutEquipment(step.id)) return;
       var mode = getSelectedBundleRuleMode();
       if (!mode || !Array.isArray(step.productIds) || !step.productIds.length) return;
+      if (bbState.cartOperationInProgress) {
+        setTimeout(function() {
+          if (!bbState.isOpen) return;
+          var activeStep = bbState.steps[bbState.currentStepIndex];
+          if (!activeStep || String(activeStep.id) !== String(step.id)) return;
+          applyWorkoutEquipmentAutoAdd(activeStep);
+        }, 180);
+        return;
+      }
       var bootyBandProductId = null;
       step.productIds.forEach(function(pid) {
         if (bootyBandProductId) return;
@@ -756,10 +803,11 @@
     function isDisabled(stepId, productId) {
       var step = bbState.steps.find(function(s) { return String(s.id) === String(stepId); });
       if (!step || !step.isProgramsStep) return false;
+      var selectedProgramsItem = bbState.selectedItems.find(function(item) {
+        return String(item.stepId) === String(step.id);
+      });
+      if (selectedProgramsItem && String(selectedProgramsItem.productId) !== String(productId)) return true;
       if (isSingleProgramSelectionTemplate) {
-        var selectedProgramsItem = bbState.selectedItems.find(function(item) {
-          return String(item.stepId) === String(step.id);
-        });
         if (selectedProgramsItem && String(selectedProgramsItem.productId) !== String(productId)) return true;
       }
       if (!resolvedProgramPackNumIds.length) return false;
@@ -2272,6 +2320,12 @@
           }
         } catch (e) {}
       }
+      var offerAutostart = (typeof window !== 'undefined' && window.__bt_bb_offer_autostart && typeof window.__bt_bb_offer_autostart === 'object')
+        ? window.__bt_bb_offer_autostart
+        : null;
+      var startStepIndex = (offerAutostart && offerAutostart.advanceToStep2) ? 1 : 0;
+      if (typeof window !== 'undefined') window.__bt_bb_offer_autostart = null;
+
       bbState.isOpen = true;
       bbState.currentStepIndex = 0;
       bbState.steps = applyStepOverride(bbState.baseSteps);
@@ -2303,8 +2357,13 @@
           return loadAllProductsForSteps();
         })
         .then(function() {
-          goToStep(0);
-          tryPreselectProgramsItem();
+          if (startStepIndex > 0) {
+            tryPreselectProgramsItem();
+            goToStep(Math.min(startStepIndex, Math.max(0, bbState.steps.length - 1)));
+          } else {
+            goToStep(0);
+            tryPreselectProgramsItem();
+          }
         })
         .catch(function(err) {
           // #region agent log
@@ -2312,8 +2371,13 @@
           // #endregion
           bbState.cartData = { item_count: 0, items: [], total_price: 0, currency: displayCurrency };
           return loadAllProductsForSteps().then(function() {
-            goToStep(0);
-            tryPreselectProgramsItem();
+            if (startStepIndex > 0) {
+              tryPreselectProgramsItem();
+              goToStep(Math.min(startStepIndex, Math.max(0, bbState.steps.length - 1)));
+            } else {
+              goToStep(0);
+              tryPreselectProgramsItem();
+            }
           });
         })
         .finally(clearCtaLoading);

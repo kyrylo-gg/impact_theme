@@ -1,0 +1,53 @@
+{%- comment -%}
+  Snippet: nass-product-carousel
+  Renders the photo + thumbnails carousel for a Shopify product.
+  Usage: {% render 'nass-product-carousel', product: my_product %}
+{%- endcomment -%}
+
+{%- assign cid = 'nasscar-' | append: product.id -%}
+<div class="nass-pcar" data-pcar id="{{ cid }}">
+  <div class="nass-pcar__frame">
+    {% for media in product.media %}
+      <img
+        class="nass-pcar__img{% if forloop.first %} is-active{% endif %}"
+        src="{{ media | image_url: width: 1200 }}"
+        alt="{{ media.alt | escape }}"
+        data-idx="{{ forloop.index0 }}"
+        loading="lazy"
+      >
+    {% endfor %}
+    <button type="button" class="nass-pcar__arrow nass-pcar__arrow--prev" aria-label="Previous">‹</button>
+    <button type="button" class="nass-pcar__arrow nass-pcar__arrow--next" aria-label="Next">›</button>
+  </div>
+  <div class="nass-pcar__thumbs">
+    {% for media in product.media %}
+      <button
+        type="button"
+        class="nass-pcar__thumb{% if forloop.first %} is-active{% endif %}"
+        data-idx="{{ forloop.index0 }}"
+        aria-label="View image {{ forloop.index }}"
+      >
+        <img src="{{ media | image_url: width: 240 }}" alt="">
+      </button>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+(function(){
+  var root = document.getElementById('{{ cid }}');
+  if (!root || root.dataset.bound) return;
+  root.dataset.bound = '1';
+  var imgs = root.querySelectorAll('.nass-pcar__img');
+  var thumbs = root.querySelectorAll('.nass-pcar__thumb');
+  var idx = 0;
+  function show(i){
+    idx = (i + imgs.length) % imgs.length;
+    imgs.forEach(function(el, k){ el.classList.toggle('is-active', k === idx); });
+    thumbs.forEach(function(el, k){ el.classList.toggle('is-active', k === idx); });
+  }
+  root.querySelector('.nass-pcar__arrow--prev').addEventListener('click', function(){ show(idx - 1); });
+  root.querySelector('.nass-pcar__arrow--next').addEventListener('click', function(){ show(idx + 1); });
+  thumbs.forEach(function(t){ t.addEventListener('click', function(){ show(parseInt(t.dataset.idx, 10)); }); });
+})();
+</script>

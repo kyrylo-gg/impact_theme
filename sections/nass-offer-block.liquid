@@ -1,0 +1,310 @@
+{% comment %}
+  NASS Twerk Program — Offer Block
+  ─────────────────────────────────
+  Drop this file into /sections/ in your Shopify theme.
+  Then in the editor: Add section → "NASS Twerk Offer Block".
+
+  Notes
+  • Dependencies: Anybody + Avenir Next webfonts (linked in theme.liquid).
+  • Two products are wired through this section:
+      - "bundle_product"   → the Twerk Essential Kit
+      - "single_product"   → the standalone 7-Day Twerk Program
+  • The carousel images for each product card come from the product's media.
+  • Every textual + numeric piece is editable from the theme editor.
+{% endcomment %}
+
+<link rel="stylesheet" href="{{ 'nass-offer-block.css' | asset_url }}">
+
+<section
+  id="nass-twerk-offer-block"
+  class="nass-offer"
+  data-section-id="{{ section.id }}"
+  data-section-type="nass-offer"
+  style="--nass-bundle-bg: {{ section.settings.bundle_bg }};"
+>
+  {%- assign bundle = section.settings.bundle_product -%}
+  {%- assign single = section.settings.single_product -%}
+
+  <div class="nass-grid nass-grid--2 nass-grid--cards">
+    <div class="nass-card nass-card--bundle">
+      <span class="nass-blob nass-blob--a"></span>
+      <span class="nass-blob nass-blob--b"></span>
+      <div class="nass-card__flash">{{ section.settings.flash_text }}</div>
+      <div class="nass-card__body">
+        <h3 class="nass-card__title">{{ section.settings.bundle_title }}</h3>
+
+        {%- if bundle != blank -%}
+          {% render 'nass-product-carousel', product: bundle %}
+        {%- endif -%}
+
+        {%- assign bundle_rows = section.blocks | where: 'type', 'bundle_row' -%}
+        <ul class="nass-card__items">
+          {% if bundle_rows.size > 0 %}
+            {% for row in bundle_rows %}
+              <li {{ row.shopify_attributes }}>
+                <span class="nass-bullet">✓</span>
+                <span class="nass-row__label">{{ row.settings.label }}</span>
+                {% if row.settings.price != blank %}
+                  <span class="nass-row__price">
+                    <span class="nass-row__accent">{{ row.settings.price }}</span>
+                    {% if row.settings.was != blank %}<span class="nass-row__strike">({{ row.settings.was }})</span>{% endif %}
+                  </span>
+                {% endif %}
+              </li>
+            {% endfor %}
+          {% else %}
+            <li>
+              <span class="nass-bullet">✓</span>
+              <span class="nass-row__label">7-Day Twerk Program</span>
+              <span class="nass-row__price"><span class="nass-row__accent">$59</span><span class="nass-row__strike">($159)</span></span>
+            </li>
+            <li>
+              <span class="nass-bullet">✓</span>
+              <span class="nass-row__label">Stretching Routine</span>
+              <span class="nass-row__price"><span class="nass-row__accent">$20</span><span class="nass-row__strike">($69)</span></span>
+            </li>
+            <li>
+              <span class="nass-bullet">✓</span>
+              <span class="nass-row__label">Knee Pads</span>
+              <span class="nass-row__price"><span class="nass-row__accent">Free</span><span class="nass-row__strike">($29)</span></span>
+            </li>
+            <li>
+              <span class="nass-bullet">✓</span>
+              <span class="nass-row__label">Booty Band Set</span>
+              <span class="nass-row__price"><span class="nass-row__accent">Free</span><span class="nass-row__strike">($19)</span></span>
+            </li>
+            <li>
+              <span class="nass-bullet">✓</span>
+              <span class="nass-row__label">Lifetime Access to <b>NASS App</b></span>
+            </li>
+          {% endif %}
+        </ul>
+
+        <div class="nass-card__total-label">{{ section.settings.total_label }}</div>
+        <div class="nass-card__total nass-card__total--accent">
+          {{ section.settings.bundle_total }}
+          <span class="nass-card__strike">{{ section.settings.bundle_was }}</span>
+        </div>
+
+        <button
+          type="button"
+          class="nass-cta"
+          data-bb-trigger
+          data-bb-program-index="0"
+          data-bb-flow="bundle"
+        >
+          <span>{{ section.settings.cta_label }}</span>
+          <span class="nass-cta__arrow">→</span>
+        </button>
+
+        <div class="nass-trust nass-trust--light">
+          <span class="nass-trust__item">
+            <span class="nass-trust__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 3L5 6V11C5 15.55 8.05 19.74 12 21C15.95 19.74 19 15.55 19 11V6L12 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M9.5 12.5L11.2 14.2L14.8 10.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </span>
+            {{ section.settings.trust_a }}
+          </span>
+          <span class="nass-trust__item">
+            <span class="nass-trust__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"></circle>
+                <path d="M8.8 12.2L11.1 14.4L15.3 10.1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </span>
+            {{ section.settings.trust_b }}
+          </span>
+        </div>
+
+        <div class="nass-card__footer">
+          <span class="nass-pill nass-pill--blue">{{ section.settings.ships_label }}</span>
+          <span class="nass-card__timer">{{ section.settings.timer_text }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="nass-card nass-card--single">
+      <div class="nass-card__body">
+        <h3 class="nass-card__title nass-card__title--dark">{{ section.settings.single_title }}</h3>
+
+        {%- if single != blank -%}
+          {% render 'nass-product-carousel', product: single %}
+        {%- endif -%}
+
+        {%- assign single_rows = section.blocks | where: 'type', 'single_row' -%}
+        <ul class="nass-card__items nass-card__items--dark">
+          {% if single_rows.size > 0 %}
+            {% for row in single_rows %}
+              <li {{ row.shopify_attributes }}>
+                <span class="nass-bullet">✓</span>
+                <span class="nass-row__label">{{ row.settings.label }}</span>
+                {% if row.settings.price != blank %}
+                  <span class="nass-row__price">
+                    <span>{{ row.settings.price }}</span>
+                    {% if row.settings.was != blank %}<span class="nass-row__strike">({{ row.settings.was }})</span>{% endif %}
+                  </span>
+                {% endif %}
+              </li>
+            {% endfor %}
+          {% else %}
+            <li>
+              <span class="nass-bullet">✓</span>
+              <span class="nass-row__label">7-Day Twerk Program</span>
+              <span class="nass-row__price"><span>$59</span><span class="nass-row__strike">($159)</span></span>
+            </li>
+            <li>
+              <span class="nass-bullet">✓</span>
+              <span class="nass-row__label">Lifetime Access to <b>NASS App</b></span>
+            </li>
+          {% endif %}
+        </ul>
+
+        <div class="nass-card__total-label">{{ section.settings.total_label }}</div>
+        <div class="nass-card__total">
+          {{ section.settings.single_total }}
+          <span class="nass-card__strike">$159</span>
+        </div>
+
+        <button
+          type="button"
+          class="nass-cta"
+          data-bb-trigger
+          data-bb-program-index="4"
+          data-bb-flow="single"
+        >
+          <span>{{ section.settings.cta_label }}</span>
+          <span class="nass-cta__arrow">→</span>
+        </button>
+
+        <div class="nass-trust">
+          <span class="nass-trust__item">
+            <span class="nass-trust__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 3L5 6V11C5 15.55 8.05 19.74 12 21C15.95 19.74 19 15.55 19 11V6L12 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M9.5 12.5L11.2 14.2L14.8 10.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </span>
+            {{ section.settings.trust_a }}
+          </span>
+          <span class="nass-trust__item">
+            <span class="nass-trust__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"></circle>
+                <path d="M8.8 12.2L11.1 14.4L15.3 10.1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </span>
+            {{ section.settings.trust_b }}
+          </span>
+        </div>
+
+        <div class="nass-card__footer">
+          <span class="nass-pill nass-pill--blue">{{ section.settings.access_label }}</span>
+          <span class="nass-card__timer nass-card__timer--dark">{{ section.settings.access_after }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function() {
+    var root = document.querySelector('[data-section-id="{{ section.id }}"]');
+    if (!root || root.dataset.bbOfferBound === '1') return;
+    root.dataset.bbOfferBound = '1';
+
+    function openBuilderFromOffer(programIndex) {
+      if (typeof window !== 'undefined') {
+        window.__bt_bb_preselect_program_index = programIndex;
+        window.__bt_bb_offer_autostart = { advanceToStep2: true };
+      }
+
+      if (window.NassBundleBuilder && typeof window.NassBundleBuilder.openWizard === 'function') {
+        window.NassBundleBuilder.openWizard();
+      } else {
+        window.location.hash = 'nass-bundle-builder';
+      }
+    }
+
+    var triggers = root.querySelectorAll('[data-bb-trigger]');
+    triggers.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var programIndex = parseInt(btn.getAttribute('data-bb-program-index') || '0', 10);
+        if (Number.isNaN(programIndex)) programIndex = 0;
+        openBuilderFromOffer(programIndex);
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "NASS Twerk Offer Block",
+  "tag": "section",
+  "class": "nass-offer-section",
+  "settings": [
+    { "type": "header", "content": "Offer cards" },
+    { "type": "color", "id": "bundle_bg", "label": "Bundle card background", "default": "#E94F76" },
+    { "type": "text", "id": "flash_text", "label": "Flash sale label", "default": "Flash Dance Day Sale" },
+
+    { "type": "header", "content": "Bundle product" },
+    { "type": "product", "id": "bundle_product", "label": "Bundle product" },
+    { "type": "text", "id": "bundle_title", "label": "Title", "default": "Twerk Essential Kit" },
+    { "type": "text", "id": "bundle_total", "label": "Total price", "default": "$79" },
+    { "type": "text", "id": "bundle_was", "label": "Was price", "default": "$276" },
+    { "type": "text", "id": "ships_label", "label": "Ships pill", "default": "Ships today" },
+    { "type": "text", "id": "timer_text", "label": "Timer text", "default": "April 21, if ordered within 2hr 00mins 29 secs" },
+
+    { "type": "header", "content": "Single product" },
+    { "type": "product", "id": "single_product", "label": "Single product" },
+    { "type": "text", "id": "single_title", "label": "Title", "default": "7-Day Twerk Program" },
+    { "type": "text", "id": "single_price", "label": "Single line price", "default": "$59" },
+    { "type": "text", "id": "single_total", "label": "Total price", "default": "$59" },
+    { "type": "text", "id": "access_label", "label": "Access pill", "default": "Immediate access" },
+    { "type": "text", "id": "access_after", "label": "Access caption", "default": "after purchase" },
+
+    { "type": "header", "content": "Shared CTAs / Trust" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Add to Cart" },
+    { "type": "text", "id": "total_label", "label": "Total label", "default": "Total Price" },
+    { "type": "text", "id": "trust_a", "label": "Trust line A", "default": "30-Day Money-Back Guarantee" },
+    { "type": "text", "id": "trust_b", "label": "Trust line B", "default": "World-Famous support" }
+  ],
+  "blocks": [
+    {
+      "type": "bundle_row",
+      "name": "Bundle row",
+      "limit": 10,
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "7-Day Twerk Program" },
+        { "type": "text", "id": "price", "label": "Price", "default": "$59" },
+        { "type": "text", "id": "was", "label": "Was price", "default": "$159" }
+      ]
+    },
+    {
+      "type": "single_row",
+      "name": "Single row",
+      "limit": 6,
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "7-Day Twerk Program" },
+        { "type": "text", "id": "price", "label": "Price", "default": "$59" },
+        { "type": "text", "id": "was", "label": "Was price", "default": "$159" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "NASS Twerk Offer Block",
+      "blocks": [
+        { "type": "bundle_row", "settings": { "label": "7-Day Twerk Program", "price": "$59", "was": "$159" } },
+        { "type": "bundle_row", "settings": { "label": "Stretching Routine", "price": "$20", "was": "$69" } },
+        { "type": "bundle_row", "settings": { "label": "Knee Pads", "price": "Free", "was": "$29" } },
+        { "type": "bundle_row", "settings": { "label": "Booty Band Set", "price": "Free", "was": "$19" } },
+        { "type": "bundle_row", "settings": { "label": "Lifetime Access to NASS App", "price": "", "was": "" } },
+        { "type": "single_row", "settings": { "label": "7-Day Twerk Program", "price": "$59", "was": "$159" } },
+        { "type": "single_row", "settings": { "label": "Lifetime Access to NASS App", "price": "", "was": "" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
