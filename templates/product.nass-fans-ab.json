@@ -626,7 +626,7 @@
       "settings": {
         "show_announcement": true,
         "announcement_highlight": "Limited Dance Day Offer:",
-        "announcement_text": "Best Nass Programs for Only $149",
+        "announcement_text": "Best Nass Programs for Only $199",
         "marquee_speed": 30,
         "title": "JOIN NASS TODAY",
         "show_arrows": true,
@@ -1259,7 +1259,7 @@
       "type": "custom-quick-add",
       "name": "TS Sticky Add",
       "settings": {
-        "product": "vip-bundle",
+        "product": "all-in-one-bundle",
         "button_link": "#nass-bundle-builder",
         "button_text": "Shop now",
         "background_button": "#faff00",
