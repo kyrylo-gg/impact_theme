@@ -276,6 +276,96 @@
         "heading_highlight": "THEIR BOOTY with NASS"
       }
     },
+    "multi_column_yCfC3K": {
+      "type": "multi-column",
+      "blocks": {
+        "item_wKN3LY": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Frame_287_2_-min.png",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "<p><strong>Incorporate essential stretching<br/></strong></p><p>Incorporate our Stretching Guide into your routine, with quick and extensive options, to enhance flexibility and prevent injury.</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_U9nQdP": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Frame_287_3_-min_3d57d193-a13a-4859-ae4d-b0f52e3cdbb5.png",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "<p><strong>Structured booty-building journey</strong><br/><br/>Our comprehensive package includes two meticulously crafted programs, featuring 16 workout videos (20-30 min each), providing you with a structured path to achieve your booty goals.</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_femkap": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Frame_288_1_-min.png",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "<p><strong>Effective, safe workouts</strong><br/><br/>Access our extensive Exercise Library for tips and techniques on every move, ensuring your workout is both effective and safe.</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_iAjEKB": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Frame_289_1_-min.png",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "<p><strong>Pre-exercise warm-up for best results</strong><br/><br/>Optional Warm-Up Routine designed to prep your body for exercise, optimizing performance and results.</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_7dyFt8": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Frame_290_1_dfdd5f9e-8739-4609-ac3c-138a68e7f836.png",
+            "column_size": "3",
+            "title": "",
+            "heading_tag": "h4",
+            "content": "<p><strong>Access workouts and wellness tips anywhere</strong><br/><br/>Convenient PDF Guides for quick, on-the-go access to your workouts, plus in-depth articles on nutrition, menstrual cycle effects on exercise, and progress tracking.</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        }
+      },
+      "block_order": [
+        "item_wKN3LY",
+        "item_U9nQdP",
+        "item_femkap",
+        "item_iAjEKB",
+        "item_7dyFt8"
+      ],
+      "name": "Multi-column",
+      "settings": {
+        "full_width": true,
+        "stack_on_mobile": false,
+        "gap": "medium",
+        "text_alignment": "start",
+        "subheading": "",
+        "title": "WHAT'S INSIDE BOOTY PROGRAM",
+        "content": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
     "twerk_lessons_MWt6Ji": {
       "type": "twerk-lessons",
       "blocks": {
@@ -1274,6 +1364,7 @@
     "hero_banner_main",
     "program_cards_ykQqNc",
     "video_reviews_grid_qJDr4j",
+    "multi_column_yCfC3K",
     "twerk_lessons_MWt6Ji",
     "student_progress_ez8yde",
     "social_proof_hPtKDy",
