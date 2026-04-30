@@ -876,7 +876,7 @@
         "program_pack_product": "vip-bundle",
         "program_pack_product_secondary": "all-in-one-bundle",
         "discount_code": "",
-        "show_discount_banner": true,
+        "show_discount_banner": false,
         "discount_promo_text": "Get 60% off all clothing with VIP Bundle!",
         "discount_applied_text": "60% off all clothing applied!",
         "size_chart_config_handle": "size-chart-settings",
