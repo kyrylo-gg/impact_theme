@@ -304,62 +304,6 @@
         "heading_highlight": "TWERK PROGRAM"
       }
     },
-    "student_progress_ez8yde": {
-      "type": "student-progress",
-      "blocks": {
-        "student_video_3HEaRn": {
-          "type": "student_video",
-          "settings": {
-            "video": "shopify://files/videos/3.webm"
-          }
-        },
-        "student_video_MHVfCM": {
-          "type": "student_video",
-          "settings": {
-            "video": "shopify://files/videos/2.webm"
-          }
-        },
-        "student_video_WGHzTQ": {
-          "type": "student_video",
-          "settings": {
-            "video": "shopify://files/videos/1 (1).webm"
-          }
-        },
-        "student_video_GKeqUQ": {
-          "type": "student_video",
-          "disabled": true,
-          "settings": {
-            "video": "shopify://files/videos/Progress 4x3  (1).webm"
-          }
-        },
-        "student_video_YiePwJ": {
-          "type": "student_video",
-          "disabled": true,
-          "settings": {
-            "video": "shopify://files/videos/profress 3_4 (1).webm"
-          }
-        },
-        "student_video_DrpmJz": {
-          "type": "student_video",
-          "disabled": true,
-          "settings": {
-            "video": "shopify://files/videos/progress 3_4 (1).webm"
-          }
-        }
-      },
-      "block_order": [
-        "student_video_3HEaRn",
-        "student_video_MHVfCM",
-        "student_video_WGHzTQ",
-        "student_video_GKeqUQ",
-        "student_video_YiePwJ",
-        "student_video_DrpmJz"
-      ],
-      "settings": {
-        "heading": "Just 7 Days to Master",
-        "heading_highlight": "Twerk Moves"
-      }
-    },
     "program_cards_ykQqNc": {
       "type": "program-cards",
       "blocks": {
@@ -424,6 +368,62 @@
       "settings": {
         "heading": "ALL NASS BESTSELLERS",
         "heading_highlight": "AT THE DANCE DAY PRICE"
+      }
+    },
+    "student_progress_ez8yde": {
+      "type": "student-progress",
+      "blocks": {
+        "student_video_3HEaRn": {
+          "type": "student_video",
+          "settings": {
+            "video": "shopify://files/videos/3.webm"
+          }
+        },
+        "student_video_MHVfCM": {
+          "type": "student_video",
+          "settings": {
+            "video": "shopify://files/videos/2.webm"
+          }
+        },
+        "student_video_WGHzTQ": {
+          "type": "student_video",
+          "settings": {
+            "video": "shopify://files/videos/1 (1).webm"
+          }
+        },
+        "student_video_GKeqUQ": {
+          "type": "student_video",
+          "disabled": true,
+          "settings": {
+            "video": "shopify://files/videos/Progress 4x3  (1).webm"
+          }
+        },
+        "student_video_YiePwJ": {
+          "type": "student_video",
+          "disabled": true,
+          "settings": {
+            "video": "shopify://files/videos/profress 3_4 (1).webm"
+          }
+        },
+        "student_video_DrpmJz": {
+          "type": "student_video",
+          "disabled": true,
+          "settings": {
+            "video": "shopify://files/videos/progress 3_4 (1).webm"
+          }
+        }
+      },
+      "block_order": [
+        "student_video_3HEaRn",
+        "student_video_MHVfCM",
+        "student_video_WGHzTQ",
+        "student_video_GKeqUQ",
+        "student_video_YiePwJ",
+        "student_video_DrpmJz"
+      ],
+      "settings": {
+        "heading": "Just 7 Days to Master",
+        "heading_highlight": "Twerk Moves"
       }
     },
     "social_proof_hPtKDy": {
@@ -1288,8 +1288,8 @@
     "hero_banner_main",
     "video_reviews_grid_qJDr4j",
     "twerk_lessons_MWt6Ji",
-    "student_progress_ez8yde",
     "program_cards_ykQqNc",
+    "student_progress_ez8yde",
     "social_proof_hPtKDy",
     "feedback_screenshots_main",
     "nass_countdown_NypKK7",
