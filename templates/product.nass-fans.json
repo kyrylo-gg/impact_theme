@@ -402,13 +402,24 @@
             "level_badge": "",
             "duration": "3 Months"
           }
+        },
+        "program_card_RTXiLb": {
+          "type": "program_card",
+          "settings": {
+            "title": "Hip Mobility",
+            "description": "A structured program that frees your hips and prepares your body for more confident movement.",
+            "image": "shopify://shop_images/Frame_5_5471b8c6-5678-4e09-8d03-91630b128711.png",
+            "level_badge": "",
+            "duration": "4 Weeks"
+          }
         }
       },
       "block_order": [
         "program_card_CxChpM",
         "program_card_LQPeBc",
         "program_card_kXCJYU",
-        "program_card_6rgVPi"
+        "program_card_6rgVPi",
+        "program_card_RTXiLb"
       ],
       "settings": {
         "heading": "ALL NASS BESTSELLERS",
