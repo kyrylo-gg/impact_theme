@@ -703,7 +703,7 @@
         "single_row_2"
       ],
       "settings": {
-        "background_image": "",
+        "background_image": "shopify://shop_images/result.png",
         "bundle_bg": "#e94f76",
         "flash_text": "Flash Dance Day Sale",
         "bundle_product": "twerk-essential-bundle",
