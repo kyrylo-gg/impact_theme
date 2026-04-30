@@ -399,6 +399,8 @@
       productsLoaded: false,
       cartData: null,
       sizeFilter: null,
+      allowStep2AutoAdd: !skipProgramsStepOnOpen,
+      forceOfferStep2AutoAdd: false,
     };
 
     function buildStepMap(steps) {
@@ -633,6 +635,7 @@
 
     function applyWorkoutEquipmentAutoAdd(step) {
       if (!step || !step.id || !stepIsWorkoutEquipment(step.id)) return;
+      if (skipProgramsStepOnOpen && !bbState.allowStep2AutoAdd) return;
       var mode = getSelectedBundleRuleMode();
       if (!mode || !Array.isArray(step.productIds) || !step.productIds.length) return;
       if (bbState.cartOperationInProgress) {
@@ -2324,14 +2327,34 @@
       var offerAutostart = (typeof window !== 'undefined' && window.__bt_bb_offer_autostart && typeof window.__bt_bb_offer_autostart === 'object')
         ? window.__bt_bb_offer_autostart
         : null;
+      var offerFlow = (offerAutostart && typeof offerAutostart.flow === 'string') ? offerAutostart.flow.toLowerCase() : '';
+      var forceAutoAddFromOffer = !!(offerAutostart && offerAutostart.autoAddBootyBand);
       var startStepIndex = (offerAutostart && offerAutostart.advanceToStep2) ? 1 : 0;
       if (skipProgramsStepOnOpen) startStepIndex = Math.max(startStepIndex, 1);
+      bbState.allowStep2AutoAdd = !skipProgramsStepOnOpen || offerFlow === 'bundle' || forceAutoAddFromOffer;
+      bbState.forceOfferStep2AutoAdd = !!forceAutoAddFromOffer;
       if (typeof window !== 'undefined') window.__bt_bb_offer_autostart = null;
       if (skipProgramsStepOnOpen) wizardEl.classList.add('bb-wizard-overlay--initializing');
 
       function clearInitialWizardState() {
         if (!skipProgramsStepOnOpen || !wizardEl) return;
         wizardEl.classList.remove('bb-wizard-overlay--initializing');
+      }
+
+      function rerunStepAutoAddAfterPreselect() {
+        var retriesLeft = 20;
+        function attempt() {
+          var activeStep = bbState.steps[bbState.currentStepIndex];
+          if (!activeStep) return;
+          if (bbState.cartOperationInProgress && retriesLeft > 0) {
+            retriesLeft -= 1;
+            setTimeout(attempt, 150);
+            return;
+          }
+          applyWorkoutEquipmentAutoAdd(activeStep);
+          bbState.forceOfferStep2AutoAdd = false;
+        }
+        attempt();
       }
 
       bbState.isOpen = true;
@@ -2368,9 +2391,11 @@
           if (startStepIndex > 0) {
             goToStep(Math.min(startStepIndex, Math.max(0, bbState.steps.length - 1)));
             tryPreselectProgramsItem();
+            rerunStepAutoAddAfterPreselect();
           } else {
             goToStep(0);
             tryPreselectProgramsItem();
+            rerunStepAutoAddAfterPreselect();
           }
           clearInitialWizardState();
         })
@@ -2383,9 +2408,11 @@
             if (startStepIndex > 0) {
               goToStep(Math.min(startStepIndex, Math.max(0, bbState.steps.length - 1)));
               tryPreselectProgramsItem();
+              rerunStepAutoAddAfterPreselect();
             } else {
               goToStep(0);
               tryPreselectProgramsItem();
+              rerunStepAutoAddAfterPreselect();
             }
             clearInitialWizardState();
           });

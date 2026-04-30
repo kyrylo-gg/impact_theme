@@ -242,10 +242,14 @@
     if (!root || root.dataset.bbOfferBound === '1') return;
     root.dataset.bbOfferBound = '1';
 
-    function openBuilderFromOffer(programIndex) {
+    function openBuilderFromOffer(programIndex, flow) {
       if (typeof window !== 'undefined') {
         window.__bt_bb_preselect_program_index = programIndex;
-        window.__bt_bb_offer_autostart = { advanceToStep2: true };
+        window.__bt_bb_offer_autostart = {
+          advanceToStep2: true,
+          flow: flow || '',
+          autoAddBootyBand: String(flow || '').toLowerCase() === 'bundle'
+        };
       }
 
       if (window.NassBundleBuilder && typeof window.NassBundleBuilder.openWizard === 'function') {
@@ -259,8 +263,9 @@
     triggers.forEach(function(btn) {
       btn.addEventListener('click', function() {
         var programIndex = parseInt(btn.getAttribute('data-bb-program-index') || '0', 10);
+        var flow = String(btn.getAttribute('data-bb-flow') || '').toLowerCase();
         if (Number.isNaN(programIndex)) programIndex = 0;
-        openBuilderFromOffer(programIndex);
+        openBuilderFromOffer(programIndex, flow);
       });
     });
   })();
