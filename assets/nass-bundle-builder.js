@@ -101,6 +101,14 @@
       || templateSuffix === 'hips-ceo'
       || templateSuffix === 'hips-b'
       || templateSuffix === 'hips-c';
+    const isBootyProgramDescriptionTemplate = templateSuffix === 'nass-fans'
+      || templateSuffix === 'nass-fans-ab'
+      || templateSuffix === 'nass_fans'
+      || templateSuffix === 'nass_fans_ab'
+      || templateSuffix === 'booty_builder'
+      || templateSuffix === 'booty-builder'
+      || templateSuffix === 'twerk_essential'
+      || templateSuffix === 'twerk-essential';
     const isHipsSingleProgramTemplate = templateSuffix === 'hips_a'
       || templateSuffix === 'hips_a_ceo'
       || templateSuffix === 'hips_b'
@@ -1210,7 +1218,7 @@
     }
 
     function shouldOpenProgramDescriptionPopup(stepId) {
-      if (!isBundlesDescriptionTemplate && !isHipsProgramDescriptionTemplate) return false;
+      if (!isBundlesDescriptionTemplate && !isHipsProgramDescriptionTemplate && !isBootyProgramDescriptionTemplate) return false;
       var step = bbState.steps.find(function(s) { return String(s.id) === String(stepId); });
       return !!(step && step.isProgramsStep);
     }
