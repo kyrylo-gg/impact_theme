@@ -9,13 +9,24 @@
   padding: 60px 24px 0;
   font-family: "Avenir Next", -apple-system, "Helvetica Neue", Arial, sans-serif;
   color: #000;
-  background-image: var(--nass-offer-bg-image, linear-gradient(180deg, #f7f6f4 0%, #faf9f7 48%, #f4f2ee 100%));
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-radius: 24px;
+  position: relative;
+  isolation: isolate;
 }
 .nass-offer * { box-sizing: border-box; }
+
+.nass-offer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  z-index: -1;
+  background-image: var(--nass-offer-bg-image, linear-gradient(180deg, #f7f6f4 0%, #faf9f7 48%, #f4f2ee 100%));
+  background-size: 100vw 100%;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
 
 .nass-offer__header { text-align: center; margin-bottom: 60px; }
 .nass-eyebrow { font-weight: 800; font-size: 14px; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.55; margin-bottom: 14px; }
@@ -142,7 +153,6 @@
 }
 
 @media (max-width: 768px) {
-  .nass-offer { border-radius: 20px; }
   .nass-card__title, .nass-card__total { font-size: 32px; }
   .nass-card__strike { font-size: 22px; }
   .nass-card__items li { font-size: 16px; }

@@ -122,6 +122,7 @@
       || templateSuffix === 'twerk_essential'
       || templateSuffix === 'booty_builder'
       || templateSuffix === 'booty-builder';
+    const skipProgramsStepOnOpen = templateSuffix === 'twerk_essential' || templateSuffix === 'twerk-essential';
     const allowBootyBuilderRuleMode = true;
     const bodyClassName = (typeof document !== 'undefined' && document.body && document.body.className)
       ? String(document.body.className).toLowerCase()
@@ -2324,7 +2325,14 @@
         ? window.__bt_bb_offer_autostart
         : null;
       var startStepIndex = (offerAutostart && offerAutostart.advanceToStep2) ? 1 : 0;
+      if (skipProgramsStepOnOpen) startStepIndex = Math.max(startStepIndex, 1);
       if (typeof window !== 'undefined') window.__bt_bb_offer_autostart = null;
+      if (skipProgramsStepOnOpen) wizardEl.classList.add('bb-wizard-overlay--initializing');
+
+      function clearInitialWizardState() {
+        if (!skipProgramsStepOnOpen || !wizardEl) return;
+        wizardEl.classList.remove('bb-wizard-overlay--initializing');
+      }
 
       bbState.isOpen = true;
       bbState.currentStepIndex = 0;
@@ -2358,12 +2366,13 @@
         })
         .then(function() {
           if (startStepIndex > 0) {
-            tryPreselectProgramsItem();
             goToStep(Math.min(startStepIndex, Math.max(0, bbState.steps.length - 1)));
+            tryPreselectProgramsItem();
           } else {
             goToStep(0);
             tryPreselectProgramsItem();
           }
+          clearInitialWizardState();
         })
         .catch(function(err) {
           // #region agent log
@@ -2372,15 +2381,19 @@
           bbState.cartData = { item_count: 0, items: [], total_price: 0, currency: displayCurrency };
           return loadAllProductsForSteps().then(function() {
             if (startStepIndex > 0) {
-              tryPreselectProgramsItem();
               goToStep(Math.min(startStepIndex, Math.max(0, bbState.steps.length - 1)));
+              tryPreselectProgramsItem();
             } else {
               goToStep(0);
               tryPreselectProgramsItem();
             }
+            clearInitialWizardState();
           });
         })
-        .finally(clearCtaLoading);
+        .finally(function() {
+          clearCtaLoading();
+          clearInitialWizardState();
+        });
     }
 
     function tryPreselectProgramsItem() {
