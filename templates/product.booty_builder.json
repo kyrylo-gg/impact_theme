@@ -132,6 +132,78 @@
     "video_reviews_grid_qJDr4j": {
       "type": "video-reviews-grid",
       "blocks": {
+        "review_GFEGiy": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/reel.mp4",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_TMcBTa": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/reel-2.mp4",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_TrXRVw": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/reel-3.mp4",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_c8CaKT": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/reel-4.mp4",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_peUFXC": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/reel-5.mp4",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_h7W486": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/reel-6.mp4",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_rk7j7N": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/reel-7.mp4",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_PCj9kE": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/reel-8.mp4",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_QDW736": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/reel-9.mp4",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
         "review_tXtKm4": {
           "type": "review",
           "settings": {
@@ -179,96 +251,24 @@
             "external_video_url": "",
             "caption": ""
           }
-        },
-        "review_XaHf7e": {
-          "type": "review",
-          "settings": {
-            "video": "shopify://files/videos/reel-7.webm",
-            "external_video_url": "",
-            "caption": ""
-          }
-        },
-        "review_cRhxWz": {
-          "type": "review",
-          "settings": {
-            "video": "shopify://files/videos/03251-ezgif.com-gif-maker.webm",
-            "external_video_url": "",
-            "caption": ""
-          }
-        },
-        "review_MmPrfa": {
-          "type": "review",
-          "settings": {
-            "video": "shopify://files/videos/reel-9.webm",
-            "external_video_url": "",
-            "caption": ""
-          }
-        },
-        "review_RMgETq": {
-          "type": "review",
-          "settings": {
-            "video": "shopify://files/videos/reel-10.webm",
-            "external_video_url": "",
-            "caption": ""
-          }
-        },
-        "review_bd6fjz": {
-          "type": "review",
-          "settings": {
-            "video": "shopify://files/videos/03252-ezgif.com-gif-maker.webm",
-            "external_video_url": "",
-            "caption": ""
-          }
-        },
-        "review_XD6wBe": {
-          "type": "review",
-          "settings": {
-            "video": "shopify://files/videos/reel-12.webm",
-            "external_video_url": "",
-            "caption": ""
-          }
-        },
-        "review_bKqFdq": {
-          "type": "review",
-          "settings": {
-            "video": "shopify://files/videos/reel-13.webm",
-            "external_video_url": "",
-            "caption": ""
-          }
-        },
-        "review_mggXYB": {
-          "type": "review",
-          "settings": {
-            "video": "shopify://files/videos/reel-14.webm",
-            "external_video_url": "",
-            "caption": ""
-          }
-        },
-        "review_a6D83c": {
-          "type": "review",
-          "settings": {
-            "video": "shopify://files/videos/reel-15.webm",
-            "external_video_url": "",
-            "caption": ""
-          }
         }
       },
       "block_order": [
+        "review_GFEGiy",
+        "review_TMcBTa",
+        "review_TrXRVw",
+        "review_c8CaKT",
+        "review_peUFXC",
+        "review_h7W486",
+        "review_rk7j7N",
+        "review_PCj9kE",
+        "review_QDW736",
         "review_tXtKm4",
         "review_FEDNzr",
         "review_JrYxdH",
         "review_7r8yNM",
         "review_aDXjnk",
-        "review_MjbNkq",
-        "review_XaHf7e",
-        "review_cRhxWz",
-        "review_MmPrfa",
-        "review_RMgETq",
-        "review_bd6fjz",
-        "review_XD6wBe",
-        "review_bKqFdq",
-        "review_mggXYB",
-        "review_a6D83c"
+        "review_MjbNkq"
       ],
       "name": "Video Reviews Grid",
       "settings": {
