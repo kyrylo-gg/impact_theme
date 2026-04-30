@@ -1452,7 +1452,7 @@
         } else if (hasBootyBuilderBundle || titleIsBootyBuilderBundle) {
           badgeLabel = 'Booty-Focused';
         } else if (hasHipOpenerBundle || titleIsHipOpenerBundle) {
-          badgeLabel = 'Bestseller';
+          badgeLabel = 'Hip Focused';
         } else if (hasTwerkEssentialKit || titleIsTwerkEssentialKit) {
           badgeLabel = 'Bestseller';
         } else if (hasMegaTwerk && hasPackOrBundle) {

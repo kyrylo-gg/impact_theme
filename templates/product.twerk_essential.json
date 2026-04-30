@@ -703,6 +703,7 @@
         "single_row_2"
       ],
       "settings": {
+        "background_image": "",
         "bundle_bg": "#e94f76",
         "flash_text": "Flash Dance Day Sale",
         "bundle_product": "twerk-essential-bundle",
@@ -720,7 +721,13 @@
         "cta_label": "Add to Cart",
         "total_label": "Total Price",
         "trust_a": "30-Day Money-Back Guarantee",
-        "trust_b": "World-Famous support"
+        "trust_b": "World-Famous support",
+        "marquee_highlight": "Limited Dance Day Price:",
+        "marquee_text": "All Twerk Essentials for only $79",
+        "marquee_speed": 30,
+        "marquee_bg": "#000000",
+        "marquee_text_color": "#ffffff",
+        "marquee_accent_color": "#fff600"
       }
     },
     "nass_bundle_builder": {

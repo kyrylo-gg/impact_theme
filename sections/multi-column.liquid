@@ -8,9 +8,35 @@
     }
   </style>
 
-  <div {% render 'section-properties' %}>
+  {%- assign is_booty_builder_template = false -%}
+  {%- if request.page_type == 'product' and template.suffix == 'booty_builder' -%}
+    {%- assign is_booty_builder_template = true -%}
+  {%- endif -%}
+
+  <div {% render 'section-properties' %} {% if is_booty_builder_template %}class="multi-column-booty-builder"{% endif %}>
     <div class="section-stack">
-      {%- render 'section-header', subheading: section.settings.subheading, heading: section.settings.title, content: section.settings.content, text_alignment: section.settings.text_alignment -%}
+      {%- if is_booty_builder_template -%}
+        <section-header class="section-header justify-{{ section.settings.text_alignment | escape }} justify-items-{{ section.settings.text_alignment | escape }} text-{{ section.settings.text_alignment | escape }}">
+          <div class="prose">
+            {%- if section.settings.subheading != blank -%}
+              <p class="subheading">{{- section.settings.subheading | escape -}}</p>
+            {%- endif -%}
+
+            {%- if section.settings.title != blank or section.settings.heading_highlight != blank -%}
+              <span class="h2 multi-column-booty-builder__heading" {% if settings.heading_apparition != 'none' %}reveal-on-scroll="true"{% endif %}>
+                {{- section.settings.title | escape -}}
+                {%- if section.settings.heading_highlight != blank -%}
+                  <span class="multi-column-booty-builder__heading-highlight">{{- section.settings.heading_highlight | escape -}}</span>
+                {%- endif -%}
+              </span>
+            {%- endif -%}
+
+            {{- section.settings.content -}}
+          </div>
+        </section-header>
+      {%- else -%}
+        {%- render 'section-header', subheading: section.settings.subheading, heading: section.settings.title, content: section.settings.content, text_alignment: section.settings.text_alignment -%}
+      {%- endif -%}
 
       <div class="multi-column scroll-area bleed md:unbleed">
         {%- for block in section.blocks -%}
@@ -94,6 +120,48 @@
       </div>
     </div>
   </div>
+
+  {%- if is_booty_builder_template -%}
+    <style>
+      #shopify-section-{{ section.id }} .multi-column-booty-builder__heading {
+        display: block;
+        font-family: var(--font-heading--family, 'Anybody'), system-ui, sans-serif;
+        font-weight: 900;
+        font-stretch: 150%;
+        letter-spacing: 0.03em;
+        line-height: 100%;
+        text-transform: uppercase;
+        color: #000000;
+        text-align: center;
+      }
+
+      #shopify-section-{{ section.id }} .multi-column-booty-builder__heading-highlight {
+        display: block;
+        color: var(--nass-primary, #0038FF);
+      }
+
+      #shopify-section-{{ section.id }} .section-header .prose > p,
+      #shopify-section-{{ section.id }} .multi-column__item .prose,
+      #shopify-section-{{ section.id }} .multi-column__item .prose p {
+        color: #000000;
+        font-family: 'Avenir Next', 'Avenir', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 1.4;
+      }
+
+      @media screen and (min-width: 1000px) {
+        /* For 5 cards: center 2 cards in the second row */
+        #shopify-section-{{ section.id }} .multi-column > .multi-column__item:nth-child(4):nth-last-child(2) {
+          grid-column: 3 / span 4;
+        }
+
+        #shopify-section-{{ section.id }} .multi-column > .multi-column__item:nth-child(5):last-child {
+          grid-column: 7 / span 4;
+        }
+      }
+    </style>
+  {%- endif -%}
 {%- endif -%}
 
 {% schema %}
@@ -173,6 +241,12 @@
       "id": "title",
       "label": "Heading",
       "default": "Featured content"
+    },
+    {
+      "type": "text",
+      "id": "heading_highlight",
+      "label": "Heading highlight",
+      "default": "Highlighted"
     },
     {
       "type": "richtext",

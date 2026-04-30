@@ -20,7 +20,14 @@
   class="nass-offer"
   data-section-id="{{ section.id }}"
   data-section-type="nass-offer"
-  style="--nass-bundle-bg: {{ section.settings.bundle_bg }};"
+  style="
+    --nass-bundle-bg: {{ section.settings.bundle_bg }};
+    --nass-marquee-duration: {{ section.settings.marquee_speed }}s;
+    --nass-marquee-bg: {{ section.settings.marquee_bg }};
+    --nass-marquee-text: {{ section.settings.marquee_text_color }};
+    --nass-marquee-accent: {{ section.settings.marquee_accent_color }};
+    {% if section.settings.background_image != blank %}--nass-offer-bg-image: url('{{ section.settings.background_image | image_url: width: 2200 }}');{% endif %}
+  "
 >
   {%- assign bundle = section.settings.bundle_product -%}
   {%- assign single = section.settings.single_product -%}
@@ -206,6 +213,27 @@
       </div>
     </div>
   </div>
+
+  <div class="nass-offer__marquee" role="region" aria-label="Offer announcement">
+    <div class="nass-offer__marquee-content">
+      <div class="nass-offer__marquee-track">
+        {%- for i in (1..12) -%}
+          <span class="nass-offer__marquee-item">
+            <span class="nass-offer__marquee-hl">{{ section.settings.marquee_highlight | escape }}</span>
+            {{ section.settings.marquee_text | escape }}
+          </span>
+        {%- endfor -%}
+      </div>
+      <div class="nass-offer__marquee-track" aria-hidden="true">
+        {%- for i in (1..12) -%}
+          <span class="nass-offer__marquee-item">
+            <span class="nass-offer__marquee-hl">{{ section.settings.marquee_highlight | escape }}</span>
+            {{ section.settings.marquee_text | escape }}
+          </span>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
 </section>
 
 <script>
@@ -245,6 +273,7 @@
   "class": "nass-offer-section",
   "settings": [
     { "type": "header", "content": "Offer cards" },
+    { "type": "image_picker", "id": "background_image", "label": "Section background image" },
     { "type": "color", "id": "bundle_bg", "label": "Bundle card background", "default": "#E94F76" },
     { "type": "text", "id": "flash_text", "label": "Flash sale label", "default": "Flash Dance Day Sale" },
 
@@ -268,7 +297,15 @@
     { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Add to Cart" },
     { "type": "text", "id": "total_label", "label": "Total label", "default": "Total Price" },
     { "type": "text", "id": "trust_a", "label": "Trust line A", "default": "30-Day Money-Back Guarantee" },
-    { "type": "text", "id": "trust_b", "label": "Trust line B", "default": "World-Famous support" }
+    { "type": "text", "id": "trust_b", "label": "Trust line B", "default": "World-Famous support" },
+
+    { "type": "header", "content": "Bottom marquee" },
+    { "type": "text", "id": "marquee_highlight", "label": "Marquee highlight", "default": "Limited Dance Day Price:" },
+    { "type": "text", "id": "marquee_text", "label": "Marquee text", "default": "All Twerk Essentials for only $79" },
+    { "type": "range", "id": "marquee_speed", "min": 10, "max": 120, "step": 5, "unit": "s", "label": "Marquee duration", "default": 30 },
+    { "type": "color", "id": "marquee_bg", "label": "Marquee background", "default": "#000000" },
+    { "type": "color", "id": "marquee_text_color", "label": "Marquee text color", "default": "#FFFFFF" },
+    { "type": "color", "id": "marquee_accent_color", "label": "Marquee accent color", "default": "#FFF600" }
   ],
   "blocks": [
     {
