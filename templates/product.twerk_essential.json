@@ -166,6 +166,7 @@
             "title": "Twerk Program",
             "description": "Discover the art of twerking with our easy-to-follow 7-day program for all skill levels.",
             "image": "shopify://shop_images/booty_band_asdasd_00345cad-3c6c-41b3-8e62-3953cf2c00ed.jpg",
+            "level_badge": "",
             "duration": "7 Days"
           }
         },
@@ -175,6 +176,7 @@
             "title": "Home Booty Program",
             "description": "The most effective bootyworkouts which you can do at the comfort of your home.",
             "image": "shopify://shop_images/Frame_1.png",
+            "level_badge": "",
             "duration": "8 Weeks"
           }
         },
@@ -184,6 +186,7 @@
             "title": "Home Booty Band Program",
             "description": "Great variety of booty-building exercises which you can perform with resistance band.",
             "image": "shopify://shop_images/stretching_band_set_0bd6ad28-abd3-424a-9f72-b4323b52ac50.jpg",
+            "level_badge": "",
             "duration": "8 Weeks"
           }
         },
@@ -193,6 +196,7 @@
             "title": "body transformation",
             "description": "12-week structured program designed to deliver confident and reliable weight loss results.",
             "image": "shopify://shop_images/booty_band_program_a55ac736-c2f1-4155-b953-1c676e9852a3.jpg",
+            "level_badge": "",
             "duration": "3 Months"
           }
         }
@@ -608,8 +612,8 @@
       "name": "NASS Countdown Banner",
       "settings": {
         "show_announcement": true,
-        "announcement_highlight": "Limited Dance Day Offer:",
-        "announcement_text": "Best Nass Programs for Only $149",
+        "announcement_highlight": "Limited Dance Day Price:",
+        "announcement_text": "All Twerk Essentials for only $79",
         "marquee_speed": 30,
         "title": "JOIN NASS TODAY",
         "show_arrows": true,
