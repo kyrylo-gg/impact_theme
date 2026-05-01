@@ -71,7 +71,7 @@
         "price_text": "Get That Booty & Twerk Like Never Before",
         "cta_text": "Unlock NASS Offers",
         "cta_url": "#nass-bundle-builder",
-        "deadline_text": "Offer ends April 30"
+        "deadline_text": "Lifetime access · Any device"
       }
     },
     "program_cards_ykQqNc": {
@@ -83,6 +83,7 @@
             "title": "Twerk Program",
             "description": "Discover the art of twerking with our easy-to-follow 7-day program for all skill levels.",
             "image": "shopify://shop_images/booty_band_asdasd_00345cad-3c6c-41b3-8e62-3953cf2c00ed.jpg",
+            "level_badge": "",
             "duration": "7 Days"
           }
         },
@@ -92,6 +93,7 @@
             "title": "Home Booty Program",
             "description": "The most effective bootyworkouts which you can do at the comfort of your home.",
             "image": "shopify://shop_images/Frame_1.png",
+            "level_badge": "",
             "duration": "8 Weeks"
           }
         },
@@ -101,6 +103,7 @@
             "title": "Home Booty Band Program",
             "description": "Great variety of booty-building exercises which you can perform with resistance band.",
             "image": "shopify://shop_images/stretching_band_set_0bd6ad28-abd3-424a-9f72-b4323b52ac50.jpg",
+            "level_badge": "",
             "duration": "8 Weeks"
           }
         },
@@ -110,6 +113,7 @@
             "title": "body transformation",
             "description": "12-week structured program designed to deliver confident and reliable weight loss results.",
             "image": "shopify://shop_images/booty_band_program_a55ac736-c2f1-4155-b953-1c676e9852a3.jpg",
+            "level_badge": "",
             "duration": "3 Months"
           }
         }
