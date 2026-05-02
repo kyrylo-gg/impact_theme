@@ -550,10 +550,10 @@
         "sticker_image": "shopify://shop_images/Frame_538.png",
         "sticker_link": "",
         "show_confetti": true,
-        "bg_color": "#0038FF",
+        "bg_color": "#0038ff",
         "bar_bg_color": "#000000",
-        "accent_color": "#FFF600",
-        "text_color": "#FFFFFF"
+        "accent_color": "#fff600",
+        "text_color": "#ffffff"
       }
     },
     "complete_system": {
@@ -880,8 +880,8 @@
         "background_button": "#faff00",
         "text_color_button": "#1a1a1a",
         "block_text_color": "#1a1a1a",
-        "block_background": "#ffb6e3",
-        "sublime_text": "<p>Celebrate Dance Day with NASS</p>",
+        "block_background": "#efa3c1",
+        "sublime_text": "<p>Celebrate Mother’s Day with NASS</p>",
         "sublime_text_color": "#1a1a1a",
         "timer_enabled": true,
         "timer_type": "daily",
