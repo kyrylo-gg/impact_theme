@@ -12,34 +12,11 @@
     "slideshow": {
       "type": "slideshow",
       "blocks": {
-        "image_aEp4BX": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/Banner_1_Desk-3_67097718-9028-46fb-9fb9-f144dd0ed21c.png",
-            "mobile_image": "shopify://shop_images/Banner_1_Mobile-2_7d6d5a6f-3970-4e86-a950-9fd1637fe042.png",
-            "content_max_width": 780,
-            "mobile_text_position": "place-self-end-start text-start",
-            "desktop_text_position": "sm:place-self-end-start sm:text-start",
-            "subheading": "",
-            "title": "",
-            "heading_tag": "h1",
-            "button_text": "",
-            "button_link": "https://www.nasswear.com/products/hip-mobility-bundle",
-            "text_color": "#ffffff",
-            "button_background": "#ffffff",
-            "button_text_color": "#000000",
-            "overlay_color": "#000000",
-            "overlay_opacity": 0,
-            "background": "",
-            "background_gradient": ""
-          }
-        },
         "80655a36-c320-42b3-984e-3e96b1a32056": {
           "type": "image",
-          "disabled": true,
           "settings": {
-            "image": "shopify://shop_images/Banner_2_Desk-2.png",
-            "mobile_image": "shopify://shop_images/Banner_2_Mobile-2.png",
+            "image": "shopify://shop_images/Banner_1_Desk-4_3607b8e7-9b28-4631-968f-11e05f4c3a46.png",
+            "mobile_image": "shopify://shop_images/Banner_1_Mobile-3_123bc67e-6b75-4c41-a64f-f65506a7c050.png",
             "content_max_width": 780,
             "mobile_text_position": "place-self-end-start text-start",
             "desktop_text_position": "sm:place-self-end-start sm:text-start",
@@ -59,10 +36,9 @@
         },
         "image_kjqBkw": {
           "type": "image",
-          "disabled": true,
           "settings": {
-            "image": "shopify://shop_images/Banner_2_Desk_3bdc4f5f-068a-465b-a475-1f6879577cda.png",
-            "mobile_image": "shopify://shop_images/Banner_2_Mobile_38e61fe9-3d2f-4b23-9657-0384fc9d59d8.png",
+            "image": "shopify://shop_images/Banner_2_Desk_9777b0f7-c469-44de-b623-4462d2ca3192.png",
+            "mobile_image": "shopify://shop_images/Banner_2_Mobile_d7c9aef9-2e70-40c6-a313-8c85cbbfb115.png",
             "content_max_width": 780,
             "mobile_text_position": "place-self-end-start text-start",
             "desktop_text_position": "sm:place-self-end-start sm:text-start",
@@ -71,6 +47,28 @@
             "heading_tag": "h1",
             "button_text": "",
             "button_link": "shopify://pages/bf25",
+            "text_color": "#ffffff",
+            "button_background": "#ffffff",
+            "button_text_color": "#000000",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0,
+            "background": "",
+            "background_gradient": ""
+          }
+        },
+        "image_aEp4BX": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Banner_3_Desk_98f1f40c-a43a-4214-b4a6-6ab228aaa6d3.png",
+            "mobile_image": "shopify://shop_images/Banner_3_Mobile_f344cbe6-d639-4d1b-89a6-68bd90ef49de.png",
+            "content_max_width": 780,
+            "mobile_text_position": "place-self-end-start text-start",
+            "desktop_text_position": "sm:place-self-end-start sm:text-start",
+            "subheading": "",
+            "title": "",
+            "heading_tag": "h1",
+            "button_text": "",
+            "button_link": "https://www.nasswear.com/products/hip-mobility-bundle",
             "text_color": "#ffffff",
             "button_background": "#ffffff",
             "button_text_color": "#000000",
@@ -128,9 +126,9 @@
         }
       },
       "block_order": [
-        "image_aEp4BX",
         "80655a36-c320-42b3-984e-3e96b1a32056",
         "image_kjqBkw",
+        "image_aEp4BX",
         "0dde9954-00cb-4fba-b3e4-26ace73393b8",
         "601a50c3-71d5-4bea-b749-6f880a128d00"
       ],
