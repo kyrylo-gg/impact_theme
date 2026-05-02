@@ -676,8 +676,8 @@
         "program_pack_product_secondary": "",
         "discount_code": "",
         "show_discount_banner": true,
-        "discount_promo_text": "Get 60% off all clothing with Full Program!",
-        "discount_applied_text": "60% off all clothing applied!",
+        "discount_promo_text": "Get FREE LEGGINGS with Full Program!",
+        "discount_applied_text": "Free Leggings applied!",
         "size_chart_config_handle": "size-chart-settings",
         "storefront_api_token": "568094b7f376083a4b0dc6fee4785741"
       }
