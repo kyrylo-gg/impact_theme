@@ -575,7 +575,18 @@
             "title": "Select programs",
             "collection": "bundle-bt",
             "is_programs_step": true,
-            "program_pack_product": "body-transformation"
+            "program_pack_product": "body-transformation",
+            "program_pack_product_secondary": ""
+          }
+        },
+        "bundle_step_hpYE7p": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "Add Leggings",
+            "collection": "body-leggings",
+            "is_programs_step": false,
+            "program_pack_product": "",
+            "program_pack_product_secondary": ""
           }
         },
         "step_shorts": {
@@ -584,7 +595,8 @@
             "title": "Add Lounge shorts",
             "collection": "bundle-lounge-shorts",
             "is_programs_step": false,
-            "program_pack_product": ""
+            "program_pack_product": "",
+            "program_pack_product_secondary": ""
           }
         },
         "step_leggings": {
@@ -593,7 +605,8 @@
             "title": "Add sport shorts",
             "collection": "bundle-sport-shorts",
             "is_programs_step": false,
-            "program_pack_product": ""
+            "program_pack_product": "",
+            "program_pack_product_secondary": ""
           }
         },
         "step_swimshorts": {
@@ -602,7 +615,8 @@
             "title": "Add swim shorts",
             "collection": "bundle-swim-shorts",
             "is_programs_step": false,
-            "program_pack_product": ""
+            "program_pack_product": "",
+            "program_pack_product_secondary": ""
           }
         },
         "step_tops": {
@@ -611,7 +625,8 @@
             "title": "Tops",
             "collection": "bundle-leggings-tops",
             "is_programs_step": false,
-            "program_pack_product": ""
+            "program_pack_product": "",
+            "program_pack_product_secondary": ""
           }
         },
         "bundle_step_bb96UU": {
@@ -620,12 +635,14 @@
             "title": "Workout Equipment",
             "collection": "bundle-equipment",
             "is_programs_step": false,
-            "program_pack_product": ""
+            "program_pack_product": "",
+            "program_pack_product_secondary": ""
           }
         }
       },
       "block_order": [
         "step_programs",
+        "bundle_step_hpYE7p",
         "step_shorts",
         "step_leggings",
         "step_swimshorts",
@@ -637,13 +654,28 @@
         "image_2": "shopify://shop_images/Frame_7-4.png",
         "image_3": "shopify://shop_images/padded_DSC09654_30427d69-c589-45c9-ab7f-2ec9f0e127e1.jpg",
         "enable_section": true,
+        "bb_title_prefix": "BUILD YOUR",
+        "bb_title_accent": "PERFECT BOOTY!",
         "bb_description": "Mix programs, shorts, and tops. Get 60% off all clothing when you add the 4 Programs Bundle.",
         "bb_promo_banner_text": "60% OFF ALL CLOTHING / with Program Pack purchase",
+        "bb_show_countdown": true,
+        "bb_countdown_mode": "daily_kyiv_10am",
+        "bb_countdown_heading": "HURRY UP! THE SALE ENDS IN:",
+        "bb_initial_days": 0,
+        "bb_initial_hours": 16,
+        "bb_initial_minutes": 11,
+        "bb_initial_seconds": 20,
+        "bb_label_days": "Days",
+        "bb_label_hours": "Hours",
+        "bb_label_minutes": "Minutes",
+        "bb_label_seconds": "Seconds",
         "show_one_click_alternative": true,
         "one_click_product": "twerk-program-lovable",
         "one_click_label": "Twerk program",
         "program_pack_product": "bundle-test",
+        "program_pack_product_secondary": "",
         "discount_code": "",
+        "show_discount_banner": true,
         "discount_promo_text": "Get 60% off all clothing with Full Program!",
         "discount_applied_text": "60% off all clothing applied!",
         "size_chart_config_handle": "size-chart-settings",
