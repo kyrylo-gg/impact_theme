@@ -66,12 +66,12 @@
         "mobile_video": "shopify://files/videos/Original format (1562x1080)_13cab976-b9fa-4c18-993b-a062167994b4.webm",
         "badge_use_theme_starburst": false,
         "badge_image_alt": "Join NASS B-Day Sale promotional badge",
-        "badge_text": "Dance Day Celebration",
-        "heading": "Dance Your Way to Confidence",
-        "price_text": "Join 40,000+ girls mastering twerk with Nastya Nass",
+        "badge_text": "Mother’s Day Celebration",
+        "heading": "GET ALL NASS PROGRAMS AT MOTHER’S DAY PRICES",
+        "price_text": "Get That Booty & Twerk Like Never Before",
         "cta_text": "Get Started",
         "cta_url": "#nass-twerk-offer-block",
-        "deadline_text": "Lifetime access · Any device"
+        "deadline_text": "Offer ends May 12"
       }
     },
     "twerk_lessons_MWt6Ji": {
@@ -612,7 +612,7 @@
       "name": "NASS Countdown Banner",
       "settings": {
         "show_announcement": true,
-        "announcement_highlight": "Limited Dance Day Price:",
+        "announcement_highlight": "Limited Mother’s Day Offer:",
         "announcement_text": "All Twerk Essentials for only $79",
         "marquee_speed": 30,
         "title": "JOIN NASS TODAY",
