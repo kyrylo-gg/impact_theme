@@ -12,6 +12,8 @@
   assign title_yellow = section.settings.title_yellow | default: 'in 3 Months'
   assign subtitle = section.settings.subtitle | default: 'Follow the Soft → Basic → Hard training roadmap — built for real life.'
   assign below_text = section.settings.below_text | default: "If you've tried before but didn't get results, here's why."
+  assign badge_primary = section.settings.badge_primary
+  assign badge_secondary = section.settings.badge_secondary
 -%}
 
 <section class="bt-wrap bt-hero">
@@ -50,6 +52,17 @@
           </div>
         </div>
       </div>
+
+      {%- if badge_primary != blank or badge_secondary != blank -%}
+        <div class="bt-hero__badges" role="group" aria-label="Promotions">
+          {%- if badge_primary != blank -%}
+            <p class="bt-hero__badge bt-hero__badge--yellow">{{ badge_primary | escape }}</p>
+          {%- endif -%}
+          {%- if badge_secondary != blank -%}
+            <p class="bt-hero__badge bt-hero__badge--black">{{ badge_secondary | escape }}</p>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
     </div>
 
     <p class="bt-hero__below">{{ below_text | escape }}</p>
@@ -64,27 +77,104 @@
   @media (min-width: 768px) { .bt-container { max-width: 1184px; } }
 
   .bt-hero__banner { position: relative; overflow: hidden; border-radius: 30px; width: 100%; aspect-ratio: 335 / 560; background: #000; }
-  @media (min-width: 768px) { .bt-hero__banner { aspect-ratio: 1184 / 511; } }
+  @media (min-width: 768px) { .bt-hero__banner { border-radius: 40px; aspect-ratio: 1184 / 511; } }
 
   .bt-hero__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 
   .bt-hero__overlay { position: absolute; inset: 0; background: #000; }
 
-  .bt-hero__content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 28px; }
-  @media (min-width: 768px) { .bt-hero__content { padding: 0; } }
+  .bt-hero__badges {
+    position: absolute;
+    z-index: 3;
+    left: 0;
+    right: 0;
+    top: 28px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 0 16px;
+    box-sizing: border-box;
+    pointer-events: none;
+  }
+  @media (min-width: 768px) {
+    .bt-hero__badges {
+      top: 44px;
+      left: 50%;
+      right: auto;
+      width: auto;
+      max-width: calc(100% - 32px);
+      padding: 0;
+      transform: translateX(-50%);
+      gap: 10px;
+    }
+  }
 
-  .bt-hero__title { margin: 0; font-family: 'Anybody', sans-serif; font-weight: 600; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; line-height: 1.05; font-size: 28px; color: #fff; }
-  @media (min-width: 768px) { .bt-hero__title { font-size: 45px; } }
+  .bt-hero__badge {
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 45px;
+    -webkit-backdrop-filter: blur(50px);
+    backdrop-filter: blur(50px);
+    max-width: 100%;
+    box-sizing: border-box;
+    pointer-events: auto;
+    font-family: Avenir, 'Nunito Sans', system-ui, sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.36px;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .bt-hero__badge--yellow {
+    padding: 8px 14px;
+    background: #FAFF00;
+    color: #000;
+    font-weight: 800;
+  }
+  .bt-hero__badge--black {
+    padding: 8px 14px;
+    background: #000;
+    color: #fff;
+  }
+  @media (min-width: 768px) {
+    .bt-hero__badge {
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: 0.48px;
+      max-width: min(100vw - 48px, 52rem);
+    }
+    .bt-hero__badge--yellow {
+      padding: 10px 20px;
+      font-weight: 900;
+    }
+    .bt-hero__badge--black {
+      padding: 10px 20px;
+      font-weight: 800;
+    }
+  }
+
+  .bt-hero__content { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; text-align: center; padding: 178px 24px 88px; box-sizing: border-box; pointer-events: none; }
+  .bt-hero__content > * { pointer-events: auto; }
+  @media (min-width: 768px) { .bt-hero__content { padding: 170px 90px 100px; justify-content: flex-start; } }
+
+  .bt-hero__title { margin: 0; font-family: 'Anybody', sans-serif; font-weight: 600; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.84px; line-height: 1.05; font-size: 28px; color: #fff; }
+  @media (min-width: 768px) { .bt-hero__title { font-size: 51.5px; letter-spacing: 1.54px; } }
   .bt-hero__title-yellow { color: #FAFF00; font-weight: 900; }
 
   .bt-hero__br-m { display: inline; }
   @media (min-width: 768px) { .bt-hero__br-m { display: none; } }
 
-  .bt-hero__divider { width: 48px; height: 3px; background: #FAFF00; margin: 12px 0; }
-  @media (min-width: 768px) { .bt-hero__divider { display: none; } }
+  .bt-hero__divider { display: none; }
 
-  .bt-hero__subtitle { margin: 8px 0 0; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 16px; color: #fff; max-width: 279px; }
-  @media (min-width: 768px) { .bt-hero__subtitle { font-size: 24px; max-width: none; margin-top: 16px; } }
+  .bt-hero__subtitle { margin: 24px 0 0; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 800; font-size: 16px; letter-spacing: 0.48px; color: #fff; max-width: 287px; line-height: 1.35; }
+  @media (min-width: 768px) { .bt-hero__subtitle { font-size: 25px; font-weight: 800; letter-spacing: 0.75px; max-width: 48rem; margin-top: 28px; } }
 
   .bt-hero__scroll { position: absolute; left: 50%; bottom: 32px; transform: translateX(-50%); pointer-events: none; animation: bt-bounce 1.6s infinite; }
   .bt-hero__scroll-pill { height: 40px; width: 24px; border-radius: 999px; border: 2px solid rgba(255,255,255,0.5); padding: 4px; box-sizing: border-box; display: flex; align-items: flex-start; justify-content: center; }
@@ -110,7 +200,10 @@
     { "type": "text", "id": "title_white_2", "label": "Title white line 2", "default": "Your Body" },
     { "type": "text", "id": "title_yellow", "label": "Title yellow", "default": "in 3 Months" },
     { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Follow the Soft → Basic → Hard training roadmap — built for real life." },
-    { "type": "text", "id": "below_text", "label": "Text below banner", "default": "If you've tried before but didn't get results, here's why." }
+    { "type": "text", "id": "below_text", "label": "Text below banner", "default": "If you've tried before but didn't get results, here's why." },
+    { "type": "header", "content": "Hero badges" },
+    { "type": "text", "id": "badge_primary", "label": "Yellow badge", "default": "Get Free Leggings with a Full Program" },
+    { "type": "text", "id": "badge_secondary", "label": "Black badge", "default": "Mother's Day Special" }
   ],
   "presets": [{ "name": "BT_Hero" }]
 }

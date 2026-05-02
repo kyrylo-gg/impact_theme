@@ -130,6 +130,7 @@
       || templateSuffix === 'twerk_essential'
       || templateSuffix === 'booty_builder'
       || templateSuffix === 'booty-builder';
+    const isBodyTransformationTemplate = templateSuffix === 'body_transformation';
     const skipProgramsStepOnOpen = templateSuffix === 'twerk_essential' || templateSuffix === 'twerk-essential';
     const allowBootyBuilderRuleMode = true;
     const bodyClassName = (typeof document !== 'undefined' && document.body && document.body.className)
@@ -526,6 +527,69 @@
       return bbState.selectedItems.some(function(item) {
         return String(item.productId) === String(productId);
       });
+    }
+
+    function normalizeBbProductId(id) {
+      return String(toNumericId(gidToNum(String(id)) || String(id)) || String(id));
+    }
+
+    function getProgramsStepForBodyTf() {
+      return bbState.steps.find(function(s) { return s && s.isProgramsStep; }) || null;
+    }
+
+    function getStepImmediatelyAfterPrograms() {
+      var steps = bbState.steps || [];
+      for (var i = 0; i < steps.length; i++) {
+        if (steps[i] && steps[i].isProgramsStep) {
+          var next = steps[i + 1];
+          if (next && next.id !== 'review') return next;
+          return null;
+        }
+      }
+      return null;
+    }
+
+    function isSelectedProgramFirstInProgramsCollection() {
+      if (!isBodyTransformationTemplate) return false;
+      var ps = getProgramsStepForBodyTf();
+      if (!ps || !Array.isArray(ps.productIds) || !ps.productIds.length) return false;
+      var firstPid = ps.productIds[0];
+      var firstNorm = normalizeBbProductId(firstPid);
+      if (!firstNorm) return false;
+      var selected = bbState.selectedItems.find(function(item) {
+        return String(item.stepId) === String(ps.id);
+      });
+      if (!selected) return false;
+      return normalizeBbProductId(selected.productId) === firstNorm;
+    }
+
+    function isBodyTransformationPromoSecondStep(stepId) {
+      if (!isBodyTransformationTemplate) return false;
+      var after = getStepImmediatelyAfterPrograms();
+      if (!after || String(after.id) !== String(stepId)) return false;
+      return isSelectedProgramFirstInProgramsCollection();
+    }
+
+    function countSelectedLinesOnStep(stepId) {
+      return bbState.selectedItems.filter(function(item) {
+        return String(item.stepId) === String(stepId);
+      }).length;
+    }
+
+    function isBodyTransformationStep2ShowZeroOnProductCards(stepId) {
+      if (!isBodyTransformationPromoSecondStep(stepId)) return false;
+      return countSelectedLinesOnStep(stepId) === 0;
+    }
+
+    function isBodyTransformationFreeBundleLineForSecondStep(item) {
+      if (!isSelectedProgramFirstInProgramsCollection()) return false;
+      var after = getStepImmediatelyAfterPrograms();
+      if (!after || String(item.stepId) !== String(after.id)) return false;
+      var firstIdx = bbState.selectedItems.findIndex(function(i) {
+        return String(i.stepId) === String(after.id);
+      });
+      if (firstIdx < 0) return false;
+      return bbState.selectedItems.indexOf(item) === firstIdx;
     }
 
     function normalizeForMatch(val) {
@@ -1230,12 +1294,16 @@
         .then(function(r) { return r.json(); })
         .then(function(data) {
           var map = {};
+          var orderedIds = [];
           (data.products || []).forEach(function(raw) {
             // `/products.json` returns prices already in the current presentment currency.
             var internal = productJsonToInternal(raw, selectedCurrency);
-            if (internal && internal.id) map[internal.id] = internal;
+            if (internal && internal.id) {
+              map[internal.id] = internal;
+              orderedIds.push(String(internal.id));
+            }
           });
-          return map;
+          return { map: map, orderedIds: orderedIds };
         });
     }
 
@@ -1320,11 +1388,19 @@
       });
       return Promise.all(promises).then(function(results) {
         var byHandle = {};
-        unique.forEach(function(h,i){ byHandle[h]=results[i]||{}; });
+        var orderedByHandle = {};
+        unique.forEach(function(h, i) {
+          var pack = results[i] || {};
+          var m = pack.map != null ? pack.map : pack;
+          byHandle[h] = m;
+          var ord = pack.orderedIds;
+          orderedByHandle[h] = (Array.isArray(ord) && ord.length) ? ord : Object.keys(m);
+        });
         bbState.steps.forEach(function(step) {
           if (step.id === 'review' || !step.collectionHandle) return;
-          var m = byHandle[step.collectionHandle]||{};
-          step.productIds = Object.keys(m);
+          var m = byHandle[step.collectionHandle] || {};
+          var ordered = orderedByHandle[step.collectionHandle] || Object.keys(m);
+          step.productIds = ordered.filter(function(pid) { return !!m[pid]; });
         });
         Object.keys(byHandle).forEach(function(h) {
           Object.assign(bbState.productsById, byHandle[h]);
@@ -1413,6 +1489,11 @@
         final = getVisualFinalPrice(stepId, price, hasPack);
       }
       if (ruleTarget && ruleTarget.free) {
+        orig = 0;
+        final = 0;
+        hasDiscount = false;
+        compareAt = null;
+      } else if (isBodyTransformationStep2ShowZeroOnProductCards(stepId)) {
         orig = 0;
         final = 0;
         hasDiscount = false;
@@ -1709,6 +1790,7 @@
       if (!p) return { orig: 0, final: 0 };
       var ruleTarget = getRuleTargetByProduct(item.stepId, p);
       if (ruleTarget && ruleTarget.free) return { orig: 0, final: 0 };
+      if (isBodyTransformationFreeBundleLineForSecondStep(item)) return { orig: 0, final: 0 };
       var price = p.priceRange && p.priceRange.minVariantPrice ? parseFloat(p.priceRange.minVariantPrice.amount) : 0;
       var compareAt = p.compareAtPriceRange && p.compareAtPriceRange.minVariantPrice ? parseFloat(p.compareAtPriceRange.minVariantPrice.amount) : null;
       var step = bbState.steps.find(function(s) { return s.id === item.stepId; });
