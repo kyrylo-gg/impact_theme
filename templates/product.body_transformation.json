@@ -623,7 +623,7 @@
           "type": "bundle_step",
           "settings": {
             "title": "Tops",
-            "collection": "bundle-leggings-tops",
+            "collection": "bundle-leggings-tops-copy",
             "is_programs_step": false,
             "program_pack_product": "",
             "program_pack_product_secondary": ""
