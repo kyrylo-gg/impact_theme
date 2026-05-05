@@ -61,6 +61,9 @@
   function init(sectionRoot, config) {
     const shopDomain = config.shopDomain;
     const sectionId = config.sectionId;
+    const knownCustomerEmail = (config && typeof config.customerEmail === 'string' && config.customerEmail.trim())
+      ? config.customerEmail.trim()
+      : '';
     const ctaEl = sectionRoot.querySelector('[data-bb-cta]');
     var wizardEl = document.getElementById('bundle-builder-wizard-' + sectionId);
     if (!wizardEl) wizardEl = sectionRoot.querySelector('.bb-wizard-overlay');
@@ -234,6 +237,53 @@
     const storefrontApiToken = ((config.storefrontApiToken || '').trim() || '568094b7f376083a4b0dc6fee4785741');
     const sizeChartConfigHandle = (config.sizeChartConfigHandle || 'size-chart-settings').trim();
     const sizeChartByProduct = (config && config.sizeChartByProduct && typeof config.sizeChartByProduct === 'object') ? config.sizeChartByProduct : {};
+    var hasCheckoutIntent = false;
+
+    function isValidEmail(email) {
+      if (!email || typeof email !== 'string') return false;
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+    }
+
+    function readEmailFromLearnqQueue() {
+      try {
+        var q = (typeof window !== 'undefined' && Array.isArray(window._learnq)) ? window._learnq : null;
+        if (!q || !q.length) return '';
+        for (var i = q.length - 1; i >= 0; i--) {
+          var row = q[i];
+          if (!Array.isArray(row) || row[0] !== 'identify') continue;
+          var payload = row[1] && typeof row[1] === 'object' ? row[1] : null;
+          if (!payload) continue;
+          var candidate = payload.$email || payload.email || '';
+          if (isValidEmail(candidate)) return String(candidate).trim();
+        }
+      } catch (e) {}
+      return '';
+    }
+
+    function resolveVisitorEmail() {
+      if (isValidEmail(knownCustomerEmail)) return knownCustomerEmail.trim();
+      try {
+        var input = document.querySelector('input[type="email"], input[name="email"], input[name="contact[email]"]');
+        if (input && isValidEmail(input.value)) return String(input.value).trim();
+      } catch (e) {}
+      var fromLearnq = readEmailFromLearnqQueue();
+      if (isValidEmail(fromLearnq)) return fromLearnq;
+      return '';
+    }
+
+    function trackBundleBuilderClosedWithoutPurchase(reason) {
+      try {
+        if (hasCheckoutIntent) return;
+        if (typeof window === 'undefined' || !window.klaviyo || typeof window.klaviyo.track !== 'function') return;
+        var email = resolveVisitorEmail();
+        if (!email) return;
+        window.klaviyo.track('Bundle Builder Closed Without Purchase', {
+          Email: email,
+          email: email,
+          close_reason: reason || 'closed'
+        });
+      } catch (e) {}
+    }
 
     // Resolve display currency with priority:
     // 1) Shopify Markets presentment currency from Liquid (localization.country.currency.iso_code)
@@ -1927,6 +1977,7 @@
         })
         .then(function() {
           bbState.isSubmitting = false;
+          hasCheckoutIntent = true;
           closeWizard();
           var checkoutHref = checkoutUrl;
           if (discountCode && getHasProgramPack()) {
@@ -2546,7 +2597,8 @@
       } catch (e) {}
     }
 
-    function closeWizard() {
+    function closeWizard(options) {
+      var closeOptions = options && typeof options === 'object' ? options : {};
       bbState.isOpen = false;
       wizardEl.classList.add('bb-wizard-overlay--hidden');
       wizardEl.setAttribute('aria-hidden', 'true');
@@ -2554,6 +2606,9 @@
       document.body.classList.remove('bb-wizard-open');
       var modal = sectionRoot.querySelector('.bb-exit-modal');
       if (modal) modal.classList.remove('bb-exit-modal--visible');
+      if (closeOptions.trackAbandon) {
+        trackBundleBuilderClosedWithoutPurchase(closeOptions.reason || 'closed');
+      }
     }
 
     function requestCloseWizard() {
@@ -2561,7 +2616,7 @@
         var modal = sectionRoot.querySelector('.bb-exit-modal');
         if (modal) modal.classList.add('bb-exit-modal--visible');
       } else {
-        closeWizard();
+        closeWizard({ trackAbandon: true, reason: 'empty_cart_close' });
       }
     }
 
@@ -2574,7 +2629,7 @@
         .then(function() {})
         .catch(function() {})
         .then(function() {
-          closeWizard();
+          closeWizard({ trackAbandon: true, reason: 'exit_confirm' });
           showToast('Cart cleared');
         });
     }
