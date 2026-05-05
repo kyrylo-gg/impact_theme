@@ -304,6 +304,7 @@
         };
         window._learnq = window._learnq || [];
         if (Array.isArray(window._learnq)) {
+          window._learnq.push(['identify', { $email: email, email: email }]);
           window._learnq.push(['track', 'Bundle Builder Closed Without Purchase', payload]);
         }
         // In some storefront setups klaviyo.track can remain pending forever.
