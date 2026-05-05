@@ -441,6 +441,7 @@
         discountAppliedText: {{ section.settings.discount_applied_text | default: '60% off all clothing applied!' | json }},
         checkoutUrl: {{ routes.root_url | append: '/' | append: 'checkout' | replace: '//', '/' | json }},
         customerEmail: {{ customer.email | json }},
+        klaviyoCompanyId: "TT4MNz",
         currency: {{ cart.currency | default: shop.currency | json }},
         shopCurrency: {{ shop.currency | json }},
         presentmentCurrency: {{ localization.country.currency.iso_code | json }},

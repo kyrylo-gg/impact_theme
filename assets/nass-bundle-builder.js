@@ -61,6 +61,9 @@
   function init(sectionRoot, config) {
     const shopDomain = config.shopDomain;
     const sectionId = config.sectionId;
+    const klaviyoCompanyId = (config && typeof config.klaviyoCompanyId === 'string' && config.klaviyoCompanyId.trim())
+      ? config.klaviyoCompanyId.trim()
+      : 'TT4MNz';
     const knownCustomerEmail = (config && typeof config.customerEmail === 'string' && config.customerEmail.trim())
       ? config.customerEmail.trim()
       : '';
@@ -238,6 +241,23 @@
     const sizeChartConfigHandle = (config.sizeChartConfigHandle || 'size-chart-settings').trim();
     const sizeChartByProduct = (config && config.sizeChartByProduct && typeof config.sizeChartByProduct === 'object') ? config.sizeChartByProduct : {};
     var hasCheckoutIntent = false;
+
+    function ensureKlaviyoRuntime() {
+      try {
+        if (typeof window === 'undefined' || typeof document === 'undefined') return;
+        window._learnq = window._learnq || [];
+        if (window.klaviyo && typeof window.klaviyo.track === 'function') return;
+        if (!klaviyoCompanyId) return;
+        if (document.querySelector('script[data-bb-klaviyo-loader="1"]')) return;
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=' + encodeURIComponent(klaviyoCompanyId);
+        script.setAttribute('data-bb-klaviyo-loader', '1');
+        document.head.appendChild(script);
+      } catch (e) {}
+    }
+
+    ensureKlaviyoRuntime();
 
     function isValidEmail(email) {
       if (!email || typeof email !== 'string') return false;
