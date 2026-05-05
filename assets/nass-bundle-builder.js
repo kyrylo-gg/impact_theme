@@ -274,14 +274,22 @@
     function trackBundleBuilderClosedWithoutPurchase(reason) {
       try {
         if (hasCheckoutIntent) return;
-        if (typeof window === 'undefined' || !window.klaviyo || typeof window.klaviyo.track !== 'function') return;
+        if (typeof window === 'undefined') return;
         var email = resolveVisitorEmail();
         if (!email) return;
-        window.klaviyo.track('Bundle Builder Closed Without Purchase', {
+        var payload = {
           Email: email,
           email: email,
           close_reason: reason || 'closed'
-        });
+        };
+        if (window.klaviyo && typeof window.klaviyo.track === 'function') {
+          window.klaviyo.track('Bundle Builder Closed Without Purchase', payload);
+          return;
+        }
+        window._learnq = window._learnq || [];
+        if (Array.isArray(window._learnq)) {
+          window._learnq.push(['track', 'Bundle Builder Closed Without Purchase', payload]);
+        }
       } catch (e) {}
     }
 
