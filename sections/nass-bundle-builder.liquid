@@ -1993,7 +1993,12 @@
     flex-direction: column;
     gap: 4px;
     position: relative;
+    z-index: 2;
+    background: var(--color-background, #fff);
     min-height: 0;
+    /* Safari: keep footer controls on a stable paint layer */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
   }
 
   .nass-bundle-builder .bb-wizard-footer-total {
@@ -2120,6 +2125,8 @@
     gap: 8px;
     justify-content: space-between;
     flex-shrink: 0;
+    position: relative;
+    z-index: 1;
   }
 
   .nass-bundle-builder .bb-wizard-footer-secure-slot {
@@ -2187,6 +2194,11 @@
     background: var(--color-background, #fff);
     color: var(--color-foreground, #000);
     transition: background 0.2s ease;
+    -webkit-appearance: none;
+    appearance: none;
+    -webkit-text-fill-color: currentColor;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
 
   .nass-bundle-builder .bb-wizard-btn:hover:not(:disabled) {
