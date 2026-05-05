@@ -302,13 +302,14 @@
           email: email,
           close_reason: reason || 'closed'
         };
-        if (window.klaviyo && typeof window.klaviyo.track === 'function') {
-          window.klaviyo.track('Bundle Builder Closed Without Purchase', payload);
-          return;
-        }
         window._learnq = window._learnq || [];
         if (Array.isArray(window._learnq)) {
           window._learnq.push(['track', 'Bundle Builder Closed Without Purchase', payload]);
+        }
+        // In some storefront setups klaviyo.track can remain pending forever.
+        // Keep it as best-effort secondary path without relying on its completion.
+        if (window.klaviyo && typeof window.klaviyo.track === 'function') {
+          try { window.klaviyo.track('Bundle Builder Closed Without Purchase', payload); } catch (_) {}
         }
       } catch (e) {}
     }
