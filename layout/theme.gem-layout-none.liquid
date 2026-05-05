@@ -65,6 +65,10 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
     <script type="module" src="{{ 'custom.js' | asset_url }}"></script>
     <script type="module" src="{{ 'sections.js' | asset_url }}"></script>
 
+    <script>
+      window._learnq = window._learnq || [];
+    </script>
+    <script async src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=TT4MNz"></script>
     {{ content_for_header }}
 
     {{- 'theme.css' | asset_url | stylesheet_tag: preload: true -}}

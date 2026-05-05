@@ -7,7 +7,12 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    {%- render 'header-scripts.zipifypages', renderctx: 'lsctn' -%}{{ content_for_header }}
+    {%- render 'header-scripts.zipifypages', renderctx: 'lsctn' -%}
+    <script>
+      window._learnq = window._learnq || [];
+    </script>
+    <script async src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=TT4MNz"></script>
+    {{ content_for_header }}
   </head>
   <body>
     {{ content_for_layout }} 
