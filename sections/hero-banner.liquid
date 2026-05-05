@@ -80,6 +80,34 @@
   </div>
 </section>
 
+{% if template.name == 'product' and template.suffix == 'nass-fans-ab' %}
+  <script>
+    (function() {
+      function openBundleBuilderWithRetry() {
+        var attempts = 0;
+        function tryOpen() {
+          if (window.NassBundleBuilder && typeof window.NassBundleBuilder.openWizard === 'function') {
+            window.NassBundleBuilder.openWizard();
+            return;
+          }
+          attempts += 1;
+          if (attempts < 30) setTimeout(tryOpen, 100);
+        }
+        tryOpen();
+      }
+
+      document.addEventListener('click', function(event) {
+        var cta = event.target.closest('.hero-banner-section__cta');
+        if (!cta) return;
+        var href = (cta.getAttribute('href') || '').trim();
+        if (href !== '#nass-bundle-builder') return;
+        event.preventDefault();
+        openBundleBuilderWithRetry();
+      });
+    })();
+  </script>
+{% endif %}
+
 {% stylesheet %}
   /* Keep entire section below sticky header (header uses z-index: 10). */
   .shopify-section.hero-banner-section-wrapper {

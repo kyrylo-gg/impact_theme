@@ -300,7 +300,8 @@
         var payload = {
           Email: email,
           email: email,
-          close_reason: reason || 'closed'
+          close_reason: reason || 'closed',
+          value: 1
         };
         window._learnq = window._learnq || [];
         if (Array.isArray(window._learnq)) {
