@@ -625,6 +625,7 @@
         },
         "bundle_step_fdXmUM": {
           "type": "bundle_step",
+          "disabled": true,
           "settings": {
             "title": "Select programs",
             "collection": "hips-a-copy-2",
