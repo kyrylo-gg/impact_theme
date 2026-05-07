@@ -828,6 +828,30 @@
         "footer_right": "Lifetime access"
       }
     },
+    "rich_text_gdMVYG": {
+      "type": "rich-text",
+      "blocks": {
+        "richtext_b8Kj9k": {
+          "type": "richtext",
+          "settings": {
+            "seo_optimization": false,
+            "content": "<h1>Body Transformation Program Built for Real Life: Not Perfect Weeks</h1><p>Most women do not quit fitness because they are lazy. They quit because many workout plans demand too much intensity before the body is physically ready for it.</p><p>This body transformation program was created around a different idea: progression before pressure.</p><p>Instead of starting with exhausting HIIT sessions or aggressive “shred” workouts, the system follows a 12-week roadmap designed to help women rebuild strength, improve conditioning, and create visible body changes step by step. The structure is divided into three progressive levels:</p><ol><li><strong>Soft (Weeks 1–4)</strong> — foundation, activation, posture, core and glute control.</li><li><strong>Basic (Weeks 5–8)</strong> — sculpt-focused strength training with squats, lunges, step-ups, and lower-body conditioning.</li><li><strong>Hard (Weeks 9–12)</strong> — higher-intensity burn phase focused on conditioning and fat-loss acceleration.</li></ol><p>This gradual progression helps women avoid the common cycle of soreness, burnout, skipped workouts, and restarting every few weeks.</p><h2>Why Random Online Workouts Often Stop Working</h2><p>A major problem with many fitness apps and YouTube routines is the lack of progression. Women jump between random workouts without building stability, movement control, or endurance first.</p><p>This body transformation workout plan follows a structured system where every phase prepares the body for the next level. Early workouts focus on activation drills, low-impact movement patterns, glute engagement, mobility work, and core stability. Instead of “destroying calories,” the goal is to improve how the body moves and recovers.</p><p>As participants progress into the Basic phase, the training becomes more sculpt-focused:</p><ul><li>lower body strength circuits;</li><li>controlled conditioning;</li><li>core finishers;</li><li>and posture-focused movement patterns.</li></ul><p>Only after building this foundation does the program move into more advanced conditioning work during the final phase.</p><p>That structure is especially important for women who want realistic results without feeling intimidated by extreme fitness culture.</p><h2>A 12-Week System Designed Around Female Physiology</h2><p>Unlike generic fat-loss challenges, this 12 week body transformation program includes built-in flexibility for real-life energy fluctuations.</p><p>The Plan B Flow system gives women two workout options on difficult days:</p><ul><li>a full session;</li><li>or a lower-impact low-energy version that still keeps momentum going.</li></ul><p>For example, a regular lower-body workout may include:</p><ul><li>strength blocks;</li><li>conditioning intervals;</li><li>and core finishers.</li></ul><p>while the low-energy version shifts toward:</p><ul><li>gentle activation;</li><li>low-impact strength work;</li><li>mobility exercises;</li><li>breathing;</li><li>and stretching.</li></ul><p>This approach helps women stay consistent during:</p><ul><li>PMS;</li><li>stressful work periods;</li><li>recovery weeks;</li><li>poor sleep;</li><li>or low-energy days.</li></ul><p>Instead of missing an entire week and feeling forced to “start over,” participants continue progressing at a realistic pace.</p><h2>More Than Weight Loss: Visible Tone, Conditioning, and Confidence</h2><p>Many women are not looking to become bodybuilders. They want:</p><ul><li>a tighter waist;</li><li>stronger glutes;</li><li>better posture;</li><li>more energy;</li><li>and visible body tone that feels sustainable.</li></ul><p>That is why this weight loss and toning program combines strength-based sculpting with gradual conditioning instead of relying only on cardio.</p><p>The workouts focus heavily on:</p><ul><li>glute activation;</li><li>lower-body strength;</li><li>core engagement;</li><li>mobility;</li><li>and progressive endurance development.</li></ul><p>This combination helps improve overall body composition while supporting long-term consistency instead of temporary crash results.</p><p>The philosophy behind the program is simple: <strong>Build first. Burn faster.</strong></p><p>Women who improve movement quality and foundational strength first are often able to train more consistently and safely during later fat-loss phases.</p><h2>Created for Women Over 35 Who Want Sustainable Progress</h2><p>Recovery, stress, hormonal changes, and joint sensitivity become increasingly important with age. Many programs ignore that reality completely.</p><p>This body transformation program for women over 35 was designed specifically for women who want visible results without punishing workouts that feel impossible to maintain.</p><p>The low-impact Soft phase helps participants rebuild confidence gradually through:</p><ul><li>controlled movement;</li><li>activation work;</li><li>mobility;</li><li>and foundational conditioning.</li></ul><p>The later phases then introduce more advanced sculpting and burn-focused training only after the body is prepared for it.</p><p>Rather than promoting unrealistic “perfect body in 30 days” messaging, the program focuses on:</p><ul><li>structured progression;</li><li>sustainable conditioning;</li><li>realistic body transformation;</li><li>and consistency that fits into real life.</li></ul><p>For many women, that becomes the difference between another temporary challenge and a fitness system they can actually maintain long term.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "richtext_b8Kj9k"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "full_width": true,
+        "content_width": "small",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
     "zp-product-footer-content": {
       "type": "product-footer-content-zipifypages",
       "disabled": true,
@@ -878,6 +902,7 @@
     "bt_what_women_say",
     "bt_faq",
     "bt_start_where_you_are",
+    "rich_text_gdMVYG",
     "zp-product-footer-content",
     "custom_quick_add_9LXX9w"
   ]
