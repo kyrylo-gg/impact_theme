@@ -291,18 +291,57 @@
       return '';
     }
 
+    function getAbandonMetricContext() {
+      var currency = getDisplayCurrency();
+      var total = 0;
+      if (bbState.selectedItems && bbState.selectedItems.length > 0) {
+        total = getSummaryTotals(currency).total || 0;
+      } else if (bbState.cartData && bbState.cartData.item_count > 0) {
+        currency = bbState.cartData.currency || currency;
+        total = (bbState.cartData.total_price || 0) / 100;
+      }
+
+      var items = (bbState.selectedItems || []).map(function(item) {
+        var product = bbState.productsById[item.productId] || null;
+        var variants = (product && product.variants && product.variants.nodes) || [];
+        var variant = variants.find(function(v) { return String(v.id) === String(item.variantId); }) || variants[0] || null;
+        var step = (bbState.steps || []).find(function(s) { return String(s.id) === String(item.stepId); }) || null;
+        return {
+          step_id: item.stepId || '',
+          step_title: step && step.title ? step.title : '',
+          product_id: item.productId || '',
+          product_title: product && product.title ? product.title : '',
+          variant_id: item.variantId || '',
+          variant_title: variant && variant.title ? variant.title : '',
+          quantity: item.quantity || 1
+        };
+      });
+
+      return {
+        total: Number(total) || 0,
+        currency: currency || '',
+        items: items,
+        page_url: (typeof window !== 'undefined' && window.location && window.location.href) ? window.location.href : ''
+      };
+    }
+
     function trackBundleBuilderClosedWithoutPurchase(reason) {
       try {
         if (hasCheckoutIntent) return;
         if (typeof window === 'undefined') return;
         var email = resolveVisitorEmail();
         if (!email) return;
+        var metricContext = getAbandonMetricContext();
         var payload = {
           Email: email,
           email: email,
           close_reason: reason || 'closed',
-          value: 1,
-          $value: 1
+          page_url: metricContext.page_url,
+          items: metricContext.items,
+          currency: metricContext.currency,
+          Value: metricContext.total,
+          value: metricContext.total,
+          $value: metricContext.total
         };
         window._learnq = window._learnq || [];
         if (Array.isArray(window._learnq)) {
