@@ -12,7 +12,7 @@
 
 <section class="bt-wrap bt-path">
   <div class="bt-container bt-path__container">
-    <h2 class="bt-path__title">{{ title | escape }}</h2>
+    <div class="bt-path__title">{{ title | escape }}</div>
     <div class="bt-path__divider" aria-hidden="true"></div>
     <p class="bt-path__subtitle">{{ subtitle | escape }}</p>
 
@@ -31,7 +31,7 @@
           </div>
         </div>
         <div class="bt-path__full-body">
-          <h3 class="bt-path__full-title">{{ section.settings.full_title | escape }}</h3>
+          <div class="bt-path__full-title">{{ section.settings.full_title | escape }}</div>
           <p class="bt-path__full-sub">{{ section.settings.full_subtitle | escape }}</p>
           <div class="bt-path__price-row">
             <span class="bt-path__price-now">{{ section.settings.full_price | escape }}</span>

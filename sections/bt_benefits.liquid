@@ -7,7 +7,7 @@
   assign title_1 = section.settings.title_1 | default: 'More Than Weight Loss. A Better Way'
   assign title_2 = section.settings.title_2 | default: 'to Feel Every Day'
   assign title_1_escaped = title_1 | escape
-  assign title_1_formatted = title_1_escaped | replace: 'More Than ', 'More Than<br class="bt-ben__br-m-mid-1">' | replace: 'Weight Loss. ', 'Weight Loss.<br class="bt-ben__br-m-mid-2">' | replace: '. ', '.<br class="bt-ben__br-d-mid">'
+  assign title_1_formatted = title_1_escaped | replace: 'More Than ', 'More Than <br class="bt-ben__br-m-mid-1">' | replace: 'Weight Loss. ', 'Weight Loss. <br class="bt-ben__br-m-mid-2">' | replace: '. ', '. <br class="bt-ben__br-d-mid">'
 
   assign img_1 = section.settings.img_1
   assign img_2 = section.settings.img_2
@@ -20,11 +20,11 @@
 
 <section class="bt-wrap bt-ben">
   <div class="bt-container bt-ben__container">
-    <h2 class="bt-ben__title">
+    <div class="bt-ben__title">
       <span class="bt-ben__w">{{ title_1_formatted }}</span>
       <br class="bt-ben__br-m">
       <span class="bt-ben__b"><br class="bt-ben__br-d"> {{ title_2 | escape }}</span>
-    </h2>
+    </div>
 
     <div class="bt-ben__desktop">
       <div class="bt-ben__desk-grid">

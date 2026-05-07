@@ -24,7 +24,7 @@
 
 <section class="bt-wrap bt-why">
   <div class="bt-container bt-why__container">
-    <h2 class="bt-why__title">
+    <div class="bt-why__title">
       {%- if t1_b != blank and t1_c != blank -%}
         <span class="bt-why__title-w">{{ t1_a | escape }} </span><br class="bt-why__br-m">
         <span class="bt-why__title-w">“{{ t1_b | escape }}” </span><br class="bt-why__br-m">
@@ -39,7 +39,7 @@
       {%- else -%}
         <span class="bt-why__title-b">{{ title_2 | escape }}</span>
       {%- endif -%}
-    </h2>
+    </div>
     <div class="bt-why__divider" aria-hidden="true"></div>
 
     <div class="bt-why__card">

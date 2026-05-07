@@ -24,14 +24,14 @@
 
 <section class="bt-wrap bt-nr2" data-bt-nr2>
   <div class="bt-container bt-nr2__container">
-    <h2 class="bt-nr2__title">
+    <div class="bt-nr2__title">
       <span class="bt-nr2__title-top">
         <span class="bt-nr2__title-top1">{{ title_top_first | escape }}</span>
         {%- if title_top_rest != blank -%}<br class="bt-nr2__title-br-m">{%- endif -%}
         {%- if title_top_rest != blank -%}<span class="bt-nr2__title-top2"> {{ title_top_rest | escape }}</span>{%- endif -%}
       </span><br>
       <span class="bt-nr2__title-accent">System</span>
-    </h2>
+    </div>
     <div class="bt-nr2__divider" aria-hidden="true"></div>
     <p class="bt-nr2__subtitle">{{ subtitle | escape | newline_to_br }}</p>
 

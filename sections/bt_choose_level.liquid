@@ -12,10 +12,10 @@
 
 <section class="bt-wrap bt-cl" data-bt-cl>
   <div class="bt-container bt-cl__container">
-    <h2 class="bt-cl__title">
+    <div class="bt-cl__title">
       <span class="bt-cl__w">{{ title_1 | escape }}</span><br>
       <span class="bt-cl__b">{{ title_2 | escape }}</span>
-    </h2>
+    </div>
 
     <p class="bt-cl__subtitle">{{ subtitle | escape }}</p>
 
@@ -31,10 +31,10 @@
           </div>
 
           <div class="bt-cl__body">
-            <h3 class="bt-cl__card-title">
+            <div class="bt-cl__card-title">
               <span class="bt-cl__card-title-main">{{ block.settings.title | escape }}</span>
               <span class="bt-cl__card-title-sub">{{ block.settings.subtitle | escape }}</span>
-            </h3>
+            </div>
 
             <div class="bt-cl__lines">
               <p class="bt-cl__line"><strong>Best for: </strong><span>{{ block.settings.best_for | escape }}</span></p>
