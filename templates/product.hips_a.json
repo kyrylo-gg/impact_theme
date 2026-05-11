@@ -613,19 +613,8 @@
     "nass_bundle_builder_giBqBr": {
       "type": "nass-bundle-builder",
       "blocks": {
-        "bundle_step_9dW7JJ": {
-          "type": "bundle_step",
-          "settings": {
-            "title": "Select programs",
-            "collection": "hips-a",
-            "is_programs_step": true,
-            "program_pack_product": "vip-bundle",
-            "program_pack_product_secondary": "all-in-one-bundle"
-          }
-        },
         "bundle_step_fdXmUM": {
           "type": "bundle_step",
-          "disabled": true,
           "settings": {
             "title": "Select programs",
             "collection": "hips-a-copy-2",
@@ -686,7 +675,6 @@
         }
       },
       "block_order": [
-        "bundle_step_9dW7JJ",
         "bundle_step_fdXmUM",
         "bundle_step_BU6nRH",
         "bundle_step_JDKCWw",
