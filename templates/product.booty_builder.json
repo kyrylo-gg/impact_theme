@@ -737,53 +737,24 @@
             "program_pack_product_secondary": "all-in-one-bundle"
           }
         },
-        "bundle_step_bb96UU": {
-          "type": "bundle_step",
+        "extra_step_CbpKAM": {
+          "type": "extra_step",
           "settings": {
-            "title": "Workout Equipment",
-            "collection": "bundle-equipment-copy",
-            "is_programs_step": false,
-            "program_pack_product": "",
-            "program_pack_product_secondary": ""
+            "title": "",
+            "collection": ""
           }
         },
-        "bundle_step_r34gCq": {
-          "type": "bundle_step",
-          "disabled": true,
+        "extra_step_LYfDj4": {
+          "type": "extra_step",
           "settings": {
-            "title": "Choose twerk Essentials",
-            "collection": "bundle-2a",
-            "is_programs_step": false,
-            "program_pack_product": "",
-            "program_pack_product_secondary": ""
+            "title": "",
+            "collection": ""
           }
         },
         "bundle_step_KMpd7k": {
           "type": "bundle_step",
           "settings": {
             "title": "Add  Booty Shorts",
-            "collection": "bundle-swim-shorts",
-            "is_programs_step": false,
-            "program_pack_product": "",
-            "program_pack_product_secondary": ""
-          }
-        },
-        "bundle_step_Dh9wMj": {
-          "type": "bundle_step",
-          "disabled": true,
-          "settings": {
-            "title": "Choose Booty Essentials",
-            "collection": "bundle-2b",
-            "is_programs_step": false,
-            "program_pack_product": "",
-            "program_pack_product_secondary": ""
-          }
-        },
-        "bundle_step_7y3j3a": {
-          "type": "bundle_step",
-          "disabled": true,
-          "settings": {
-            "title": "Add Booty Shorts",
             "collection": "bundle-swim-shorts",
             "is_programs_step": false,
             "program_pack_product": "",
@@ -810,17 +781,6 @@
             "program_pack_product_secondary": ""
           }
         },
-        "step_swimshorts": {
-          "type": "bundle_step",
-          "disabled": true,
-          "settings": {
-            "title": "Add Booty shorts",
-            "collection": "bundle-swim-shorts",
-            "is_programs_step": false,
-            "program_pack_product": "",
-            "program_pack_product_secondary": ""
-          }
-        },
         "step_tops": {
           "type": "bundle_step",
           "settings": {
@@ -830,19 +790,27 @@
             "program_pack_product": "",
             "program_pack_product_secondary": ""
           }
+        },
+        "bundle_step_bb96UU": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "Workout Equipment",
+            "collection": "bundle-equipment-copy",
+            "is_programs_step": false,
+            "program_pack_product": "",
+            "program_pack_product_secondary": ""
+          }
         }
       },
       "block_order": [
         "step_programs",
-        "bundle_step_bb96UU",
-        "bundle_step_r34gCq",
+        "extra_step_CbpKAM",
+        "extra_step_LYfDj4",
         "bundle_step_KMpd7k",
-        "bundle_step_Dh9wMj",
-        "bundle_step_7y3j3a",
         "step_shorts",
         "step_leggings",
-        "step_swimshorts",
-        "step_tops"
+        "step_tops",
+        "bundle_step_bb96UU"
       ],
       "settings": {
         "image_1": "shopify://shop_images/Frame_7-6.png",
@@ -852,6 +820,7 @@
         "bb_title_prefix": "GET THE BOOTY.",
         "bb_title_accent": "OWN THE SUMMER.",
         "bb_description": "Mix programs, shorts, and tops. Get 60% off all clothing when you purchase the VIP Bundle or All-In-One Bundles",
+        "bb_badge_pill_text": "Save up to 82%",
         "bb_promo_banner_text": "60% OFF ALL CLOTHING / with VIP  or All-In One Bundle purchase",
         "bb_show_countdown": false,
         "bb_countdown_mode": "daily_kyiv_10am",
