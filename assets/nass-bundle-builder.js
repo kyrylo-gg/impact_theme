@@ -178,7 +178,7 @@
       clear: routesRoot + 'cart/clear.js'
     };
     var configSteps = Array.isArray(config.steps) ? config.steps : [];
-    var EXTRA_STEP_FREE_ITEMS_LIMIT = 2;
+    var EXTRA_STEP_FREE_ITEMS_LIMIT = 1;
     var stepsFromConfig = configSteps.map(function(s) {
       return {
         id: String(s.id),
@@ -2044,15 +2044,18 @@
     function getItemOrigAndFinal(item, hasPack) {
       var p = bbState.productsById[item.productId];
       if (!p) return { orig: 0, final: 0 };
+      var price = p.priceRange && p.priceRange.minVariantPrice ? parseFloat(p.priceRange.minVariantPrice.amount) : 0;
+      var compareAt = p.compareAtPriceRange && p.compareAtPriceRange.minVariantPrice ? parseFloat(p.compareAtPriceRange.minVariantPrice.amount) : null;
       var ruleTarget = getRuleTargetByProduct(item.stepId, p);
       if (ruleTarget && ruleTarget.free) return { orig: 0, final: 0 };
       if (isBodyTransformationFreeBundleLineForSecondStep(item)) return { orig: 0, final: 0 };
       if (isExtraStep(item.stepId) && hasSelectedProgramPackInProgramsStep()) {
         var extraFreeIds = getFreeExtraStepProductIds();
-        if (extraFreeIds[String(item.productId)]) return { orig: 0, final: 0 };
+        if (extraFreeIds[String(item.productId)]) {
+          var extraStepOrig = (compareAt != null && compareAt > price) ? compareAt : price;
+          return { orig: extraStepOrig, final: 0 };
+        }
       }
-      var price = p.priceRange && p.priceRange.minVariantPrice ? parseFloat(p.priceRange.minVariantPrice.amount) : 0;
-      var compareAt = p.compareAtPriceRange && p.compareAtPriceRange.minVariantPrice ? parseFloat(p.compareAtPriceRange.minVariantPrice.amount) : null;
       var step = bbState.steps.find(function(s) { return s.id === item.stepId; });
       var isProgramsStep = step && step.isProgramsStep;
       var orig, final;
