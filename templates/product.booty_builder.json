@@ -740,15 +740,15 @@
         "extra_step_CbpKAM": {
           "type": "extra_step",
           "settings": {
-            "title": "",
-            "collection": ""
+            "title": "Select Free Shorts",
+            "collection": "biker-shorts"
           }
         },
         "extra_step_LYfDj4": {
           "type": "extra_step",
           "settings": {
-            "title": "",
-            "collection": ""
+            "title": "select free top",
+            "collection": "halter-tops"
           }
         },
         "bundle_step_KMpd7k": {
