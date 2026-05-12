@@ -623,6 +623,20 @@
             "program_pack_product_secondary": "all-in-one-bundle"
           }
         },
+        "extra_step_rn7KCk": {
+          "type": "extra_step",
+          "settings": {
+            "title": "select free shorts",
+            "collection": "biker-shorts"
+          }
+        },
+        "extra_step_jGUeVy": {
+          "type": "extra_step",
+          "settings": {
+            "title": "select free top",
+            "collection": "halter-tops"
+          }
+        },
         "bundle_step_BU6nRH": {
           "type": "bundle_step",
           "settings": {
@@ -676,6 +690,8 @@
       },
       "block_order": [
         "bundle_step_fdXmUM",
+        "extra_step_rn7KCk",
+        "extra_step_jGUeVy",
         "bundle_step_BU6nRH",
         "bundle_step_JDKCWw",
         "bundle_step_Nr4GH8",
@@ -688,6 +704,7 @@
         "bb_title_prefix": "BUILD YOUR",
         "bb_title_accent": "PERFECT BOOTY!",
         "bb_description": "Mix programs, shorts, and tops. Get 60% off all clothing when you add the 4 Programs Bundle.",
+        "bb_badge_pill_text": "Save up to 82%",
         "bb_promo_banner_text": "60% OFF ALL CLOTHING / with Program Pack purchase",
         "bb_show_countdown": true,
         "bb_countdown_mode": "daily_kyiv_10am",
