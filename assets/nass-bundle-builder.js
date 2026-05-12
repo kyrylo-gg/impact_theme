@@ -2387,16 +2387,42 @@
       if (!handle) return 'waist-hip';
       var lower = (handle || '').toLowerCase();
       if (lower.indexOf('top') >= 0 || lower.indexOf('bra') >= 0 || lower.indexOf('longtop') >= 0) return 'chest';
+      if (lower.indexOf('halter') >= 0 || lower.indexOf('bust') >= 0 || lower.indexOf('shirt') >= 0) return 'chest';
       return 'waist-hip';
+    }
+
+    /** Parse a size cell like "39-40", "39 – 40", or "32". Hyphens between numbers must not become unary minus ("39-40" is not 39 and -40). */
+    function parseCellRange(cell) {
+      var s = String(cell || '').replace(/\u00a0/g, ' ').replace(/,/g, '.').trim();
+      if (!s) return null;
+      var nums = s.match(/\d+(?:\.\d+)?/g);
+      if (!nums || !nums.length) return null;
+      var parsed = nums.map(function(n) { return parseFloat(n); }).filter(function(x) { return !isNaN(x); });
+      if (!parsed.length) return null;
+      if (parsed.length === 1) return { min: parsed[0], max: parsed[0] };
+      return { min: Math.min.apply(null, parsed), max: Math.max.apply(null, parsed) };
+    }
+
+    function tableMedianDataMagnitude(tableData) {
+      if (!tableData || tableData.length < 2) return 0;
+      var mids = [];
+      for (var r = 1; r < tableData.length; r++) {
+        for (var c = 1; c < tableData[r].length; c++) {
+          var pr = parseCellRange(tableData[r][c]);
+          if (pr) mids.push((pr.min + pr.max) * 0.5);
+        }
+      }
+      if (!mids.length) return 0;
+      mids.sort(function(a, b) { return a - b; });
+      return mids[Math.floor(mids.length / 2)];
     }
 
     function parseSizeChartHTML(html) {
       var parser = new DOMParser();
       var doc = parser.parseFromString(html || '', 'text/html');
       var tables = doc.querySelectorAll('table');
-      var inchTable = [];
-      var cmTable = [];
-      tables.forEach(function(table, idx) {
+      var list = [];
+      tables.forEach(function(table) {
         var rows = table.querySelectorAll('tr');
         var tableData = [];
         rows.forEach(function(row) {
@@ -2405,7 +2431,35 @@
           cells.forEach(function(cell) { rowData.push((cell.textContent || '').trim()); });
           if (rowData.length) tableData.push(rowData);
         });
-        if (idx === 0) inchTable = tableData; else cmTable = tableData;
+        if (tableData.length) list.push(tableData);
+      });
+      var inchTable = [];
+      var cmTable = [];
+      if (list.length === 0) return { inchTable: inchTable, cmTable: cmTable };
+      if (list.length === 1) {
+        inchTable = list[0];
+        return { inchTable: inchTable, cmTable: cmTable };
+      }
+      if (list.length === 2) {
+        var m0 = tableMedianDataMagnitude(list[0]);
+        var m1 = tableMedianDataMagnitude(list[1]);
+        if (m0 > 0 && m1 > 0 && Math.abs(m0 - m1) > 1) {
+          if (m0 < m1) {
+            inchTable = list[0];
+            cmTable = list[1];
+          } else {
+            inchTable = list[1];
+            cmTable = list[0];
+          }
+        } else {
+          inchTable = list[0];
+          cmTable = list[1];
+        }
+        return { inchTable: inchTable, cmTable: cmTable };
+      }
+      list.forEach(function(tableData, idx) {
+        if (idx === 0) inchTable = tableData;
+        else if (idx === 1) cmTable = tableData;
       });
       return { inchTable: inchTable, cmTable: cmTable };
     }
@@ -2618,21 +2672,14 @@
       var hipVal = parseFloat((scInputs && scInputs.querySelector('[data-bb-sc-field="hip"]')) ? scInputs.querySelector('[data-bb-sc-field="hip"]').value : '') || 0;
       var chestVal = parseFloat((scInputs && scInputs.querySelector('[data-bb-sc-field="chest"]')) ? scInputs.querySelector('[data-bb-sc-field="chest"]').value : '') || 0;
       var headers = (table[0] || []).slice(1);
-      function findRowByKeyword(keyword) {
+      function findRowByKeyword(keyword, minRow) {
+        var start = typeof minRow === 'number' ? minRow : 1;
         var kw = String(keyword || '').toLowerCase();
-        for (var i = 1; i < table.length; i++) {
+        for (var i = start; i < table.length; i++) {
           var label = String((table[i] && table[i][0]) || '').toLowerCase();
           if (label.indexOf(kw) >= 0) return table[i];
         }
         return null;
-      }
-      function parseCellRange(cell) {
-        var nums = String(cell || '').replace(',', '.').match(/-?\d+(?:\.\d+)?/g);
-        if (!nums || !nums.length) return null;
-        var parsed = nums.map(function(n) { return parseFloat(n); }).filter(function(n) { return !isNaN(n); });
-        if (!parsed.length) return null;
-        if (parsed.length === 1) return { min: parsed[0], max: parsed[0] };
-        return { min: Math.min.apply(null, parsed), max: Math.max.apply(null, parsed) };
       }
       function findColumnIndexForValue(row, value) {
         if (!row) return -1;
@@ -2656,7 +2703,7 @@
         return -1;
       }
       if (sizeChartState.measurementType === 'chest') {
-        var chestRow = findRowByKeyword('chest');
+        var chestRow = findRowByKeyword('chest', 1) || findRowByKeyword('bust', 1) || findRowByKeyword('chest', 0) || findRowByKeyword('bust', 0);
         var chestIdx = findColumnIndexForValue(chestRow, chestVal);
         if (chestIdx < 0 || !headers[chestIdx]) { showSizeChartResult('error', null, MSG.out_of_bounds); return; }
         showSizeChartResult('success', headers[chestIdx], '');
