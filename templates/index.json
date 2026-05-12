@@ -61,8 +61,8 @@
         "image_aEp4BX": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Banner_3_Desk_98f1f40c-a43a-4214-b4a6-6ab228aaa6d3.png",
-            "mobile_image": "shopify://shop_images/Banner_3_Mobile_f344cbe6-d639-4d1b-89a6-68bd90ef49de.png",
+            "image": "shopify://shop_images/Banner_3_Desk_bdd0a10d-d522-468c-ac24-32a15369b4eb.png",
+            "mobile_image": "shopify://shop_images/Banner_3_Mobile_98015f9c-1f63-4175-a455-8e2852b43f0d.png",
             "content_max_width": 780,
             "mobile_text_position": "place-self-end-start text-start",
             "desktop_text_position": "sm:place-self-end-start sm:text-start",
