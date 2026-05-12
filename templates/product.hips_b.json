@@ -637,16 +637,6 @@
             "collection": "halter-tops"
           }
         },
-        "bundle_step_CmaekB": {
-          "type": "bundle_step",
-          "settings": {
-            "title": "add equipment",
-            "collection": "bundle-equipment-copy",
-            "is_programs_step": false,
-            "program_pack_product": "",
-            "program_pack_product_secondary": ""
-          }
-        },
         "bundle_step_YmxnyE": {
           "type": "bundle_step",
           "settings": {
@@ -686,17 +676,27 @@
             "program_pack_product": "",
             "program_pack_product_secondary": ""
           }
+        },
+        "bundle_step_CmaekB": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "add equipment",
+            "collection": "bundle-equipment-copy",
+            "is_programs_step": false,
+            "program_pack_product": "",
+            "program_pack_product_secondary": ""
+          }
         }
       },
       "block_order": [
         "bundle_step_9JpWYp",
         "extra_step_LExAnB",
         "extra_step_4fnBTd",
-        "bundle_step_CmaekB",
         "bundle_step_YmxnyE",
         "bundle_step_LqwfL9",
         "bundle_step_xUpX8h",
-        "bundle_step_nfPhdr"
+        "bundle_step_nfPhdr",
+        "bundle_step_CmaekB"
       ],
       "name": "Bundle Builder",
       "settings": {
