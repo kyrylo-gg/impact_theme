@@ -2449,10 +2449,23 @@
       scCalculator.style.display = visible ? '' : 'none';
     }
 
+    function getLocalSizeChartRef(productId) {
+      var k = String(productId || '');
+      var n = String(gidToNum(k) || toNumericId(k) || '');
+      if (sizeChartByProduct[k]) return sizeChartByProduct[k];
+      if (n && sizeChartByProduct[n]) return sizeChartByProduct[n];
+      for (var key in sizeChartByProduct) {
+        if (!Object.prototype.hasOwnProperty.call(sizeChartByProduct, key)) continue;
+        var nk = String(gidToNum(String(key)) || toNumericId(String(key)) || '');
+        if (nk && n && nk === n) return sizeChartByProduct[key];
+      }
+      return null;
+    }
+
     function openSizeChartModal(productId) {
       if (!scModal) return;
       var productKey = String(productId || '');
-      var localRef = sizeChartByProduct[productKey] || sizeChartByProduct[String(gidToNum(productKey) || '')] || null;
+      var localRef = getLocalSizeChartRef(productKey);
       sizeChartState.open = true;
       sizeChartState.productId = productId;
       sizeChartState.handle = null;
@@ -2484,12 +2497,39 @@
         sizeChartState.measurementType = getMeasurementType(sizeChartState.handle || '');
         setCalculatorVisible(!sizeChartState.noCalc);
         if (scUnitToggle) scUnitToggle.style.display = sizeChartState.noCalc ? 'none' : '';
+        if (scTips) scTips.innerHTML = sizeChartState.measurementType === 'chest' ? '<p><strong>How to Measure:</strong></p><p>&bull; <strong>Chest:</strong> Measure around the fullest part of your bust.</p>' : '<p><strong>How to Measure:</strong></p><p>&bull; <strong>Waist:</strong> Measure around the narrowest part of your waistline.</p><p>&bull; <strong>Hips:</strong> Stand with feet together and measure around the fullest part of your hips.</p>';
+        if (scInputs) {
+          scInputs.className = 'bb-size-chart-inputs bb-size-chart-inputs--' + sizeChartState.measurementType;
+          scInputs.querySelectorAll('.bb-size-chart-input-group--chest').forEach(function(g){ g.style.display = sizeChartState.measurementType === 'chest' ? '' : 'none'; });
+          scInputs.querySelectorAll('.bb-size-chart-input-group:not(.bb-size-chart-input-group--chest)').forEach(function(g){ g.style.display = sizeChartState.measurementType === 'chest' ? 'none' : ''; });
+        }
         if (sizeChartState.noCalc && localRef.html) {
           if (scLoading) scLoading.style.display = 'none';
           if (scTableWrap) scTableWrap.style.display = 'none';
           if (scContent) { scContent.innerHTML = localRef.html; scContent.style.display = ''; }
           if (scEmpty) scEmpty.style.display = 'none';
           return;
+        }
+        if (!sizeChartState.noCalc && localRef.html) {
+          var parsedFromLiquid = parseSizeChartHTML(localRef.html);
+          if (parsedFromLiquid.inchTable && parsedFromLiquid.inchTable.length) {
+            sizeChartState.inchTable = parsedFromLiquid.inchTable;
+            sizeChartState.cmTable = parsedFromLiquid.cmTable || [];
+            if (scLoading) scLoading.style.display = 'none';
+            if (scContent) { scContent.style.display = 'none'; scContent.innerHTML = ''; }
+            renderSizeChartTable();
+            if (scTableWrap) scTableWrap.style.display = '';
+            if (scEmpty) scEmpty.style.display = 'none';
+            fetchSizeChartConfig().then(function(cfg) { sizeChartState.config = cfg; });
+            if (scCalcBtn) {
+              var waist = (scInputs && scInputs.querySelector('[data-bb-sc-field="waist"]')) ? scInputs.querySelector('[data-bb-sc-field="waist"]').value : '';
+              var hip = (scInputs && scInputs.querySelector('[data-bb-sc-field="hip"]')) ? scInputs.querySelector('[data-bb-sc-field="hip"]').value : '';
+              var chest = (scInputs && scInputs.querySelector('[data-bb-sc-field="chest"]')) ? scInputs.querySelector('[data-bb-sc-field="chest"]').value : '';
+              var canCalc = sizeChartState.measurementType === 'chest' ? !!chest : (!!waist && !!hip);
+              scCalcBtn.disabled = !canCalc;
+            }
+            return;
+          }
         }
       }
 
@@ -2500,8 +2540,10 @@
         if (scEmpty) scEmpty.style.display = '';
         return;
       }
-      fetchSizeChartConfig().then(function(cfg) { sizeChartState.config = cfg; });
-      fetchProductSizeChartRef(productId).then(function(ref) {
+      fetchSizeChartConfig().then(function(cfg) {
+        sizeChartState.config = cfg;
+        return fetchProductSizeChartRef(productId);
+      }).then(function(ref) {
         if (!ref) { if (scLoading) scLoading.style.display = 'none'; if (scEmpty) scEmpty.style.display = ''; return; }
         sizeChartState.handle = ref.handle || null;
         sizeChartState.noCalc = ref.noCalc === true;
@@ -2535,6 +2577,13 @@
           if (scTableWrap) scTableWrap.style.display = '';
         }
         if (scEmpty) scEmpty.style.display = 'none';
+        if (scCalcBtn) {
+          var waist2 = (scInputs && scInputs.querySelector('[data-bb-sc-field="waist"]')) ? scInputs.querySelector('[data-bb-sc-field="waist"]').value : '';
+          var hip2 = (scInputs && scInputs.querySelector('[data-bb-sc-field="hip"]')) ? scInputs.querySelector('[data-bb-sc-field="hip"]').value : '';
+          var chest2 = (scInputs && scInputs.querySelector('[data-bb-sc-field="chest"]')) ? scInputs.querySelector('[data-bb-sc-field="chest"]').value : '';
+          var canCalc2 = sizeChartState.measurementType === 'chest' ? !!chest2 : (!!waist2 && !!hip2);
+          scCalcBtn.disabled = !canCalc2;
+        }
       }).catch(function() { if (scLoading) scLoading.style.display = 'none'; if (scEmpty) scEmpty.style.display = ''; });
     }
 

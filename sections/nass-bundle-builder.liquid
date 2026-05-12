@@ -467,7 +467,8 @@
         sizeChartConfigHandle: {{ section.settings.size_chart_config_handle | default: 'size-chart-settings' | json }},
         sizeChartByProduct: {
           {%- assign first_size_chart_item = true -%}
-          {%- for block in step_blocks -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'bundle_step' or block.type == 'extra_step' -%}
             {%- if block.settings.collection != blank -%}
               {%- for p in block.settings.collection.products -%}
                 {%- liquid
@@ -495,6 +496,7 @@
                 {%- if first_size_chart_item -%}{%- assign first_size_chart_item = false -%}{%- else -%},{%- endif -%}
                 {{ p.id | json }}: { "noCalc": {{ has_no_calc_tag | json }}, "handle": {{ size_chart_handle | json }}, "html": {{ size_chart_html | json }} }
               {%- endfor -%}
+            {%- endif -%}
             {%- endif -%}
           {%- endfor -%}
         },
