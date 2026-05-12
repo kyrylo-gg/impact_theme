@@ -178,23 +178,26 @@
       clear: routesRoot + 'cart/clear.js'
     };
     var configSteps = Array.isArray(config.steps) ? config.steps : [];
+    var EXTRA_STEP_FREE_ITEMS_LIMIT = 2;
     var stepsFromConfig = configSteps.map(function(s) {
       return {
         id: String(s.id),
+        stepType: String(s.stepType || ''),
         title: s.title || 'Step',
         collectionHandle: (s.collectionHandle || '').trim(),
         isProgramsStep: !!s.isProgramsStep,
+        isExtraStep: !!s.isExtraStep,
         productIds: []
       };
     });
     if (stepsFromConfig.length === 0) {
       stepsFromConfig = [
-        { id: 'programs', title: 'Select programs', collectionHandle: 'courses', isProgramsStep: true, productIds: [] },
-        { id: 'shorts', title: 'Choose lounge shorts', collectionHandle: 'shorts', isProgramsStep: false, productIds: [] },
-        { id: 'leggings', title: 'Add sport shorts', collectionHandle: 'leggings', isProgramsStep: false, productIds: [] },
-        { id: 'swimshorts', title: 'Add swim shorts', collectionHandle: 'shorts', isProgramsStep: false, productIds: [] },
-        { id: 'tops', title: 'Select top', collectionHandle: 'bodywear', isProgramsStep: false, productIds: [] },
-        { id: 'review', title: 'Review your bundle', collectionHandle: '', isProgramsStep: false, productIds: [] },
+        { id: 'programs', stepType: 'bundle_step', title: 'Select programs', collectionHandle: 'courses', isProgramsStep: true, isExtraStep: false, productIds: [] },
+        { id: 'shorts', stepType: 'bundle_step', title: 'Choose lounge shorts', collectionHandle: 'shorts', isProgramsStep: false, isExtraStep: false, productIds: [] },
+        { id: 'leggings', stepType: 'bundle_step', title: 'Add sport shorts', collectionHandle: 'leggings', isProgramsStep: false, isExtraStep: false, productIds: [] },
+        { id: 'swimshorts', stepType: 'bundle_step', title: 'Add swim shorts', collectionHandle: 'shorts', isProgramsStep: false, isExtraStep: false, productIds: [] },
+        { id: 'tops', stepType: 'bundle_step', title: 'Select top', collectionHandle: 'bodywear', isProgramsStep: false, isExtraStep: false, productIds: [] },
+        { id: 'review', stepType: 'review', title: 'Review your bundle', collectionHandle: '', isProgramsStep: false, isExtraStep: false, productIds: [] },
       ];
     }
     var programPackIds = [];
@@ -209,6 +212,21 @@
     programPackIds = programPackIds.filter(function(id, index, arr) {
       return arr.indexOf(id) === index;
     });
+    var configuredProgramPackHandles = programPackIds
+      .map(function(id) {
+        var raw = String(id || '').trim().toLowerCase();
+        if (!raw) return '';
+        if (raw.indexOf('gid://') === 0) return '';
+        if (/^\d+$/.test(raw)) return '';
+        return raw;
+      })
+      .filter(function(v, i, a) { return !!v && a.indexOf(v) === i; });
+    var allowedExtraStepProgramHandles = ['vip-bundle', 'all-in-one-bundle'];
+    var extraStepIds = Array.isArray(config.extraStepIds)
+      ? config.extraStepIds.map(function(id) { return String(id); })
+      : [];
+    var extraStepIdMap = {};
+    extraStepIds.forEach(function(id) { extraStepIdMap[String(id)] = true; });
     var programPackNumIds = programPackIds
       .map(function(id) {
         var num = toNumericId(gidToNum(id) || id);
@@ -539,9 +557,11 @@
         if (!step || !step.id) return;
         map[String(step.id)] = {
           id: String(step.id),
+          stepType: String(step.stepType || ''),
           title: step.title || 'Step',
           collectionHandle: (step.collectionHandle || '').trim(),
           isProgramsStep: !!step.isProgramsStep,
+          isExtraStep: !!step.isExtraStep,
           productIds: []
         };
       });
@@ -561,9 +581,11 @@
             if (!step || !step.id) return null;
             return {
               id: String(step.id),
+              stepType: String(step.stepType || ''),
               title: step.title || '',
               collectionHandle: (step.collectionHandle || '').trim(),
-              isProgramsStep: !!step.isProgramsStep
+              isProgramsStep: !!step.isProgramsStep,
+              isExtraStep: !!step.isExtraStep
             };
           })
           .filter(Boolean);
@@ -579,9 +601,11 @@
         return (baseSteps || []).map(function(step) {
           return {
             id: step.id,
+            stepType: String(step.stepType || ''),
             title: step.title,
             collectionHandle: step.collectionHandle,
             isProgramsStep: !!step.isProgramsStep,
+            isExtraStep: !!step.isExtraStep,
             productIds: []
           };
         });
@@ -597,17 +621,21 @@
         if (existing) {
           resolved.push({
             id: existing.id,
+            stepType: String(existing.stepType || ''),
             title: existing.title,
             collectionHandle: existing.collectionHandle,
             isProgramsStep: !!existing.isProgramsStep,
+            isExtraStep: !!existing.isExtraStep,
             productIds: []
           });
         } else {
           resolved.push({
             id: normalizedId,
+            stepType: String(overrideStep.stepType || ''),
             title: overrideStep.title || 'Step',
             collectionHandle: (overrideStep.collectionHandle || '').trim(),
             isProgramsStep: !!overrideStep.isProgramsStep,
+            isExtraStep: !!overrideStep.isExtraStep,
             productIds: []
           });
         }
@@ -615,17 +643,21 @@
 
       var reviewStep = stepMap.review || {
         id: 'review',
+        stepType: 'review',
         title: 'Review your bundle',
         collectionHandle: '',
         isProgramsStep: false,
+        isExtraStep: false,
         productIds: []
       };
 
       resolved.push({
         id: 'review',
+        stepType: 'review',
         title: reviewStep.title || 'Review your bundle',
         collectionHandle: '',
         isProgramsStep: false,
+        isExtraStep: false,
         productIds: []
       });
 
@@ -636,6 +668,97 @@
       if (!productId || !resolvedProgramPackNumIds.length) return false;
       var a = toNumericId(gidToNum(String(productId)) || String(productId));
       return !!a && resolvedProgramPackNumIds.indexOf(String(a)) >= 0;
+    }
+
+    function isExtraStep(stepId) {
+      return !!extraStepIdMap[String(stepId)];
+    }
+
+    function hasSelectedProgramPackInProgramsStep() {
+      var programsStep = bbState.steps.find(function(s) { return s && s.isProgramsStep; });
+      if (!programsStep) return false;
+      var selectedProgramItem = bbState.selectedItems.find(function(item) {
+        return String(item.stepId) === String(programsStep.id);
+      });
+      if (!selectedProgramItem) return false;
+      var selectedProduct = bbState.productsById[selectedProgramItem.productId];
+      if (!selectedProduct) return false;
+      var handle = String(selectedProduct.handle || '').toLowerCase().trim();
+      if (!handle) return false;
+      return allowedExtraStepProgramHandles.indexOf(handle) !== -1;
+    }
+
+    function shouldShowStep(step) {
+      if (!step) return false;
+      if (!isExtraStep(step.id)) return true;
+      return hasSelectedProgramPackInProgramsStep();
+    }
+
+    function getVisibleStepIndexes() {
+      var indexes = [];
+      bbState.steps.forEach(function(step, idx) {
+        if (shouldShowStep(step)) indexes.push(idx);
+      });
+      return indexes;
+    }
+
+    function getVisibleStepPosition(index) {
+      var visibleIndexes = getVisibleStepIndexes();
+      return visibleIndexes.indexOf(index);
+    }
+
+    function getNextVisibleStepIndex(index) {
+      var visibleIndexes = getVisibleStepIndexes();
+      for (var i = 0; i < visibleIndexes.length; i++) {
+        if (visibleIndexes[i] > index) return visibleIndexes[i];
+      }
+      return -1;
+    }
+
+    function getPrevVisibleStepIndex(index) {
+      var visibleIndexes = getVisibleStepIndexes();
+      for (var i = visibleIndexes.length - 1; i >= 0; i--) {
+        if (visibleIndexes[i] < index) return visibleIndexes[i];
+      }
+      return -1;
+    }
+
+    function getFirstVisibleStepIndex() {
+      var visibleIndexes = getVisibleStepIndexes();
+      return visibleIndexes.length ? visibleIndexes[0] : -1;
+    }
+
+    function getSelectedItemsByStep(stepId) {
+      return bbState.selectedItems.filter(function(item) {
+        return String(item.stepId) === String(stepId);
+      });
+    }
+
+    function getFreeExtraStepProductIds() {
+      var freeIds = {};
+      if (!hasSelectedProgramPackInProgramsStep()) return freeIds;
+      var freeCount = 0;
+      bbState.selectedItems.forEach(function(item) {
+        if (!isExtraStep(item.stepId)) return;
+        if (freeCount >= EXTRA_STEP_FREE_ITEMS_LIMIT) return;
+        freeIds[String(item.productId)] = true;
+        freeCount += 1;
+      });
+      return freeIds;
+    }
+
+    function getExtraStepSelectedCount(stepId) {
+      if (!isExtraStep(stepId)) return 0;
+      return getSelectedItemsByStep(stepId).length;
+    }
+
+    function cleanupExtraStepItemsIfPackMissing() {
+      if (hasSelectedProgramPackInProgramsStep()) return Promise.resolve();
+      var extraStepProductIds = bbState.selectedItems
+        .filter(function(item) { return isExtraStep(item.stepId); })
+        .map(function(item) { return String(item.productId); });
+      if (!extraStepProductIds.length) return Promise.resolve();
+      return removeItemsByProductIds(extraStepProductIds);
     }
 
     function getHasProgramPack() {
@@ -741,24 +864,18 @@
       if (!selectedProduct) return '';
       var title = normalizeForMatch(selectedProduct.title);
       var handle = normalizeForMatch(selectedProduct.handle);
-      var isBootyBuilderBundle = (
-        (title.indexOf('booty builder bundle') !== -1)
-        || (title.indexOf('booty builder') !== -1)
-        || ((title.indexOf('booty builder') !== -1) && (title.indexOf('bundle') !== -1 || title.indexOf('pack') !== -1))
-        || (handle.indexOf('booty builder') !== -1)
-        || ((handle.indexOf('booty builder') !== -1) && (handle.indexOf('bundle') !== -1 || handle.indexOf('pack') !== -1))
+      var hasRuleDisabledBundle = (
+        title.indexOf('vip bundle') !== -1
+        || title.indexOf('all in one bundle') !== -1
+        || title.indexOf('all-in-one bundle') !== -1
+        || title.indexOf('twerk essential kit') !== -1
+        || title.indexOf('booty builder bundle') !== -1
+        || handle.indexOf('vip-bundle') !== -1
+        || handle.indexOf('all-in-one-bundle') !== -1
+        || handle.indexOf('twerk-essential-kit') !== -1
+        || handle.indexOf('booty-builder-bundle') !== -1
       );
-      if (
-        title.indexOf('vip bundle') !== -1 ||
-        title.indexOf('twerk essential bundle') !== -1 ||
-        title.indexOf('twerk essential kit') !== -1 ||
-        title.indexOf('all in one bundle') !== -1
-      ) {
-        return 'vip_or_essential';
-      }
-      if (allowBootyBuilderRuleMode && isBootyBuilderBundle) {
-        return 'booty_builder';
-      }
+      if (hasRuleDisabledBundle) return '';
       return '';
     }
 
@@ -767,24 +884,18 @@
       if (!p) return '';
       var title = normalizeForMatch(p.title);
       var handle = normalizeForMatch(p.handle);
-      var isBootyBuilderBundle = (
-        (title.indexOf('booty builder bundle') !== -1)
-        || (title.indexOf('booty builder') !== -1)
-        || ((title.indexOf('booty builder') !== -1) && (title.indexOf('bundle') !== -1 || title.indexOf('pack') !== -1))
-        || (handle.indexOf('booty builder') !== -1)
-        || ((handle.indexOf('booty builder') !== -1) && (handle.indexOf('bundle') !== -1 || handle.indexOf('pack') !== -1))
+      var hasRuleDisabledBundle = (
+        title.indexOf('vip bundle') !== -1
+        || title.indexOf('all in one bundle') !== -1
+        || title.indexOf('all-in-one bundle') !== -1
+        || title.indexOf('twerk essential kit') !== -1
+        || title.indexOf('booty builder bundle') !== -1
+        || handle.indexOf('vip-bundle') !== -1
+        || handle.indexOf('all-in-one-bundle') !== -1
+        || handle.indexOf('twerk-essential-kit') !== -1
+        || handle.indexOf('booty-builder-bundle') !== -1
       );
-      if (
-        title.indexOf('vip bundle') !== -1 ||
-        title.indexOf('twerk essential bundle') !== -1 ||
-        title.indexOf('twerk essential kit') !== -1 ||
-        title.indexOf('all in one bundle') !== -1
-      ) {
-        return 'vip_or_essential';
-      }
-      if (allowBootyBuilderRuleMode && isBootyBuilderBundle) {
-        return 'booty_builder';
-      }
+      if (hasRuleDisabledBundle) return '';
       return '';
     }
 
@@ -892,6 +1003,7 @@
         return !idsSet[String(item.productId)];
       });
       bbState.hasProgramPack = getHasProgramPack();
+      renderProgressBar();
       renderStep();
       renderDiscountBanner();
       renderFooterSummary();
@@ -1170,6 +1282,7 @@
       var isAutoAddedByRule = !!(options && options.autoAddedByRule);
       bbState.selectedItems.push({ stepId: stepId, productId: productId, variantId: vid, quantity: qty, lineKey: null, autoAddedByRule: isAutoAddedByRule });
       bbState.hasProgramPack = getHasProgramPack();
+      renderProgressBar();
       renderStep();
       renderDiscountBanner();
       renderFooterSummary();
@@ -1251,6 +1364,7 @@
         return String(i.productId) !== String(productId);
       });
       bbState.hasProgramPack = getHasProgramPack();
+      renderProgressBar();
       renderStep();
       renderDiscountBanner();
       function changeCartRemoveById(idValue) {
@@ -1293,7 +1407,11 @@
                   return cleanupAutoAddedEquipmentItems();
                 });
               }
-              if (isProgramsStepRemoval || isRuleTriggerBundleRemoval) return cleanupAutoAddedEquipmentItems();
+              if (isProgramsStepRemoval || isRuleTriggerBundleRemoval) {
+                return cleanupAutoAddedEquipmentItems().then(function() {
+                  return cleanupExtraStepItemsIfPackMissing();
+                });
+              }
               return null;
             });
         })
@@ -1619,6 +1737,16 @@
         final = 0;
         hasDiscount = false;
         compareAt = null;
+      } else if (isExtraStep(stepId) && hasSelectedProgramPackInProgramsStep()) {
+        var extraFreeIds = getFreeExtraStepProductIds();
+        var selectedOnExtraStep = getExtraStepSelectedCount(stepId);
+        var isFreeExtraItem = !!extraFreeIds[String(productId)] || selectedOnExtraStep < EXTRA_STEP_FREE_ITEMS_LIMIT;
+        if (isFreeExtraItem) {
+          orig = parseFloat(price);
+          final = 0;
+          hasDiscount = false;
+          compareAt = null;
+        }
       }
       var sourceCur = getProductSourceCurrency(p);
       var cur = getDisplayCurrency();
@@ -1801,6 +1929,13 @@
       var scrollRow = contentEl.querySelector('.bb-product-scroll');
       var scrollLeft = scrollRow ? scrollRow.scrollLeft : 0;
       var step = bbState.steps[bbState.currentStepIndex];
+      if (!shouldShowStep(step)) {
+        var fallbackIndex = getPrevVisibleStepIndex(bbState.currentStepIndex);
+        if (fallbackIndex < 0) fallbackIndex = getNextVisibleStepIndex(bbState.currentStepIndex);
+        if (fallbackIndex < 0) fallbackIndex = getFirstVisibleStepIndex();
+        if (fallbackIndex >= 0) goToStep(fallbackIndex);
+        return;
+      }
       if (step.id === 'review') {
         if (sizeFilterSlotEl) sizeFilterSlotEl.innerHTML = '';
         contentEl.innerHTML = renderReviewStep();
@@ -1912,6 +2047,10 @@
       var ruleTarget = getRuleTargetByProduct(item.stepId, p);
       if (ruleTarget && ruleTarget.free) return { orig: 0, final: 0 };
       if (isBodyTransformationFreeBundleLineForSecondStep(item)) return { orig: 0, final: 0 };
+      if (isExtraStep(item.stepId) && hasSelectedProgramPackInProgramsStep()) {
+        var extraFreeIds = getFreeExtraStepProductIds();
+        if (extraFreeIds[String(item.productId)]) return { orig: 0, final: 0 };
+      }
       var price = p.priceRange && p.priceRange.minVariantPrice ? parseFloat(p.priceRange.minVariantPrice.amount) : 0;
       var compareAt = p.compareAtPriceRange && p.compareAtPriceRange.minVariantPrice ? parseFloat(p.compareAtPriceRange.minVariantPrice.amount) : null;
       var step = bbState.steps.find(function(s) { return s.id === item.stepId; });
@@ -2605,7 +2744,7 @@
             tryPreselectProgramsItem();
             rerunStepAutoAddAfterPreselect();
           } else {
-            goToStep(0);
+            goToStep(getFirstVisibleStepIndex() >= 0 ? getFirstVisibleStepIndex() : 0);
             tryPreselectProgramsItem();
             rerunStepAutoAddAfterPreselect();
           }
@@ -2622,7 +2761,7 @@
               tryPreselectProgramsItem();
               rerunStepAutoAddAfterPreselect();
             } else {
-              goToStep(0);
+              goToStep(getFirstVisibleStepIndex() >= 0 ? getFirstVisibleStepIndex() : 0);
               tryPreselectProgramsItem();
               rerunStepAutoAddAfterPreselect();
             }
@@ -2707,9 +2846,12 @@
 
     function renderProgressBar() {
       if (!progressBarEl) return;
-      var len = bbState.steps.length;
-      var current = bbState.currentStepIndex;
-      var stepNum = current + 1;
+      var visibleIndexes = getVisibleStepIndexes();
+      var len = visibleIndexes.length;
+      if (!len) return;
+      var currentPos = getVisibleStepPosition(bbState.currentStepIndex);
+      if (currentPos < 0) currentPos = 0;
+      var stepNum = currentPos + 1;
       progressBarEl.innerHTML = '';
       progressBarEl.setAttribute('aria-valuenow', stepNum);
       progressBarEl.setAttribute('aria-valuemin', 1);
@@ -2717,7 +2859,7 @@
       progressBarEl.setAttribute('aria-label', 'Step ' + stepNum + ' of ' + len);
       for (var i = 0; i < len; i++) {
         var seg = document.createElement('div');
-        seg.className = 'bb-wizard-progress-segment' + (i <= current ? ' bb-wizard-progress-segment--filled' : '');
+        seg.className = 'bb-wizard-progress-segment' + (i <= currentPos ? ' bb-wizard-progress-segment--filled' : '');
         progressBarEl.appendChild(seg);
       }
       if (stepTextEl) stepTextEl.textContent = 'Step ' + stepNum + ' of ' + len;
@@ -2726,6 +2868,13 @@
     function goToStep(index) {
       var len = bbState.steps.length;
       if (index < 0 || index >= len) return;
+      if (!shouldShowStep(bbState.steps[index])) {
+        var fallbackIndex = getNextVisibleStepIndex(index);
+        if (fallbackIndex < 0) fallbackIndex = getPrevVisibleStepIndex(index);
+        if (fallbackIndex < 0) fallbackIndex = getFirstVisibleStepIndex();
+        if (fallbackIndex < 0) return;
+        index = fallbackIndex;
+      }
       bbState.currentStepIndex = index;
       bbState.sizeFilter = null;
       var step = bbState.steps[index];
@@ -2739,15 +2888,17 @@
       if (footerEl) footerEl.classList.toggle('bb-wizard-footer--review', !!isReviewStep);
       if (nextBtn) {
         nextBtn.disabled = false;
-        if (index === len - 1) {
+        var nextVisibleIndex = getNextVisibleStepIndex(index);
+        if (nextVisibleIndex < 0) {
           nextBtn.innerHTML = '<span class="bb-wizard-btn-text">Add to cart</span><span class="bb-wizard-btn-arrow" aria-hidden="true">→</span>';
         } else {
           nextBtn.textContent = 'Next';
         }
       }
       applyWorkoutEquipmentAutoAdd(step);
-      if (index + 1 < len && bbState.steps[index + 1].id !== 'review') {
-        preloadStepImages(index + 1);
+      var preloadIndex = getNextVisibleStepIndex(index);
+      if (preloadIndex >= 0 && bbState.steps[preloadIndex].id !== 'review') {
+        preloadStepImages(preloadIndex);
       }
     }
 
@@ -2788,7 +2939,8 @@
 
     closeEls.forEach(function(el) { el.addEventListener('click', requestCloseWizard); });
     if (backBtn) backBtn.addEventListener('click', function() {
-      if (bbState.currentStepIndex > 0) goToStep(bbState.currentStepIndex - 1);
+      var prevVisibleIndex = getPrevVisibleStepIndex(bbState.currentStepIndex);
+      if (prevVisibleIndex >= 0) goToStep(prevVisibleIndex);
       else requestCloseWizard();
     });
     var stayBtn = sectionRoot.querySelector('[data-bb-exit-stay]');
@@ -2809,7 +2961,8 @@
           showToast('Please select the size of Knee Pads to continue');
           return;
         }
-        if (bbState.currentStepIndex < bbState.steps.length - 1) goToStep(bbState.currentStepIndex + 1);
+        var nextVisibleIndex = getNextVisibleStepIndex(bbState.currentStepIndex);
+        if (nextVisibleIndex >= 0) goToStep(nextVisibleIndex);
         else submitBundle();
       });
     }

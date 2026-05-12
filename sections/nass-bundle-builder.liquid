@@ -24,7 +24,7 @@
     <div class="bb-container">
       {%- comment -%} Heading block {%- endcomment -%}
       <div class="bb-heading">
-        <span class="bb-badge-pill">Save up to 82%</span>
+        <span class="bb-badge-pill">{{ section.settings.bb_badge_pill_text | default: 'Save up to 82%' | escape }}</span>
         <div class="bb-title">
           {{ section.settings.bb_title_prefix | default: 'BUILD YOUR' | escape }}
           <span class="bb-title-accent">{{ section.settings.bb_title_accent | default: 'PERFECT BOOTY!' | escape }}</span>
@@ -404,18 +404,35 @@
         cartAddUrl: '{{ routes.cart_add_url | append: ".js" }}',
         routesRoot: {{ routes.root_url | json }},
         steps: [
-          {%- assign step_blocks = section.blocks | where: "type", "bundle_step" -%}
+          {%- assign step_blocks = section.blocks -%}
+          {%- assign bb_first_step = true -%}
           {%- for block in step_blocks -%}
+          {%- if block.type == 'bundle_step' or block.type == 'extra_step' -%}
+          {%- unless bb_first_step -%},{%- endunless -%}
           {
             id: {{ block.id | json }},
+            stepType: {{ block.type | json }},
             title: {{ block.settings.title | default: "Step" | json }},
             collectionHandle: {%- if block.settings.collection -%}{{ block.settings.collection.handle | json }}{%- else -%}""{%- endif -%},
             isProgramsStep: {{ block.settings.is_programs_step | json }},
+            isExtraStep: {%- if block.type == 'extra_step' -%}true{%- else -%}false{%- endif -%},
             programPackProductId: {%- if block.settings.is_programs_step and block.settings.program_pack_product -%}{{ block.settings.program_pack_product.id | json }}{%- else -%}null{%- endif -%},
             programPackProductIdSecondary: {%- if block.settings.is_programs_step and block.settings.program_pack_product_secondary -%}{{ block.settings.program_pack_product_secondary.id | json }}{%- else -%}null{%- endif -%}
-          }{%- unless forloop.last -%},{%- endunless -%}
+          }
+          {%- assign bb_first_step = false -%}
+          {%- endif -%}
           {%- endfor -%},
           { id: "review", title: "Review your bundle", collectionHandle: "", isProgramsStep: false }
+        ],
+        extraStepIds: [
+          {%- assign bb_first_extra_step = true -%}
+          {%- for block in step_blocks -%}
+            {%- if block.type == 'extra_step' -%}
+              {%- unless bb_first_extra_step -%}, {%- endunless -%}
+              {{ block.id | json }}
+              {%- assign bb_first_extra_step = false -%}
+            {%- endif -%}
+          {%- endfor -%}
         ],
         {%- comment -%} Program pack products: mutual exclusion + 60% discount trigger on Programs step. Step-level settings override section-level defaults. {%- endcomment -%}
         {%- assign pp_primary = '' -%}
@@ -640,8 +657,8 @@
   .nass-bundle-builder .bb-badge-pill {
     display: inline-flex;
     align-items: center;
-    background: var(--bb-primary);
-    color: #fff;
+    background: #FAFF00;
+    color: #000;
     padding: 8px 16px;
     border-radius: 9999px;
     font-size: 14px;
@@ -3527,6 +3544,12 @@
     },
     {
       "type": "text",
+      "id": "bb_badge_pill_text",
+      "label": "Top badge text",
+      "default": "Save up to 82%"
+    },
+    {
+      "type": "text",
       "id": "bb_promo_banner_text",
       "label": "Promo banner text",
       "default": "60% OFF ALL CLOTHING / with Program Pack purchase"
@@ -3732,6 +3755,22 @@
           "id": "program_pack_product_secondary",
           "label": "4 Programs Bundle product #2 (mutual exclusion)",
           "info": "Optional second bundle product for the same Programs-step mutual exclusion. Overrides section setting."
+        }
+      ]
+    },
+    {
+      "type": "extra_step",
+      "name": "Extra step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Step title"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
         }
       ]
     }
