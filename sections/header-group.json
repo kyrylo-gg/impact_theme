@@ -76,7 +76,7 @@
         "title": {
           "type": "title",
           "settings": {
-            "label": "Buy 2, Get 1 FREE 🩳💖Mommy Mode On!",
+            "label": "New Hip Opener Bundle! Just $99",
             "color": "#000000",
             "desk_font_size": 25,
             "mob_font_size": 13
@@ -112,7 +112,7 @@
           "type": "button",
           "settings": {
             "label": "Shop Now!",
-            "link": "shopify://collections/1-1-clothing-offer",
+            "link": "https://www.nasswear.com/products/hip-mobility",
             "button_background": "#FAFF00",
             "button_color": "#000000",
             "desk_font_size": 18,
