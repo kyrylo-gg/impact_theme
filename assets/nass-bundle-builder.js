@@ -2391,6 +2391,21 @@
       return 'waist-hip';
     }
 
+    /** Normalize row labels so e.g. Cyrillic "С" (U+0421) + "hest" still matches Latin "chest". */
+    function normalizeSizeRowLabel(s) {
+      return String(s || '')
+        .toLowerCase()
+        .replace(/\u0441/g, 'c');
+    }
+
+    function tableHasLabelSubstr(tableData, sub) {
+      sub = String(sub || '').toLowerCase();
+      for (var r = 0; r < tableData.length; r++) {
+        if (normalizeSizeRowLabel((tableData[r] && tableData[r][0]) || '').indexOf(sub) >= 0) return true;
+      }
+      return false;
+    }
+
     /** Parse a size cell like "39-40", "39 – 40", or "32". Hyphens between numbers must not become unary minus ("39-40" is not 39 and -40). */
     function parseCellRange(cell) {
       var s = String(cell || '').replace(/\u00a0/g, ' ').replace(/,/g, '.').trim();
@@ -2417,7 +2432,22 @@
       return mids[Math.floor(mids.length / 2)];
     }
 
-    function parseSizeChartHTML(html) {
+    function assignInchCmFromTwoTables(a, b) {
+      var m0 = tableMedianDataMagnitude(a);
+      var m1 = tableMedianDataMagnitude(b);
+      if (m0 > 0 && m1 > 0 && Math.abs(m0 - m1) > 1) {
+        if (m0 < m1) return { inchTable: a, cmTable: b };
+        return { inchTable: b, cmTable: a };
+      }
+      return { inchTable: a, cmTable: b };
+    }
+
+    /**
+     * @param {string} html
+     * @param {string} [measurementKind] 'chest' | 'waist-hip' — when the page has 3+ tables, pick the pair that matches (e.g. chest IN/CM vs waist IN/CM).
+     */
+    function parseSizeChartHTML(html, measurementKind) {
+      measurementKind = measurementKind || '';
       var parser = new DOMParser();
       var doc = parser.parseFromString(html || '', 'text/html');
       var tables = doc.querySelectorAll('table');
@@ -2433,35 +2463,46 @@
         });
         if (tableData.length) list.push(tableData);
       });
-      var inchTable = [];
-      var cmTable = [];
-      if (list.length === 0) return { inchTable: inchTable, cmTable: cmTable };
-      if (list.length === 1) {
-        inchTable = list[0];
-        return { inchTable: inchTable, cmTable: cmTable };
+      if (list.length === 0) return { inchTable: [], cmTable: [] };
+      if (list.length === 1) return { inchTable: list[0], cmTable: [] };
+
+      var work = list;
+      if (list.length > 2 && measurementKind) {
+        var filtered = list.filter(function(t) {
+          if (measurementKind === 'chest') return tableHasLabelSubstr(t, 'chest') || tableHasLabelSubstr(t, 'bust');
+          if (measurementKind === 'waist-hip') return tableHasLabelSubstr(t, 'waist') || tableHasLabelSubstr(t, 'hip');
+          return true;
+        });
+        if (filtered.length >= 2) work = filtered;
+        else if (filtered.length === 1) return { inchTable: filtered[0], cmTable: [] };
       }
-      if (list.length === 2) {
-        var m0 = tableMedianDataMagnitude(list[0]);
-        var m1 = tableMedianDataMagnitude(list[1]);
-        if (m0 > 0 && m1 > 0 && Math.abs(m0 - m1) > 1) {
-          if (m0 < m1) {
-            inchTable = list[0];
-            cmTable = list[1];
-          } else {
-            inchTable = list[1];
-            cmTable = list[0];
+
+      if (work.length === 2) {
+        var pair = assignInchCmFromTwoTables(work[0], work[1]);
+        return { inchTable: pair.inchTable, cmTable: pair.cmTable };
+      }
+
+      var bestI = 0;
+      var bestJ = 1;
+      var bestDiff = -1;
+      for (var i = 0; i < work.length; i++) {
+        for (var j = i + 1; j < work.length; j++) {
+          var mi = tableMedianDataMagnitude(work[i]);
+          var mj = tableMedianDataMagnitude(work[j]);
+          var d = (mi > 0 && mj > 0) ? Math.abs(mi - mj) : 0;
+          if (d > bestDiff) {
+            bestDiff = d;
+            bestI = i;
+            bestJ = j;
           }
-        } else {
-          inchTable = list[0];
-          cmTable = list[1];
         }
-        return { inchTable: inchTable, cmTable: cmTable };
       }
-      list.forEach(function(tableData, idx) {
-        if (idx === 0) inchTable = tableData;
-        else if (idx === 1) cmTable = tableData;
-      });
-      return { inchTable: inchTable, cmTable: cmTable };
+      if (bestDiff > 1) {
+        var pair2 = assignInchCmFromTwoTables(work[bestI], work[bestJ]);
+        return { inchTable: pair2.inchTable, cmTable: pair2.cmTable };
+      }
+      var pair3 = assignInchCmFromTwoTables(work[0], work[1]);
+      return { inchTable: pair3.inchTable, cmTable: pair3.cmTable };
     }
 
     function parseCalculatorData(value) {
@@ -2565,7 +2606,7 @@
           return;
         }
         if (!sizeChartState.noCalc && localRef.html) {
-          var parsedFromLiquid = parseSizeChartHTML(localRef.html);
+          var parsedFromLiquid = parseSizeChartHTML(localRef.html, getMeasurementType(sizeChartState.handle || ''));
           if (parsedFromLiquid.inchTable && parsedFromLiquid.inchTable.length) {
             sizeChartState.inchTable = parsedFromLiquid.inchTable;
             sizeChartState.cmTable = parsedFromLiquid.cmTable || [];
@@ -2617,7 +2658,7 @@
         if (scLoading) scLoading.style.display = 'none';
         if (!page) { if (scEmpty) scEmpty.style.display = ''; return; }
         sizeChartState.page = page;
-        var parsed = parseSizeChartHTML(page.body);
+        var parsed = parseSizeChartHTML(page.body, getMeasurementType(sizeChartState.handle || ''));
         sizeChartState.inchTable = parsed.inchTable;
         sizeChartState.cmTable = parsed.cmTable;
         if (sizeChartState.noCalc) {
@@ -2676,7 +2717,7 @@
         var start = typeof minRow === 'number' ? minRow : 1;
         var kw = String(keyword || '').toLowerCase();
         for (var i = start; i < table.length; i++) {
-          var label = String((table[i] && table[i][0]) || '').toLowerCase();
+          var label = normalizeSizeRowLabel((table[i] && table[i][0]) || '');
           if (label.indexOf(kw) >= 0) return table[i];
         }
         return null;
