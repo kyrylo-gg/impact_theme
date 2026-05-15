@@ -705,7 +705,7 @@
       "settings": {
         "background_image": "shopify://shop_images/result.png",
         "bundle_bg": "#e94f76",
-        "flash_text": "Flash Mother’s Day Sale",
+        "flash_text": "End-of-Spring Special Offer",
         "bundle_product": "twerk-essential",
         "bundle_title": "Twerk Essential Kit",
         "bundle_total": "$79",
@@ -1303,7 +1303,7 @@
         "text_color_button": "#1a1a1a",
         "block_text_color": "#1a1a1a",
         "block_background": "#efa3c1",
-        "sublime_text": "<p><strong>Prep for Summer with NASS</strong></p>",
+        "sublime_text": "<p>Prep for Summer with NASS</p>",
         "sublime_text_color": "#1a1a1a",
         "timer_enabled": true,
         "timer_type": "daily",
