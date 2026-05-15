@@ -663,9 +663,9 @@
         "bundle_row_4": {
           "type": "bundle_row",
           "settings": {
-            "label": "Booty Band Set",
+            "label": "Shorts",
             "price": "Free",
-            "was": "$19"
+            "was": "$49"
           }
         },
         "bundle_row_5": {
@@ -709,7 +709,7 @@
         "bundle_product": "twerk-essential-bundle",
         "bundle_title": "Twerk Essential Kit",
         "bundle_total": "$79",
-        "bundle_was": "$276",
+        "bundle_was": "$306",
         "ships_label": "Immediate access",
         "timer_text": "after purchase",
         "single_product": "twerk-program-3",
