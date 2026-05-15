@@ -66,12 +66,12 @@
         "mobile_video": "shopify://files/videos/Original format (1562x1080)_13cab976-b9fa-4c18-993b-a062167994b4.webm",
         "badge_use_theme_starburst": false,
         "badge_image_alt": "Join NASS B-Day Sale promotional badge",
-        "badge_text": "Mother’s Day Celebration",
+        "badge_text": " Last Days of Spring ",
         "heading": "Dance Your Way to Confidence",
         "price_text": "Join 40,000+ girls mastering twerk with Nastya Nass",
         "cta_text": "Get Started",
         "cta_url": "#nass-twerk-offer-block",
-        "deadline_text": "Offer ends May 12"
+        "deadline_text": "Offer ends May 31"
       }
     },
     "twerk_lessons_MWt6Ji": {
@@ -612,7 +612,7 @@
       "name": "NASS Countdown Banner",
       "settings": {
         "show_announcement": true,
-        "announcement_highlight": "Limited Mother’s Day Offer:",
+        "announcement_highlight": "END-OF-SPRING SPECIAL OFFER:",
         "announcement_text": "All Twerk Essentials for only $79",
         "marquee_speed": 30,
         "title": "JOIN NASS TODAY",
@@ -858,6 +858,7 @@
         "bb_title_prefix": "SHAKE YOUR BOOTY",
         "bb_title_accent": "THIS DANCE DAY!",
         "bb_description": "Mix programs, shorts, and tops. Get 60% off all clothing when you purchase the VIP Bundle.",
+        "bb_badge_pill_text": "Save up to 82%",
         "bb_promo_banner_text": "60% OFF ALL CLOTHING / with VIP Bundle purchase",
         "bb_show_countdown": false,
         "bb_countdown_mode": "daily_kyiv_10am",
@@ -1350,7 +1351,7 @@
         "text_color_button": "#1a1a1a",
         "block_text_color": "#1a1a1a",
         "block_background": "#efa3c1",
-        "sublime_text": "<p>Celebrate Mother’s Day with NASS</p>",
+        "sublime_text": "<p><strong>Prep for Summer with NASS</strong></p>",
         "sublime_text_color": "#1a1a1a",
         "timer_enabled": true,
         "timer_type": "daily",
