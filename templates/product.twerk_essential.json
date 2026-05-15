@@ -753,43 +753,10 @@
             "program_pack_product_secondary": ""
           }
         },
-        "bundle_step_r34gCq": {
-          "type": "bundle_step",
-          "disabled": true,
-          "settings": {
-            "title": "Choose twerk Essentials",
-            "collection": "bundle-2a",
-            "is_programs_step": false,
-            "program_pack_product": "",
-            "program_pack_product_secondary": ""
-          }
-        },
         "bundle_step_KMpd7k": {
           "type": "bundle_step",
           "settings": {
             "title": "Add  Booty Shorts",
-            "collection": "bundle-swim-shorts",
-            "is_programs_step": false,
-            "program_pack_product": "",
-            "program_pack_product_secondary": ""
-          }
-        },
-        "bundle_step_Dh9wMj": {
-          "type": "bundle_step",
-          "disabled": true,
-          "settings": {
-            "title": "Choose Booty Essentials",
-            "collection": "bundle-2b",
-            "is_programs_step": false,
-            "program_pack_product": "",
-            "program_pack_product_secondary": ""
-          }
-        },
-        "bundle_step_7y3j3a": {
-          "type": "bundle_step",
-          "disabled": true,
-          "settings": {
-            "title": "Add Booty Shorts",
             "collection": "bundle-swim-shorts",
             "is_programs_step": false,
             "program_pack_product": "",
@@ -816,17 +783,6 @@
             "program_pack_product_secondary": ""
           }
         },
-        "step_swimshorts": {
-          "type": "bundle_step",
-          "disabled": true,
-          "settings": {
-            "title": "Add Booty shorts",
-            "collection": "bundle-swim-shorts",
-            "is_programs_step": false,
-            "program_pack_product": "",
-            "program_pack_product_secondary": ""
-          }
-        },
         "step_tops": {
           "type": "bundle_step",
           "settings": {
@@ -841,13 +797,9 @@
       "block_order": [
         "step_programs",
         "bundle_step_bb96UU",
-        "bundle_step_r34gCq",
         "bundle_step_KMpd7k",
-        "bundle_step_Dh9wMj",
-        "bundle_step_7y3j3a",
         "step_shorts",
         "step_leggings",
-        "step_swimshorts",
         "step_tops"
       ],
       "settings": {
