@@ -1027,7 +1027,9 @@
       );
       if (isBootyBandSet) return { free: true, mode: mode, type: 'booty_band' };
       var isKneePads = title.indexOf('knee pads') !== -1 || title.indexOf('knee pad') !== -1 || handle.indexOf('knee pads') !== -1 || handle.indexOf('knee-pads') !== -1 || handle.indexOf('knee-pad') !== -1;
-      if (isKneePads && mode === 'vip_or_essential') return { free: true, mode: mode, type: 'knee_pads' };
+      if (isKneePads && mode === 'vip_or_essential' && skipProgramsStepOnOpen) {
+        return { free: true, mode: mode, type: 'knee_pads' };
+      }
       if (mode === 'booty_builder' && (title.indexOf('band') !== -1 || handle.indexOf('band') !== -1)) {
         return { free: true, mode: mode, type: 'booty_band' };
       }
@@ -1183,29 +1185,7 @@
     }
 
     function hasRequiredKneePadsSelectionForVipEssential(step) {
-      if (!step || !step.id || !stepIsWorkoutEquipment(step.id)) return true;
-      if (getEquipmentBundleRuleMode() !== 'vip_or_essential') return true;
-      var kneePadsProductId = null;
-      (step.productIds || []).forEach(function(pid) {
-        if (kneePadsProductId) return;
-        var rule = getRuleTargetByProductForMode(step.id, bbState.productsById[pid], getEquipmentBundleRuleMode());
-        if (rule && rule.type === 'knee_pads') kneePadsProductId = pid;
-      });
-      if (!kneePadsProductId) return true;
-      var selectedKneePads = bbState.selectedItems.find(function(item) {
-        return String(item.productId) === String(kneePadsProductId);
-      });
-      if (!selectedKneePads) return false;
-      var product = bbState.productsById[kneePadsProductId];
-      if (!kneePadsRequiresSizeSelection(product)) return true;
-      var variants = (product && product.variants && product.variants.nodes) || [];
-      var selectedVariant = variants.find(function(v) { return String(v.id) === String(selectedKneePads.variantId); });
-      if (!selectedVariant) return false;
-      return (selectedVariant.selectedOptions || []).some(function(o) {
-        if (String((o && o.name) || '').toLowerCase() !== 'size') return false;
-        var val = String((o && o.value) || '').trim().toLowerCase();
-        return !!val && val !== 'default title';
-      });
+      return true;
     }
 
     function animateKneePadsSelectSizeButton() {
@@ -3241,12 +3221,6 @@
     if (exitBtn) exitBtn.addEventListener('click', confirmExitWizard);
     if (nextBtn) {
       nextBtn.addEventListener('click', function() {
-        var currentStep = bbState.steps[bbState.currentStepIndex];
-        if (!hasRequiredKneePadsSelectionForVipEssential(currentStep)) {
-          animateKneePadsSelectSizeButton();
-          showToast('Please select the size of Knee Pads to continue');
-          return;
-        }
         var nextVisibleIndex = getNextVisibleStepIndex(bbState.currentStepIndex);
         if (nextVisibleIndex >= 0) goToStep(nextVisibleIndex);
         else submitBundle();
