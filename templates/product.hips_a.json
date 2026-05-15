@@ -625,6 +625,7 @@
         },
         "extra_step_rn7KCk": {
           "type": "extra_step",
+          "disabled": true,
           "settings": {
             "title": "select free shorts",
             "collection": "biker-shorts"
@@ -632,6 +633,7 @@
         },
         "extra_step_jGUeVy": {
           "type": "extra_step",
+          "disabled": true,
           "settings": {
             "title": "select free top",
             "collection": "halter-tops"
