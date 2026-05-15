@@ -549,6 +549,7 @@
       sizeFilter: null,
       allowStep2AutoAdd: !skipProgramsStepOnOpen,
       forceOfferStep2AutoAdd: false,
+      offerFlow: '',
     };
 
     function buildStepMap(steps) {
@@ -853,6 +854,52 @@
       return false;
     }
 
+    function isTwerkEssentialKitProduct(title, handle) {
+      if (handle.indexOf('twerk program') !== -1) return false;
+      if (title.indexOf('twerk program') !== -1 && title.indexOf('kit') === -1) return false;
+      return (
+        title.indexOf('twerk essential kit') !== -1
+        || title.indexOf('twerk essential bundle') !== -1
+        || (
+          handle.indexOf('twerk essential') !== -1
+          && handle.indexOf('kit') !== -1
+        )
+        || handle === 'twerk essential'
+      );
+    }
+
+    function isBootyBuilderBundleProduct(title, handle) {
+      return (
+        title.indexOf('booty builder bundle') !== -1
+        || (
+          title.indexOf('booty builder') !== -1
+          && (title.indexOf('bundle') !== -1 || title.indexOf('pack') !== -1)
+        )
+        || handle.indexOf('booty-builder-bundle') !== -1
+        || (
+          handle.indexOf('booty-builder') !== -1
+          && (handle.indexOf('bundle') !== -1 || handle.indexOf('pack') !== -1)
+        )
+      );
+    }
+
+    function resolveBundleRuleModeFromProduct(title, handle) {
+      if (
+        title.indexOf('vip bundle') !== -1
+        || title.indexOf('all in one bundle') !== -1
+        || title.indexOf('all-in-one bundle') !== -1
+        || handle.indexOf('vip-bundle') !== -1
+        || handle.indexOf('all-in-one-bundle') !== -1
+        || isTwerkEssentialKitProduct(title, handle)
+      ) {
+        return 'vip_or_essential';
+      }
+      if (allowBootyBuilderRuleMode && isBootyBuilderBundleProduct(title, handle)) {
+        return 'booty_builder';
+      }
+      return '';
+    }
+
     function getSelectedBundleRuleMode() {
       var programsStep = bbState.steps.find(function(s) { return s && s.isProgramsStep; });
       if (!programsStep) return '';
@@ -862,41 +909,68 @@
       if (!selectedProgramItem) return '';
       var selectedProduct = bbState.productsById[selectedProgramItem.productId];
       if (!selectedProduct) return '';
-      var title = normalizeForMatch(selectedProduct.title);
-      var handle = normalizeForMatch(selectedProduct.handle);
-      var hasRuleDisabledBundle = (
-        title.indexOf('vip bundle') !== -1
-        || title.indexOf('all in one bundle') !== -1
-        || title.indexOf('all-in-one bundle') !== -1
-        || title.indexOf('twerk essential kit') !== -1
-        || title.indexOf('booty builder bundle') !== -1
-        || handle.indexOf('vip-bundle') !== -1
-        || handle.indexOf('all-in-one-bundle') !== -1
-        || handle.indexOf('twerk-essential-kit') !== -1
-        || handle.indexOf('booty-builder-bundle') !== -1
+      return resolveBundleRuleModeFromProduct(
+        normalizeForMatch(selectedProduct.title),
+        normalizeForMatch(selectedProduct.handle)
       );
-      if (hasRuleDisabledBundle) return '';
-      return '';
     }
 
     function getBundleRuleModeByProductId(productId) {
       var p = bbState.productsById[productId];
       if (!p) return '';
-      var title = normalizeForMatch(p.title);
-      var handle = normalizeForMatch(p.handle);
-      var hasRuleDisabledBundle = (
-        title.indexOf('vip bundle') !== -1
-        || title.indexOf('all in one bundle') !== -1
-        || title.indexOf('all-in-one bundle') !== -1
-        || title.indexOf('twerk essential kit') !== -1
-        || title.indexOf('booty builder bundle') !== -1
-        || handle.indexOf('vip-bundle') !== -1
-        || handle.indexOf('all-in-one-bundle') !== -1
-        || handle.indexOf('twerk-essential-kit') !== -1
-        || handle.indexOf('booty-builder-bundle') !== -1
+      return resolveBundleRuleModeFromProduct(
+        normalizeForMatch(p.title),
+        normalizeForMatch(p.handle)
       );
-      if (hasRuleDisabledBundle) return '';
-      return '';
+    }
+
+    function isTwerkEssentialBundleOfferFlow() {
+      return skipProgramsStepOnOpen && bbState.offerFlow === 'bundle';
+    }
+
+    function getEquipmentBundleRuleMode() {
+      if (skipProgramsStepOnOpen && bbState.offerFlow !== 'bundle') return '';
+      return getSelectedBundleRuleMode();
+    }
+
+    function getTwerkEssentialFreeClothingStepIds() {
+      if (!isTwerkEssentialBundleOfferFlow()) return [];
+      if (getSelectedBundleRuleMode() !== 'vip_or_essential') return [];
+      var equipmentIdx = -1;
+      bbState.steps.forEach(function(step, index) {
+        if (step && stepIsWorkoutEquipment(step.id)) equipmentIdx = index;
+      });
+      if (equipmentIdx < 0) return [];
+      var freeStepIds = [];
+      for (var offset = 1; offset <= 3; offset++) {
+        var step = bbState.steps[equipmentIdx + offset];
+        if (!step || step.id === 'review' || step.isProgramsStep || stepIsWorkoutEquipment(step.id)) continue;
+        freeStepIds.push(String(step.id));
+      }
+      return freeStepIds;
+    }
+
+    function isTwerkEssentialFreeClothingStep(stepId) {
+      return getTwerkEssentialFreeClothingStepIds().indexOf(String(stepId)) >= 0;
+    }
+
+    function getTwerkEssentialFreeClothingProductIds() {
+      var freeIds = {};
+      if (!isTwerkEssentialBundleOfferFlow()) return freeIds;
+      var freeStepIds = getTwerkEssentialFreeClothingStepIds();
+      if (!freeStepIds.length) return freeIds;
+      var freeCount = 0;
+      bbState.selectedItems.forEach(function(item) {
+        if (freeStepIds.indexOf(String(item.stepId)) === -1) return;
+        if (freeCount >= 1) return;
+        freeIds[String(item.productId)] = true;
+        freeCount += 1;
+      });
+      return freeIds;
+    }
+
+    function hasTwerkEssentialFreeClothingSlotAvailable() {
+      return Object.keys(getTwerkEssentialFreeClothingProductIds()).length < 1;
     }
 
     function isRuleTriggerBundleProduct(productId) {
@@ -934,7 +1008,8 @@
     }
 
     function getRuleTargetByProduct(stepId, product) {
-      return getRuleTargetByProductForMode(stepId, product, getSelectedBundleRuleMode());
+      var mode = stepIsWorkoutEquipment(stepId) ? getEquipmentBundleRuleMode() : getSelectedBundleRuleMode();
+      return getRuleTargetByProductForMode(stepId, product, mode);
     }
 
     function applyWorkoutEquipmentAutoAdd(step) {
@@ -951,19 +1026,27 @@
         }, 180);
         return;
       }
+      var kneePadsProductId = null;
       var bootyBandProductId = null;
       step.productIds.forEach(function(pid) {
-        if (bootyBandProductId) return;
         var rule = getRuleTargetByProduct(step.id, bbState.productsById[pid]);
-        if (rule && rule.type === 'booty_band') bootyBandProductId = pid;
+        if (!rule) return;
+        if (rule.type === 'knee_pads' && !kneePadsProductId) kneePadsProductId = pid;
+        if (rule.type === 'booty_band' && !bootyBandProductId) bootyBandProductId = pid;
       });
-      if (!bootyBandProductId || isSelected(bootyBandProductId) || bbState.cartOperationInProgress) return;
-      addItem(step.id, bootyBandProductId, null, 1, { autoAddedByRule: true });
+      var autoAddProductId = null;
+      if (isTwerkEssentialBundleOfferFlow() && mode === 'vip_or_essential' && kneePadsProductId) {
+        autoAddProductId = kneePadsProductId;
+      } else if (bootyBandProductId) {
+        autoAddProductId = bootyBandProductId;
+      }
+      if (!autoAddProductId || isSelected(autoAddProductId) || bbState.cartOperationInProgress) return;
+      addItem(step.id, autoAddProductId, null, 1, { autoAddedByRule: true });
     }
 
     function getAllowedAutoAddedEquipmentProductIds() {
       var allowed = {};
-      var mode = getSelectedBundleRuleMode();
+      var mode = getEquipmentBundleRuleMode();
       if (!mode) return allowed;
       bbState.steps.forEach(function(step) {
         if (!step || !step.id || !stepIsWorkoutEquipment(step.id)) return;
@@ -1058,13 +1141,27 @@
       return removeItemsByProductIds(staleAutoAddedIds);
     }
 
+    function kneePadsRequiresSizeSelection(product) {
+      var variants = (product && product.variants && product.variants.nodes) || [];
+      if (variants.length <= 1) return false;
+      var selectableSizeCount = 0;
+      variants.forEach(function(v) {
+        (v.selectedOptions || []).forEach(function(o) {
+          if (String((o && o.name) || '').toLowerCase() !== 'size') return;
+          var val = String((o && o.value) || '').trim().toLowerCase();
+          if (val && val !== 'default title') selectableSizeCount += 1;
+        });
+      });
+      return selectableSizeCount > 1;
+    }
+
     function hasRequiredKneePadsSelectionForVipEssential(step) {
       if (!step || !step.id || !stepIsWorkoutEquipment(step.id)) return true;
-      if (getSelectedBundleRuleMode() !== 'vip_or_essential') return true;
+      if (getEquipmentBundleRuleMode() !== 'vip_or_essential') return true;
       var kneePadsProductId = null;
       (step.productIds || []).forEach(function(pid) {
         if (kneePadsProductId) return;
-        var rule = getRuleTargetByProduct(step.id, bbState.productsById[pid]);
+        var rule = getRuleTargetByProductForMode(step.id, bbState.productsById[pid], getEquipmentBundleRuleMode());
         if (rule && rule.type === 'knee_pads') kneePadsProductId = pid;
       });
       if (!kneePadsProductId) return true;
@@ -1073,14 +1170,8 @@
       });
       if (!selectedKneePads) return false;
       var product = bbState.productsById[kneePadsProductId];
+      if (!kneePadsRequiresSizeSelection(product)) return true;
       var variants = (product && product.variants && product.variants.nodes) || [];
-      if (!variants.length) return true;
-      var hasSizeVariants = variants.some(function(v) {
-        return (v.selectedOptions || []).some(function(o) {
-          return String((o && o.name) || '').toLowerCase() === 'size' && String((o && o.value) || '').trim() !== '';
-        });
-      });
-      if (!hasSizeVariants) return true;
       var selectedVariant = variants.find(function(v) { return String(v.id) === String(selectedKneePads.variantId); });
       if (!selectedVariant) return false;
       return (selectedVariant.selectedOptions || []).some(function(o) {
@@ -1747,6 +1838,15 @@
           hasDiscount = false;
           compareAt = null;
         }
+      } else if (isTwerkEssentialFreeClothingStep(stepId)) {
+        var twerkFreeIds = getTwerkEssentialFreeClothingProductIds();
+        var isTwerkFreeItem = !!twerkFreeIds[String(productId)] || hasTwerkEssentialFreeClothingSlotAvailable();
+        if (isTwerkFreeItem) {
+          orig = parseFloat(price);
+          final = 0;
+          hasDiscount = false;
+          compareAt = null;
+        }
       }
       var sourceCur = getProductSourceCurrency(p);
       var cur = getDisplayCurrency();
@@ -1754,14 +1854,15 @@
       var cardClass = 'bb-product-card' + (dis ? ' bb-product-card--disabled' : '');
       var busy = !!bbState.cartOperationInProgress;
       var spinnerSvg = '<span class="bb-spinner" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10" stroke-dasharray="32 56"/></svg></span>';
-      var addBtnLabel = (ruleTarget && ruleTarget.type === 'knee_pads') ? 'Select your size' : ('Add for ' + formatMoney(final, cur, sourceCur));
+      var kneePadsNeedsSize = ruleTarget && ruleTarget.type === 'knee_pads' && kneePadsRequiresSizeSelection(p);
+      var addBtnLabel = kneePadsNeedsSize ? 'Select your size' : ('Add for ' + formatMoney(final, cur, sourceCur));
       var addBtnContent = busy ? spinnerSvg + '<span class="bb-btn-text">Adding...</span>' : addBtnLabel;
       var removeBtnContent = busy ? spinnerSvg : '×';
       var btnHtml = dis
         ? '<button type="button" class="bb-product-btn bb-product-btn--disabled" disabled>Unavailable</button>'
         : sel
           ? '<button type="button" class="bb-product-btn bb-product-btn--added" disabled>Added</button><button type="button" class="bb-product-remove' + (busy ? ' bb-product-btn--loading' : '') + '" data-bb-remove="' + productId + '" aria-label="Remove"' + (busy ? ' disabled' : '') + '>' + removeBtnContent + '</button>'
-          : '<button type="button" class="bb-product-btn bb-product-btn--add' + (busy ? ' bb-product-btn--loading' : '') + '"' + (busy ? ' disabled>' : ' data-bb-add data-step="' + stepId + '" data-product="' + productId + '"' + ((ruleTarget && ruleTarget.type === 'knee_pads') ? ' data-bb-knee-pads-size-btn="true"' : '') + '>') + addBtnContent + '</button>';
+          : '<button type="button" class="bb-product-btn bb-product-btn--add' + (busy ? ' bb-product-btn--loading' : '') + '"' + (busy ? ' disabled>' : ' data-bb-add data-step="' + stepId + '" data-product="' + productId + '"' + (kneePadsNeedsSize ? ' data-bb-knee-pads-size-btn="true"' : '') + '>') + addBtnContent + '</button>';
       var priceHtml;
       if (hasDiscount) {
         priceHtml = '<span class="bb-product-original">' + formatMoney(orig, cur, sourceCur) + '</span><span class="bb-product-final">' + formatMoney(final, cur, sourceCur) + '</span><span class="bb-product-badge">-60%</span>';
@@ -2047,13 +2148,26 @@
       var price = p.priceRange && p.priceRange.minVariantPrice ? parseFloat(p.priceRange.minVariantPrice.amount) : 0;
       var compareAt = p.compareAtPriceRange && p.compareAtPriceRange.minVariantPrice ? parseFloat(p.compareAtPriceRange.minVariantPrice.amount) : null;
       var ruleTarget = getRuleTargetByProduct(item.stepId, p);
-      if (ruleTarget && ruleTarget.free) return { orig: 0, final: 0 };
-      if (isBodyTransformationFreeBundleLineForSecondStep(item)) return { orig: 0, final: 0 };
+      if (ruleTarget && ruleTarget.free) {
+        var ruleFreeOrig = (compareAt != null && compareAt > price) ? compareAt : price;
+        return { orig: ruleFreeOrig, final: 0 };
+      }
+      if (isBodyTransformationFreeBundleLineForSecondStep(item)) {
+        var btFreeOrig = (compareAt != null && compareAt > price) ? compareAt : price;
+        return { orig: btFreeOrig, final: 0 };
+      }
       if (isExtraStep(item.stepId) && hasSelectedProgramPackInProgramsStep()) {
         var extraFreeIds = getFreeExtraStepProductIds();
         if (extraFreeIds[String(item.productId)]) {
           var extraStepOrig = (compareAt != null && compareAt > price) ? compareAt : price;
           return { orig: extraStepOrig, final: 0 };
+        }
+      }
+      if (isTwerkEssentialFreeClothingStep(item.stepId)) {
+        var twerkFreeIds = getTwerkEssentialFreeClothingProductIds();
+        if (twerkFreeIds[String(item.productId)]) {
+          var twerkStepOrig = (compareAt != null && compareAt > price) ? compareAt : price;
+          return { orig: twerkStepOrig, final: 0 };
         }
       }
       var step = bbState.steps.find(function(s) { return s.id === item.stepId; });
@@ -2822,6 +2936,7 @@
       var forceAutoAddFromOffer = !!(offerAutostart && offerAutostart.autoAddBootyBand);
       var startStepIndex = (offerAutostart && offerAutostart.advanceToStep2) ? 1 : 0;
       if (skipProgramsStepOnOpen) startStepIndex = Math.max(startStepIndex, 1);
+      bbState.offerFlow = offerFlow;
       bbState.allowStep2AutoAdd = !skipProgramsStepOnOpen || offerFlow === 'bundle' || forceAutoAddFromOffer;
       bbState.forceOfferStep2AutoAdd = !!forceAutoAddFromOffer;
       if (typeof window !== 'undefined') window.__bt_bb_offer_autostart = null;
@@ -2926,7 +3041,11 @@
         }
         if (typeof window === 'undefined') return;
         var targetIndex = null;
-        if (typeof window.__bt_bb_preselect_program_index === 'number' && isFinite(window.__bt_bb_preselect_program_index)) {
+        if (skipProgramsStepOnOpen && bbState.offerFlow === 'single') {
+          targetIndex = 1;
+        } else if (skipProgramsStepOnOpen && bbState.offerFlow === 'bundle') {
+          targetIndex = 0;
+        } else if (typeof window.__bt_bb_preselect_program_index === 'number' && isFinite(window.__bt_bb_preselect_program_index)) {
           targetIndex = Math.max(0, Math.floor(window.__bt_bb_preselect_program_index));
         } else if (window.__bt_bb_preselect_second) {
           targetIndex = 1;
@@ -2949,6 +3068,7 @@
 
     function closeWizard(options) {
       var closeOptions = options && typeof options === 'object' ? options : {};
+      bbState.offerFlow = '';
       bbState.isOpen = false;
       wizardEl.classList.add('bb-wizard-overlay--hidden');
       wizardEl.setAttribute('aria-hidden', 'true');
