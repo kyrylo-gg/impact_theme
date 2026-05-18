@@ -154,6 +154,8 @@
       || templateSuffix === 'nass_fans_ab'
       || templateSuffix === 'twerk-program-r1'
       || templateSuffix === 'twerk_program_r1';
+    const isTwerkProgramR1Template = templateSuffix === 'twerk-program-r1'
+      || templateSuffix === 'twerk_program_r1';
     const allowBootyBuilderRuleMode = true;
     const bodyClassName = (typeof document !== 'undefined' && document.body && document.body.className)
       ? String(document.body.className).toLowerCase()
@@ -1912,7 +1914,16 @@
         } else if (titleIsMegaPack) {
           badgeLabel = 'Best Value';
         } else if (hasTwerkProgram || titleIsTwerkProgram) {
-          badgeLabel = '';
+          if (
+            isTwerkProgramR1Template
+            && !hasPackOrBundle
+            && !hasVipBundle
+            && !titleIsVipBundle
+          ) {
+            badgeLabel = 'Special';
+          } else {
+            badgeLabel = '';
+          }
         }
       }
       var badgeHtml = badgeLabel ? '<div class="bb-product-top-badge" aria-hidden="true">' + badgeLabel + '</div>' : '';
