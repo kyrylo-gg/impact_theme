@@ -639,7 +639,6 @@
     },
     "nass_countdown_NypKK7": {
       "type": "nass-countdown",
-      "disabled": true,
       "name": "NASS Countdown Banner",
       "settings": {
         "show_announcement": true,
