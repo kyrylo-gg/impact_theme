@@ -74,6 +74,22 @@
         "deadline_text": "The offer is valid for 72 hours only"
       }
     },
+    "countdown_timer_c7DARj": {
+      "type": "countdown-timer",
+      "name": "Countdown Timer",
+      "settings": {
+        "countdown_mode": "fixed",
+        "heading": "HURRY UP! THE SALE ENDS IN:",
+        "initial_days": 0,
+        "initial_hours": 23,
+        "initial_minutes": 0,
+        "initial_seconds": 0,
+        "label_days": "Days",
+        "label_hours": "Hours",
+        "label_minutes": "Minutes",
+        "label_seconds": "Seconds"
+      }
+    },
     "video_reviews_grid_qJDr4j": {
       "type": "video-reviews-grid",
       "blocks": {
@@ -1259,6 +1275,7 @@
   "order": [
     "hero_video",
     "hero_banner_main",
+    "countdown_timer_c7DARj",
     "video_reviews_grid_qJDr4j",
     "twerk_lessons_MWt6Ji",
     "program_cards_ykQqNc",
