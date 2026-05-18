@@ -671,26 +671,10 @@
           "type": "bundle_step",
           "settings": {
             "title": "Select programs",
-            "collection": "bundle-programs-ab-a-copy-2",
+            "collection": "bundle-r1",
             "is_programs_step": true,
             "program_pack_product": "vip-bundle",
-            "program_pack_product_secondary": "all-in-one-bundle"
-          }
-        },
-        "extra_step_CUbUTV": {
-          "type": "extra_step",
-          "disabled": true,
-          "settings": {
-            "title": "select free shorts",
-            "collection": "biker-shorts"
-          }
-        },
-        "extra_step_pk4Kjz": {
-          "type": "extra_step",
-          "disabled": true,
-          "settings": {
-            "title": "select free top",
-            "collection": "halter-tops"
+            "program_pack_product_secondary": ""
           }
         },
         "bundle_step_KMpd7k": {
@@ -746,8 +730,6 @@
       },
       "block_order": [
         "step_programs",
-        "extra_step_CUbUTV",
-        "extra_step_pk4Kjz",
         "bundle_step_KMpd7k",
         "step_shorts",
         "step_leggings",
@@ -779,7 +761,7 @@
         "one_click_product": "twerk-program-lovable",
         "one_click_label": "Twerk program",
         "program_pack_product": "vip-bundle",
-        "program_pack_product_secondary": "all-in-one-bundle",
+        "program_pack_product_secondary": "",
         "discount_code": "",
         "show_discount_banner": true,
         "discount_promo_text": "2 Free Items with VIP Bundle Until 5/31",
