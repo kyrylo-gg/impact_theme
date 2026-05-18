@@ -365,6 +365,7 @@
         "program_card_6rgVPi",
         "program_card_RTXiLb"
       ],
+      "disabled": true,
       "settings": {
         "heading": "ALL NASS BESTSELLERS",
         "heading_highlight": "AT THE DANCE DAY PRICE"
@@ -622,6 +623,7 @@
     },
     "nass_countdown_NypKK7": {
       "type": "nass-countdown",
+      "disabled": true,
       "name": "NASS Countdown Banner",
       "settings": {
         "show_announcement": true,
@@ -746,13 +748,13 @@
         "bb_description": "Mix programs, shorts, and tops. Get 60% off all clothing when you purchase the VIP Bundle or All-In-One Bundles",
         "bb_badge_pill_text": "2 Free Items with VIP Bundle or All-In-One Bundles Until 5/31",
         "bb_promo_banner_text": "60% OFF ALL CLOTHING / with VIP  or All-In One Bundle purchase",
-        "bb_show_countdown": false,
-        "bb_countdown_mode": "daily_kyiv_10am",
+        "bb_show_countdown": true,
+        "bb_countdown_mode": "fixed",
         "bb_countdown_heading": "HURRY UP! THE SALE ENDS IN:",
         "bb_initial_days": 0,
-        "bb_initial_hours": 16,
-        "bb_initial_minutes": 11,
-        "bb_initial_seconds": 20,
+        "bb_initial_hours": 23,
+        "bb_initial_minutes": 0,
+        "bb_initial_seconds": 0,
         "bb_label_days": "Days",
         "bb_label_hours": "Hours",
         "bb_label_minutes": "Minutes",
