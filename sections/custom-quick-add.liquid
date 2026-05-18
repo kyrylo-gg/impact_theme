@@ -531,7 +531,8 @@
     if timer_type == 'cancel_time'
       assign timer_minutes = section.settings.cancel_minutes
       assign timer_hours = section.settings.cancel_time | times: 60
-      assign timer_target = timer_minutes | plus: timer_hours
+      assign timer_days = section.settings.cancel_days | times: 1440
+      assign timer_target = timer_minutes | plus: timer_hours | plus: timer_days
     endif
   %}
 {% endif %}
@@ -809,8 +810,18 @@
     },
     {
       "type": "range",
+      "id": "cancel_days",
+      "label": "Cancel time for countdown (days)",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "d",
+      "default": 0
+    },
+    {
+      "type": "range",
       "id": "cancel_time",
-      "label": "Cancel time for countdown",
+      "label": "Cancel time for countdown (hours)",
       "min": 0,
       "max": 24,
       "step": 1,

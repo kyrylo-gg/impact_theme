@@ -1,11 +1,16 @@
 {%- liquid
   assign end_iso = section.settings.end_date | strip | replace: ' ', 'T'
+  assign countdown_mode = section.settings.countdown_mode | default: 'daily_kyiv_10am'
+  assign initial_days = section.settings.initial_days | default: 0
+  assign initial_hours = section.settings.initial_hours | default: 0
+  assign initial_minutes = section.settings.initial_minutes | default: 0
+  assign initial_seconds = section.settings.initial_seconds | default: 0
 -%}
 
 <section
   class="nass-countdown"
   data-section-id="{{ section.id }}"
-  data-mode="daily_kyiv_10am"
+  data-mode="{{ countdown_mode | escape }}"
   data-end="{{ end_iso | escape }}"
   data-expired-text="{{ section.settings.expired_text | escape }}"
   style="
@@ -125,22 +130,22 @@
 
       <div class="nass-timer" role="timer" aria-live="polite">
         <div class="nass-timer__unit">
-          <div class="nass-timer__box"><span data-unit="days">00</span></div>
+          <div class="nass-timer__box"><span data-unit="days">{{ initial_days | prepend: '00' | slice: -2, 2 }}</span></div>
           <div class="nass-timer__label">{{ section.settings.label_days | escape }}</div>
         </div>
         <span class="nass-timer__sep" aria-hidden="true">:</span>
         <div class="nass-timer__unit">
-          <div class="nass-timer__box"><span data-unit="hours">00</span></div>
+          <div class="nass-timer__box"><span data-unit="hours">{{ initial_hours | prepend: '00' | slice: -2, 2 }}</span></div>
           <div class="nass-timer__label">{{ section.settings.label_hours | escape }}</div>
         </div>
         <span class="nass-timer__sep" aria-hidden="true">:</span>
         <div class="nass-timer__unit">
-          <div class="nass-timer__box"><span data-unit="minutes">00</span></div>
+          <div class="nass-timer__box"><span data-unit="minutes">{{ initial_minutes | prepend: '00' | slice: -2, 2 }}</span></div>
           <div class="nass-timer__label">{{ section.settings.label_minutes | escape }}</div>
         </div>
         <span class="nass-timer__sep" aria-hidden="true">:</span>
         <div class="nass-timer__unit">
-          <div class="nass-timer__box"><span data-unit="seconds">00</span></div>
+          <div class="nass-timer__box"><span data-unit="seconds">{{ initial_seconds | prepend: '00' | slice: -2, 2 }}</span></div>
           <div class="nass-timer__label">{{ section.settings.label_seconds | escape }}</div>
         </div>
       </div>
@@ -171,7 +176,53 @@
     { "type": "checkbox", "id": "show_arrows", "label": "Show arrows around title", "default": true },
 
     { "type": "header", "content": "Countdown Timer" },
-    { "type": "text", "id": "end_date", "label": "End date (YYYY-MM-DD HH:MM, store timezone)", "info": "Example: 2026-05-31 23:59", "default": "2026-05-31 23:59" },
+    {
+      "type": "select",
+      "id": "countdown_mode",
+      "label": "Countdown mode",
+      "options": [
+        { "value": "fixed", "label": "Fixed (start from initial values)" },
+        { "value": "daily_kyiv_10am", "label": "Daily: until 10:00 AM Kyiv (resets every 24h)" }
+      ],
+      "default": "daily_kyiv_10am"
+    },
+    {
+      "type": "range",
+      "id": "initial_days",
+      "label": "Starting days",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "initial_hours",
+      "label": "Starting hours",
+      "min": 0,
+      "max": 23,
+      "step": 1,
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "initial_minutes",
+      "label": "Starting minutes",
+      "min": 0,
+      "max": 59,
+      "step": 1,
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "initial_seconds",
+      "label": "Starting seconds",
+      "min": 0,
+      "max": 59,
+      "step": 1,
+      "default": 0
+    },
+    { "type": "text", "id": "end_date", "label": "End date (YYYY-MM-DD HH:MM, store timezone)", "info": "Used when countdown mode is not Fixed or Daily Kyiv. Example: 2026-05-31 23:59", "default": "2026-05-31 23:59" },
     { "type": "text", "id": "label_days", "label": "Days label", "default": "Days" },
     { "type": "text", "id": "label_hours", "label": "Hours label", "default": "Hours" },
     { "type": "text", "id": "label_minutes", "label": "Minutes label", "default": "Minutes" },

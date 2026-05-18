@@ -74,16 +74,46 @@
       return new Date(endRaw).getTime();
     }
 
+    function renderFromTotalSeconds(totalSeconds) {
+      if (slots.days) slots.days.textContent = pad(Math.floor(totalSeconds / 86400));
+      if (slots.hours) slots.hours.textContent = pad(Math.floor((totalSeconds % 86400) / 3600));
+      if (slots.minutes) slots.minutes.textContent = pad(Math.floor((totalSeconds % 3600) / 60));
+      if (slots.seconds) slots.seconds.textContent = pad(totalSeconds % 60);
+    }
+
+    function showExpired() {
+      Object.values(slots).forEach(function (el) {
+        if (el) el.textContent = '00';
+      });
+      if (timerEl && expiredText) timerEl.setAttribute('aria-label', expiredText);
+      teardownSection(section);
+    }
+
+    var fixedTotalSeconds = null;
+    if (mode === 'fixed') {
+      fixedTotalSeconds =
+        parseInt(slots.days && slots.days.textContent, 10) * 86400 +
+        parseInt(slots.hours && slots.hours.textContent, 10) * 3600 +
+        parseInt(slots.minutes && slots.minutes.textContent, 10) * 60 +
+        parseInt(slots.seconds && slots.seconds.textContent, 10);
+    }
+
     function tick() {
+      if (mode === 'fixed') {
+        if (fixedTotalSeconds <= 0) {
+          showExpired();
+          return;
+        }
+        renderFromTotalSeconds(fixedTotalSeconds);
+        fixedTotalSeconds--;
+        return;
+      }
+
       var end = getEndTimestamp();
       if (Number.isNaN(end)) return;
       var diff = end - Date.now();
       if (diff <= 0) {
-        Object.values(slots).forEach(function (el) {
-          if (el) el.textContent = '00';
-        });
-        if (timerEl && expiredText) timerEl.setAttribute('aria-label', expiredText);
-        teardownSection(section);
+        showExpired();
         return;
       }
 
