@@ -763,7 +763,7 @@
         "bb_title_accent": "TWERK LIKE A PRO.",
         "bb_description": "Mix programs, shorts, and tops. Get 60% off all clothing when you purchase the VIP Bundle",
         "bb_badge_pill_text": "Save up to 82%",
-        "bb_promo_banner_text": "60% OFF ALL CLOTHING / with VIP  or All-In One Bundle purchase",
+        "bb_promo_banner_text": "60% OFF ALL CLOTHING / with VIP  Bundle purchase",
         "bb_show_countdown": true,
         "bb_countdown_mode": "fixed",
         "bb_countdown_heading": "HURRY UP! THE SALE ENDS IN:",
@@ -782,7 +782,7 @@
         "program_pack_product_secondary": "all-in-one-bundle",
         "discount_code": "",
         "show_discount_banner": true,
-        "discount_promo_text": "2 Free Items with VIP Bundle or All-In-One Bundles Until 5/31",
+        "discount_promo_text": "2 Free Items with VIP Bundle Until 5/31",
         "discount_applied_text": "2 Free Products applied!",
         "size_chart_config_handle": "size-chart-settings",
         "storefront_api_token": "568094b7f376083a4b0dc6fee4785741"
