@@ -151,7 +151,9 @@
       || templateSuffix === 'nass-fans'
       || templateSuffix === 'nass_fans'
       || templateSuffix === 'nass-fans-ab'
-      || templateSuffix === 'nass_fans_ab';
+      || templateSuffix === 'nass_fans_ab'
+      || templateSuffix === 'twerk-program-r1'
+      || templateSuffix === 'twerk_program_r1';
     const allowBootyBuilderRuleMode = true;
     const bodyClassName = (typeof document !== 'undefined' && document.body && document.body.className)
       ? String(document.body.className).toLowerCase()
@@ -708,6 +710,7 @@
         return String(item.stepId) === String(programsStep.id);
       });
       if (!selectedProgramItem) return false;
+      if (isProgramPack(selectedProgramItem.productId)) return true;
       var selectedProduct = bbState.productsById[selectedProgramItem.productId];
       if (!selectedProduct) return false;
       var handle = String(selectedProduct.handle || '').toLowerCase().trim();
