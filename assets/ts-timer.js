@@ -15,8 +15,11 @@ class TSTimer extends HTMLElement {
         this.endDate = this.parseDateInput(this.timeTarget);
         break;
       case "cancel_time":
-        const targetMinutes = parseInt(this.timeTarget);
-        this.endDate = new Date(Date.now() + targetMinutes * 60 * 1000).getTime();
+        const targetValue = parseInt(this.timeTarget, 10) || 0;
+        const targetMs = this.dataset.targetUnit === "seconds"
+          ? targetValue * 1000
+          : targetValue * 60 * 1000;
+        this.endDate = new Date(Date.now() + targetMs).getTime();
         break;
       case "daily":
         this.endDate = this.getEndOfDayTimestampLA();
