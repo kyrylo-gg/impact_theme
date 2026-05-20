@@ -114,7 +114,9 @@
       || templateSuffix === 'booty_builder'
       || templateSuffix === 'booty-builder'
       || templateSuffix === 'twerk_essential'
-      || templateSuffix === 'twerk-essential';
+      || templateSuffix === 'twerk-essential'
+      || templateSuffix === 'twerk-program-r1'
+      || templateSuffix === 'twerk_program_r1';
     const isHipsSingleProgramTemplate = templateSuffix === 'hips_a'
       || templateSuffix === 'hips_a_ceo'
       || templateSuffix === 'hips_b'

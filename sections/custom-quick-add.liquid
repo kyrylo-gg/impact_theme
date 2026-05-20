@@ -674,10 +674,12 @@
     const sticky = document.getElementById('quick-add-sticky-{{ section.id }}');
     const buyButtons = document.querySelector('.buy-buttons');
     const bundleBuilder = document.getElementById('nass-bundle-builder');
+    const nassCountdownBanner = document.querySelector('.nass-countdown');
     const twerkOfferBlock = document.getElementById('nass-twerk-offer-block');
     const searchParams = new URLSearchParams(window.location.search);
     const isBodyTransformationPage = document.body.classList.contains('product--body_transformation');
     const isTwerkEssentialPage = document.body.classList.contains('product--twerk_essential');
+    const isTwerkProgramR1Page = document.body.classList.contains('product--twerk-program-r1');
 
     if (sticky) {
       sticky.classList.add('show');
@@ -689,12 +691,24 @@
 
     if (!sticky) return;
 
+    function hasPassedCountdownAnchor(el) {
+      if (!el) return true;
+      return el.getBoundingClientRect().bottom <= 0;
+    }
+
     function updateStickyVisibility() {
       const hideOriginal = original && isElementInViewport(original, 0.1);
       const hideBuyButtons = !isBodyTransformationPage && buyButtons && isElementInViewport(buyButtons, 0.15);
       const hideBundleBuilder = bundleBuilder && isElementInViewport(bundleBuilder, 0.1);
       const hideTwerkOfferBlock = isTwerkEssentialPage && twerkOfferBlock && isElementInViewport(twerkOfferBlock, 0.1);
-      const hide = hideOriginal || hideBuyButtons || hideBundleBuilder || hideTwerkOfferBlock;
+      const hideUntilCountdownPassed = isTwerkProgramR1Page
+        && nassCountdownBanner
+        && !hasPassedCountdownAnchor(nassCountdownBanner);
+      const hide = hideOriginal
+        || hideBuyButtons
+        || hideBundleBuilder
+        || hideTwerkOfferBlock
+        || hideUntilCountdownPassed;
       if (hide) {
         sticky.classList.add('hidden');
       } else {
