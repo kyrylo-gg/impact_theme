@@ -601,6 +601,7 @@
         },
         "step_leggings": {
           "type": "bundle_step",
+          "disabled": true,
           "settings": {
             "title": "Add sport shorts",
             "collection": "bundle-sport-shorts",
@@ -611,6 +612,7 @@
         },
         "step_swimshorts": {
           "type": "bundle_step",
+          "disabled": true,
           "settings": {
             "title": "Add swim shorts",
             "collection": "bundle-swim-shorts",
@@ -631,6 +633,7 @@
         },
         "bundle_step_bb96UU": {
           "type": "bundle_step",
+          "disabled": true,
           "settings": {
             "title": "Workout Equipment",
             "collection": "bundle-equipment",
@@ -657,6 +660,7 @@
         "bb_title_prefix": "BUILD YOUR",
         "bb_title_accent": "PERFECT BOOTY!",
         "bb_description": "Mix programs, shorts, and tops. Get 60% off all clothing when you add the 4 Programs Bundle.",
+        "bb_badge_pill_text": "Save up to 82%",
         "bb_promo_banner_text": "60% OFF ALL CLOTHING / with Program Pack purchase",
         "bb_show_countdown": true,
         "bb_countdown_mode": "daily_kyiv_10am",
@@ -873,8 +877,10 @@
         "timer_enabled": true,
         "timer_type": "daily",
         "cancel_date": "01-01-2026 12:00",
+        "cancel_days": 0,
         "cancel_time": 0,
         "cancel_minutes": 29,
+        "cancel_seconds": 0,
         "cancel_action": "none",
         "countdown_background": "#313131",
         "countdown_color": "#ffffff",
