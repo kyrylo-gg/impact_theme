@@ -161,6 +161,238 @@
         "input_text_color": ""
       }
     },
+    "confidence_without_pressure_pop": {
+      "type": "confidence-without-pressure",
+      "blocks": {
+        "confidence_pain_1": {
+          "type": "pain_card",
+          "settings": {
+            "alt": "Diet routines feel restrictive",
+            "text": "Strict diets and fitness pressure feel impossible to maintain."
+          }
+        },
+        "confidence_pain_2": {
+          "type": "pain_card",
+          "settings": {
+            "alt": "Early alarm burnout",
+            "text": "Early alarms and exhausting plans quickly drain your motivation."
+          }
+        },
+        "confidence_pain_3": {
+          "type": "pain_card",
+          "settings": {
+            "alt": "Gym anxiety",
+            "text": "Gym routines can feel overwhelming and disconnected from real confidence."
+          }
+        }
+      },
+      "block_order": [
+        "confidence_pain_1",
+        "confidence_pain_2",
+        "confidence_pain_3"
+      ],
+      "settings": {
+        "heading_part1": "Get confidence and results",
+        "heading_part2": "without pressure",
+        "accent_color": "#0038FF",
+        "subheading": "A regular fitness routine has always been complicated for most women.",
+        "footer_copy": "<p>Try <strong>dance as your fitness routine</strong> to <u>keep your body toned</u> and <u>uplift your mood</u>.</p>"
+      }
+    },
+    "dance_workouts_pop": {
+      "type": "dance-workouts",
+      "blocks": {
+        "dance_benefit_1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "🍑",
+            "title": "Sculpts your booty",
+            "description": "<p>Focused choreography activates glutes and helps build shape.</p>",
+            "column": "left"
+          }
+        },
+        "dance_benefit_2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "🔥",
+            "title": "Burns calories fast",
+            "description": "<p>High-energy moves keep your heart rate up and your body toned.</p>",
+            "column": "left"
+          }
+        },
+        "dance_benefit_3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "🕒",
+            "title": "Fits your schedule",
+            "description": "<p>Short classes make consistency realistic even on busy days.</p>",
+            "column": "left"
+          }
+        },
+        "dance_benefit_4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "✨",
+            "title": "Boosts confidence",
+            "description": "<p>Feel stronger and more expressive with every session.</p>",
+            "column": "right"
+          }
+        },
+        "dance_benefit_5": {
+          "type": "benefit",
+          "settings": {
+            "icon": "🎵",
+            "title": "Feels like fun",
+            "description": "<p>Train with rhythm instead of forcing boring routines.</p>",
+            "column": "right"
+          }
+        },
+        "dance_benefit_6": {
+          "type": "benefit",
+          "settings": {
+            "icon": "🌍",
+            "title": "Train from anywhere",
+            "description": "<p>All you need is your phone and a little space at home.</p>",
+            "column": "right"
+          }
+        }
+      },
+      "block_order": [
+        "dance_benefit_1",
+        "dance_benefit_2",
+        "dance_benefit_3",
+        "dance_benefit_4",
+        "dance_benefit_5",
+        "dance_benefit_6"
+      ],
+      "settings": {
+        "heading_part1": "Dance Workouts",
+        "heading_part2": "That Feel Like Fun",
+        "accent_color": "#0038FF",
+        "video": "shopify://files/videos/Video2_NASS_b25922ad-a72c-44e1-808a-919d96bd1575.mp4",
+        "video_glow": "#FFF600",
+        "cta_text": "Claim Special Offer",
+        "cta_url": "#",
+        "trust_1": "30-Day Money-Back Guarantee",
+        "trust_2": "World-Famous support"
+      }
+    },
+    "nass_programs_pop": {
+      "type": "nass-programs",
+      "blocks": {
+        "nass_program_card_1": {
+          "type": "card",
+          "settings": {
+            "title": "Created by Nastya NASS",
+            "description": "<p>Each program is personally designed based on her <strong>10+ years of dance</strong> and fitness experience.</p>",
+            "style": "default",
+            "image_position": "center"
+          }
+        },
+        "nass_program_card_2": {
+          "type": "card",
+          "settings": {
+            "title": "6,000+ Girls in the Community",
+            "description": "<p>Join a vibrant and <strong>supportive community</strong> growing stronger together.</p>",
+            "style": "default",
+            "image_position": "center"
+          }
+        },
+        "nass_program_card_3": {
+          "type": "card",
+          "settings": {
+            "title": "7-Day Structured Twerk Program",
+            "description": "<p><strong>A step-by-step system</strong> to help you master the basics and feel real progress in just one week.</p>",
+            "style": "default",
+            "image_position": "center"
+          }
+        },
+        "nass_program_card_4": {
+          "type": "card",
+          "settings": {
+            "title": "Short, Effective Lessons",
+            "description": "<p>Workouts that <strong>fit easily into your day</strong> without overwhelming your schedule.</p>",
+            "style": "default",
+            "image_position": "center"
+          }
+        },
+        "nass_program_card_5": {
+          "type": "card",
+          "settings": {
+            "title": "Instant Access in the NASS App",
+            "description": "<p>Train anytime, <strong>anywhere with full access</strong> to all recorded video lessons.</p>",
+            "style": "app_blue",
+            "image_position": "center"
+          }
+        },
+        "nass_program_card_6": {
+          "type": "card",
+          "settings": {
+            "title": "Confidence & Feminine Energy Focus",
+            "description": "<p>Not just technique - but movement, <strong>self-expression</strong>, and confidence in your body.</p>",
+            "style": "default",
+            "image_position": "center"
+          }
+        }
+      },
+      "block_order": [
+        "nass_program_card_1",
+        "nass_program_card_2",
+        "nass_program_card_3",
+        "nass_program_card_4",
+        "nass_program_card_5",
+        "nass_program_card_6"
+      ],
+      "settings": {
+        "heading_part_1": "WHAT MAKES NASS",
+        "heading_part_2": "PROGRAMS DIFFERENT?",
+        "accent_color": "#0038FF",
+        "cta_text": "Shop Booty Programs",
+        "cta_link": "#",
+        "badge_1_text": "30-Day Money-Back Guarantee",
+        "badge_2_text": "World-Famous support"
+      }
+    },
+    "ready_to_shine_pop": {
+      "type": "ready-to-shine",
+      "blocks": {
+        "ready_card_1": {
+          "type": "card",
+          "settings": {
+            "emoji": "⚡",
+            "title": "For women who want to feel confident and powerful",
+            "text": "Feel strong, feminine, and in control of your body."
+          }
+        },
+        "ready_card_2": {
+          "type": "card",
+          "settings": {
+            "emoji": "🤸",
+            "title": "For those who are tired of boring workouts and stressful fitness routines",
+            "text": "Replace pressure with movement that feels energizing and fun."
+          }
+        },
+        "ready_card_3": {
+          "type": "card",
+          "settings": {
+            "emoji": "😌",
+            "title": "For all levels, from beginners to advanced",
+            "text": "Start where you are and progress with clear, guided lessons."
+          }
+        }
+      },
+      "block_order": [
+        "ready_card_1",
+        "ready_card_2",
+        "ready_card_3"
+      ],
+      "settings": {
+        "heading_prefix": "For Every Woman",
+        "heading_accent": "Ready to Shine",
+        "accent_color": "#0038FF",
+        "glow_color": "#FFF600"
+      }
+    },
     "rich_text_B46AnJ": {
       "type": "rich-text",
       "blocks": {
@@ -269,6 +501,10 @@
   "order": [
     "zp-product-header-content",
     "main",
+    "confidence_without_pressure_pop",
+    "dance_workouts_pop",
+    "nass_programs_pop",
+    "ready_to_shine_pop",
     "rich_text_B46AnJ",
     "1678891879e610efa5",
     "033c843a-f56c-4c1c-9e96-37189e8792f5",

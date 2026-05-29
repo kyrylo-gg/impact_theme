@@ -1,0 +1,492 @@
+<section class="nass-programs" id="nass-programs-{{ section.id }}" data-nass-programs>
+  <div class="nass-programs__container">
+    <h2 class="nass-programs__heading">
+      <span class="nass-programs__heading-part1">{{ section.settings.heading_part_1 | escape }}</span>
+      <span class="nass-programs__heading-part2"> {{ section.settings.heading_part_2 | escape }}</span>
+    </h2>
+    <div class="nass-programs__underline" aria-hidden="true"></div>
+
+    <div class="nass-programs__carousel">
+      <div class="nass-programs__track" data-nass-programs-track>
+        {% for block in section.blocks %}
+          {% assign card_style = block.settings.style | default: 'default' %}
+          {% assign image_position = block.settings.image_position | default: 'center' %}
+          {% assign image_style = 'object-position:' | append: image_position | append: ';' %}
+          <article class="nass-programs__card nass-programs__card--{{ card_style }}" {{ block.shopify_attributes }}>
+            {% if block.settings.image != blank %}
+              {{
+                block.settings.image
+                | image_url: width: 900
+                | image_tag:
+                  class: 'nass-programs__image',
+                  loading: 'lazy',
+                  alt: block.settings.title,
+                  style: image_style
+              }}
+            {% endif %}
+            <div class="nass-programs__gradient" aria-hidden="true"></div>
+            <div class="nass-programs__caption">
+              <h3 class="nass-programs__title">{{ block.settings.title | escape }}</h3>
+              <div class="nass-programs__description rte">{{ block.settings.description }}</div>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="nass-programs__dots" data-nass-programs-dots aria-hidden="true">
+      {% for block in section.blocks %}
+        <span class="nass-programs__dot{% if forloop.first %} is-active{% endif %}"></span>
+      {% endfor %}
+    </div>
+
+    <div class="nass-programs__cta-wrap">
+      <a class="nass-programs__cta" href="{{ section.settings.cta_link | default: '#' }}">
+        <span>{{ section.settings.cta_text | escape }}</span>
+        <span class="nass-programs__cta-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            <path d="M13 6L19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </span>
+      </a>
+
+      <div class="nass-programs__trust" role="list">
+        <span class="nass-programs__trust-item" role="listitem">
+          <span class="nass-programs__trust-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 3L5 6V11C5 15.55 8.05 19.74 12 21C15.95 19.74 19 15.55 19 11V6L12 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M9.5 12.5L11.2 14.2L14.8 10.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+          {{ section.settings.badge_1_text | escape }}
+        </span>
+        <span class="nass-programs__trust-item" role="listitem">
+          <span class="nass-programs__trust-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"></circle>
+              <path d="M8.8 12.2L11.1 14.4L15.3 10.1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+          {{ section.settings.badge_2_text | escape }}
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function() {
+    var root = document.querySelector('#nass-programs-{{ section.id }}');
+    if (!root) return;
+    var track = root.querySelector('[data-nass-programs-track]');
+    var dotsWrap = root.querySelector('[data-nass-programs-dots]');
+    if (!track || !dotsWrap) return;
+    var dots = Array.prototype.slice.call(dotsWrap.querySelectorAll('.nass-programs__dot'));
+    if (!dots.length) return;
+
+    function setActive(index) {
+      dots.forEach(function(dot, idx) {
+        dot.classList.toggle('is-active', idx === index);
+      });
+    }
+
+    var ticking = false;
+    track.addEventListener('scroll', function() {
+      if (window.matchMedia('(min-width: 768px)').matches) return;
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function() {
+        ticking = false;
+        var slide = track.querySelector('.nass-programs__card');
+        if (!slide) return;
+        var styles = window.getComputedStyle(track);
+        var gap = parseFloat(styles.columnGap || styles.gap || '0') || 0;
+        var width = slide.getBoundingClientRect().width + gap;
+        var idx = Math.round(track.scrollLeft / width);
+        idx = Math.max(0, Math.min(idx, dots.length - 1));
+        setActive(idx);
+      });
+    }, { passive: true });
+  })();
+</script>
+
+{% stylesheet %}
+  .nass-programs {
+    --nass-programs-accent: {{ section.settings.accent_color | default: '#0038FF' }};
+    padding: clamp(3rem, 8vw, 6rem) 20px;
+  }
+
+  .nass-programs__container {
+    max-width: 1183px;
+    margin: 0 auto;
+  }
+
+  .nass-programs__heading {
+    margin: 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-size: clamp(1.5rem, 4.5vw, 2.1875rem);
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+  }
+
+  .nass-programs__heading-part1 {
+    color: #000;
+    font-weight: 600;
+  }
+
+  .nass-programs__heading-part2 {
+    color: var(--nass-programs-accent);
+    font-weight: 900;
+  }
+
+  .nass-programs__underline {
+    width: 60px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--nass-programs-accent);
+    margin: 16px auto 0;
+  }
+
+  .nass-programs__carousel {
+    margin-top: 40px;
+  }
+
+  .nass-programs__track {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .nass-programs__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nass-programs__card {
+    flex: 0 0 85%;
+    max-width: 335px;
+    scroll-snap-align: start;
+    position: relative;
+    border-radius: 30px;
+    overflow: hidden;
+    background: #000;
+    aspect-ratio: 381 / 450;
+  }
+
+  .nass-programs__card--app_blue {
+    background: linear-gradient(180deg, #000000 0%, #0038ff 100%);
+  }
+
+  .nass-programs__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  .nass-programs__card--app_blue .nass-programs__image {
+    object-fit: contain;
+    padding: 16px 16px 110px;
+  }
+
+  .nass-programs__gradient {
+    position: absolute;
+    inset: 35% 0 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
+    pointer-events: none;
+  }
+
+  .nass-programs__card--app_blue .nass-programs__gradient {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 15%, rgba(0, 0, 0, 0.5) 100%);
+  }
+
+  .nass-programs__caption {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    border-radius: 24px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(32px);
+    -webkit-backdrop-filter: blur(32px);
+  }
+
+  .nass-programs__title {
+    margin: 0;
+    color: #fff600;
+    font-family: var(--font-body--family, 'Avenir'), 'Avenir', 'Avenir Next', Arial, sans-serif;
+    font-size: clamp(1.125rem, 2.2vw, 1.5rem);
+    line-height: 1.2;
+    font-weight: 800;
+  }
+
+  .nass-programs__description {
+    margin-top: 8px;
+    color: #fff;
+    font-family: var(--font-body--family, 'Avenir'), 'Avenir', 'Avenir Next', Arial, sans-serif;
+    font-size: clamp(1rem, 1.8vw, 1.125rem);
+    line-height: 1.35;
+    font-weight: 500;
+  }
+
+  .nass-programs__description p {
+    margin: 0;
+  }
+
+  .nass-programs__description strong {
+    font-weight: 800;
+  }
+
+  .nass-programs__dots {
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .nass-programs__dot {
+    width: 20px;
+    height: 3px;
+    border-radius: 999px;
+    background: rgba(138, 138, 138, 0.4);
+    transition: width 150ms ease, background-color 150ms ease;
+  }
+
+  .nass-programs__dot.is-active {
+    width: 40px;
+    background: #8a8a8a;
+  }
+
+  .nass-programs__cta-wrap {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nass-programs__cta {
+    width: min(100%, 482px);
+    border-radius: 86px;
+    background: #000;
+    color: #fff;
+    text-decoration: none;
+    padding: 19px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--font-body--family, 'Avenir'), 'Avenir', 'Avenir Next', Arial, sans-serif;
+    font-size: clamp(1rem, 1.7vw, 1.125rem);
+    font-weight: 700;
+    transition: background-color 160ms ease;
+  }
+
+  .nass-programs__cta:hover {
+    background: #1b1b1b;
+  }
+
+  .nass-programs__cta-arrow {
+    width: 20px;
+    height: 20px;
+    transition: transform 160ms ease;
+  }
+
+  .nass-programs__cta:hover .nass-programs__cta-arrow {
+    transform: translateX(4px);
+  }
+
+  .nass-programs__cta-arrow svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .nass-programs__trust {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .nass-programs__trust-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #000;
+    font-family: var(--font-body--family, 'Avenir'), 'Avenir', 'Avenir Next', Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.3;
+    font-weight: 500;
+  }
+
+  .nass-programs__trust-icon {
+    width: 16px;
+    height: 16px;
+    line-height: 0;
+  }
+
+  .nass-programs__trust-icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  @media (min-width: 768px) {
+    .nass-programs {
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+
+    .nass-programs__track {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 21px;
+      overflow: visible;
+      scroll-snap-type: none;
+    }
+
+    .nass-programs__card {
+      max-width: none;
+      width: 100%;
+      flex: initial;
+    }
+
+    .nass-programs__caption {
+      left: 7%;
+      right: 7%;
+      bottom: 7%;
+      border-radius: 30px;
+      padding: 18px 20px;
+    }
+
+    .nass-programs__dots {
+      display: none;
+    }
+
+    .nass-programs__trust {
+      flex-direction: row;
+      gap: 40px;
+    }
+
+    .nass-programs__trust-item {
+      font-size: 16px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "nass-programs",
+  "settings": [
+    { "type": "text", "id": "heading_part_1", "label": "Heading part 1", "default": "WHAT MAKES NASS" },
+    { "type": "text", "id": "heading_part_2", "label": "Heading part 2", "default": "PROGRAMS DIFFERENT?" },
+    { "type": "color", "id": "accent_color", "label": "Accent color", "default": "#0038FF" },
+    { "type": "text", "id": "cta_text", "label": "CTA text", "default": "Shop Booty Programs" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" },
+    { "type": "text", "id": "badge_1_text", "label": "Badge 1", "default": "30-Day Money-Back Guarantee" },
+    { "type": "text", "id": "badge_2_text", "label": "Badge 2", "default": "World-Famous support" }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "limit": 6,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "richtext", "id": "description", "label": "Description" },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Style",
+          "options": [
+            { "value": "default", "label": "Default" },
+            { "value": "app_blue", "label": "App blue gradient" }
+          ],
+          "default": "default"
+        },
+        { "type": "text", "id": "image_position", "label": "Image position", "default": "center" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "nass-programs",
+      "settings": {
+        "heading_part_1": "WHAT MAKES NASS",
+        "heading_part_2": "PROGRAMS DIFFERENT?",
+        "cta_text": "Shop Booty Programs",
+        "badge_1_text": "30-Day Money-Back Guarantee",
+        "badge_2_text": "World-Famous support"
+      },
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "title": "Created by Nastya NASS",
+            "description": "<p>Each program is personally designed based on her <strong>10+ years of dance</strong> and fitness experience.</p>",
+            "style": "default",
+            "image_position": "center"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "6,000+ Girls in the Community",
+            "description": "<p>Join a vibrant and <strong>supportive community</strong> growing stronger together.</p>",
+            "style": "default",
+            "image_position": "center"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "7-Day Structured Twerk Program",
+            "description": "<p><strong>A step-by-step system</strong> to help you master the basics and feel real progress in just one week.</p>",
+            "style": "default",
+            "image_position": "center"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "Short, Effective Lessons",
+            "description": "<p>Workouts that <strong>fit easily into your day</strong> without overwhelming your schedule.</p>",
+            "style": "default",
+            "image_position": "center"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "Instant Access in the NASS App",
+            "description": "<p>Train anytime, <strong>anywhere with full access</strong> to all recorded video lessons.</p>",
+            "style": "app_blue",
+            "image_position": "center"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "Confidence & Feminine Energy Focus",
+            "description": "<p>Not just technique - but movement, <strong>self-expression</strong>, and confidence in your body.</p>",
+            "style": "default",
+            "image_position": "center"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

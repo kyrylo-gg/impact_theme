@@ -1,0 +1,218 @@
+<section class="ready-to-shine" id="ready-to-shine-{{ section.id }}">
+  <div class="ready-to-shine__container">
+    <h2 class="ready-to-shine__heading">
+      <span class="ready-to-shine__heading-prefix">{{ section.settings.heading_prefix | escape }}</span>
+      <span class="ready-to-shine__heading-accent"> {{ section.settings.heading_accent | escape }}</span>
+    </h2>
+
+    <div class="ready-to-shine__grid">
+      {% for block in section.blocks %}
+        <article class="ready-to-shine__card" {{ block.shopify_attributes }}>
+          <div class="ready-to-shine__image-wrap">
+            {% if block.settings.image != blank %}
+              {{
+                block.settings.image
+                | image_url: width: 900
+                | image_tag:
+                  class: 'ready-to-shine__image',
+                  loading: 'lazy',
+                  alt: block.settings.title
+              }}
+            {% else %}
+              {{ 'image' | placeholder_svg_tag: 'ready-to-shine__image' }}
+            {% endif %}
+          </div>
+
+          <div class="ready-to-shine__emoji" aria-hidden="true">{{ block.settings.emoji | escape }}</div>
+          <h3 class="ready-to-shine__title">{{ block.settings.title | escape }}</h3>
+          <p class="ready-to-shine__text">{{ block.settings.text | escape }}</p>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .ready-to-shine {
+    --ready-to-shine-accent: {{ section.settings.accent_color | default: '#0038FF' }};
+    --ready-to-shine-glow: {{ section.settings.glow_color | default: '#FFF600' }};
+    padding: clamp(3rem, 8vw, 6rem) 20px;
+  }
+
+  .ready-to-shine__container {
+    max-width: 1183px;
+    margin: 0 auto;
+  }
+
+  .ready-to-shine__heading {
+    margin: 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-size: clamp(1.5rem, 4.5vw, 2.1875rem);
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+  }
+
+  .ready-to-shine__heading-prefix {
+    color: #000;
+    font-weight: 600;
+  }
+
+  .ready-to-shine__heading-accent {
+    color: var(--ready-to-shine-accent);
+    font-weight: 900;
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 6px;
+  }
+
+  .ready-to-shine__grid {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .ready-to-shine__card {
+    text-align: center;
+  }
+
+  .ready-to-shine__image-wrap {
+    border-radius: 30px;
+    overflow: hidden;
+    background: #f5f5f5;
+    aspect-ratio: 335 / 352;
+  }
+
+  .ready-to-shine__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ready-to-shine__emoji {
+    width: 70px;
+    height: 70px;
+    margin: -35px auto 0;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 40px var(--ready-to-shine-glow);
+    display: grid;
+    place-items: center;
+    font-size: 40px;
+    line-height: 1;
+    position: relative;
+    z-index: 1;
+  }
+
+  .ready-to-shine__title {
+    margin: 20px 0 0;
+    color: #000;
+    font-family: var(--font-body--family, 'Avenir'), 'Avenir', 'Avenir Next', Arial, sans-serif;
+    font-size: clamp(1.125rem, 2.1vw, 1.5rem);
+    line-height: 1.25;
+    font-weight: 600;
+  }
+
+  .ready-to-shine__text {
+    margin: 8px auto 0;
+    max-width: 333px;
+    color: #000;
+    font-family: var(--font-body--family, 'Avenir'), 'Avenir', 'Avenir Next', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.35;
+    font-weight: 500;
+  }
+
+  @media (min-width: 768px) {
+    .ready-to-shine {
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+
+    .ready-to-shine__grid {
+      margin-top: 60px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 30px;
+    }
+
+    .ready-to-shine__image-wrap {
+      aspect-ratio: 381 / 400;
+    }
+
+    .ready-to-shine__emoji {
+      width: 95px;
+      height: 95px;
+      margin-top: -47px;
+      font-size: 48px;
+    }
+
+    .ready-to-shine__title {
+      margin-top: 24px;
+    }
+
+    .ready-to-shine__text {
+      margin-top: 12px;
+      font-size: 18px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "ready-to-shine",
+  "settings": [
+    { "type": "text", "id": "heading_prefix", "label": "Heading prefix", "default": "For Every Woman" },
+    { "type": "text", "id": "heading_accent", "label": "Heading accent", "default": "Ready to Shine" },
+    { "type": "color", "id": "accent_color", "label": "Accent color", "default": "#0038FF" },
+    { "type": "color", "id": "glow_color", "label": "Glow color", "default": "#FFF600" }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "limit": 3,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "emoji", "label": "Emoji", "default": "⚡" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "ready-to-shine",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "emoji": "⚡",
+            "title": "For women who want to feel confident and powerful",
+            "text": "Feel strong, feminine, and in control of your body."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "emoji": "🤸",
+            "title": "For those who are tired of boring workouts and stressful fitness routines",
+            "text": "Replace pressure with movement that feels energizing and fun."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "emoji": "😌",
+            "title": "For all levels, from beginners to advanced",
+            "text": "Start where you are and progress with clear, guided lessons."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

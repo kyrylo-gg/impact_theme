@@ -1,0 +1,432 @@
+<section class="dance-workouts" id="dance-workouts-{{ section.id }}">
+  <div class="dance-workouts__container">
+    <h2 class="dance-workouts__heading">
+      <span class="dance-workouts__heading-part1">{{ section.settings.heading_part1 | escape }}</span>
+      <span class="dance-workouts__heading-part2"> {{ section.settings.heading_part2 | escape }}</span>
+    </h2>
+
+    <div class="dance-workouts__content">
+      <ul class="dance-workouts__benefits dance-workouts__benefits--left" role="list">
+        {% for block in section.blocks %}
+          {% if block.type == 'benefit' and block.settings.column == 'left' %}
+            <li class="dance-workouts__benefit dance-workouts__benefit--left" {{ block.shopify_attributes }}>
+              <div class="dance-workouts__benefit-icon" aria-hidden="true">{{ block.settings.icon | escape }}</div>
+              <div class="dance-workouts__benefit-copy">
+                <h3 class="dance-workouts__benefit-title">{{ block.settings.title | escape }}</h3>
+                <div class="dance-workouts__benefit-text rte">{{ block.settings.description }}</div>
+              </div>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+
+      <div class="dance-workouts__video-wrap">
+        {% if section.settings.video != blank %}
+          {{
+            section.settings.video
+            | video_tag:
+              autoplay: true,
+              loop: true,
+              muted: true,
+              controls: false,
+              playsinline: true,
+              image_size: '900x'
+          }}
+        {% endif %}
+      </div>
+
+      <ul class="dance-workouts__benefits dance-workouts__benefits--right" role="list">
+        {% for block in section.blocks %}
+          {% if block.type == 'benefit' and block.settings.column == 'right' %}
+            <li class="dance-workouts__benefit dance-workouts__benefit--right" {{ block.shopify_attributes }}>
+              <div class="dance-workouts__benefit-icon" aria-hidden="true">{{ block.settings.icon | escape }}</div>
+              <div class="dance-workouts__benefit-copy">
+                <h3 class="dance-workouts__benefit-title">{{ block.settings.title | escape }}</h3>
+                <div class="dance-workouts__benefit-text rte">{{ block.settings.description }}</div>
+              </div>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="dance-workouts__cta-wrap">
+      <a class="dance-workouts__cta" href="{{ section.settings.cta_url | default: '#' }}">
+        <span>{{ section.settings.cta_text | escape }}</span>
+        <span class="dance-workouts__cta-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            <path d="M13 6L19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </span>
+      </a>
+
+      <div class="dance-workouts__trust" role="list">
+        <span class="dance-workouts__trust-item" role="listitem">
+          <span class="dance-workouts__trust-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 3L5 6V11C5 15.55 8.05 19.74 12 21C15.95 19.74 19 15.55 19 11V6L12 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M9.5 12.5L11.2 14.2L14.8 10.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+          {{ section.settings.trust_1 | escape }}
+        </span>
+        <span class="dance-workouts__trust-item" role="listitem">
+          <span class="dance-workouts__trust-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"></circle>
+              <path d="M8.8 12.2L11.1 14.4L15.3 10.1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+          {{ section.settings.trust_2 | escape }}
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .dance-workouts {
+    --dance-workouts-accent: {{ section.settings.accent_color | default: '#0038FF' }};
+    --dance-workouts-glow: {{ section.settings.video_glow | default: '#FFF600' }};
+    padding: clamp(3rem, 8vw, 6rem) 20px;
+  }
+
+  .dance-workouts__container {
+    max-width: 1183px;
+    margin: 0 auto;
+  }
+
+  .dance-workouts__heading {
+    margin: 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-size: clamp(1.5rem, 4.5vw, 2.1875rem);
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+  }
+
+  .dance-workouts__heading-part1 {
+    color: #000;
+    font-weight: 600;
+  }
+
+  .dance-workouts__heading-part2 {
+    color: var(--dance-workouts-accent);
+    font-weight: 900;
+    white-space: nowrap;
+  }
+
+  .dance-workouts__content {
+    margin-top: 40px;
+    display: grid;
+    gap: 28px;
+  }
+
+  .dance-workouts__benefits {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 28px;
+  }
+
+  .dance-workouts__benefit {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-align: left;
+  }
+
+  .dance-workouts__benefit-icon {
+    flex: 0 0 70px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 6px 28px rgba(0, 0, 0, 0.15);
+    display: grid;
+    place-items: center;
+    font-size: 40px;
+    line-height: 1;
+  }
+
+  .dance-workouts__benefit-title {
+    margin: 0;
+    color: #000;
+    font-family: var(--font-body--family, 'Avenir'), 'Avenir', 'Avenir Next', Arial, sans-serif;
+    font-size: clamp(1.125rem, 2.2vw, 1.5rem);
+    line-height: 1.2;
+    font-weight: 900;
+  }
+
+  .dance-workouts__benefit-text {
+    margin-top: 8px;
+    color: #666;
+    font-family: var(--font-body--family, 'Avenir'), 'Avenir', 'Avenir Next', Arial, sans-serif;
+    font-size: clamp(1rem, 1.7vw, 1.125rem);
+    line-height: 1.35;
+    font-weight: 500;
+  }
+
+  .dance-workouts__benefit-text p {
+    margin: 0;
+  }
+
+  .dance-workouts__video-wrap {
+    width: 100%;
+    max-width: 428px;
+    margin: 0 auto;
+    aspect-ratio: 1 / 1;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 0 80px var(--dance-workouts-glow);
+    background: #111;
+  }
+
+  .dance-workouts__video-wrap video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .dance-workouts__cta-wrap {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .dance-workouts__cta {
+    width: min(100%, 482px);
+    border-radius: 86px;
+    background: #000;
+    color: #fff;
+    text-decoration: none;
+    padding: 19px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--font-body--family, 'Avenir'), 'Avenir', 'Avenir Next', Arial, sans-serif;
+    font-size: clamp(1rem, 1.7vw, 1.125rem);
+    font-weight: 700;
+    transition: background-color 160ms ease;
+  }
+
+  .dance-workouts__cta:hover {
+    background: #1b1b1b;
+  }
+
+  .dance-workouts__cta-arrow {
+    width: 20px;
+    height: 20px;
+    transition: transform 160ms ease;
+  }
+
+  .dance-workouts__cta:hover .dance-workouts__cta-arrow {
+    transform: translateX(4px);
+  }
+
+  .dance-workouts__cta-arrow svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .dance-workouts__trust {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .dance-workouts__trust-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #000;
+    font-family: var(--font-body--family, 'Avenir'), 'Avenir', 'Avenir Next', Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.3;
+    font-weight: 500;
+  }
+
+  .dance-workouts__trust-icon {
+    width: 16px;
+    height: 16px;
+    line-height: 0;
+  }
+
+  .dance-workouts__trust-icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  @media (min-width: 768px) {
+    .dance-workouts {
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+
+    .dance-workouts__content {
+      margin-top: 48px;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      align-items: center;
+      gap: 40px;
+    }
+
+    .dance-workouts__benefits {
+      gap: 40px;
+    }
+
+    .dance-workouts__benefit-icon {
+      flex-basis: 95px;
+      width: 95px;
+      height: 95px;
+      font-size: 48px;
+    }
+
+    .dance-workouts__benefit--left {
+      flex-direction: row-reverse;
+      text-align: right;
+    }
+
+    .dance-workouts__benefit--right {
+      flex-direction: row;
+      text-align: left;
+    }
+
+    .dance-workouts__video-wrap {
+      box-shadow: 0 0 120px var(--dance-workouts-glow);
+    }
+
+    .dance-workouts__trust {
+      flex-direction: row;
+      gap: 40px;
+    }
+
+    .dance-workouts__trust-item {
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .dance-workouts__heading-part2 {
+      display: block;
+      white-space: normal;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "dance-workouts",
+  "settings": [
+    { "type": "text", "id": "heading_part1", "label": "Heading part 1", "default": "Dance Workouts" },
+    { "type": "text", "id": "heading_part2", "label": "Heading part 2", "default": "That Feel Like Fun" },
+    { "type": "color", "id": "accent_color", "label": "Accent color", "default": "#0038FF" },
+    { "type": "video", "id": "video", "label": "Video" },
+    { "type": "color", "id": "video_glow", "label": "Video glow color", "default": "#FFF600" },
+    { "type": "text", "id": "cta_text", "label": "CTA text", "default": "Claim Special Offer" },
+    { "type": "url", "id": "cta_url", "label": "CTA link" },
+    { "type": "text", "id": "trust_1", "label": "Trust line 1", "default": "30-Day Money-Back Guarantee" },
+    { "type": "text", "id": "trust_2", "label": "Trust line 2", "default": "World-Famous support" }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "limit": 6,
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon", "default": "💃" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "richtext", "id": "description", "label": "Description" },
+        {
+          "type": "select",
+          "id": "column",
+          "label": "Column",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "left"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "dance-workouts",
+      "settings": {
+        "heading_part1": "Dance Workouts",
+        "heading_part2": "That Feel Like Fun",
+        "cta_text": "Claim Special Offer",
+        "trust_1": "30-Day Money-Back Guarantee",
+        "trust_2": "World-Famous support"
+      },
+      "blocks": [
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "🍑",
+            "title": "Sculpts your booty",
+            "description": "<p>Focused choreography activates glutes and helps build shape.</p>",
+            "column": "left"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "🔥",
+            "title": "Burns calories fast",
+            "description": "<p>High-energy moves keep your heart rate up and your body toned.</p>",
+            "column": "left"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "🕒",
+            "title": "Fits your schedule",
+            "description": "<p>Short classes make consistency realistic even on busy days.</p>",
+            "column": "left"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "✨",
+            "title": "Boosts confidence",
+            "description": "<p>Feel stronger and more expressive with every session.</p>",
+            "column": "right"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "🎵",
+            "title": "Feels like fun",
+            "description": "<p>Train with rhythm instead of forcing boring routines.</p>",
+            "column": "right"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "🌍",
+            "title": "Train from anywhere",
+            "description": "<p>All you need is your phone and a little space at home.</p>",
+            "column": "right"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

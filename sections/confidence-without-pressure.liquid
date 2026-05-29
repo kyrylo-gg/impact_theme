@@ -1,0 +1,287 @@
+<section class="confidence-without-pressure" id="confidence-without-pressure-{{ section.id }}">
+  <div class="confidence-without-pressure__container">
+    <h2 class="confidence-without-pressure__heading">
+      <span class="confidence-without-pressure__heading-part1">{{ section.settings.heading_part1 | escape }}</span>
+      <span class="confidence-without-pressure__heading-part2"> {{ section.settings.heading_part2 | escape }}</span>
+    </h2>
+
+    {% if section.settings.subheading != blank %}
+      <p class="confidence-without-pressure__subheading">{{ section.settings.subheading | escape }}</p>
+    {% endif %}
+
+    <ul class="confidence-without-pressure__cards" role="list">
+      {% for block in section.blocks %}
+        <li class="confidence-without-pressure__card" {{ block.shopify_attributes }}>
+          <div class="confidence-without-pressure__media">
+            {% if block.settings.image != blank %}
+              {{
+                block.settings.image
+                | image_url: width: 900
+                | image_tag:
+                  class: 'confidence-without-pressure__image',
+                  loading: 'lazy',
+                  alt: block.settings.alt
+              }}
+            {% else %}
+              {{ 'image' | placeholder_svg_tag: 'confidence-without-pressure__image confidence-without-pressure__image--placeholder' }}
+            {% endif %}
+            <div class="confidence-without-pressure__gradient" aria-hidden="true"></div>
+          </div>
+
+          <div class="confidence-without-pressure__caption">
+            <span class="confidence-without-pressure__cross" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M6 6L18 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+                <path d="M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+              </svg>
+            </span>
+            <p class="confidence-without-pressure__caption-text">{{ block.settings.text | escape }}</p>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+
+    {% if section.settings.footer_copy != blank %}
+      <div class="confidence-without-pressure__footer rte">{{ section.settings.footer_copy }}</div>
+    {% endif %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .confidence-without-pressure {
+    --confidence-without-pressure-accent: {{ section.settings.accent_color | default: '#0038FF' }};
+    padding: clamp(3rem, 8vw, 6rem) 20px;
+  }
+
+  .confidence-without-pressure__container {
+    max-width: 1183px;
+    margin: 0 auto;
+  }
+
+  .confidence-without-pressure__heading {
+    margin: 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-size: clamp(1.5rem, 4.5vw, 2.1875rem);
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+  }
+
+  .confidence-without-pressure__heading-part1 {
+    color: #000;
+    font-weight: 600;
+  }
+
+  .confidence-without-pressure__heading-part2 {
+    color: var(--confidence-without-pressure-accent);
+    font-weight: 900;
+    white-space: nowrap;
+  }
+
+  .confidence-without-pressure__subheading {
+    margin: 24px auto 0;
+    max-width: 860px;
+    text-align: center;
+    color: #000;
+    font-family: var(--font-body--family, 'Avenir'), 'Avenir', 'Avenir Next', Arial, sans-serif;
+    font-size: clamp(1rem, 1.8vw, 1.5rem);
+    line-height: 1.35;
+    font-weight: 500;
+  }
+
+  .confidence-without-pressure__cards {
+    margin: 40px 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 24px;
+  }
+
+  .confidence-without-pressure__card {
+    position: relative;
+    border-radius: 30px;
+    overflow: hidden;
+    background: #000;
+    aspect-ratio: 335 / 352;
+  }
+
+  .confidence-without-pressure__media {
+    position: absolute;
+    inset: 0;
+  }
+
+  .confidence-without-pressure__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  .confidence-without-pressure__gradient {
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 75%;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
+    pointer-events: none;
+  }
+
+  .confidence-without-pressure__caption {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    border-radius: 24px;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.06);
+    backdrop-filter: blur(32px);
+    -webkit-backdrop-filter: blur(32px);
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .confidence-without-pressure__cross {
+    flex: 0 0 auto;
+    width: 22px;
+    height: 22px;
+    color: #ff3b30;
+    line-height: 0;
+  }
+
+  .confidence-without-pressure__cross svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .confidence-without-pressure__caption-text {
+    margin: 0;
+    color: #fff;
+    font-family: var(--font-body--family, 'Avenir'), 'Avenir', 'Avenir Next', Arial, sans-serif;
+    font-size: clamp(0.95rem, 1.2vw, 1.125rem);
+    line-height: 1.3;
+    font-weight: 800;
+  }
+
+  .confidence-without-pressure__footer {
+    margin-top: 40px;
+    text-align: center;
+    color: #000;
+    font-family: var(--font-body--family, 'Avenir'), 'Avenir', 'Avenir Next', Arial, sans-serif;
+    font-size: clamp(1rem, 1.8vw, 1.5rem);
+    line-height: 1.35;
+    font-weight: 500;
+  }
+
+  .confidence-without-pressure__footer p {
+    margin: 0;
+  }
+
+  @media (min-width: 768px) {
+    .confidence-without-pressure {
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+
+    .confidence-without-pressure__cards {
+      margin-top: 48px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .confidence-without-pressure__card {
+      aspect-ratio: 381 / 400;
+    }
+
+    .confidence-without-pressure__caption {
+      left: 7%;
+      right: 7%;
+      bottom: 7%;
+      border-radius: 30px;
+      padding: 18px 20px;
+    }
+
+    .confidence-without-pressure__footer {
+      margin-top: 56px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .confidence-without-pressure__heading-part2 {
+      display: block;
+      white-space: normal;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Confidence No Pressure",
+  "settings": [
+    { "type": "text", "id": "heading_part1", "label": "Heading part 1", "default": "Get confidence and results" },
+    { "type": "text", "id": "heading_part2", "label": "Heading part 2", "default": "without pressure" },
+    { "type": "color", "id": "accent_color", "label": "Accent color", "default": "#0038FF" },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "A regular fitness routine has always been complicated for most women."
+    },
+    {
+      "type": "richtext",
+      "id": "footer_copy",
+      "label": "Footer copy",
+      "default": "<p>Try <strong>dance as your fitness routine</strong> to <u>keep your body toned</u> and <u>uplift your mood</u>.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "pain_card",
+      "name": "Pain card",
+      "limit": 3,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "alt", "label": "Image alt text", "default": "Fitness pain point image" },
+        { "type": "textarea", "id": "text", "label": "Card text" }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "Confidence No Pressure",
+      "settings": {
+        "heading_part1": "Get confidence and results",
+        "heading_part2": "without pressure",
+        "subheading": "A regular fitness routine has always been complicated for most women.",
+        "footer_copy": "<p>Try <strong>dance as your fitness routine</strong> to <u>keep your body toned</u> and <u>uplift your mood</u>.</p>"
+      },
+      "blocks": [
+        {
+          "type": "pain_card",
+          "settings": {
+            "alt": "Diet routines feel restrictive",
+            "text": "Strict diets and fitness pressure feel impossible to maintain."
+          }
+        },
+        {
+          "type": "pain_card",
+          "settings": {
+            "alt": "Early alarm burnout",
+            "text": "Early alarms and exhausting plans quickly drain your motivation."
+          }
+        },
+        {
+          "type": "pain_card",
+          "settings": {
+            "alt": "Gym anxiety",
+            "text": "Gym routines can feel overwhelming and disconnected from real confidence."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
