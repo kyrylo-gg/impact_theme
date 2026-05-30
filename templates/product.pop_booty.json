@@ -1538,8 +1538,8 @@
       ],
       "name": "Student Progress 1",
       "settings": {
-        "heading": "Real Results",
-        "heading_highlight": "from Girls Like You"
+        "heading": "",
+        "heading_highlight": ""
       }
     }
   },
