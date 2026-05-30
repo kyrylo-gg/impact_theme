@@ -270,6 +270,14 @@
             "open_by_default": false
           }
         },
+        "faq_wazNCx": {
+          "type": "faq",
+          "settings": {
+            "question": "Money-Back Guarantee",
+            "answer": "<p>We offer a 30-day money-back guarantee. No questions asked.</p>",
+            "open_by_default": false
+          }
+        },
         "booty_faq_2": {
           "type": "faq",
           "settings": {
@@ -321,6 +329,7 @@
         "booty_tier_1",
         "tier_NEy4e9",
         "booty_faq_1",
+        "faq_wazNCx",
         "booty_faq_2",
         "review_zYRTPB",
         "review_k3DmXG",
