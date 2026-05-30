@@ -168,38 +168,49 @@
         "gallery_image_U9R449": {
           "type": "gallery_image",
           "settings": {
-            "image": "shopify://shop_images/Image_1_d73f8ecb-b4ed-403e-97d8-0e897d91b796.png",
+            "image": "shopify://shop_images/Image_1_a5d1b47f-d39f-4ae5-99eb-3ab197fdbc64.png",
             "alt": ""
           }
         },
         "gallery_image_DEgKet": {
           "type": "gallery_image",
           "settings": {
+            "image": "shopify://shop_images/Image_2.png",
             "alt": ""
           }
         },
         "gallery_image_NMNdFh": {
           "type": "gallery_image",
           "settings": {
-            "image": "shopify://shop_images/Image_3_32b75255-3665-40bc-9b3a-d18301ac3e58.png",
+            "image": "shopify://shop_images/Image_3_abc9ffcc-2f57-4171-8405-43ed7b932224.png",
             "alt": ""
           }
         },
         "gallery_image_Vd8eMH": {
           "type": "gallery_image",
           "settings": {
+            "image": "shopify://shop_images/Image_4_c015493c-8a4c-44cc-8e03-f7ea412002ae.png",
             "alt": ""
           }
         },
         "gallery_image_rfPzwb": {
           "type": "gallery_image",
           "settings": {
+            "image": "shopify://shop_images/Community_1.2.png",
             "alt": ""
           }
         },
         "gallery_image_YJcPkK": {
           "type": "gallery_image",
           "settings": {
+            "image": "shopify://shop_images/Image_5_5f979a1b-b8d8-4f50-83c1-67a6121d0b4d.png",
+            "alt": ""
+          }
+        },
+        "gallery_image_i7fkyB": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/Image_6_09c95840-3a7b-4f83-8e10-5adf96265560.png",
             "alt": ""
           }
         },
@@ -212,13 +223,19 @@
         "booty_benefit_2": {
           "type": "benefit",
           "settings": {
-            "label": "Fat Burning & Cardio"
+            "label": "Mood Boost & Body Confidence"
           }
         },
         "booty_benefit_3": {
           "type": "benefit",
           "settings": {
-            "label": "Confidence & Feminine Energy"
+            "label": "Consistency Through Enjoyment"
+          }
+        },
+        "benefit_RhpRMG": {
+          "type": "benefit",
+          "settings": {
+            "label": "Open Hips & Free Movement"
           }
         },
         "booty_tier_1": {
@@ -267,9 +284,11 @@
         "gallery_image_Vd8eMH",
         "gallery_image_rfPzwb",
         "gallery_image_YJcPkK",
+        "gallery_image_i7fkyB",
         "booty_benefit_1",
         "booty_benefit_2",
         "booty_benefit_3",
+        "benefit_RhpRMG",
         "booty_tier_1",
         "tier_NEy4e9",
         "booty_faq_1",
