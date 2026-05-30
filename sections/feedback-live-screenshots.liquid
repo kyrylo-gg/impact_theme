@@ -12,12 +12,13 @@
   {{ section.shopify_attributes }}
 >
   <div class="feedback-screenshots__inner">
-    <div class="feedback-screenshots__heading">
-      {{ section.settings.heading | default: "The twerk program everyone's" | escape }}
-      <span class="feedback-screenshots__heading-highlight">{{ section.settings.heading_highlight | default: "excited about" | escape }}</span>
-    </div>
+    <div class="feedback-screenshots__collage">
+      <div class="feedback-screenshots__heading">
+        {{ section.settings.heading | default: "The twerk program everyone's" | escape }}
+        <span class="feedback-screenshots__heading-highlight">{{ section.settings.heading_highlight | default: "excited about" | escape }}</span>
+      </div>
 
-    <div class="feedback-screenshots__grid">
+      <div class="feedback-screenshots__grid">
       {% assign blocks = section.blocks %}
       {% assign skip_next = false %}
       {% for block in blocks %}
@@ -111,7 +112,54 @@
           </div>
         {% endif %}
       {% endfor %}
+      </div>
     </div>
+
+    {% if section.settings.show_pop_booty_footer %}
+      {% assign quote_review_blocks = section.blocks | where: 'type', 'quote_review' %}
+      {% if quote_review_blocks.size > 0 %}
+        <div class="feedback-screenshots__quote-reviews">
+          {% for block in quote_review_blocks %}
+            {% assign review_rating = block.settings.rating | default: 5 | plus: 0 %}
+            <article class="feedback-screenshots__quote-card" {{ block.shopify_attributes }}>
+              {% if block.settings.quote != blank %}
+                <p class="feedback-screenshots__quote-text">{{ block.settings.quote | escape }}</p>
+              {% endif %}
+              <div class="feedback-screenshots__quote-meta">
+                <div class="feedback-screenshots__quote-author">
+                  {% if block.settings.avatar != blank %}
+                    {{
+                      block.settings.avatar
+                      | image_url: width: 80
+                      | image_tag:
+                        class: 'feedback-screenshots__quote-avatar',
+                        loading: 'lazy',
+                        alt: block.settings.name
+                    }}
+                  {% else %}
+                    <span class="feedback-screenshots__quote-avatar feedback-screenshots__quote-avatar--placeholder" aria-hidden="true"></span>
+                  {% endif %}
+                  {% if block.settings.name != blank %}
+                    <span class="feedback-screenshots__quote-name">{{ block.settings.name | escape }}</span>
+                  {% endif %}
+                </div>
+                <div class="feedback-screenshots__quote-stars" role="img" aria-label="{{ review_rating }} out of 5 stars">
+                  {% for i in (1..5) %}
+                    <svg class="feedback-screenshots__quote-star{% if i <= review_rating %} feedback-screenshots__quote-star--filled{% endif %}" viewBox="0 0 24 24" aria-hidden="true">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                  {% endfor %}
+                </div>
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if section.settings.reviews_footer != blank %}
+        <p class="feedback-screenshots__reviews-footer">{{ section.settings.reviews_footer | escape }}</p>
+      {% endif %}
+    {% endif %}
 
     {% render 'pop-booty-cta-trust', section: section %}
   </div>
@@ -127,21 +175,25 @@
     --fls-font-display: var(--font-heading--family, 'Anybody'), system-ui, sans-serif;
   }
 
-  /* Gray background with rounded corners like other sections */
   .feedback-screenshots {
+    margin-top: 1.5rem;
+    background: transparent;
+  }
+  @media (min-width: 1024px) {
+    .feedback-screenshots { margin-top: 2rem; }
+  }
+
+  /* Gray background only on heading + screenshot collage */
+  .feedback-screenshots__collage {
     background: var(--fls-bg);
     border-radius: 24px;
-    margin-top: 1.5rem;
     padding: 2.5rem 0;
   }
   @media (min-width: 640px) {
-    .feedback-screenshots { padding: 3rem 0; }
+    .feedback-screenshots__collage { padding: 3rem 0; }
   }
   @media (min-width: 1024px) {
-    .feedback-screenshots {
-      margin-top: 2rem;
-      padding: 4rem 0;
-    }
+    .feedback-screenshots__collage { padding: 4rem 0; }
   }
 
   .feedback-screenshots__inner {
@@ -265,6 +317,115 @@
     border-radius: var(--fls-inner-radius);
     pointer-events: none;
   }
+
+  .feedback-screenshots__quote-reviews {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  @media (min-width: 768px) {
+    .feedback-screenshots__quote-reviews {
+      margin-top: 2.5rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+      align-items: stretch;
+    }
+  }
+
+  .feedback-screenshots__quote-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+    border: 1px solid #f0f0f0;
+    border-radius: 16px;
+    background: #fff;
+    text-align: left;
+  }
+
+  .feedback-screenshots__quote-text {
+    margin: 0;
+    color: #000;
+    font-family: var(--font-body--family, 'Avenir'), 'Avenir', 'Avenir Next', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.4;
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  @media (min-width: 768px) {
+    .feedback-screenshots__quote-text {
+      font-size: 18px;
+    }
+  }
+
+  .feedback-screenshots__quote-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .feedback-screenshots__quote-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .feedback-screenshots__quote-avatar {
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .feedback-screenshots__quote-avatar--placeholder {
+    background: #e8e8e8;
+  }
+
+  .feedback-screenshots__quote-name {
+    color: #000;
+    font-family: var(--font-body--family, 'Avenir'), 'Avenir', 'Avenir Next', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.2;
+    font-weight: 800;
+  }
+
+  .feedback-screenshots__quote-stars {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .feedback-screenshots__quote-star {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: #f5b301;
+    stroke-width: 1.5;
+  }
+
+  .feedback-screenshots__quote-star--filled {
+    fill: #f5b301;
+    stroke: #f5b301;
+  }
+
+  .feedback-screenshots__reviews-footer {
+    margin: 24px 0 0;
+    text-align: center;
+    color: #000;
+    font-family: var(--font-body--family, 'Avenir'), 'Avenir', 'Avenir Next', Arial, sans-serif;
+    font-size: clamp(1.125rem, 2vw, 1.5rem);
+    line-height: 1.25;
+    font-weight: 800;
+  }
 {% endstylesheet %}
 
 {% schema %}
@@ -286,12 +447,19 @@
     },
     {
       "type": "header",
-      "content": "Pop Booty footer"
+      "content": "Pop Booty"
+    },
+    {
+      "type": "text",
+      "id": "reviews_footer",
+      "label": "Reviews footer line",
+      "default": "Experienced by over 6,000 girls",
+      "info": "Shown below quote review cards when Pop Booty footer is enabled."
     },
     {
       "type": "checkbox",
       "id": "show_pop_booty_footer",
-      "label": "Show CTA & trust badges on pop_booty",
+      "label": "Enable Pop Booty footer (quote reviews, CTA & trust badges)",
       "default": false
     },
     {
@@ -356,6 +524,37 @@
           "id": "highlight",
           "label": "Yellow highlight border",
           "default": false
+        }
+      ]
+    },
+    {
+      "type": "quote_review",
+      "name": "Quote review",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name"
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Avatar"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
         }
       ]
     }

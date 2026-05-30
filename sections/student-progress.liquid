@@ -11,13 +11,19 @@
 <section class="student-progress{% if is_twerk_essential_template %} student-progress--twerk-essential{% endif %}" id="student-progress-{{ section.id }}">
   <div class="student-progress__container">
     {% unless section.settings.hide_heading %}
-      <div class="student-progress__header">
-        <div class="student-progress__title">
-          {{ section.settings.heading | default: "SEE HOW OUR" | escape }}
-          <span class="student-progress__title-highlight">{{ section.settings.heading_highlight | default: "STUDENTS PERFORM" | escape }}</span>
+      {% if section.settings.heading != blank or section.settings.heading_highlight != blank %}
+        <div class="student-progress__header">
+          <div class="student-progress__title">
+            {% if section.settings.heading != blank %}
+              {{ section.settings.heading | escape }}
+            {% endif %}
+            {% if section.settings.heading_highlight != blank %}
+              <span class="student-progress__title-highlight">{{ section.settings.heading_highlight | escape }}</span>
+            {% endif %}
+          </div>
+          <div class="student-progress__divider"></div>
         </div>
-        <div class="student-progress__divider"></div>
-      </div>
+      {% endif %}
     {% endunless %}
 
     <div class="student-progress__scroll-wrapper">

@@ -4,14 +4,24 @@
   Pure Liquid + HTML + CSS. No React, Tailwind, or build tools.
 {% endcomment %}
 
+{% liquid
+  assign show_pop_booty_subheading = false
+  if section.settings.show_pop_booty_footer and section.settings.subheading != blank
+    assign show_pop_booty_subheading = true
+  endif
+%}
+
 <section class="program-cards program-cards-section">
   <div class="program-cards__container">
     <div class="program-cards__header">
-      <div class="program-cards__title">
-        {{ section.settings.heading | default: 'WHAT DOES THIS PACK' }}
-        <span class="program-cards__title-highlight">{{ section.settings.heading_highlight | default: 'INCLUDE?' }}</span>
+      <div class="program-cards__title{% if section.settings.show_pop_booty_footer %} program-cards__title--pop-booty{% endif %}">
+        <span class="program-cards__title-line">{{ section.settings.heading | default: 'WHAT DOES THIS PACK' | escape }}</span>
+        <span class="program-cards__title-highlight">{{ section.settings.heading_highlight | default: 'INCLUDE?' | escape }}</span>
       </div>
       <div class="program-cards__divider"></div>
+      {% if show_pop_booty_subheading %}
+        <p class="program-cards__subheading">{{ section.settings.subheading | escape }}</p>
+      {% endif %}
     </div>
 
     <div class="program-cards__scroll-wrapper">
@@ -36,6 +46,9 @@
                   >
                 {% else %}
                   {{ 'image' | placeholder_svg_tag: 'program-cards__card-image' }}
+                {% endif %}
+                {% if section.settings.show_pop_booty_footer and block.settings.top_badge != blank %}
+                  <span class="program-cards__card-top-badge">{{ block.settings.top_badge | escape }}</span>
                 {% endif %}
                 <div class="program-cards__card-gradient"></div>
               </div>
@@ -105,6 +118,19 @@
     font-size: 30px;
   }
 
+  .program-cards__title--pop-booty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    line-height: 1.05;
+  }
+
+  .program-cards__title-line,
+  .program-cards__title-highlight {
+    display: block;
+  }
+
   .program-cards__title-highlight {
     color: var(--pc-primary);
   }
@@ -114,6 +140,18 @@
     height: 4px;
     background-color: var(--pc-primary);
     margin: 16px auto 0 auto;
+  }
+
+  .program-cards__subheading {
+    margin: 16px auto 0;
+    max-width: 860px;
+    padding: 0 8px;
+    text-align: center;
+    color: #000;
+    font-family: var(--font-body--family, 'Avenir'), 'Avenir', 'Avenir Next', Arial, sans-serif;
+    font-size: clamp(1rem, 1.8vw, 1.5rem);
+    line-height: 1.35;
+    font-weight: 500;
   }
 
   .program-cards__scroll-wrapper {
@@ -168,12 +206,31 @@
     object-fit: cover;
   }
 
+  .program-cards__card-top-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 2;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: var(--pc-highlight, #faff00);
+    color: #000;
+    font-family: var(--font-body--family, 'Avenir'), 'Avenir', 'Avenir Next', Arial, sans-serif;
+    font-size: 12px;
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    pointer-events: none;
+  }
+
   .program-cards__card-gradient {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
+    z-index: 1;
     background: linear-gradient(
       to top,
       rgba(0, 0, 0, 0.9) 0%,
@@ -188,6 +245,7 @@
     bottom: 0;
     left: 0;
     right: 0;
+    z-index: 2;
     padding: 24px;
   }
 
@@ -198,7 +256,7 @@
     letter-spacing: 0.03em;
     line-height: 100%;
     text-transform: uppercase;
-    color: #ffffff;
+    color: #fff;
     margin: 0 0 8px 0;
     font-size: 20px;
   }
@@ -230,7 +288,7 @@
   }
 
   .program-cards__card-description {
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.85);
     font-family: var(--pc-font-body);
     font-size: 18px;
     font-weight: 500;
@@ -300,12 +358,18 @@
     },
     {
       "type": "header",
-      "content": "Pop Booty footer"
+      "content": "Pop Booty"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "info": "Shown under the highlighted heading when Pop Booty footer is enabled."
     },
     {
       "type": "checkbox",
       "id": "show_pop_booty_footer",
-      "label": "Show CTA & trust badges on pop_booty",
+      "label": "Enable Pop Booty footer (subheading, CTA & trust badges)",
       "default": false
     },
     {
@@ -365,6 +429,12 @@
           "id": "duration",
           "label": "Duration Badge",
           "default": "8 Weeks"
+        },
+        {
+          "type": "text",
+          "id": "top_badge",
+          "label": "Top corner badge (pop_booty)",
+          "info": "Yellow pill on the top-left of the card image. Shown when Pop Booty footer is enabled."
         }
       ]
     }

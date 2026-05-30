@@ -313,6 +313,12 @@
     {%- if template.name == 'product' and template.suffix == 'pop_booty' -%}
       {% render 'pop-booty-bt-headings' %}
       {% render 'pop-booty-cta-trust-styles' %}
+      <style>
+        /* pop_booty: inline bundle landing hidden; wizard opens from Booty Workouts CTA */
+        body.product--pop_booty .nass-bundle-builder .bb-section {
+          display: none !important;
+        }
+      </style>
     {%- endif -%}
 
     {% render 'ts-base' %}

@@ -4,21 +4,21 @@
 {% endcomment %}
 
 {%- liquid
-  assign title = section.settings.title | default: 'FAQ'
   assign footer = section.settings.footer
+  assign faq_title = section.settings.title
+  assign faq_title_highlight = section.settings.title_highlight
 -%}
 
 <section class="bt-wrap bt-faq">
   <div class="bt-container bt-faq__container">
-    {% if template.name == 'product' and template.suffix == 'hips_a_ceo' %}
+    {% if faq_title != blank or faq_title_highlight != blank %}
       <div class="bt-faq__title">
-        <span class="bt-faq__title-lead">Questions.</span>
-        <span class="bt-faq__title-accent">Answered.</span>
-      </div>
-    {% else %}
-      <div class="bt-faq__title">
-        <span class="bt-faq__title-lead">Questions.</span>
-        <span class="bt-faq__title-accent">Answered.</span>
+        {% if faq_title != blank %}
+          <span class="bt-faq__title-lead">{{ faq_title | escape }}</span>
+        {% endif %}
+        {% if faq_title_highlight != blank %}
+          <span class="bt-faq__title-accent">{{ faq_title_highlight | escape }}</span>
+        {% endif %}
       </div>
     {% endif %}
 
@@ -80,7 +80,8 @@
   "class": "shopify-section--bt-faq",
   "tag": "section",
   "settings": [
-    { "type": "text", "id": "title", "label": "Title", "default": "FAQ" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Questions." },
+    { "type": "text", "id": "title_highlight", "label": "Highlighted word(s)", "default": "Answered." },
     { "type": "text", "id": "footer", "label": "Footer text", "default": "If you&#39;re ready, your best starting point is the one you&#39;ll stick with." },
     { "type": "header", "content": "Pop Booty footer" },
     {

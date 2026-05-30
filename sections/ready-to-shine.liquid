@@ -1,4 +1,12 @@
-<section class="ready-to-shine" id="ready-to-shine-{{ section.id }}">
+{%- liquid
+  assign rts_glow_color = section.settings.glow_color | default: '#FFF600'
+  assign rts_accent_color = section.settings.accent_color | default: '#0038FF'
+-%}
+<section
+  class="ready-to-shine"
+  id="ready-to-shine-{{ section.id }}"
+  style="--ready-to-shine-accent: {{ rts_accent_color }}; --ready-to-shine-glow: {{ rts_glow_color }};"
+>
   <div class="ready-to-shine__container">
     <h2 class="ready-to-shine__heading">
       <span class="ready-to-shine__heading-prefix">{{ section.settings.heading_prefix | escape }}</span>
@@ -23,7 +31,10 @@
             {% endif %}
           </div>
 
-          <div class="ready-to-shine__emoji" aria-hidden="true">{{ block.settings.emoji | escape }}</div>
+          <div class="ready-to-shine__emoji-wrap">
+            <span class="ready-to-shine__emoji-glow" aria-hidden="true"></span>
+            <span class="ready-to-shine__emoji" aria-hidden="true">{{ block.settings.emoji | escape }}</span>
+          </div>
           <h3 class="ready-to-shine__title">{{ block.settings.title | escape }}</h3>
           <p class="ready-to-shine__text">{{ block.settings.text | escape }}</p>
         </article>
@@ -32,10 +43,27 @@
   </div>
 </section>
 
+{% style %}
+  #shopify-section-{{ section.id }} .ready-to-shine__emoji-glow {
+    background: radial-gradient(
+      circle at center,
+      {{ rts_glow_color | color_modify: 'alpha', 0.55 }} 0%,
+      {{ rts_glow_color | color_modify: 'alpha', 0.38 }} 40%,
+      {{ rts_glow_color | color_modify: 'alpha', 0.15 }} 58%,
+      transparent 72%
+    );
+    filter: blur(18px);
+  }
+
+  @media (min-width: 768px) {
+    #shopify-section-{{ section.id }} .ready-to-shine__emoji-glow {
+      filter: blur(24px);
+    }
+  }
+{% endstyle %}
+
 {% stylesheet %}
   .ready-to-shine {
-    --ready-to-shine-accent: {{ section.settings.accent_color | default: '#0038FF' }};
-    --ready-to-shine-glow: {{ section.settings.glow_color | default: '#FFF600' }};
     padding: clamp(3rem, 8vw, 6rem) 20px;
   }
 
@@ -92,19 +120,40 @@
     display: block;
   }
 
-  .ready-to-shine__emoji {
+  .ready-to-shine__emoji-wrap {
+    position: relative;
     width: 70px;
     height: 70px;
     margin: -35px auto 0;
+    display: grid;
+    place-items: center;
+    overflow: visible;
+  }
+
+  .ready-to-shine__emoji-glow {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 0;
+    width: 165%;
+    height: 165%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .ready-to-shine__emoji {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
     background: #fff;
-    box-shadow: 0 0 40px var(--ready-to-shine-glow);
     display: grid;
     place-items: center;
     font-size: 40px;
     line-height: 1;
-    position: relative;
-    z-index: 1;
+    box-shadow: none;
   }
 
   .ready-to-shine__title {
@@ -142,10 +191,13 @@
       aspect-ratio: 381 / 400;
     }
 
-    .ready-to-shine__emoji {
+    .ready-to-shine__emoji-wrap {
       width: 95px;
       height: 95px;
       margin-top: -47px;
+    }
+
+    .ready-to-shine__emoji {
       font-size: 48px;
     }
 

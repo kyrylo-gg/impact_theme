@@ -17,6 +17,7 @@
     .program-cards__title,
     .video-reviews-grid__heading,
     .feedback-screenshots__heading,
+    .bt-faq__title,
     .student-progress__title,
     .why-this-works__heading,
     .testimonials__heading,
@@ -42,6 +43,7 @@
       .program-cards__title,
       .video-reviews-grid__heading,
       .feedback-screenshots__heading,
+      .bt-faq__title,
       .student-progress__title,
       .why-this-works__heading,
       .testimonials__heading,
@@ -55,7 +57,9 @@
     .confidence-without-pressure__heading-part1,
     .dance-workouts__heading-part1,
     .nass-programs__heading-part1,
-    .ready-to-shine__heading-prefix
+    .ready-to-shine__heading-prefix,
+    .program-cards__title-line,
+    .bt-faq__title-lead
   ) {
     color: #111 !important;
     font-weight: 600 !important;
@@ -70,6 +74,7 @@
     .program-cards__title-highlight,
     .video-reviews-grid__heading-highlight,
     .feedback-screenshots__heading-highlight,
+    .bt-faq__title-accent,
     .student-progress__title-highlight,
     .why-this-works__heading-highlight
   ) {
@@ -111,6 +116,27 @@
 
   body.product--pop_booty main#main.anchor .booty-workouts__title p {
     margin: 0 !important;
+  }
+
+  body.product--pop_booty main#main.anchor .program-cards__card-title {
+    color: #fff !important;
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+    font-size: 20px !important;
+    line-height: 1 !important;
+  }
+
+  @media (min-width: 768px) {
+    body.product--pop_booty main#main.anchor .program-cards__card-title {
+      font-size: 24px !important;
+    }
+  }
+
+  body.product--pop_booty main#main.anchor .program-cards__card-description {
+    color: rgba(255, 255, 255, 0.85) !important;
+    font-weight: 500 !important;
+    text-transform: none !important;
+    font-size: 18px !important;
   }
 
   body.product--pop_booty main#main.anchor :is(

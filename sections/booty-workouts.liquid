@@ -1,3 +1,10 @@
+{% liquid
+  assign cta_opens_bundle_builder = false
+  if request.page_type == 'product' and template.suffix == 'pop_booty'
+    assign cta_opens_bundle_builder = true
+  endif
+%}
+
 <section
   class="section-booty-workouts booty-workouts"
   id="booty-workouts-{{ section.id }}"
@@ -295,13 +302,13 @@
           {% elsif section.settings.title != blank %}
             <div class="booty-workouts__title booty-workouts__title--legacy rte">{{ section.settings.title }}</div>
           {% endif %}
-
-          {% if section.settings.starting_price != blank %}
-            <p class="booty-workouts__starting-price">{{ section.settings.starting_price | escape }}</p>
-          {% endif %}
         </div>
 
         <div class="booty-workouts__body">
+          {% if section.settings.starting_price != blank %}
+            <p class="booty-workouts__starting-price">{{ section.settings.starting_price | escape }}</p>
+          {% endif %}
+
           {% if section.settings.description != blank %}
             <div class="booty-workouts__description rte">{{ section.settings.description }}</div>
           {% endif %}
@@ -347,8 +354,12 @@
                       <span class="booty-workouts__tier-thumb">
                         {{
                           block.settings.thumb
-                          | image_url: width: 120
-                          | image_tag: loading: 'lazy', alt: block.settings.title
+                          | image_url: width: 480
+                          | image_tag:
+                            loading: 'lazy',
+                            alt: block.settings.title,
+                            width: block.settings.thumb.width,
+                            height: block.settings.thumb.height
                         }}
                       </span>
                     {% endif %}
@@ -378,7 +389,11 @@
           {% endif %}
 
           {% if section.settings.cta_label != blank %}
-            <a class="booty-workouts__cta" href="{{ section.settings.cta_url | default: '#' }}">
+            <a
+              class="booty-workouts__cta"
+              href="{% if cta_opens_bundle_builder %}#nass-bundle-builder{% else %}{{ section.settings.cta_url | default: '#' }}{% endif %}"
+              {% if cta_opens_bundle_builder %}data-booty-workouts-bundle-cta{% endif %}
+            >
               <span>{{ section.settings.cta_label | escape }}</span>
               <span class="booty-workouts__cta-arrow" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none">
@@ -448,10 +463,13 @@
 
           {% assign review_blocks = section.blocks | where: 'type', 'review' %}
           {% if review_blocks.size > 0 %}
-            <div class="booty-workouts__reviews">
+            <div
+              class="booty-workouts__reviews{% if review_blocks.size > 1 %} booty-workouts__reviews--slider{% endif %}"
+              data-booty-workouts-reviews
+            >
               {% for block in review_blocks %}
                 {% assign review_rating = block.settings.rating | default: 5 | plus: 0 %}
-                <article class="booty-workouts__review" {{ block.shopify_attributes }}>
+                <article class="booty-workouts__review{% if forloop.first %} is-active{% endif %}" {{ block.shopify_attributes }}>
                   {% if block.settings.avatar != blank %}
                     <span class="booty-workouts__review-avatar">
                       {{
@@ -642,7 +660,7 @@
   }
 
   .booty-workouts__starting-price {
-    margin: 10px 0 0;
+    margin: 0;
     color: #666;
     font-family: var(--font-body--family, 'Avenir'), 'Avenir', 'Avenir Next', Arial, sans-serif;
     font-size: clamp(0.875rem, 1.6vw, 1.125rem);
@@ -774,6 +792,15 @@
     box-shadow: 0 8px 24px rgba(184, 167, 211, 0.25);
   }
 
+  .booty-workouts__tier:not(.booty-workouts__tier--has-ribbon) .booty-workouts__tier-surface {
+    border: 1px solid #e0e0e0;
+  }
+
+  .booty-workouts__tier.is-selected:not(.booty-workouts__tier--has-ribbon) .booty-workouts__tier-surface {
+    border: 1px solid #e0e0e0;
+    box-shadow: none;
+  }
+
   .booty-workouts__tier--has-ribbon {
     margin-top: 12px;
   }
@@ -811,18 +838,19 @@
   }
 
   .booty-workouts__tier-thumb {
-    flex: 0 0 52px;
-    width: 52px;
-    height: 52px;
+    flex: 0 0 auto;
+    width: fit-content;
+    height: fit-content;
     border-radius: 12px;
     overflow: hidden;
     background: #f0f0f0;
+    line-height: 0;
   }
 
   .booty-workouts__tier-thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: auto;
+    height: auto;
+    max-height: 52px;
     display: block;
   }
 
@@ -977,6 +1005,22 @@
   .booty-workouts__reviews {
     display: grid;
     gap: 12px;
+  }
+
+  .booty-workouts__reviews--slider {
+    gap: 0;
+  }
+
+  .booty-workouts__reviews--slider .booty-workouts__review {
+    grid-area: 1 / 1;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 320ms ease, visibility 320ms ease;
+  }
+
+  .booty-workouts__reviews--slider .booty-workouts__review.is-active {
+    opacity: 1;
+    visibility: visible;
   }
 
   .booty-workouts__review {
@@ -1157,6 +1201,10 @@
       margin-top: 0;
     }
 
+    .booty-workouts__starting-price {
+      margin-top: 10px;
+    }
+
     .booty-workouts__title {
       font-size: 45px;
     }
@@ -1240,6 +1288,52 @@
           goToSlide(index);
         });
       });
+    }
+
+    const bundleCta = section.querySelector('[data-booty-workouts-bundle-cta]');
+    if (bundleCta) {
+      function tryOpenBundleWizard(maxRetries) {
+        maxRetries = typeof maxRetries === 'number' ? maxRetries : 25;
+        var retries = 0;
+        function tick() {
+          if (window.NassBundleBuilder && typeof window.NassBundleBuilder.openWizard === 'function') {
+            window.NassBundleBuilder.openWizard();
+            return;
+          }
+          if (retries >= maxRetries) {
+            window.location.hash = '#nass-bundle-builder';
+            return;
+          }
+          retries += 1;
+          setTimeout(tick, 100);
+        }
+        tick();
+      }
+
+      bundleCta.addEventListener('click', (event) => {
+        event.preventDefault();
+        tryOpenBundleWizard(25);
+      });
+    }
+
+    const reviewsRoot = section.querySelector('[data-booty-workouts-reviews]');
+    if (reviewsRoot) {
+      const reviews = Array.from(reviewsRoot.querySelectorAll('.booty-workouts__review'));
+      if (reviews.length > 1) {
+        let activeIndex = reviews.findIndex((review) => review.classList.contains('is-active'));
+        if (activeIndex < 0) activeIndex = 0;
+
+        const showReview = (index) => {
+          reviews.forEach((review, reviewIndex) => {
+            review.classList.toggle('is-active', reviewIndex === index);
+          });
+        };
+
+        window.setInterval(() => {
+          activeIndex = (activeIndex + 1) % reviews.length;
+          showReview(activeIndex);
+        }, 7000);
+      }
     }
   })();
 </script>
