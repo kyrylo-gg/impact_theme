@@ -241,22 +241,24 @@
         "booty_tier_1": {
           "type": "tier",
           "settings": {
-            "title": "4 Booty Programs",
-            "old_price": "$456",
-            "price": "$107",
-            "discount": "76% OFF",
+            "title": "VIP Bundle",
+            "old_price": "$717",
+            "price": "$149",
+            "discount": "79% OFF",
             "ribbon": "Extra 60% Off all Booty Clothing",
+            "thumb": "shopify://shop_images/VIP_Bundle_pdp.png",
             "preselected": true
           }
         },
         "tier_NEy4e9": {
           "type": "tier",
           "settings": {
-            "title": "4 Booty Programs",
-            "old_price": "$456",
-            "price": "$107",
-            "discount": "76% OFF",
-            "ribbon": "Extra 60% Off all Booty Clothing",
+            "title": "Twerk Program",
+            "old_price": "$159",
+            "price": "$59",
+            "discount": "63% OFF",
+            "ribbon": "",
+            "thumb": "shopify://shop_images/Twerk_Program_pdp_1.png",
             "preselected": true
           }
         },
@@ -312,8 +314,9 @@
         "trust_support": "World-Famous support",
         "secure_label": "Secure Checkout",
         "payment_icons_alt": "Accepted payment methods",
+        "review_avatar": "shopify://shop_images/Frame_32.png",
         "review_title": "Super fun",
-        "review_body": "<p>I love this program! It's super fun and makes me feel super sexy while doing it!</p>"
+        "review_body": "<p>I'm enjoying the twerk program, and the booty-building program - as someone with very little junk in the trunk, they complement each other perfectly!! Highly recommend.</p>"
       }
     },
     "confidence_without_pressure_pop": {
