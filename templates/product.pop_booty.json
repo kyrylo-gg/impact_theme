@@ -1488,62 +1488,121 @@
         "enable_judgeme_badge": true
       }
     },
-    "booty_workouts_AVKRC3": {
+    "booty_workouts_KMFCjK": {
       "type": "booty-workouts",
       "blocks": {
-        "benefit_VW3Atc": {
+        "gallery_image_byNN49": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/Image_1_a5d1b47f-d39f-4ae5-99eb-3ab197fdbc64.png",
+            "alt": ""
+          }
+        },
+        "gallery_image_yijL8P": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/Image_2.png",
+            "alt": ""
+          }
+        },
+        "gallery_image_TWXefQ": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/Image_3_abc9ffcc-2f57-4171-8405-43ed7b932224.png",
+            "alt": ""
+          }
+        },
+        "gallery_image_q6aBpx": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/Image_4_c015493c-8a4c-44cc-8e03-f7ea412002ae.png",
+            "alt": ""
+          }
+        },
+        "gallery_image_bjPaFt": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/Community_1.2.png",
+            "alt": ""
+          }
+        },
+        "gallery_image_9V7jQb": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/Image_5_5f979a1b-b8d8-4f50-83c1-67a6121d0b4d.png",
+            "alt": ""
+          }
+        },
+        "gallery_image_7T9dYe": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/Image_6_09c95840-3a7b-4f83-8e10-5adf96265560.png",
+            "alt": ""
+          }
+        },
+        "benefit_nh6tFi": {
           "type": "benefit",
           "settings": {
             "label": "Booty Shape & Muscle Tone"
           }
         },
-        "benefit_bahwgP": {
+        "benefit_EEzJXt": {
           "type": "benefit",
           "settings": {
-            "label": "Fat Burning & Cardio"
+            "label": "Mood Boost & Body Confidence"
           }
         },
-        "benefit_pTBgYd": {
+        "benefit_riBj96": {
           "type": "benefit",
           "settings": {
-            "label": "Confidence & Feminine Energy"
+            "label": "Consistency Through Enjoyment"
           }
         },
-        "tier_N6zAed": {
+        "benefit_Djy3xQ": {
+          "type": "benefit",
+          "settings": {
+            "label": "Open Hips & Free Movement"
+          }
+        },
+        "tier_k8hdQQ": {
           "type": "tier",
           "settings": {
-            "title": "4 Booty Programs",
-            "old_price": "$456",
-            "price": "$107",
-            "discount": "76% OFF",
+            "title": "VIP Bundle",
+            "old_price": "$717",
+            "price": "$149",
+            "discount": "79% OFF",
             "ribbon": "Extra 60% Off all Booty Clothing",
+            "thumb": "shopify://shop_images/VIP_Bundle_pdp.png",
             "preselected": true
           }
         },
-        "faq_w8zEiQ": {
-          "type": "faq",
+        "tier_ixwBBH": {
+          "type": "tier",
           "settings": {
-            "question": "What You'll Get",
-            "answer": "<p>Instant access to booty-focused dance workouts, structured programs, and bonus lessons inside the NASS app.</p>",
-            "open_by_default": false
-          }
-        },
-        "faq_FYPzJ9": {
-          "type": "faq",
-          "settings": {
-            "question": "About the community",
-            "answer": "<p>Join 6,000+ women who train together, share progress, and stay motivated with world-famous Nastya NASS.</p>",
-            "open_by_default": true
+            "title": "Twerk Program",
+            "old_price": "$159",
+            "price": "$59",
+            "discount": "63% OFF",
+            "ribbon": "",
+            "thumb": "shopify://shop_images/Twerk_Program_pdp_1.png",
+            "preselected": true
           }
         }
       },
       "block_order": [
-        "benefit_VW3Atc",
-        "benefit_bahwgP",
-        "benefit_pTBgYd",
-        "tier_N6zAed",
-        "faq_w8zEiQ",
-        "faq_FYPzJ9"
+        "gallery_image_byNN49",
+        "gallery_image_yijL8P",
+        "gallery_image_TWXefQ",
+        "gallery_image_q6aBpx",
+        "gallery_image_bjPaFt",
+        "gallery_image_9V7jQb",
+        "gallery_image_7T9dYe",
+        "benefit_nh6tFi",
+        "benefit_EEzJXt",
+        "benefit_riBj96",
+        "benefit_Djy3xQ",
+        "tier_k8hdQQ",
+        "tier_ixwBBH"
       ],
       "settings": {
         "rating_label": "Rated",
@@ -1563,8 +1622,8 @@
         "trust_support": "World-Famous support",
         "secure_label": "Secure Checkout",
         "payment_icons_alt": "Accepted payment methods",
-        "review_title": "Super fun",
-        "review_body": "<p>I love this program! It's super fun and makes me feel super sexy while doing it!</p>"
+        "review_title": "",
+        "review_body": ""
       }
     },
     "bt_faq_yC7n4z": {
@@ -1713,7 +1772,7 @@
     "student_progress_3GQNkJ",
     "nass_countdown_PUMrCf",
     "nass_testimonials_ELPAbp",
-    "booty_workouts_AVKRC3",
+    "booty_workouts_KMFCjK",
     "bt_faq_yC7n4z",
     "student_progress_QBDTex"
   ]
