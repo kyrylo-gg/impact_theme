@@ -953,37 +953,37 @@
         "subheading": "<p>What is missing from every other hip mobility program.</p>"
       }
     },
-    "twerk_makeovers_RigHaN": {
-      "type": "twerk-makeovers",
+    "student_progress_3GQNkJ": {
+      "type": "student-progress",
       "blocks": {
-        "makeover_video_Hk4ect": {
-          "type": "makeover_video",
-          "settings": {}
+        "student_video_3mY9da": {
+          "type": "student_video",
+          "settings": {
+            "video": "shopify://files/videos/3.webm"
+          }
         },
-        "makeover_video_Nqj4az": {
-          "type": "makeover_video",
-          "settings": {}
+        "student_video_ybxrAD": {
+          "type": "student_video",
+          "settings": {
+            "video": "shopify://files/videos/2.webm"
+          }
         },
-        "makeover_video_xzBMX4": {
-          "type": "makeover_video",
-          "settings": {}
-        },
-        "makeover_video_QwHy6K": {
-          "type": "makeover_video",
-          "settings": {}
+        "student_video_tpBeUe": {
+          "type": "student_video",
+          "settings": {
+            "video": "shopify://files/videos/1 (1).webm"
+          }
         }
       },
       "block_order": [
-        "makeover_video_Hk4ect",
-        "makeover_video_Nqj4az",
-        "makeover_video_xzBMX4",
-        "makeover_video_QwHy6K"
+        "student_video_3mY9da",
+        "student_video_ybxrAD",
+        "student_video_tpBeUe"
       ],
-      "name": "Twerk Makeovers",
+      "name": "Student Progress",
       "settings": {
-        "heading": "LOOK AT THESE INCREDIBLE",
-        "heading_highlight": "TWERK MAKEOVERS!",
-        "subtitle": "YOU CAN ACHIEVE THIS TOO!"
+        "heading": "SEE HOW OUR",
+        "heading_highlight": "STUDENTS PERFORM"
       }
     },
     "nass_countdown_PUMrCf": {
@@ -1317,7 +1317,7 @@
     "video_reviews_grid_aXTixC",
     "feedback_live_screenshots_HUrhFR",
     "why_this_works_MEeJDT",
-    "twerk_makeovers_RigHaN",
+    "student_progress_3GQNkJ",
     "nass_countdown_PUMrCf",
     "nass_testimonials_ELPAbp",
     "faq_wNxEUc"
