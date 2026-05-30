@@ -1506,7 +1506,40 @@
       "name": "BT_FAQ",
       "settings": {
         "title": "FAQ",
-        "footer": "If you&#39;re ready, your best starting point is the one you&#39;ll stick with."
+        "footer": "If you're ready, your best starting point is the one you'll stick with."
+      }
+    },
+    "student_progress_QBDTex": {
+      "type": "student-progress",
+      "blocks": {
+        "student_video_JQBgaH": {
+          "type": "student_video",
+          "settings": {
+            "video": "shopify://files/videos/3.webm"
+          }
+        },
+        "student_video_eenb39": {
+          "type": "student_video",
+          "settings": {
+            "video": "shopify://files/videos/2.webm"
+          }
+        },
+        "student_video_XghNmm": {
+          "type": "student_video",
+          "settings": {
+            "video": "shopify://files/videos/1 (1).webm"
+          }
+        }
+      },
+      "block_order": [
+        "student_video_JQBgaH",
+        "student_video_eenb39",
+        "student_video_XghNmm"
+      ],
+      "name": "Student Progress 1",
+      "settings": {
+        "heading": "Real Results",
+        "heading_highlight": "from Girls Like You"
       }
     }
   },
@@ -1528,6 +1561,7 @@
     "nass_countdown_PUMrCf",
     "nass_testimonials_ELPAbp",
     "booty_workouts_AVKRC3",
-    "bt_faq_yC7n4z"
+    "bt_faq_yC7n4z",
+    "student_progress_QBDTex"
   ]
 }
