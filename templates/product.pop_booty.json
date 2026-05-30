@@ -240,84 +240,6 @@
         "review_body": "<p>I love this program! It's super fun and makes me feel super sexy while doing it!</p>"
       }
     },
-    "booty_workouts_AVKRC3": {
-      "type": "booty-workouts",
-      "blocks": {
-        "benefit_VW3Atc": {
-          "type": "benefit",
-          "settings": {
-            "label": "Booty Shape & Muscle Tone"
-          }
-        },
-        "benefit_bahwgP": {
-          "type": "benefit",
-          "settings": {
-            "label": "Fat Burning & Cardio"
-          }
-        },
-        "benefit_pTBgYd": {
-          "type": "benefit",
-          "settings": {
-            "label": "Confidence & Feminine Energy"
-          }
-        },
-        "tier_N6zAed": {
-          "type": "tier",
-          "settings": {
-            "title": "4 Booty Programs",
-            "old_price": "$456",
-            "price": "$107",
-            "discount": "76% OFF",
-            "ribbon": "Extra 60% Off all Booty Clothing",
-            "preselected": true
-          }
-        },
-        "faq_w8zEiQ": {
-          "type": "faq",
-          "settings": {
-            "question": "What You'll Get",
-            "answer": "<p>Instant access to booty-focused dance workouts, structured programs, and bonus lessons inside the NASS app.</p>",
-            "open_by_default": false
-          }
-        },
-        "faq_FYPzJ9": {
-          "type": "faq",
-          "settings": {
-            "question": "About the community",
-            "answer": "<p>Join 6,000+ women who train together, share progress, and stay motivated with world-famous Nastya NASS.</p>",
-            "open_by_default": true
-          }
-        }
-      },
-      "block_order": [
-        "benefit_VW3Atc",
-        "benefit_bahwgP",
-        "benefit_pTBgYd",
-        "tier_N6zAed",
-        "faq_w8zEiQ",
-        "faq_FYPzJ9"
-      ],
-      "settings": {
-        "rating_label": "Rated",
-        "rating_value": "4.8/5 by Over 6000 Participants",
-        "title": "<p>Booty Workouts That <strong>Feel Like Fun</strong></p>",
-        "starting_price": "Starting from just $59",
-        "description": "<p>Twerk workouts from world-famous Nastya NASS help you tone your body, shape a beautiful booty, and make every workout fun and energizing.</p>",
-        "hero_image": "shopify://shop_images/Banner_Product_1_935cbba9-6018-4188-95c4-4f0a3b9fe2bb.png",
-        "image_radius": 30,
-        "offer_kicker": "Limited Time",
-        "offer_title": "SPRING OFFER",
-        "offer_bg_from": "#ebd7ff",
-        "offer_bg_to": "#ffd1fc",
-        "cta_label": "Order Today",
-        "cta_url": "",
-        "trust_guarantee": "30-Day Money-Back Guarantee",
-        "trust_support": "World-Famous support",
-        "secure_label": "Secure Checkout",
-        "review_title": "Super fun",
-        "review_body": "<p>I love this program! It's super fun and makes me feel super sexy while doing it!</p>"
-      }
-    },
     "confidence_without_pressure_pop": {
       "type": "confidence-without-pressure",
       "blocks": {
@@ -1425,57 +1347,166 @@
         "enable_judgeme_badge": true
       }
     },
-    "faq_wNxEUc": {
-      "type": "faq",
+    "booty_workouts_AVKRC3": {
+      "type": "booty-workouts",
       "blocks": {
-        "item_gnXYNJ": {
-          "type": "item",
+        "benefit_VW3Atc": {
+          "type": "benefit",
           "settings": {
-            "title": "Do you ship overseas?",
-            "content": "<p>Yes, we ship all over the world. Shipping costs will apply, and will be added at checkout. We run discounts and promotions all year, so stay tuned for exclusive deals.</p>"
+            "label": "Booty Shape & Muscle Tone"
           }
         },
-        "item_6dyX4M": {
-          "type": "item",
+        "benefit_bahwgP": {
+          "type": "benefit",
           "settings": {
-            "title": "How long will it take to get my orders?",
-            "content": "<p>It depends on where you are. Orders processed here will take 5-7 business days to arrive. Overseas deliveries can take anywhere from 7-16 days. Delivery details will be provided in your confirmation email.</p>"
+            "label": "Fat Burning & Cardio"
           }
         },
-        "item_wAHcbi": {
-          "type": "item",
+        "benefit_pTBgYd": {
+          "type": "benefit",
           "settings": {
-            "title": "Any question?",
-            "content": "<p>You can contact us through our contact page! We will be happy to assist you.</p>"
+            "label": "Confidence & Feminine Energy"
+          }
+        },
+        "tier_N6zAed": {
+          "type": "tier",
+          "settings": {
+            "title": "4 Booty Programs",
+            "old_price": "$456",
+            "price": "$107",
+            "discount": "76% OFF",
+            "ribbon": "Extra 60% Off all Booty Clothing",
+            "preselected": true
+          }
+        },
+        "faq_w8zEiQ": {
+          "type": "faq",
+          "settings": {
+            "question": "What You'll Get",
+            "answer": "<p>Instant access to booty-focused dance workouts, structured programs, and bonus lessons inside the NASS app.</p>",
+            "open_by_default": false
+          }
+        },
+        "faq_FYPzJ9": {
+          "type": "faq",
+          "settings": {
+            "question": "About the community",
+            "answer": "<p>Join 6,000+ women who train together, share progress, and stay motivated with world-famous Nastya NASS.</p>",
+            "open_by_default": true
           }
         }
       },
       "block_order": [
-        "item_gnXYNJ",
-        "item_6dyX4M",
-        "item_wAHcbi"
+        "benefit_VW3Atc",
+        "benefit_bahwgP",
+        "benefit_pTBgYd",
+        "tier_N6zAed",
+        "faq_w8zEiQ",
+        "faq_FYPzJ9"
       ],
-      "name": "FAQ",
       "settings": {
-        "full_width": true,
-        "subheading": "",
+        "rating_label": "Rated",
+        "rating_value": "4.8/5 by Over 6000 Participants",
+        "title": "<p>Booty Workouts That <strong>Feel Like Fun</strong></p>",
+        "starting_price": "Starting from just $59",
+        "description": "<p>Twerk workouts from world-famous Nastya NASS help you tone your body, shape a beautiful booty, and make every workout fun and energizing.</p>",
+        "hero_image": "shopify://shop_images/Banner_Product_1_935cbba9-6018-4188-95c4-4f0a3b9fe2bb.png",
+        "image_radius": 30,
+        "offer_kicker": "Limited Time",
+        "offer_title": "SPRING OFFER",
+        "offer_bg_from": "#ebd7ff",
+        "offer_bg_to": "#ffd1fc",
+        "cta_label": "Order Today",
+        "cta_url": "",
+        "trust_guarantee": "30-Day Money-Back Guarantee",
+        "trust_support": "World-Famous support",
+        "secure_label": "Secure Checkout",
+        "review_title": "Super fun",
+        "review_body": "<p>I love this program! It's super fun and makes me feel super sexy while doing it!</p>"
+      }
+    },
+    "bt_faq_yC7n4z": {
+      "type": "bt_faq",
+      "blocks": {
+        "faq_iNFDF4": {
+          "type": "faq",
+          "settings": {
+            "question": "Is this program good for women 35+ / 40+ / 50+?",
+            "answer": "Yes! The program is designed for women of all ages and fitness levels. Each level adapts to your body's needs."
+          }
+        },
+        "faq_dxGqPa": {
+          "type": "faq",
+          "settings": {
+            "question": "Do I have to do jumping or HIIT?",
+            "answer": "No jumping or HIIT required. The workouts are joint-friendly and designed for sustainable progress."
+          }
+        },
+        "faq_ecKMgi": {
+          "type": "faq",
+          "settings": {
+            "question": "What if I have low-energy days or PMS?",
+            "answer": "That's exactly what Plan B is for. On tough days, switch to a gentler flow and stay on track without burning out."
+          }
+        },
+        "faq_kMXc86": {
+          "type": "faq",
+          "settings": {
+            "question": "How many days per week is it?",
+            "answer": "The program is designed for 3–5 days per week, depending on your level and schedule."
+          }
+        },
+        "faq_ptTKgD": {
+          "type": "faq",
+          "settings": {
+            "question": "How long is each workout?",
+            "answer": "Workouts range from 20 to 40 minutes depending on the level."
+          }
+        },
+        "faq_LaxJWm": {
+          "type": "faq",
+          "settings": {
+            "question": "Do I need equipment?",
+            "answer": "Minimal equipment — a set of dumbbells and a mat are enough to get started."
+          }
+        },
+        "faq_zBQbUf": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I access the program?",
+            "answer": "You'll get instant access through our app. Works on any device — phone, tablet, or computer."
+          }
+        },
+        "faq_YbQyNM": {
+          "type": "faq",
+          "settings": {
+            "question": "Is it a one-time purchase or subscription?",
+            "answer": "It's a one-time purchase. Pay once, access forever."
+          }
+        },
+        "faq_B67kaY": {
+          "type": "faq",
+          "settings": {
+            "question": "What if I'm a complete beginner?",
+            "answer": "Start with the Soft level — it's built specifically for beginners with zero fitness experience."
+          }
+        }
+      },
+      "block_order": [
+        "faq_iNFDF4",
+        "faq_dxGqPa",
+        "faq_ecKMgi",
+        "faq_kMXc86",
+        "faq_ptTKgD",
+        "faq_LaxJWm",
+        "faq_zBQbUf",
+        "faq_YbQyNM",
+        "faq_B67kaY"
+      ],
+      "name": "BT_FAQ",
+      "settings": {
         "title": "FAQ",
-        "content": "<p>Use this text to share information about your product or shipping policies.</p>",
-        "team_avatar_width": 160,
-        "support_hours": "Our customer support is available Monday to Friday: 8am-8:30pm.",
-        "answer_time": "Average answer time: 24h",
-        "button_text": "",
-        "button_url": "",
-        "text_position": "center",
-        "background": "",
-        "background_gradient": "",
-        "text_color": "",
-        "heading_color": "",
-        "heading_gradient": "",
-        "button_background": "",
-        "button_text_color": "",
-        "accordion_background": "",
-        "accordion_text_color": ""
+        "footer": "If you&#39;re ready, your best starting point is the one you&#39;ll stick with."
       }
     }
   },
@@ -1497,6 +1528,6 @@
     "nass_countdown_PUMrCf",
     "nass_testimonials_ELPAbp",
     "booty_workouts_AVKRC3",
-    "faq_wNxEUc"
+    "bt_faq_yC7n4z"
   ]
 }
