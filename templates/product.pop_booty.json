@@ -1342,8 +1342,8 @@
       ],
       "name": "Testimonials",
       "settings": {
-        "heading_count": "40,000+",
-        "subtitle": "See what our community has to say",
+        "heading_count": "",
+        "subtitle": "Customer Reviews",
         "enable_judgeme_badge": true
       }
     },
