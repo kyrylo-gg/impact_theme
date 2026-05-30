@@ -1,7 +1,11 @@
-<section class="why-this-works" id="why-this-works-{{ section.id }}">
+<section class="why-this-works{% if request.page_type == 'product' and template.suffix == 'pop_booty' and section.settings.heading_highlight != blank %} why-this-works--split-heading{% endif %}" id="why-this-works-{{ section.id }}">
   <div class="why-this-works__container">
     <p class="why-this-works__eyebrow">{{ section.settings.eyebrow | escape }}</p>
-    {% if template.name == 'product' and template.suffix == 'hips_a_ceo' %}
+    {% if request.page_type == 'product' and template.suffix == 'pop_booty' and section.settings.heading_highlight != blank %}
+      <h2 class="why-this-works__heading">
+        {{ section.settings.heading | escape }}<span class="why-this-works__heading-highlight"> {{ section.settings.heading_highlight | escape }}</span>
+      </h2>
+    {% elsif template.name == 'product' and template.suffix == 'hips_a_ceo' %}
       <div class="why-this-works__heading">{{ section.settings.heading | escape }}</div>
     {% else %}
       <h2 class="why-this-works__heading">{{ section.settings.heading | escape }}</h2>
@@ -223,6 +227,12 @@
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Why most programs fail." },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Why this one works" },
+    {
+      "type": "text",
+      "id": "heading_highlight",
+      "label": "Heading highlight",
+      "info": "Used on pop_booty template only. Shown in blue after the main heading."
+    },
     {
       "type": "richtext",
       "id": "subheading",

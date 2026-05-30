@@ -1,0 +1,88 @@
+{% comment %} Shared CTA + trust badge styles for pop_booty sections {% endcomment %}
+<style>
+  .pop-booty-cta-trust {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pop-booty-cta-trust__cta {
+    width: min(100%, 482px);
+    border-radius: 86px;
+    background: #000;
+    color: #fff;
+    text-decoration: none;
+    padding: 19px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    font-family: Avenir, 'Nunito Sans', system-ui, sans-serif;
+    font-size: clamp(1rem, 1.7vw, 1.125rem);
+    font-weight: 700;
+    transition: background-color 160ms ease;
+  }
+
+  .pop-booty-cta-trust__cta:hover {
+    background: #1b1b1b;
+  }
+
+  .pop-booty-cta-trust__cta-arrow {
+    width: 20px;
+    height: 20px;
+    transition: transform 160ms ease;
+  }
+
+  .pop-booty-cta-trust__cta:hover .pop-booty-cta-trust__cta-arrow {
+    transform: translateX(4px);
+  }
+
+  .pop-booty-cta-trust__cta-arrow svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .pop-booty-cta-trust__trust {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .pop-booty-cta-trust__trust-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #000;
+    font-family: Avenir, 'Nunito Sans', system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.3;
+    font-weight: 500;
+  }
+
+  .pop-booty-cta-trust__trust-icon {
+    width: 16px;
+    height: 16px;
+    line-height: 0;
+  }
+
+  .pop-booty-cta-trust__trust-icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  @media (min-width: 768px) {
+    .pop-booty-cta-trust__trust {
+      flex-direction: row;
+      gap: 40px;
+    }
+
+    .pop-booty-cta-trust__trust-item {
+      font-size: 16px;
+    }
+  }
+</style>

@@ -52,7 +52,7 @@
       {% render 'nass-fonts' %}
     {%- endif -%}
     {%- if template.name == 'product' -%}
-      {%- if template.suffix == 'body_transformation' or template.suffix == 'hips_a' or template.suffix == 'hips_a_ceo' or template.suffix == 'hips_b' or template.suffix == 'hips_c' -%}
+      {%- if template.suffix == 'body_transformation' or template.suffix == 'pop_booty' or template.suffix == 'hips_a' or template.suffix == 'hips_a_ceo' or template.suffix == 'hips_b' or template.suffix == 'hips_c' -%}
         {% render 'bt-body-transformation-fonts' %}
       {%- endif -%}
     {%- endif -%}
@@ -308,6 +308,11 @@
         }
       })();
     </script>
+    {%- endif -%}
+
+    {%- if template.name == 'product' and template.suffix == 'pop_booty' -%}
+      {% render 'pop-booty-bt-headings' %}
+      {% render 'pop-booty-cta-trust-styles' %}
     {%- endif -%}
 
     {% render 'ts-base' %}

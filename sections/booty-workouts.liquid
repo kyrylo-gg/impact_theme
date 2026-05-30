@@ -4,49 +4,296 @@
   data-section-id="{{ section.id }}"
   style="
     --booty-workouts-image-radius: {{ section.settings.image_radius }}px;
-    --booty-workouts-offer-from: {{ section.settings.offer_bg_from }};
-    --booty-workouts-offer-to: {{ section.settings.offer_bg_to }};
   "
 >
+  <style>
+    #shopify-section-{{ section.id }} .booty-workouts__bars {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      width: 100%;
+      margin-top: 14px;
+      padding: 0;
+    }
+
+    #shopify-section-{{ section.id }} .booty-workouts__bars[hidden] {
+      display: none !important;
+    }
+
+    #shopify-section-{{ section.id }} .booty-workouts__bar {
+      display: block;
+      width: 32px;
+      height: 5px;
+      padding: 0;
+      border: 0;
+      border-radius: 999px;
+      background: #dfdfdf;
+      cursor: pointer;
+      transition: width 200ms ease, background-color 200ms ease;
+    }
+
+    #shopify-section-{{ section.id }} .booty-workouts__bar--active {
+      width: 48px;
+      background: #333;
+    }
+
+    #shopify-section-{{ section.id }} .booty-workouts__head {
+      text-align: left;
+    }
+
+    #shopify-section-{{ section.id }} .booty-workouts__rating {
+      display: block;
+      color: #666;
+    }
+
+    #shopify-section-{{ section.id }} .booty-workouts__rating-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+    }
+
+    #shopify-section-{{ section.id }} .booty-workouts__rating-label,
+    #shopify-section-{{ section.id }} .booty-workouts__rating-score,
+    #shopify-section-{{ section.id }} .booty-workouts__rating-subline {
+      color: #666;
+      font-family: var(--font-body--family, 'Avenir'), 'Avenir', 'Avenir Next', Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.35;
+      font-weight: 400;
+    }
+
+    #shopify-section-{{ section.id }} .booty-workouts__rating-subline {
+      display: block;
+      margin-top: 4px;
+    }
+
+    #shopify-section-{{ section.id }} .booty-workouts__stars {
+      color: #f5b301;
+      letter-spacing: 0.06em;
+      font-size: 14px;
+      line-height: 1;
+    }
+
+    #shopify-section-{{ section.id }} .booty-workouts__title {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 12px;
+      text-align: left;
+      text-transform: uppercase;
+      font-family: 'Anybody', sans-serif;
+      font-stretch: 150%;
+      letter-spacing: 0.03em;
+      line-height: 1.05;
+      font-size: clamp(1.75rem, 8vw, 2.8125rem);
+      font-weight: 700;
+      color: #000;
+    }
+
+    #shopify-section-{{ section.id }} .booty-workouts__title-line {
+      display: block;
+      color: #000;
+      font-weight: 700;
+    }
+
+    #shopify-section-{{ section.id }} .booty-workouts__title-line + .booty-workouts__title-line {
+      margin-top: 0;
+    }
+
+    @media (min-width: 768px) {
+      #shopify-section-{{ section.id }} .booty-workouts__title {
+        font-size: 45px;
+      }
+    }
+  </style>
   <div class="booty-workouts__container">
     <div class="booty-workouts__grid">
-      <div class="booty-workouts__media">
+      <div class="booty-workouts__media" data-booty-workouts-gallery>
+        {%- liquid
+          assign gallery_slides = 0
+          assign gallery_source = 'placeholder'
+
+          for block in section.blocks
+            if block.type == 'gallery_image' and block.settings.image != blank
+              assign gallery_slides = gallery_slides | plus: 1
+            endif
+          endfor
+
+          if gallery_slides > 0
+            assign gallery_source = 'blocks'
+          elsif product != blank and product.media.size > 0
+            unless section.settings.gallery_use_product_media == false
+              assign gallery_slides = product.media.size
+              assign gallery_source = 'product'
+            endunless
+          endif
+
+          if gallery_source == 'placeholder'
+            if section.settings.hero_image != blank
+              assign gallery_slides = 1
+              assign gallery_source = 'hero'
+            else
+              assign gallery_slides = 1
+            endif
+          endif
+        -%}
+
         <div class="booty-workouts__image-wrap">
-          {% if section.settings.hero_image != blank %}
-            {{
-              section.settings.hero_image
-              | image_url: width: 1200
-              | image_tag:
-                class: 'booty-workouts__image',
-                loading: 'lazy',
-                widths: '335,582,900,1200',
-                sizes: '(min-width: 768px) 582px, 100vw'
-            }}
-          {% else %}
-            {{ 'product-1' | placeholder_svg_tag: 'booty-workouts__image booty-workouts__image--placeholder' }}
-          {% endif %}
+          {% case gallery_source %}
+            {% when 'blocks' %}
+              {% assign first_gallery_slide = true %}
+              {% for block in section.blocks %}
+                {% if block.type == 'gallery_image' and block.settings.image != blank %}
+                  <div
+                    class="booty-workouts__slide{% if first_gallery_slide %} is-active{% endif %}"
+                    data-booty-workouts-slide
+                    {{ block.shopify_attributes }}
+                  >
+                    {{
+                      block.settings.image
+                      | image_url: width: 1200
+                      | image_tag:
+                        class: 'booty-workouts__image',
+                        loading: 'lazy',
+                        widths: '335,582,900,1200',
+                        sizes: '(min-width: 768px) 582px, 100vw',
+                        alt: block.settings.alt
+                    }}
+                  </div>
+                  {% assign first_gallery_slide = false %}
+                {% endif %}
+              {% endfor %}
+            {% when 'product' %}
+              {% for media in product.media %}
+                <div
+                  class="booty-workouts__slide{% if forloop.first %} is-active{% endif %}"
+                  data-booty-workouts-slide
+                >
+                  {% if media.media_type == 'image' %}
+                    {{
+                      media
+                      | image_url: width: 1200
+                      | image_tag:
+                        class: 'booty-workouts__image',
+                        loading: 'lazy',
+                        widths: '335,582,900,1200',
+                        sizes: '(min-width: 768px) 582px, 100vw',
+                        alt: media.alt
+                    }}
+                  {% else %}
+                    {{
+                      media.preview_image
+                      | image_url: width: 1200
+                      | image_tag:
+                        class: 'booty-workouts__image',
+                        loading: 'lazy',
+                        widths: '335,582,900,1200',
+                        sizes: '(min-width: 768px) 582px, 100vw',
+                        alt: media.alt
+                    }}
+                  {% endif %}
+                </div>
+              {% endfor %}
+            {% when 'hero' %}
+              <div class="booty-workouts__slide is-active" data-booty-workouts-slide>
+                {{
+                  section.settings.hero_image
+                  | image_url: width: 1200
+                  | image_tag:
+                    class: 'booty-workouts__image',
+                    loading: 'lazy',
+                    widths: '335,582,900,1200',
+                    sizes: '(min-width: 768px) 582px, 100vw'
+                }}
+              </div>
+            {% else %}
+              <div class="booty-workouts__slide is-active" data-booty-workouts-slide>
+                {{ 'product-1' | placeholder_svg_tag: 'booty-workouts__image booty-workouts__image--placeholder' }}
+              </div>
+          {% endcase %}
         </div>
-        <div class="booty-workouts__dots" aria-hidden="true">
-          <span class="booty-workouts__dot booty-workouts__dot--active"></span>
-          <span class="booty-workouts__dot"></span>
-          <span class="booty-workouts__dot"></span>
-          <span class="booty-workouts__dot"></span>
-          <span class="booty-workouts__dot"></span>
+
+        <div
+          class="booty-workouts__bars"
+          data-booty-workouts-bars
+          role="tablist"
+          aria-label="Product gallery"
+          {% unless gallery_slides > 1 %}hidden{% endunless %}
+        >
+          {% if gallery_source == 'blocks' %}
+            {% assign bar_index = 0 %}
+            {% for block in section.blocks %}
+              {% if block.type == 'gallery_image' and block.settings.image != blank %}
+                <button
+                  type="button"
+                  class="booty-workouts__bar{% if bar_index == 0 %} booty-workouts__bar--active{% endif %}"
+                  data-booty-workouts-bar
+                  data-slide-index="{{ bar_index }}"
+                  role="tab"
+                  aria-selected="{% if bar_index == 0 %}true{% else %}false{% endif %}"
+                  aria-label="Slide {{ bar_index | plus: 1 }}"
+                ></button>
+                {% assign bar_index = bar_index | plus: 1 %}
+              {% endif %}
+            {% endfor %}
+          {% elsif gallery_source == 'product' %}
+            {% for media in product.media %}
+              <button
+                type="button"
+                class="booty-workouts__bar{% if forloop.first %} booty-workouts__bar--active{% endif %}"
+                data-booty-workouts-bar
+                data-slide-index="{{ forloop.index0 }}"
+                role="tab"
+                aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+                aria-label="Slide {{ forloop.index }}"
+              ></button>
+            {% endfor %}
+          {% endif %}
         </div>
       </div>
 
       <div class="booty-workouts__details">
         <div class="booty-workouts__head">
           {% if section.settings.rating_value != blank %}
+            {%- liquid
+              assign rating_score = section.settings.rating_value
+              assign rating_subline = ''
+              if section.settings.rating_value contains ' by '
+                assign rating_split = section.settings.rating_value | split: ' by '
+                assign rating_score = rating_split[0] | strip
+                assign rating_subline = 'by ' | append: rating_split[1] | strip
+              endif
+            -%}
             <div class="booty-workouts__rating">
-              <span class="booty-workouts__stars" aria-hidden="true">★★★★★</span>
-              <span class="booty-workouts__rating-label">{{ section.settings.rating_label | escape }}</span>
-              <span class="booty-workouts__rating-value">{{ section.settings.rating_value | escape }}</span>
+              <div class="booty-workouts__rating-row">
+                {% if section.settings.rating_label != blank %}
+                  <span class="booty-workouts__rating-label">{{ section.settings.rating_label | escape }}</span>
+                {% endif %}
+                <span class="booty-workouts__stars" aria-hidden="true">★★★★★</span>
+                <span class="booty-workouts__rating-score">{{ rating_score | escape }}</span>
+              </div>
+              {% if rating_subline != blank %}
+                <span class="booty-workouts__rating-subline">{{ rating_subline | escape }}</span>
+              {% endif %}
             </div>
           {% endif %}
 
-          {% if section.settings.title != blank %}
-            <div class="booty-workouts__title rte">{{ section.settings.title }}</div>
+          {% if section.settings.title_part_1 != blank or section.settings.title_part_2 != blank or section.settings.title_part_3 != blank %}
+            <div class="booty-workouts__title">
+              {% if section.settings.title_part_1 != blank %}
+                <span class="booty-workouts__title-line">{{ section.settings.title_part_1 | escape }}</span>
+              {% endif %}
+              {% if section.settings.title_part_2 != blank %}
+                <span class="booty-workouts__title-line">{{ section.settings.title_part_2 | escape }}</span>
+              {% endif %}
+              {% if section.settings.title_part_3 != blank %}
+                <span class="booty-workouts__title-line">{{ section.settings.title_part_3 | escape }}</span>
+              {% endif %}
+            </div>
+          {% elsif section.settings.title != blank %}
+            <div class="booty-workouts__title booty-workouts__title--legacy rte">{{ section.settings.title }}</div>
           {% endif %}
 
           {% if section.settings.starting_price != blank %}
@@ -56,9 +303,7 @@
 
         <div class="booty-workouts__body">
           {% if section.settings.description != blank %}
-            <div class="booty-workouts__description-card">
-              <div class="booty-workouts__description rte">{{ section.settings.description }}</div>
-            </div>
+            <div class="booty-workouts__description rte">{{ section.settings.description }}</div>
           {% endif %}
 
           {% assign benefit_blocks = section.blocks | where: 'type', 'benefit' %}
@@ -66,25 +311,10 @@
             <ul class="booty-workouts__benefits" role="list">
               {% for block in benefit_blocks %}
                 <li class="booty-workouts__benefit" {{ block.shopify_attributes }}>
-                  <span class="booty-workouts__benefit-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none">
-                      <path d="M9.5 12.5L11.2 14.2L14.8 10.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                      <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"></circle>
-                    </svg>
-                  </span>
-                  <span class="booty-workouts__benefit-label">{{ block.settings.label | escape }}</span>
+                  {{ block.settings.label | escape }}
                 </li>
               {% endfor %}
             </ul>
-          {% endif %}
-
-          {% if section.settings.offer_title != blank %}
-            <div class="booty-workouts__offer">
-              {% if section.settings.offer_kicker != blank %}
-                <span class="booty-workouts__offer-kicker">{{ section.settings.offer_kicker | escape }}</span>
-              {% endif %}
-              <span class="booty-workouts__offer-title">{{ section.settings.offer_title | escape }}</span>
-            </div>
           {% endif %}
 
           {% assign tier_blocks = section.blocks | where: 'type', 'tier' %}
@@ -98,7 +328,7 @@
                   {% assign tier_selected = true %}
                 {% endif %}
                 <label
-                  class="booty-workouts__tier{% if tier_selected %} is-selected{% endif %}"
+                  class="booty-workouts__tier{% if tier_selected %} is-selected{% endif %}{% if block.settings.ribbon != blank %} booty-workouts__tier--has-ribbon{% endif %}"
                   data-booty-workouts-tier
                   {{ block.shopify_attributes }}
                 >
@@ -111,7 +341,8 @@
                   {% if block.settings.ribbon != blank %}
                     <span class="booty-workouts__tier-ribbon">{{ block.settings.ribbon | escape }}</span>
                   {% endif %}
-                  <span class="booty-workouts__tier-main">
+                  <span class="booty-workouts__tier-surface">
+                    <span class="booty-workouts__tier-main">
                     {% if block.settings.thumb != blank %}
                       <span class="booty-workouts__tier-thumb">
                         {{
@@ -123,18 +354,23 @@
                     {% endif %}
                     <span class="booty-workouts__tier-copy">
                       <span class="booty-workouts__tier-title">{{ block.settings.title | escape }}</span>
-                      <span class="booty-workouts__tier-prices">
-                        {% if block.settings.old_price != blank %}
-                          <span class="booty-workouts__tier-old">{{ block.settings.old_price | escape }}</span>
-                        {% endif %}
-                        {% if block.settings.price != blank %}
-                          <span class="booty-workouts__tier-price">{{ block.settings.price | escape }}</span>
-                        {% endif %}
-                      </span>
                     </span>
-                    {% if block.settings.discount != blank %}
-                      <span class="booty-workouts__tier-discount">{{ block.settings.discount | escape }}</span>
-                    {% endif %}
+                    <span class="booty-workouts__tier-pricing">
+                      {% if block.settings.old_price != blank or block.settings.price != blank %}
+                        <span class="booty-workouts__tier-prices">
+                          {% if block.settings.old_price != blank %}
+                            <span class="booty-workouts__tier-old">{{ block.settings.old_price | escape }}</span>
+                          {% endif %}
+                          {% if block.settings.price != blank %}
+                            <span class="booty-workouts__tier-price">{{ block.settings.price | escape }}</span>
+                          {% endif %}
+                        </span>
+                      {% endif %}
+                      {% if block.settings.discount != blank %}
+                        <span class="booty-workouts__tier-discount">{{ block.settings.discount | escape }}</span>
+                      {% endif %}
+                    </span>
+                    </span>
                   </span>
                 </label>
               {% endfor %}
@@ -178,47 +414,103 @@
             {% endif %}
           </div>
 
-          {% assign payment_blocks = section.blocks | where: 'type', 'payment' %}
-          {% if payment_blocks.size > 0 %}
-            <div class="booty-workouts__payments">
+          {% if section.settings.secure_label != blank or section.settings.payment_icons_image != blank %}
+            <div class="booty-workouts__secure-checkout">
               {% if section.settings.secure_label != blank %}
-                <span class="booty-workouts__secure">{{ section.settings.secure_label | escape }}</span>
+                <p class="booty-workouts__secure-label">{{ section.settings.secure_label | escape }}</p>
               {% endif %}
-              <div class="booty-workouts__payment-icons">
-                {% for block in payment_blocks %}
-                  <span class="booty-workouts__payment-icon" {{ block.shopify_attributes }}>
-                    {% if block.settings.icon != blank %}
-                      {{
-                        block.settings.icon
-                        | image_url: width: 80
-                        | image_tag: loading: 'lazy', alt: block.settings.alt
-                      }}
-                    {% endif %}
-                  </span>
-                {% endfor %}
+              {% assign payment_icons_alt = section.settings.payment_icons_alt | default: 'Accepted payment methods' | escape %}
+              <div class="booty-workouts__payment-strip">
+                {% if section.settings.payment_icons_image != blank %}
+                  {{
+                    section.settings.payment_icons_image
+                    | image_url: width: 1200
+                    | image_tag:
+                      class: 'booty-workouts__payment-strip-img',
+                      loading: 'lazy',
+                      widths: '320,480,640,900,1200',
+                      sizes: '(min-width: 768px) 520px, 100vw',
+                      alt: payment_icons_alt
+                  }}
+                {% else %}
+                  <img
+                    class="booty-workouts__payment-strip-img"
+                    src="{{ 'booty-workouts-payment-icons.png' | asset_url }}"
+                    alt="{{ payment_icons_alt }}"
+                    loading="lazy"
+                    width="1124"
+                    height="58"
+                  >
+                {% endif %}
               </div>
             </div>
           {% endif %}
 
-          {% if section.settings.review_title != blank or section.settings.review_body != blank %}
-            <div class="booty-workouts__review">
-              {% if section.settings.review_avatar != blank %}
-                <span class="booty-workouts__review-avatar">
-                  {{
-                    section.settings.review_avatar
-                    | image_url: width: 80
-                    | image_tag: loading: 'lazy', alt: section.settings.review_title
-                  }}
-                </span>
-              {% endif %}
-              <div class="booty-workouts__review-copy">
-                {% if section.settings.review_title != blank %}
-                  <p class="booty-workouts__review-title">{{ section.settings.review_title | escape }}</p>
+          {% assign review_blocks = section.blocks | where: 'type', 'review' %}
+          {% if review_blocks.size > 0 %}
+            <div class="booty-workouts__reviews">
+              {% for block in review_blocks %}
+                {% assign review_rating = block.settings.rating | default: 5 | plus: 0 %}
+                <article class="booty-workouts__review" {{ block.shopify_attributes }}>
+                  {% if block.settings.avatar != blank %}
+                    <span class="booty-workouts__review-avatar">
+                      {{
+                        block.settings.avatar
+                        | image_url: width: 80
+                        | image_tag: loading: 'lazy', alt: block.settings.title
+                      }}
+                    </span>
+                  {% endif %}
+                  <div class="booty-workouts__review-copy">
+                    {% if block.settings.title != blank %}
+                      <div class="booty-workouts__review-head">
+                        <p class="booty-workouts__review-title">{{ block.settings.title | escape }}</p>
+                        <div class="booty-workouts__review-stars" role="img" aria-label="{{ review_rating }} out of 5 stars">
+                          {% for i in (1..5) %}
+                            <svg class="booty-workouts__review-star{% if i <= review_rating %} booty-workouts__review-star--filled{% endif %}" viewBox="0 0 24 24" aria-hidden="true">
+                              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                            </svg>
+                          {% endfor %}
+                        </div>
+                      </div>
+                    {% endif %}
+                    {% if block.settings.body != blank %}
+                      <div class="booty-workouts__review-body rte">{{ block.settings.body }}</div>
+                    {% endif %}
+                  </div>
+                </article>
+              {% endfor %}
+            </div>
+          {% elsif section.settings.review_title != blank or section.settings.review_body != blank %}
+            <div class="booty-workouts__reviews">
+              <article class="booty-workouts__review">
+                {% if section.settings.review_avatar != blank %}
+                  <span class="booty-workouts__review-avatar">
+                    {{
+                      section.settings.review_avatar
+                      | image_url: width: 80
+                      | image_tag: loading: 'lazy', alt: section.settings.review_title
+                    }}
+                  </span>
                 {% endif %}
-                {% if section.settings.review_body != blank %}
-                  <div class="booty-workouts__review-body rte">{{ section.settings.review_body }}</div>
-                {% endif %}
-              </div>
+                <div class="booty-workouts__review-copy">
+                  {% if section.settings.review_title != blank %}
+                    <div class="booty-workouts__review-head">
+                      <p class="booty-workouts__review-title">{{ section.settings.review_title | escape }}</p>
+                      <div class="booty-workouts__review-stars" role="img" aria-label="5 out of 5 stars">
+                        {% for i in (1..5) %}
+                          <svg class="booty-workouts__review-star booty-workouts__review-star--filled" viewBox="0 0 24 24" aria-hidden="true">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                          </svg>
+                        {% endfor %}
+                      </div>
+                    </div>
+                  {% endif %}
+                  {% if section.settings.review_body != blank %}
+                    <div class="booty-workouts__review-body rte">{{ section.settings.review_body }}</div>
+                  {% endif %}
+                </div>
+              </article>
             </div>
           {% endif %}
 
@@ -278,38 +570,75 @@
     gap: 20px;
   }
 
+  .booty-workouts__head {
+    text-align: left;
+  }
+
   .booty-workouts__rating {
+    display: block;
+    color: #666;
+  }
+
+  .booty-workouts__rating-row {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
+  }
+
+  .booty-workouts__rating-label,
+  .booty-workouts__rating-score,
+  .booty-workouts__rating-subline {
     color: #666;
     font-family: var(--font-body--family, 'Avenir'), 'Avenir', 'Avenir Next', Arial, sans-serif;
     font-size: 14px;
-    line-height: 1.3;
+    line-height: 1.35;
+    font-weight: 400;
+  }
+
+  .booty-workouts__rating-subline {
+    display: block;
+    margin-top: 4px;
   }
 
   .booty-workouts__stars {
-    color: #000;
-    letter-spacing: 0.08em;
-    font-size: 13px;
+    color: #f5b301;
+    letter-spacing: 0.06em;
+    font-size: 14px;
+    line-height: 1;
   }
 
   .booty-workouts__title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     margin-top: 12px;
-    color: #000;
+    text-align: left;
+    text-transform: uppercase;
     font-family: var(--font-heading--family, 'Anybody'), sans-serif;
-    font-size: clamp(1.5rem, 4vw, 2.1875rem);
-    line-height: 1.1;
+    font-stretch: 150%;
+    letter-spacing: 0.03em;
+    line-height: 1.05;
+    font-size: clamp(1.75rem, 8vw, 2.8125rem);
+    font-weight: 700;
+    color: #000;
+  }
+
+  .booty-workouts__title-line {
+    display: block;
+    color: #000;
+    font-weight: 700;
+  }
+
+  .booty-workouts__title--legacy,
+  .booty-workouts__title--legacy strong {
+    color: #000;
     font-weight: 700;
   }
 
   .booty-workouts__title p {
     margin: 0;
-  }
-
-  .booty-workouts__title strong {
-    font-weight: 900;
+    color: #000;
   }
 
   .booty-workouts__starting-price {
@@ -321,10 +650,25 @@
   }
 
   .booty-workouts__image-wrap {
+    position: relative;
     aspect-ratio: 335 / 319;
     border-radius: var(--booty-workouts-image-radius, 30px);
     overflow: hidden;
     background: #f0f0f0;
+  }
+
+  .booty-workouts__slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 240ms ease;
+    pointer-events: none;
+  }
+
+  .booty-workouts__slide.is-active {
+    opacity: 1;
+    z-index: 1;
+    pointer-events: auto;
   }
 
   .booty-workouts__image {
@@ -334,35 +678,38 @@
     object-fit: cover;
   }
 
-  .booty-workouts__dots {
+  .booty-workouts__bars {
     margin-top: 14px;
     display: flex;
     justify-content: center;
-    gap: 8px;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
   }
 
-  .booty-workouts__dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
+  .booty-workouts__bar {
+    width: 28px;
+    height: 4px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
     background: #dfdfdf;
+    cursor: pointer;
+    transition: width 200ms ease, background-color 200ms ease;
   }
 
-  .booty-workouts__dot--active {
-    background: #000;
-  }
-
-  .booty-workouts__description-card {
-    padding: 3px;
-    border-radius: 20px;
-    background: #b8a7d3;
+  .booty-workouts__bar--active {
+    width: 44px;
+    background: #333;
   }
 
   .booty-workouts__description {
-    padding: 16px 18px;
-    border-radius: 17px;
+    margin: 0;
+    padding: 16px 20px 16px 22px;
+    border-radius: 16px;
+    border-left: 6px solid #b8a7d3;
     background: #f8f8f8;
-    color: #666;
+    color: #000;
     font-family: var(--font-body--family, 'Avenir'), 'Avenir', 'Avenir Next', Arial, sans-serif;
     font-size: clamp(0.875rem, 1.6vw, 1.125rem);
     line-height: 1.45;
@@ -374,99 +721,87 @@
 
   .booty-workouts__benefits {
     margin: 0;
-    padding: 0;
-    list-style: none;
+    padding: 0 0 0 1.15em;
+    list-style: disc;
     display: grid;
-    gap: 12px;
+    gap: 10px;
   }
 
   .booty-workouts__benefit {
-    display: flex;
-    align-items: center;
-    gap: 10px;
     color: #000;
     font-family: var(--font-body--family, 'Avenir'), 'Avenir', 'Avenir Next', Arial, sans-serif;
     font-size: clamp(0.875rem, 1.6vw, 1.125rem);
     line-height: 1.35;
-    font-weight: 600;
+    font-weight: 400;
+    padding-left: 4px;
   }
 
-  .booty-workouts__benefit-icon {
-    flex: 0 0 22px;
-    width: 22px;
-    height: 22px;
+  .booty-workouts__benefit::marker {
     color: #000;
-  }
-
-  .booty-workouts__benefit-icon svg {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-
-  .booty-workouts__offer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    min-height: 72px;
-    padding: 14px 18px;
-    border-radius: 16px;
-    background: linear-gradient(270deg, var(--booty-workouts-offer-from, #ebd7ff) 0%, var(--booty-workouts-offer-to, #ffd1fc) 100%);
-    text-align: center;
-  }
-
-  .booty-workouts__offer-kicker {
-    color: #000;
-    font-family: var(--font-body--family, 'Avenir'), 'Avenir', 'Avenir Next', Arial, sans-serif;
-    font-size: 14px;
-    line-height: 1.2;
-    font-weight: 500;
-  }
-
-  .booty-workouts__offer-title {
-    color: #000;
-    font-family: var(--font-heading--family, 'Anybody'), sans-serif;
-    font-size: clamp(1.125rem, 2.4vw, 1.5rem);
-    line-height: 1.1;
-    font-weight: 900;
-    letter-spacing: 0.04em;
   }
 
   .booty-workouts__tiers {
     display: grid;
-    gap: 12px;
+    gap: 16px;
   }
 
   .booty-workouts__tier {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    cursor: pointer;
+    overflow: visible;
+  }
+
+  .booty-workouts__tier-surface {
     display: block;
-    padding: 14px 16px;
+    padding: 16px;
     border: 1px solid #f0f0f0;
     border-radius: 16px;
     background: #fff;
-    cursor: pointer;
     transition: border-color 160ms ease, box-shadow 160ms ease;
   }
 
-  .booty-workouts__tier.is-selected {
+  .booty-workouts__tier.is-selected .booty-workouts__tier-surface {
     border: 3px solid #b8a7d3;
     box-shadow: 0 8px 24px rgba(184, 167, 211, 0.25);
   }
 
+  .booty-workouts__tier--has-ribbon {
+    margin-top: 12px;
+  }
+
   .booty-workouts__tier-ribbon {
     position: absolute;
-    top: -10px;
-    left: 16px;
-    padding: 4px 10px;
-    border-radius: 999px;
-    background: #fff600;
-    color: #000;
+    top: 0;
+    left: 50%;
+    z-index: 2;
+    transform: translateX(-50%) translateY(-100%);
+    padding: 6px 16px;
+    border: 3px solid #b8a7d3;
+    border-bottom: 0;
+    border-radius: 12px 12px 0 0;
+    background: #b8a7d3;
+    color: #fff;
     font-family: var(--font-body--family, 'Avenir'), 'Avenir', 'Avenir Next', Arial, sans-serif;
     font-size: 11px;
     line-height: 1.2;
     font-weight: 700;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .booty-workouts__tier--has-ribbon:not(.is-selected) .booty-workouts__tier-ribbon {
+    border-color: #f0f0f0;
+    background: #fafafa;
+    color: #666;
   }
 
   .booty-workouts__tier-main {
@@ -505,11 +840,20 @@
     font-weight: 800;
   }
 
+  .booty-workouts__tier-pricing {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    margin-left: auto;
+  }
+
   .booty-workouts__tier-prices {
     display: flex;
     align-items: baseline;
+    justify-content: flex-end;
     gap: 8px;
-    margin-top: 4px;
   }
 
   .booty-workouts__tier-old {
@@ -522,11 +866,11 @@
     color: #000;
     font-size: 18px;
     font-weight: 800;
+    line-height: 1;
   }
 
   .booty-workouts__tier-discount {
-    flex: 0 0 auto;
-    padding: 6px 10px;
+    padding: 6px 12px;
     border-radius: 999px;
     background: #fff600;
     color: #000;
@@ -534,6 +878,7 @@
     font-size: 12px;
     line-height: 1;
     font-weight: 800;
+    white-space: nowrap;
   }
 
   .booty-workouts__cta {
@@ -571,8 +916,10 @@
 
   .booty-workouts__trust {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 12px 20px;
   }
 
   .booty-workouts__trust-item {
@@ -598,29 +945,38 @@
     display: block;
   }
 
-  .booty-workouts__payments {
+  .booty-workouts__secure-checkout {
     display: grid;
-    gap: 10px;
+    gap: 12px;
+    justify-items: center;
+    text-align: center;
   }
 
-  .booty-workouts__secure {
+  .booty-workouts__secure-label {
+    margin: 0;
     color: #666;
     font-family: var(--font-body--family, 'Avenir'), 'Avenir', 'Avenir Next', Arial, sans-serif;
     font-size: 14px;
     line-height: 1.3;
+    font-style: italic;
+    font-weight: 400;
   }
 
-  .booty-workouts__payment-icons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-items: center;
+  .booty-workouts__payment-strip {
+    width: 100%;
+    max-width: 520px;
   }
 
-  .booty-workouts__payment-icon img {
+  .booty-workouts__payment-strip-img {
     display: block;
-    height: 24px;
-    width: auto;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .booty-workouts__reviews {
+    display: grid;
+    gap: 12px;
   }
 
   .booty-workouts__review {
@@ -648,6 +1004,18 @@
     display: block;
   }
 
+  .booty-workouts__review-copy {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .booty-workouts__review-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
   .booty-workouts__review-title {
     margin: 0;
     color: #000;
@@ -657,8 +1025,28 @@
     font-weight: 800;
   }
 
+  .booty-workouts__review-stars {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .booty-workouts__review-star {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: #f5b301;
+    stroke-width: 1.5;
+  }
+
+  .booty-workouts__review-star--filled {
+    fill: #f5b301;
+    stroke: #f5b301;
+  }
+
   .booty-workouts__review-body {
-    margin-top: 6px;
+    margin-top: 8px;
     color: #666;
     font-family: var(--font-body--family, 'Avenir'), 'Avenir', 'Avenir Next', Arial, sans-serif;
     font-size: 14px;
@@ -769,14 +1157,12 @@
       margin-top: 0;
     }
 
-    .booty-workouts__cta {
-      min-height: 68px;
+    .booty-workouts__title {
+      font-size: 45px;
     }
 
-    .booty-workouts__trust {
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: 24px;
+    .booty-workouts__cta {
+      min-height: 68px;
     }
   }
 {% endstylesheet %}
@@ -809,6 +1195,52 @@
         });
       });
     }
+
+    const galleryRoot = section.querySelector('[data-booty-workouts-gallery]');
+    if (galleryRoot) {
+      const slides = Array.from(galleryRoot.querySelectorAll('[data-booty-workouts-slide]'));
+      const barsWrap = galleryRoot.querySelector('[data-booty-workouts-bars]');
+      if (!barsWrap || slides.length === 0) return;
+
+      const showBars = slides.length > 1;
+      barsWrap.hidden = !showBars;
+
+      if (showBars && !barsWrap.querySelector('[data-booty-workouts-bar]')) {
+        slides.forEach((slide, index) => {
+          const bar = document.createElement('button');
+          bar.type = 'button';
+          bar.className = 'booty-workouts__bar' + (index === 0 ? ' booty-workouts__bar--active' : '');
+          bar.setAttribute('data-booty-workouts-bar', '');
+          bar.setAttribute('data-slide-index', String(index));
+          bar.setAttribute('role', 'tab');
+          bar.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
+          bar.setAttribute('aria-label', 'Slide ' + (index + 1));
+          barsWrap.appendChild(bar);
+        });
+      }
+
+      const bars = Array.from(barsWrap.querySelectorAll('[data-booty-workouts-bar]'));
+      if (!showBars || bars.length < 2) return;
+
+      const goToSlide = (index) => {
+        const safeIndex = Math.max(0, Math.min(index, slides.length - 1));
+        slides.forEach((slide, slideIndex) => {
+          slide.classList.toggle('is-active', slideIndex === safeIndex);
+        });
+        bars.forEach((bar, barIndex) => {
+          const isActive = barIndex === safeIndex;
+          bar.classList.toggle('booty-workouts__bar--active', isActive);
+          bar.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+      };
+
+      bars.forEach((bar) => {
+        bar.addEventListener('click', () => {
+          const index = Number.parseInt(bar.getAttribute('data-slide-index') || '0', 10);
+          goToSlide(index);
+        });
+      });
+    }
   })();
 </script>
 
@@ -824,9 +1256,12 @@
     {
       "type": "richtext",
       "id": "title",
-      "label": "Title (use <strong> for bold half)",
-      "default": "<p>Booty Workouts That <strong>Feel Like Fun</strong></p>"
+      "label": "Title (legacy richtext)",
+      "info": "Used only if title lines below are empty."
     },
+    { "type": "text", "id": "title_part_1", "label": "Title line 1", "default": "Booty" },
+    { "type": "text", "id": "title_part_2", "label": "Title line 2", "default": "Workouts That" },
+    { "type": "text", "id": "title_part_3", "label": "Title line 3", "default": "Feel Like Fun" },
     { "type": "text", "id": "starting_price", "label": "Starting from", "default": "Starting from just $59" },
     {
       "type": "richtext",
@@ -835,7 +1270,19 @@
       "default": "<p>Twerk workouts from world-famous Nastya NASS help you tone your body, shape a beautiful booty, and make every workout fun and energizing.</p>"
     },
     { "type": "header", "content": "Hero image / gallery" },
-    { "type": "image_picker", "id": "hero_image", "label": "Main image" },
+    {
+      "type": "checkbox",
+      "id": "gallery_use_product_media",
+      "label": "Use product images when no Gallery image blocks",
+      "default": true,
+      "info": "If you add Gallery image blocks below, those are used instead. Otherwise images from the product Media in Shopify admin are shown."
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Main image (fallback)",
+      "info": "Shown only when there are no Gallery image blocks and product has no media."
+    },
     {
       "type": "range",
       "id": "image_radius",
@@ -846,23 +1293,61 @@
       "default": 30,
       "label": "Image radius"
     },
-    { "type": "header", "content": "Spring offer" },
-    { "type": "text", "id": "offer_kicker", "label": "Kicker", "default": "Limited Time" },
-    { "type": "text", "id": "offer_title", "label": "Title", "default": "SPRING OFFER" },
-    { "type": "color", "id": "offer_bg_from", "label": "Gradient from", "default": "#EBD7FF" },
-    { "type": "color", "id": "offer_bg_to", "label": "Gradient to", "default": "#FFD1FC" },
     { "type": "header", "content": "CTA & trust" },
     { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Order Today" },
     { "type": "url", "id": "cta_url", "label": "CTA link" },
     { "type": "text", "id": "trust_guarantee", "label": "Guarantee", "default": "30-Day Money-Back Guarantee" },
     { "type": "text", "id": "trust_support", "label": "Support", "default": "World-Famous support" },
-    { "type": "text", "id": "secure_label", "label": "Secure checkout label", "default": "Secure Checkout" },
-    { "type": "header", "content": "Review" },
+    { "type": "header", "content": "Secure checkout" },
+    { "type": "text", "id": "secure_label", "label": "Heading", "default": "Secure Checkout" },
+    {
+      "type": "image_picker",
+      "id": "payment_icons_image",
+      "label": "Payment icons (single image)",
+      "info": "Upload one combined strip of all payment logos. If empty, the theme default asset is used."
+    },
+    {
+      "type": "text",
+      "id": "payment_icons_alt",
+      "label": "Payment icons alt text",
+      "default": "Accepted payment methods"
+    },
+    { "type": "header", "content": "Review (legacy)" },
+    {
+      "type": "paragraph",
+      "content": "Add Review blocks below for multiple reviews. These settings are used only when no Review blocks exist."
+    },
     { "type": "image_picker", "id": "review_avatar", "label": "Avatar" },
     { "type": "text", "id": "review_title", "label": "Review title", "default": "Super fun" },
     { "type": "richtext", "id": "review_body", "label": "Review body" }
   ],
   "blocks": [
+    {
+      "type": "gallery_image",
+      "name": "Gallery image",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "alt", "label": "Alt text" }
+      ]
+    },
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "image_picker", "id": "avatar", "label": "Avatar" },
+        { "type": "text", "id": "title", "label": "Review title", "default": "Super fun" },
+        { "type": "richtext", "id": "body", "label": "Review body" },
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5,
+          "label": "Star rating"
+        }
+      ]
+    },
     {
       "type": "benefit",
       "name": "Benefit bullet",
@@ -886,14 +1371,6 @@
         },
         { "type": "image_picker", "id": "thumb", "label": "Thumbnail" },
         { "type": "checkbox", "id": "preselected", "label": "Preselected", "default": false }
-      ]
-    },
-    {
-      "type": "payment",
-      "name": "Payment icon",
-      "settings": [
-        { "type": "image_picker", "id": "icon", "label": "Icon" },
-        { "type": "text", "id": "alt", "label": "Alt text" }
       ]
     },
     {
@@ -937,6 +1414,14 @@
             "discount": "76% OFF",
             "ribbon": "Extra 60% Off all Booty Clothing",
             "preselected": true
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "title": "Super fun",
+            "body": "<p>I love this program! It's super fun and makes me feel super sexy while doing it!</p>",
+            "rating": 5
           }
         },
         {

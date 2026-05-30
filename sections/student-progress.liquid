@@ -10,13 +10,15 @@
 
 <section class="student-progress{% if is_twerk_essential_template %} student-progress--twerk-essential{% endif %}" id="student-progress-{{ section.id }}">
   <div class="student-progress__container">
-    <div class="student-progress__header">
-      <div class="student-progress__title">
-        {{ section.settings.heading | default: "SEE HOW OUR" | escape }}
-        <span class="student-progress__title-highlight">{{ section.settings.heading_highlight | default: "STUDENTS PERFORM" | escape }}</span>
+    {% unless section.settings.hide_heading %}
+      <div class="student-progress__header">
+        <div class="student-progress__title">
+          {{ section.settings.heading | default: "SEE HOW OUR" | escape }}
+          <span class="student-progress__title-highlight">{{ section.settings.heading_highlight | default: "STUDENTS PERFORM" | escape }}</span>
+        </div>
+        <div class="student-progress__divider"></div>
       </div>
-      <div class="student-progress__divider"></div>
-    </div>
+    {% endunless %}
 
     <div class="student-progress__scroll-wrapper">
       <div class="student-progress__row">
@@ -100,6 +102,8 @@
         {% endfor %}
       </div>
     </div>
+
+    {% render 'pop-booty-cta-trust', section: section %}
   </div>
 
   {% if is_twerk_essential_template %}
@@ -545,6 +549,45 @@
       "id": "heading_highlight",
       "label": "Highlighted word(s)",
       "default": "STUDENTS PERFORM"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_heading",
+      "label": "Hide heading",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Pop Booty footer"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pop_booty_footer",
+      "label": "Show CTA & trust badges on pop_booty",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "Shop Booty Programs"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link"
+    },
+    {
+      "type": "text",
+      "id": "badge_1_text",
+      "label": "Badge 1",
+      "default": "30-Day Money-Back Guarantee"
+    },
+    {
+      "type": "text",
+      "id": "badge_2_text",
+      "label": "Badge 2",
+      "default": "World-Famous support"
     }
   ],
   "blocks": [

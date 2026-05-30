@@ -1,0 +1,44 @@
+{% comment %}
+  CTA button + trust badges for pop_booty sections (matches nass-programs footer).
+  Enable per section via show_pop_booty_footer setting.
+{% endcomment %}
+{% if template.suffix == 'pop_booty' and section.settings.show_pop_booty_footer %}
+  <div class="pop-booty-cta-trust">
+    {% if section.settings.cta_text != blank %}
+      <a class="pop-booty-cta-trust__cta" href="{{ section.settings.cta_link | default: '#' }}">
+        <span>{{ section.settings.cta_text | escape }}</span>
+        <span class="pop-booty-cta-trust__cta-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            <path d="M13 6L19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </span>
+      </a>
+    {% endif %}
+
+    <div class="pop-booty-cta-trust__trust" role="list">
+      {% if section.settings.badge_1_text != blank %}
+        <span class="pop-booty-cta-trust__trust-item" role="listitem">
+          <span class="pop-booty-cta-trust__trust-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 3L5 6V11C5 15.55 8.05 19.74 12 21C15.95 19.74 19 15.55 19 11V6L12 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M9.5 12.5L11.2 14.2L14.8 10.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+          {{ section.settings.badge_1_text | escape }}
+        </span>
+      {% endif %}
+      {% if section.settings.badge_2_text != blank %}
+        <span class="pop-booty-cta-trust__trust-item" role="listitem">
+          <span class="pop-booty-cta-trust__trust-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"></circle>
+              <path d="M8.8 12.2L11.1 14.4L15.3 10.1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+          {{ section.settings.badge_2_text | escape }}
+        </span>
+      {% endif %}
+    </div>
+  </div>
+{% endif %}

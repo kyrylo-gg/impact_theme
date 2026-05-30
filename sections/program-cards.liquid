@@ -55,6 +55,8 @@
         {% endfor %}
       </div>
     </div>
+
+    {% render 'pop-booty-cta-trust', section: section %}
   </div>
 </section>
 
@@ -295,6 +297,39 @@
       "id": "heading_highlight",
       "label": "Highlighted word",
       "default": "INCLUDE?"
+    },
+    {
+      "type": "header",
+      "content": "Pop Booty footer"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pop_booty_footer",
+      "label": "Show CTA & trust badges on pop_booty",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "Shop Booty Programs"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link"
+    },
+    {
+      "type": "text",
+      "id": "badge_1_text",
+      "label": "Badge 1",
+      "default": "30-Day Money-Back Guarantee"
+    },
+    {
+      "type": "text",
+      "id": "badge_2_text",
+      "label": "Badge 2",
+      "default": "World-Famous support"
     }
   ],
   "blocks": [
