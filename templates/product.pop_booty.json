@@ -165,6 +165,44 @@
     "booty_workouts_offer": {
       "type": "booty-workouts",
       "blocks": {
+        "gallery_image_U9R449": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/Image_1_d73f8ecb-b4ed-403e-97d8-0e897d91b796.png",
+            "alt": ""
+          }
+        },
+        "gallery_image_DEgKet": {
+          "type": "gallery_image",
+          "settings": {
+            "alt": ""
+          }
+        },
+        "gallery_image_NMNdFh": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/Image_3_32b75255-3665-40bc-9b3a-d18301ac3e58.png",
+            "alt": ""
+          }
+        },
+        "gallery_image_Vd8eMH": {
+          "type": "gallery_image",
+          "settings": {
+            "alt": ""
+          }
+        },
+        "gallery_image_rfPzwb": {
+          "type": "gallery_image",
+          "settings": {
+            "alt": ""
+          }
+        },
+        "gallery_image_YJcPkK": {
+          "type": "gallery_image",
+          "settings": {
+            "alt": ""
+          }
+        },
         "booty_benefit_1": {
           "type": "benefit",
           "settings": {
@@ -194,12 +232,15 @@
             "preselected": true
           }
         },
-        "booty_review_1": {
-          "type": "review",
+        "tier_NEy4e9": {
+          "type": "tier",
           "settings": {
-            "title": "Super fun",
-            "body": "<p>I love this program! It's super fun and makes me feel super sexy while doing it!</p>",
-            "rating": 5
+            "title": "4 Booty Programs",
+            "old_price": "$456",
+            "price": "$107",
+            "discount": "76% OFF",
+            "ribbon": "Extra 60% Off all Booty Clothing",
+            "preselected": true
           }
         },
         "booty_faq_1": {
@@ -220,29 +261,40 @@
         }
       },
       "block_order": [
+        "gallery_image_U9R449",
+        "gallery_image_DEgKet",
+        "gallery_image_NMNdFh",
+        "gallery_image_Vd8eMH",
+        "gallery_image_rfPzwb",
+        "gallery_image_YJcPkK",
         "booty_benefit_1",
         "booty_benefit_2",
         "booty_benefit_3",
         "booty_tier_1",
-        "booty_review_1",
+        "tier_NEy4e9",
         "booty_faq_1",
         "booty_faq_2"
       ],
       "settings": {
         "rating_label": "Rated",
         "rating_value": "4.8/5 by Over 6000 Participants",
+        "title": "<p>Booty Workouts That <strong>Feel Like Fun</strong></p>",
         "title_part_1": "Booty",
         "title_part_2": "Workouts That",
         "title_part_3": "Feel Like Fun",
         "starting_price": "Starting from just $59",
         "description": "<p>Twerk workouts from world-famous Nastya NASS help you tone your body, shape a beautiful booty, and make every workout fun and energizing.</p>",
+        "gallery_use_product_media": true,
         "hero_image": "shopify://shop_images/Banner_Product_1_935cbba9-6018-4188-95c4-4f0a3b9fe2bb.png",
         "image_radius": 30,
         "cta_label": "Order Today",
         "cta_url": "",
         "trust_guarantee": "30-Day Money-Back Guarantee",
         "trust_support": "World-Famous support",
-        "secure_label": "Secure Checkout"
+        "secure_label": "Secure Checkout",
+        "payment_icons_alt": "Accepted payment methods",
+        "review_title": "Super fun",
+        "review_body": "<p>I love this program! It's super fun and makes me feel super sexy while doing it!</p>"
       }
     },
     "confidence_without_pressure_pop": {
@@ -576,9 +628,9 @@
       "settings": {
         "heading": "Only 7 Days to ",
         "heading_highlight": "Master Twerk Moves",
-        "show_pop_booty_footer": true,
+        "show_pop_booty_footer": false,
         "cta_text": "Shop Booty Programs",
-        "cta_link": "#",
+        "cta_link": "",
         "badge_1_text": "30-Day Money-Back Guarantee",
         "badge_2_text": "World-Famous support"
       }
@@ -637,9 +689,9 @@
       "settings": {
         "heading": "WHAT DOES THIS PACK",
         "heading_highlight": "INCLUDE?",
-        "show_pop_booty_footer": true,
+        "show_pop_booty_footer": false,
         "cta_text": "Shop Booty Programs",
-        "cta_link": "#",
+        "cta_link": "",
         "badge_1_text": "30-Day Money-Back Guarantee",
         "badge_2_text": "World-Famous support"
       }
@@ -951,9 +1003,9 @@
       "settings": {
         "heading": "The twerk program everyone's",
         "heading_highlight": "excited about",
-        "show_pop_booty_footer": true,
+        "show_pop_booty_footer": false,
         "cta_text": "Shop Booty Programs",
-        "cta_link": "#",
+        "cta_link": "",
         "badge_1_text": "30-Day Money-Back Guarantee",
         "badge_2_text": "World-Famous support"
       }
@@ -1065,8 +1117,8 @@
       "name": "Why This Works",
       "settings": {
         "eyebrow": "Better and Feels Right",
-        "heading": "Without a Boring",
-        "heading_highlight": "Fitness Routine",
+        "heading": "Without a Boring Fitness Routine",
+        "heading_highlight": "",
         "subheading": "",
         "left_image": "shopify://shop_images/Group_69.png",
         "right_image": "shopify://shop_images/Group_70.png"
@@ -1102,7 +1154,13 @@
       "name": "Student Progress",
       "settings": {
         "heading": "Real Results",
-        "heading_highlight": "from Girls Like You"
+        "heading_highlight": "from Girls Like You",
+        "hide_heading": false,
+        "show_pop_booty_footer": false,
+        "cta_text": "Shop Booty Programs",
+        "cta_link": "",
+        "badge_1_text": "30-Day Money-Back Guarantee",
+        "badge_2_text": "World-Famous support"
       }
     },
     "nass_countdown_PUMrCf": {
@@ -1400,14 +1458,6 @@
             "preselected": true
           }
         },
-        "review_AVKRC3": {
-          "type": "review",
-          "settings": {
-            "title": "Super fun",
-            "body": "<p>I love this program! It's super fun and makes me feel super sexy while doing it!</p>",
-            "rating": 5
-          }
-        },
         "faq_w8zEiQ": {
           "type": "faq",
           "settings": {
@@ -1430,7 +1480,6 @@
         "benefit_bahwgP",
         "benefit_pTBgYd",
         "tier_N6zAed",
-        "review_AVKRC3",
         "faq_w8zEiQ",
         "faq_FYPzJ9"
       ],
@@ -1438,15 +1487,22 @@
         "rating_label": "Rated",
         "rating_value": "4.8/5 by Over 6000 Participants",
         "title": "<p>Booty Workouts That <strong>Feel Like Fun</strong></p>",
+        "title_part_1": "Booty",
+        "title_part_2": "Workouts That",
+        "title_part_3": "Feel Like Fun",
         "starting_price": "Starting from just $59",
         "description": "<p>Twerk workouts from world-famous Nastya NASS help you tone your body, shape a beautiful booty, and make every workout fun and energizing.</p>",
+        "gallery_use_product_media": true,
         "hero_image": "shopify://shop_images/Banner_Product_1_935cbba9-6018-4188-95c4-4f0a3b9fe2bb.png",
         "image_radius": 30,
         "cta_label": "Order Today",
         "cta_url": "",
         "trust_guarantee": "30-Day Money-Back Guarantee",
         "trust_support": "World-Famous support",
-        "secure_label": "Secure Checkout"
+        "secure_label": "Secure Checkout",
+        "payment_icons_alt": "Accepted payment methods",
+        "review_title": "Super fun",
+        "review_body": "<p>I love this program! It's super fun and makes me feel super sexy while doing it!</p>"
       }
     },
     "bt_faq_yC7n4z": {
@@ -1531,9 +1587,9 @@
       "settings": {
         "title": "FAQ",
         "footer": "If you're ready, your best starting point is the one you'll stick with.",
-        "show_pop_booty_footer": true,
+        "show_pop_booty_footer": false,
         "cta_text": "Shop Booty Programs",
-        "cta_link": "#",
+        "cta_link": "",
         "badge_1_text": "30-Day Money-Back Guarantee",
         "badge_2_text": "World-Famous support"
       }
@@ -1567,10 +1623,12 @@
       ],
       "name": "Student Progress 1",
       "settings": {
-        "hide_heading": true,
-        "show_pop_booty_footer": true,
+        "heading": "",
+        "heading_highlight": "",
+        "hide_heading": false,
+        "show_pop_booty_footer": false,
         "cta_text": "Shop Booty Programs",
-        "cta_link": "#",
+        "cta_link": "",
         "badge_1_text": "30-Day Money-Back Guarantee",
         "badge_2_text": "World-Famous support"
       }
@@ -1593,6 +1651,7 @@
     "student_progress_3GQNkJ",
     "nass_countdown_PUMrCf",
     "nass_testimonials_ELPAbp",
+    "booty_workouts_AVKRC3",
     "bt_faq_yC7n4z",
     "student_progress_QBDTex"
   ]
