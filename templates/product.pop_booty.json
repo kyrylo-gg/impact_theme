@@ -1708,8 +1708,8 @@
       "settings": {
         "title": "FAQ",
         "footer": "If you're ready, your best starting point is the one you'll stick with.",
-        "show_pop_booty_footer": true,
-        "cta_text": "Order Booty Programs",
+        "show_pop_booty_footer": false,
+        "cta_text": "Shop Booty Programs",
         "cta_link": "",
         "badge_1_text": "30-Day Money-Back Guarantee",
         "badge_2_text": "World-Famous support"
