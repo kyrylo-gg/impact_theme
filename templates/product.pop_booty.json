@@ -366,7 +366,7 @@
           "settings": {
             "image": "shopify://shop_images/Frame_347.png",
             "alt": "Diet routines feel restrictive",
-            "text": "Strict diets and fitness pressure feel impossible to maintain."
+            "text": "You have to follow a strict diet and count calories."
           }
         },
         "confidence_pain_2": {
@@ -374,7 +374,7 @@
           "settings": {
             "image": "shopify://shop_images/Frame_348.png",
             "alt": "Early alarm burnout",
-            "text": "Early alarms and exhausting plans quickly drain your motivation."
+            "text": "Find time for the gym or wake up early for morning workouts."
           }
         },
         "confidence_pain_3": {
@@ -382,7 +382,7 @@
           "settings": {
             "image": "shopify://shop_images/Frame_349.png",
             "alt": "Gym anxiety",
-            "text": "Gym routines can feel overwhelming and disconnected from real confidence."
+            "text": "Constantly look for new ways to stay in shape."
           }
         }
       },
@@ -396,7 +396,7 @@
         "heading_part2": "without pressure",
         "accent_color": "#0038ff",
         "subheading": "A regular fitness routine has always been complicated for most women.",
-        "footer_copy": "<p>Try <strong>dance as your fitness routine</strong> to <u>keep your body toned</u> and <u>uplift your mood</u>.</p>"
+        "footer_copy": "<p>By choosing <strong>dance as your fitness routine</strong>, you not only <span style=\"text-decoration:underline\">keep your body toned</span> but also <span style=\"text-decoration:underline\">uplift your mood</span>, confidence, and energy.</p>"
       }
     },
     "dance_workouts_pop": {
