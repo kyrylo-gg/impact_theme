@@ -198,7 +198,8 @@
           "type": "faq",
           "settings": {
             "question": "What You'll Get",
-            "answer": "<p>Instant access to booty-focused dance workouts, structured programs, and bonus lessons inside the NASS app.</p>"
+            "answer": "<p>Instant access to booty-focused dance workouts, structured programs, and bonus lessons inside the NASS app.</p>",
+            "open_by_default": false
           }
         },
         "booty_faq_2": {
@@ -228,8 +229,8 @@
         "image_radius": 30,
         "offer_kicker": "Limited Time",
         "offer_title": "SPRING OFFER",
-        "offer_bg_from": "#EBD7FF",
-        "offer_bg_to": "#FFD1FC",
+        "offer_bg_from": "#ebd7ff",
+        "offer_bg_to": "#ffd1fc",
         "cta_label": "Order Today",
         "cta_url": "",
         "trust_guarantee": "30-Day Money-Back Guarantee",
@@ -245,6 +246,7 @@
         "confidence_pain_1": {
           "type": "pain_card",
           "settings": {
+            "image": "shopify://shop_images/Frame_347.png",
             "alt": "Diet routines feel restrictive",
             "text": "Strict diets and fitness pressure feel impossible to maintain."
           }
@@ -252,6 +254,7 @@
         "confidence_pain_2": {
           "type": "pain_card",
           "settings": {
+            "image": "shopify://shop_images/Frame_348.png",
             "alt": "Early alarm burnout",
             "text": "Early alarms and exhausting plans quickly drain your motivation."
           }
@@ -259,6 +262,7 @@
         "confidence_pain_3": {
           "type": "pain_card",
           "settings": {
+            "image": "shopify://shop_images/Frame_349.png",
             "alt": "Gym anxiety",
             "text": "Gym routines can feel overwhelming and disconnected from real confidence."
           }
@@ -361,6 +365,7 @@
         "nass_program_card_1": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/Frame_40-3.png",
             "title": "Created by Nastya NASS",
             "description": "<p>Each program is personally designed based on her <strong>10+ years of dance</strong> and fitness experience.</p>",
             "style": "default",
@@ -370,6 +375,7 @@
         "nass_program_card_2": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/Frame_41_81515072-7fe1-4a1c-a4a4-e0c608948c43.png",
             "title": "6,000+ Girls in the Community",
             "description": "<p>Join a vibrant and <strong>supportive community</strong> growing stronger together.</p>",
             "style": "default",
@@ -379,6 +385,7 @@
         "nass_program_card_3": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/Frame_42.png",
             "title": "7-Day Structured Twerk Program",
             "description": "<p><strong>A step-by-step system</strong> to help you master the basics and feel real progress in just one week.</p>",
             "style": "default",
@@ -388,6 +395,7 @@
         "nass_program_card_4": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/Frame_43_d23c3417-4ddc-4333-acbd-1352304a3483.png",
             "title": "Short, Effective Lessons",
             "description": "<p>Workouts that <strong>fit easily into your day</strong> without overwhelming your schedule.</p>",
             "style": "default",
@@ -397,6 +405,7 @@
         "nass_program_card_5": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/Frame_44_0d8e65d6-8b36-476b-9477-308e64b6e76d.png",
             "title": "Instant Access in the NASS App",
             "description": "<p>Train anytime, <strong>anywhere with full access</strong> to all recorded video lessons.</p>",
             "style": "app_blue",
@@ -406,6 +415,7 @@
         "nass_program_card_6": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/Frame_45.png",
             "title": "Confidence & Feminine Energy Focus",
             "description": "<p>Not just technique - but movement, <strong>self-expression</strong>, and confidence in your body.</p>",
             "style": "default",
@@ -437,6 +447,7 @@
         "ready_card_1": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/Frame_358.png",
             "emoji": "⚡",
             "title": "For women who want to feel confident and powerful",
             "text": "Feel strong, feminine, and in control of your body."
@@ -445,6 +456,7 @@
         "ready_card_2": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/Frame_359.png",
             "emoji": "🤸",
             "title": "For those who are tired of boring workouts and stressful fitness routines",
             "text": "Replace pressure with movement that feels energizing and fun."
@@ -453,6 +465,7 @@
         "ready_card_3": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/Frame_360_66ca3817-6924-4ad1-9247-ffd760fc387e.png",
             "emoji": "😌",
             "title": "For all levels, from beginners to advanced",
             "text": "Start where you are and progress with clear, guided lessons."
@@ -890,10 +903,10 @@
         "show_stickers": true,
         "sticker_link": "",
         "show_confetti": true,
-        "bg_color": "#0038FF",
+        "bg_color": "#0038ff",
         "bar_bg_color": "#000000",
-        "accent_color": "#FFF600",
-        "text_color": "#FFFFFF"
+        "accent_color": "#fff600",
+        "text_color": "#ffffff"
       }
     },
     "nass_testimonials_ELPAbp": {
