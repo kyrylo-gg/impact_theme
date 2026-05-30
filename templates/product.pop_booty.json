@@ -627,6 +627,7 @@
         "review_94dhjJ": {
           "type": "review",
           "settings": {
+            "video": "shopify://files/videos/reel.webm",
             "external_video_url": "",
             "caption": ""
           }
@@ -634,6 +635,7 @@
         "review_CMUAiW": {
           "type": "review",
           "settings": {
+            "video": "shopify://files/videos/0325-ezgif.com-gif-maker.webm",
             "external_video_url": "",
             "caption": ""
           }
@@ -641,6 +643,7 @@
         "review_A6kqgq": {
           "type": "review",
           "settings": {
+            "video": "shopify://files/videos/reel-3.webm",
             "external_video_url": "",
             "caption": ""
           }
@@ -648,11 +651,90 @@
         "review_QMFnUQ": {
           "type": "review",
           "settings": {
+            "video": "shopify://files/videos/reel-4.webm",
             "external_video_url": "",
             "caption": ""
           }
         },
         "review_PAVRn7": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/reel-5.webm",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_Lh3eR8": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/reel-6.webm",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_TJzikW": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/reel-7.webm",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_MqjrUt": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/03251-ezgif.com-gif-maker.webm",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_ttHgiH": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/reel-9.webm",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_nzRGzE": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/reel-6.mp4",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_jm7wrK": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/03252-ezgif.com-gif-maker.webm",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_4mW8mt": {
+          "type": "review",
+          "settings": {
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_L8F8CN": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/reel-13.webm",
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_dd6bPc": {
+          "type": "review",
+          "settings": {
+            "external_video_url": "",
+            "caption": ""
+          }
+        },
+        "review_k9GBJD": {
           "type": "review",
           "settings": {
             "external_video_url": "",
@@ -665,7 +747,17 @@
         "review_CMUAiW",
         "review_A6kqgq",
         "review_QMFnUQ",
-        "review_PAVRn7"
+        "review_PAVRn7",
+        "review_Lh3eR8",
+        "review_TJzikW",
+        "review_MqjrUt",
+        "review_ttHgiH",
+        "review_nzRGzE",
+        "review_jm7wrK",
+        "review_4mW8mt",
+        "review_L8F8CN",
+        "review_dd6bPc",
+        "review_k9GBJD"
       ],
       "name": "Video Reviews Grid",
       "settings": {
