@@ -405,54 +405,54 @@
         "dance_benefit_1": {
           "type": "benefit",
           "settings": {
-            "icon": "🍑",
-            "title": "Sculpts your booty",
-            "description": "<p>Focused choreography activates glutes and helps build shape.</p>",
+            "icon": "⚡",
+            "title": "Confidence Boost",
+            "description": "<p>Feel proud of your body and unlock your femininity and power.</p>",
             "column": "left"
           }
         },
         "dance_benefit_2": {
           "type": "benefit",
           "settings": {
-            "icon": "🔥",
-            "title": "Burns calories fast",
-            "description": "<p>High-energy moves keep your heart rate up and your body toned.</p>",
+            "icon": "💪",
+            "title": "Strong & Toned Booty",
+            "description": "<p>Build strength in your glutes and legs while sculpting beautiful, natural curves.</p>",
             "column": "left"
           }
         },
         "dance_benefit_3": {
           "type": "benefit",
           "settings": {
-            "icon": "🕒",
-            "title": "Fits your schedule",
-            "description": "<p>Short classes make consistency realistic even on busy days.</p>",
+            "icon": "😁",
+            "title": "Mood & Energy Lift",
+            "description": "<p>Dance releases endorphins, reduces stress, and fills you with vibrant energy that lasts all day.</p>",
             "column": "left"
           }
         },
         "dance_benefit_4": {
           "type": "benefit",
           "settings": {
-            "icon": "✨",
-            "title": "Boosts confidence",
-            "description": "<p>Feel stronger and more expressive with every session.</p>",
+            "icon": "🧘‍♀️",
+            "title": "Better Body Awareness",
+            "description": "<p>Learn to control every muscle, improving posture, flexibility, and coordination.</p>",
             "column": "right"
           }
         },
         "dance_benefit_5": {
           "type": "benefit",
           "settings": {
-            "icon": "🎵",
-            "title": "Feels like fun",
-            "description": "<p>Train with rhythm instead of forcing boring routines.</p>",
+            "icon": "🙌",
+            "title": "Community & Support",
+            "description": "<p>Join a global sisterhood of women who move, grow, and celebrate progress together.</p>",
             "column": "right"
           }
         },
         "dance_benefit_6": {
           "type": "benefit",
           "settings": {
-            "icon": "🌍",
-            "title": "Train from anywhere",
-            "description": "<p>All you need is your phone and a little space at home.</p>",
+            "icon": "✨",
+            "title": "Fun Way to Stay Fit",
+            "description": "<p>Forget boring workouts. Twerk is pure joy, fitness that feels like dancing at your favorite party.</p>",
             "column": "right"
           }
         }
