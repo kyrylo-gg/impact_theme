@@ -240,6 +240,84 @@
         "review_body": "<p>I love this program! It's super fun and makes me feel super sexy while doing it!</p>"
       }
     },
+    "booty_workouts_AVKRC3": {
+      "type": "booty-workouts",
+      "blocks": {
+        "benefit_VW3Atc": {
+          "type": "benefit",
+          "settings": {
+            "label": "Booty Shape & Muscle Tone"
+          }
+        },
+        "benefit_bahwgP": {
+          "type": "benefit",
+          "settings": {
+            "label": "Fat Burning & Cardio"
+          }
+        },
+        "benefit_pTBgYd": {
+          "type": "benefit",
+          "settings": {
+            "label": "Confidence & Feminine Energy"
+          }
+        },
+        "tier_N6zAed": {
+          "type": "tier",
+          "settings": {
+            "title": "4 Booty Programs",
+            "old_price": "$456",
+            "price": "$107",
+            "discount": "76% OFF",
+            "ribbon": "Extra 60% Off all Booty Clothing",
+            "preselected": true
+          }
+        },
+        "faq_w8zEiQ": {
+          "type": "faq",
+          "settings": {
+            "question": "What You'll Get",
+            "answer": "<p>Instant access to booty-focused dance workouts, structured programs, and bonus lessons inside the NASS app.</p>",
+            "open_by_default": false
+          }
+        },
+        "faq_FYPzJ9": {
+          "type": "faq",
+          "settings": {
+            "question": "About the community",
+            "answer": "<p>Join 6,000+ women who train together, share progress, and stay motivated with world-famous Nastya NASS.</p>",
+            "open_by_default": true
+          }
+        }
+      },
+      "block_order": [
+        "benefit_VW3Atc",
+        "benefit_bahwgP",
+        "benefit_pTBgYd",
+        "tier_N6zAed",
+        "faq_w8zEiQ",
+        "faq_FYPzJ9"
+      ],
+      "settings": {
+        "rating_label": "Rated",
+        "rating_value": "4.8/5 by Over 6000 Participants",
+        "title": "<p>Booty Workouts That <strong>Feel Like Fun</strong></p>",
+        "starting_price": "Starting from just $59",
+        "description": "<p>Twerk workouts from world-famous Nastya NASS help you tone your body, shape a beautiful booty, and make every workout fun and energizing.</p>",
+        "hero_image": "shopify://shop_images/Banner_Product_1_935cbba9-6018-4188-95c4-4f0a3b9fe2bb.png",
+        "image_radius": 30,
+        "offer_kicker": "Limited Time",
+        "offer_title": "SPRING OFFER",
+        "offer_bg_from": "#ebd7ff",
+        "offer_bg_to": "#ffd1fc",
+        "cta_label": "Order Today",
+        "cta_url": "",
+        "trust_guarantee": "30-Day Money-Back Guarantee",
+        "trust_support": "World-Famous support",
+        "secure_label": "Secure Checkout",
+        "review_title": "Super fun",
+        "review_body": "<p>I love this program! It's super fun and makes me feel super sexy while doing it!</p>"
+      }
+    },
     "confidence_without_pressure_pop": {
       "type": "confidence-without-pressure",
       "blocks": {
@@ -1418,6 +1496,7 @@
     "student_progress_3GQNkJ",
     "nass_countdown_PUMrCf",
     "nass_testimonials_ELPAbp",
+    "booty_workouts_AVKRC3",
     "faq_wNxEUc"
   ]
 }
