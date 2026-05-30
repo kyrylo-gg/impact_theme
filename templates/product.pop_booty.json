@@ -782,6 +782,7 @@
         "screenshot_MeLBte": {
           "type": "screenshot",
           "settings": {
+            "image": "shopify://shop_images/review-1.png",
             "row_share": "full",
             "size": "default",
             "highlight": false
@@ -790,7 +791,8 @@
         "screenshot_cYMN3L": {
           "type": "screenshot",
           "settings": {
-            "row_share": "half",
+            "image": "shopify://shop_images/review-2.png",
+            "row_share": "full",
             "size": "default",
             "highlight": false
           }
@@ -798,7 +800,8 @@
         "screenshot_YkxmLg": {
           "type": "screenshot",
           "settings": {
-            "row_share": "half",
+            "image": "shopify://shop_images/review-3.png",
+            "row_share": "full",
             "size": "wide",
             "highlight": true
           }
@@ -806,6 +809,7 @@
         "screenshot_mAB8ea": {
           "type": "screenshot",
           "settings": {
+            "image": "shopify://shop_images/review-9.png",
             "row_share": "full",
             "size": "default",
             "highlight": false
@@ -814,7 +818,8 @@
         "screenshot_6yh7YT": {
           "type": "screenshot",
           "settings": {
-            "row_share": "half",
+            "image": "shopify://shop_images/review-4.png",
+            "row_share": "full",
             "size": "default",
             "highlight": false
           }
@@ -822,9 +827,91 @@
         "screenshot_fAD7Qx": {
           "type": "screenshot",
           "settings": {
-            "row_share": "half",
+            "image": "shopify://shop_images/review-7.png",
+            "row_share": "full",
             "size": "default",
             "highlight": true
+          }
+        },
+        "screenshot_dDwybb": {
+          "type": "screenshot",
+          "settings": {
+            "image": "shopify://shop_images/review-12.png",
+            "row_share": "full",
+            "size": "default",
+            "highlight": false
+          }
+        },
+        "screenshot_4VNbjH": {
+          "type": "screenshot",
+          "settings": {
+            "image": "shopify://shop_images/review-8.png",
+            "row_share": "full",
+            "size": "default",
+            "highlight": false
+          }
+        },
+        "screenshot_F4MWNE": {
+          "type": "screenshot",
+          "settings": {
+            "image": "shopify://shop_images/review-10.png",
+            "row_share": "half",
+            "size": "default",
+            "highlight": false
+          }
+        },
+        "screenshot_GXQArr": {
+          "type": "screenshot",
+          "settings": {
+            "image": "shopify://shop_images/review-14.png",
+            "row_share": "half",
+            "size": "default",
+            "highlight": false
+          }
+        },
+        "screenshot_BYacDa": {
+          "type": "screenshot",
+          "settings": {
+            "image": "shopify://shop_images/review-13.png",
+            "row_share": "full",
+            "size": "default",
+            "highlight": false
+          }
+        },
+        "screenshot_9wrhCa": {
+          "type": "screenshot",
+          "settings": {
+            "image": "shopify://shop_images/review-6.png",
+            "row_share": "full",
+            "size": "default",
+            "highlight": false
+          }
+        },
+        "screenshot_ehtEhm": {
+          "type": "screenshot",
+          "settings": {
+            "image": "shopify://shop_images/review-15.png",
+            "row_share": "half",
+            "size": "default",
+            "highlight": false
+          }
+        },
+        "screenshot_AiNbhG": {
+          "type": "screenshot",
+          "settings": {
+            "image": "shopify://shop_images/review-11.png",
+            "row_share": "half",
+            "size": "default",
+            "highlight": false
+          }
+        },
+        "screenshot_N9knxk": {
+          "type": "screenshot",
+          "settings": {
+            "image": "shopify://shop_images/review-5.png",
+            "row_share": "full",
+            "size": "default",
+            "highlight": false
           }
         }
       },
@@ -834,7 +921,16 @@
         "screenshot_YkxmLg",
         "screenshot_mAB8ea",
         "screenshot_6yh7YT",
-        "screenshot_fAD7Qx"
+        "screenshot_fAD7Qx",
+        "screenshot_dDwybb",
+        "screenshot_4VNbjH",
+        "screenshot_F4MWNE",
+        "screenshot_GXQArr",
+        "screenshot_BYacDa",
+        "screenshot_9wrhCa",
+        "screenshot_ehtEhm",
+        "screenshot_AiNbhG",
+        "screenshot_N9knxk"
       ],
       "name": "Feedback Screenshots",
       "settings": {
