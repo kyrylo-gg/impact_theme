@@ -277,6 +277,33 @@
             "answer": "<p>Join 6,000+ women who train together, share progress, and stay motivated with world-famous Nastya NASS.</p>",
             "open_by_default": true
           }
+        },
+        "review_zYRTPB": {
+          "type": "review",
+          "settings": {
+            "avatar": "shopify://shop_images/Frame_32.png",
+            "title": "Super fun",
+            "body": "<p>I'm enjoying the twerk program, and the booty-building program - as someone with very little junk in the trunk, they complement each other perfectly!! Highly recommend.</p>",
+            "rating": 5
+          }
+        },
+        "review_k3DmXG": {
+          "type": "review",
+          "settings": {
+            "avatar": "shopify://shop_images/Frame_32-3.png",
+            "title": "Love it!",
+            "body": "<p>Nastya's energy is contagious - she makes every workout feel like a celebration. I finally found a program that keeps me motivated.</p>",
+            "rating": 5
+          }
+        },
+        "review_XU4i7y": {
+          "type": "review",
+          "settings": {
+            "avatar": "shopify://shop_images/Frame_32-2.png",
+            "title": "Its motivating",
+            "body": "<p>I never thought fitness could be this exciting! The lessons are easy to follow, and / can feel progress after every session.</p>",
+            "rating": 5
+          }
         }
       },
       "block_order": [
@@ -294,7 +321,10 @@
         "booty_tier_1",
         "tier_NEy4e9",
         "booty_faq_1",
-        "booty_faq_2"
+        "booty_faq_2",
+        "review_zYRTPB",
+        "review_k3DmXG",
+        "review_XU4i7y"
       ],
       "settings": {
         "rating_label": "Rated",
