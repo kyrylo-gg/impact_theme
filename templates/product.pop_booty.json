@@ -715,6 +715,7 @@
         "review_4mW8mt": {
           "type": "review",
           "settings": {
+            "video": "shopify://files/videos/reel-12.webm",
             "external_video_url": "",
             "caption": ""
           }
@@ -730,6 +731,7 @@
         "review_dd6bPc": {
           "type": "review",
           "settings": {
+            "video": "shopify://files/videos/reel-14.webm",
             "external_video_url": "",
             "caption": ""
           }
@@ -737,6 +739,7 @@
         "review_k9GBJD": {
           "type": "review",
           "settings": {
+            "video": "shopify://files/videos/reel-15.webm",
             "external_video_url": "",
             "caption": ""
           }
