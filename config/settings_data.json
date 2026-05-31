@@ -47,56 +47,6 @@
     "favicon": "shopify://shop_images/nass_favicon.png",
     "checkout_accent_color": "#f0c417",
     "checkout_button_color": "#1a1a1a",
-    "color_schemes": {
-      "scheme-1": {
-        "settings": {
-          "scheme_background": "#ffffff",
-          "scheme_text": "#1a1a1a",
-          "scheme_button": "#1a1a1a",
-          "scheme_button_label": "#ffffff"
-        }
-      },
-      "scheme-2": {
-        "settings": {
-          "scheme_background": "#f5f5f5",
-          "scheme_text": "#1a1a1a",
-          "scheme_button": "#1a1a1a",
-          "scheme_button_label": "#ffffff"
-        }
-      },
-      "scheme-3": {
-        "settings": {
-          "scheme_background": "#eef1ea",
-          "scheme_text": "#1a1a1a",
-          "scheme_button": "#1a1a1a",
-          "scheme_button_label": "#ffffff"
-        }
-      },
-      "scheme-4": {
-        "settings": {
-          "scheme_background": "#242833",
-          "scheme_text": "#ffffff",
-          "scheme_button": "#ffffff",
-          "scheme_button_label": "#000000"
-        }
-      },
-      "scheme-5": {
-        "settings": {
-          "scheme_background": "#121212",
-          "scheme_text": "#ffffff",
-          "scheme_button": "#ffffff",
-          "scheme_button_label": "#121212"
-        }
-      },
-      "scheme-6": {
-        "settings": {
-          "scheme_background": "#334fb4",
-          "scheme_text": "#ffffff",
-          "scheme_button": "#ffffff",
-          "scheme_button_label": "#334fb4"
-        }
-      }
-    },
     "sections": {
       "redirects": {
         "type": "redirects",
@@ -370,16 +320,6 @@
         "disabled": false,
         "settings": {}
       },
-      "15557474716127144420": {
-        "type": "shopify://apps/kaching-bundles/blocks/app-embed-block/6c637362-a106-4a32-94ac-94dcfd68cdb8",
-        "disabled": false,
-        "settings": {}
-      },
-      "7194384644902525832": {
-        "type": "shopify://apps/fokkio-automatic-gift/blocks/widget/866ae171-054c-4fa5-8677-5f391a13902b",
-        "disabled": false,
-        "settings": {}
-      },
       "1877152918344802950": {
         "type": "shopify://apps/intelligems-a-b-testing/blocks/intelligems-script/fa83b64c-0c77-4c0c-b4b2-b94b42f5ef19",
         "disabled": false,
@@ -387,13 +327,58 @@
       },
       "169412249732273955": {
         "type": "shopify://apps/intercom-ai-customer-service/blocks/widget/ef6552d6-43c7-4fc7-b903-fec510e74dee",
-        "disabled": true,
-        "settings": {}
-      },
-      "17676059084223943535": {
-        "type": "shopify://apps/triplewhale/blocks/triple_pixel_snippet/483d496b-3f1a-4609-aea7-8eee3b6b7a2a",
         "disabled": false,
         "settings": {}
+      }
+    },
+    "color_schemes": {
+      "scheme-1": {
+        "settings": {
+          "scheme_background": "#ffffff",
+          "scheme_text": "#1a1a1a",
+          "scheme_button": "#1a1a1a",
+          "scheme_button_label": "#ffffff"
+        }
+      },
+      "scheme-2": {
+        "settings": {
+          "scheme_background": "#f5f5f5",
+          "scheme_text": "#1a1a1a",
+          "scheme_button": "#1a1a1a",
+          "scheme_button_label": "#ffffff"
+        }
+      },
+      "scheme-3": {
+        "settings": {
+          "scheme_background": "#eef1ea",
+          "scheme_text": "#1a1a1a",
+          "scheme_button": "#1a1a1a",
+          "scheme_button_label": "#ffffff"
+        }
+      },
+      "scheme-4": {
+        "settings": {
+          "scheme_background": "#242833",
+          "scheme_text": "#ffffff",
+          "scheme_button": "#ffffff",
+          "scheme_button_label": "#000000"
+        }
+      },
+      "scheme-5": {
+        "settings": {
+          "scheme_background": "#121212",
+          "scheme_text": "#ffffff",
+          "scheme_button": "#ffffff",
+          "scheme_button_label": "#121212"
+        }
+      },
+      "scheme-6": {
+        "settings": {
+          "scheme_background": "#334fb4",
+          "scheme_text": "#ffffff",
+          "scheme_button": "#ffffff",
+          "scheme_button_label": "#334fb4"
+        }
       }
     }
   },
