@@ -831,18 +831,18 @@
             "description": "Discover the art of twerking with our easy-to-follow 7-day program for all skill levels.",
             "image": "shopify://shop_images/booty_band_asdasd_00345cad-3c6c-41b3-8e62-3953cf2c00ed.jpg",
             "level_badge": "Beginner",
-            "duration": "7 Days",
+            "duration": "",
             "top_badge": "Top Seller"
           }
         },
         "program_card_mCXWHf": {
           "type": "program_card",
           "settings": {
-            "title": "Weight Loss Program",
-            "description": "Weight Loss Program will guide you on how to sculpt the better version of yourself.",
+            "title": "Hip Mobility",
+            "description": "A structured program that frees your hips and prepares your body for more confident movement.",
             "image": "shopify://shop_images/booty_band_program_a55ac736-c2f1-4155-b953-1c676e9852a3.jpg",
             "level_badge": "Advanced",
-            "duration": "8 Weeks",
+            "duration": "",
             "top_badge": "Top Seller"
           }
         },
@@ -850,10 +850,10 @@
           "type": "program_card",
           "settings": {
             "title": "Booty Program",
-            "description": "The most effective booty-building workouts which you can do at the comfort of your home.",
+            "description": "The most effective booty workouts which you can do at the comfort of your home.",
             "image": "shopify://shop_images/Frame_1.png",
             "level_badge": "7 Day Bonus",
-            "duration": "8 Weeks",
+            "duration": "",
             "top_badge": ""
           }
         },
