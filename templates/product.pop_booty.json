@@ -105,7 +105,7 @@
         "0669bfe9-354c-4601-abcf-c38d6afaeb80": {
           "type": "text",
           "settings": {
-            "text": "<p>\ud83d\udd04 30 Day Returns<br/>\ud83d\ude9a $140+ Free US Shipping<br/>\ud83d\udc83 Unique NassyStitch Technology<br/>\ud83d\udc9a Eco-Friendly Packaging</p>"
+            "text": "<p>🔄 30 Day Returns<br/>🚚 $140+ Free US Shipping<br/>💃 Unique NassyStitch Technology<br/>💚 Eco-Friendly Packaging</p>"
           }
         },
         "cba091ce-a0d9-465f-ab86-d40697549bf2": {
@@ -282,7 +282,7 @@
           "type": "faq",
           "settings": {
             "question": "About the community",
-            "answer": "<p>All programs are personally created by Nastya NASS and thoughtfully designed to help you grow stronger, more confident, and more connected to your body.\u2028</p><p></p><p>More than 6,000 girls have already completed these programs\u2028and become part of our vibrant, supportive community.</p>",
+            "answer": "<p>All programs are personally created by Nastya NASS and thoughtfully designed to help you grow stronger, more confident, and more connected to your body. </p><p></p><p>More than 6,000 girls have already completed these programs and become part of our vibrant, supportive community.</p>",
             "open_by_default": true
           }
         },
@@ -355,7 +355,131 @@
         "payment_icons_alt": "Accepted payment methods",
         "review_avatar": "shopify://shop_images/Frame_32.png",
         "review_title": "Super fun",
-        "review_body": "<p>I'm enjoying the twerk program, and the booty-building program - as someone with very little junk in the trunk, they complement each other perfectly!! Highly recommend.</p>",
+        "review_body": "<p>I'm enjoying the twerk program, and the booty-building program - as someone with very little junk in the trunk, they complement each other perfectly!! Highly recommend.</p>"
+      }
+    },
+    "nass_bundle_builder_pop": {
+      "type": "nass-bundle-builder",
+      "blocks": {
+        "step_programs": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "Select programs",
+            "collection": "bundle-booty-builder-copy-1",
+            "is_programs_step": true,
+            "program_pack_product": "vip-bundle",
+            "program_pack_product_secondary": "all-in-one-bundle"
+          }
+        },
+        "extra_step_CbpKAM": {
+          "type": "extra_step",
+          "disabled": true,
+          "settings": {
+            "title": "Select Free Shorts",
+            "collection": "biker-shorts"
+          }
+        },
+        "extra_step_LYfDj4": {
+          "type": "extra_step",
+          "disabled": true,
+          "settings": {
+            "title": "select free top",
+            "collection": "halter-tops"
+          }
+        },
+        "bundle_step_KMpd7k": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "Add  Booty Shorts",
+            "collection": "bundle-swim-shorts",
+            "is_programs_step": false,
+            "program_pack_product": "",
+            "program_pack_product_secondary": ""
+          }
+        },
+        "step_shorts": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "Add Lounge shorts",
+            "collection": "bundle-lounge-shorts",
+            "is_programs_step": false,
+            "program_pack_product": "",
+            "program_pack_product_secondary": ""
+          }
+        },
+        "step_leggings": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "Add sport shorts",
+            "collection": "bundle-sport-shorts",
+            "is_programs_step": false,
+            "program_pack_product": "",
+            "program_pack_product_secondary": ""
+          }
+        },
+        "step_tops": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "Leggings and Tops",
+            "collection": "bundle-leggings-tops",
+            "is_programs_step": false,
+            "program_pack_product": "",
+            "program_pack_product_secondary": ""
+          }
+        },
+        "bundle_step_bb96UU": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "Workout Equipment",
+            "collection": "bundle-equipment-copy",
+            "is_programs_step": false,
+            "program_pack_product": "",
+            "program_pack_product_secondary": ""
+          }
+        }
+      },
+      "block_order": [
+        "step_programs",
+        "extra_step_CbpKAM",
+        "extra_step_LYfDj4",
+        "bundle_step_KMpd7k",
+        "step_shorts",
+        "step_leggings",
+        "step_tops",
+        "bundle_step_bb96UU"
+      ],
+      "settings": {
+        "image_1": "shopify://shop_images/Frame_7-6.png",
+        "image_2": "shopify://shop_images/Frame_7-4.png",
+        "image_3": "shopify://shop_images/padded_DSC09654_30427d69-c589-45c9-ab7f-2ec9f0e127e1.jpg",
+        "enable_section": true,
+        "bb_title_prefix": "GET THE BOOTY.",
+        "bb_title_accent": "OWN THE SUMMER.",
+        "bb_description": "Mix programs, shorts, and tops. Get 60% off all clothing when you purchase the VIP Bundle or All-In-One Bundles",
+        "bb_badge_pill_text": "2 Free  Items with VIP Bundle or All-In-One Bundles Until 5/31",
+        "bb_promo_banner_text": "60% OFF ALL CLOTHING / with VIP  or All-In One Bundle purchase",
+        "bb_show_countdown": false,
+        "bb_countdown_mode": "daily_kyiv_10am",
+        "bb_countdown_heading": "HURRY UP! THE SALE ENDS IN:",
+        "bb_initial_days": 0,
+        "bb_initial_hours": 16,
+        "bb_initial_minutes": 11,
+        "bb_initial_seconds": 20,
+        "bb_label_days": "Days",
+        "bb_label_hours": "Hours",
+        "bb_label_minutes": "Minutes",
+        "bb_label_seconds": "Seconds",
+        "show_one_click_alternative": false,
+        "one_click_product": "twerk-program-lovable",
+        "one_click_label": "Twerk program",
+        "program_pack_product": "vip-bundle",
+        "program_pack_product_secondary": "all-in-one-bundle",
+        "discount_code": "",
+        "show_discount_banner": true,
+        "discount_promo_text": "2 Free Items with VIP Bundle or All-In-One Bundles Until 5/31",
+        "discount_applied_text": "2 Free Products applied!",
+        "size_chart_config_handle": "size-chart-settings",
+        "storefront_api_token": "568094b7f376083a4b0dc6fee4785741"
       }
     },
     "confidence_without_pressure_pop": {
@@ -406,7 +530,7 @@
         "dance_benefit_1": {
           "type": "benefit",
           "settings": {
-            "icon": "\u26a1",
+            "icon": "⚡",
             "title": "Confidence Boost",
             "description": "<p>Feel proud of your body and unlock your femininity and power.</p>",
             "column": "left"
@@ -415,7 +539,7 @@
         "dance_benefit_2": {
           "type": "benefit",
           "settings": {
-            "icon": "\ud83d\udcaa",
+            "icon": "💪",
             "title": "Strong & Toned Booty",
             "description": "<p>Build strength in your glutes and legs while sculpting beautiful, natural curves.</p>",
             "column": "left"
@@ -424,7 +548,7 @@
         "dance_benefit_3": {
           "type": "benefit",
           "settings": {
-            "icon": "\ud83d\ude01",
+            "icon": "😁",
             "title": "Mood & Energy Lift",
             "description": "<p>Dance releases endorphins, reduces stress, and fills you with vibrant energy that lasts all day.</p>",
             "column": "left"
@@ -433,16 +557,16 @@
         "dance_benefit_4": {
           "type": "benefit",
           "settings": {
-            "icon": "\ud83e\uddd8\u200d\u2640\ufe0f",
+            "icon": "🧘‍♀️",
             "title": "Better Body Awareness",
-            "description": "<p>Learn to control every muscle, improving posture, flexibility,\u2028and coordination.</p>",
+            "description": "<p>Learn to control every muscle, improving posture, flexibility, and coordination.</p>",
             "column": "right"
           }
         },
         "dance_benefit_5": {
           "type": "benefit",
           "settings": {
-            "icon": "\ud83d\ude4c",
+            "icon": "🙌",
             "title": "Community & Support",
             "description": "<p>Join a global sisterhood of women who move, grow, and celebrate progress together.</p>",
             "column": "right"
@@ -451,7 +575,7 @@
         "dance_benefit_6": {
           "type": "benefit",
           "settings": {
-            "icon": "\u2728",
+            "icon": "✨",
             "title": "Fun Way to Stay Fit",
             "description": "<p>Forget boring workouts. Twerk is pure joy, fitness that feels like dancing at your favorite party.</p>",
             "column": "right"
@@ -567,7 +691,7 @@
           "type": "card",
           "settings": {
             "image": "shopify://shop_images/Frame_358.png",
-            "emoji": "\u26a1",
+            "emoji": "⚡",
             "title": "For women who want to feel confident and powerful",
             "text": "You'll learn to love your body, move freely, and radiate feminine energy in every step."
           }
@@ -576,7 +700,7 @@
           "type": "card",
           "settings": {
             "image": "shopify://shop_images/Frame_359.png",
-            "emoji": "\ud83e\udd38",
+            "emoji": "🤸",
             "title": "For those who are tired of boring workouts and stressful fitness routines",
             "text": "Twerk turns fitness into pure fun. Dance, smile, and see real progress while enjoying every move."
           }
@@ -585,7 +709,7 @@
           "type": "card",
           "settings": {
             "image": "shopify://shop_images/Frame_360_66ca3817-6924-4ad1-9247-ffd760fc387e.png",
-            "emoji": "\ud83d\ude0c",
+            "emoji": "😌",
             "title": "For all levels, from beginners to advanced",
             "text": "No dance experience needed. Nastya NASS will guide you step-by-step, helping you master each movement safely and with joy."
           }
@@ -647,7 +771,7 @@
           "type": "lesson_card",
           "settings": {
             "title": "Lesson Five",
-            "description": "Twerk on your toes \u2014 new position.",
+            "description": "Twerk on your toes — new position.",
             "video": "shopify://files/videos/Lesson demo 5 (1) (online-video-cutter.com)_b94585f5-7c4c-44ea-8820-97891cef43af.webm"
           }
         },
@@ -688,7 +812,7 @@
       ],
       "name": "Twerk Lessons",
       "settings": {
-        "heading": "Only 7 Days to\u2028",
+        "heading": "Only 7 Days to ",
         "heading_highlight": "Master Twerk Moves",
         "show_pop_booty_footer": true,
         "cta_text": "Start Your 7-Day Journey",
@@ -707,7 +831,8 @@
             "description": "Discover the art of twerking with our easy-to-follow 7-day program for all skill levels.",
             "image": "shopify://shop_images/booty_band_asdasd_00345cad-3c6c-41b3-8e62-3953cf2c00ed.jpg",
             "level_badge": "Beginner",
-            "duration": "7 Days"
+            "duration": "7 Days",
+            "top_badge": ""
           }
         },
         "program_card_mCXWHf": {
@@ -728,7 +853,8 @@
             "description": "The most effective booty-building workouts which you can do at the comfort of your home.",
             "image": "shopify://shop_images/Frame_1.png",
             "level_badge": "7 Day Bonus",
-            "duration": "8 Weeks"
+            "duration": "8 Weeks",
+            "top_badge": ""
           }
         },
         "program_card_h3ETJ6": {
@@ -738,7 +864,8 @@
             "description": "Great variety of booty-building exercises which you can perform with resistance band.",
             "image": "shopify://shop_images/stretching_band_set_0bd6ad28-abd3-424a-9f72-b4323b52ac50.jpg",
             "level_badge": "",
-            "duration": "8 Weeks"
+            "duration": "8 Weeks",
+            "top_badge": ""
           }
         }
       },
@@ -1109,13 +1236,13 @@
         "row_other_mAwkFT": {
           "type": "row_other",
           "settings": {
-            "text": "Progress takes weeks \u2028or months"
+            "text": "Progress takes weeks  or months"
           }
         },
         "row_other_NbLHRd": {
           "type": "row_other",
           "settings": {
-            "text": "Quality depends on \u2028the trainer"
+            "text": "Quality depends on  the trainer"
           }
         },
         "row_other_67mYEe": {
@@ -1133,7 +1260,7 @@
         "row_other_WrRqyU": {
           "type": "row_other",
           "settings": {
-            "text": "Focuses only on physical\u2028 effort"
+            "text": "Focuses only on physical  effort"
           }
         },
         "row_other_WYwBQP": {
@@ -1145,19 +1272,19 @@
         "row_other_jPQFbB": {
           "type": "row_other",
           "settings": {
-            "text": "Hard to maintain without\u2028 routine"
+            "text": "Hard to maintain without  routine"
           }
         },
         "row_this_VViVqj": {
           "type": "row_this",
           "settings": {
-            "text": "Learn real twerk moves in just \u20287 days, train with pleasure"
+            "text": "Learn real twerk moves in just  7 days, train with pleasure"
           }
         },
         "row_this_4CypLN": {
           "type": "row_this",
           "settings": {
-            "text": "Created by world-famous \u2028trainer Nastya Nass"
+            "text": "Created by world-famous  trainer Nastya Nass"
           }
         },
         "row_this_nr99VC": {
@@ -1169,13 +1296,13 @@
         "row_this_KXB4rE": {
           "type": "row_this",
           "settings": {
-            "text": "Keeps your body toned\u2028 through dance & joy"
+            "text": "Keeps your body toned  through dance & joy"
           }
         },
         "row_this_TWmPYy": {
           "type": "row_this",
           "settings": {
-            "text": "Boosts confidence and\u2028 body awareness"
+            "text": "Boosts confidence and  body awareness"
           }
         },
         "row_this_RrgUpf": {
@@ -1187,7 +1314,7 @@
         "row_this_6GYiqB": {
           "type": "row_this",
           "settings": {
-            "text": "Dance after the course,\u2028 stay in shape with ease"
+            "text": "Dance after the course,  stay in shape with ease"
           }
         }
       },
@@ -1355,7 +1482,7 @@
           "settings": {
             "rating": 5,
             "title": "Amazing content",
-            "body": "Im so happy I finally get to learn with the master of twerk, online \u2026 can't wait to reach that level of experience like Nastya",
+            "body": "Im so happy I finally get to learn with the master of twerk, online … can't wait to reach that level of experience like Nastya",
             "reviewer_name": "Myriam El baouch",
             "verified": true
           }
@@ -1686,7 +1813,7 @@
           "type": "faq",
           "settings": {
             "question": "How many days per week is it?",
-            "answer": "The program is designed for 3\u20135 days per week, depending on your level and schedule."
+            "answer": "The program is designed for 3–5 days per week, depending on your level and schedule."
           }
         },
         "faq_ptTKgD": {
@@ -1700,14 +1827,14 @@
           "type": "faq",
           "settings": {
             "question": "Do I need equipment?",
-            "answer": "Minimal equipment \u2014 a set of dumbbells and a mat are enough to get started."
+            "answer": "Minimal equipment — a set of dumbbells and a mat are enough to get started."
           }
         },
         "faq_zBQbUf": {
           "type": "faq",
           "settings": {
             "question": "How do I access the program?",
-            "answer": "You'll get instant access through our app. Works on any device \u2014 phone, tablet, or computer."
+            "answer": "You'll get instant access through our app. Works on any device — phone, tablet, or computer."
           }
         },
         "faq_YbQyNM": {
@@ -1721,7 +1848,7 @@
           "type": "faq",
           "settings": {
             "question": "What if I'm a complete beginner?",
-            "answer": "Start with the Soft level \u2014 it's built specifically for beginners with zero fitness experience."
+            "answer": "Start with the Soft level — it's built specifically for beginners with zero fitness experience."
           }
         }
       },
@@ -1738,8 +1865,8 @@
       ],
       "name": "BT_FAQ",
       "settings": {
-        "title": "Questions.",
-        "title_highlight": "Answered.",
+        "title": "FAQ",
+        "title_highlight": "",
         "footer": "If you're ready, your best starting point is the one you'll stick with.",
         "show_pop_booty_footer": false,
         "cta_text": "Shop Booty Programs",
@@ -1780,135 +1907,11 @@
         "heading": "",
         "heading_highlight": "",
         "hide_heading": true,
-        "show_pop_booty_footer": false,
+        "show_pop_booty_footer": true,
         "cta_text": "Shop Booty Programs",
         "cta_link": "",
         "badge_1_text": "30-Day Money-Back Guarantee",
         "badge_2_text": "World-Famous support"
-      }
-    },
-    "nass_bundle_builder_pop": {
-      "type": "nass-bundle-builder",
-      "blocks": {
-        "step_programs": {
-          "type": "bundle_step",
-          "settings": {
-            "title": "Select programs",
-            "collection": "bundle-booty-builder-copy-1",
-            "is_programs_step": true,
-            "program_pack_product": "vip-bundle",
-            "program_pack_product_secondary": "all-in-one-bundle"
-          }
-        },
-        "extra_step_CbpKAM": {
-          "type": "extra_step",
-          "disabled": true,
-          "settings": {
-            "title": "Select Free Shorts",
-            "collection": "biker-shorts"
-          }
-        },
-        "extra_step_LYfDj4": {
-          "type": "extra_step",
-          "disabled": true,
-          "settings": {
-            "title": "select free top",
-            "collection": "halter-tops"
-          }
-        },
-        "bundle_step_KMpd7k": {
-          "type": "bundle_step",
-          "settings": {
-            "title": "Add  Booty Shorts",
-            "collection": "bundle-swim-shorts",
-            "is_programs_step": false,
-            "program_pack_product": "",
-            "program_pack_product_secondary": ""
-          }
-        },
-        "step_shorts": {
-          "type": "bundle_step",
-          "settings": {
-            "title": "Add Lounge shorts",
-            "collection": "bundle-lounge-shorts",
-            "is_programs_step": false,
-            "program_pack_product": "",
-            "program_pack_product_secondary": ""
-          }
-        },
-        "step_leggings": {
-          "type": "bundle_step",
-          "settings": {
-            "title": "Add sport shorts",
-            "collection": "bundle-sport-shorts",
-            "is_programs_step": false,
-            "program_pack_product": "",
-            "program_pack_product_secondary": ""
-          }
-        },
-        "step_tops": {
-          "type": "bundle_step",
-          "settings": {
-            "title": "Leggings and Tops",
-            "collection": "bundle-leggings-tops",
-            "is_programs_step": false,
-            "program_pack_product": "",
-            "program_pack_product_secondary": ""
-          }
-        },
-        "bundle_step_bb96UU": {
-          "type": "bundle_step",
-          "settings": {
-            "title": "Workout Equipment",
-            "collection": "bundle-equipment-copy",
-            "is_programs_step": false,
-            "program_pack_product": "",
-            "program_pack_product_secondary": ""
-          }
-        }
-      },
-      "block_order": [
-        "step_programs",
-        "extra_step_CbpKAM",
-        "extra_step_LYfDj4",
-        "bundle_step_KMpd7k",
-        "step_shorts",
-        "step_leggings",
-        "step_tops",
-        "bundle_step_bb96UU"
-      ],
-      "settings": {
-        "image_1": "shopify://shop_images/Frame_7-6.png",
-        "image_2": "shopify://shop_images/Frame_7-4.png",
-        "image_3": "shopify://shop_images/padded_DSC09654_30427d69-c589-45c9-ab7f-2ec9f0e127e1.jpg",
-        "enable_section": true,
-        "bb_title_prefix": "GET THE BOOTY.",
-        "bb_title_accent": "OWN THE SUMMER.",
-        "bb_description": "Mix programs, shorts, and tops. Get 60% off all clothing when you purchase the VIP Bundle or All-In-One Bundles",
-        "bb_badge_pill_text": "2 Free  Items with VIP Bundle or All-In-One Bundles Until 5/31",
-        "bb_promo_banner_text": "60% OFF ALL CLOTHING / with VIP  or All-In One Bundle purchase",
-        "bb_show_countdown": false,
-        "bb_countdown_mode": "daily_kyiv_10am",
-        "bb_countdown_heading": "HURRY UP! THE SALE ENDS IN:",
-        "bb_initial_days": 0,
-        "bb_initial_hours": 16,
-        "bb_initial_minutes": 11,
-        "bb_initial_seconds": 20,
-        "bb_label_days": "Days",
-        "bb_label_hours": "Hours",
-        "bb_label_minutes": "Minutes",
-        "bb_label_seconds": "Seconds",
-        "show_one_click_alternative": false,
-        "one_click_product": "twerk-program-lovable",
-        "one_click_label": "Twerk program",
-        "program_pack_product": "vip-bundle",
-        "program_pack_product_secondary": "all-in-one-bundle",
-        "discount_code": "",
-        "show_discount_banner": true,
-        "discount_promo_text": "2 Free Items with VIP Bundle or All-In-One Bundles Until 5/31",
-        "discount_applied_text": "2 Free Products applied!",
-        "size_chart_config_handle": "size-chart-settings",
-        "storefront_api_token": "568094b7f376083a4b0dc6fee4785741"
       }
     }
   },
