@@ -10,9 +10,22 @@
 >
   <div class="testimonials__container">
     <header class="testimonials__header">
-      <div class="testimonials__heading">
-        JOIN <span class="testimonials__heading-count">{{ section.settings.heading_count | default: '40,000+' | escape }}</span> CONFIDENT GIRLS
-      </div>
+      {%- liquid
+        assign testimonials_heading_count = section.settings.heading_count | default: '40,000+'
+        assign testimonials_pop_booty = false
+        if request.page_type == 'product' and template.suffix == 'pop_booty'
+          assign testimonials_pop_booty = true
+        endif
+      -%}
+      {% if testimonials_heading_count != blank %}
+        <div class="testimonials__heading{% if testimonials_pop_booty %} testimonials__heading--count-only{% endif %}">
+          {% if testimonials_pop_booty %}
+            <span class="testimonials__heading-count">{{ testimonials_heading_count | escape }}</span>
+          {% else %}
+            JOIN <span class="testimonials__heading-count">{{ testimonials_heading_count | escape }}</span> CONFIDENT GIRLS
+          {% endif %}
+        </div>
+      {% endif %}
       {% if section.settings.subtitle != blank %}
         <p class="testimonials__subtitle">{{ section.settings.subtitle | escape }}</p>
       {% endif %}

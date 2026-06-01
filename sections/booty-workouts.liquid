@@ -105,13 +105,17 @@
       font-weight: 700;
     }
 
+    #shopify-section-{{ section.id }} .booty-workouts__title-line--accent {
+      font-weight: 900;
+    }
+
     #shopify-section-{{ section.id }} .booty-workouts__title-line + .booty-workouts__title-line {
       margin-top: 0;
     }
 
     @media (min-width: 768px) {
       #shopify-section-{{ section.id }} .booty-workouts__title {
-        font-size: 45px;
+        font-size: 35px;
       }
     }
   </style>
@@ -296,7 +300,7 @@
                 <span class="booty-workouts__title-line">{{ section.settings.title_part_2 | escape }}</span>
               {% endif %}
               {% if section.settings.title_part_3 != blank %}
-                <span class="booty-workouts__title-line">{{ section.settings.title_part_3 | escape }}</span>
+                <span class="booty-workouts__title-line booty-workouts__title-line--accent">{{ section.settings.title_part_3 | escape }}</span>
               {% endif %}
             </div>
           {% elsif section.settings.title != blank %}
@@ -648,10 +652,18 @@
     font-weight: 700;
   }
 
-  .booty-workouts__title--legacy,
-  .booty-workouts__title--legacy strong {
+  .booty-workouts__title-line--accent {
+    font-weight: 900;
+  }
+
+  .booty-workouts__title--legacy {
     color: #000;
     font-weight: 700;
+  }
+
+  .booty-workouts__title--legacy strong {
+    color: #000;
+    font-weight: 900;
   }
 
   .booty-workouts__title p {
@@ -1206,7 +1218,7 @@
     }
 
     .booty-workouts__title {
-      font-size: 45px;
+      font-size: 35px;
     }
 
     .booty-workouts__cta {

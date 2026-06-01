@@ -1,8 +1,21 @@
+{%- liquid
+  assign confidence_pop_booty_lines = false
+  if request.page_type == 'product' and template.suffix == 'pop_booty' and section.settings.heading_part1_line2 != blank
+    assign confidence_pop_booty_lines = true
+  endif
+-%}
+
 <section class="confidence-without-pressure" id="confidence-without-pressure-{{ section.id }}">
   <div class="confidence-without-pressure__container">
-    <h2 class="confidence-without-pressure__heading">
-      <span class="confidence-without-pressure__heading-part1">{{ section.settings.heading_part1 | escape }}</span>
-      <span class="confidence-without-pressure__heading-part2"> {{ section.settings.heading_part2 | escape }}</span>
+    <h2 class="confidence-without-pressure__heading{% if confidence_pop_booty_lines %} confidence-without-pressure__heading--pop-booty-lines{% endif %}">
+      {% if confidence_pop_booty_lines %}
+        <span class="confidence-without-pressure__heading-part1 confidence-without-pressure__heading-line confidence-without-pressure__heading-line--1">{{ section.settings.heading_part1 | escape }}</span>
+        <span class="confidence-without-pressure__heading-part1 confidence-without-pressure__heading-line confidence-without-pressure__heading-line--2">{{ section.settings.heading_part1_line2 | escape }}</span>
+        <span class="confidence-without-pressure__heading-part2 confidence-without-pressure__heading-line confidence-without-pressure__heading-line--3">{{ section.settings.heading_part2 | escape }}</span>
+      {% else %}
+        <span class="confidence-without-pressure__heading-part1">{{ section.settings.heading_part1 | escape }}</span>
+        <span class="confidence-without-pressure__heading-part2"> {{ section.settings.heading_part2 | escape }}</span>
+      {% endif %}
     </h2>
 
     {% if section.settings.subheading != blank %}
@@ -221,6 +234,12 @@
   "name": "Confidence No Pressure",
   "settings": [
     { "type": "text", "id": "heading_part1", "label": "Heading part 1", "default": "Get confidence and results" },
+    {
+      "type": "text",
+      "id": "heading_part1_line2",
+      "label": "Heading part 1 (line 2, pop_booty desktop)",
+      "info": "Optional. On pop_booty splits the heading into three lines on desktop."
+    },
     { "type": "text", "id": "heading_part2", "label": "Heading part 2", "default": "without pressure" },
     { "type": "color", "id": "accent_color", "label": "Accent color", "default": "#0038FF" },
     {

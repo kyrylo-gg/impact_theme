@@ -1,6 +1,6 @@
 {% comment %}
   BT-style section headings for product.pop_booty only.
-  Matches body_transformation typography (Anybody, 24px/45px, black + #0038FF).
+  Matches body_transformation typography (Anybody, 24px/35px desktop, black + #0038FF).
 {% endcomment %}
 <style>
   body.product--pop_booty main#main.anchor {
@@ -20,8 +20,7 @@
     .bt-faq__title,
     .student-progress__title,
     .why-this-works__heading,
-    .testimonials__heading,
-    .booty-workouts__title
+    .testimonials__heading
   ) {
     font-family: 'Anybody', sans-serif !important;
     font-weight: 600 !important;
@@ -46,10 +45,9 @@
       .bt-faq__title,
       .student-progress__title,
       .why-this-works__heading,
-      .testimonials__heading,
-      .booty-workouts__title
+      .testimonials__heading
     ) {
-      font-size: 45px !important;
+      font-size: 35px !important;
     }
   }
 
@@ -59,7 +57,8 @@
     .nass-programs__heading-part1,
     .ready-to-shine__heading-prefix,
     .program-cards__title-line,
-    .bt-faq__title-lead
+    .bt-faq__title-lead,
+    .video-reviews-grid__heading-lead
   ) {
     color: #111 !important;
     font-weight: 600 !important;
@@ -105,13 +104,30 @@
     margin-top: 12px !important;
     color: #000 !important;
     font-weight: 700 !important;
+    font-family: 'Anybody', sans-serif !important;
+    text-transform: uppercase !important;
+    font-stretch: 150% !important;
+    letter-spacing: 0.03em !important;
+    font-size: 24px !important;
+    line-height: 1.05 !important;
+  }
+
+  @media (min-width: 768px) {
+    body.product--pop_booty main#main.anchor .booty-workouts__title {
+      font-size: 35px !important;
+    }
   }
 
   body.product--pop_booty main#main.anchor .booty-workouts__title-line,
-  body.product--pop_booty main#main.anchor .booty-workouts__title p,
-  body.product--pop_booty main#main.anchor .booty-workouts__title strong {
+  body.product--pop_booty main#main.anchor .booty-workouts__title p {
     color: #000 !important;
     font-weight: 700 !important;
+  }
+
+  body.product--pop_booty main#main.anchor .booty-workouts__title-line--accent,
+  body.product--pop_booty main#main.anchor .booty-workouts__title strong {
+    color: #000 !important;
+    font-weight: 900 !important;
   }
 
   body.product--pop_booty main#main.anchor .booty-workouts__title p {
@@ -217,6 +233,40 @@
       .why-this-works__heading-highlight
     ) {
       display: block !important;
+    }
+
+    body.product--pop_booty main#main.anchor .confidence-without-pressure__heading--pop-booty-lines .confidence-without-pressure__heading-line,
+    body.product--pop_booty main#main.anchor .video-reviews-grid__heading--pop-booty-lines .video-reviews-grid__heading-line {
+      display: block !important;
+    }
+  }
+
+  @media (max-width: 767px) {
+    body.product--pop_booty main#main.anchor .confidence-without-pressure__heading--pop-booty-lines .confidence-without-pressure__heading-line--1,
+    body.product--pop_booty main#main.anchor .confidence-without-pressure__heading--pop-booty-lines .confidence-without-pressure__heading-line--2 {
+      display: inline !important;
+    }
+
+    body.product--pop_booty main#main.anchor .confidence-without-pressure__heading--pop-booty-lines .confidence-without-pressure__heading-line--2::before {
+      content: ' ';
+    }
+
+    body.product--pop_booty main#main.anchor .confidence-without-pressure__heading--pop-booty-lines .confidence-without-pressure__heading-line--3 {
+      display: block !important;
+      white-space: normal !important;
+    }
+
+    body.product--pop_booty main#main.anchor .video-reviews-grid__heading--pop-booty-lines .video-reviews-grid__heading-line--1 {
+      display: block !important;
+    }
+
+    body.product--pop_booty main#main.anchor .video-reviews-grid__heading--pop-booty-lines .video-reviews-grid__heading-line--2,
+    body.product--pop_booty main#main.anchor .video-reviews-grid__heading--pop-booty-lines .video-reviews-grid__heading-line--3 {
+      display: inline !important;
+    }
+
+    body.product--pop_booty main#main.anchor .video-reviews-grid__heading--pop-booty-lines .video-reviews-grid__heading-line--3::before {
+      content: ' ';
     }
   }
 </style>

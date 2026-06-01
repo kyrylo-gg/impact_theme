@@ -3,13 +3,26 @@
   Lightweight UGC preview grid with click-to-load video playback.
 {% endcomment %}
 
+{%- liquid
+  assign video_reviews_pop_booty_lines = false
+  if request.page_type == 'product' and template.suffix == 'pop_booty' and section.settings.heading_highlight_line2 != blank
+    assign video_reviews_pop_booty_lines = true
+  endif
+-%}
+
 <section class="video-reviews-grid" id="shopify-section-{{ section.id }}" {{ section.shopify_attributes }}>
   <div class="video-reviews-grid__inner">
     {% if section.settings.heading != blank %}
-      <div class="video-reviews-grid__heading">
-        {{ section.settings.heading | escape }}
-        {% if section.settings.heading_highlight != blank %}
-          <span class="video-reviews-grid__heading-highlight">{{ section.settings.heading_highlight | escape }}</span>
+      <div class="video-reviews-grid__heading{% if video_reviews_pop_booty_lines %} video-reviews-grid__heading--pop-booty-lines{% endif %}">
+        {% if video_reviews_pop_booty_lines %}
+          <span class="video-reviews-grid__heading-lead video-reviews-grid__heading-line video-reviews-grid__heading-line--1">{{ section.settings.heading | escape }}</span>
+          <span class="video-reviews-grid__heading-highlight video-reviews-grid__heading-line video-reviews-grid__heading-line--2">{{ section.settings.heading_highlight | escape }}</span>
+          <span class="video-reviews-grid__heading-highlight video-reviews-grid__heading-line video-reviews-grid__heading-line--3">{{ section.settings.heading_highlight_line2 | escape }}</span>
+        {% else %}
+          {{ section.settings.heading | escape }}
+          {% if section.settings.heading_highlight != blank %}
+            <span class="video-reviews-grid__heading-highlight">{{ section.settings.heading_highlight | escape }}</span>
+          {% endif %}
         {% endif %}
       </div>
     {% endif %}
@@ -753,6 +766,12 @@
       "id": "heading_highlight",
       "label": "Highlighted word(s)",
       "default": "TWERK LIKE PROS"
+    },
+    {
+      "type": "text",
+      "id": "heading_highlight_line2",
+      "label": "Highlighted line 2 (pop_booty desktop)",
+      "info": "Optional. On pop_booty splits the highlight into two lines on desktop."
     }
   ],
   "blocks": [

@@ -392,7 +392,8 @@
         "confidence_pain_3"
       ],
       "settings": {
-        "heading_part1": "Get confidence and results",
+        "heading_part1": "Get confidence",
+        "heading_part1_line2": "and results",
         "heading_part2": "without pressure",
         "accent_color": "#0038ff",
         "subheading": "A regular fitness routine has always been complicated for most women.",
@@ -903,7 +904,8 @@
       "name": "Video Reviews Grid",
       "settings": {
         "heading": "Get Inspired by Girls",
-        "heading_highlight": "Who Already Twerk Like Pros"
+        "heading_highlight": "Who Already Twerk",
+        "heading_highlight_line2": "Like Pros"
       }
     },
     "feedback_live_screenshots_HUrhFR": {
@@ -1513,7 +1515,7 @@
       ],
       "name": "Testimonials",
       "settings": {
-        "heading_count": "",
+        "heading_count": "40,000+",
         "subtitle": "Customer Reviews",
         "enable_judgeme_badge": true
       }
