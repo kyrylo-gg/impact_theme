@@ -685,6 +685,7 @@
     border-radius: var(--booty-workouts-image-radius, 30px);
     overflow: hidden;
     background: #f0f0f0;
+    touch-action: pan-y;
   }
 
   .booty-workouts__slide {
@@ -1260,6 +1261,7 @@
     if (galleryRoot) {
       const slides = Array.from(galleryRoot.querySelectorAll('[data-booty-workouts-slide]'));
       const barsWrap = galleryRoot.querySelector('[data-booty-workouts-bars]');
+      const imageWrap = galleryRoot.querySelector('.booty-workouts__image-wrap');
       if (!barsWrap || slides.length === 0) return;
 
       const showBars = slides.length > 1;
@@ -1282,24 +1284,117 @@
       const bars = Array.from(barsWrap.querySelectorAll('[data-booty-workouts-bar]'));
       if (!showBars || bars.length < 2) return;
 
+      let activeIndex = slides.findIndex((slide) => slide.classList.contains('is-active'));
+      if (activeIndex < 0) activeIndex = 0;
+
       const goToSlide = (index) => {
-        const safeIndex = Math.max(0, Math.min(index, slides.length - 1));
+        activeIndex = ((index % slides.length) + slides.length) % slides.length;
         slides.forEach((slide, slideIndex) => {
-          slide.classList.toggle('is-active', slideIndex === safeIndex);
+          slide.classList.toggle('is-active', slideIndex === activeIndex);
         });
         bars.forEach((bar, barIndex) => {
-          const isActive = barIndex === safeIndex;
+          const isActive = barIndex === activeIndex;
           bar.classList.toggle('booty-workouts__bar--active', isActive);
           bar.setAttribute('aria-selected', isActive ? 'true' : 'false');
         });
+      };
+
+      const desktopMedia = window.matchMedia('(min-width: 768px)');
+      let autoplayTimer = null;
+
+      const pauseAutoplay = () => {
+        if (autoplayTimer) {
+          window.clearInterval(autoplayTimer);
+          autoplayTimer = null;
+        }
+      };
+
+      const startAutoplay = () => {
+        pauseAutoplay();
+        if (!desktopMedia.matches || slides.length < 2) return;
+        autoplayTimer = window.setInterval(() => {
+          goToSlide(activeIndex + 1);
+        }, 7000);
+      };
+
+      const resetAutoplay = () => {
+        if (!desktopMedia.matches) return;
+        pauseAutoplay();
+        startAutoplay();
       };
 
       bars.forEach((bar) => {
         bar.addEventListener('click', () => {
           const index = Number.parseInt(bar.getAttribute('data-slide-index') || '0', 10);
           goToSlide(index);
+          resetAutoplay();
         });
       });
+
+      if (imageWrap) {
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchTracking = false;
+
+        imageWrap.addEventListener(
+          'touchstart',
+          (event) => {
+            if (event.touches.length !== 1) return;
+            touchStartX = event.touches[0].clientX;
+            touchStartY = event.touches[0].clientY;
+            touchTracking = true;
+            pauseAutoplay();
+          },
+          { passive: true }
+        );
+
+        imageWrap.addEventListener(
+          'touchend',
+          (event) => {
+            if (!touchTracking) return;
+            touchTracking = false;
+            if (event.changedTouches.length !== 1) {
+              resetAutoplay();
+              return;
+            }
+
+            const deltaX = event.changedTouches[0].clientX - touchStartX;
+            const deltaY = event.changedTouches[0].clientY - touchStartY;
+            if (Math.abs(deltaX) < 48 || Math.abs(deltaX) < Math.abs(deltaY)) {
+              resetAutoplay();
+              return;
+            }
+
+            if (deltaX < 0) goToSlide(activeIndex + 1);
+            else goToSlide(activeIndex - 1);
+            resetAutoplay();
+          },
+          { passive: true }
+        );
+
+        imageWrap.addEventListener(
+          'touchcancel',
+          () => {
+            touchTracking = false;
+            resetAutoplay();
+          },
+          { passive: true }
+        );
+      }
+
+      if (typeof desktopMedia.addEventListener === 'function') {
+        desktopMedia.addEventListener('change', () => {
+          if (desktopMedia.matches) startAutoplay();
+          else pauseAutoplay();
+        });
+      } else if (typeof desktopMedia.addListener === 'function') {
+        desktopMedia.addListener(() => {
+          if (desktopMedia.matches) startAutoplay();
+          else pauseAutoplay();
+        });
+      }
+
+      startAutoplay();
     }
 
     const bundleCta = section.querySelector('[data-booty-workouts-bundle-cta]');
