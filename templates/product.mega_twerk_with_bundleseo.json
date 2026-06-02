@@ -66,7 +66,7 @@
         "mobile_video": "shopify://files/videos/Banner Landing NASS mobile (1) (1).webm",
         "badge_use_theme_starburst": false,
         "badge_image_alt": "Join NASS B-Day Sale promotional badge",
-        "badge_text": "Last Days of Spring",
+        "badge_text": "Hot Summer Start",
         "heading": "Twerk Your Way to a Summer Booty",
         "price_text": "Claim Your NASS Programs at Special Prices",
         "cta_text": "Unlock NASS Offers",
@@ -84,7 +84,8 @@
             "description": "Discover the art of twerking with our easy-to-follow 7-day program for all skill levels.",
             "image": "shopify://shop_images/booty_band_asdasd_00345cad-3c6c-41b3-8e62-3953cf2c00ed.jpg",
             "level_badge": "",
-            "duration": "7 Days"
+            "duration": "7 Days",
+            "top_badge": ""
           }
         },
         "program_card_LQPeBc": {
@@ -94,7 +95,8 @@
             "description": "The most effective bootyworkouts which you can do at the comfort of your home.",
             "image": "shopify://shop_images/Frame_1.png",
             "level_badge": "",
-            "duration": "8 Weeks"
+            "duration": "8 Weeks",
+            "top_badge": ""
           }
         },
         "program_card_kXCJYU": {
@@ -104,7 +106,8 @@
             "description": "Great variety of booty-building exercises which you can perform with resistance band.",
             "image": "shopify://shop_images/stretching_band_set_0bd6ad28-abd3-424a-9f72-b4323b52ac50.jpg",
             "level_badge": "",
-            "duration": "8 Weeks"
+            "duration": "8 Weeks",
+            "top_badge": ""
           }
         },
         "program_card_6rgVPi": {
@@ -114,7 +117,8 @@
             "description": "12-week structured program designed to deliver confident and reliable weight loss results.",
             "image": "shopify://shop_images/booty_band_program_a55ac736-c2f1-4155-b953-1c676e9852a3.jpg",
             "level_badge": "",
-            "duration": "3 Months"
+            "duration": "3 Months",
+            "top_badge": ""
           }
         }
       },
@@ -126,7 +130,13 @@
       ],
       "settings": {
         "heading": "MORE PROGRAMS.",
-        "heading_highlight": "ONE SPECIAL PRICE!"
+        "heading_highlight": "ONE SPECIAL PRICE!",
+        "subheading": "",
+        "show_pop_booty_footer": false,
+        "cta_text": "Shop Booty Programs",
+        "cta_link": "",
+        "badge_1_text": "30-Day Money-Back Guarantee",
+        "badge_2_text": "World-Famous support"
       }
     },
     "video_reviews_grid_qJDr4j": {
@@ -273,7 +283,8 @@
       "name": "Video Reviews Grid",
       "settings": {
         "heading": "JOIN GIRLS WHO ALREADY",
-        "heading_highlight": "TWERK LIKE PROS"
+        "heading_highlight": "TWERK LIKE PROS",
+        "heading_highlight_line2": ""
       }
     },
     "twerk_lessons_MWt6Ji": {
@@ -356,7 +367,12 @@
       ],
       "settings": {
         "heading": "WHAT'S INSIDE THE",
-        "heading_highlight": "TWERK PROGRAM"
+        "heading_highlight": "TWERK PROGRAM",
+        "show_pop_booty_footer": false,
+        "cta_text": "Shop Booty Programs",
+        "cta_link": "",
+        "badge_1_text": "30-Day Money-Back Guarantee",
+        "badge_2_text": "World-Famous support"
       }
     },
     "student_progress_ez8yde": {
@@ -409,7 +425,13 @@
       ],
       "settings": {
         "heading": "Just 7 Days to Master",
-        "heading_highlight": "Twerk Moves"
+        "heading_highlight": "Twerk Moves",
+        "hide_heading": false,
+        "show_pop_booty_footer": false,
+        "cta_text": "Shop Booty Programs",
+        "cta_link": "",
+        "badge_1_text": "30-Day Money-Back Guarantee",
+        "badge_2_text": "World-Famous support"
       }
     },
     "social_proof_hPtKDy": {
@@ -603,7 +625,13 @@
       ],
       "settings": {
         "heading": "The twerk program everyone's",
-        "heading_highlight": "excited about"
+        "heading_highlight": "excited about",
+        "reviews_footer": "Experienced by over 6,000 girls",
+        "show_pop_booty_footer": false,
+        "cta_text": "Shop Booty Programs",
+        "cta_link": "",
+        "badge_1_text": "30-Day Money-Back Guarantee",
+        "badge_2_text": "World-Famous support"
       }
     },
     "nass_countdown_NypKK7": {
@@ -616,6 +644,11 @@
         "marquee_speed": 30,
         "title": "JOIN NASS TODAY",
         "show_arrows": true,
+        "countdown_mode": "daily_kyiv_10am",
+        "initial_days": 0,
+        "initial_hours": 0,
+        "initial_minutes": 0,
+        "initial_seconds": 0,
         "end_date": "2026-05-31 23:59",
         "label_days": "Days",
         "label_hours": "Hours",
@@ -730,7 +763,7 @@
         "bb_title_prefix": "GET THE BOOTY. OWN THE SUMMER.",
         "bb_title_accent": "TWERK LIKE A PRO.",
         "bb_description": "Mix programs, shorts, and tops. Get 60% off all clothing when you purchase the VIP Bundle or All-In-One Bundles",
-        "bb_badge_pill_text": "2 Free Items with VIP Bundle or All-In-One Bundles Until 5/31",
+        "bb_badge_pill_text": "2 Free Items with VIP Bundle or All-In-One Bundles Until 7/1",
         "bb_promo_banner_text": "60% OFF ALL CLOTHING / with VIP  or All-In One Bundle purchase",
         "bb_show_countdown": false,
         "bb_countdown_mode": "daily_kyiv_10am",
@@ -750,7 +783,7 @@
         "program_pack_product_secondary": "all-in-one-bundle",
         "discount_code": "",
         "show_discount_banner": true,
-        "discount_promo_text": "2 Free Items with VIP Bundle or All-In-One Bundles Until 5/31",
+        "discount_promo_text": "2 Free Items with VIP Bundle or All-In-One Bundles Until 7/1",
         "discount_applied_text": "2 Free Products applied!",
         "size_chart_config_handle": "size-chart-settings",
         "storefront_api_token": "568094b7f376083a4b0dc6fee4785741"
@@ -1222,13 +1255,15 @@
         "text_color_button": "#1a1a1a",
         "block_text_color": "#1a1a1a",
         "block_background": "#efa3c1",
-        "sublime_text": "<p>Prep for Summer with NASS</p>",
+        "sublime_text": "<p>Get Your Booty Summer-Ready</p>",
         "sublime_text_color": "#1a1a1a",
         "timer_enabled": true,
         "timer_type": "daily",
         "cancel_date": "01-01-2026 12:00",
+        "cancel_days": 0,
         "cancel_time": 0,
         "cancel_minutes": 29,
+        "cancel_seconds": 0,
         "cancel_action": "none",
         "countdown_background": "#052010",
         "countdown_color": "#ffffff",
