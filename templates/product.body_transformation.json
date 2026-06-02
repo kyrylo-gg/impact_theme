@@ -175,7 +175,7 @@
         "subtitle": "Follow the Soft → Basic → Hard training roadmap. Built for real life.",
         "below_text": "If you've tried before but didn't get results, here's why.",
         "badge_primary": "Get Free Leggings with a Full Program",
-        "badge_secondary": "End-of-Spring Special Offer"
+        "badge_secondary": "Hot Summer Start"
       }
     },
     "bt_pain_points": {
@@ -813,7 +813,13 @@
       ],
       "settings": {
         "title": "FAQ",
-        "footer": "If you're ready, your best starting point is the one you'll stick with."
+        "title_highlight": "Answered.",
+        "footer": "If you're ready, your best starting point is the one you'll stick with.",
+        "show_pop_booty_footer": false,
+        "cta_text": "Shop Booty Programs",
+        "cta_link": "",
+        "badge_1_text": "30-Day Money-Back Guarantee",
+        "badge_2_text": "World-Famous support"
       }
     },
     "bt_start_where_you_are": {
