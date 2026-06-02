@@ -66,12 +66,12 @@
         "mobile_video": "shopify://files/videos/Original format (1562x1080)_13cab976-b9fa-4c18-993b-a062167994b4.webm",
         "badge_use_theme_starburst": false,
         "badge_image_alt": "Join NASS B-Day Sale promotional badge",
-        "badge_text": "End-of-Spring Special Offer",
+        "badge_text": "Hot Summer Start",
         "heading": "Dance Your Way to Confidence",
         "price_text": "Join 40,000+ girls mastering twerk with Nastya Nass",
         "cta_text": "Get Started",
         "cta_url": "#nass-twerk-offer-block",
-        "deadline_text": "Offer ends May 31"
+        "deadline_text": "Offer ends July 1"
       }
     },
     "twerk_lessons_MWt6Ji": {
@@ -154,7 +154,12 @@
       ],
       "settings": {
         "heading": "WHAT'S INSIDE THE",
-        "heading_highlight": "TWERK PROGRAM"
+        "heading_highlight": "TWERK PROGRAM",
+        "show_pop_booty_footer": false,
+        "cta_text": "Shop Booty Programs",
+        "cta_link": "",
+        "badge_1_text": "30-Day Money-Back Guarantee",
+        "badge_2_text": "World-Famous support"
       }
     },
     "program_cards_ykQqNc": {
@@ -167,7 +172,8 @@
             "description": "Discover the art of twerking with our easy-to-follow 7-day program for all skill levels.",
             "image": "shopify://shop_images/booty_band_asdasd_00345cad-3c6c-41b3-8e62-3953cf2c00ed.jpg",
             "level_badge": "",
-            "duration": "7 Days"
+            "duration": "7 Days",
+            "top_badge": ""
           }
         },
         "program_card_LQPeBc": {
@@ -177,7 +183,8 @@
             "description": "The most effective bootyworkouts which you can do at the comfort of your home.",
             "image": "shopify://shop_images/Frame_1.png",
             "level_badge": "",
-            "duration": "8 Weeks"
+            "duration": "8 Weeks",
+            "top_badge": ""
           }
         },
         "program_card_kXCJYU": {
@@ -187,7 +194,8 @@
             "description": "Great variety of booty-building exercises which you can perform with resistance band.",
             "image": "shopify://shop_images/stretching_band_set_0bd6ad28-abd3-424a-9f72-b4323b52ac50.jpg",
             "level_badge": "",
-            "duration": "8 Weeks"
+            "duration": "8 Weeks",
+            "top_badge": ""
           }
         },
         "program_card_6rgVPi": {
@@ -197,7 +205,8 @@
             "description": "12-week structured program designed to deliver confident and reliable weight loss results.",
             "image": "shopify://shop_images/booty_band_program_a55ac736-c2f1-4155-b953-1c676e9852a3.jpg",
             "level_badge": "",
-            "duration": "3 Months"
+            "duration": "3 Months",
+            "top_badge": ""
           }
         }
       },
@@ -210,7 +219,13 @@
       "disabled": true,
       "settings": {
         "heading": "MORE PROGRAMS.",
-        "heading_highlight": "ONE SPECIAL PRICE!"
+        "heading_highlight": "ONE SPECIAL PRICE!",
+        "subheading": "",
+        "show_pop_booty_footer": false,
+        "cta_text": "Shop Booty Programs",
+        "cta_link": "",
+        "badge_1_text": "30-Day Money-Back Guarantee",
+        "badge_2_text": "World-Famous support"
       }
     },
     "video_reviews_grid_qJDr4j": {
@@ -357,7 +372,8 @@
       "name": "Video Reviews Grid",
       "settings": {
         "heading": "JOIN GIRLS WHO ALREADY",
-        "heading_highlight": "TWERK LIKE PROS"
+        "heading_highlight": "TWERK LIKE PROS",
+        "heading_highlight_line2": ""
       }
     },
     "student_progress_ez8yde": {
@@ -410,7 +426,13 @@
       ],
       "settings": {
         "heading": "Just 7 Days to Master",
-        "heading_highlight": "Twerk Moves"
+        "heading_highlight": "Twerk Moves",
+        "hide_heading": false,
+        "show_pop_booty_footer": false,
+        "cta_text": "Shop Booty Programs",
+        "cta_link": "",
+        "badge_1_text": "30-Day Money-Back Guarantee",
+        "badge_2_text": "World-Famous support"
       }
     },
     "social_proof_hPtKDy": {
@@ -604,7 +626,13 @@
       ],
       "settings": {
         "heading": "The twerk program everyone's",
-        "heading_highlight": "excited about"
+        "heading_highlight": "excited about",
+        "reviews_footer": "Experienced by over 6,000 girls",
+        "show_pop_booty_footer": false,
+        "cta_text": "Shop Booty Programs",
+        "cta_link": "",
+        "badge_1_text": "30-Day Money-Back Guarantee",
+        "badge_2_text": "World-Famous support"
       }
     },
     "nass_countdown_NypKK7": {
@@ -612,7 +640,7 @@
       "name": "NASS Countdown Banner",
       "settings": {
         "show_announcement": true,
-        "announcement_highlight": "END-OF-SPRING SPECIAL OFFER:",
+        "announcement_highlight": "Hot Summer Start:",
         "announcement_text": "All Twerk Essentials for only $79",
         "marquee_speed": 30,
         "title": "JOIN NASS TODAY",
@@ -710,7 +738,7 @@
       "settings": {
         "background_image": "shopify://shop_images/result.png",
         "bundle_bg": "#e94f76",
-        "flash_text": "End-of-Spring Special Offer",
+        "flash_text": "Hot Summer Start",
         "bundle_product": "twerk-essential",
         "bundle_title": "Twerk Essential Kit",
         "bundle_total": "$79",
@@ -727,7 +755,7 @@
         "total_label": "Total Price",
         "trust_a": "30-Day Money-Back Guarantee",
         "trust_b": "World-Famous support",
-        "marquee_highlight": "End-of-Spring Special Offer:",
+        "marquee_highlight": "Hot Summer Start:",
         "marquee_text": "All Twerk Essentials for only $79",
         "marquee_speed": 30,
         "marquee_bg": "#000000",
@@ -1308,7 +1336,7 @@
         "text_color_button": "#1a1a1a",
         "block_text_color": "#1a1a1a",
         "block_background": "#efa3c1",
-        "sublime_text": "<p>Prep for Summer with NASS</p>",
+        "sublime_text": "<p>Get Your Booty Summer-Ready</p>",
         "sublime_text_color": "#1a1a1a",
         "timer_enabled": true,
         "timer_type": "daily",
