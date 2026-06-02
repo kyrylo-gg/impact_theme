@@ -66,12 +66,12 @@
         "mobile_video": "shopify://files/videos/Banner Landing NASS mobile (1) (1).webm",
         "badge_use_theme_starburst": false,
         "badge_image_alt": "Join NASS B-Day Sale promotional badge",
-        "badge_text": "End-of-Spring Special Offer",
+        "badge_text": "Hot Summer Start",
         "heading": "Twerk Your Way to a Summer Booty",
         "price_text": "Claim Your NASS Programs at Special Prices",
         "cta_text": "Unlock NASS Offers",
         "cta_url": "#nass-bundle-builder",
-        "deadline_text": "Offer ends May 31"
+        "deadline_text": "Offer ends July 1"
       }
     },
     "video_reviews_grid_qJDr4j": {
@@ -654,7 +654,7 @@
       "name": "NASS Countdown Banner",
       "settings": {
         "show_announcement": true,
-        "announcement_highlight": "End-of-Spring Special Offer:",
+        "announcement_highlight": "Hot Summer Start:",
         "announcement_text": "Best Nass Programs for Only $199",
         "marquee_speed": 30,
         "title": "JOIN NASS TODAY",
@@ -778,7 +778,7 @@
         "bb_title_prefix": "GET THE BOOTY. OWN THE SUMMER.",
         "bb_title_accent": "TWERK LIKE A PRO.",
         "bb_description": "Mix programs, shorts, and tops. Get 60% off all clothing when you purchase the VIP Bundle or All-In-One Bundles",
-        "bb_badge_pill_text": "2 Free Items with VIP Bundle or All-In-One Bundles Until 5/31",
+        "bb_badge_pill_text": "2 Free Items with VIP Bundle or All-In-One Bundles Until 7/1",
         "bb_promo_banner_text": "60% OFF ALL CLOTHING / with VIP  or All-In One Bundle purchase",
         "bb_show_countdown": false,
         "bb_countdown_mode": "daily_kyiv_10am",
@@ -798,7 +798,7 @@
         "program_pack_product_secondary": "all-in-one-bundle",
         "discount_code": "",
         "show_discount_banner": true,
-        "discount_promo_text": "2 Free Items with VIP Bundle or All-In-One Bundles Until 5/31",
+        "discount_promo_text": "2 Free Items with VIP Bundle or All-In-One Bundles Until 7/1",
         "discount_applied_text": "2 Free Products applied!",
         "size_chart_config_handle": "size-chart-settings",
         "storefront_api_token": "568094b7f376083a4b0dc6fee4785741"
@@ -1271,7 +1271,7 @@
         "text_color_button": "#1a1a1a",
         "block_text_color": "#1a1a1a",
         "block_background": "#efa3c1",
-        "sublime_text": "<p>Prep for Summer with NASS</p>",
+        "sublime_text": "<p>Get Your Booty Summer-Ready</p>",
         "sublime_text_color": "#1a1a1a",
         "timer_enabled": true,
         "timer_type": "daily",
