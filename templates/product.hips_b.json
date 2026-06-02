@@ -363,6 +363,7 @@
       "settings": {
         "eyebrow": "Why most programs fail.",
         "heading": "Why this one works",
+        "heading_highlight": "",
         "subheading": "<p>What is missing from every other hip mobility program.</p>",
         "left_image": "shopify://shop_images/other.png",
         "right_image": "shopify://shop_images/hip-11.png"
@@ -535,11 +536,16 @@
       "name": "NASS Countdown Banner",
       "settings": {
         "show_announcement": true,
-        "announcement_highlight": "End-of-Spring Special Offer:",
+        "announcement_highlight": "Hot Summer Start:",
         "announcement_text": "Best Nass Programs for Only $199",
         "marquee_speed": 30,
         "title": "JOIN NASS TODAY",
         "show_arrows": true,
+        "countdown_mode": "daily_kyiv_10am",
+        "initial_days": 0,
+        "initial_hours": 0,
+        "initial_minutes": 0,
+        "initial_seconds": 0,
         "end_date": "2026-05-31 23:59",
         "label_days": "Days",
         "label_hours": "Hours",
@@ -726,7 +732,7 @@
         "program_pack_product_secondary": "all-in-one-bundle",
         "discount_code": "",
         "show_discount_banner": true,
-        "discount_promo_text": "2 Free Items with VIP Bundle or All-In-One Bundles Until 5/31",
+        "discount_promo_text": "2 Free Items with VIP Bundle or All-In-One Bundles Until 7/1",
         "discount_applied_text": "2 Free Products applied!",
         "size_chart_config_handle": "size-chart-settings",
         "storefront_api_token": ""
@@ -797,7 +803,13 @@
       "name": "BT_FAQ",
       "settings": {
         "title": "FAQ",
-        "footer": ""
+        "title_highlight": "Answered.",
+        "footer": "",
+        "show_pop_booty_footer": false,
+        "cta_text": "Shop Booty Programs",
+        "cta_link": "",
+        "badge_1_text": "30-Day Money-Back Guarantee",
+        "badge_2_text": "World-Famous support"
       }
     },
     "body_ready_cta": {
@@ -900,13 +912,15 @@
         "text_color_button": "#1a1a1a",
         "block_text_color": "#1a1a1a",
         "block_background": "#efa3c1",
-        "sublime_text": "<p>Prep for Summer with NASS!</p>",
+        "sublime_text": "<p>Get Your Booty Summer-Ready</p>",
         "sublime_text_color": "#1a1a1a",
         "timer_enabled": true,
         "timer_type": "daily",
         "cancel_date": "01-01-2026 12:00",
+        "cancel_days": 0,
         "cancel_time": 0,
         "cancel_minutes": 29,
+        "cancel_seconds": 0,
         "cancel_action": "none",
         "countdown_background": "#313131",
         "countdown_color": "#ffffff",
