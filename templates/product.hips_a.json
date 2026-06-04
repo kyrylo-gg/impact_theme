@@ -687,6 +687,7 @@
         },
         "bundle_step_BU6nRH": {
           "type": "bundle_step",
+          "disabled": true,
           "settings": {
             "title": "Add equipment",
             "collection": "bundle-equipment-copy",
