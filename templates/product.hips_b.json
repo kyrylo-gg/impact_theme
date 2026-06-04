@@ -687,6 +687,7 @@
         },
         "bundle_step_CmaekB": {
           "type": "bundle_step",
+          "disabled": true,
           "settings": {
             "title": "add equipment",
             "collection": "bundle-equipment-copy",
