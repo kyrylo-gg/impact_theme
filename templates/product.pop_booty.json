@@ -654,6 +654,16 @@
             "program_pack_product_secondary": ""
           }
         },
+        "step_shorts": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "Add Lounge shorts",
+            "collection": "bundle-lounge-shorts",
+            "is_programs_step": false,
+            "program_pack_product": "",
+            "program_pack_product_secondary": ""
+          }
+        },
         "extra_step_CbpKAM": {
           "type": "extra_step",
           "disabled": true,
@@ -680,16 +690,6 @@
             "program_pack_product_secondary": ""
           }
         },
-        "step_shorts": {
-          "type": "bundle_step",
-          "settings": {
-            "title": "Add Lounge shorts",
-            "collection": "bundle-lounge-shorts",
-            "is_programs_step": false,
-            "program_pack_product": "",
-            "program_pack_product_secondary": ""
-          }
-        },
         "step_leggings": {
           "type": "bundle_step",
           "settings": {
@@ -709,27 +709,16 @@
             "program_pack_product": "",
             "program_pack_product_secondary": ""
           }
-        },
-        "bundle_step_bb96UU": {
-          "type": "bundle_step",
-          "settings": {
-            "title": "Workout Equipment",
-            "collection": "bundle-equipment-copy",
-            "is_programs_step": false,
-            "program_pack_product": "",
-            "program_pack_product_secondary": ""
-          }
         }
       },
       "block_order": [
         "step_programs",
+        "step_shorts",
         "extra_step_CbpKAM",
         "extra_step_LYfDj4",
         "bundle_step_KMpd7k",
-        "step_shorts",
         "step_leggings",
-        "step_tops",
-        "bundle_step_bb96UU"
+        "step_tops"
       ],
       "settings": {
         "image_1": "shopify://shop_images/Frame_7-6.png",
@@ -755,7 +744,7 @@
         "show_one_click_alternative": false,
         "one_click_product": "twerk-program-lovable",
         "one_click_label": "Twerk program",
-        "program_pack_product": "vip-bundle",
+        "program_pack_product": "twerk-star",
         "program_pack_product_secondary": "all-in-one-bundle",
         "discount_code": "",
         "show_discount_banner": true,
@@ -2007,6 +1996,35 @@
         "badge_1_text": "30-Day Money-Back Guarantee",
         "badge_2_text": "World-Famous support"
       }
+    },
+    "custom_quick_add_JNPh8L": {
+      "type": "custom-quick-add",
+      "name": "TS Sticky Add",
+      "settings": {
+        "product": "",
+        "button_link": "",
+        "button_text": "Shop now",
+        "background_button": "#FAFF00",
+        "text_color_button": "#1a1a1a",
+        "block_text_color": "",
+        "block_background": "#1a1a1a",
+        "sublime_text": "<p>7-day money-back guarantee</p>",
+        "sublime_text_color": "#ffffff",
+        "timer_enabled": true,
+        "timer_type": "daily",
+        "cancel_date": "01-01-2026 12:00",
+        "cancel_days": 0,
+        "cancel_time": 0,
+        "cancel_minutes": 29,
+        "cancel_seconds": 0,
+        "cancel_action": "none",
+        "countdown_background": "#313131",
+        "countdown_color": "#ffffff",
+        "mobile_countdown_background": "#313131",
+        "mobile_countdown_color": "#ffffff",
+        "labels_color": "#000000",
+        "mobile_labels_color": "#ffffff"
+      }
     }
   },
   "order": [
@@ -2029,6 +2047,7 @@
     "nass_countdown_PUMrCf",
     "booty_workouts_KMFCjK",
     "bt_faq_yC7n4z",
-    "student_progress_QBDTex"
+    "student_progress_QBDTex",
+    "custom_quick_add_JNPh8L"
   ]
 }
