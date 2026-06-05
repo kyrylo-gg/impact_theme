@@ -365,10 +365,10 @@
           "type": "bundle_step",
           "settings": {
             "title": "Select programs",
-            "collection": "bundle-booty-builder-copy-1",
+            "collection": "bundle-vip-copy-1",
             "is_programs_step": true,
             "program_pack_product": "vip-bundle",
-            "program_pack_product_secondary": "all-in-one-bundle"
+            "program_pack_product_secondary": ""
           }
         },
         "extra_step_CbpKAM": {
