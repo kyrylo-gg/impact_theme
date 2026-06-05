@@ -20,35 +20,49 @@
   "
 >
   <style>
-    #shopify-section-{{ section.id }} .booty-workouts__bars {
+    #shopify-section-{{ section.id }} .booty-workouts__thumbs {
       display: flex;
-      justify-content: center;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       width: 100%;
-      margin-top: 14px;
+      margin-top: 12px;
       padding: 0;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
     }
 
-    #shopify-section-{{ section.id }} .booty-workouts__bars[hidden] {
+    #shopify-section-{{ section.id }} .booty-workouts__thumbs::-webkit-scrollbar {
+      display: none;
+    }
+
+    #shopify-section-{{ section.id }} .booty-workouts__thumbs[hidden] {
       display: none !important;
     }
 
-    #shopify-section-{{ section.id }} .booty-workouts__bar {
+    #shopify-section-{{ section.id }} .booty-workouts__thumb {
       display: block;
-      width: 32px;
-      height: 5px;
+      flex: 0 0 auto;
+      width: 52px;
+      height: 52px;
       padding: 0;
-      border: 0;
-      border-radius: 999px;
-      background: #dfdfdf;
+      border: 2px solid transparent;
+      border-radius: 4px;
+      background: #f0f0f0;
+      overflow: hidden;
       cursor: pointer;
-      transition: width 200ms ease, background-color 200ms ease;
+      transition: border-color 200ms ease;
     }
 
-    #shopify-section-{{ section.id }} .booty-workouts__bar--active {
-      width: 48px;
-      background: #333;
+    #shopify-section-{{ section.id }} .booty-workouts__thumb--active {
+      border-color: #b8a7d3;
+    }
+
+    #shopify-section-{{ section.id }} .booty-workouts__thumb-image {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
     }
 
     #shopify-section-{{ section.id }} .booty-workouts__head {
@@ -252,27 +266,51 @@
         </div>
 
         <div
-          class="booty-workouts__bars"
-          data-booty-workouts-bars
+          class="booty-workouts__thumbs"
+          data-booty-workouts-thumbs
           role="tablist"
           aria-label="Product gallery"
           {% unless gallery_slides > 1 %}hidden{% endunless %}
         >
           {% if gallery_source == 'blocks' %}
-            {% assign bar_index = 0 %}
+            {% assign thumb_index = 0 %}
             {% for block in section.blocks %}
               {% if block.type == 'gallery_image' %}
                 {% if block.settings.image != blank or block.settings.video != blank %}
                 <button
                   type="button"
-                  class="booty-workouts__bar{% if bar_index == 0 %} booty-workouts__bar--active{% endif %}"
-                  data-booty-workouts-bar
-                  data-slide-index="{{ bar_index }}"
+                  class="booty-workouts__thumb{% if thumb_index == 0 %} booty-workouts__thumb--active{% endif %}"
+                  data-booty-workouts-thumb
+                  data-slide-index="{{ thumb_index }}"
                   role="tab"
-                  aria-selected="{% if bar_index == 0 %}true{% else %}false{% endif %}"
-                  aria-label="Slide {{ bar_index | plus: 1 }}"
-                ></button>
-                {% assign bar_index = bar_index | plus: 1 %}
+                  aria-selected="{% if thumb_index == 0 %}true{% else %}false{% endif %}"
+                  aria-label="Slide {{ thumb_index | plus: 1 }}"
+                >
+                  {% if block.settings.image != blank %}
+                    {{
+                      block.settings.image
+                      | image_url: width: 160
+                      | image_tag:
+                        class: 'booty-workouts__thumb-image',
+                        loading: 'lazy',
+                        widths: '80, 120, 160',
+                        sizes: '52px',
+                        alt: block.settings.alt
+                    }}
+                  {% elsif block.settings.video != blank %}
+                    {{
+                      block.settings.video.preview_image
+                      | image_url: width: 160
+                      | image_tag:
+                        class: 'booty-workouts__thumb-image',
+                        loading: 'lazy',
+                        widths: '80, 120, 160',
+                        sizes: '52px',
+                        alt: block.settings.alt
+                    }}
+                  {% endif %}
+                </button>
+                {% assign thumb_index = thumb_index | plus: 1 %}
                 {% endif %}
               {% endif %}
             {% endfor %}
@@ -280,13 +318,37 @@
             {% for media in product.media %}
               <button
                 type="button"
-                class="booty-workouts__bar{% if forloop.first %} booty-workouts__bar--active{% endif %}"
-                data-booty-workouts-bar
+                class="booty-workouts__thumb{% if forloop.first %} booty-workouts__thumb--active{% endif %}"
+                data-booty-workouts-thumb
                 data-slide-index="{{ forloop.index0 }}"
                 role="tab"
                 aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
                 aria-label="Slide {{ forloop.index }}"
-              ></button>
+              >
+                {% if media.media_type == 'image' %}
+                  {{
+                    media
+                    | image_url: width: 160
+                    | image_tag:
+                      class: 'booty-workouts__thumb-image',
+                      loading: 'lazy',
+                      widths: '80, 120, 160',
+                      sizes: '52px',
+                      alt: media.alt
+                  }}
+                {% else %}
+                  {{
+                    media.preview_image
+                    | image_url: width: 160
+                    | image_tag:
+                      class: 'booty-workouts__thumb-image',
+                      loading: 'lazy',
+                      widths: '80, 120, 160',
+                      sizes: '52px',
+                      alt: media.alt
+                  }}
+                {% endif %}
+              </button>
             {% endfor %}
           {% endif %}
         </div>
@@ -410,7 +472,7 @@
                 {% endif %}
 
                 <div
-                  class="booty-workouts__tier{% if tier_selected %} is-selected{% endif %}{% if block.settings.ribbon != blank %} booty-workouts__tier--has-ribbon{% endif %}"
+                  class="booty-workouts__tier{% if tier_selected %} is-selected{% endif %}{% if forloop.first and tier_has_details %} is-expanded{% endif %}{% if block.settings.ribbon != blank %} booty-workouts__tier--has-ribbon{% endif %}"
                   data-booty-workouts-tier
                   data-booty-workouts-program-index="{{ forloop.index0 }}"
                   {{ block.shopify_attributes }}
@@ -430,7 +492,7 @@
                       type="button"
                       class="booty-workouts__tier-header"
                       data-booty-workouts-tier-toggle
-                      aria-expanded="false"
+                      aria-expanded="{% if forloop.first and tier_has_details %}true{% else %}false{% endif %}"
                       aria-controls="booty-workouts-tier-details-{{ section.id }}-{{ block.id }}"
                     >
                       <span class="booty-workouts__tier-main">
@@ -863,29 +925,43 @@
     background: #000;
   }
 
-  .booty-workouts__bars {
-    margin-top: 14px;
+  .booty-workouts__thumbs {
+    margin-top: 12px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
 
-  .booty-workouts__bar {
-    width: 28px;
-    height: 4px;
+  .booty-workouts__thumbs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .booty-workouts__thumb {
+    flex: 0 0 auto;
+    width: 52px;
+    height: 52px;
     padding: 0;
-    border: 0;
-    border-radius: 999px;
-    background: #dfdfdf;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    background: #f0f0f0;
+    overflow: hidden;
     cursor: pointer;
-    transition: width 200ms ease, background-color 200ms ease;
+    transition: border-color 200ms ease;
   }
 
-  .booty-workouts__bar--active {
-    width: 44px;
-    background: #333;
+  .booty-workouts__thumb--active {
+    border-color: #b8a7d3;
+  }
+
+  .booty-workouts__thumb-image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
   }
 
   .booty-workouts__description {
@@ -1032,13 +1108,8 @@
     box-shadow: 0 8px 24px rgba(184, 167, 211, 0.25);
   }
 
-  .booty-workouts__tier:not(.booty-workouts__tier--has-ribbon) .booty-workouts__tier-surface {
+  .booty-workouts__tier:not(.booty-workouts__tier--has-ribbon):not(.is-selected) .booty-workouts__tier-surface {
     border: 1px solid #e0e0e0;
-  }
-
-  .booty-workouts__tier.is-selected:not(.booty-workouts__tier--has-ribbon) .booty-workouts__tier-surface {
-    border: 1px solid #e0e0e0;
-    box-shadow: none;
   }
 
   .booty-workouts__tier--has-ribbon {
@@ -1093,6 +1164,10 @@
     overflow: hidden;
     max-height: 0;
     transition: max-height 320ms ease;
+  }
+
+  .booty-workouts__tier.is-expanded .booty-workouts__tier-details {
+    max-height: none;
   }
 
   .booty-workouts__tier-details-inner {
@@ -1544,6 +1619,11 @@
       aspect-ratio: 582 / 554;
     }
 
+    .booty-workouts__thumb {
+      width: 56px;
+      height: 56px;
+    }
+
     .booty-workouts__body {
       margin-top: 0;
     }
@@ -1628,10 +1708,12 @@
         });
       };
 
-      const getDetailsHeight = (details) => {
-        const inner = details.querySelector('.booty-workouts__tier-details-inner');
-        if (!inner) return 0;
-        return inner.scrollHeight;
+      const measureDetailsHeight = (details) => {
+        const previousMaxHeight = details.style.maxHeight;
+        details.style.maxHeight = 'none';
+        const height = details.scrollHeight;
+        details.style.maxHeight = previousMaxHeight;
+        return height;
       };
 
       const collapseTier = (tier) => {
@@ -1640,8 +1722,8 @@
         tier.classList.remove('is-expanded');
 
         if (details) {
-          if (details.style.maxHeight === 'none') {
-            details.style.maxHeight = getDetailsHeight(details) + 'px';
+          if (details.style.maxHeight === 'none' || details.style.maxHeight === '') {
+            details.style.maxHeight = measureDetailsHeight(details) + 'px';
           }
           window.requestAnimationFrame(() => {
             details.style.maxHeight = '0px';
@@ -1650,13 +1732,23 @@
         if (toggle) toggle.setAttribute('aria-expanded', 'false');
       };
 
-      const expandTier = (tier) => {
+      const expandTier = (tier, { instant = false } = {}) => {
         const details = tier.querySelector('[data-booty-workouts-tier-details]');
         const toggle = tier.querySelector('[data-booty-workouts-tier-toggle]');
         if (!details) return;
 
         tier.classList.add('is-expanded');
-        details.style.maxHeight = getDetailsHeight(details) + 'px';
+
+        if (instant) {
+          details.style.maxHeight = 'none';
+        } else {
+          const targetHeight = measureDetailsHeight(details);
+          details.style.maxHeight = '0px';
+          window.requestAnimationFrame(() => {
+            details.style.maxHeight = targetHeight + 'px';
+          });
+        }
+
         if (toggle) toggle.setAttribute('aria-expanded', 'true');
       };
 
@@ -1665,7 +1757,7 @@
           if (!tier.classList.contains('is-expanded')) return;
           const details = tier.querySelector('[data-booty-workouts-tier-details]');
           if (!details) return;
-          details.style.maxHeight = details.style.maxHeight === 'none' ? 'none' : getDetailsHeight(details) + 'px';
+          details.style.maxHeight = 'none';
         });
       };
 
@@ -1719,9 +1811,19 @@
       });
 
       const initialTier = tiers.find((tier) => tier.querySelector('input[type="radio"]:checked')) || tiers[0];
+      const firstTier = tiers[0];
+
       if (initialTier) {
         setSelectedTier(initialTier);
       }
+
+      if (firstTier && firstTier.querySelector('[data-booty-workouts-tier-details]')) {
+        tiers.forEach((item) => {
+          if (item !== firstTier) collapseTier(item);
+        });
+        expandTier(firstTier, { instant: true });
+      }
+
       syncBundleBuilderPreselect();
     }
 
@@ -1740,28 +1842,39 @@
     const galleryRoot = section.querySelector('[data-booty-workouts-gallery]');
     if (galleryRoot) {
       const slides = Array.from(galleryRoot.querySelectorAll('[data-booty-workouts-slide]'));
-      const barsWrap = galleryRoot.querySelector('[data-booty-workouts-bars]');
+      const thumbsWrap = galleryRoot.querySelector('[data-booty-workouts-thumbs]');
       const imageWrap = galleryRoot.querySelector('.booty-workouts__image-wrap');
-      if (!barsWrap || slides.length === 0) return;
+      if (!thumbsWrap || slides.length === 0) return;
 
-      const showBars = slides.length > 1;
-      barsWrap.hidden = !showBars;
+      const showThumbs = slides.length > 1;
+      thumbsWrap.hidden = !showThumbs;
 
-      if (showBars && !barsWrap.querySelector('[data-booty-workouts-bar]')) {
+      if (showThumbs && !thumbsWrap.querySelector('[data-booty-workouts-thumb]')) {
         slides.forEach((slide, index) => {
-          const bar = document.createElement('button');
-          bar.type = 'button';
-          bar.className = 'booty-workouts__bar' + (index === 0 ? ' booty-workouts__bar--active' : '');
-          bar.setAttribute('data-booty-workouts-bar', '');
-          bar.setAttribute('data-slide-index', String(index));
-          bar.setAttribute('role', 'tab');
-          bar.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
-          bar.setAttribute('aria-label', 'Slide ' + (index + 1));
-          barsWrap.appendChild(bar);
+          const thumb = document.createElement('button');
+          thumb.type = 'button';
+          thumb.className = 'booty-workouts__thumb' + (index === 0 ? ' booty-workouts__thumb--active' : '');
+          thumb.setAttribute('data-booty-workouts-thumb', '');
+          thumb.setAttribute('data-slide-index', String(index));
+          thumb.setAttribute('role', 'tab');
+          thumb.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
+          thumb.setAttribute('aria-label', 'Slide ' + (index + 1));
+
+          const slideImage = slide.querySelector('img');
+          if (slideImage) {
+            const thumbImage = document.createElement('img');
+            thumbImage.className = 'booty-workouts__thumb-image';
+            thumbImage.src = slideImage.currentSrc || slideImage.src;
+            thumbImage.alt = slideImage.alt || '';
+            thumbImage.loading = 'lazy';
+            thumb.appendChild(thumbImage);
+          }
+
+          thumbsWrap.appendChild(thumb);
         });
       }
 
-      const bars = Array.from(barsWrap.querySelectorAll('[data-booty-workouts-bar]'));
+      const thumbs = Array.from(thumbsWrap.querySelectorAll('[data-booty-workouts-thumb]'));
 
       let activeIndex = slides.findIndex((slide) => slide.classList.contains('is-active'));
       if (activeIndex < 0) activeIndex = 0;
@@ -1783,22 +1896,29 @@
         });
       };
 
+      const scrollActiveThumbIntoView = () => {
+        const activeThumb = thumbs[activeIndex];
+        if (!activeThumb) return;
+        activeThumb.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
+      };
+
       const goToSlide = (index) => {
         activeIndex = ((index % slides.length) + slides.length) % slides.length;
         slides.forEach((slide, slideIndex) => {
           slide.classList.toggle('is-active', slideIndex === activeIndex);
         });
-        bars.forEach((bar, barIndex) => {
-          const isActive = barIndex === activeIndex;
-          bar.classList.toggle('booty-workouts__bar--active', isActive);
-          bar.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        thumbs.forEach((thumb, thumbIndex) => {
+          const isActive = thumbIndex === activeIndex;
+          thumb.classList.toggle('booty-workouts__thumb--active', isActive);
+          thumb.setAttribute('aria-selected', isActive ? 'true' : 'false');
         });
         syncSlideVideos();
+        scrollActiveThumbIntoView();
       };
 
       syncSlideVideos();
 
-      if (!showBars || bars.length < 2) return;
+      if (slides.length < 2) return;
 
       const desktopMedia = window.matchMedia('(min-width: 768px)');
       let autoplayTimer = null;
@@ -1824,9 +1944,9 @@
         startAutoplay();
       };
 
-      bars.forEach((bar) => {
-        bar.addEventListener('click', () => {
-          const index = Number.parseInt(bar.getAttribute('data-slide-index') || '0', 10);
+      thumbs.forEach((thumb) => {
+        thumb.addEventListener('click', () => {
+          const index = Number.parseInt(thumb.getAttribute('data-slide-index') || '0', 10);
           goToSlide(index);
           resetAutoplay();
         });
