@@ -180,10 +180,7 @@
       || templateSuffix === 'hips-b'
       || templateSuffix === 'hips_c'
       || templateSuffix === 'hips-c'
-      || templateSuffix === 'pop_booty'
-      || templateSuffix === 'pop-booty'
-      || bodyHasHipsNoPreselectClass
-      || (bodyClassName.indexOf('product--pop_booty') >= 0);
+      || bodyHasHipsNoPreselectClass;
     const footerEl = sectionRoot.querySelector('[data-bb-wizard-footer]');
     var routesRoot = (typeof window !== 'undefined' && window.Shopify && window.Shopify.routes && window.Shopify.routes.root)
       ? String(window.Shopify.routes.root).replace(/\/?$/, '/')

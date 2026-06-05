@@ -127,8 +127,10 @@
           assign gallery_source = 'placeholder'
 
           for block in section.blocks
-            if block.type == 'gallery_image' and block.settings.image != blank
-              assign gallery_slides = gallery_slides | plus: 1
+            if block.type == 'gallery_image'
+              if block.settings.image != blank or block.settings.video != blank
+                assign gallery_slides = gallery_slides | plus: 1
+              endif
             endif
           endfor
 
@@ -156,24 +158,41 @@
             {% when 'blocks' %}
               {% assign first_gallery_slide = true %}
               {% for block in section.blocks %}
-                {% if block.type == 'gallery_image' and block.settings.image != blank %}
+                {% if block.type == 'gallery_image' %}
+                  {% if block.settings.image != blank or block.settings.video != blank %}
                   <div
                     class="booty-workouts__slide{% if first_gallery_slide %} is-active{% endif %}"
                     data-booty-workouts-slide
+                    {% if block.settings.video != blank and block.settings.video_autoplay_active %}data-booty-workouts-video-autoplay="true"{% endif %}
                     {{ block.shopify_attributes }}
                   >
-                    {{
-                      block.settings.image
-                      | image_url: width: 1200
-                      | image_tag:
-                        class: 'booty-workouts__image',
-                        loading: 'lazy',
-                        widths: '335,582,900,1200',
-                        sizes: '(min-width: 768px) 582px, 100vw',
-                        alt: block.settings.alt
-                    }}
+                    {% if block.settings.video != blank %}
+                      {{
+                        block.settings.video
+                        | video_tag:
+                          class: 'booty-workouts__video',
+                          autoplay: false,
+                          loop: block.settings.video_loop,
+                          muted: true,
+                          controls: block.settings.video_controls,
+                          playsinline: true,
+                          preload: 'metadata'
+                      }}
+                    {% else %}
+                      {{
+                        block.settings.image
+                        | image_url: width: 1200
+                        | image_tag:
+                          class: 'booty-workouts__image',
+                          loading: 'lazy',
+                          widths: '335,582,900,1200',
+                          sizes: '(min-width: 768px) 582px, 100vw',
+                          alt: block.settings.alt
+                      }}
+                    {% endif %}
                   </div>
                   {% assign first_gallery_slide = false %}
+                  {% endif %}
                 {% endif %}
               {% endfor %}
             {% when 'product' %}
@@ -236,7 +255,8 @@
           {% if gallery_source == 'blocks' %}
             {% assign bar_index = 0 %}
             {% for block in section.blocks %}
-              {% if block.type == 'gallery_image' and block.settings.image != blank %}
+              {% if block.type == 'gallery_image' %}
+                {% if block.settings.image != blank or block.settings.video != blank %}
                 <button
                   type="button"
                   class="booty-workouts__bar{% if bar_index == 0 %} booty-workouts__bar--active{% endif %}"
@@ -247,6 +267,7 @@
                   aria-label="Slide {{ bar_index | plus: 1 }}"
                 ></button>
                 {% assign bar_index = bar_index | plus: 1 %}
+                {% endif %}
               {% endif %}
             {% endfor %}
           {% elsif gallery_source == 'product' %}
@@ -319,13 +340,43 @@
 
           {% assign benefit_blocks = section.blocks | where: 'type', 'benefit' %}
           {% if benefit_blocks.size > 0 %}
-            <ul class="booty-workouts__benefits" role="list">
-              {% for block in benefit_blocks %}
-                <li class="booty-workouts__benefit" {{ block.shopify_attributes }}>
-                  {{ block.settings.label | escape }}
-                </li>
-              {% endfor %}
-            </ul>
+            <div class="booty-workouts__offer-card">
+              {% if section.settings.offer_banner_title != blank or section.settings.offer_banner_eyebrow != blank %}
+                <div class="booty-workouts__offer-banner">
+                  <span class="booty-workouts__offer-sparkles booty-workouts__offer-sparkles--left" aria-hidden="true">
+                    <svg viewBox="0 0 40 40" fill="none">
+                      <path d="M20 4L21.8 14.2L32 16L21.8 17.8L20 28L18.2 17.8L8 16L18.2 14.2L20 4Z" fill="#FFF600"/>
+                      <path d="M8 8L8.9 12.1L13 13L8.9 13.9L8 18L7.1 13.9L3 13L7.1 12.1L8 8Z" fill="#FFF600"/>
+                      <path d="M32 24L32.9 28.1L37 29L32.9 29.9L32 34L31.1 29.9L27 29L31.1 28.1L32 24Z" fill="#FFF600"/>
+                    </svg>
+                  </span>
+                  <div class="booty-workouts__offer-copy">
+                    {% if section.settings.offer_banner_eyebrow != blank %}
+                      <p class="booty-workouts__offer-eyebrow">{{ section.settings.offer_banner_eyebrow | escape }}</p>
+                    {% endif %}
+                    {% if section.settings.offer_banner_title != blank %}
+                      <p class="booty-workouts__offer-title">{{ section.settings.offer_banner_title | escape }}</p>
+                    {% endif %}
+                  </div>
+                  <span class="booty-workouts__offer-sparkles booty-workouts__offer-sparkles--right" aria-hidden="true">
+                    <svg viewBox="0 0 40 40" fill="none">
+                      <path d="M20 4L21.8 14.2L32 16L21.8 17.8L20 28L18.2 17.8L8 16L18.2 14.2L20 4Z" fill="#FFF600"/>
+                      <path d="M8 8L8.9 12.1L13 13L8.9 13.9L8 18L7.1 13.9L3 13L7.1 12.1L8 8Z" fill="#FFF600"/>
+                      <path d="M32 24L32.9 28.1L37 29L32.9 29.9L32 34L31.1 29.9L27 29L31.1 28.1L32 24Z" fill="#FFF600"/>
+                    </svg>
+                  </span>
+                </div>
+              {% endif %}
+              <div class="booty-workouts__offer-body">
+                <ul class="booty-workouts__benefits" role="list">
+                  {% for block in benefit_blocks %}
+                    <li class="booty-workouts__benefit" {{ block.shopify_attributes }}>
+                      {{ block.settings.label | escape }}
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
           {% endif %}
 
           {% assign tier_blocks = section.blocks | where: 'type', 'tier' %}
@@ -338,56 +389,145 @@
                 {% elsif forloop.first %}
                   {% assign tier_selected = true %}
                 {% endif %}
-                <label
+
+                {% assign tier_feature_count = 0 %}
+                {% for feature_index in (1..4) %}
+                  {% capture feature_key %}feature_{{ feature_index }}{% endcapture %}
+                  {% if block.settings[feature_key] != blank %}
+                    {% assign tier_feature_count = tier_feature_count | plus: 1 %}
+                  {% endif %}
+                {% endfor %}
+
+                {% assign tier_has_details = false %}
+                {% if tier_feature_count > 0 or block.settings.extra_1_label != blank or block.settings.extra_2_label != blank %}
+                  {% assign tier_has_details = true %}
+                {% endif %}
+
+                <div
                   class="booty-workouts__tier{% if tier_selected %} is-selected{% endif %}{% if block.settings.ribbon != blank %} booty-workouts__tier--has-ribbon{% endif %}"
                   data-booty-workouts-tier
+                  data-booty-workouts-program-index="{{ forloop.index0 }}"
                   {{ block.shopify_attributes }}
                 >
                   <input
                     type="radio"
                     name="booty-workouts-tier-{{ section.id }}"
+                    id="booty-workouts-tier-{{ section.id }}-{{ block.id }}"
                     class="booty-workouts__tier-input visually-hidden"
                     {% if tier_selected %}checked{% endif %}
                   >
                   {% if block.settings.ribbon != blank %}
                     <span class="booty-workouts__tier-ribbon">{{ block.settings.ribbon | escape }}</span>
                   {% endif %}
-                  <span class="booty-workouts__tier-surface">
-                    <span class="booty-workouts__tier-main">
-                    {% if block.settings.thumb != blank %}
-                      <span class="booty-workouts__tier-thumb">
-                        {{
-                          block.settings.thumb
-                          | image_url: width: 480
-                          | image_tag:
-                            loading: 'lazy',
-                            alt: block.settings.title,
-                            width: block.settings.thumb.width,
-                            height: block.settings.thumb.height
-                        }}
-                      </span>
-                    {% endif %}
-                    <span class="booty-workouts__tier-copy">
-                      <span class="booty-workouts__tier-title">{{ block.settings.title | escape }}</span>
-                    </span>
-                    <span class="booty-workouts__tier-pricing">
-                      {% if block.settings.old_price != blank or block.settings.price != blank %}
-                        <span class="booty-workouts__tier-prices">
-                          {% if block.settings.old_price != blank %}
-                            <span class="booty-workouts__tier-old">{{ block.settings.old_price | escape }}</span>
+                  <div class="booty-workouts__tier-surface">
+                    <button
+                      type="button"
+                      class="booty-workouts__tier-header"
+                      data-booty-workouts-tier-toggle
+                      aria-expanded="false"
+                      aria-controls="booty-workouts-tier-details-{{ section.id }}-{{ block.id }}"
+                    >
+                      <span class="booty-workouts__tier-main">
+                        {% if block.settings.thumb != blank %}
+                          <span class="booty-workouts__tier-thumb">
+                            {{
+                              block.settings.thumb
+                              | image_url: width: 480
+                              | image_tag:
+                                loading: 'lazy',
+                                alt: block.settings.title,
+                                width: block.settings.thumb.width,
+                                height: block.settings.thumb.height
+                            }}
+                          </span>
+                        {% endif %}
+                        <span class="booty-workouts__tier-copy">
+                          <span class="booty-workouts__tier-title">{{ block.settings.title | escape }}</span>
+                        </span>
+                        <span class="booty-workouts__tier-pricing">
+                          {% if block.settings.old_price != blank or block.settings.price != blank %}
+                            <span class="booty-workouts__tier-prices">
+                              {% if block.settings.old_price != blank %}
+                                <span class="booty-workouts__tier-old">{{ block.settings.old_price | escape }}</span>
+                              {% endif %}
+                              {% if block.settings.price != blank %}
+                                <span class="booty-workouts__tier-price">{{ block.settings.price | escape }}</span>
+                              {% endif %}
+                            </span>
                           {% endif %}
-                          {% if block.settings.price != blank %}
-                            <span class="booty-workouts__tier-price">{{ block.settings.price | escape }}</span>
+                          {% if block.settings.discount != blank %}
+                            <span class="booty-workouts__tier-discount">{{ block.settings.discount | escape }}</span>
                           {% endif %}
                         </span>
-                      {% endif %}
-                      {% if block.settings.discount != blank %}
-                        <span class="booty-workouts__tier-discount">{{ block.settings.discount | escape }}</span>
-                      {% endif %}
-                    </span>
-                    </span>
-                  </span>
-                </label>
+                      </span>
+                    </button>
+
+                    {% if tier_has_details %}
+                      <div
+                        class="booty-workouts__tier-details"
+                        id="booty-workouts-tier-details-{{ section.id }}-{{ block.id }}"
+                        data-booty-workouts-tier-details
+                      >
+                        <div class="booty-workouts__tier-details-inner">
+                        {% assign tier_inline_extra = false %}
+                        {% if tier_feature_count == 1 and block.settings.extra_1_label != blank and block.settings.extra_2_label == blank %}
+                          {% assign tier_inline_extra = true %}
+                        {% endif %}
+
+                        {% if tier_feature_count > 0 or tier_inline_extra %}
+                          <ul class="booty-workouts__tier-features{% if tier_inline_extra %} booty-workouts__tier-features--inline-extra{% endif %}" role="list">
+                            {% for feature_index in (1..4) %}
+                              {% capture feature_key %}feature_{{ feature_index }}{% endcapture %}
+                              {% if block.settings[feature_key] != blank %}
+                                <li class="booty-workouts__tier-feature">
+                                  <span class="booty-workouts__tier-feature-icon booty-workouts__tier-feature-icon--check" aria-hidden="true">
+                                    <svg viewBox="0 0 20 20" fill="none">
+                                      <circle cx="10" cy="10" r="10" fill="currentColor"></circle>
+                                      <path d="M6 10.5L8.5 13L14 7.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                  </span>
+                                  <span>{{ block.settings[feature_key] | escape }}</span>
+                                </li>
+                              {% endif %}
+                            {% endfor %}
+                            {% if tier_inline_extra %}
+                              <li class="booty-workouts__tier-feature">
+                                <span class="booty-workouts__tier-feature-icon booty-workouts__tier-feature-icon--emoji" aria-hidden="true">
+                                  {{ block.settings.extra_1_icon | default: '✅' }}
+                                </span>
+                                <span>{{ block.settings.extra_1_label | escape }}</span>
+                              </li>
+                            {% endif %}
+                          </ul>
+                        {% endif %}
+
+                        {% unless tier_inline_extra %}
+                          {% if block.settings.extra_1_label != blank or block.settings.extra_2_label != blank %}
+                            <div class="booty-workouts__tier-extras">
+                              {% if block.settings.extra_1_label != blank %}
+                                <span class="booty-workouts__tier-extra">
+                                  <span class="booty-workouts__tier-feature-icon booty-workouts__tier-feature-icon--emoji" aria-hidden="true">
+                                    {{ block.settings.extra_1_icon | default: '✅' }}
+                                  </span>
+                                  <span>{{ block.settings.extra_1_label | escape }}</span>
+                                </span>
+                              {% endif %}
+                              {% if block.settings.extra_2_label != blank %}
+                                <span class="booty-workouts__tier-extra">
+                                  <span class="booty-workouts__tier-feature-icon booty-workouts__tier-feature-icon--emoji" aria-hidden="true">
+                                    {{ block.settings.extra_2_icon | default: '🧘‍♀️' }}
+                                  </span>
+                                  <span>{{ block.settings.extra_2_label | escape }}</span>
+                                </span>
+                              {% endif %}
+                            </div>
+                          {% endif %}
+                        {% endunless %}
+                        </div>
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
               {% endfor %}
             </div>
           {% endif %}
@@ -709,6 +849,14 @@
     object-fit: cover;
   }
 
+  .booty-workouts__video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    background: #000;
+  }
+
   .booty-workouts__bars {
     margin-top: 14px;
     display: flex;
@@ -750,24 +898,97 @@
     margin: 0;
   }
 
+  .booty-workouts__offer-card {
+    border: 1px solid #e8e8e8;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  .booty-workouts__offer-card + .booty-workouts__tiers {
+    margin-top: 16px;
+  }
+
+  .booty-workouts__offer-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 16px;
+    background: linear-gradient(90deg, #d81b4d 0%, #f06a5e 55%, #f7a08f 100%);
+    text-align: center;
+  }
+
+  .booty-workouts__offer-copy {
+    display: grid;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .booty-workouts__offer-eyebrow {
+    margin: 0;
+    color: #fff;
+    font-family: var(--font-body--family, 'Avenir'), 'Avenir', 'Avenir Next', Arial, sans-serif;
+    font-size: 12px;
+    line-height: 1.2;
+    font-weight: 500;
+  }
+
+  .booty-workouts__offer-title {
+    margin: 0;
+    color: #fff600;
+    font-family: var(--font-heading--family, 'Anybody'), sans-serif;
+    font-size: clamp(1rem, 3.8vw, 1.25rem);
+    line-height: 1.05;
+    font-weight: 900;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .booty-workouts__offer-sparkles {
+    flex: 0 0 auto;
+    width: 40px;
+    height: 40px;
+    line-height: 0;
+  }
+
+  .booty-workouts__offer-sparkles svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .booty-workouts__offer-sparkles--right {
+    transform: scaleX(-1);
+  }
+
+  .booty-workouts__offer-body {
+    padding: 18px 20px 20px;
+  }
+
   .booty-workouts__benefits {
     margin: 0;
-    padding: 0 0 0 1.15em;
-    list-style: disc;
+    padding: 0;
+    list-style: none;
     display: grid;
     gap: 10px;
   }
 
   .booty-workouts__benefit {
+    position: relative;
     color: #000;
     font-family: var(--font-body--family, 'Avenir'), 'Avenir', 'Avenir Next', Arial, sans-serif;
     font-size: clamp(0.875rem, 1.6vw, 1.125rem);
     line-height: 1.35;
     font-weight: 400;
-    padding-left: 4px;
+    padding-left: 1.4em;
   }
 
-  .booty-workouts__benefit::marker {
+  .booty-workouts__benefit::before {
+    content: '⚡️';
+    position: absolute;
+    left: 0;
+    top: 0;
     color: #000;
   }
 
@@ -844,10 +1065,117 @@
     color: #666;
   }
 
+  .booty-workouts__tier-header {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+    font: inherit;
+    color: inherit;
+  }
+
   .booty-workouts__tier-main {
     display: flex;
     align-items: center;
     gap: 12px;
+  }
+
+  .booty-workouts__tier-details {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 320ms ease;
+  }
+
+  .booty-workouts__tier-details-inner {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 1px solid transparent;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition:
+      opacity 260ms ease,
+      transform 320ms ease,
+      padding-top 320ms ease,
+      margin-top 320ms ease,
+      border-color 320ms ease;
+  }
+
+  .booty-workouts__tier.is-expanded .booty-workouts__tier-details-inner {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top-color: #f0f0f0;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .booty-workouts__tier-details,
+    .booty-workouts__tier-details-inner {
+      transition: none;
+    }
+  }
+
+  .booty-workouts__tier-features {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 10px;
+  }
+
+  .booty-workouts__tier-features--inline-extra {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 16px;
+  }
+
+  .booty-workouts__tier-feature,
+  .booty-workouts__tier-extra {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #000;
+    font-family: var(--font-body--family, 'Avenir'), 'Avenir', 'Avenir Next', Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.3;
+    font-weight: 500;
+  }
+
+  .booty-workouts__tier-feature-icon {
+    flex: 0 0 18px;
+    width: 18px;
+    height: 18px;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .booty-workouts__tier-feature-icon--check {
+    color: #000;
+  }
+
+  .booty-workouts__tier-feature-icon--check svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .booty-workouts__tier-feature-icon--emoji {
+    flex-basis: auto;
+    width: auto;
+    font-size: 16px;
+  }
+
+  .booty-workouts__tier-extras {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid #f0f0f0;
   }
 
   .booty-workouts__tier-thumb {
@@ -1225,6 +1553,37 @@
     .booty-workouts__cta {
       min-height: 68px;
     }
+
+    .booty-workouts__offer-banner {
+      padding: 16px 24px;
+      gap: 16px;
+    }
+
+    .booty-workouts__offer-eyebrow {
+      font-size: 14px;
+    }
+
+    .booty-workouts__offer-title {
+      font-size: 22px;
+    }
+
+    .booty-workouts__offer-sparkles {
+      width: 48px;
+      height: 48px;
+    }
+
+    .booty-workouts__offer-body {
+      padding: 22px 24px 24px;
+    }
+
+    .booty-workouts__offer-card + .booty-workouts__tiers {
+      margin-top: 24px;
+    }
+
+    .booty-workouts__tier-features {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 16px;
+    }
   }
 {% endstylesheet %}
 
@@ -1232,17 +1591,132 @@
   (() => {
     const section = document.getElementById('booty-workouts-{{ section.id }}');
     if (!section) return;
+    const shouldSyncBundleBuilderPreselect = {{ cta_opens_bundle_builder | json }};
 
     const tiersRoot = section.querySelector('[data-booty-workouts-tiers]');
     if (tiersRoot) {
+      const tiers = Array.from(tiersRoot.querySelectorAll('[data-booty-workouts-tier]'));
+
+      const syncBundleBuilderPreselect = () => {
+        if (!shouldSyncBundleBuilderPreselect || typeof window === 'undefined') return;
+
+        const expandedTier = tiers.find((tier) => tier.classList.contains('is-expanded'));
+        let programIndex = 0;
+
+        if (expandedTier) {
+          programIndex = Number.parseInt(expandedTier.getAttribute('data-booty-workouts-program-index') || '0', 10);
+          if (!Number.isFinite(programIndex) || programIndex < 0) programIndex = 0;
+        }
+
+        window.__bt_bb_preselect_program_index = programIndex;
+        window.__bt_bb_preselect_first = programIndex === 0;
+        window.__bt_bb_preselect_second = programIndex === 1;
+      };
+
+      const setSelectedTier = (tier) => {
+        const input = tier.querySelector('input[type="radio"]');
+        if (input) input.checked = true;
+
+        tiers.forEach((item) => {
+          item.classList.toggle('is-selected', item === tier);
+        });
+      };
+
+      const getDetailsHeight = (details) => {
+        const inner = details.querySelector('.booty-workouts__tier-details-inner');
+        if (!inner) return 0;
+        return inner.scrollHeight;
+      };
+
+      const collapseTier = (tier) => {
+        const details = tier.querySelector('[data-booty-workouts-tier-details]');
+        const toggle = tier.querySelector('[data-booty-workouts-tier-toggle]');
+        tier.classList.remove('is-expanded');
+
+        if (details) {
+          if (details.style.maxHeight === 'none') {
+            details.style.maxHeight = getDetailsHeight(details) + 'px';
+          }
+          window.requestAnimationFrame(() => {
+            details.style.maxHeight = '0px';
+          });
+        }
+        if (toggle) toggle.setAttribute('aria-expanded', 'false');
+      };
+
+      const expandTier = (tier) => {
+        const details = tier.querySelector('[data-booty-workouts-tier-details]');
+        const toggle = tier.querySelector('[data-booty-workouts-tier-toggle]');
+        if (!details) return;
+
+        tier.classList.add('is-expanded');
+        details.style.maxHeight = getDetailsHeight(details) + 'px';
+        if (toggle) toggle.setAttribute('aria-expanded', 'true');
+      };
+
+      const refreshExpandedHeights = () => {
+        tiers.forEach((tier) => {
+          if (!tier.classList.contains('is-expanded')) return;
+          const details = tier.querySelector('[data-booty-workouts-tier-details]');
+          if (!details) return;
+          details.style.maxHeight = details.style.maxHeight === 'none' ? 'none' : getDetailsHeight(details) + 'px';
+        });
+      };
+
+      tiers.forEach((tier) => {
+        const details = tier.querySelector('[data-booty-workouts-tier-details]');
+        if (!details) return;
+
+        details.addEventListener('transitionend', (event) => {
+          if (event.propertyName !== 'max-height') return;
+          if (!tier.classList.contains('is-expanded')) return;
+          details.style.maxHeight = 'none';
+        });
+      });
+
+      tiers.forEach((tier) => {
+        const toggle = tier.querySelector('[data-booty-workouts-tier-toggle]');
+        if (!toggle) return;
+
+        toggle.addEventListener('click', () => {
+          const hasDetails = !!tier.querySelector('[data-booty-workouts-tier-details]');
+          const wasSelected = tier.classList.contains('is-selected');
+          const wasExpanded = tier.classList.contains('is-expanded');
+
+          setSelectedTier(tier);
+          if (!hasDetails) return;
+
+          if (wasSelected && wasExpanded) {
+            collapseTier(tier);
+            syncBundleBuilderPreselect();
+            return;
+          }
+
+          tiers.forEach((item) => {
+            if (item !== tier) collapseTier(item);
+          });
+          expandTier(tier);
+          syncBundleBuilderPreselect();
+        });
+      });
+
+      window.addEventListener('resize', refreshExpandedHeights);
+
       tiersRoot.addEventListener('change', (event) => {
         const input = event.target;
         if (!(input instanceof HTMLInputElement) || input.type !== 'radio') return;
 
-        tiersRoot.querySelectorAll('[data-booty-workouts-tier]').forEach((tier) => {
-          tier.classList.toggle('is-selected', tier.contains(input) && input.checked);
-        });
+        const tier = input.closest('[data-booty-workouts-tier]');
+        if (!tier) return;
+
+        setSelectedTier(tier);
       });
+
+      const initialTier = tiers.find((tier) => tier.querySelector('input[type="radio"]:checked')) || tiers[0];
+      if (initialTier) {
+        setSelectedTier(initialTier);
+      }
+      syncBundleBuilderPreselect();
     }
 
     const faqRoot = section.querySelector('[data-booty-workouts-faq]');
@@ -1282,10 +1756,26 @@
       }
 
       const bars = Array.from(barsWrap.querySelectorAll('[data-booty-workouts-bar]'));
-      if (!showBars || bars.length < 2) return;
 
       let activeIndex = slides.findIndex((slide) => slide.classList.contains('is-active'));
       if (activeIndex < 0) activeIndex = 0;
+
+      const syncSlideVideos = () => {
+        slides.forEach((slide, slideIndex) => {
+          const video = slide.querySelector('video');
+          if (!video) return;
+
+          if (slideIndex === activeIndex) {
+            if (slide.getAttribute('data-booty-workouts-video-autoplay') === 'true') {
+              video.play().catch(() => {});
+            }
+            return;
+          }
+
+          video.pause();
+          if (!video.loop) video.currentTime = 0;
+        });
+      };
 
       const goToSlide = (index) => {
         activeIndex = ((index % slides.length) + slides.length) % slides.length;
@@ -1297,7 +1787,12 @@
           bar.classList.toggle('booty-workouts__bar--active', isActive);
           bar.setAttribute('aria-selected', isActive ? 'true' : 'false');
         });
+        syncSlideVideos();
       };
+
+      syncSlideVideos();
+
+      if (!showBars || bars.length < 2) return;
 
       const desktopMedia = window.matchMedia('(min-width: 768px)');
       let autoplayTimer = null;
@@ -1419,6 +1914,21 @@
 
       bundleCta.addEventListener('click', (event) => {
         event.preventDefault();
+        const tiersRoot = section.querySelector('[data-booty-workouts-tiers]');
+        if (tiersRoot && shouldSyncBundleBuilderPreselect) {
+          const tiers = Array.from(tiersRoot.querySelectorAll('[data-booty-workouts-tier]'));
+          const expandedTier = tiers.find((tier) => tier.classList.contains('is-expanded'));
+          let programIndex = 0;
+
+          if (expandedTier) {
+            programIndex = Number.parseInt(expandedTier.getAttribute('data-booty-workouts-program-index') || '0', 10);
+            if (!Number.isFinite(programIndex) || programIndex < 0) programIndex = 0;
+          }
+
+          window.__bt_bb_preselect_program_index = programIndex;
+          window.__bt_bb_preselect_first = programIndex === 0;
+          window.__bt_bb_preselect_second = programIndex === 1;
+        }
         tryOpenBundleWizard(25);
       });
     }
@@ -1469,6 +1979,19 @@
       "id": "description",
       "label": "Description",
       "default": "<p>Twerk workouts from world-famous Nastya NASS help you tone your body, shape a beautiful booty, and make every workout fun and energizing.</p>"
+    },
+    { "type": "header", "content": "Benefits offer card" },
+    {
+      "type": "text",
+      "id": "offer_banner_eyebrow",
+      "label": "Banner eyebrow",
+      "default": "Limited Time"
+    },
+    {
+      "type": "text",
+      "id": "offer_banner_title",
+      "label": "Banner title",
+      "default": "SUMMER START OFFER"
     },
     { "type": "header", "content": "Hero image / gallery" },
     {
@@ -1525,10 +2048,34 @@
   "blocks": [
     {
       "type": "gallery_image",
-      "name": "Gallery image",
+      "name": "Gallery image / video",
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "text", "id": "alt", "label": "Alt text" }
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video",
+          "info": "If set, video is shown instead of the image."
+        },
+        { "type": "text", "id": "alt", "label": "Image alt text" },
+        {
+          "type": "checkbox",
+          "id": "video_controls",
+          "label": "Show video controls",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "video_loop",
+          "label": "Loop video",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "video_autoplay_active",
+          "label": "Autoplay video when slide is visible",
+          "default": true
+        }
       ]
     },
     {
@@ -1571,7 +2118,16 @@
           "default": "Extra 60% Off all Booty Clothing"
         },
         { "type": "image_picker", "id": "thumb", "label": "Thumbnail" },
-        { "type": "checkbox", "id": "preselected", "label": "Preselected", "default": false }
+        { "type": "checkbox", "id": "preselected", "label": "Preselected", "default": false },
+        { "type": "header", "content": "Expandable details" },
+        { "type": "text", "id": "feature_1", "label": "Feature 1" },
+        { "type": "text", "id": "feature_2", "label": "Feature 2" },
+        { "type": "text", "id": "feature_3", "label": "Feature 3" },
+        { "type": "text", "id": "feature_4", "label": "Feature 4" },
+        { "type": "text", "id": "extra_1_label", "label": "Extra 1 label" },
+        { "type": "text", "id": "extra_1_icon", "label": "Extra 1 icon", "default": "✅" },
+        { "type": "text", "id": "extra_2_label", "label": "Extra 2 label" },
+        { "type": "text", "id": "extra_2_icon", "label": "Extra 2 icon", "default": "🧘‍♀️" }
       ]
     },
     {

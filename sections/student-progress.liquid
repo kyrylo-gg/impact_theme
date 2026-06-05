@@ -10,9 +10,18 @@
 
 <section class="student-progress{% if is_twerk_essential_template %} student-progress--twerk-essential{% endif %}" id="student-progress-{{ section.id }}">
   <div class="student-progress__container">
-    {% unless section.settings.hide_heading %}
-      {% if section.settings.heading != blank or section.settings.heading_highlight != blank %}
-        <div class="student-progress__header">
+    {% liquid
+      assign show_student_progress_title = false
+      unless section.settings.hide_heading
+        if section.settings.heading != blank or section.settings.heading_highlight != blank
+          assign show_student_progress_title = true
+        endif
+      endunless
+      assign show_student_progress_subheading = section.settings.subheading != blank
+    %}
+    {% if show_student_progress_title or show_student_progress_subheading %}
+      <div class="student-progress__header">
+        {% if show_student_progress_title %}
           <div class="student-progress__title">
             {% if section.settings.heading != blank %}
               {{ section.settings.heading | escape }}
@@ -21,10 +30,15 @@
               <span class="student-progress__title-highlight">{{ section.settings.heading_highlight | escape }}</span>
             {% endif %}
           </div>
+        {% endif %}
+        {% if show_student_progress_title or show_student_progress_subheading %}
           <div class="student-progress__divider"></div>
-        </div>
-      {% endif %}
-    {% endunless %}
+        {% endif %}
+        {% if show_student_progress_subheading %}
+          <div class="student-progress__subheading rte">{{ section.settings.subheading }}</div>
+        {% endif %}
+      </div>
+    {% endif %}
 
     <div class="student-progress__scroll-wrapper">
       <div class="student-progress__row">
@@ -301,6 +315,29 @@
     margin: 16px auto 0;
   }
 
+  .student-progress__subheading {
+    margin: 16px auto 0;
+    max-width: 720px;
+    padding: 0 8px;
+    color: #000;
+    font-family: var(--font-body--family, 'Avenir'), 'Avenir Next', Arial, sans-serif;
+    font-size: clamp(16px, 2vw, 20px);
+    font-weight: 500;
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  .student-progress__subheading p {
+    margin: 0;
+  }
+
+  @media (min-width: 768px) {
+    .student-progress__subheading {
+      margin-top: 20px;
+      font-size: 20px;
+    }
+  }
+
   .student-progress__scroll-wrapper {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -561,6 +598,12 @@
       "id": "hide_heading",
       "label": "Hide heading",
       "default": false
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "info": "Shown below the blue divider."
     },
     {
       "type": "header",
