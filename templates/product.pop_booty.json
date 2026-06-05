@@ -1884,19 +1884,19 @@
         "student_video_JQBgaH": {
           "type": "student_video",
           "settings": {
-            "video": "shopify://files/videos/3.webm"
+            "video": "shopify://files/videos/makeover-1.mp4"
           }
         },
         "student_video_eenb39": {
           "type": "student_video",
           "settings": {
-            "video": "shopify://files/videos/2.webm"
+            "video": "shopify://files/videos/makeover-2.mp4"
           }
         },
         "student_video_XghNmm": {
           "type": "student_video",
           "settings": {
-            "video": "shopify://files/videos/1 (1).webm"
+            "video": "shopify://files/videos/makeover-3.mp4"
           }
         }
       },
@@ -1922,6 +1922,7 @@
     "zp-product-header-content",
     "main",
     "booty_workouts_offer",
+    "nass_testimonials_ELPAbp",
     "nass_bundle_builder_pop",
     "confidence_without_pressure_pop",
     "dance_workouts_pop",
@@ -1935,7 +1936,6 @@
     "why_this_works_MEeJDT",
     "student_progress_3GQNkJ",
     "nass_countdown_PUMrCf",
-    "nass_testimonials_ELPAbp",
     "booty_workouts_KMFCjK",
     "bt_faq_yC7n4z",
     "student_progress_QBDTex"
