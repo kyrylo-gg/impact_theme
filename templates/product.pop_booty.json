@@ -2022,7 +2022,7 @@
         "savings_badge_suffix": "OFF",
         "savings_badge_color": "#ffffff",
         "mobile_savings_badge_color": "",
-        "sublime_text_color": "#ffffff",
+        "sublime_text_color": "#000000",
         "sublime_text_color_mobile": "#ffffff",
         "sublime_text": "<p>30-day money-back guarantee</p>",
         "block_background": "#0038ff",
