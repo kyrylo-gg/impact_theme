@@ -169,49 +169,80 @@
           "type": "gallery_image",
           "settings": {
             "image": "shopify://shop_images/Image_1_a5d1b47f-d39f-4ae5-99eb-3ab197fdbc64.png",
-            "alt": ""
+            "alt": "",
+            "video_controls": true,
+            "video_loop": true,
+            "video_autoplay_active": true
           }
         },
         "gallery_image_DEgKet": {
           "type": "gallery_image",
           "settings": {
             "image": "shopify://shop_images/Image_2.png",
-            "alt": ""
+            "alt": "",
+            "video_controls": true,
+            "video_loop": true,
+            "video_autoplay_active": true
           }
         },
         "gallery_image_NMNdFh": {
           "type": "gallery_image",
           "settings": {
             "image": "shopify://shop_images/Image_3_abc9ffcc-2f57-4171-8405-43ed7b932224.png",
-            "alt": ""
+            "alt": "",
+            "video_controls": true,
+            "video_loop": true,
+            "video_autoplay_active": true
           }
         },
         "gallery_image_Vd8eMH": {
           "type": "gallery_image",
           "settings": {
             "image": "shopify://shop_images/Image_4_c015493c-8a4c-44cc-8e03-f7ea412002ae.png",
-            "alt": ""
+            "alt": "",
+            "video_controls": true,
+            "video_loop": true,
+            "video_autoplay_active": true
           }
         },
         "gallery_image_rfPzwb": {
           "type": "gallery_image",
           "settings": {
             "image": "shopify://shop_images/Community_1.2.png",
-            "alt": ""
+            "alt": "",
+            "video_controls": true,
+            "video_loop": true,
+            "video_autoplay_active": true
+          }
+        },
+        "gallery_image_Y38acA": {
+          "type": "gallery_image",
+          "settings": {
+            "video": "shopify://files/videos/0605-ezgif.com-gif-maker_883dba9d-8855-48f5-b54e-032b9e5bbd57.webm",
+            "alt": "",
+            "video_controls": true,
+            "video_loop": true,
+            "video_autoplay_active": true
           }
         },
         "gallery_image_YJcPkK": {
           "type": "gallery_image",
           "settings": {
             "image": "shopify://shop_images/Image_5_5f979a1b-b8d8-4f50-83c1-67a6121d0b4d.png",
-            "alt": ""
+            "alt": "",
+            "video_controls": true,
+            "video_loop": true,
+            "video_autoplay_active": true
           }
         },
         "gallery_image_i7fkyB": {
           "type": "gallery_image",
           "settings": {
             "image": "shopify://shop_images/Image_6_09c95840-3a7b-4f83-8e10-5adf96265560.png",
-            "alt": ""
+            "alt": "",
+            "video_controls": true,
+            "video_loop": true,
+            "video_autoplay_active": true
           }
         },
         "booty_benefit_1": {
@@ -336,6 +367,7 @@
         "gallery_image_NMNdFh",
         "gallery_image_Vd8eMH",
         "gallery_image_rfPzwb",
+        "gallery_image_Y38acA",
         "gallery_image_YJcPkK",
         "gallery_image_i7fkyB",
         "booty_benefit_1",
@@ -360,6 +392,8 @@
         "title_part_3": "Feel Like Fun",
         "starting_price": "Starting from just $59",
         "description": "<p>Twerk workouts from world-famous Nastya NASS help you tone your body, shape a beautiful booty, and make every workout fun and energizing.</p>",
+        "offer_banner_eyebrow": "Limited Time",
+        "offer_banner_title": "SUMMER START OFFER",
         "gallery_use_product_media": true,
         "hero_image": "shopify://shop_images/Banner_Product_1_935cbba9-6018-4188-95c4-4f0a3b9fe2bb.png",
         "image_radius": 30,
@@ -372,6 +406,239 @@
         "review_avatar": "shopify://shop_images/Frame_32.png",
         "review_title": "Super fun",
         "review_body": "<p>I'm enjoying the twerk program, and the booty-building program - as someone with very little junk in the trunk, they complement each other perfectly!! Highly recommend.</p>"
+      }
+    },
+    "nass_testimonials_ELPAbp": {
+      "type": "nass-testimonials",
+      "blocks": {
+        "review_x9fFCT": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Best Booty shaking class out there!",
+            "body": "Great instructions and I can go at my own pace. I just did the warmup class and it was perfectly challenging! I can't wait to dive in with rest of the workouts!",
+            "reviewer_name": "Annie Chamberlain",
+            "verified": true
+          }
+        },
+        "review_Q9hRDx": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Love NASS and her courses!!!!",
+            "body": "Love it!!! she's the best",
+            "reviewer_name": "Ana Mafalda Duarte Limas",
+            "verified": true
+          }
+        },
+        "review_AmARNk": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Love it",
+            "body": "U are such in inspiration nastya !!",
+            "reviewer_name": "Ashley Steiner",
+            "verified": true
+          }
+        },
+        "review_KqYJQB": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Love it",
+            "body": "I am learning so much and having so much fun shaking my booty",
+            "reviewer_name": "Angela Rose",
+            "verified": true
+          }
+        },
+        "review_EPUBfV": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Leveled up my twerk game!",
+            "body": "Excellent course! I take regular classes at my local studio and this course helped me take my skills to the next level! Great technique breakdowns with clear step by step instructions.",
+            "reviewer_name": "Yarah Rico",
+            "verified": true
+          }
+        },
+        "review_AEiPBc": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "",
+            "body": "Love the program!!!!",
+            "reviewer_name": "Stephanie Collard",
+            "verified": true
+          }
+        },
+        "review_Dwfeyn": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Amazing content",
+            "body": "Im so happy I finally get to learn with the master of twerk, online … can't wait to reach that level of experience like Nastya",
+            "reviewer_name": "Myriam El baouch",
+            "verified": true
+          }
+        },
+        "review_8ArPHz": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Love them",
+            "body": "My wife has loved the class and watched several of them a few times. I have benefited from them as well as it has improved twerking 100%",
+            "reviewer_name": "James Cole",
+            "verified": true
+          }
+        },
+        "review_icRgey": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Loooove it!",
+            "body": "This tutorial has been my great teacher! It gives me very clear break down of every technique. Combos are nice to practice the moves. I really enjoy learning with this program. Thank you!",
+            "reviewer_name": "Noriko Matsuki",
+            "verified": true
+          }
+        },
+        "review_C6AmG4": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Awesome!",
+            "body": "I've been following nastya for years. I teach twerk and pole fitness for a studio in Virginia. This course helped me condition and prep soooo much better. Love love loveeeee this",
+            "reviewer_name": "Jewelea Shubert",
+            "verified": true
+          }
+        },
+        "review_zjJJUC": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Learning",
+            "body": "Easy breakdown of the movements, able to review as many times as needed and a great activation workout",
+            "reviewer_name": "Samantha Medina",
+            "verified": true
+          }
+        },
+        "review_DJ4p3y": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Fun Excited",
+            "body": "It was different still need more practice to where I want it but I love it",
+            "reviewer_name": "Rosa Cordova",
+            "verified": true
+          }
+        },
+        "review_PtVHeL": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Love it!",
+            "body": "Such a fun class. Highly recommend.",
+            "reviewer_name": "Kacey Samiee",
+            "verified": true
+          }
+        },
+        "review_6P8rC8": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Love it!",
+            "body": "I love the twerk program so much !!",
+            "reviewer_name": "L M Neveu",
+            "verified": true
+          }
+        },
+        "review_yU8QyC": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Awesome Explanation",
+            "body": "I've always had a hard time learning how to move my booty and with this class I'm able to understand and learning how to! Thanks!",
+            "reviewer_name": "Nicole Swadling",
+            "verified": true
+          }
+        },
+        "review_mFyLYX": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Twerk class",
+            "body": "Great how to class. Very fun",
+            "reviewer_name": "Sacheen M Gonzales",
+            "verified": true
+          }
+        },
+        "review_G9tq8W": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "",
+            "body": "These shorts are really nice material! Comfy!",
+            "reviewer_name": "Christina Le",
+            "verified": true
+          }
+        },
+        "review_99kpre": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "",
+            "body": "Wife loves them will buy more",
+            "reviewer_name": "Matt Holmes",
+            "verified": true
+          }
+        },
+        "review_bHTkcQ": {
+          "type": "review",
+          "settings": {
+            "rating": 4,
+            "title": "It's worth it",
+            "body": "The workout - is it worth it? Well let me twerk it! Seriously, I love the workout, it really is awesome!",
+            "reviewer_name": "Carrie Barnhart",
+            "verified": true
+          }
+        },
+        "review_CFm8Am": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "So much fun!",
+            "body": "I love this program! It's super fun and makes me feel super sexy while doing it!",
+            "reviewer_name": "Lili Henderson",
+            "verified": true
+          }
+        }
+      },
+      "block_order": [
+        "review_x9fFCT",
+        "review_Q9hRDx",
+        "review_AmARNk",
+        "review_KqYJQB",
+        "review_EPUBfV",
+        "review_AEiPBc",
+        "review_Dwfeyn",
+        "review_8ArPHz",
+        "review_icRgey",
+        "review_C6AmG4",
+        "review_zjJJUC",
+        "review_DJ4p3y",
+        "review_PtVHeL",
+        "review_6P8rC8",
+        "review_yU8QyC",
+        "review_mFyLYX",
+        "review_G9tq8W",
+        "review_99kpre",
+        "review_bHTkcQ",
+        "review_CFm8Am"
+      ],
+      "name": "Testimonials",
+      "settings": {
+        "heading_count": "Customer Reviews",
+        "subtitle": "",
+        "enable_judgeme_badge": true
       }
     },
     "nass_bundle_builder_pop": {
@@ -1433,239 +1700,6 @@
         "text_color": "#ffffff"
       }
     },
-    "nass_testimonials_ELPAbp": {
-      "type": "nass-testimonials",
-      "blocks": {
-        "review_x9fFCT": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "title": "Best Booty shaking class out there!",
-            "body": "Great instructions and I can go at my own pace. I just did the warmup class and it was perfectly challenging! I can't wait to dive in with rest of the workouts!",
-            "reviewer_name": "Annie Chamberlain",
-            "verified": true
-          }
-        },
-        "review_Q9hRDx": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "title": "Love NASS and her courses!!!!",
-            "body": "Love it!!! she's the best",
-            "reviewer_name": "Ana Mafalda Duarte Limas",
-            "verified": true
-          }
-        },
-        "review_AmARNk": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "title": "Love it",
-            "body": "U are such in inspiration nastya !!",
-            "reviewer_name": "Ashley Steiner",
-            "verified": true
-          }
-        },
-        "review_KqYJQB": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "title": "Love it",
-            "body": "I am learning so much and having so much fun shaking my booty",
-            "reviewer_name": "Angela Rose",
-            "verified": true
-          }
-        },
-        "review_EPUBfV": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "title": "Leveled up my twerk game!",
-            "body": "Excellent course! I take regular classes at my local studio and this course helped me take my skills to the next level! Great technique breakdowns with clear step by step instructions.",
-            "reviewer_name": "Yarah Rico",
-            "verified": true
-          }
-        },
-        "review_AEiPBc": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "title": "",
-            "body": "Love the program!!!!",
-            "reviewer_name": "Stephanie Collard",
-            "verified": true
-          }
-        },
-        "review_Dwfeyn": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "title": "Amazing content",
-            "body": "Im so happy I finally get to learn with the master of twerk, online … can't wait to reach that level of experience like Nastya",
-            "reviewer_name": "Myriam El baouch",
-            "verified": true
-          }
-        },
-        "review_8ArPHz": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "title": "Love them",
-            "body": "My wife has loved the class and watched several of them a few times. I have benefited from them as well as it has improved twerking 100%",
-            "reviewer_name": "James Cole",
-            "verified": true
-          }
-        },
-        "review_icRgey": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "title": "Loooove it!",
-            "body": "This tutorial has been my great teacher! It gives me very clear break down of every technique. Combos are nice to practice the moves. I really enjoy learning with this program. Thank you!",
-            "reviewer_name": "Noriko Matsuki",
-            "verified": true
-          }
-        },
-        "review_C6AmG4": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "title": "Awesome!",
-            "body": "I've been following nastya for years. I teach twerk and pole fitness for a studio in Virginia. This course helped me condition and prep soooo much better. Love love loveeeee this",
-            "reviewer_name": "Jewelea Shubert",
-            "verified": true
-          }
-        },
-        "review_zjJJUC": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "title": "Learning",
-            "body": "Easy breakdown of the movements, able to review as many times as needed and a great activation workout",
-            "reviewer_name": "Samantha Medina",
-            "verified": true
-          }
-        },
-        "review_DJ4p3y": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "title": "Fun Excited",
-            "body": "It was different still need more practice to where I want it but I love it",
-            "reviewer_name": "Rosa Cordova",
-            "verified": true
-          }
-        },
-        "review_PtVHeL": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "title": "Love it!",
-            "body": "Such a fun class. Highly recommend.",
-            "reviewer_name": "Kacey Samiee",
-            "verified": true
-          }
-        },
-        "review_6P8rC8": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "title": "Love it!",
-            "body": "I love the twerk program so much !!",
-            "reviewer_name": "L M Neveu",
-            "verified": true
-          }
-        },
-        "review_yU8QyC": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "title": "Awesome Explanation",
-            "body": "I've always had a hard time learning how to move my booty and with this class I'm able to understand and learning how to! Thanks!",
-            "reviewer_name": "Nicole Swadling",
-            "verified": true
-          }
-        },
-        "review_mFyLYX": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "title": "Twerk class",
-            "body": "Great how to class. Very fun",
-            "reviewer_name": "Sacheen M Gonzales",
-            "verified": true
-          }
-        },
-        "review_G9tq8W": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "title": "",
-            "body": "These shorts are really nice material! Comfy!",
-            "reviewer_name": "Christina Le",
-            "verified": true
-          }
-        },
-        "review_99kpre": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "title": "",
-            "body": "Wife loves them will buy more",
-            "reviewer_name": "Matt Holmes",
-            "verified": true
-          }
-        },
-        "review_bHTkcQ": {
-          "type": "review",
-          "settings": {
-            "rating": 4,
-            "title": "It's worth it",
-            "body": "The workout - is it worth it? Well let me twerk it! Seriously, I love the workout, it really is awesome!",
-            "reviewer_name": "Carrie Barnhart",
-            "verified": true
-          }
-        },
-        "review_CFm8Am": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "title": "So much fun!",
-            "body": "I love this program! It's super fun and makes me feel super sexy while doing it!",
-            "reviewer_name": "Lili Henderson",
-            "verified": true
-          }
-        }
-      },
-      "block_order": [
-        "review_x9fFCT",
-        "review_Q9hRDx",
-        "review_AmARNk",
-        "review_KqYJQB",
-        "review_EPUBfV",
-        "review_AEiPBc",
-        "review_Dwfeyn",
-        "review_8ArPHz",
-        "review_icRgey",
-        "review_C6AmG4",
-        "review_zjJJUC",
-        "review_DJ4p3y",
-        "review_PtVHeL",
-        "review_6P8rC8",
-        "review_yU8QyC",
-        "review_mFyLYX",
-        "review_G9tq8W",
-        "review_99kpre",
-        "review_bHTkcQ",
-        "review_CFm8Am"
-      ],
-      "name": "Testimonials",
-      "settings": {
-        "heading_count": "Customer Reviews",
-        "subtitle": "",
-        "enable_judgeme_badge": true
-      }
-    },
     "booty_workouts_KMFCjK": {
       "type": "booty-workouts",
       "blocks": {
@@ -1673,49 +1707,70 @@
           "type": "gallery_image",
           "settings": {
             "image": "shopify://shop_images/Image_1_a5d1b47f-d39f-4ae5-99eb-3ab197fdbc64.png",
-            "alt": ""
+            "alt": "",
+            "video_controls": true,
+            "video_loop": true,
+            "video_autoplay_active": true
           }
         },
         "gallery_image_yijL8P": {
           "type": "gallery_image",
           "settings": {
             "image": "shopify://shop_images/Image_2.png",
-            "alt": ""
+            "alt": "",
+            "video_controls": true,
+            "video_loop": true,
+            "video_autoplay_active": true
           }
         },
         "gallery_image_TWXefQ": {
           "type": "gallery_image",
           "settings": {
             "image": "shopify://shop_images/Image_3_abc9ffcc-2f57-4171-8405-43ed7b932224.png",
-            "alt": ""
+            "alt": "",
+            "video_controls": true,
+            "video_loop": true,
+            "video_autoplay_active": true
           }
         },
         "gallery_image_q6aBpx": {
           "type": "gallery_image",
           "settings": {
             "image": "shopify://shop_images/Image_4_c015493c-8a4c-44cc-8e03-f7ea412002ae.png",
-            "alt": ""
+            "alt": "",
+            "video_controls": true,
+            "video_loop": true,
+            "video_autoplay_active": true
           }
         },
         "gallery_image_bjPaFt": {
           "type": "gallery_image",
           "settings": {
             "image": "shopify://shop_images/Community_1.2.png",
-            "alt": ""
+            "alt": "",
+            "video_controls": true,
+            "video_loop": true,
+            "video_autoplay_active": true
           }
         },
         "gallery_image_9V7jQb": {
           "type": "gallery_image",
           "settings": {
             "image": "shopify://shop_images/Image_5_5f979a1b-b8d8-4f50-83c1-67a6121d0b4d.png",
-            "alt": ""
+            "alt": "",
+            "video_controls": true,
+            "video_loop": true,
+            "video_autoplay_active": true
           }
         },
         "gallery_image_7T9dYe": {
           "type": "gallery_image",
           "settings": {
             "image": "shopify://shop_images/Image_6_09c95840-3a7b-4f83-8e10-5adf96265560.png",
-            "alt": ""
+            "alt": "",
+            "video_controls": true,
+            "video_loop": true,
+            "video_autoplay_active": true
           }
         },
         "benefit_nh6tFi": {
@@ -1807,6 +1862,8 @@
         "title_part_3": "Feel Like Fun",
         "starting_price": "Starting from just $59",
         "description": "<p>Twerk workouts from world-famous Nastya NASS help you tone your body, shape a beautiful booty, and make every workout fun and energizing.</p>",
+        "offer_banner_eyebrow": "Limited Time",
+        "offer_banner_title": "SUMMER START OFFER",
         "gallery_use_product_media": true,
         "hero_image": "shopify://shop_images/Banner_Product_1_935cbba9-6018-4188-95c4-4f0a3b9fe2bb.png",
         "image_radius": 30,
