@@ -3,11 +3,17 @@
   if request.page_type == 'product' and template.suffix == 'pop_booty'
     assign cta_opens_bundle_builder = true
   endif
+
+  if section.settings.anchor_id != blank
+    assign booty_workouts_anchor = section.settings.anchor_id | strip
+  else
+    assign booty_workouts_anchor = 'booty-workouts-' | append: section.id
+  endif
 %}
 
 <section
   class="section-booty-workouts booty-workouts"
-  id="booty-workouts-{{ section.id }}"
+  id="{{ booty_workouts_anchor | escape }}"
   data-section-id="{{ section.id }}"
   style="
     --booty-workouts-image-radius: {{ section.settings.image_radius }}px;
@@ -1589,7 +1595,7 @@
 
 <script>
   (() => {
-    const section = document.getElementById('booty-workouts-{{ section.id }}');
+    const section = document.getElementById('{{ booty_workouts_anchor | escape }}');
     if (!section) return;
     const shouldSyncBundleBuilderPreselect = {{ cta_opens_bundle_builder | json }};
 
@@ -1961,6 +1967,12 @@
   "tag": "section",
   "class": "section-booty-workouts",
   "settings": [
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Section anchor ID",
+      "info": "Used for in-page links, e.g. booty-workouts. Do not include #."
+    },
     { "type": "header", "content": "Heading & rating" },
     { "type": "text", "id": "rating_label", "label": "Rating label", "default": "Rated" },
     { "type": "text", "id": "rating_value", "label": "Rating value text", "default": "4.8/5 by Over 6000 Participants" },

@@ -384,6 +384,7 @@
         "review_XU4i7y"
       ],
       "settings": {
+        "anchor_id": "booty-workouts",
         "rating_label": "Rated",
         "rating_value": "4.8/5 by Over 6000 Participants",
         "title": "<p>Booty Workouts That <strong>Feel Like Fun</strong></p>",
@@ -2002,7 +2003,7 @@
       "name": "TS Sticky Add",
       "settings": {
         "product": "twerk-star",
-        "button_link": "",
+        "button_link": "#booty-workouts",
         "button_text": "Shop now",
         "background_button": "#FAFF00",
         "text_color_button": "#1a1a1a",

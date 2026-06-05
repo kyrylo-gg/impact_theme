@@ -110,7 +110,15 @@
     font-weight: 600;
     font-size: 13px;
     line-height: 100%;
-    color: #000000;
+    color: var(--sublime-text-color-desktop, #000000);
+  }
+
+  .custom-quick-add-product-title {
+    margin: 0 0 4px;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.2;
+    color: var(--product-title-color, var(--block-text-color, #000));
   }
 
   .price,
@@ -172,10 +180,15 @@
   .custom-quick-add-main .price-list .money,
   .custom-quick-add-main .price-list .text-subdued,
   .custom-quick-add-main .price-list .text-on-sale {
-    color: #000000 !important;
+    color: var(--price-sale-color, var(--block-text-color, #000)) !important;
     font-weight: 500;
     font-size: 13px;
     line-height: 100%;
+  }
+
+  .custom-quick-add-main .price-list .text-subdued,
+  .custom-quick-add-main .price-list compare-at-price {
+    color: var(--price-compare-color, var(--block-text-color, #000)) !important;
   }
 
   .custom-quick-add-main .price-list .money {
@@ -314,11 +327,11 @@
 
     .time-label {
       font-size: 9px;
-      color: #000000;
+      color: var(--mobile-labels-color, var(--labels-color, #000));
     }
 
     .timer-desktop .time-label {
-      color: #000000;
+      color: var(--mobile-labels-color, var(--labels-color, #000));
     }
 
     .timer-desktop .time-value {
@@ -345,10 +358,19 @@
     .custom-quick-add-main .price-list .money,
     .custom-quick-add-main .price-list .text-subdued,
     .custom-quick-add-main .price-list .text-on-sale {
-      color: #000000 !important;
+      color: var(--price-sale-color, var(--block-text-color, #000)) !important;
       font-weight: 500;
       font-size: 13px;
       line-height: 1.2;
+    }
+
+    .custom-quick-add-main .price-list .text-subdued,
+    .custom-quick-add-main .price-list compare-at-price {
+      color: var(--price-compare-color, var(--block-text-color, #000)) !important;
+    }
+
+    .custom-quick-add-product-title {
+      color: var(--product-title-color, var(--block-text-color, #000));
     }
 
     .custom-quick-add-main .price-list .money {
@@ -409,11 +431,10 @@
 
     .custom-quick-add-sublime.sublime-mobile {
       margin-top: 0;
-      color: black;
     }
 
     .sublime-mobile .custom-quick-add-sublime-text {
-      color: black;
+      color: var(--sublime-text-color-mobile, var(--sublime-text-color-desktop, #000));
     }
 
     .custom-quick-add-sublime-icon {
@@ -479,7 +500,7 @@
 
     .custom-quick-add-main__savings {
       font-size: 8px;
-      color: #000000 !important;
+      color: var(--mobile-savings-badge-color, var(--savings-badge-color, #000)) !important;
     }
   }
   .inverse {
@@ -490,15 +511,21 @@
   #shopify-section-{{ section.id }} {
       --countdown-background: {{ section.settings.countdown_background }};
       --countdown-color: {{ section.settings.countdown_color }};
-      --labels-color: {{ section.settings.labels_color }};
+      --labels-color: {{ section.settings.labels_color | default: '#000000' }};
       --block-text-color: {{ section.settings.block_text_color | default: '#ffffff' }};
-      --sublime-text-color: {{ section.settings.sublime_text_color | default: '#ffffff' }};
+      --product-title-color: {{ section.settings.product_title_color | default: section.settings.block_text_color | default: '#ffffff' }};
+      --price-sale-color: {{ section.settings.price_sale_color | default: section.settings.block_text_color | default: '#ffffff' }};
+      --price-compare-color: {{ section.settings.price_compare_color | default: section.settings.block_text_color | default: '#ffffff' }};
+      --savings-badge-color: {{ section.settings.savings_badge_color | default: section.settings.block_text_color | default: '#000000' }};
+      --sublime-text-color-desktop: {{ section.settings.sublime_text_color | default: '#ffffff' }};
+      --sublime-text-color-mobile: {{ section.settings.sublime_text_color_mobile | default: section.settings.sublime_text_color | default: '#000000' }};
   }
   @media screen and (max-width: 768px) {
       #shopify-section-{{ section.id }} {
           --mobile-countdown-background: {{ section.settings.mobile_countdown_background }};
           --mobile-countdown-color: {{ section.settings.mobile_countdown_color }};
-          --mobile-labels-color: {{ section.settings.mobile_labels_color }};
+          --mobile-labels-color: {{ section.settings.mobile_labels_color | default: section.settings.labels_color | default: '#ffffff' }};
+          --mobile-savings-badge-color: {{ section.settings.mobile_savings_badge_color | default: section.settings.savings_badge_color | default: section.settings.block_text_color | default: '#000000' }};
       }
   }
 
@@ -511,13 +538,13 @@
     font-weight: 700;
     font-size: 9px;
     line-height: 140%;
-    color: #000000;
+    color: var(--savings-badge-color, #000000);
     margin: 3px auto 0;
   }
 
   @media (max-width: 768px) {
     .custom-quick-add-main__savings {
-      color: #000000;
+      color: var(--mobile-savings-badge-color, var(--savings-badge-color, #000000));
     }
   }
 </style>
@@ -553,6 +580,8 @@
   assign sticky_cta_href = section.settings.button_link
   if is_hips_complete_system_anchor_template
     assign sticky_cta_href = '#complete-system'
+  elsif template.name == 'product' and template.suffix == 'pop_booty' and sticky_cta_href == blank
+    assign sticky_cta_href = '#booty-workouts'
   endif
 -%}
 
@@ -574,22 +603,22 @@
         {% assign labels = 'Days,Hours,Mins,Secs' | split: ',' %}
         <div class="timer-block flex items-center">
           <span class="time-value" data-cell="days">00</span>
-          <span class="time-label">{{ labels[0] }}</span>
+          <span class="time-label">{{ section.settings.label_days | default: labels[0] | escape }}</span>
         </div>
         <span class="colon">:</span>
         <div class="timer-block flex items-center">
           <span class="time-value" data-cell="hours">00</span>
-          <span class="time-label">{{ labels[1] }}</span>
+          <span class="time-label">{{ section.settings.label_hours | default: labels[1] | escape }}</span>
         </div>
         <span class="colon">:</span>
         <div class="timer-block flex items-center">
           <span class="time-value" data-cell="minutes">00</span>
-          <span class="time-label">{{ labels[2] }}</span>
+          <span class="time-label">{{ section.settings.label_minutes | default: labels[2] | escape }}</span>
         </div>
         <span class="colon">:</span>
         <div class="timer-block flex items-center">
           <span class="time-value" data-cell="seconds">00</span>
-          <span class="time-label">{{ labels[3] }}</span>
+          <span class="time-label">{{ section.settings.label_seconds | default: labels[3] | escape }}</span>
         </div>
       </ts-timer>
     {% endif %}
@@ -626,20 +655,56 @@
 
     <div class="custom-quick-add-main {% if section.settings.timer_enabled == false %} full-width {% endif %}">
       <div class="custom-quick-add-main__price">
+        {% if section.settings.show_product_title and section.settings.product != blank %}
+          <p class="custom-quick-add-product-title">
+            {% if section.settings.product_title != blank %}
+              {{ section.settings.product_title | escape }}
+            {% else %}
+              {{ section.settings.product.title | escape }}
+            {% endif %}
+          </p>
+        {% endif %}
         {% assign current_variant = section.settings.product.selected_or_first_available_variant %}
         {%- render 'price-list',
           product: section.settings.product,
           variant: current_variant
         -%}
 
-        {% if current_variant.compare_at_price > current_variant.price %}
-          {% assign discount =
-            current_variant.compare_at_price
-            | minus: current_variant.price
-            | times: 100
-            | divided_by: current_variant.compare_at_price
+        {% if section.settings.show_savings_badge %}
+          {% liquid
+            assign savings_badge_text = section.settings.savings_badge_text | strip
+            assign savings_percentage_override = section.settings.savings_percentage_override | strip
+            assign savings_badge_suffix = section.settings.savings_badge_suffix | default: 'OFF' | strip
+            assign show_savings = false
+
+            if savings_badge_text != blank
+              assign show_savings = true
+            elsif current_variant.compare_at_price > current_variant.price
+              assign show_savings = true
+            elsif savings_percentage_override != blank
+              assign show_savings = true
+            endif
           %}
-          <p class="custom-quick-add-main__savings">{{ discount }}% OFF</p>
+
+          {% if show_savings %}
+            <p class="custom-quick-add-main__savings">
+              {% if savings_badge_text != blank %}
+                {{ savings_badge_text | escape }}
+              {% else %}
+                {% if savings_percentage_override != blank %}
+                  {% assign discount = savings_percentage_override %}
+                {% else %}
+                  {% assign discount =
+                    current_variant.compare_at_price
+                    | minus: current_variant.price
+                    | times: 100
+                    | divided_by: current_variant.compare_at_price
+                  %}
+                {% endif %}
+                {{ discount }}% {{ savings_badge_suffix | escape }}
+              {% endif %}
+            </p>
+          {% endif %}
         {% endif %}
       </div>
       <a
@@ -766,13 +831,106 @@
     {
       "type": "color",
       "id": "block_text_color",
-      "label": "Block text color"
+      "label": "Block text color",
+      "info": "Fallback for product title and prices when their colors are empty."
+    },
+    {
+      "type": "header",
+      "content": "Typography colors"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_product_title",
+      "label": "Show product title",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "product_title",
+      "label": "Product title override",
+      "info": "Leave empty to use the selected product title."
     },
     {
       "type": "color",
-      "id": "block_background",
-      "label": "Block background color",
-      "default": "#1a1a1a"
+      "id": "product_title_color",
+      "label": "Product title color"
+    },
+    {
+      "type": "color",
+      "id": "price_sale_color",
+      "label": "Sale price color"
+    },
+    {
+      "type": "color",
+      "id": "price_compare_color",
+      "label": "Compare-at price color"
+    },
+    {
+      "type": "color",
+      "id": "labels_color",
+      "label": "Timer labels color (Desktop)",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "mobile_labels_color",
+      "label": "Timer labels color (Mobile)",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Discount badge"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_savings_badge",
+      "label": "Show discount badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "savings_badge_text",
+      "label": "Discount badge text (full override)",
+      "info": "Example: 79% OFF. If filled, percentage and suffix below are ignored."
+    },
+    {
+      "type": "text",
+      "id": "savings_percentage_override",
+      "label": "Discount percentage override",
+      "info": "Optional. Use a custom number instead of auto-calculated discount."
+    },
+    {
+      "type": "text",
+      "id": "savings_badge_suffix",
+      "label": "Discount badge suffix",
+      "default": "OFF",
+      "info": "Shown after the percentage when using auto-calculated discount."
+    },
+    {
+      "type": "color",
+      "id": "savings_badge_color",
+      "label": "Discount badge color (Desktop)",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "mobile_savings_badge_color",
+      "label": "Discount badge color (Mobile)"
+    },
+    {
+      "type": "color",
+      "id": "sublime_text_color",
+      "label": "Sublime text color (Desktop)",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "sublime_text_color_mobile",
+      "label": "Sublime text color (Mobile)"
+    },
+    {
+      "type": "header",
+      "content": "Sublime text"
     },
     {
       "type": "richtext",
@@ -782,9 +940,9 @@
     },
     {
       "type": "color",
-      "id": "sublime_text_color",
-      "label": "Sublime text color",
-      "default": "#ffffff"
+      "id": "block_background",
+      "label": "Block background color",
+      "default": "#1a1a1a"
     },
     {
       "type": "header",
@@ -910,19 +1068,31 @@
     },
     {
       "type": "header",
-      "content": "Labels - settings"
+      "content": "Timer labels"
     },
     {
-      "type": "color",
-      "id": "labels_color",
-      "label": "Labels color",
-      "default": "#000000"
+      "type": "text",
+      "id": "label_days",
+      "label": "Days label",
+      "default": "Days"
     },
     {
-      "type": "color",
-      "id": "mobile_labels_color",
-      "label": "Labels color (Mobile)",
-      "default": "#ffffff"
+      "type": "text",
+      "id": "label_hours",
+      "label": "Hours label",
+      "default": "Hours"
+    },
+    {
+      "type": "text",
+      "id": "label_minutes",
+      "label": "Minutes label",
+      "default": "Mins"
+    },
+    {
+      "type": "text",
+      "id": "label_seconds",
+      "label": "Seconds label",
+      "default": "Secs"
     }
   ],
   "presets": [
