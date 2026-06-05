@@ -17,7 +17,13 @@
           assign show_student_progress_title = true
         endif
       endunless
-      assign show_student_progress_subheading = section.settings.subheading != blank
+
+      assign show_student_progress_subheading = false
+      if request.page_type == 'product' and template.suffix == 'pop_booty' and section.settings.show_pop_booty_footer
+        if section.settings.subheading != blank
+          assign show_student_progress_subheading = true
+        endif
+      endif
     %}
     {% if show_student_progress_title or show_student_progress_subheading %}
       <div class="student-progress__header">
@@ -600,12 +606,6 @@
       "default": false
     },
     {
-      "type": "richtext",
-      "id": "subheading",
-      "label": "Subheading",
-      "info": "Shown below the blue divider."
-    },
-    {
       "type": "header",
       "content": "Pop Booty footer"
     },
@@ -614,6 +614,12 @@
       "id": "show_pop_booty_footer",
       "label": "Show CTA & trust badges on pop_booty",
       "default": false
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "info": "pop_booty only. Shown below the blue divider when Pop Booty footer is enabled (Student Progress 1)."
     },
     {
       "type": "text",
