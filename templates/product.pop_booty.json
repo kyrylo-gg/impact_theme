@@ -220,7 +220,7 @@
           "settings": {
             "video": "shopify://files/videos/0605-ezgif.com-gif-maker_883dba9d-8855-48f5-b54e-032b9e5bbd57.webm",
             "alt": "",
-            "video_controls": true,
+            "video_controls": false,
             "video_loop": true,
             "video_autoplay_active": true
           }
