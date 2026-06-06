@@ -3172,7 +3172,8 @@
         nextBtn.disabled = false;
         var nextVisibleIndex = getNextVisibleStepIndex(index);
         if (nextVisibleIndex < 0) {
-          nextBtn.innerHTML = '<span class="bb-wizard-btn-text">Add to cart</span><span class="bb-wizard-btn-arrow" aria-hidden="true">→</span>';
+          var reviewCtaText = isBodyTransformationTemplate ? 'Complete Order' : 'Add to cart';
+          nextBtn.innerHTML = '<span class="bb-wizard-btn-text">' + reviewCtaText + '</span><span class="bb-wizard-btn-arrow" aria-hidden="true">→</span>';
         } else {
           nextBtn.textContent = 'Next';
         }

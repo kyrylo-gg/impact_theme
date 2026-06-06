@@ -710,6 +710,7 @@
       <a
         href="{{ sticky_cta_href }}"
         class="custom-quick-add-button"
+        {% if template.name == 'product' and template.suffix == 'body_transformation' %}data-bt-sticky-open-bundle{% endif %}
         style="background:{{ section.settings.background_button }}; color:{{ section.settings.text_color_button }}"
       >
         {{ section.settings.button_text }}
@@ -755,6 +756,37 @@
     }
 
     if (!sticky) return;
+
+    if (isBodyTransformationPage) {
+      var stickyBundleBtn = sticky.querySelector('[data-bt-sticky-open-bundle]');
+      if (stickyBundleBtn) {
+        stickyBundleBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          function tryOpenBundleWizard(maxRetries) {
+            maxRetries = typeof maxRetries === 'number' ? maxRetries : 25;
+            var retries = 0;
+            function tick() {
+              var bb = (window.NassBundleBuilder && typeof window.NassBundleBuilder.openWizard === 'function')
+                ? window.NassBundleBuilder
+                : null;
+              if (bb) {
+                bb.openWizard();
+                return;
+              }
+              if (retries >= maxRetries) {
+                window.location.hash = '#nass-bundle-builder';
+                return;
+              }
+              retries += 1;
+              window.location.hash = '#nass-bundle-builder';
+              setTimeout(tick, 100);
+            }
+            tick();
+          }
+          tryOpenBundleWizard();
+        });
+      }
+    }
 
     function hasPassedCountdownAnchor(el) {
       if (!el) return true;

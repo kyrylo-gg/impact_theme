@@ -11,7 +11,11 @@
   assign bottom_2 = section.settings.bottom_2 | default: "Here's who built this system — and why it's different."
   assign is_hips_a_like = false
   assign is_hips_b_like = false
+  assign is_body_transformation = false
   if template.name == 'product'
+    if template.suffix == 'body_transformation'
+      assign is_body_transformation = true
+    endif
     if template.suffix == 'hips_a' or template.suffix == 'hips_a_ceo' or template.suffix == 'hips_b' or template.suffix == 'hips_c' or template.suffix == 'hips_b-2'
       assign is_hips_a_like = true
     endif
@@ -22,7 +26,7 @@
 -%}
 
 <section
-  class="bt-wrap bt-pain{% if is_hips_a_like %} bt-pain--hips-a{% endif %}{% if is_hips_b_like %} bt-pain--hips-b{% endif %}"
+  class="bt-wrap bt-pain{% if is_body_transformation %} bt-pain--body-transformation{% endif %}{% if is_hips_a_like %} bt-pain--hips-a{% endif %}{% if is_hips_b_like %} bt-pain--hips-b{% endif %}"
   data-bt-pain
 >
   <div class="bt-container">
@@ -42,7 +46,7 @@
 
     <p class="bt-pain__subtitle">{{ subtitle | escape }}</p>
 
-    <div class="bt-pain__grid">
+    <div class="bt-pain__grid" data-bt-pain-grid>
       {%- for block in section.blocks -%}
         {%- assign variant = block.settings.variant | default: 'blue' -%}
         <button type="button" class="bt-pain__card bt-pain__card--{{ variant }}" data-bt-flip aria-label="Flip card">
@@ -74,6 +78,12 @@
       {%- endfor -%}
     </div>
 
+    <div class="bt-pain__dots" data-bt-pain-dots aria-hidden="true">
+      {%- for block in section.blocks -%}
+        <span class="bt-pain__dot{% if forloop.first %} is-active{% endif %}"></span>
+      {%- endfor -%}
+    </div>
+
     {%- unless bottom_1 == blank -%}
       <p class="bt-pain__bottom">{{ bottom_1 | escape }}</p>
     {%- endunless -%}
@@ -85,6 +95,8 @@
 (function(){
   var root = document.querySelector('[data-bt-pain]');
   if (!root) return;
+  var grid = root.querySelector('[data-bt-pain-grid]');
+  var dotsWrap = root.querySelector('[data-bt-pain-dots]');
   var cards = root.querySelectorAll('[data-bt-flip]');
 
   cards.forEach(function(btn){
@@ -93,6 +105,32 @@
       btn.classList.toggle('is-flipped');
     });
   });
+
+  if (grid && dotsWrap) {
+    var dots = Array.prototype.slice.call(dotsWrap.querySelectorAll('.bt-pain__dot'));
+    if (dots.length) {
+      function setActiveDot(i) {
+        dots.forEach(function(dot, idx) {
+          dot.classList.toggle('is-active', idx === i);
+        });
+      }
+
+      var dotTicking = false;
+      grid.addEventListener('scroll', function() {
+        if (dotTicking) return;
+        dotTicking = true;
+        requestAnimationFrame(function() {
+          dotTicking = false;
+          var card = grid.querySelector('[data-bt-flip]');
+          if (!card) return;
+          var w = card.getBoundingClientRect().width + 16;
+          var idx = Math.round(grid.scrollLeft / w);
+          idx = Math.max(0, Math.min(idx, dots.length - 1));
+          setActiveDot(idx);
+        });
+      }, { passive: true });
+    }
+  }
 
   var firstCard = cards[0];
   if (!firstCard) return;
@@ -110,7 +148,7 @@
   }
 
   firstCard.addEventListener('animationend', function(e) {
-    if (e.animationName === 'bt-pain-peek') {
+    if (e.animationName === 'bt-pain-peek' || e.animationName === 'bt-pain-flip-once') {
       firstCard.classList.remove('is-peek');
       firstCard.dataset.peekAnimating = 'false';
     }
@@ -148,21 +186,76 @@
   .bt-pain__subtitle { margin: 16px 0 0; text-align: center; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; color: #111; font-size: 14px; }
   @media (min-width: 768px) { .bt-pain__subtitle { font-size: 18px; margin-top: 24px; } }
 
-  .bt-pain__grid { margin-top: 32px; display: flex; flex-direction: column; gap: 20px; }
-  @media (min-width: 768px) { .bt-pain__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .bt-pain__grid {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 calc(50% - 167.5px);
+    margin-bottom: -8px;
+    padding-bottom: 8px;
+  }
+  .bt-pain__grid::-webkit-scrollbar { display: none; }
 
-  .bt-pain__card { width: 100%; height: 198px; border: 0; padding: 0; background: transparent; cursor: pointer; perspective: 1000px; }
-  @media (min-width: 768px) { .bt-pain__card { height: 259px; } }
+  .bt-pain__dots { margin-top: 24px; display: flex; justify-content: center; gap: 8px; }
+  .bt-pain__dot { height: 2px; width: 20px; background: rgba(138,138,138,0.4); border-radius: 999px; transition: width 150ms ease, background 150ms ease; }
+  .bt-pain__dot.is-active { width: 40px; background: #8A8A8A; }
+  @media (min-width: 768px) {
+    .bt-pain__dots { display: none; }
+  }
+
+  @media (min-width: 768px) {
+    .bt-pain__grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+      overflow: visible;
+      padding: 0;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  .bt-pain__card {
+    width: 335px;
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+    height: 198px;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+    perspective: 1000px;
+  }
+  @media (min-width: 768px) {
+    .bt-pain__card {
+      width: 100%;
+      flex: unset;
+      scroll-snap-align: unset;
+      height: 259px;
+    }
+  }
 
   .bt-pain__inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 500ms ease-out; }
   .bt-pain__card.is-flipped .bt-pain__inner { transform: rotateY(180deg); }
   .bt-pain__card.is-peek:not(.is-flipped) .bt-pain__inner { animation: bt-pain-peek 1800ms cubic-bezier(0.22, 1, 0.36, 1) 1; }
+  .bt-pain--body-transformation .bt-pain__card.is-peek:not(.is-flipped) .bt-pain__inner { animation: bt-pain-flip-once 2200ms cubic-bezier(0.22, 1, 0.36, 1) 1; }
 
   @keyframes bt-pain-peek {
     0% { transform: rotateY(0deg); }
     25% { transform: rotateY(36deg); }
     50% { transform: rotateY(0deg); }
     75% { transform: rotateY(-36deg); }
+    100% { transform: rotateY(0deg); }
+  }
+
+  @keyframes bt-pain-flip-once {
+    0% { transform: rotateY(0deg); }
+    40% { transform: rotateY(180deg); }
+    55% { transform: rotateY(180deg); }
     100% { transform: rotateY(0deg); }
   }
 
