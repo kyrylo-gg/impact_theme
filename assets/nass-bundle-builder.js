@@ -1018,13 +1018,10 @@
         || handle.indexOf('resistance-band-set') !== -1
         || (handle.indexOf('booty') !== -1 && handle.indexOf('band') !== -1)
       );
-      if (isBootyBandSet) return { free: true, mode: mode, type: 'booty_band' };
+      if (isBootyBandSet && mode === 'vip_or_essential') return { free: true, mode: mode, type: 'booty_band' };
       var isKneePads = title.indexOf('knee pads') !== -1 || title.indexOf('knee pad') !== -1 || handle.indexOf('knee pads') !== -1 || handle.indexOf('knee-pads') !== -1 || handle.indexOf('knee-pad') !== -1;
       if (isKneePads && mode === 'vip_or_essential' && skipProgramsStepOnOpen) {
         return { free: true, mode: mode, type: 'knee_pads' };
-      }
-      if (mode === 'booty_builder' && (title.indexOf('band') !== -1 || handle.indexOf('band') !== -1)) {
-        return { free: true, mode: mode, type: 'booty_band' };
       }
       return null;
     }
@@ -1038,7 +1035,7 @@
       if (!step || !step.id || !stepIsWorkoutEquipment(step.id)) return;
       if (skipProgramsStepOnOpen && !bbState.allowStep2AutoAdd) return;
       var mode = getSelectedBundleRuleMode();
-      if (!mode || !Array.isArray(step.productIds) || !step.productIds.length) return;
+      if (mode !== 'vip_or_essential' || !Array.isArray(step.productIds) || !step.productIds.length) return;
       if (bbState.cartOperationInProgress) {
         setTimeout(function() {
           if (!bbState.isOpen) return;
