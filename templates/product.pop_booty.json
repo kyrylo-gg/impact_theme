@@ -693,6 +693,7 @@
         },
         "step_leggings": {
           "type": "bundle_step",
+          "disabled": true,
           "settings": {
             "title": "Add sport shorts",
             "collection": "bundle-sport-shorts",

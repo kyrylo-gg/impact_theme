@@ -429,6 +429,7 @@
         "heading_highlight": "Twerk Moves",
         "hide_heading": false,
         "show_pop_booty_footer": false,
+        "subheading": "",
         "cta_text": "Shop Booty Programs",
         "cta_link": "",
         "badge_1_text": "30-Day Money-Back Guarantee",
@@ -688,7 +689,7 @@
         "bundle_row_3": {
           "type": "bundle_row",
           "settings": {
-            "label": "Knee Pads",
+            "label": "Booty Band Set",
             "price": "Free",
             "was": "$29"
           }
@@ -786,16 +787,6 @@
             "program_pack_product_secondary": ""
           }
         },
-        "bundle_step_KMpd7k": {
-          "type": "bundle_step",
-          "settings": {
-            "title": "Add  Booty Shorts",
-            "collection": "bundle-swim-shorts",
-            "is_programs_step": false,
-            "program_pack_product": "",
-            "program_pack_product_secondary": ""
-          }
-        },
         "step_shorts": {
           "type": "bundle_step",
           "settings": {
@@ -806,8 +797,19 @@
             "program_pack_product_secondary": ""
           }
         },
+        "bundle_step_KMpd7k": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "Add  Booty Shorts",
+            "collection": "bundle-swim-shorts",
+            "is_programs_step": false,
+            "program_pack_product": "",
+            "program_pack_product_secondary": ""
+          }
+        },
         "step_leggings": {
           "type": "bundle_step",
+          "disabled": true,
           "settings": {
             "title": "Add sport shorts",
             "collection": "bundle-sport-shorts",
@@ -830,8 +832,8 @@
       "block_order": [
         "step_programs",
         "bundle_step_bb96UU",
-        "bundle_step_KMpd7k",
         "step_shorts",
+        "bundle_step_KMpd7k",
         "step_leggings",
         "step_tops"
       ],
@@ -1335,9 +1337,23 @@
         "background_button": "#faff00",
         "text_color_button": "#1a1a1a",
         "block_text_color": "#1a1a1a",
-        "block_background": "#efa3c1",
-        "sublime_text": "<p>Get Your Booty Summer-Ready</p>",
+        "show_product_title": false,
+        "product_title": "",
+        "product_title_color": "",
+        "price_sale_color": "",
+        "price_compare_color": "",
+        "labels_color": "#000000",
+        "mobile_labels_color": "#ffffff",
+        "show_savings_badge": true,
+        "savings_badge_text": "",
+        "savings_percentage_override": "",
+        "savings_badge_suffix": "OFF",
+        "savings_badge_color": "#000000",
+        "mobile_savings_badge_color": "",
         "sublime_text_color": "#1a1a1a",
+        "sublime_text_color_mobile": "",
+        "sublime_text": "<p>Get Your Booty Summer-Ready</p>",
+        "block_background": "#efa3c1",
         "timer_enabled": true,
         "timer_type": "daily",
         "cancel_date": "01-01-2026 12:00",
@@ -1350,8 +1366,10 @@
         "countdown_color": "#ffffff",
         "mobile_countdown_background": "#052010",
         "mobile_countdown_color": "#ffffff",
-        "labels_color": "#000000",
-        "mobile_labels_color": "#ffffff"
+        "label_days": "Days",
+        "label_hours": "Hours",
+        "label_minutes": "Mins",
+        "label_seconds": "Secs"
       }
     }
   },

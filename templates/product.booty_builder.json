@@ -520,6 +520,7 @@
         "heading_highlight": "Twerk Moves",
         "hide_heading": false,
         "show_pop_booty_footer": false,
+        "subheading": "",
         "cta_text": "Shop Booty Programs",
         "cta_link": "",
         "badge_1_text": "30-Day Money-Back Guarantee",
@@ -770,6 +771,16 @@
             "program_pack_product_secondary": "all-in-one-bundle"
           }
         },
+        "bundle_step_bb96UU": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "Workout Equipment",
+            "collection": "bundle-equipment-copy",
+            "is_programs_step": false,
+            "program_pack_product": "",
+            "program_pack_product_secondary": ""
+          }
+        },
         "extra_step_CbpKAM": {
           "type": "extra_step",
           "disabled": true,
@@ -786,16 +797,6 @@
             "collection": "halter-tops"
           }
         },
-        "bundle_step_KMpd7k": {
-          "type": "bundle_step",
-          "settings": {
-            "title": "Add  Booty Shorts",
-            "collection": "bundle-swim-shorts",
-            "is_programs_step": false,
-            "program_pack_product": "",
-            "program_pack_product_secondary": ""
-          }
-        },
         "step_shorts": {
           "type": "bundle_step",
           "settings": {
@@ -806,8 +807,19 @@
             "program_pack_product_secondary": ""
           }
         },
+        "bundle_step_KMpd7k": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "Add  Booty Shorts",
+            "collection": "bundle-swim-shorts",
+            "is_programs_step": false,
+            "program_pack_product": "",
+            "program_pack_product_secondary": ""
+          }
+        },
         "step_leggings": {
           "type": "bundle_step",
+          "disabled": true,
           "settings": {
             "title": "Add sport shorts",
             "collection": "bundle-sport-shorts",
@@ -825,28 +837,17 @@
             "program_pack_product": "",
             "program_pack_product_secondary": ""
           }
-        },
-        "bundle_step_bb96UU": {
-          "type": "bundle_step",
-          "disabled": true,
-          "settings": {
-            "title": "Workout Equipment",
-            "collection": "bundle-equipment-copy",
-            "is_programs_step": false,
-            "program_pack_product": "",
-            "program_pack_product_secondary": ""
-          }
         }
       },
       "block_order": [
         "step_programs",
+        "bundle_step_bb96UU",
         "extra_step_CbpKAM",
         "extra_step_LYfDj4",
-        "bundle_step_KMpd7k",
         "step_shorts",
+        "bundle_step_KMpd7k",
         "step_leggings",
-        "step_tops",
-        "bundle_step_bb96UU"
+        "step_tops"
       ],
       "settings": {
         "image_1": "shopify://shop_images/Frame_7-6.png",
@@ -856,7 +857,7 @@
         "bb_title_prefix": "GET THE BOOTY.",
         "bb_title_accent": "OWN THE SUMMER.",
         "bb_description": "Mix programs, shorts, and tops. Get 60% off all clothing when you purchase the VIP Bundle or All-In-One Bundles",
-        "bb_badge_pill_text": "2 Free  Items with VIP Bundle or All-In-One Bundles Until 7/1",
+        "bb_badge_pill_text": "Free Booty Band Set with VIP Bundle or All-In-One Bundles",
         "bb_promo_banner_text": "60% OFF ALL CLOTHING / with VIP  or All-In One Bundle purchase",
         "bb_show_countdown": false,
         "bb_countdown_mode": "daily_kyiv_10am",
@@ -876,8 +877,8 @@
         "program_pack_product_secondary": "all-in-one-bundle",
         "discount_code": "",
         "show_discount_banner": true,
-        "discount_promo_text": "2 Free Items with VIP Bundle or All-In-One Bundles Until 7/1",
-        "discount_applied_text": "2 Free Products applied!",
+        "discount_promo_text": "Free Booty Band Set with VIP Bundle or All-In-One Bundles",
+        "discount_applied_text": "Free Booty Band Set Applied!",
         "size_chart_config_handle": "size-chart-settings",
         "storefront_api_token": "568094b7f376083a4b0dc6fee4785741"
       }
@@ -1348,9 +1349,23 @@
         "background_button": "#faff00",
         "text_color_button": "#1a1a1a",
         "block_text_color": "#1a1a1a",
-        "block_background": "#efa3c1",
-        "sublime_text": "<p>Get Your Booty Summer-Ready</p>",
+        "show_product_title": false,
+        "product_title": "",
+        "product_title_color": "",
+        "price_sale_color": "",
+        "price_compare_color": "",
+        "labels_color": "#000000",
+        "mobile_labels_color": "#ffffff",
+        "show_savings_badge": true,
+        "savings_badge_text": "",
+        "savings_percentage_override": "",
+        "savings_badge_suffix": "OFF",
+        "savings_badge_color": "#000000",
+        "mobile_savings_badge_color": "",
         "sublime_text_color": "#1a1a1a",
+        "sublime_text_color_mobile": "",
+        "sublime_text": "<p>Get Your Booty Summer-Ready</p>",
+        "block_background": "#efa3c1",
         "timer_enabled": true,
         "timer_type": "daily",
         "cancel_date": "01-01-2026 12:00",
@@ -1363,8 +1378,10 @@
         "countdown_color": "#ffffff",
         "mobile_countdown_background": "#052010",
         "mobile_countdown_color": "#ffffff",
-        "labels_color": "#000000",
-        "mobile_labels_color": "#ffffff"
+        "label_days": "Days",
+        "label_hours": "Hours",
+        "label_minutes": "Mins",
+        "label_seconds": "Secs"
       }
     }
   },

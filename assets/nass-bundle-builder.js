@@ -140,22 +140,8 @@
       || templateSuffix === 'booty-builder';
     const isBodyTransformationTemplate = templateSuffix === 'body_transformation';
     const skipProgramsStepOnOpen = templateSuffix === 'twerk_essential' || templateSuffix === 'twerk-essential';
-    const isVipPackTwoFreeItemsTemplate = templateSuffix === 'booty_builder'
-      || templateSuffix === 'booty-builder'
-      || templateSuffix === 'hips_a'
-      || templateSuffix === 'hips_a_ceo'
-      || templateSuffix === 'hips-a'
-      || templateSuffix === 'hips-a-ceo'
-      || templateSuffix === 'hips_b'
-      || templateSuffix === 'hips-b'
-      || templateSuffix === 'mega_twerk_with_bundles'
-      || templateSuffix === 'mega_twerk_with_bundleseo'
-      || templateSuffix === 'nass-fans'
-      || templateSuffix === 'nass_fans'
-      || templateSuffix === 'nass-fans-ab'
-      || templateSuffix === 'nass_fans_ab'
-      || templateSuffix === 'twerk-program-r1'
-      || templateSuffix === 'twerk_program_r1';
+    const isVipPackTwoFreeItemsTemplate = templateSuffix === 'nass-fans-ab'
+      || templateSuffix === 'nass_fans_ab';
     const isTwerkProgramR1Template = templateSuffix === 'twerk-program-r1'
       || templateSuffix === 'twerk_program_r1';
     const allowBootyBuilderRuleMode = true;

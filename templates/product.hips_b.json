@@ -629,6 +629,16 @@
             "program_pack_product_secondary": "all-in-one-bundle"
           }
         },
+        "bundle_step_CmaekB": {
+          "type": "bundle_step",
+          "settings": {
+            "title": "Workout equipment",
+            "collection": "bundle-equipment-copy",
+            "is_programs_step": false,
+            "program_pack_product": "",
+            "program_pack_product_secondary": ""
+          }
+        },
         "extra_step_LExAnB": {
           "type": "extra_step",
           "disabled": true,
@@ -657,6 +667,7 @@
         },
         "bundle_step_LqwfL9": {
           "type": "bundle_step",
+          "disabled": true,
           "settings": {
             "title": "Add sport shorts",
             "collection": "bundle-sport-shorts",
@@ -684,28 +695,17 @@
             "program_pack_product": "",
             "program_pack_product_secondary": ""
           }
-        },
-        "bundle_step_CmaekB": {
-          "type": "bundle_step",
-          "disabled": true,
-          "settings": {
-            "title": "add equipment",
-            "collection": "bundle-equipment-copy",
-            "is_programs_step": false,
-            "program_pack_product": "",
-            "program_pack_product_secondary": ""
-          }
         }
       },
       "block_order": [
         "bundle_step_9JpWYp",
+        "bundle_step_CmaekB",
         "extra_step_LExAnB",
         "extra_step_4fnBTd",
         "bundle_step_YmxnyE",
         "bundle_step_LqwfL9",
         "bundle_step_xUpX8h",
-        "bundle_step_nfPhdr",
-        "bundle_step_CmaekB"
+        "bundle_step_nfPhdr"
       ],
       "name": "Bundle Builder",
       "settings": {
@@ -733,8 +733,8 @@
         "program_pack_product_secondary": "all-in-one-bundle",
         "discount_code": "",
         "show_discount_banner": true,
-        "discount_promo_text": "2 Free Items with VIP Bundle or All-In-One Bundles Until 7/1",
-        "discount_applied_text": "2 Free Products applied!",
+        "discount_promo_text": "Free Booty Band Set with VIP Bundle or All-In-One Bundles",
+        "discount_applied_text": "Free Booty Band Set  Applied!",
         "size_chart_config_handle": "size-chart-settings",
         "storefront_api_token": ""
       }
@@ -912,9 +912,23 @@
         "background_button": "#faff00",
         "text_color_button": "#1a1a1a",
         "block_text_color": "#1a1a1a",
-        "block_background": "#efa3c1",
-        "sublime_text": "<p>Get Your Booty Summer-Ready</p>",
+        "show_product_title": false,
+        "product_title": "",
+        "product_title_color": "",
+        "price_sale_color": "",
+        "price_compare_color": "",
+        "labels_color": "#000000",
+        "mobile_labels_color": "#ffffff",
+        "show_savings_badge": true,
+        "savings_badge_text": "",
+        "savings_percentage_override": "",
+        "savings_badge_suffix": "OFF",
+        "savings_badge_color": "#000000",
+        "mobile_savings_badge_color": "",
         "sublime_text_color": "#1a1a1a",
+        "sublime_text_color_mobile": "",
+        "sublime_text": "<p>Get Your Booty Summer-Ready</p>",
+        "block_background": "#efa3c1",
         "timer_enabled": true,
         "timer_type": "daily",
         "cancel_date": "01-01-2026 12:00",
@@ -927,8 +941,10 @@
         "countdown_color": "#ffffff",
         "mobile_countdown_background": "#313131",
         "mobile_countdown_color": "#ffffff",
-        "labels_color": "#000000",
-        "mobile_labels_color": "#ffffff"
+        "label_days": "Days",
+        "label_hours": "Hours",
+        "label_minutes": "Mins",
+        "label_seconds": "Secs"
       }
     }
   },
