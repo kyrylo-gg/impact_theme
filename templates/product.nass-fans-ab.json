@@ -61,14 +61,13 @@
     },
     "hero_banner_main": {
       "type": "hero-banner-video",
-      "disabled": true,
       "settings": {
         "video": "shopify://files/videos/Banner Landing NASS desktop (1).webm",
         "mobile_video": "shopify://files/videos/Banner Landing NASS mobile (1) (1).webm",
         "flash_sale_text": "<p><strong>FLASH SALE:</strong> All 7 NASS Programs for $199 (<strong>81% Off</strong>)</p>",
         "title": "STOP HIDING",
         "subtitle": "For Stiff Hips, Zero Rhythm, and Feeling Like Your Body Won't Listen to You",
-        "description": "<p>Discover the system that turned <strong>40,000+ women</strong> into confident dancers — now every Nastya Nass program in one bundle, <u>built for the modern woman</u>.</p>",
+        "description": "<p>Discover the system that turned <strong>40,000+ women</strong> into confident dancers — now every Nastya Nass program in one bundle, <span style=\"text-decoration:underline\">built for the modern woman</span>.</p>",
         "cta_text": "START TWERKING LIKE A PRO",
         "cta_link": "#nass-bundle-builder",
         "students_count": "40,000+ Students",
@@ -248,7 +247,8 @@
       "name": "Video Reviews Grid",
       "settings": {
         "heading": "JOIN GIRLS WHO ALREADY",
-        "heading_highlight": "TWERK LIKE PROS"
+        "heading_highlight": "TWERK LIKE PROS",
+        "heading_highlight_line2": ""
       }
     },
     "twerk_lessons_MWt6Ji": {
@@ -331,7 +331,12 @@
       ],
       "settings": {
         "heading": "WHAT'S INSIDE THE",
-        "heading_highlight": "TWERK PROGRAM"
+        "heading_highlight": "TWERK PROGRAM",
+        "show_pop_booty_footer": false,
+        "cta_text": "Shop Booty Programs",
+        "cta_link": "",
+        "badge_1_text": "30-Day Money-Back Guarantee",
+        "badge_2_text": "World-Famous support"
       }
     },
     "program_cards_ykQqNc": {
@@ -344,7 +349,8 @@
             "description": "Discover the art of twerking with our easy-to-follow 7-day program for all skill levels.",
             "image": "shopify://shop_images/booty_band_asdasd_00345cad-3c6c-41b3-8e62-3953cf2c00ed.jpg",
             "level_badge": "",
-            "duration": "7 Days"
+            "duration": "7 Days",
+            "top_badge": ""
           }
         },
         "program_card_LQPeBc": {
@@ -354,7 +360,8 @@
             "description": "The most effective bootyworkouts which you can do at the comfort of your home.",
             "image": "shopify://shop_images/Frame_1.png",
             "level_badge": "",
-            "duration": "8 Weeks"
+            "duration": "8 Weeks",
+            "top_badge": ""
           }
         },
         "program_card_kXCJYU": {
@@ -364,7 +371,8 @@
             "description": "Great variety of booty-building exercises which you can perform with resistance band.",
             "image": "shopify://shop_images/stretching_band_set_0bd6ad28-abd3-424a-9f72-b4323b52ac50.jpg",
             "level_badge": "",
-            "duration": "8 Weeks"
+            "duration": "8 Weeks",
+            "top_badge": ""
           }
         },
         "program_card_6rgVPi": {
@@ -374,7 +382,8 @@
             "description": "12-week structured program designed to deliver confident and reliable weight loss results.",
             "image": "shopify://shop_images/booty_band_program_a55ac736-c2f1-4155-b953-1c676e9852a3.jpg",
             "level_badge": "",
-            "duration": "3 Months"
+            "duration": "3 Months",
+            "top_badge": ""
           }
         },
         "program_card_RTXiLb": {
@@ -384,7 +393,8 @@
             "description": "A structured program that frees your hips and prepares your body for more confident movement.",
             "image": "shopify://shop_images/Frame_5_5471b8c6-5678-4e09-8d03-91630b128711.png",
             "level_badge": "",
-            "duration": "4 Weeks"
+            "duration": "4 Weeks",
+            "top_badge": ""
           }
         }
       },
@@ -397,7 +407,13 @@
       ],
       "settings": {
         "heading": "ALL NASS BESTSELLERS",
-        "heading_highlight": "AT THE DANCE DAY PRICE"
+        "heading_highlight": "AT THE DANCE DAY PRICE",
+        "subheading": "",
+        "show_pop_booty_footer": false,
+        "cta_text": "Shop Booty Programs",
+        "cta_link": "",
+        "badge_1_text": "30-Day Money-Back Guarantee",
+        "badge_2_text": "World-Famous support"
       }
     },
     "student_progress_ez8yde": {
@@ -453,7 +469,14 @@
       ],
       "settings": {
         "heading": "Just 7 Days to Master",
-        "heading_highlight": "Twerk Moves"
+        "heading_highlight": "Twerk Moves",
+        "hide_heading": false,
+        "show_pop_booty_footer": false,
+        "subheading": "",
+        "cta_text": "Shop Booty Programs",
+        "cta_link": "",
+        "badge_1_text": "30-Day Money-Back Guarantee",
+        "badge_2_text": "World-Famous support"
       }
     },
     "social_proof_hPtKDy": {
@@ -647,7 +670,13 @@
       ],
       "settings": {
         "heading": "The twerk program everyone's",
-        "heading_highlight": "excited about"
+        "heading_highlight": "excited about",
+        "reviews_footer": "Experienced by over 6,000 girls",
+        "show_pop_booty_footer": false,
+        "cta_text": "Shop Booty Programs",
+        "cta_link": "",
+        "badge_1_text": "30-Day Money-Back Guarantee",
+        "badge_2_text": "World-Famous support"
       }
     },
     "nass_countdown_NypKK7": {
@@ -660,6 +689,11 @@
         "marquee_speed": 30,
         "title": "JOIN NASS TODAY",
         "show_arrows": true,
+        "countdown_mode": "daily_kyiv_10am",
+        "initial_days": 0,
+        "initial_hours": 0,
+        "initial_minutes": 0,
+        "initial_seconds": 0,
         "end_date": "2026-05-31 23:59",
         "label_days": "Days",
         "label_hours": "Hours",
@@ -1266,21 +1300,39 @@
         "background_button": "#faff00",
         "text_color_button": "#1a1a1a",
         "block_text_color": "#1a1a1a",
-        "block_background": "#efa3c1",
-        "sublime_text": "<p>Prep for Summer with NASS</p>",
+        "show_product_title": false,
+        "product_title": "",
+        "product_title_color": "",
+        "price_sale_color": "",
+        "price_compare_color": "",
+        "labels_color": "#000000",
+        "mobile_labels_color": "#ffffff",
+        "show_savings_badge": true,
+        "savings_badge_text": "",
+        "savings_percentage_override": "",
+        "savings_badge_suffix": "OFF",
+        "savings_badge_color": "#000000",
+        "mobile_savings_badge_color": "",
         "sublime_text_color": "#1a1a1a",
+        "sublime_text_color_mobile": "",
+        "sublime_text": "<p>Prep for Summer with NASS</p>",
+        "block_background": "#efa3c1",
         "timer_enabled": true,
         "timer_type": "daily",
         "cancel_date": "01-01-2026 12:00",
+        "cancel_days": 0,
         "cancel_time": 0,
         "cancel_minutes": 29,
+        "cancel_seconds": 0,
         "cancel_action": "none",
         "countdown_background": "#052010",
         "countdown_color": "#ffffff",
         "mobile_countdown_background": "#052010",
         "mobile_countdown_color": "#ffffff",
-        "labels_color": "#000000",
-        "mobile_labels_color": "#ffffff"
+        "label_days": "Days",
+        "label_hours": "Hours",
+        "label_minutes": "Mins",
+        "label_seconds": "Secs"
       }
     }
   },
