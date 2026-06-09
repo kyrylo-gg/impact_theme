@@ -79,10 +79,12 @@
       "type": "hero-banner-image",
       "name": "Hero Banner Image",
       "settings": {
+        "bg_desktop": "shopify://shop_images/Frame_344_c97cad18-4816-4d1e-b37f-524044835f1f.png",
+        "bg_mobile": "shopify://shop_images/Frame_346_444a5294-ca28-4f19-b9e5-81787980f326.png",
         "flash_sale_text": "<p><strong>FLASH SALE:</strong> All 7 NASS Programs for $199 (<strong>81% Off</strong>)</p>",
         "title": "STOP HIDING",
         "subtitle": "For Stiff Hips, Zero Rhythm, and Feeling Like Your Body Won't Listen to You",
-        "description": "<p>Discover the system that turned <strong>40,000+ women</strong> into confident dancers — now every Nastya Nass program in one bundle, <u>built for the modern woman</u>.</p>",
+        "description": "<p>Discover the system that turned <strong>40,000+ women</strong> into confident dancers — now every Nastya Nass program in one bundle, <span style=\"text-decoration:underline\">built for the modern woman</span>.</p>",
         "cta_text": "START TWERKING LIKE A PRO",
         "cta_link": "",
         "students_count": "40,000+ Students",
