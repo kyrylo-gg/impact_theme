@@ -109,8 +109,12 @@
       || templateSuffix === 'hips-c';
     const isBootyProgramDescriptionTemplate = templateSuffix === 'nass-fans'
       || templateSuffix === 'nass-fans-ab'
+      || templateSuffix === 'nass-fans-a-2'
+      || templateSuffix === 'nass-fans-b-2'
       || templateSuffix === 'nass_fans'
       || templateSuffix === 'nass_fans_ab'
+      || templateSuffix === 'nass_fans_a_2'
+      || templateSuffix === 'nass_fans_b_2'
       || templateSuffix === 'booty_builder'
       || templateSuffix === 'booty-builder'
       || templateSuffix === 'twerk_essential'
