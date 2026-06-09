@@ -108,11 +108,13 @@
     const isNassFansFamilyTemplate = templateSuffix.indexOf('nass-fans') === 0 || templateSuffix.indexOf('nass_fans') === 0;
     const isBundlesDescriptionTemplate = templateSuffix === 'mega_twerk_with_bundles' || templateSuffix === 'mega_twerk_with_bundleseo';
     const isHipsProgramDescriptionTemplate = templateSuffix === 'hips_a'
+      || templateSuffix === 'hips_a_ab'
       || templateSuffix === 'hips_a_ceo'
       || templateSuffix === 'hips_ceo'
       || templateSuffix === 'hips_b'
       || templateSuffix === 'hips_c'
       || templateSuffix === 'hips-a'
+      || templateSuffix === 'hips-a-ab'
       || templateSuffix === 'hips-a-ceo'
       || templateSuffix === 'hips-ceo'
       || templateSuffix === 'hips-b'
@@ -120,6 +122,7 @@
     const isBootyProgramDescriptionTemplate = isNassFansFamilyTemplate
       || templateSuffix === 'nass-fans'
       || templateSuffix === 'nass-fans-ab'
+      || templateSuffix === 'nass_fans_ab_test'
       || templateSuffix === 'booty_builder'
       || templateSuffix === 'booty-builder'
       || templateSuffix === 'twerk_essential'
