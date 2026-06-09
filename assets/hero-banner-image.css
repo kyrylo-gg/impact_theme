@@ -49,19 +49,7 @@
   display: block;
 }
 
-.hbi__img--desktop,
-.hbi__img--tilt {
-  display: none;
-}
-
-.hbi__img--tilt {
-  transform: rotate(1deg) scale(1.05);
-  opacity: 0.6;
-  mix-blend-mode: overlay;
-  z-index: 1;
-}
-
-.hbi.is-reduced-motion .hbi__img--tilt {
+.hbi__img--desktop {
   display: none;
 }
 
@@ -401,8 +389,7 @@
     display: none;
   }
 
-  .hbi__img--desktop,
-  .hbi__img--tilt {
+  .hbi__img--desktop {
     display: block;
   }
 

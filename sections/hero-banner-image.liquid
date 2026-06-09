@@ -24,24 +24,13 @@
     {%- if hbi_bg_desktop != blank -%}
       {{
         hbi_bg_desktop
-        | image_url: width: 2400
+        | image_url: width: 3840
         | image_tag:
           class: 'hbi__img hbi__img--desktop',
           loading: 'eager',
           fetchpriority: 'high',
           alt: '',
-          widths: '1280, 1920, 2400',
-          sizes: '100vw'
-      }}
-      {{
-        hbi_bg_desktop
-        | image_url: width: 2400
-        | image_tag:
-          class: 'hbi__img hbi__img--tilt',
-          loading: 'eager',
-          alt: '',
-          aria-hidden: 'true',
-          widths: '1280, 1920, 2400',
+          widths: '1280, 1920, 2560, 3200, 3840',
           sizes: '100vw'
       }}
     {%- else -%}
@@ -51,15 +40,6 @@
         alt=""
         loading="eager"
         fetchpriority="high"
-        width="2400"
-        height="1593"
-      >
-      <img
-        class="hbi__img hbi__img--tilt"
-        src="{{ 'hero-banner-image-desktop.png' | asset_url }}"
-        alt=""
-        aria-hidden="true"
-        loading="eager"
         width="2400"
         height="1593"
       >
