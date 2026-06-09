@@ -24,17 +24,22 @@
     });
   }
 
-  function openBundleBuilderWithRetry() {
-    var attempts = 0;
-    function tryOpen() {
-      if (window.NassBundleBuilder && typeof window.NassBundleBuilder.openWizard === 'function') {
-        window.NassBundleBuilder.openWizard();
-        return;
-      }
-      attempts += 1;
-      if (attempts < 30) setTimeout(tryOpen, 100);
+  function isBundleBuilderAnchor(href) {
+    if (!href) return false;
+    href = href.trim();
+    if (href === '#nass-bundle-builder') return true;
+    try {
+      return new URL(href, window.location.href).hash === '#nass-bundle-builder';
+    } catch (e) {
+      return false;
     }
-    tryOpen();
+  }
+
+  function scrollToBundleBuilder() {
+    var target = document.getElementById('nass-bundle-builder');
+    if (!target) return;
+    var behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+    target.scrollIntoView({ block: 'start', behavior: behavior });
   }
 
   function bindCta(section) {
@@ -43,9 +48,9 @@
       if (!cta) return;
 
       var href = (cta.getAttribute('href') || '').trim();
-      if (href === '#nass-bundle-builder') {
+      if (isBundleBuilderAnchor(href)) {
         event.preventDefault();
-        openBundleBuilderWithRetry();
+        scrollToBundleBuilder();
       }
     });
   }
