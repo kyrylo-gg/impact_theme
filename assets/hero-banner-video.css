@@ -67,11 +67,7 @@
 }
 
 .hero-banner__overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 29%, transparent 100%);
-  pointer-events: none;
+  display: none;
 }
 
 .hero-banner__content {
@@ -393,10 +389,6 @@
 
   .hero-banner__video--desktop {
     display: block;
-  }
-
-  .hero-banner__overlay {
-    background: var(--hb-overlay);
   }
 
   .hero-banner__content {
