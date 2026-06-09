@@ -1,0 +1,405 @@
+{%- liquid
+  assign hbi_bg_desktop = section.settings.bg_desktop
+  assign hbi_bg_mobile = section.settings.bg_mobile
+  if hbi_bg_mobile == blank
+    assign hbi_bg_mobile = hbi_bg_desktop
+  endif
+
+  assign hbi_heading_tag = 'h2'
+  if section.index == 1
+    assign hbi_heading_tag = 'h1'
+  endif
+-%}
+
+{{ 'hero-banner-image.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'hero-banner-image.js' | asset_url }}" defer></script>
+
+<section
+  class="hbi"
+  data-section-id="{{ section.id }}"
+  id="hero-banner-image-{{ section.id }}"
+  aria-label="{{ section.settings.title | default: 'Hero banner' | escape }}"
+>
+  <div class="hbi__media">
+    {%- if hbi_bg_desktop != blank -%}
+      {{
+        hbi_bg_desktop
+        | image_url: width: 2400
+        | image_tag:
+          class: 'hbi__img hbi__img--desktop',
+          loading: 'eager',
+          fetchpriority: 'high',
+          alt: '',
+          widths: '1280, 1920, 2400',
+          sizes: '100vw'
+      }}
+      {{
+        hbi_bg_desktop
+        | image_url: width: 2400
+        | image_tag:
+          class: 'hbi__img hbi__img--tilt',
+          loading: 'eager',
+          alt: '',
+          aria-hidden: 'true',
+          widths: '1280, 1920, 2400',
+          sizes: '100vw'
+      }}
+    {%- else -%}
+      <img
+        class="hbi__img hbi__img--desktop"
+        src="{{ 'hero-banner-image-desktop.png' | asset_url }}"
+        alt=""
+        loading="eager"
+        fetchpriority="high"
+        width="2400"
+        height="1593"
+      >
+      <img
+        class="hbi__img hbi__img--tilt"
+        src="{{ 'hero-banner-image-desktop.png' | asset_url }}"
+        alt=""
+        aria-hidden="true"
+        loading="eager"
+        width="2400"
+        height="1593"
+      >
+    {%- endif -%}
+
+    {%- if hbi_bg_mobile != blank -%}
+      {{
+        hbi_bg_mobile
+        | image_url: width: 900
+        | image_tag:
+          class: 'hbi__img hbi__img--mobile',
+          loading: 'eager',
+          fetchpriority: 'high',
+          alt: '',
+          widths: '375, 750, 900',
+          sizes: '100vw'
+      }}
+    {%- else -%}
+      <img
+        class="hbi__img hbi__img--mobile"
+        src="{{ 'hero-banner-image-mobile.png' | asset_url }}"
+        alt=""
+        loading="eager"
+        fetchpriority="high"
+        width="900"
+        height="1600"
+      >
+    {%- endif -%}
+
+    <div class="hbi__scrim" aria-hidden="true"></div>
+    <div class="hbi__glow" aria-hidden="true"></div>
+
+    <div class="hbi__content">
+      <div class="hbi__content-inner">
+        <div class="hbi__panel">
+          {%- if section.settings.flash_sale_text != blank -%}
+            <div class="hbi__flash">
+              {{ section.settings.flash_sale_text }}
+            </div>
+          {%- endif -%}
+
+          <div class="hbi__card">
+            {%- if section.settings.title != blank -%}
+              <{{ hbi_heading_tag }} class="hbi__title">{{ section.settings.title | escape }}</{{ hbi_heading_tag }}>
+            {%- endif -%}
+
+            {%- if section.settings.subtitle != blank -%}
+              <p class="hbi__subtitle">{{ section.settings.subtitle | escape }}</p>
+            {%- endif -%}
+
+            <div class="hbi__divider" aria-hidden="true"></div>
+
+            {%- if section.settings.description != blank -%}
+              <div class="hbi__description">{{ section.settings.description }}</div>
+            {%- endif -%}
+          </div>
+
+          {%- if section.settings.cta_text != blank -%}
+            <a
+              class="hbi__cta hbi__cta--desktop"
+              href="{{ section.settings.cta_link | default: '#nass-bundle-builder' }}"
+              data-analytics="hero_cta"
+              aria-label="{{ section.settings.cta_text | escape }}"
+            >
+              <span>{{ section.settings.cta_text | escape }}</span>
+              {% render 'icon-hb-arrow-right' %}
+            </a>
+          {%- endif -%}
+
+          <div class="hbi__trust hbi__trust--desktop">
+            <div class="hbi__rating">
+              {% render 'icon-hb-user' %}
+              <strong>{{ section.settings.students_count | escape }}</strong>
+              {% render 'icon-hb-stars' %}
+              <span>{{ section.settings.rating | escape }}</span>
+            </div>
+            <div class="hbi__benefits">
+              {%- if section.settings.benefit_1 != blank -%}
+                <span>{% render 'icon-hb-lock' %} {{ section.settings.benefit_1 | escape }}</span>
+              {%- endif -%}
+              {%- if section.settings.benefit_2 != blank -%}
+                <span>{% render 'icon-hb-check' %} {{ section.settings.benefit_2 | escape }}</span>
+              {%- endif -%}
+              {%- if section.settings.benefit_3 != blank -%}
+                <span>{% render 'icon-hb-truck' %} {{ section.settings.benefit_3 | escape }}</span>
+              {%- endif -%}
+            </div>
+          </div>
+
+          {%- if section.settings.show_review -%}
+            <div class="hbi__review hbi__review--desktop">
+              {%- if section.settings.review_avatar != blank -%}
+                {{
+                  section.settings.review_avatar
+                  | image_url: width: 96
+                  | image_tag:
+                    class: 'hbi__review-avatar',
+                    loading: 'lazy',
+                    alt: '',
+                    width: 48,
+                    height: 48
+                }}
+              {%- endif -%}
+              <div>
+                <div class="hbi__review-name">
+                  {{ section.settings.review_name | escape }}
+                  {% render 'icon-hb-stars' %}
+                </div>
+                {%- if section.settings.review_text != blank -%}
+                  <p class="hbi__review-text">{{ section.settings.review_text | escape }}</p>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+
+    {%- if section.settings.show_marquee and section.settings.marquee_text != blank -%}
+      <div class="hbi__marquee-wrap">
+        {% render 'hero-banner-marquee', text: section.settings.marquee_text %}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="hbi__below">
+    {%- if section.settings.cta_text != blank -%}
+      <a
+        class="hbi__cta"
+        href="{{ section.settings.cta_link | default: '#nass-bundle-builder' }}"
+        data-analytics="hero_cta"
+        aria-label="{{ section.settings.cta_text | escape }}"
+      >
+        <span>{{ section.settings.cta_text | escape }}</span>
+        {% render 'icon-hb-arrow-right' %}
+      </a>
+    {%- endif -%}
+
+    <div class="hbi__trust">
+      <div class="hbi__rating">
+        {% render 'icon-hb-user' %}
+        <strong>{{ section.settings.students_count | escape }}</strong>
+        {% render 'icon-hb-stars' %}
+        <span>{{ section.settings.rating | escape }}</span>
+      </div>
+      <div class="hbi__benefits">
+        {%- if section.settings.benefit_1 != blank -%}
+          <span>{% render 'icon-hb-lock' %} {{ section.settings.benefit_1 | escape }}</span>
+        {%- endif -%}
+        {%- if section.settings.benefit_2 != blank -%}
+          <span>{% render 'icon-hb-check' %} {{ section.settings.benefit_2 | escape }}</span>
+        {%- endif -%}
+        {%- if section.settings.benefit_3 != blank -%}
+          <span>{% render 'icon-hb-truck' %} {{ section.settings.benefit_3 | escape }}</span>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- if section.settings.show_review -%}
+      <div class="hbi__review">
+        {%- if section.settings.review_avatar != blank -%}
+          {{
+            section.settings.review_avatar
+            | image_url: width: 96
+            | image_tag:
+              class: 'hbi__review-avatar',
+              loading: 'lazy',
+              alt: '',
+              width: 48,
+              height: 48
+          }}
+        {%- endif -%}
+        <div>
+          <div class="hbi__review-name">
+            {{ section.settings.review_name | escape }}
+            {% render 'icon-hb-stars' %}
+          </div>
+          {%- if section.settings.review_text != blank -%}
+            <p class="hbi__review-text">{{ section.settings.review_text | escape }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Banner Image",
+  "tag": "section",
+  "class": "section-hero-banner-image",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_desktop",
+      "label": "Background image (desktop)",
+      "info": "Falls back to theme asset hero-banner-image-desktop.png when empty."
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_mobile",
+      "label": "Background image (mobile)",
+      "info": "Falls back to theme asset hero-banner-image-mobile.png when empty."
+    },
+    {
+      "type": "header",
+      "content": "Flash sale pill"
+    },
+    {
+      "type": "richtext",
+      "id": "flash_sale_text",
+      "label": "Flash sale text",
+      "default": "<p><strong>FLASH SALE:</strong> All 7 NASS Programs for $199 (<strong>81% Off</strong>)</p>"
+    },
+    {
+      "type": "header",
+      "content": "Headline"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "STOP HIDING"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "For Stiff Hips, Zero Rhythm, and Feeling Like Your Body Won't Listen to You"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Discover the system that turned <strong>40,000+ women</strong> into confident dancers — now every Nastya Nass program in one bundle, <u>built for the modern woman</u>.</p>"
+    },
+    {
+      "type": "header",
+      "content": "CTA"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "START TWERKING LIKE A PRO"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link"
+    },
+    {
+      "type": "header",
+      "content": "Trust row"
+    },
+    {
+      "type": "text",
+      "id": "students_count",
+      "label": "Students count",
+      "default": "40,000+ Students"
+    },
+    {
+      "type": "text",
+      "id": "rating",
+      "label": "Rating",
+      "default": "4.8/5"
+    },
+    {
+      "type": "text",
+      "id": "benefit_1",
+      "label": "Benefit 1",
+      "default": "Lifetime Access"
+    },
+    {
+      "type": "text",
+      "id": "benefit_2",
+      "label": "Benefit 2",
+      "default": "30-Day Money Back Guarantee"
+    },
+    {
+      "type": "text",
+      "id": "benefit_3",
+      "label": "Benefit 3",
+      "default": "Free Shipping"
+    },
+    {
+      "type": "header",
+      "content": "Review card"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_review",
+      "label": "Show review card",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "review_avatar",
+      "label": "Review avatar"
+    },
+    {
+      "type": "text",
+      "id": "review_name",
+      "label": "Review name",
+      "default": "Annie C."
+    },
+    {
+      "type": "textarea",
+      "id": "review_text",
+      "label": "Review text",
+      "default": "Best booty-shaking class out there. Clear instructions, I go at my own pace — and I'm already seeing progress!"
+    },
+    {
+      "type": "header",
+      "content": "Marquee"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_marquee",
+      "label": "Show marquee",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "marquee_text",
+      "label": "Marquee text",
+      "default": "ALL 7 PROGRAMS · $199"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner Image"
+    }
+  ]
+}
+{% endschema %}

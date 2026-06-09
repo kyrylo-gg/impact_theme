@@ -1,0 +1,589 @@
+.hero-banner {
+  --hb-yellow: #faff00;
+  --hb-star: #ffc300;
+  --hb-black: #000;
+  --hb-white: #fff;
+  --hb-muted: #959595;
+  --hb-glass-bg: rgba(255, 255, 255, 0.12);
+  --hb-glass-blur: 23px;
+  --hb-radius-lg: 30px;
+  --hb-radius-pill: 100px;
+  --hb-overlay: rgba(0, 0, 0, 0.4);
+  --hb-cta-glow: 0 0 20px rgba(255, 195, 0, 0.4), 0 0 40px rgba(255, 195, 0, 0.18);
+
+  position: relative;
+  width: 100%;
+  color: var(--hb-white);
+  overflow: hidden;
+}
+
+.shopify-section.shopify-section--hero-banner {
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+}
+
+.hero-banner__media {
+  position: relative;
+  width: 100%;
+  min-height: 622px;
+  overflow: hidden;
+}
+
+.hero-banner__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  z-index: 0;
+}
+
+.hero-banner__video--mobile {
+  display: block;
+}
+
+.hero-banner__video--desktop {
+  display: none;
+}
+
+.hero-banner__poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  display: none;
+}
+
+.hero-banner.is-reduced-motion .hero-banner__poster {
+  display: block;
+}
+
+.hero-banner.is-reduced-motion .hero-banner__video {
+  display: none !important;
+}
+
+.hero-banner__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 29%, transparent 100%);
+  pointer-events: none;
+}
+
+.hero-banner__content {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 16px 56px;
+}
+
+.hero-banner__content-inner {
+  width: 100%;
+  max-width: 540px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: auto;
+  padding-bottom: 24px;
+}
+
+.hero-banner__panel {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.hero-banner__flash {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  padding: 8px 16px;
+  border-radius: var(--hb-radius-pill);
+  background: var(--hb-yellow);
+  color: var(--hb-black);
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.hero-banner__flash strong {
+  font-weight: 700;
+}
+
+.hero-banner__card {
+  width: 100%;
+  padding: 20px;
+  border-radius: var(--hb-radius-lg);
+  background: var(--hb-glass-bg);
+  backdrop-filter: blur(var(--hb-glass-blur));
+  -webkit-backdrop-filter: blur(var(--hb-glass-blur));
+  text-align: center;
+}
+
+.hero-banner__title {
+  margin: 0 auto 8px;
+  color: var(--hb-yellow);
+  font-family: var(--font-heading--family, 'Anybody'), 'Anybody', sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: 0.84px;
+  text-transform: uppercase;
+  display: inline-block;
+  transform: scaleX(1.38);
+  transform-origin: center center;
+}
+
+.hero-banner__subtitle {
+  margin: 0 0 12px;
+  color: var(--hb-white);
+  font-family: Avenir, 'Avenir Next', system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.hero-banner__divider {
+  width: 52px;
+  height: 4px;
+  margin: 0 auto 16px;
+  border-radius: 2px;
+  background: var(--hb-yellow);
+}
+
+.hero-banner__description {
+  color: var(--hb-white);
+  font-family: Avenir, 'Avenir Next', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.hero-banner__description strong {
+  font-weight: 900;
+  color: var(--hb-yellow);
+}
+
+.hero-banner__description p {
+  margin: 0;
+}
+
+.hero-banner__below {
+  width: 100%;
+  background: var(--hb-white);
+  padding: 20px 16px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.hero-banner__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 540px;
+  min-height: 52px;
+  padding: 14px 24px;
+  border-radius: var(--hb-radius-pill);
+  background: var(--hb-yellow);
+  color: var(--hb-black);
+  text-decoration: none;
+  font-family: Avenir, 'Avenir Next', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  box-shadow: var(--hb-cta-glow);
+  transition: filter 0.2s ease;
+}
+
+.hero-banner__cta:hover {
+  filter: brightness(0.95);
+}
+
+.hero-banner__cta:focus-visible {
+  outline: 2px solid var(--hb-black);
+  outline-offset: 3px;
+}
+
+.hero-banner__trust {
+  width: 100%;
+  max-width: 540px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero-banner__rating {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--hb-black);
+  font-family: 'Avenir Next', Avenir, system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.hero-banner__rating strong {
+  font-weight: 700;
+}
+
+.hero-banner__rating .hero-banner__icon--stars {
+  color: var(--hb-star);
+}
+
+.hero-banner__benefits {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 16px;
+  color: var(--hb-muted);
+  font-family: 'Avenir Next', Avenir, system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.hero-banner__benefits span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hero-banner__review {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  max-width: 395px;
+  padding: 12px 16px;
+  border-radius: 16px;
+  background: var(--hb-white);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+.hero-banner__review-avatar {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.hero-banner__review-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+  color: var(--hb-black);
+  font-family: Avenir, 'Avenir Next', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.hero-banner__review-name .hero-banner__icon--stars {
+  color: var(--hb-star);
+  width: 56px;
+  height: 11px;
+}
+
+.hero-banner__review-text {
+  margin: 0;
+  color: var(--hb-muted);
+  font-family: Avenir, 'Avenir Next', system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.hero-banner__marquee-wrap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  height: 43px;
+  overflow: hidden;
+  background: var(--hb-black);
+}
+
+.hero-banner__marquee {
+  display: flex;
+  width: max-content;
+  height: 100%;
+  align-items: center;
+  white-space: nowrap;
+  animation: hb-marquee 24s linear infinite;
+  will-change: transform;
+}
+
+.hero-banner__marquee-track {
+  display: inline-flex;
+  gap: 40px;
+  padding-right: 40px;
+}
+
+.hero-banner__marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body--family, 'Avenir Next'), 'Avenir', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.625;
+}
+
+.hero-banner__marquee-bullet {
+  color: var(--hb-white);
+  font-size: 18px;
+  line-height: 1;
+}
+
+.hero-banner__marquee-programs,
+.hero-banner__marquee-dot {
+  color: var(--hb-white);
+}
+
+.hero-banner__marquee-dot {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.hero-banner__marquee-price {
+  color: var(--hb-yellow);
+}
+
+@keyframes hb-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (min-width: 750px) {
+  .hero-banner__media {
+    min-height: min(650px, 80vh);
+  }
+
+  .hero-banner__video--mobile {
+    display: none;
+  }
+
+  .hero-banner__video--desktop {
+    display: block;
+  }
+
+  .hero-banner__overlay {
+    background: var(--hb-overlay);
+  }
+
+  .hero-banner__content {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    justify-content: center;
+    padding: 48px 24px 60px;
+  }
+
+  .hero-banner__content-inner {
+    margin-top: 0;
+    padding-bottom: 0;
+    max-width: 560px;
+  }
+
+  .hero-banner__flash {
+    margin-bottom: 20px;
+  }
+
+  .hero-banner__panel {
+    gap: 20px;
+    padding: 24px 20px 20px;
+    border-radius: var(--hb-radius-lg);
+    background: var(--hb-glass-bg);
+    backdrop-filter: blur(var(--hb-glass-blur));
+    -webkit-backdrop-filter: blur(var(--hb-glass-blur));
+  }
+
+  .hero-banner__card {
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .hero-banner__title {
+    font-size: clamp(38px, 4.2vw, 44px);
+    letter-spacing: 1.2px;
+    white-space: nowrap;
+    transform: scaleX(1.45);
+  }
+
+  .hero-banner__subtitle {
+    font-size: 24px;
+  }
+
+  .hero-banner__description {
+    font-size: 16px;
+  }
+
+  .hero-banner__below {
+    display: none;
+  }
+
+  .hero-banner__cta--desktop {
+    display: inline-flex;
+    margin-top: 0;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    font-size: 18px;
+    background: var(--hb-black);
+    color: var(--hb-white);
+    box-shadow: var(--hb-cta-glow);
+  }
+
+  .hero-banner__cta--desktop:hover {
+    filter: brightness(1.15);
+  }
+
+  .hero-banner__cta--desktop:focus-visible {
+    outline: 2px solid var(--hb-white);
+    outline-offset: 3px;
+  }
+
+  .hero-banner__trust--desktop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hero-banner__trust--desktop .hero-banner__rating {
+    color: var(--hb-white);
+  }
+
+  .hero-banner__trust--desktop .hero-banner__benefits {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .hero-banner__review--desktop {
+    margin-top: 0;
+    width: 100%;
+    max-width: 395px;
+  }
+
+  .hero-banner__marquee-wrap {
+    position: absolute;
+    bottom: 0;
+  }
+
+  .hero-banner__marquee-item {
+    gap: 12px;
+  }
+
+  .hero-banner__marquee-bullet {
+    font-size: 20px;
+  }
+
+  .hero-banner__marquee-dot {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 749px) {
+  .hero-banner__content {
+    justify-content: flex-start;
+    padding-top: 20px;
+  }
+
+  .hero-banner__content-inner {
+    margin-top: 0;
+    height: 100%;
+  }
+
+  .hero-banner__panel {
+    flex: 1;
+    gap: 0;
+    width: 100%;
+  }
+
+  .hero-banner__flash {
+    margin: 0 auto 12px;
+    flex-shrink: 0;
+  }
+
+  .hero-banner__card {
+    margin-top: auto;
+  }
+
+  .hero-banner__cta {
+    background: var(--hb-black);
+    color: var(--hb-white);
+    box-shadow: var(--hb-cta-glow);
+  }
+
+  .hero-banner__cta:hover {
+    filter: brightness(1.15);
+  }
+
+  .hero-banner__cta:focus-visible {
+    outline: 2px solid var(--hb-white);
+    outline-offset: 3px;
+  }
+
+  .hero-banner__cta--desktop,
+  .hero-banner__trust--desktop,
+  .hero-banner__review--desktop {
+    display: none;
+  }
+
+  .hero-banner__marquee-track {
+    gap: 28px;
+    padding-right: 28px;
+  }
+
+  .hero-banner__marquee-item {
+    font-size: 13px;
+    gap: 8px;
+  }
+
+  .hero-banner__marquee-bullet {
+    font-size: 14px;
+  }
+
+  .hero-banner__marquee-dot {
+    font-size: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-banner__marquee {
+    animation: none;
+  }
+}

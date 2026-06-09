@@ -1,0 +1,43 @@
+{%- if text != blank -%}
+  {%- liquid
+    assign hb_marquee_label = text
+    assign hb_marquee_price = ''
+
+    if text contains '·'
+      assign hb_marquee_chunks = text | split: '·'
+      assign hb_marquee_label = hb_marquee_chunks[0] | strip
+      assign hb_marquee_price = hb_marquee_chunks[1] | strip
+    elsif text contains '•'
+      assign hb_marquee_chunks = text | split: '•'
+      assign hb_marquee_label = hb_marquee_chunks[0] | strip
+      assign hb_marquee_price = hb_marquee_chunks[1] | strip
+    endif
+  -%}
+
+  <div class="hero-banner__marquee" aria-label="{{ text | escape }}">
+    <div class="hero-banner__marquee-track">
+      {%- for i in (1..8) -%}
+        <span class="hero-banner__marquee-item">
+          <span class="hero-banner__marquee-bullet" aria-hidden="true">•</span>
+          <span class="hero-banner__marquee-programs">{{ hb_marquee_label | escape }}</span>
+          {%- if hb_marquee_price != blank -%}
+            <span class="hero-banner__marquee-dot" aria-hidden="true">·</span>
+            <span class="hero-banner__marquee-price">{{ hb_marquee_price | escape }}</span>
+          {%- endif -%}
+        </span>
+      {%- endfor -%}
+    </div>
+    <div class="hero-banner__marquee-track" aria-hidden="true">
+      {%- for i in (1..8) -%}
+        <span class="hero-banner__marquee-item">
+          <span class="hero-banner__marquee-bullet" aria-hidden="true">•</span>
+          <span class="hero-banner__marquee-programs">{{ hb_marquee_label | escape }}</span>
+          {%- if hb_marquee_price != blank -%}
+            <span class="hero-banner__marquee-dot" aria-hidden="true">·</span>
+            <span class="hero-banner__marquee-price">{{ hb_marquee_price | escape }}</span>
+          {%- endif -%}
+        </span>
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}

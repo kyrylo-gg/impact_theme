@@ -60,18 +60,48 @@
       }
     },
     "hero_banner_main": {
-      "type": "hero-banner",
+      "type": "hero-banner-video",
+      "disabled": true,
       "settings": {
         "video": "shopify://files/videos/Banner Landing NASS desktop (1).webm",
         "mobile_video": "shopify://files/videos/Banner Landing NASS mobile (1) (1).webm",
-        "badge_use_theme_starburst": false,
-        "badge_image_alt": "Join NASS B-Day Sale promotional badge",
-        "badge_text": "End-of-Spring Special Offer",
-        "heading": "Twerk Your Way to a Summer Booty",
-        "price_text": "Claim Your NASS Programs at Special Prices",
-        "cta_text": "Unlock NASS Offers",
-        "cta_url": "#nass-bundle-builder",
-        "deadline_text": "Offer ends May 31"
+        "flash_sale_text": "<p><strong>FLASH SALE:</strong> All 7 NASS Programs for $199 (<strong>81% Off</strong>)</p>",
+        "title": "STOP HIDING",
+        "subtitle": "For Stiff Hips, Zero Rhythm, and Feeling Like Your Body Won't Listen to You",
+        "description": "<p>Discover the system that turned <strong>40,000+ women</strong> into confident dancers — now every Nastya Nass program in one bundle, <u>built for the modern woman</u>.</p>",
+        "cta_text": "START TWERKING LIKE A PRO",
+        "cta_link": "#nass-bundle-builder",
+        "students_count": "40,000+ Students",
+        "rating": "4.8/5",
+        "benefit_1": "Lifetime Access",
+        "benefit_2": "30-Day Money Back Guarantee",
+        "benefit_3": "Free Shipping",
+        "show_review": true,
+        "review_name": "Annie C.",
+        "review_text": "Best booty-shaking class out there. Clear instructions, I go at my own pace — and I'm already seeing progress!",
+        "show_marquee": true,
+        "marquee_text": "ALL 7 PROGRAMS · $199"
+      }
+    },
+    "hero_banner_image": {
+      "type": "hero-banner-image",
+      "settings": {
+        "flash_sale_text": "<p><strong>FLASH SALE:</strong> All 7 NASS Programs for $199 (<strong>81% Off</strong>)</p>",
+        "title": "STOP HIDING",
+        "subtitle": "For Stiff Hips, Zero Rhythm, and Feeling Like Your Body Won't Listen to You",
+        "description": "<p>Discover the system that turned <strong>40,000+ women</strong> into confident dancers — now every Nastya Nass program in one bundle, <u>built for the modern woman</u>.</p>",
+        "cta_text": "START TWERKING LIKE A PRO",
+        "cta_link": "#nass-bundle-builder",
+        "students_count": "40,000+ Students",
+        "rating": "4.8/5",
+        "benefit_1": "Lifetime Access",
+        "benefit_2": "30-Day Money Back Guarantee",
+        "benefit_3": "Free Shipping",
+        "show_review": true,
+        "review_name": "Annie C.",
+        "review_text": "Best booty-shaking class out there. Clear instructions, I go at my own pace — and I'm already seeing progress!",
+        "show_marquee": true,
+        "marquee_text": "ALL 7 PROGRAMS · $199"
       }
     },
     "video_reviews_grid_qJDr4j": {
@@ -1257,6 +1287,7 @@
   "order": [
     "hero_video",
     "hero_banner_main",
+    "hero_banner_image",
     "video_reviews_grid_qJDr4j",
     "twerk_lessons_MWt6Ji",
     "program_cards_ykQqNc",
