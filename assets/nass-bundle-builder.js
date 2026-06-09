@@ -95,7 +95,17 @@
     const secureFooterShieldIconUrl = (config && typeof config.secureFooterShieldIconUrl === 'string' && config.secureFooterShieldIconUrl.trim())
       ? config.secureFooterShieldIconUrl.trim()
       : '';
-    const templateSuffix = String((config && config.templateSuffix) || '').toLowerCase().trim();
+    function resolveTemplateSuffix(cfg) {
+      var suffix = String((cfg && cfg.templateSuffix) || '').toLowerCase().trim();
+      if (suffix) return suffix;
+      if (typeof document !== 'undefined' && document.body && document.body.className) {
+        var bodyMatch = String(document.body.className).toLowerCase().match(/\bproduct--([^\s]+)/);
+        if (bodyMatch && bodyMatch[1]) return bodyMatch[1];
+      }
+      return '';
+    }
+    const templateSuffix = resolveTemplateSuffix(config);
+    const isNassFansFamilyTemplate = templateSuffix.indexOf('nass-fans') === 0 || templateSuffix.indexOf('nass_fans') === 0;
     const isBundlesDescriptionTemplate = templateSuffix === 'mega_twerk_with_bundles' || templateSuffix === 'mega_twerk_with_bundleseo';
     const isHipsProgramDescriptionTemplate = templateSuffix === 'hips_a'
       || templateSuffix === 'hips_a_ceo'
@@ -107,14 +117,9 @@
       || templateSuffix === 'hips-ceo'
       || templateSuffix === 'hips-b'
       || templateSuffix === 'hips-c';
-    const isBootyProgramDescriptionTemplate = templateSuffix === 'nass-fans'
+    const isBootyProgramDescriptionTemplate = isNassFansFamilyTemplate
+      || templateSuffix === 'nass-fans'
       || templateSuffix === 'nass-fans-ab'
-      || templateSuffix === 'nass-fans-a-2'
-      || templateSuffix === 'nass-fans-b-2'
-      || templateSuffix === 'nass_fans'
-      || templateSuffix === 'nass_fans_ab'
-      || templateSuffix === 'nass_fans_a_2'
-      || templateSuffix === 'nass_fans_b_2'
       || templateSuffix === 'booty_builder'
       || templateSuffix === 'booty-builder'
       || templateSuffix === 'twerk_essential'
@@ -1534,11 +1539,9 @@
       if (!productId) return;
       var p = bbState.productsById[productId];
       if (!p || !imageViewerEl || !imageViewerImgEl || !imageViewerTitleEl) return;
-      var nodes = (p.images && p.images.nodes) || [];
-      var node = nodes[0] || null;
-      var imgWidth = (typeof window !== 'undefined' && window.innerWidth < 768) ? 600 : 1200;
-      imageViewerImgEl.src = node ? getImageUrlOptimized(node.url, imgWidth) : '';
-      imageViewerImgEl.alt = p.title || '';
+      imageViewerState = { productId: null, imageIndex: 0 };
+      imageViewerImgEl.src = '';
+      imageViewerImgEl.alt = '';
       imageViewerTitleEl.textContent = p.title || '';
       imageViewerTitleEl.style.display = '';
       if (imageViewerPrevEl) imageViewerPrevEl.style.display = 'none';
@@ -1613,9 +1616,11 @@
     }
 
     function shouldOpenProgramDescriptionPopup(stepId) {
-      if (!isBundlesDescriptionTemplate && !isHipsProgramDescriptionTemplate && !isBootyProgramDescriptionTemplate) return false;
       var step = bbState.steps.find(function(s) { return String(s.id) === String(stepId); });
-      return !!(step && step.isProgramsStep);
+      if (!step || !step.isProgramsStep) return false;
+      return isBundlesDescriptionTemplate
+        || isHipsProgramDescriptionTemplate
+        || isBootyProgramDescriptionTemplate;
     }
 
     function fetchCollectionProductsJson(handle) {

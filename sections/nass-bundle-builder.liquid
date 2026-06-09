@@ -399,7 +399,7 @@
     }
     window.NassBundleBuilder.init(sectionRoot, {
         sectionId: sectionId,
-        templateSuffix: {%- if product and product.template_suffix != blank -%}{{ product.template_suffix | json }}{%- else -%}""{%- endif -%},
+        templateSuffix: {%- if template.suffix != blank -%}{{ template.suffix | json }}{%- elsif product and product.template_suffix != blank -%}{{ product.template_suffix | json }}{%- else -%}""{%- endif -%},
         shopDomain: '{{ shop.permanent_domain }}',
         cartAddUrl: '{{ routes.cart_add_url | append: ".js" }}',
         routesRoot: {{ routes.root_url | json }},
