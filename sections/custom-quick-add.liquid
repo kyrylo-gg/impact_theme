@@ -766,6 +766,7 @@
       if (stickyBundleBtn) {
         stickyBundleBtn.addEventListener('click', function(e) {
           e.preventDefault();
+          window.__bt_bb_preselect_first = true;
           function tryOpenBundleWizard(maxRetries) {
             maxRetries = typeof maxRetries === 'number' ? maxRetries : 25;
             var retries = 0;

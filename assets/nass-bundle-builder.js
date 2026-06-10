@@ -2371,7 +2371,8 @@
         discountEl.className = 'bb-wizard-discount bb-wizard-discount--applied';
         discountEl.innerHTML = '<span class="bb-wizard-discount-text">' + escapeHtml(discountAppliedText) + '</span>';
       } else {
-        discountEl.className = 'bb-wizard-discount bb-wizard-discount--promo';
+        discountEl.className = 'bb-wizard-discount bb-wizard-discount--promo'
+          + (isBodyTransformationTemplate ? ' bb-wizard-discount--body-tf-promo' : '');
         discountEl.innerHTML = '<span class="bb-wizard-discount-text">' + escapeHtml(discountPromoText) + '</span>';
       }
     }
