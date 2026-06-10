@@ -1266,7 +1266,7 @@
       "type": "custom-quick-add",
       "name": "TS Sticky Add",
       "settings": {
-        "product": "all-in-one-bundle",
+        "product": "all-in-one-bundle-eu",
         "button_link": "#nass-bundle-builder",
         "button_text": "Shop now",
         "background_button": "#faff00",
