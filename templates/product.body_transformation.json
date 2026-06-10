@@ -681,7 +681,7 @@
         "discount_code": "",
         "show_discount_banner": true,
         "discount_promo_text": "Get FREE LEGGINGS with Full Program!",
-        "discount_applied_text": "Free Leggings applied!",
+        "discount_applied_text": "Free Leggings Promo Applied!",
         "size_chart_config_handle": "size-chart-settings",
         "storefront_api_token": "568094b7f376083a4b0dc6fee4785741"
       }
@@ -877,9 +877,23 @@
         "background_button": "#faff00",
         "text_color_button": "#1a1a1a",
         "block_text_color": "",
-        "block_background": "#efa3c1",
-        "sublime_text": "<p>Get Your Booty Summer-Ready</p>",
+        "show_product_title": false,
+        "product_title": "",
+        "product_title_color": "",
+        "price_sale_color": "",
+        "price_compare_color": "",
+        "labels_color": "#000000",
+        "mobile_labels_color": "#ffffff",
+        "show_savings_badge": true,
+        "savings_badge_text": "",
+        "savings_percentage_override": "",
+        "savings_badge_suffix": "OFF",
+        "savings_badge_color": "#000000",
+        "mobile_savings_badge_color": "",
         "sublime_text_color": "#ffffff",
+        "sublime_text_color_mobile": "",
+        "sublime_text": "<p>Get Your Booty Summer-Ready</p>",
+        "block_background": "#efa3c1",
         "timer_enabled": true,
         "timer_type": "daily",
         "cancel_date": "01-01-2026 12:00",
@@ -892,8 +906,10 @@
         "countdown_color": "#ffffff",
         "mobile_countdown_background": "#313131",
         "mobile_countdown_color": "#ffffff",
-        "labels_color": "#000000",
-        "mobile_labels_color": "#ffffff"
+        "label_days": "Days",
+        "label_hours": "Hours",
+        "label_minutes": "Mins",
+        "label_seconds": "Secs"
       }
     }
   },
