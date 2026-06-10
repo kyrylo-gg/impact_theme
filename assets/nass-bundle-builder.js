@@ -1650,9 +1650,27 @@
         || isBootyProgramDescriptionTemplate;
     }
 
+    function getStorefrontFetchOrigin() {
+      try {
+        if (typeof window !== 'undefined' && window.location && window.location.hostname) {
+          var host = String(window.location.hostname).toLowerCase();
+          if (host && host !== 'localhost' && host !== '127.0.0.1') {
+            return window.location.protocol + '//' + window.location.hostname;
+          }
+        }
+      } catch (e) {}
+      return 'https://' + shopDomain;
+    }
+
+    function shouldUseLocalizedProductJsonPath() {
+      if (!isLocalizedRoute || !routesRoot || routesRoot === '/') return false;
+      // Shopify permanent_domain does not serve /en-pl/... routes; only the public storefront domain does.
+      return getStorefrontFetchOrigin().indexOf('.myshopify.com') === -1;
+    }
+
     function getLocalizedStorefrontPath(path) {
       var normalizedPath = String(path || '').replace(/^\//, '');
-      if (!isLocalizedRoute || !routesRoot || routesRoot === '/') {
+      if (!shouldUseLocalizedProductJsonPath()) {
         return '/' + normalizedPath;
       }
       var prefix = String(routesRoot).replace(/\/$/, '');
@@ -1719,11 +1737,17 @@
       return { map: map, orderedIds: orderedIds };
     }
 
-    function fetchCollectionProductsJson(handle) {
+    function fetchCollectionProductsJsonAtPath(handle, useLocalizedPath) {
       var selectedCurrency = getDisplayCurrency() || productsJsonFallbackCurrency || shopBaseCurrency || 'USD';
-      var url = 'https://' + shopDomain + getLocalizedStorefrontPath('collections/' + encodeURIComponent(handle) + '/products.json') + '?limit=50&currency=' + encodeURIComponent(selectedCurrency) + '&_bb_ts=' + Date.now();
+      var collectionPath = useLocalizedPath
+        ? getLocalizedStorefrontPath('collections/' + encodeURIComponent(handle) + '/products.json')
+        : '/collections/' + encodeURIComponent(handle) + '/products.json';
+      var url = getStorefrontFetchOrigin() + collectionPath + '?limit=50&currency=' + encodeURIComponent(selectedCurrency) + '&_bb_ts=' + Date.now();
       return fetch(url, { cache: 'no-store' })
-        .then(function(r) { return r.json(); })
+        .then(function(r) {
+          if (!r.ok) throw new Error('products.json ' + r.status);
+          return r.json();
+        })
         .then(function(data) {
           var map = {};
           var orderedIds = [];
@@ -1736,7 +1760,12 @@
             }
           });
           return { map: map, orderedIds: orderedIds };
-        });
+        })
+        .catch(function() { return { map: {}, orderedIds: [] }; });
+    }
+
+    function fetchCollectionProductsJson(handle) {
+      return fetchCollectionProductsJsonAtPath(handle, shouldUseLocalizedProductJsonPath());
     }
 
     function fetchCollectionProductsStorefront(handle, countryCode) {
@@ -1803,11 +1832,15 @@
         return fetchCollectionProductsJson(handle);
       }
       // Keep the full collection from products.json, but overlay fixed Markets prices from Storefront.
-      return Promise.all([
-        fetchCollectionProductsJson(handle),
-        fetchCollectionProductsStorefront(handle, getStorefrontCountryCode())
-      ]).then(function(results) {
-        return mergeCollectionProductPacks(results[0], results[1]);
+      return fetchCollectionProductsJson(handle).then(function(jsonPack) {
+        var loadJsonPack = (!jsonPack.orderedIds || !jsonPack.orderedIds.length) && shouldUseLocalizedProductJsonPath()
+          ? fetchCollectionProductsJsonAtPath(handle, false)
+          : Promise.resolve(jsonPack);
+        return loadJsonPack.then(function(resolvedJsonPack) {
+          return fetchCollectionProductsStorefront(handle, getStorefrontCountryCode()).then(function(sfPack) {
+            return mergeCollectionProductPacks(resolvedJsonPack, sfPack);
+          });
+        });
       });
     }
 
