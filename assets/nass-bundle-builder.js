@@ -580,6 +580,7 @@
       forceOfferStep2AutoAdd: false,
       offerFlow: '',
     };
+    var productsLoadGeneration = 0;
 
     function buildStepMap(steps) {
       var map = {};
@@ -1743,43 +1744,97 @@
       return !!useLocalizedPath;
     }
 
-    function fetchCollectionProductsJsonAtPath(handle, useLocalizedPath) {
-      var selectedCurrency = getDisplayCurrency() || productsJsonFallbackCurrency || shopBaseCurrency || 'USD';
-      var omitCurrencyParam = shouldOmitProductsJsonCurrencyParam(useLocalizedPath);
-      var priceCurrency = omitCurrencyParam
-        ? (presentmentCurrency || productsJsonFallbackCurrency || selectedCurrency || shopBaseCurrency || 'USD')
-        : selectedCurrency;
-      var collectionPath = useLocalizedPath
-        ? getLocalizedStorefrontPath('collections/' + encodeURIComponent(handle) + '/products.json')
-        : '/collections/' + encodeURIComponent(handle) + '/products.json';
-      var url = getStorefrontFetchOrigin() + collectionPath + '?limit=50';
-      if (!omitCurrencyParam) {
-        url += '&currency=' + encodeURIComponent(selectedCurrency);
-      }
-      url += '&_bb_ts=' + Date.now();
-      return fetch(url, { cache: 'no-store' })
+    function packProductsJsonResponse(data, priceCurrency) {
+      var map = {};
+      var orderedIds = [];
+      (data.products || []).forEach(function(raw) {
+        var internal = productJsonToInternal(raw, priceCurrency);
+        if (internal && internal.id) {
+          map[internal.id] = internal;
+          orderedIds.push(String(internal.id));
+        }
+      });
+      return { map: map, orderedIds: orderedIds };
+    }
+
+    function fetchProductsJsonPackFromUrl(url, priceCurrency) {
+      return fetch(url, {
+        cache: 'no-store',
+        credentials: 'same-origin',
+        headers: { Accept: 'application/json' }
+      })
         .then(function(r) {
           if (!r.ok) throw new Error('products.json ' + r.status);
           return r.json();
         })
         .then(function(data) {
-          var map = {};
-          var orderedIds = [];
-          (data.products || []).forEach(function(raw) {
-            // Localized products.json without ?currency= returns fixed Markets presentment amounts.
-            var internal = productJsonToInternal(raw, priceCurrency);
-            if (internal && internal.id) {
-              map[internal.id] = internal;
-              orderedIds.push(String(internal.id));
-            }
-          });
-          return { map: map, orderedIds: orderedIds };
-        })
+          return packProductsJsonResponse(data, priceCurrency);
+        });
+    }
+
+    function buildCollectionProductsJsonUrl(handle, useLocalizedPath, includeCurrencyParam, selectedCurrency) {
+      var collectionPath = useLocalizedPath
+        ? getLocalizedStorefrontPath('collections/' + encodeURIComponent(handle) + '/products.json')
+        : '/collections/' + encodeURIComponent(handle) + '/products.json';
+      var url = getStorefrontFetchOrigin() + collectionPath + '?limit=50';
+      if (includeCurrencyParam) {
+        url += '&currency=' + encodeURIComponent(selectedCurrency);
+      }
+      url += '&_bb_ts=' + Date.now();
+      return url;
+    }
+
+    function fetchCollectionProductsJsonAtPath(handle, useLocalizedPath, includeCurrencyParam) {
+      var selectedCurrency = getDisplayCurrency() || productsJsonFallbackCurrency || shopBaseCurrency || 'USD';
+      var omitCurrencyParam = typeof includeCurrencyParam === 'boolean'
+        ? !includeCurrencyParam
+        : shouldOmitProductsJsonCurrencyParam(useLocalizedPath);
+      var priceCurrency = omitCurrencyParam
+        ? (presentmentCurrency || productsJsonFallbackCurrency || selectedCurrency || shopBaseCurrency || 'USD')
+        : selectedCurrency;
+      var url = buildCollectionProductsJsonUrl(handle, useLocalizedPath, !omitCurrencyParam, selectedCurrency);
+      return fetchProductsJsonPackFromUrl(url, priceCurrency)
         .catch(function() { return { map: {}, orderedIds: [] }; });
     }
 
+    function fetchCollectionProductsJsonWithFallback(handle) {
+      var selectedCurrency = getDisplayCurrency() || productsJsonFallbackCurrency || shopBaseCurrency || 'USD';
+      var presentmentCur = presentmentCurrency || productsJsonFallbackCurrency || selectedCurrency || shopBaseCurrency || 'USD';
+      var useLocalized = shouldUseLocalizedProductJsonPath();
+      var strategies = [];
+
+      if (useLocalized) {
+        // Best: localized market context without ?currency= (fixed Markets catalog prices).
+        strategies.push({ useLocalizedPath: true, includeCurrencyParam: false, priceCurrency: presentmentCur });
+        strategies.push({ useLocalizedPath: true, includeCurrencyParam: true, priceCurrency: selectedCurrency });
+      }
+      strategies.push({ useLocalizedPath: false, includeCurrencyParam: false, priceCurrency: presentmentCur });
+      strategies.push({ useLocalizedPath: false, includeCurrencyParam: true, priceCurrency: selectedCurrency });
+
+      function tryStrategy(index) {
+        if (index >= strategies.length) return Promise.resolve({ map: {}, orderedIds: [] });
+        var strategy = strategies[index];
+        var url = buildCollectionProductsJsonUrl(
+          handle,
+          strategy.useLocalizedPath,
+          strategy.includeCurrencyParam,
+          selectedCurrency
+        );
+        return fetchProductsJsonPackFromUrl(url, strategy.priceCurrency)
+          .then(function(pack) {
+            if (pack.orderedIds && pack.orderedIds.length) return pack;
+            return tryStrategy(index + 1);
+          })
+          .catch(function() {
+            return tryStrategy(index + 1);
+          });
+      }
+
+      return tryStrategy(0);
+    }
+
     function fetchCollectionProductsJson(handle) {
-      return fetchCollectionProductsJsonAtPath(handle, shouldUseLocalizedProductJsonPath());
+      return fetchCollectionProductsJsonWithFallback(handle);
     }
 
     function fetchCollectionProductsStorefront(handle, countryCode) {
@@ -1842,20 +1897,9 @@
     }
 
     function fetchCollectionProducts(handle) {
-      if (!useStorefrontMarketPricing) {
-        return fetchCollectionProductsJson(handle);
-      }
-      // Keep the full collection from products.json, but overlay fixed Markets prices from Storefront.
-      return fetchCollectionProductsJson(handle).then(function(jsonPack) {
-        var loadJsonPack = (!jsonPack.orderedIds || !jsonPack.orderedIds.length) && shouldUseLocalizedProductJsonPath()
-          ? fetchCollectionProductsJsonAtPath(handle, false)
-          : Promise.resolve(jsonPack);
-        return loadJsonPack.then(function(resolvedJsonPack) {
-          return fetchCollectionProductsStorefront(handle, getStorefrontCountryCode()).then(function(sfPack) {
-            return mergeCollectionProductPacks(resolvedJsonPack, sfPack);
-          });
-        });
-      });
+      // products.json (with localized fallback chain) is the source of truth for catalog + Markets prices.
+      // Storefront collection queries return null for these EU handles, so skip that round-trip.
+      return fetchCollectionProductsJsonWithFallback(handle);
     }
 
     function fetchProductByIdStorefront(productId) {
@@ -1875,8 +1919,10 @@
       }).catch(function() { return null; });
     }
 
-    function loadAllProductsForSteps() {
-      if (bbState.productsLoaded) return Promise.resolve();
+    function loadAllProductsForSteps(options) {
+      options = options || {};
+      if (bbState.productsLoaded && !options.force) return Promise.resolve();
+      var loadGeneration = productsLoadGeneration;
       var handles = [];
       bbState.steps.forEach(function(step) {
         if (step.id !== 'review' && step.collectionHandle) handles.push(step.collectionHandle);
@@ -1886,6 +1932,7 @@
         return fetchCollectionProducts(h);
       });
       return Promise.all(promises).then(function(results) {
+        if (loadGeneration !== productsLoadGeneration) return;
         var byHandle = {};
         var orderedByHandle = {};
         unique.forEach(function(h, i) {
@@ -1950,11 +1997,19 @@
           }
         }
       }).then(function() {
+        if (loadGeneration !== productsLoadGeneration) return;
+        var hasAnyProducts = bbState.steps.some(function(step) {
+          return step && step.id !== 'review' && Array.isArray(step.productIds) && step.productIds.length > 0;
+        });
+        if (!hasAnyProducts && !options._retriedEmpty) {
+          return loadAllProductsForSteps({ force: true, _retriedEmpty: true });
+        }
         bbState.productsLoaded = true;
         renderStep();
         renderFooterSummary();
         preloadStepImages(1);
       }).catch(function(err) {
+        if (loadGeneration !== productsLoadGeneration) return;
         contentEl.innerHTML = '<p class="bb-wizard-placeholder">Could not load products. Please try again later.</p>';
       });
     }
@@ -3145,6 +3200,7 @@
       bbState.isOpen = true;
       bbState.currentStepIndex = 0;
       bbState.steps = applyStepOverride(bbState.baseSteps);
+      productsLoadGeneration += 1;
       bbState.productsLoaded = false;
       bbState.productsById = {};
       bbState.selectedItems = [];
@@ -3170,7 +3226,7 @@
         .then(function(r) { return r.ok ? r.json() : null; })
         .then(function(cart) {
           bbState.cartData = cart || { item_count: 0, items: [], total_price: 0, currency: displayCurrency };
-          return loadAllProductsForSteps();
+          return loadAllProductsForSteps({ force: true });
         })
         .then(function() {
           if (startStepIndex > 0) {
@@ -3189,7 +3245,7 @@
           console.log('[BB] openWizard catch:', err && err.message ? err.message : err);
           // #endregion
           bbState.cartData = { item_count: 0, items: [], total_price: 0, currency: displayCurrency };
-          return loadAllProductsForSteps().then(function() {
+          return loadAllProductsForSteps({ force: true }).then(function() {
             if (startStepIndex > 0) {
               goToStep(Math.min(startStepIndex, Math.max(0, bbState.steps.length - 1)));
               tryPreselectProgramsItem();
