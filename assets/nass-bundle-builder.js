@@ -413,12 +413,11 @@
     var shopBaseCurrency = (config && typeof config.shopCurrency === 'string' && config.shopCurrency.trim())
       ? String(config.shopCurrency).trim()
       : 'USD';
-    var isMarketPresentmentPage = !!(
-      templateSuffix === 'nass-fans-eu'
-      || templateSuffix === 'hips_a_eu'
-      || (presentmentCurrency && presentmentCurrency !== shopBaseCurrency)
-      || (presentmentCountry && presentmentCountry !== 'US')
-    );
+    var isEuProductTemplate = templateSuffix.indexOf('-eu') !== -1
+      || templateSuffix.indexOf('_eu') !== -1
+      || templateSuffix === 'mega_retarget_eu';
+    // Only EU product templates should use Markets fixed pricing — not every /en-pl/ visit.
+    var isMarketPresentmentPage = isEuProductTemplate;
     var useStorefrontMarketPricing = !!(storefrontApiToken && isMarketPresentmentPage);
     var productsJsonFallbackCurrency = isLocalizedRoute
       ? (presentmentCurrency || shopBaseCurrency || 'USD')
@@ -1651,9 +1650,78 @@
         || isBootyProgramDescriptionTemplate;
     }
 
+    function getLocalizedStorefrontPath(path) {
+      var normalizedPath = String(path || '').replace(/^\//, '');
+      if (!isLocalizedRoute || !routesRoot || routesRoot === '/') {
+        return '/' + normalizedPath;
+      }
+      var prefix = String(routesRoot).replace(/\/$/, '');
+      return prefix + '/' + normalizedPath;
+    }
+
+    function mergeVariantPricing(baseVariants, sfVariants) {
+      var baseNodes = (baseVariants && baseVariants.nodes) || [];
+      var sfNodes = (sfVariants && sfVariants.nodes) || [];
+      if (!sfNodes.length) return baseVariants;
+      var sfById = {};
+      sfNodes.forEach(function(v) { sfById[String(v.id)] = v; });
+      return {
+        nodes: baseNodes.map(function(v) {
+          var sf = sfById[String(v.id)];
+          if (!sf) return v;
+          return Object.assign({}, v, {
+            price: sf.price || v.price,
+            availableForSale: sf.availableForSale !== false
+          });
+        })
+      };
+    }
+
+    function overlayStorefrontPricing(baseProduct, sfProduct) {
+      if (!baseProduct) return sfProduct || null;
+      if (!sfProduct) return baseProduct;
+      return Object.assign({}, baseProduct, {
+        priceRange: sfProduct.priceRange || baseProduct.priceRange,
+        compareAtPriceRange: sfProduct.compareAtPriceRange || baseProduct.compareAtPriceRange,
+        variants: mergeVariantPricing(baseProduct.variants, sfProduct.variants),
+        descriptionHtml: sfProduct.descriptionHtml || baseProduct.descriptionHtml,
+        availableForSale: sfProduct.availableForSale !== false ? sfProduct.availableForSale : baseProduct.availableForSale
+      });
+    }
+
+    function findStorefrontProductMatch(sfMap, baseProduct) {
+      if (!baseProduct || !sfMap) return null;
+      var direct = sfMap[baseProduct.id] || sfMap[String(baseProduct.id)];
+      if (direct) return direct;
+      var baseHandle = String(baseProduct.handle || '').toLowerCase();
+      if (!baseHandle) return null;
+      var keys = Object.keys(sfMap);
+      for (var i = 0; i < keys.length; i++) {
+        var candidate = sfMap[keys[i]];
+        if (candidate && String(candidate.handle || '').toLowerCase() === baseHandle) return candidate;
+      }
+      return null;
+    }
+
+    function mergeCollectionProductPacks(jsonPack, sfPack) {
+      jsonPack = jsonPack || { map: {}, orderedIds: [] };
+      sfPack = sfPack || { map: {}, orderedIds: [] };
+      var map = {};
+      var orderedIds = (jsonPack.orderedIds && jsonPack.orderedIds.length)
+        ? jsonPack.orderedIds.slice()
+        : Object.keys(jsonPack.map || {});
+      orderedIds.forEach(function(id) {
+        var base = jsonPack.map[id];
+        if (!base) return;
+        var sf = findStorefrontProductMatch(sfPack.map, base);
+        map[id] = overlayStorefrontPricing(base, sf);
+      });
+      return { map: map, orderedIds: orderedIds };
+    }
+
     function fetchCollectionProductsJson(handle) {
       var selectedCurrency = getDisplayCurrency() || productsJsonFallbackCurrency || shopBaseCurrency || 'USD';
-      var url = 'https://' + shopDomain + '/collections/' + encodeURIComponent(handle) + '/products.json?limit=50&currency=' + encodeURIComponent(selectedCurrency) + '&_bb_ts=' + Date.now();
+      var url = 'https://' + shopDomain + getLocalizedStorefrontPath('collections/' + encodeURIComponent(handle) + '/products.json') + '?limit=50&currency=' + encodeURIComponent(selectedCurrency) + '&_bb_ts=' + Date.now();
       return fetch(url, { cache: 'no-store' })
         .then(function(r) { return r.json(); })
         .then(function(data) {
@@ -1731,10 +1799,16 @@
     }
 
     function fetchCollectionProducts(handle) {
-      if (useStorefrontMarketPricing) {
-        return fetchCollectionProductsStorefront(handle, getStorefrontCountryCode());
+      if (!useStorefrontMarketPricing) {
+        return fetchCollectionProductsJson(handle);
       }
-      return fetchCollectionProductsJson(handle);
+      // Keep the full collection from products.json, but overlay fixed Markets prices from Storefront.
+      return Promise.all([
+        fetchCollectionProductsJson(handle),
+        fetchCollectionProductsStorefront(handle, getStorefrontCountryCode())
+      ]).then(function(results) {
+        return mergeCollectionProductPacks(results[0], results[1]);
+      });
     }
 
     function fetchProductByIdStorefront(productId) {
@@ -1814,12 +1888,14 @@
                 return fetchProductByIdStorefront(id);
               })).then(function(internals) {
                 internals.forEach(function(internal) {
-                  if (internal && internal.id) {
-                    bbState.productsById[internal.id] = internal;
-                    if (programsStep.productIds.indexOf(internal.id) === -1) {
-                      // If configured pack product is absent from collection, append it.
-                      programsStep.productIds.push(internal.id);
-                    }
+                  if (!internal || !internal.id) return;
+                  var existing = bbState.productsById[internal.id];
+                  bbState.productsById[internal.id] = existing
+                    ? overlayStorefrontPricing(existing, internal)
+                    : internal;
+                  if (programsStep.productIds.indexOf(internal.id) === -1) {
+                    // If configured pack product is absent from collection, append it.
+                    programsStep.productIds.push(internal.id);
                   }
                 });
               }).then(function() { return Promise.resolve(); });
