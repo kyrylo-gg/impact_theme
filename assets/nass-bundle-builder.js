@@ -404,20 +404,28 @@
     var presentmentCurrency = (config && typeof config.presentmentCurrency === 'string' && config.presentmentCurrency.trim())
       ? String(config.presentmentCurrency).trim()
       : '';
+    var presentmentCountry = (config && typeof config.presentmentCountry === 'string' && config.presentmentCountry.trim())
+      ? String(config.presentmentCountry).trim().toUpperCase()
+      : '';
     var displayCurrency = presentmentCurrency
       ? presentmentCurrency
       : ((config && typeof config.currency === 'string' && config.currency.trim()) ? String(config.currency).trim() : 'USD');
     var shopBaseCurrency = (config && typeof config.shopCurrency === 'string' && config.shopCurrency.trim())
       ? String(config.shopCurrency).trim()
       : 'USD';
+    var isMarketPresentmentPage = !!(
+      templateSuffix === 'nass-fans-eu'
+      || templateSuffix === 'hips_a_eu'
+      || (presentmentCurrency && presentmentCurrency !== shopBaseCurrency)
+      || (presentmentCountry && presentmentCountry !== 'US')
+    );
+    var useStorefrontMarketPricing = !!(storefrontApiToken && isMarketPresentmentPage);
     var productsJsonFallbackCurrency = isLocalizedRoute
       ? (presentmentCurrency || shopBaseCurrency || 'USD')
       : (shopBaseCurrency || 'USD');
 
-    // Do not force USD on non-localized pages.
-    // Shopify Markets can still present EUR amounts on /products/... depending on geo,
-    // and forcing USD requires reliable Storefront inContext querying which may not be available.
-    var lockCurrencyToConfig = false;
+    // On Markets presentment pages, keep Liquid-declared currency authoritative.
+    var lockCurrencyToConfig = isMarketPresentmentPage;
 
     try {
       if (typeof window !== 'undefined') {
@@ -500,8 +508,8 @@
           })();
         }
 
-        // Always prefer currently selected currency from Shopify picker/menu.
-        if (window.Shopify && window.Shopify.currency && window.Shopify.currency.active) {
+        // On Markets pages, do not override presentment currency with the header picker.
+        if (!lockCurrencyToConfig && window.Shopify && window.Shopify.currency && window.Shopify.currency.active) {
           displayCurrency = String(window.Shopify.currency.active).trim() || displayCurrency;
         }
       }
@@ -1250,7 +1258,13 @@
       return parseFloat(realPrice) * 0.4;
     }
 
+    function getStorefrontCountryCode() {
+      if (presentmentCountry) return presentmentCountry;
+      return 'US';
+    }
+
     function getActiveCurrency() {
+      if (lockCurrencyToConfig && presentmentCurrency) return presentmentCurrency;
       try {
         if (typeof window !== 'undefined' && window.Shopify && window.Shopify.currency && window.Shopify.currency.active) {
           var active = String(window.Shopify.currency.active).trim();
@@ -1259,6 +1273,12 @@
       } catch (e) {}
       if (presentmentCurrency) return presentmentCurrency;
       return displayCurrency;
+    }
+
+    function shouldConvertBaseToActive(source, target) {
+      if (!source || !target || source === target) return false;
+      if (lockCurrencyToConfig || useStorefrontMarketPricing) return false;
+      return source === shopBaseCurrency && target !== shopBaseCurrency;
     }
 
     function getShopifyRate() {
@@ -1292,6 +1312,7 @@
         ? String(product.priceRange.minVariantPrice.currencyCode).trim()
         : '';
       if (explicitCur) return explicitCur;
+      if (useStorefrontMarketPricing && presentmentCurrency) return presentmentCurrency;
       return productsJsonFallbackCurrency;
     }
 
@@ -1300,8 +1321,7 @@
       var source = (sourceCurrency || shopBaseCurrency || 'USD');
       var value = Number(amount || 0);
 
-      // Convert base-currency amounts to active currency using Shopify rate.
-      if (source === shopBaseCurrency && target !== shopBaseCurrency) {
+      if (shouldConvertBaseToActive(source, target)) {
         value = value * getShopifyRate();
       }
 
@@ -1313,7 +1333,7 @@
       var source = (sourceCurrency || shopBaseCurrency || 'USD');
       var value = Number(amount || 0);
 
-      if (source === shopBaseCurrency && target !== shopBaseCurrency) {
+      if (shouldConvertBaseToActive(source, target)) {
         value = value * getShopifyRate();
       }
 
@@ -1338,6 +1358,7 @@
 
     // Re-render prices when currency changes (symbol + conversion).
     (function bindCurrencyWatcher() {
+      if (lockCurrencyToConfig) return;
       var lastCur = getActiveCurrency();
       var lastRate = getShopifyRate();
       setInterval(function() {
@@ -1651,12 +1672,12 @@
     }
 
     function fetchCollectionProductsStorefront(handle, countryCode) {
-      if (!storefrontApiToken) return Promise.resolve({});
+      if (!storefrontApiToken) return Promise.resolve({ map: {}, orderedIds: [] });
       var url = 'https://' + shopDomain + '/api/2024-01/graphql.json';
       // Note: `@inContext` is a directive on the operation, not on the field.
       // `country` is a CountryCode enum (no quotes).
       var cc = (countryCode || '').trim() || 'US';
-      var query = 'query($handle: String!) @inContext(country: ' + cc + '){collection(handle:$handle){products(first:50){edges{node{id title handle tags images(first:10){edges{node{url altText}}}variants(first:20){edges{node{id title availableForSale price{amount currencyCode}compareAtPrice{amount currencyCode}selectedOptions{name value}}}}}}}}}';
+      var query = 'query($handle: String!) @inContext(country: ' + cc + '){collection(handle:$handle){products(first:50){edges{node{id title handle descriptionHtml tags images(first:10){edges{node{url altText}}}variants(first:20){edges{node{id title availableForSale price{amount currencyCode}compareAtPrice{amount currencyCode}selectedOptions{name value}}}}}}}}}';
 
       return fetch(url, {
         method: 'POST',
@@ -1668,14 +1689,18 @@
           var edges = data && data.data && data.data.collection && data.data.collection.products && data.data.collection.products.edges;
           edges = Array.isArray(edges) ? edges : [];
           var map = {};
+          var orderedIds = [];
           edges.forEach(function(e) {
             var p = e && e.node;
             var internal = p ? storefrontProductToInternal(p) : null;
-            if (internal && internal.id) map[internal.id] = internal;
+            if (internal && internal.id) {
+              map[internal.id] = internal;
+              orderedIds.push(String(internal.id));
+            }
           });
-          return map;
+          return { map: map, orderedIds: orderedIds };
         })
-        .catch(function() { return {}; });
+        .catch(function() { return { map: {}, orderedIds: [] }; });
     }
 
     function storefrontProductToInternal(sf) {
@@ -1688,12 +1713,14 @@
       var varNodes = (sf.variants && sf.variants.edges) ? sf.variants.edges.map(function(e) {
         var v = e.node;
         var o = (v.selectedOptions || []).map(function(opt) { return { name: opt.name, value: opt.value }; });
-        return { id: String(v.id), title: v.title || '', availableForSale: v.availableForSale !== false, price: { amount: String(v.price && v.price.amount || '0'), currencyCode: (v.price && v.price.currencyCode) || 'USD' }, selectedOptions: o };
+        var variantCur = (v.price && v.price.currencyCode) ? String(v.price.currencyCode) : cur;
+        return { id: String(gidToNum(v.id) || v.id), title: v.title || '', availableForSale: v.availableForSale !== false, price: { amount: String(v.price && v.price.amount || '0'), currencyCode: variantCur }, selectedOptions: o };
       }) : [];
       return {
-        id: String(sf.id),
+        id: String(gidToNum(sf.id) || sf.id),
         title: sf.title || '',
         handle: sf.handle || '',
+        descriptionHtml: sf.descriptionHtml || '',
         tags: Array.isArray(sf.tags) ? sf.tags : [],
         availableForSale: v0 ? v0.availableForSale !== false : true,
         priceRange: { minVariantPrice: { amount: price, currencyCode: cur } },
@@ -1703,12 +1730,20 @@
       };
     }
 
+    function fetchCollectionProducts(handle) {
+      if (useStorefrontMarketPricing) {
+        return fetchCollectionProductsStorefront(handle, getStorefrontCountryCode());
+      }
+      return fetchCollectionProductsJson(handle);
+    }
+
     function fetchProductByIdStorefront(productId) {
       if (!storefrontApiToken) return Promise.resolve(null);
       var gid = String(productId).indexOf('gid://') === 0 ? productId : 'gid://shopify/Product/' + String(productId);
       var url = 'https://' + shopDomain + '/api/2024-01/graphql.json';
       // Note: `@inContext` is a directive on the operation, not on the field.
-      var query = 'query($id: ID!) @inContext(country: US){product(id:$id){id title handle images(first:10){edges{node{url altText}}}variants(first:20){edges{node{id title availableForSale price{amount currencyCode}compareAtPrice{amount currencyCode}selectedOptions{name value}}}}}}';
+      var cc = getStorefrontCountryCode();
+      var query = 'query($id: ID!) @inContext(country: ' + cc + '){product(id:$id){id title handle descriptionHtml images(first:10){edges{node{url altText}}}variants(first:20){edges{node{id title availableForSale price{amount currencyCode}compareAtPrice{amount currencyCode}selectedOptions{name value}}}}}}';
       return fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'X-Shopify-Storefront-Access-Token': storefrontApiToken },
@@ -1727,7 +1762,7 @@
       });
       var unique = handles.filter(function(v,i,a){return a.indexOf(v)===i;});
       var promises = unique.map(function(h){
-        return fetchCollectionProductsJson(h);
+        return fetchCollectionProducts(h);
       });
       return Promise.all(promises).then(function(results) {
         var byHandle = {};
