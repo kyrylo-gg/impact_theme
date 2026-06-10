@@ -1737,12 +1737,26 @@
       return { map: map, orderedIds: orderedIds };
     }
 
+    function shouldOmitProductsJsonCurrencyParam(useLocalizedPath) {
+      // Localized /en-pl/.../products.json already returns fixed Markets prices.
+      // Adding ?currency=EUR forces Shopify exchange-rate conversion (e.g. 89 -> 87.95).
+      return !!useLocalizedPath;
+    }
+
     function fetchCollectionProductsJsonAtPath(handle, useLocalizedPath) {
       var selectedCurrency = getDisplayCurrency() || productsJsonFallbackCurrency || shopBaseCurrency || 'USD';
+      var omitCurrencyParam = shouldOmitProductsJsonCurrencyParam(useLocalizedPath);
+      var priceCurrency = omitCurrencyParam
+        ? (presentmentCurrency || productsJsonFallbackCurrency || selectedCurrency || shopBaseCurrency || 'USD')
+        : selectedCurrency;
       var collectionPath = useLocalizedPath
         ? getLocalizedStorefrontPath('collections/' + encodeURIComponent(handle) + '/products.json')
         : '/collections/' + encodeURIComponent(handle) + '/products.json';
-      var url = getStorefrontFetchOrigin() + collectionPath + '?limit=50&currency=' + encodeURIComponent(selectedCurrency) + '&_bb_ts=' + Date.now();
+      var url = getStorefrontFetchOrigin() + collectionPath + '?limit=50';
+      if (!omitCurrencyParam) {
+        url += '&currency=' + encodeURIComponent(selectedCurrency);
+      }
+      url += '&_bb_ts=' + Date.now();
       return fetch(url, { cache: 'no-store' })
         .then(function(r) {
           if (!r.ok) throw new Error('products.json ' + r.status);
@@ -1752,8 +1766,8 @@
           var map = {};
           var orderedIds = [];
           (data.products || []).forEach(function(raw) {
-            // `/products.json` returns prices already in the current presentment currency.
-            var internal = productJsonToInternal(raw, selectedCurrency);
+            // Localized products.json without ?currency= returns fixed Markets presentment amounts.
+            var internal = productJsonToInternal(raw, priceCurrency);
             if (internal && internal.id) {
               map[internal.id] = internal;
               orderedIds.push(String(internal.id));
