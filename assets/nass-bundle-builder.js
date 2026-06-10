@@ -108,6 +108,7 @@
     const isNassFansFamilyTemplate = templateSuffix.indexOf('nass-fans') === 0 || templateSuffix.indexOf('nass_fans') === 0;
     const isBundlesDescriptionTemplate = templateSuffix === 'mega_twerk_with_bundles' || templateSuffix === 'mega_twerk_with_bundleseo';
     const isHipsProgramDescriptionTemplate = templateSuffix === 'hips_a'
+      || templateSuffix === 'hips_a_eu'
       || templateSuffix === 'hips_a_ab'
       || templateSuffix === 'hips_a_ceo'
       || templateSuffix === 'hips_ceo'
@@ -121,6 +122,7 @@
       || templateSuffix === 'hips-c';
     const isBootyProgramDescriptionTemplate = isNassFansFamilyTemplate
       || templateSuffix === 'nass-fans'
+      || templateSuffix === 'nass-fans-eu'
       || templateSuffix === 'nass-fans-ab'
       || templateSuffix === 'nass_fans_ab_test'
       || templateSuffix === 'booty_builder'
@@ -130,6 +132,7 @@
       || templateSuffix === 'twerk-program-r1'
       || templateSuffix === 'twerk_program_r1';
     const isHipsSingleProgramTemplate = templateSuffix === 'hips_a'
+      || templateSuffix === 'hips_a_eu'
       || templateSuffix === 'hips_a_ceo'
       || templateSuffix === 'hips_b'
       || templateSuffix === 'hips_c'
@@ -139,6 +142,7 @@
       || templateSuffix === 'hips-c';
     const isSingleProgramSelectionTemplate = isBundlesDescriptionTemplate || isHipsSingleProgramTemplate;
     const isHipsBootyBuilderAutoAddTemplate = templateSuffix === 'hips_a'
+      || templateSuffix === 'hips_a_eu'
       || templateSuffix === 'hips_a_ceo'
       || templateSuffix === 'hips_b'
       || templateSuffix === 'hips_c'

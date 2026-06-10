@@ -101,6 +101,9 @@
               if template.suffix == 'hips_a'
                 assign is_hips_a_template = true
                 assign is_hips_a_like_template = true
+              elsif template.suffix == 'hips_a_eu'
+                assign is_hips_a_template = true
+                assign is_hips_a_like_template = true
               elsif template.suffix == 'hips_a_ceo'
                 assign is_hips_a_ceo_template = true
                 assign is_hips_a_like_template = true
@@ -527,27 +530,32 @@
     }
 
     body.product--hips_a .hips-hero-banner__price,
+    body.product--hips_a_eu .hips-hero-banner__price,
     body.product--hips_a_ceo .hips-hero-banner__price,
     body.product--hips_ceo .hips-hero-banner__price {
       display: none;
     }
 
     body.product--hips_a .hips-hero-banner__cta-arrow,
+    body.product--hips_a_eu .hips-hero-banner__cta-arrow,
     body.product--hips_a_ceo .hips-hero-banner__cta-arrow,
     body.product--hips_ceo .hips-hero-banner__cta-arrow {
       display: none;
     }
 
     body.product--hips_a .hips-hero-banner__cta > span:first-child,
+    body.product--hips_a_eu .hips-hero-banner__cta > span:first-child,
     body.product--hips_a_ceo .hips-hero-banner__cta > span:first-child,
     body.product--hips_ceo .hips-hero-banner__cta > span:first-child,
     body.product--hips_a .hips-hero-banner__cta-accent,
+    body.product--hips_a_eu .hips-hero-banner__cta-accent,
     body.product--hips_a_ceo .hips-hero-banner__cta-accent,
     body.product--hips_ceo .hips-hero-banner__cta-accent {
       white-space: nowrap;
     }
 
     body.product--hips_a .hips-hero-banner__cta,
+    body.product--hips_a_eu .hips-hero-banner__cta,
     body.product--hips_a_ceo .hips-hero-banner__cta,
     body.product--hips_ceo .hips-hero-banner__cta {
       justify-content: center;
@@ -558,18 +566,21 @@
     }
 
     body.product--hips_a .hips-hero-banner__cta > span:first-child,
+    body.product--hips_a_eu .hips-hero-banner__cta > span:first-child,
     body.product--hips_a_ceo .hips-hero-banner__cta > span:first-child,
     body.product--hips_ceo .hips-hero-banner__cta > span:first-child {
       font-size: 0.95em;
     }
 
     body.product--hips_a .hips-hero-banner__cta-accent--hips-a-desktop,
+    body.product--hips_a_eu .hips-hero-banner__cta-accent--hips-a-desktop,
     body.product--hips_a_ceo .hips-hero-banner__cta-accent--hips-a-desktop,
     body.product--hips_ceo .hips-hero-banner__cta-accent--hips-a-desktop {
       display: none;
     }
 
     body.product--hips_a .hips-hero-banner__cta-accent--hips-a-mobile-prices,
+    body.product--hips_a_eu .hips-hero-banner__cta-accent--hips-a-mobile-prices,
     body.product--hips_a_ceo .hips-hero-banner__cta-accent--hips-a-mobile-prices,
     body.product--hips_ceo .hips-hero-banner__cta-accent--hips-a-mobile-prices {
       display: inline-flex;
@@ -580,12 +591,14 @@
 
   @media (min-width: 768px) {
     body.product--hips_a .hips-hero-banner__cta-accent--hips-a-desktop,
+    body.product--hips_a_eu .hips-hero-banner__cta-accent--hips-a-desktop,
     body.product--hips_a_ceo .hips-hero-banner__cta-accent--hips-a-desktop,
     body.product--hips_ceo .hips-hero-banner__cta-accent--hips-a-desktop {
       display: inline;
     }
 
     body.product--hips_a .hips-hero-banner__cta-accent--hips-a-mobile-prices,
+    body.product--hips_a_eu .hips-hero-banner__cta-accent--hips-a-mobile-prices,
     body.product--hips_a_ceo .hips-hero-banner__cta-accent--hips-a-mobile-prices,
     body.product--hips_ceo .hips-hero-banner__cta-accent--hips-a-mobile-prices {
       display: none;

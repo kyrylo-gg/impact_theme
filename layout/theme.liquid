@@ -52,7 +52,7 @@
       {% render 'nass-fonts' %}
     {%- endif -%}
     {%- if template.name == 'product' -%}
-      {%- if template.suffix == 'body_transformation' or template.suffix == 'pop_booty' or template.suffix == 'hips_a' or template.suffix == 'hips_a_ab' or template.suffix == 'hips_a_ceo' or template.suffix == 'hips_b' or template.suffix == 'hips_c' -%}
+      {%- if template.suffix == 'body_transformation' or template.suffix == 'pop_booty' or template.suffix == 'hips_a' or template.suffix == 'hips_a_eu' or template.suffix == 'hips_a_ab' or template.suffix == 'hips_a_ceo' or template.suffix == 'hips_b' or template.suffix == 'hips_c' -%}
         {% render 'bt-body-transformation-fonts' %}
       {%- endif -%}
     {%- endif -%}
@@ -139,7 +139,7 @@
     </style>
     {%- endif -%}
 
-    {%- if template.name == 'product' and (template.suffix == 'hips_a' or template.suffix == 'hips_a_ab' or template.suffix == 'hips_a_ceo' or template.suffix == 'hips_b' or template.suffix == 'hips_c') -%}
+    {%- if template.name == 'product' and (template.suffix == 'hips_a' or template.suffix == 'hips_a_eu' or template.suffix == 'hips_a_ab' or template.suffix == 'hips_a_ceo' or template.suffix == 'hips_b' or template.suffix == 'hips_c') -%}
     <style>
       /**
        * product.hips_a: same typography stack as Body Transformation (BT) sections.
@@ -148,6 +148,7 @@
        * Scoped to main so theme header outside main keeps shop defaults.
        */
       body.product--hips_a main#main.anchor,
+      body.product--hips_a_eu main#main.anchor,
       body.product--hips_a_ab main#main.anchor,
       body.product--hips_a_ceo main#main.anchor,
       body.product--hips_b main#main.anchor,
@@ -159,6 +160,7 @@
 
       /* hips_a: keep bundle builder hidden; open via CTA click (wizard overlay) */
       body.product--hips_a .nass-bundle-builder .bb-section,
+      body.product--hips_a_eu .nass-bundle-builder .bb-section,
       body.product--hips_a_ab .nass-bundle-builder .bb-section,
       body.product--hips_a_ceo .nass-bundle-builder .bb-section,
       body.product--hips_b .nass-bundle-builder .bb-section,
@@ -167,6 +169,7 @@
       }
 
       body.product--hips_a main#main.anchor .shopify-section-group-footer-group .shopify-section--custom-liquid,
+      body.product--hips_a_eu main#main.anchor .shopify-section-group-footer-group .shopify-section--custom-liquid,
       body.product--hips_a_ab main#main.anchor .shopify-section-group-footer-group .shopify-section--custom-liquid,
       body.product--hips_a_ceo main#main.anchor .shopify-section-group-footer-group .shopify-section--custom-liquid,
       body.product--hips_b main#main.anchor .shopify-section-group-footer-group .shopify-section--custom-liquid,
@@ -186,6 +189,7 @@
       @media (min-width: 768px) {
         /* hips_a only: keep BT_PainPoints heading size aligned with page sections */
         body.product--hips_a main#main.anchor .bt-pain__title,
+        body.product--hips_a_eu main#main.anchor .bt-pain__title,
         body.product--hips_a_ab main#main.anchor .bt-pain__title,
         body.product--hips_b main#main.anchor .bt-pain__title,
         body.product--hips_c main#main.anchor .bt-pain__title {
@@ -195,6 +199,19 @@
 
       /* BT_PainPoints-like divider under black/blue section headings on hips_a */
       body.product--hips_a main#main.anchor :is(
+        .hips-hero-banner__heading,
+        .why-stiff__heading,
+        .hip-mobility__heading,
+        .about-founder__heading,
+        .program-contents__heading,
+        .four-weeks__heading,
+        .everything-in-pocket__heading,
+        .program-for-you__heading,
+        .complete-system__heading,
+        .body-ready-cta__heading,
+        .bt-faq__title
+      )::after,
+      body.product--hips_a_eu main#main.anchor :is(
         .hips-hero-banner__heading,
         .why-stiff__heading,
         .hip-mobility__heading,
@@ -260,6 +277,8 @@
         /* On hips_a desktop: accent line always starts on new line */
         body.product--hips_a main#main.anchor [class$='__heading-accent'],
         body.product--hips_a main#main.anchor [class*='__heading-accent '],
+        body.product--hips_a_eu main#main.anchor [class$='__heading-accent'],
+        body.product--hips_a_eu main#main.anchor [class*='__heading-accent '],
         body.product--hips_a_ab main#main.anchor [class$='__heading-accent'],
         body.product--hips_a_ab main#main.anchor [class*='__heading-accent '],
         body.product--hips_b main#main.anchor [class$='__heading-accent'],
@@ -270,6 +289,7 @@
         }
 
         body.product--hips_a main#main.anchor .everything-in-pocket__heading--desktop::after,
+        body.product--hips_a_eu main#main.anchor .everything-in-pocket__heading--desktop::after,
         body.product--hips_a_ab main#main.anchor .everything-in-pocket__heading--desktop::after,
         body.product--hips_b main#main.anchor .everything-in-pocket__heading--desktop::after,
         body.product--hips_c main#main.anchor .everything-in-pocket__heading--desktop::after {
@@ -282,7 +302,7 @@
     <script>
       (function() {
         function initHipsABundleOpen() {
-          if (!document.body || !(document.body.classList.contains('product--hips_a') || document.body.classList.contains('product--hips_a_ab') || document.body.classList.contains('product--hips_a_ceo') || document.body.classList.contains('product--hips_b') || document.body.classList.contains('product--hips_c'))) return;
+          if (!document.body || !(document.body.classList.contains('product--hips_a') || document.body.classList.contains('product--hips_a_eu') || document.body.classList.contains('product--hips_a_ab') || document.body.classList.contains('product--hips_a_ceo') || document.body.classList.contains('product--hips_b') || document.body.classList.contains('product--hips_c'))) return;
 
           /* hips_a: normalize CTA anchors to Complete System section */
           document.querySelectorAll('.hips-hero-banner__cta, .body-ready-cta__button').forEach(function(link) {
