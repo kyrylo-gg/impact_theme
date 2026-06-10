@@ -2508,6 +2508,34 @@
       if (bbState.isSubmitting || bbState.selectedItems.length === 0) return;
       bbState.isSubmitting = true;
 
+      function redirectToCheckout() {
+        bbState.isSubmitting = false;
+        hasCheckoutIntent = true;
+        closeWizard();
+        var checkoutHref = checkoutUrl;
+        if (discountCode && getHasProgramPack()) {
+          checkoutHref += (checkoutUrl.indexOf('?') >= 0 ? '&' : '?') + 'discount=' + encodeURIComponent(discountCode);
+        }
+        window.location.href = checkoutHref;
+      }
+
+      // Items are already in cart from incremental addItem calls during the wizard.
+      // Skip clear/re-add to avoid duplicate add-to-cart analytics on Complete Order.
+      if (isBodyTransformationTemplate) {
+        var btDiscountCode = (getHasProgramPack() && discountCode) ? discountCode : '';
+        fetch(cartUrls.update, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ discount: btDiscountCode })
+        })
+          .then(function() { redirectToCheckout(); })
+          .catch(function() {
+            bbState.isSubmitting = false;
+            showToast('Error. Please try again.');
+          });
+        return;
+      }
+
       var items = bbState.selectedItems.map(function(item) {
         var variantNum = String(item.variantId).replace(/.*\/(\d+)$/, '$1') || String(item.variantId);
         return { id: parseInt(variantNum, 10) || variantNum, quantity: item.quantity || 1 };
@@ -2536,16 +2564,7 @@
             body: JSON.stringify({ discount: code })
           });
         })
-        .then(function() {
-          bbState.isSubmitting = false;
-          hasCheckoutIntent = true;
-          closeWizard();
-          var checkoutHref = checkoutUrl;
-          if (discountCode && getHasProgramPack()) {
-            checkoutHref += (checkoutUrl.indexOf('?') >= 0 ? '&' : '?') + 'discount=' + encodeURIComponent(discountCode);
-          }
-          window.location.href = checkoutHref;
-        })
+        .then(function() { redirectToCheckout(); })
         .catch(function() {
           bbState.isSubmitting = false;
           showToast('Error. Please try again.');
