@@ -362,6 +362,60 @@
         body.product--pop_booty .booty-workouts[data-booty-workouts-role] {
           scroll-margin-top: calc(var(--sticky-area-height, 0px) + 16px);
         }
+
+        @media (max-width: 767px) {
+          html:has(body.product--pop_booty),
+          body.product--pop_booty,
+          body.product--pop_booty main#main.anchor {
+            overflow-x: hidden;
+            max-width: 100%;
+          }
+
+          body.product--pop_booty main#main.anchor .shopify-section,
+          body.product--pop_booty .zpa-published-page-holder {
+            max-width: 100%;
+          }
+
+          body.product--pop_booty .testimonials__scroll,
+          body.product--pop_booty .twerk-lessons__scroll-wrapper,
+          body.product--pop_booty .program-cards__scroll-wrapper,
+          body.product--pop_booty .student-progress__scroll-wrapper {
+            max-width: 100%;
+          }
+
+          body.product--pop_booty .nass-banner__title-row {
+            max-width: 100%;
+            padding-right: 88px;
+          }
+
+          body.product--pop_booty .nass-timer {
+            gap: 4px;
+            max-width: 100%;
+            justify-content: center;
+          }
+
+          body.product--pop_booty .nass-timer__box {
+            width: 58px;
+            height: 40px;
+            font-size: 18px;
+          }
+
+          body.product--pop_booty .nass-timer__sep {
+            height: 40px;
+            font-size: 18px;
+          }
+
+          body.product--pop_booty .dance-workouts,
+          body.product--pop_booty .dance-workouts__video-stage {
+            overflow-x: clip;
+          }
+
+          body.product--pop_booty .video-reviews-grid__inner,
+          body.product--pop_booty .video-reviews-grid__grid {
+            min-width: 0;
+            max-width: 100%;
+          }
+        }
       </style>
       <script>
         (function() {

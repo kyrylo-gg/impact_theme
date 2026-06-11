@@ -1598,6 +1598,38 @@
     border: 0;
   }
 
+  @media (max-width: 767px) {
+    .booty-workouts {
+      overflow-x: clip;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .booty-workouts__container,
+    .booty-workouts__grid,
+    .booty-workouts__media,
+    .booty-workouts__body,
+    .booty-workouts__image-wrap,
+    .booty-workouts__tier-main,
+    .booty-workouts__offer-banner,
+    .booty-workouts__thumbs {
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .booty-workouts__title,
+    .booty-workouts__title-line,
+    .booty-workouts__rating-subline {
+      max-width: 100%;
+      overflow-wrap: anywhere;
+    }
+
+    .booty-workouts__tier-ribbon {
+      max-width: calc(100% - 24px);
+      white-space: normal;
+    }
+  }
+
   @media (min-width: 768px) {
     .booty-workouts {
       padding-left: 32px;
