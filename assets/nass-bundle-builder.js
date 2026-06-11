@@ -166,6 +166,8 @@
       || templateSuffix === 'nass_fans_ab';
     const isTwerkProgramR1Template = templateSuffix === 'twerk-program-r1'
       || templateSuffix === 'twerk_program_r1';
+    const isPopBootyTemplate = templateSuffix === 'pop_booty'
+      || templateSuffix === 'pop-booty';
     const allowBootyBuilderRuleMode = true;
     const bodyClassName = (typeof document !== 'undefined' && document.body && document.body.className)
       ? String(document.body.className).toLowerCase()
@@ -954,6 +956,26 @@
       );
     }
 
+    function isVipBundleProduct(title, handle) {
+      return title.indexOf('vip bundle') !== -1 || handle.indexOf('vip-bundle') !== -1;
+    }
+
+    function isPopBootyVipBundleSelected() {
+      if (!isPopBootyTemplate) return false;
+      var programsStep = bbState.steps.find(function(s) { return s && s.isProgramsStep; });
+      if (!programsStep) return false;
+      var selectedProgramItem = bbState.selectedItems.find(function(item) {
+        return String(item.stepId) === String(programsStep.id);
+      });
+      if (!selectedProgramItem) return false;
+      var selectedProduct = bbState.productsById[selectedProgramItem.productId];
+      if (!selectedProduct) return false;
+      return isVipBundleProduct(
+        normalizeForMatch(selectedProduct.title),
+        normalizeForMatch(selectedProduct.handle)
+      );
+    }
+
     function resolveBundleRuleModeFromProduct(title, handle) {
       if (
         title.indexOf('vip bundle') !== -1
@@ -1069,7 +1091,10 @@
         || handle.indexOf('resistance-band-set') !== -1
         || (handle.indexOf('booty') !== -1 && handle.indexOf('band') !== -1)
       );
-      if (isBootyBandSet && mode === 'vip_or_essential') return { free: true, mode: mode, type: 'booty_band' };
+      if (isBootyBandSet && mode === 'vip_or_essential') {
+        if (isPopBootyVipBundleSelected()) return null;
+        return { free: true, mode: mode, type: 'booty_band' };
+      }
       var isKneePads = title.indexOf('knee pads') !== -1 || title.indexOf('knee pad') !== -1 || handle.indexOf('knee pads') !== -1 || handle.indexOf('knee-pads') !== -1 || handle.indexOf('knee-pad') !== -1;
       if (isKneePads && mode === 'vip_or_essential' && skipProgramsStepOnOpen) {
         return { free: true, mode: mode, type: 'knee_pads' };
