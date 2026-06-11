@@ -358,7 +358,63 @@
         body.product--pop_booty .nass-bundle-builder .bb-section {
           display: none !important;
         }
+
+        body.product--pop_booty .booty-workouts[data-booty-workouts-role] {
+          scroll-margin-top: calc(var(--sticky-area-height, 0px) + 16px);
+        }
       </style>
+      <script>
+        (function() {
+          if (!document.body || !document.body.classList.contains('product--pop_booty')) return;
+
+          var anchorRoles = {
+            'booty-workouts': 'hero',
+            'booty-workouts-repeat': 'repeat'
+          };
+
+          function scrollToBootyAnchor(hash) {
+            var role = anchorRoles[hash];
+            if (!role) return false;
+
+            var target = document.querySelector('[data-booty-workouts-role="' + role + '"]');
+            if (!target) return false;
+
+            target.scrollIntoView({ block: 'start', behavior: 'smooth' });
+            return true;
+          }
+
+          document.addEventListener('click', function(event) {
+            var link = event.target.closest('a[href*="#"]');
+            if (!link || event.defaultPrevented) return;
+
+            var url;
+            try {
+              url = new URL(link.href, window.location.origin);
+            } catch (error) {
+              return;
+            }
+
+            if (url.pathname !== window.location.pathname || url.search !== window.location.search) return;
+
+            var hash = url.hash.replace(/^#/, '');
+            if (!anchorRoles[hash]) return;
+            if (!scrollToBootyAnchor(hash)) return;
+
+            event.preventDefault();
+            event.stopImmediatePropagation();
+
+            if (window.history && window.history.replaceState) {
+              window.history.replaceState(null, '', '#' + hash);
+            }
+          }, true);
+
+          window.addEventListener('load', function() {
+            var hash = window.location.hash.replace(/^#/, '');
+            if (!anchorRoles[hash]) return;
+            scrollToBootyAnchor(hash);
+          });
+        })();
+      </script>
     {%- endif -%}
 
     {% render 'ts-base' %}

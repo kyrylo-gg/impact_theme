@@ -9,12 +9,22 @@
   else
     assign booty_workouts_anchor = 'booty-workouts-' | append: section.id
   endif
+
+  assign booty_workouts_role = ''
+  if request.page_type == 'product' and template.suffix == 'pop_booty'
+    if booty_workouts_anchor == 'booty-workouts'
+      assign booty_workouts_role = 'hero'
+    elsif booty_workouts_anchor == 'booty-workouts-repeat'
+      assign booty_workouts_role = 'repeat'
+    endif
+  endif
 %}
 
 <section
   class="section-booty-workouts booty-workouts"
   id="{{ booty_workouts_anchor | escape }}"
   data-section-id="{{ section.id }}"
+  {% if booty_workouts_role != blank %}data-booty-workouts-role="{{ booty_workouts_role }}"{% endif %}
   style="
     --booty-workouts-image-radius: {{ section.settings.image_radius }}px;
   "
@@ -1898,11 +1908,21 @@
 
       const scrollActiveThumbIntoView = () => {
         const activeThumb = thumbs[activeIndex];
-        if (!activeThumb) return;
-        activeThumb.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
+        if (!activeThumb || !thumbsWrap) return;
+
+        const thumbLeft = activeThumb.offsetLeft;
+        const thumbWidth = activeThumb.offsetWidth;
+        const wrapWidth = thumbsWrap.clientWidth;
+        const maxScroll = Math.max(0, thumbsWrap.scrollWidth - wrapWidth);
+        const targetScroll = thumbLeft - wrapWidth / 2 + thumbWidth / 2;
+
+        thumbsWrap.scrollTo({
+          left: Math.max(0, Math.min(targetScroll, maxScroll)),
+          behavior: 'smooth',
+        });
       };
 
-      const goToSlide = (index) => {
+      const goToSlide = (index, { scrollThumb = false } = {}) => {
         activeIndex = ((index % slides.length) + slides.length) % slides.length;
         slides.forEach((slide, slideIndex) => {
           slide.classList.toggle('is-active', slideIndex === activeIndex);
@@ -1913,7 +1933,7 @@
           thumb.setAttribute('aria-selected', isActive ? 'true' : 'false');
         });
         syncSlideVideos();
-        scrollActiveThumbIntoView();
+        if (scrollThumb) scrollActiveThumbIntoView();
       };
 
       syncSlideVideos();
@@ -1947,7 +1967,7 @@
       thumbs.forEach((thumb) => {
         thumb.addEventListener('click', () => {
           const index = Number.parseInt(thumb.getAttribute('data-slide-index') || '0', 10);
-          goToSlide(index);
+          goToSlide(index, { scrollThumb: true });
           resetAutoplay();
         });
       });
@@ -1986,8 +2006,8 @@
               return;
             }
 
-            if (deltaX < 0) goToSlide(activeIndex + 1);
-            else goToSlide(activeIndex - 1);
+            if (deltaX < 0) goToSlide(activeIndex + 1, { scrollThumb: true });
+            else goToSlide(activeIndex - 1, { scrollThumb: true });
             resetAutoplay();
           },
           { passive: true }
