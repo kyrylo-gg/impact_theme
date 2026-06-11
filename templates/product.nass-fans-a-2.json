@@ -1287,7 +1287,7 @@
         "price_sale_color": "",
         "price_compare_color": "",
         "labels_color": "#000000",
-        "mobile_labels_color": "#ffffff",
+        "mobile_labels_color": "#1a1a1a",
         "show_savings_badge": true,
         "savings_badge_text": "",
         "savings_percentage_override": "",
