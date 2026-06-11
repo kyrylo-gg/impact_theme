@@ -1311,7 +1311,7 @@
         "savings_badge_color": "#000000",
         "mobile_savings_badge_color": "",
         "sublime_text_color": "#1a1a1a",
-        "sublime_text_color_mobile": "",
+        "sublime_text_color_mobile": "#1a1a1a",
         "sublime_text": "<p>Get Your Booty Summer-Ready</p>",
         "block_background": "#efa3c1",
         "timer_enabled": true,
