@@ -13,6 +13,12 @@
       .replace(/'/g, '&#39;');
   }
 
+  function formatBodyTfPromoHtml(text) {
+    return escapeHtml(text).replace(/free\s+leggings/gi, function(match) {
+      return '<span class="bb-wizard-discount-accent">' + match + '</span>';
+    });
+  }
+
   function gidToNum(gid) {
     if (!gid || typeof gid !== 'string') return '';
     var m = String(gid).match(/\/Product\/(\d+)/);
@@ -865,6 +871,19 @@
         return 'Choose your free leggings';
       }
       return step.title || 'Step';
+    }
+
+    function renderWizardTitle(step) {
+      if (!titleEl || !step) return;
+      if (isBodyTransformationTemplate && step.isProgramsStep) {
+        titleEl.innerHTML = formatBodyTfPromoHtml(discountPromoText);
+        return;
+      }
+      if (isBodyTransformationPromoSecondStep(step.id)) {
+        titleEl.innerHTML = formatBodyTfPromoHtml('Choose your free leggings');
+        return;
+      }
+      titleEl.textContent = getWizardStepTitle(step);
     }
 
     function countSelectedLinesOnStep(stepId) {
@@ -2368,6 +2387,16 @@
       });
     });
 
+    function setDiscountBannerText(html) {
+      if (!discountEl) return;
+      var textEl = discountEl.querySelector('.bb-wizard-discount-text');
+      if (textEl) {
+        textEl.innerHTML = html;
+      } else {
+        discountEl.innerHTML = '<span class="bb-wizard-discount-text">' + html + '</span>';
+      }
+    }
+
     function renderDiscountBanner() {
       if (!discountEl) return;
       if (!showDiscountBanner) {
@@ -2375,14 +2404,29 @@
         return;
       }
       var hasPack = getHasProgramPack();
+      var step = bbState.steps[bbState.currentStepIndex];
+      var bodyTfClass = isBodyTransformationTemplate ? ' bb-wizard-discount--body-tf' : '';
       if (hasPack) {
-        discountEl.className = 'bb-wizard-discount bb-wizard-discount--applied';
-        discountEl.innerHTML = '<span class="bb-wizard-discount-text">' + escapeHtml(discountAppliedText) + '</span>';
-      } else {
-        discountEl.className = 'bb-wizard-discount bb-wizard-discount--promo'
-          + (isBodyTransformationTemplate ? ' bb-wizard-discount--body-tf-promo' : '');
-        discountEl.innerHTML = '<span class="bb-wizard-discount-text">' + escapeHtml(discountPromoText) + '</span>';
+        discountEl.style.display = '';
+        discountEl.className = 'bb-wizard-discount bb-wizard-discount--applied' + bodyTfClass;
+        setDiscountBannerText(
+          isBodyTransformationTemplate
+            ? formatBodyTfPromoHtml(discountAppliedText)
+            : escapeHtml(discountAppliedText)
+        );
+        return;
       }
+      if (isBodyTransformationTemplate && step && step.isProgramsStep) {
+        discountEl.style.display = 'none';
+        return;
+      }
+      discountEl.style.display = '';
+      discountEl.className = 'bb-wizard-discount bb-wizard-discount--promo' + bodyTfClass;
+      setDiscountBannerText(
+        isBodyTransformationTemplate
+          ? formatBodyTfPromoHtml(discountPromoText)
+          : escapeHtml(discountPromoText)
+      );
     }
 
     function getItemOrigAndFinal(item, hasPack) {
@@ -3401,7 +3445,7 @@
       bbState.currentStepIndex = index;
       bbState.sizeFilter = null;
       var step = bbState.steps[index];
-      if (titleEl) titleEl.textContent = getWizardStepTitle(step);
+      renderWizardTitle(step);
       renderProgressBar();
       renderStep();
       renderDiscountBanner();
