@@ -859,6 +859,14 @@
       return isSelectedProgramFirstInProgramsCollection();
     }
 
+    function getWizardStepTitle(step) {
+      if (!step) return '';
+      if (isBodyTransformationPromoSecondStep(step.id)) {
+        return 'Choose your free leggings';
+      }
+      return step.title || 'Step';
+    }
+
     function countSelectedLinesOnStep(stepId) {
       return bbState.selectedItems.filter(function(item) {
         return String(item.stepId) === String(stepId);
@@ -3393,7 +3401,7 @@
       bbState.currentStepIndex = index;
       bbState.sizeFilter = null;
       var step = bbState.steps[index];
-      if (titleEl) titleEl.textContent = step.title;
+      if (titleEl) titleEl.textContent = getWizardStepTitle(step);
       renderProgressBar();
       renderStep();
       renderDiscountBanner();
