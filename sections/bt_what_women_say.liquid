@@ -39,8 +39,9 @@
       {%- endfor -%}
     </div>
 
-    {%- if section.settings.footer != blank -%}
-      <p class="bt-wws__footer">{{ section.settings.footer | escape }}</p>
+    {%- assign footer_text = section.settings.footer | strip -%}
+    {%- if footer_text != blank -%}
+      <p class="bt-wws__footer">{{ footer_text | escape }}</p>
     {%- endif -%}
   </div>
 </section>
@@ -138,7 +139,7 @@
   "settings": [
     { "type": "text", "id": "title_1", "label": "Title (blue)", "default": "What Women Say" },
     { "type": "text", "id": "title_2", "label": "Title suffix", "default": "After Starting" },
-    { "type": "text", "id": "footer", "label": "Footer text", "default": "If you&#39;re thinking &quot;But will this work for me?&quot; — let&#39;s answer that." }
+    { "type": "text", "id": "footer", "label": "Footer text" }
   ],
   "blocks": [
     { "type": "testimonial", "name": "Testimonial", "settings": [
