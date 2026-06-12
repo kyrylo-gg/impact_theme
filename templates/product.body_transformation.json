@@ -264,29 +264,43 @@
         "meet_photo_1": {
           "type": "photo",
           "settings": {
-            "image_mobile": "shopify://shop_images/Frame_245.png",
+            "image_mobile": "shopify://shop_images/Frame_279.png",
             "image_desktop": "shopify://shop_images/Frame_38.png"
           }
         },
         "meet_photo_2": {
           "type": "photo",
           "settings": {
-            "image_mobile": "shopify://shop_images/Frame_245.png",
+            "image_mobile": "shopify://shop_images/Frame_280.png",
             "image_desktop": "shopify://shop_images/Frame_38.png"
           }
         },
         "meet_photo_3": {
           "type": "photo",
           "settings": {
-            "image_mobile": "shopify://shop_images/Frame_245.png",
+            "image_mobile": "shopify://shop_images/Frame_281.png",
             "image_desktop": "shopify://shop_images/Frame_38.png"
+          }
+        },
+        "photo_gdUCwW": {
+          "type": "photo",
+          "settings": {
+            "image_mobile": "shopify://shop_images/Frame_282.png"
+          }
+        },
+        "photo_d7YXR9": {
+          "type": "photo",
+          "settings": {
+            "image_mobile": "shopify://shop_images/Frame_283.png"
           }
         }
       },
       "block_order": [
         "meet_photo_1",
         "meet_photo_2",
-        "meet_photo_3"
+        "meet_photo_3",
+        "photo_gdUCwW",
+        "photo_d7YXR9"
       ],
       "settings": {
         "title_1": "Meet",
