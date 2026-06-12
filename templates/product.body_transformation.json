@@ -106,7 +106,7 @@
         "0669bfe9-354c-4601-abcf-c38d6afaeb80": {
           "type": "text",
           "settings": {
-            "text": "<p>🔄 30 Day Returns<br/>🚚 $140+ Free US Shipping<br/>💃 Unique NassyStitch Technology<br/>💚 Eco-Friendly Packaging</p>"
+            "text": "<p>\ud83d\udd04 30 Day Returns<br/>\ud83d\ude9a $140+ Free US Shipping<br/>\ud83d\udc83 Unique NassyStitch Technology<br/>\ud83d\udc9a Eco-Friendly Packaging</p>"
           }
         },
         "cba091ce-a0d9-465f-ab86-d40697549bf2": {
@@ -172,7 +172,7 @@
         "title_white_1": "Transform",
         "title_white_2": "Your Body",
         "title_yellow": "in 3 Months",
-        "subtitle": "Follow the Soft → Basic → Hard training roadmap. Built for real life.",
+        "subtitle": "Follow the Soft \u2192 Basic \u2192 Hard training roadmap. Built for real life.",
         "below_text": "If you've tried before but didn't get results, here's why.",
         "badge_primary": "Get Free Leggings with a Full Program",
         "badge_secondary": "Hot Summer Start"
@@ -184,9 +184,9 @@
         "card_p8ftjc": {
           "type": "card",
           "settings": {
-            "emoji": "😤",
-            "text": "I miss a few workouts… and then I quit for weeks.",
-            "back_emoji": "😉",
+            "emoji": "\ud83d\ude24",
+            "text": "I miss a few workouts\u2026 and then I quit for weeks.",
+            "back_emoji": "\ud83d\ude09",
             "back_text": "This system gives you a simple way to continue, so you don't restart.",
             "variant": "blue"
           }
@@ -194,49 +194,49 @@
         "card_KRbhjG": {
           "type": "card",
           "settings": {
-            "emoji": "😓",
+            "emoji": "\ud83d\ude13",
             "text": "PMS hits, and my routine falls apart every month.",
-            "back_emoji": "🙌",
-            "back_text": "You'll have a built-in low-energy option, so you can stay consistent.",
+            "back_emoji": "\ud83d\ude4c",
+            "back_text": "You'll have a built-in\u2028low-energy option, so you\u2028can stay consistent.",
             "variant": "purple"
           }
         },
         "card_RnizPY": {
           "type": "card",
           "settings": {
-            "emoji": "🗓",
+            "emoji": "\ud83d\uddd3",
             "text": "I cannot stick to long workouts. My schedule is chaotic.",
-            "back_emoji": "😌",
-            "back_text": "You’ll always have a minimum effective option that still counts.",
+            "back_emoji": "\ud83d\ude0c",
+            "back_text": "You\u2019ll always have\u2028a minimum effective option that still counts.",
             "variant": "blue"
           }
         },
         "card_Nbw3bb": {
           "type": "card",
           "settings": {
-            "emoji": "😬",
+            "emoji": "\ud83d\ude2c",
             "text": "Jumping or HIIT hurts my knees or just feels too intense.",
-            "back_emoji": "🤸",
-            "back_text": "You start joint-friendly and level up only when you're ready.",
+            "back_emoji": "\ud83e\udd38",
+            "back_text": "You start joint-friendly\u2028and level up only when\u2028you're ready.",
             "variant": "purple"
           }
         },
         "card_h9QHTN": {
           "type": "card",
           "settings": {
-            "emoji": "🤷‍♀️",
+            "emoji": "\ud83e\udd37\u200d\u2640\ufe0f",
             "text": "I do random workouts because I do not know what to do.",
-            "back_emoji": "😄",
-            "back_text": "You’ll follow a clear roadmap: Build → Sculpt → Burn, step by step.",
+            "back_emoji": "\ud83d\ude04",
+            "back_text": "You\u2019ll follow a clear roadmap: Build \u2192 Sculpt \u2192 Burn, step by step.",
             "variant": "blue"
           }
         },
         "card_AGKA3n": {
           "type": "card",
           "settings": {
-            "emoji": "😢",
-            "text": "I want to look tighter, but I hate “punishment” workouts.",
-            "back_emoji": "⚡",
+            "emoji": "\ud83d\ude22",
+            "text": "I want to look tighter, but I hate \u201cpunishment\u201d workouts.",
+            "back_emoji": "\u26a1",
             "back_text": "This is consistency-first training. Visible results without extremes.",
             "variant": "purple"
           }
@@ -254,8 +254,8 @@
         "title_1": "You're Not Lazy.",
         "title_2": "You Just Need a Better System.",
         "subtitle": "Tap what feels true for you.",
-        "bottom_1": "If any of that feels familiar, you’re in the right place.",
-        "bottom_2": "Here’s who built this system, and why it’s different."
+        "bottom_1": "If any of that feels familiar, you\u2019re in the right place.",
+        "bottom_2": "Here\u2019s who built this system, and why it\u2019s different."
       }
     },
     "bt_meet_nastya": {
@@ -322,27 +322,27 @@
         "row_nPwhVe": {
           "type": "row",
           "settings": {
-            "left_emoji": "😫",
+            "left_emoji": "\ud83d\ude2b",
             "left_text": "Too hard, too soon",
-            "right_emoji": "🤸",
+            "right_emoji": "\ud83e\udd38",
             "right_text": "Build first, then level up"
           }
         },
         "row_VAQ4RB": {
           "type": "row",
           "settings": {
-            "left_emoji": "👟",
+            "left_emoji": "\ud83d\udc5f",
             "left_text": "Random workouts",
-            "right_emoji": "😄",
-            "right_text": "Soft → Basic → Hard roadmap"
+            "right_emoji": "\ud83d\ude04",
+            "right_text": "Soft \u2192 Basic \u2192 Hard roadmap"
           }
         },
         "row_nKNM8K": {
           "type": "row",
           "settings": {
-            "left_emoji": "🙁",
+            "left_emoji": "\ud83d\ude41",
             "left_text": "No plan for low-energy days",
-            "right_emoji": "✅",
+            "right_emoji": "\u2705",
             "right_text": "Plan B Flow (No-Restart)"
           }
         }
@@ -353,12 +353,12 @@
         "row_nKNM8K"
       ],
       "settings": {
-        "title_1": "Why Most \"Fat-Loss\" Challenges Fail —",
+        "title_1": "Why Most \"Fat-Loss\" Challenges Fail \u2014",
         "title_2": "and Why This Works",
         "col_left": "Typical",
         "col_right": "This program",
-        "bottom_1": "Build → Sculpt → Burn (build first, burn faster).",
-        "bottom_2": "Here's what that looks like — step by step."
+        "bottom_1": "Build \u2192 Sculpt \u2192 Burn (build first, burn faster).",
+        "bottom_2": "Here's what that looks like \u2014 step by step."
       }
     },
     "bt_choose_level": {
@@ -416,37 +416,37 @@
         "benefit_6FpgV4": {
           "type": "benefit",
           "settings": {
-            "text": "✅ A lighter, more comfortable body"
+            "text": "\u2705 A lighter, more comfortable body"
           }
         },
         "benefit_pGh6FX": {
           "type": "benefit",
           "settings": {
-            "text": "✅ More energy for real life"
+            "text": "\u2705 More energy for real life"
           }
         },
         "benefit_taN6Jg": {
           "type": "benefit",
           "settings": {
-            "text": "✅ Confidence in your body again"
+            "text": "\u2705 Confidence in your body again"
           }
         },
         "benefit_LKR3zj": {
           "type": "benefit",
           "settings": {
-            "text": "✅ Clothes that fit and feel good"
+            "text": "\u2705 Clothes that fit and feel good"
           }
         },
         "benefit_9hhkwA": {
           "type": "benefit",
           "settings": {
-            "text": "✅ Better daily well-being"
+            "text": "\u2705 Better daily well-being"
           }
         },
         "benefit_7Wy8gN": {
           "type": "benefit",
           "settings": {
-            "text": "✅ Inner calm and satisfaction"
+            "text": "\u2705 Inner calm and satisfaction"
           }
         }
       },
@@ -492,11 +492,11 @@
     "bt_app_access": {
       "type": "bt_app_access",
       "settings": {
-        "video_mobile": "shopify://files/videos/Main.Gif 30 FPS - вертикал (1).webm",
+        "video_mobile": "shopify://files/videos/Main.Gif 30 FPS - \u0432\u0435\u0440\u0442\u0438\u043a\u0430\u043b (1).webm",
         "video_url_mobile": "",
-        "video_desktop": "shopify://files/videos/Main.Gif 30 FPS- горизонтал.webm",
+        "video_desktop": "shopify://files/videos/Main.Gif 30 FPS- \u0433\u043e\u0440\u0438\u0437\u043e\u043d\u0442\u0430\u043b.webm",
         "video_url_desktop": "",
-        "video": "shopify://files/videos/Main.Gif 30 FPS- горизонтал.webm",
+        "video": "shopify://files/videos/Main.Gif 30 FPS- \u0433\u043e\u0440\u0438\u0437\u043e\u043d\u0442\u0430\u043b.webm",
         "video_url": "",
         "overlay_opacity": 0.3,
         "title_1": "Instant Access",
@@ -540,53 +540,32 @@
         "footer": "If you're ready to start transforming your body, here's the simplest way to begin."
       }
     },
-    "bt_choose_your_path": {
-      "type": "bt_choose_your_path",
+    "bt_full_program_card": {
+      "type": "bt_full_program_card",
       "blocks": {
-        "level_w7h7C6": {
-          "type": "level",
+        "full_item_1": {
+          "type": "item",
           "settings": {
-            "image": "shopify://shop_images/bt_soft.png",
-            "duration": "4 weeks",
-            "title": "Soft",
-            "subtitle": "(Foundation)",
-            "price": "$37",
-            "reg_price": "$80",
-            "description": "Start joint-friendly and build the base",
-            "url": ""
+            "text": "Soft + Basic + Hard (12 weeks)"
           }
         },
-        "level_HRzwTt": {
-          "type": "level",
+        "full_item_2": {
+          "type": "item",
           "settings": {
-            "image": "shopify://shop_images/Frame_41-2_e07c83cf-fb7b-41b3-bc4d-a87d5482690c.png",
-            "duration": "4 weeks",
-            "title": "Basic",
-            "subtitle": "(Sculpt)",
-            "price": "$47",
-            "reg_price": "$100",
-            "description": "Strength-based sculpting for visible tone",
-            "url": ""
+            "text": "Plan B Flow."
           }
         },
-        "level_pQWrEN": {
-          "type": "level",
+        "full_item_3": {
+          "type": "item",
           "settings": {
-            "image": "shopify://shop_images/Frame_41-3.png",
-            "duration": "4 weeks",
-            "title": "Hard",
-            "subtitle": "(Burn)",
-            "price": "$57",
-            "reg_price": "$120",
-            "description": "Higher intensity when you’re ready",
-            "url": ""
+            "text": "Readiness Test."
           }
         }
       },
       "block_order": [
-        "level_w7h7C6",
-        "level_HRzwTt",
-        "level_pQWrEN"
+        "full_item_1",
+        "full_item_2",
+        "full_item_3"
       ],
       "settings": {
         "title": "Choose Your Path",
@@ -600,11 +579,58 @@
         "full_price": "$99",
         "full_reg_price": "$300",
         "full_save": "Save $201 today (67% OFF!)",
-        "full_url": "",
-        "cta_full": "Get the Full Program",
-        "cta_level": "Shop now",
+        "cta_full": "Get the Full Program"
+      }
+    },
+    "bt_program_cards": {
+      "type": "bt_program_cards",
+      "blocks": {
+        "level_w7h7C6": {
+          "type": "level",
+          "settings": {
+            "image": "shopify://shop_images/bt_soft.png",
+            "duration": "4 weeks",
+            "title": "Soft",
+            "subtitle": "(Foundation)",
+            "price": "$37",
+            "reg_price": "$80",
+            "description": "Start joint-friendly and build the base"
+          }
+        },
+        "level_HRzwTt": {
+          "type": "level",
+          "settings": {
+            "image": "shopify://shop_images/Frame_41-2_e07c83cf-fb7b-41b3-bc4d-a87d5482690c.png",
+            "duration": "4 weeks",
+            "title": "Basic",
+            "subtitle": "(Sculpt)",
+            "price": "$47",
+            "reg_price": "$100",
+            "description": "Strength-based sculpting for visible tone"
+          }
+        },
+        "level_pQWrEN": {
+          "type": "level",
+          "settings": {
+            "image": "shopify://shop_images/Frame_41-3.png",
+            "duration": "4 weeks",
+            "title": "Hard",
+            "subtitle": "(Burn)",
+            "price": "$57",
+            "reg_price": "$120",
+            "description": "Higher intensity when you\u2019re ready"
+          }
+        }
+      },
+      "block_order": [
+        "level_w7h7C6",
+        "level_HRzwTt",
+        "level_pQWrEN"
+      ],
+      "settings": {
         "prefer_text": "Prefer to start smaller? Pick one level below.",
-        "bottom_1": "Most women choose the Full Bundle so they can start Soft now and have the full roadmap ready when they’re ready.",
+        "cta_level": "Shop now",
+        "bottom_1": "Most women choose the Full Bundle so they can start Soft now and have the full roadmap ready when they\u2019re ready.",
         "bottom_2": "Still want to hear it from women who started exactly where you are?"
       }
     },
@@ -736,7 +762,7 @@
           "settings": {
             "image": "shopify://shop_images/Frame_44-3.png",
             "name": "Brianna Thompson",
-            "quote": "I’m not gonna lie I usually quit after like week 2 😅 This is the first program that didn’t make me feel “behind” all the time. Starting Soft was exactly what I needed."
+            "quote": "I\u2019m not gonna lie I usually quit after like week 2 \ud83d\ude05 This is the first program that didn\u2019t make me feel \u201cbehind\u201d all the time. Starting Soft was exactly what I needed."
           }
         },
         "testimonial_MmEdgf": {
@@ -744,7 +770,7 @@
           "settings": {
             "image": "shopify://shop_images/Frame_44-3-2.png",
             "name": "Johnna Byrd",
-            "quote": "The Plan B days are EVERYTHING. Like… I had a low energy week and I didn’t fall off the wagon for once?? lol"
+            "quote": "The Plan B days are EVERYTHING. Like\u2026 I had a low energy week and I didn\u2019t fall off the wagon for once?? lol"
           }
         },
         "testimonial_BmVnQ7": {
@@ -752,7 +778,7 @@
           "settings": {
             "image": "shopify://shop_images/Frame_44.png",
             "name": "Kim Davis",
-            "quote": "I have knee issues and most “challenges” wreck me tbh. Soft felt really joint friendly and I could actually keep going (without pain)."
+            "quote": "I have knee issues and most \u201cchallenges\u201d wreck me tbh. Soft felt really joint friendly and I could actually keep going (without pain)."
           }
         }
       },
@@ -764,7 +790,7 @@
       "settings": {
         "title_1": "What Women Say",
         "title_2": "After Starting",
-        "footer": "If you're thinking \"But will this work for me?\" — let's answer that."
+        "footer": "If you're thinking \"But will this work for me?\" \u2014 let's answer that."
       }
     },
     "bt_faq": {
@@ -781,7 +807,7 @@
           "type": "faq",
           "settings": {
             "question": "Do I have to do jumping or HIIT?",
-            "answer": "No. You don’t have to do jumping or intense HIIT at the start. The program uses a step-by-step interval structure for safe adaptation:\n\nSoft Level: No jumping. Focuses on technique and gentle conditioning.\n\nBasic Level: Slightly higher intensity, but still manageable and jump-free.\n\nHard Level: Introduces jumping and high-intensity HIIT only when your body is fully prepared."
+            "answer": "No. You don\u2019t have to do jumping or intense HIIT at the start. The program uses a step-by-step interval structure for safe adaptation:\n\nSoft Level: No jumping. Focuses on technique and gentle conditioning.\n\nBasic Level: Slightly higher intensity, but still manageable and jump-free.\n\nHard Level: Introduces jumping and high-intensity HIIT only when your body is fully prepared."
           }
         },
         "faq_keYwNN": {
@@ -816,7 +842,7 @@
           "type": "faq",
           "settings": {
             "question": "Do I need equipment?",
-            "answer": "You don’t need any special equipment, just exercise mat (recommended for comfort, stability, and grip during floor exercises).\n\nAt the Hard level, you will need a sturdy surface for step-ups, which can be any safe elevation found at home (like a step or platform)."
+            "answer": "You don\u2019t need any special equipment, just exercise mat (recommended for comfort, stability, and grip during floor exercises).\n\nAt the Hard level, you will need a sturdy surface for step-ups, which can be any safe elevation found at home (like a step or platform)."
           }
         },
         "faq_ATY3n8": {
@@ -837,7 +863,7 @@
           "type": "faq",
           "settings": {
             "question": "What is your money-back guarantee?",
-            "answer": "We offer a 30-day money-back guarantee. If you’re not completely satisfied with your purchase, you can request a full refund within 30 days - no questions asked."
+            "answer": "We offer a 30-day money-back guarantee. If you\u2019re not completely satisfied with your purchase, you can request a full refund within 30 days - no questions asked."
           }
         }
       },
@@ -872,7 +898,7 @@
         "title_1": "Start Where You Are.",
         "title_2": "Stay Consistent.",
         "title_3": "Get Results.",
-        "desc": "Start at your level (Soft → Basic → Hard)\nPlan B Flow for real-life days\nBuild → Sculpt → Burn (build first, burn faster)",
+        "desc": "Start at your level (Soft \u2192 Basic \u2192 Hard)\nPlan B Flow for real-life days\nBuild \u2192 Sculpt \u2192 Burn (build first, burn faster)",
         "cta_text": "Get Instant Access",
         "cta_url": "",
         "footer_left": "One-time purchase",
@@ -887,7 +913,7 @@
           "type": "richtext",
           "settings": {
             "seo_optimization": false,
-            "content": "<h1>Body Transformation Program Built for Real Life: Not Perfect Weeks</h1><p>Most women do not quit fitness because they are lazy. They quit because many workout plans demand too much intensity before the body is physically ready for it.</p><p>This body transformation program was created around a different idea: progression before pressure.</p><p>Instead of starting with exhausting HIIT sessions or aggressive “shred” workouts, the system follows a 12-week roadmap designed to help women rebuild strength, improve conditioning, and create visible body changes step by step. The structure is divided into three progressive levels:</p><ol><li><strong>Soft (Weeks 1–4)</strong> — foundation, activation, posture, core and glute control.</li><li><strong>Basic (Weeks 5–8)</strong> — sculpt-focused strength training with squats, lunges, step-ups, and lower-body conditioning.</li><li><strong>Hard (Weeks 9–12)</strong> — higher-intensity burn phase focused on conditioning and fat-loss acceleration.</li></ol><p>This gradual progression helps women avoid the common cycle of soreness, burnout, skipped workouts, and restarting every few weeks.</p><h2>Why Random Online Workouts Often Stop Working</h2><p>A major problem with many fitness apps and YouTube routines is the lack of progression. Women jump between random workouts without building stability, movement control, or endurance first.</p><p>This body transformation workout plan follows a structured system where every phase prepares the body for the next level. Early workouts focus on activation drills, low-impact movement patterns, glute engagement, mobility work, and core stability. Instead of “destroying calories,” the goal is to improve how the body moves and recovers.</p><p>As participants progress into the Basic phase, the training becomes more sculpt-focused:</p><ul><li>lower body strength circuits;</li><li>controlled conditioning;</li><li>core finishers;</li><li>and posture-focused movement patterns.</li></ul><p>Only after building this foundation does the program move into more advanced conditioning work during the final phase.</p><p>That structure is especially important for women who want realistic results without feeling intimidated by extreme fitness culture.</p><h2>A 12-Week System Designed Around Female Physiology</h2><p>Unlike generic fat-loss challenges, this 12 week body transformation program includes built-in flexibility for real-life energy fluctuations.</p><p>The Plan B Flow system gives women two workout options on difficult days:</p><ul><li>a full session;</li><li>or a lower-impact low-energy version that still keeps momentum going.</li></ul><p>For example, a regular lower-body workout may include:</p><ul><li>strength blocks;</li><li>conditioning intervals;</li><li>and core finishers.</li></ul><p>while the low-energy version shifts toward:</p><ul><li>gentle activation;</li><li>low-impact strength work;</li><li>mobility exercises;</li><li>breathing;</li><li>and stretching.</li></ul><p>This approach helps women stay consistent during:</p><ul><li>PMS;</li><li>stressful work periods;</li><li>recovery weeks;</li><li>poor sleep;</li><li>or low-energy days.</li></ul><p>Instead of missing an entire week and feeling forced to “start over,” participants continue progressing at a realistic pace.</p><h2>More Than Weight Loss: Visible Tone, Conditioning, and Confidence</h2><p>Many women are not looking to become bodybuilders. They want:</p><ul><li>a tighter waist;</li><li>stronger glutes;</li><li>better posture;</li><li>more energy;</li><li>and visible body tone that feels sustainable.</li></ul><p>That is why this weight loss and toning program combines strength-based sculpting with gradual conditioning instead of relying only on cardio.</p><p>The workouts focus heavily on:</p><ul><li>glute activation;</li><li>lower-body strength;</li><li>core engagement;</li><li>mobility;</li><li>and progressive endurance development.</li></ul><p>This combination helps improve overall body composition while supporting long-term consistency instead of temporary crash results.</p><p>The philosophy behind the program is simple: <strong>Build first. Burn faster.</strong></p><p>Women who improve movement quality and foundational strength first are often able to train more consistently and safely during later fat-loss phases.</p><h2>Created for Women Over 35 Who Want Sustainable Progress</h2><p>Recovery, stress, hormonal changes, and joint sensitivity become increasingly important with age. Many programs ignore that reality completely.</p><p>This body transformation program for women over 35 was designed specifically for women who want visible results without punishing workouts that feel impossible to maintain.</p><p>The low-impact Soft phase helps participants rebuild confidence gradually through:</p><ul><li>controlled movement;</li><li>activation work;</li><li>mobility;</li><li>and foundational conditioning.</li></ul><p>The later phases then introduce more advanced sculpting and burn-focused training only after the body is prepared for it.</p><p>Rather than promoting unrealistic “perfect body in 30 days” messaging, the program focuses on:</p><ul><li>structured progression;</li><li>sustainable conditioning;</li><li>realistic body transformation;</li><li>and consistency that fits into real life.</li></ul><p>For many women, that becomes the difference between another temporary challenge and a fitness system they can actually maintain long term.</p>"
+            "content": "<h1>Body Transformation Program Built for Real Life: Not Perfect Weeks</h1><p>Most women do not quit fitness because they are lazy. They quit because many workout plans demand too much intensity before the body is physically ready for it.</p><p>This body transformation program was created around a different idea: progression before pressure.</p><p>Instead of starting with exhausting HIIT sessions or aggressive \u201cshred\u201d workouts, the system follows a 12-week roadmap designed to help women rebuild strength, improve conditioning, and create visible body changes step by step. The structure is divided into three progressive levels:</p><ol><li><strong>Soft (Weeks 1\u20134)</strong> \u2014 foundation, activation, posture, core and glute control.</li><li><strong>Basic (Weeks 5\u20138)</strong> \u2014 sculpt-focused strength training with squats, lunges, step-ups, and lower-body conditioning.</li><li><strong>Hard (Weeks 9\u201312)</strong> \u2014 higher-intensity burn phase focused on conditioning and fat-loss acceleration.</li></ol><p>This gradual progression helps women avoid the common cycle of soreness, burnout, skipped workouts, and restarting every few weeks.</p><h2>Why Random Online Workouts Often Stop Working</h2><p>A major problem with many fitness apps and YouTube routines is the lack of progression. Women jump between random workouts without building stability, movement control, or endurance first.</p><p>This body transformation workout plan follows a structured system where every phase prepares the body for the next level. Early workouts focus on activation drills, low-impact movement patterns, glute engagement, mobility work, and core stability. Instead of \u201cdestroying calories,\u201d the goal is to improve how the body moves and recovers.</p><p>As participants progress into the Basic phase, the training becomes more sculpt-focused:</p><ul><li>lower body strength circuits;</li><li>controlled conditioning;</li><li>core finishers;</li><li>and posture-focused movement patterns.</li></ul><p>Only after building this foundation does the program move into more advanced conditioning work during the final phase.</p><p>That structure is especially important for women who want realistic results without feeling intimidated by extreme fitness culture.</p><h2>A 12-Week System Designed Around Female Physiology</h2><p>Unlike generic fat-loss challenges, this 12 week body transformation program includes built-in flexibility for real-life energy fluctuations.</p><p>The Plan B Flow system gives women two workout options on difficult days:</p><ul><li>a full session;</li><li>or a lower-impact low-energy version that still keeps momentum going.</li></ul><p>For example, a regular lower-body workout may include:</p><ul><li>strength blocks;</li><li>conditioning intervals;</li><li>and core finishers.</li></ul><p>while the low-energy version shifts toward:</p><ul><li>gentle activation;</li><li>low-impact strength work;</li><li>mobility exercises;</li><li>breathing;</li><li>and stretching.</li></ul><p>This approach helps women stay consistent during:</p><ul><li>PMS;</li><li>stressful work periods;</li><li>recovery weeks;</li><li>poor sleep;</li><li>or low-energy days.</li></ul><p>Instead of missing an entire week and feeling forced to \u201cstart over,\u201d participants continue progressing at a realistic pace.</p><h2>More Than Weight Loss: Visible Tone, Conditioning, and Confidence</h2><p>Many women are not looking to become bodybuilders. They want:</p><ul><li>a tighter waist;</li><li>stronger glutes;</li><li>better posture;</li><li>more energy;</li><li>and visible body tone that feels sustainable.</li></ul><p>That is why this weight loss and toning program combines strength-based sculpting with gradual conditioning instead of relying only on cardio.</p><p>The workouts focus heavily on:</p><ul><li>glute activation;</li><li>lower-body strength;</li><li>core engagement;</li><li>mobility;</li><li>and progressive endurance development.</li></ul><p>This combination helps improve overall body composition while supporting long-term consistency instead of temporary crash results.</p><p>The philosophy behind the program is simple: <strong>Build first. Burn faster.</strong></p><p>Women who improve movement quality and foundational strength first are often able to train more consistently and safely during later fat-loss phases.</p><h2>Created for Women Over 35 Who Want Sustainable Progress</h2><p>Recovery, stress, hormonal changes, and joint sensitivity become increasingly important with age. Many programs ignore that reality completely.</p><p>This body transformation program for women over 35 was designed specifically for women who want visible results without punishing workouts that feel impossible to maintain.</p><p>The low-impact Soft phase helps participants rebuild confidence gradually through:</p><ul><li>controlled movement;</li><li>activation work;</li><li>mobility;</li><li>and foundational conditioning.</li></ul><p>The later phases then introduce more advanced sculpting and burn-focused training only after the body is prepared for it.</p><p>Rather than promoting unrealistic \u201cperfect body in 30 days\u201d messaging, the program focuses on:</p><ul><li>structured progression;</li><li>sustainable conditioning;</li><li>realistic body transformation;</li><li>and consistency that fits into real life.</li></ul><p>For many women, that becomes the difference between another temporary challenge and a fitness system they can actually maintain long term.</p>"
           }
         }
       },
@@ -967,7 +993,8 @@
     "bt_no_restart",
     "bt_app_access",
     "bt_real_results",
-    "bt_choose_your_path",
+    "bt_full_program_card",
+    "bt_program_cards",
     "nass_bundle_builder",
     "bt_what_women_say",
     "bt_faq",

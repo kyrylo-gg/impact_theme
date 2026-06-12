@@ -1,0 +1,241 @@
+{% comment %}
+  BT_FullProgramCard (Body Transformation)
+  Full 12-week program card — split from BT_ChooseYourPath.
+{% endcomment %}
+
+{%- liquid
+  assign title = section.settings.title | default: 'Choose Your Path'
+  assign subtitle = section.settings.subtitle | default: 'Start at your level today — or get the complete system for the best value.'
+  assign cta_full = section.settings.cta_full | default: 'Get the Full Program'
+-%}
+
+<section class="bt-wrap bt-path bt-fpc" data-bt-choose-path>
+  <div class="bt-container bt-path__container">
+    <div class="bt-path__title">{{ title | escape }}</div>
+    <div class="bt-path__divider" aria-hidden="true"></div>
+    <p class="bt-path__subtitle">{{ subtitle | escape }}</p>
+
+    <div class="bt-path__full">
+      <div id="bt-path__full-card" class="bt-path__full-card">
+        <div class="bt-path__full-img">
+          {%- if section.settings.full_image_mobile != blank -%}
+            <img class="bt-path__img bt-path__img--m" src="{{ section.settings.full_image_mobile | image_url: width: 900 }}" alt="" loading="lazy">
+          {%- endif -%}
+          {%- if section.settings.full_image_desktop != blank -%}
+            <img class="bt-path__img bt-path__img--d" src="{{ section.settings.full_image_desktop | image_url: width: 1100 }}" alt="" loading="lazy">
+          {%- endif -%}
+          <div class="bt-path__badges">
+            <span class="bt-path__badge bt-path__badge--y">{{ section.settings.badge_1 | escape }}</span>
+            <span class="bt-path__badge bt-path__badge--g">{{ section.settings.badge_2 | escape }}</span>
+          </div>
+        </div>
+        <div class="bt-path__full-body">
+          <div class="bt-path__full-title">{{ section.settings.full_title | escape }}</div>
+          <p class="bt-path__full-sub">{{ section.settings.full_subtitle | escape }}</p>
+          <div class="bt-path__price-row">
+            <span class="bt-path__price-now">{{ section.settings.full_price | escape }}</span>
+            <span class="bt-path__price-reg">Reg. {{ section.settings.full_reg_price | escape }}</span>
+          </div>
+          <p class="bt-path__save">{{ section.settings.full_save | escape }}</p>
+          <div class="bt-path__bonuses">
+            <p class="bt-path__bonuses-title">Bonuses:</p>
+            <ul class="bt-path__bonuses-list">
+              <li>🏷️ 60% off apparel &amp; equipment</li>
+              <li>🥗 Nutrition guide</li>
+              <li>🧘‍♀️ Guided meditations</li>
+            </ul>
+          </div>
+          <ul class="bt-path__list">
+            {%- for block in section.blocks -%}
+              <li {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</li>
+            {%- endfor -%}
+          </ul>
+
+          <a id="bt-full-program-cta" href="#nass-bundle-builder" class="bt-path__cta bt-path__cta--full" data-bt-open-bundle data-bt-bb-preselect="true">{{ cta_full | escape }} <span aria-hidden="true">→</span></a>
+          <p class="bt-path__guarantee">
+            <span class="bt-path__guarantee-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="14" height="14" focusable="false">
+                <path d="M12 2L4 5v6c0 5.2 3.4 9.9 8 11 4.6-1.1 8-5.8 8-11V5l-8-3zm0 2.1 6 2.3V11c0 4.2-2.6 8.1-6 9.2-3.4-1.1-6-5-6-9.2V6.4l6-2.3z" fill="currentColor"></path>
+                <path d="M10.9 14.7 8.2 12l1.1-1.1 1.6 1.6 3.8-3.8 1.1 1.1-4.9 4.9z" fill="currentColor"></path>
+              </svg>
+            </span>
+            <span>30-day money-back guarantee</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  (function(){
+    var sectionEl = document.getElementById('shopify-section-{{ section.id }}');
+    if (!sectionEl) return;
+    if (!document.body.classList.contains('product--body_transformation')) return;
+
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        document.body.classList.toggle('bt-choose-path-active', entry.isIntersecting);
+      });
+    }, { rootMargin: '-15% 0px -55% 0px', threshold: 0.01 });
+
+    io.observe(sectionEl);
+  })();
+
+  function tryOpenBundleWizard(maxRetries){
+    maxRetries = typeof maxRetries === 'number' ? maxRetries : 20;
+    var retries = 0;
+    function tick(){
+      var bb = (window.NassBundleBuilder && typeof window.NassBundleBuilder.openWizard === 'function') ? window.NassBundleBuilder : null;
+      if (bb) {
+        bb.openWizard();
+        return;
+      }
+      if (retries >= maxRetries) {
+        window.location.hash = '#nass-bundle-builder';
+        return;
+      }
+      retries += 1;
+      window.location.hash = '#nass-bundle-builder';
+      setTimeout(tick, 100);
+    }
+    tick();
+  }
+
+  var root = document.getElementById('shopify-section-{{ section.id }}');
+  if (!root) return;
+  root.querySelectorAll('[data-bt-open-bundle]').forEach(function(el){
+    el.addEventListener('click', function(e){
+      e.preventDefault();
+      window.__bt_bb_preselect_first = el.getAttribute('data-bt-bb-preselect') === 'true';
+      tryOpenBundleWizard(25);
+    });
+  });
+})();
+</script>
+
+{% stylesheet %}
+  .bt-wrap { width: 100%; display: flex; justify-content: center; padding: 24px 16px; box-sizing: border-box; }
+  @media (min-width: 768px) { .bt-wrap { padding: 40px 0; } }
+  .bt-container { width: 100%; max-width: 335px; text-align: center; }
+  @media (min-width: 768px) { .bt-container { max-width: 1184px; } }
+
+  .bt-path__title { margin: 0; font-family: 'Anybody', sans-serif; font-weight: 900; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 24px; color: #0038FF; line-height: 1.05; }
+  @media (min-width: 768px) { .bt-path__title { font-size: 45px; } }
+
+  .bt-path__divider { display: none; width: 48px; height: 3px; background: #0038FF; margin: 16px auto 0; }
+  @media (min-width: 768px) { .bt-path__divider { display: block; } }
+
+  .bt-path__subtitle { margin: 16px 0 0; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 14px; color: #111; }
+  @media (min-width: 768px) { .bt-path__subtitle { margin-top: 24px; font-size: 18px; } }
+
+  .bt-path__full { margin-top: 24px; display: flex; justify-content: center; }
+  @media (min-width: 768px) { .bt-path__full { margin-top: 40px; } }
+  .bt-path__full-card { background: #fff; border-radius: 30px; overflow: hidden; box-shadow: 0 6px 28px rgba(0,0,0,0.15); }
+  @media (min-width: 768px) { .bt-path__full-card { display: flex; max-width: 782px; width: 100%; } }
+
+  .bt-path__full-img { position: relative; margin: 12px; border-radius: 18px; overflow: hidden; height: 311px; border: 0; background: #fff; }
+  @media (min-width: 768px) { .bt-path__full-img { width: 369px; height: 396px; flex: 0 0 369px; align-self: center; } }
+  .bt-path__img { width: 100%; height: 100%; object-fit: cover; display: none; }
+  .bt-path__img--m { display: block; }
+  @media (min-width: 768px) { .bt-path__img--m { display: none; } .bt-path__img--d { display: block; } }
+
+  .bt-path__badges { position: absolute; left: 20px; top: 20px; display: flex; gap: 8px; }
+  .bt-path__badge { border-radius: 999px; padding: 6px 12px; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 800; font-size: 14px; color: #111; }
+  @media (min-width: 768px) { .bt-path__badge { font-size: 18px; } }
+  .bt-path__badge--y { background: #FAFF00; }
+  .bt-path__badge--g { background: #B8FF00; }
+
+  .bt-path__full-body { padding: 0 20px 20px; text-align: left; }
+  @media (min-width: 768px) { .bt-path__full-body { padding: 32px; } }
+  .bt-path__full-title { margin: 0; font-family: 'Anybody', sans-serif; font-weight: 600; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 20px; color: #111; }
+  @media (min-width: 768px) { .bt-path__full-title { font-size: 24px; } }
+  .bt-path__full-sub { margin: 8px 0 0; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 800; font-size: 16px; color: #111; }
+  @media (min-width: 768px) { .bt-path__full-sub { font-size: 18px; } }
+
+  .bt-path__price-row { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+  .bt-path__price-now { font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 800; font-size: 21px; color: #0A8A2A; }
+  @media (min-width: 768px) { .bt-path__price-now { font-size: 24px; } }
+  .bt-path__price-reg { font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 16px; color: #111; border-radius: 999px; border: 1px solid rgba(0,0,0,0.1); padding: 6px 12px; position: relative; }
+  @media (min-width: 768px) { .bt-path__price-reg { font-size: 18px; } }
+
+  .bt-path__full .bt-path__price-now { color: #00C853; }
+  .bt-path__full .bt-path__price-reg::after {
+    content: '';
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    top: 50%;
+    height: 2px;
+    background: #FF0000;
+    transform: translateY(-50%);
+    border-radius: 999px;
+    pointer-events: none;
+  }
+
+  .bt-path__save { margin: 8px 0 0; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 800; font-size: 14px; color: #111; }
+  @media (min-width: 768px) { .bt-path__save { font-size: 18px; } }
+  .bt-path__bonuses { margin-top: 10px; }
+  .bt-path__bonuses-title { margin: 0; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 800; font-size: 14px; color: #111; }
+  .bt-path__bonuses-list { margin: 6px 0 0; padding: 0; list-style: none; display: grid; gap: 4px; }
+  .bt-path__bonuses-list li { font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 14px; color: #111; text-align: left; }
+  @media (min-width: 768px) {
+    .bt-path__bonuses-title { font-size: 16px; }
+    .bt-path__bonuses-list li { font-size: 16px; }
+  }
+
+  .bt-path__list { margin: 16px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+  .bt-path__list li { font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 14px; color: #111; text-align: left; }
+  @media (min-width: 768px) { .bt-path__list li { font-size: 18px; } }
+
+  .bt-path__cta { margin-top: 20px; display: flex; align-items: center; justify-content: space-between; width: 100%; border-radius: 32px; padding: 17px 26px 18px; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 18px; text-decoration: none; background: #111; color: #fff; }
+  .bt-path__cta--full { background: #0038FF; }
+  .bt-path__guarantee { margin: 8px 0 0; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 12px; color: #8A8A8A; text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px; }
+  .bt-path__guarantee-icon { display: inline-flex; color: #9A9A9A; line-height: 0; }
+  @media (min-width: 768px) { .bt-path__guarantee { font-size: 13px; } }
+
+  body.product--body_transformation .nass-bundle-builder .bb-section { display: none !important; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BT_FullProgramCard",
+  "class": "shopify-section--bt-full-program-card",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Choose Your Path" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Start at your level today — or get the complete system for the best value." },
+    { "type": "header", "content": "Full program card" },
+    { "type": "image_picker", "id": "full_image_mobile", "label": "Full image (mobile)" },
+    { "type": "image_picker", "id": "full_image_desktop", "label": "Full image (desktop)" },
+    { "type": "text", "id": "badge_1", "label": "Badge 1", "default": "Recommended" },
+    { "type": "text", "id": "badge_2", "label": "Badge 2", "default": "Best Value" },
+    { "type": "text", "id": "full_title", "label": "Full title", "default": "FULL 12-WEEK PROGRAM" },
+    { "type": "text", "id": "full_subtitle", "label": "Full subtitle", "default": "(Soft + Basic + Hard)" },
+    { "type": "text", "id": "full_price", "label": "Full price", "default": "$99" },
+    { "type": "text", "id": "full_reg_price", "label": "Full reg price", "default": "$300" },
+    { "type": "text", "id": "full_save", "label": "Full save line", "default": "Save $201 today (67% OFF!)" },
+    { "type": "text", "id": "cta_full", "label": "Full CTA text", "default": "Get the Full Program" }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Program feature",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Soft + Basic + Hard (12 weeks)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BT_FullProgramCard",
+      "blocks": [
+        { "type": "item", "settings": { "text": "Soft + Basic + Hard (12 weeks)" } },
+        { "type": "item", "settings": { "text": "Plan B Flow." } },
+        { "type": "item", "settings": { "text": "Readiness Test." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,175 @@
+{% comment %}
+  BT_ProgramCards (Body Transformation)
+  Individual level program cards — split from BT_ChooseYourPath.
+{% endcomment %}
+
+{%- liquid
+  assign cta_level = section.settings.cta_level | default: 'Shop now'
+-%}
+
+<section class="bt-wrap bt-path bt-pc" data-bt-choose-path>
+  <div class="bt-container bt-path__container">
+    <p class="bt-path__prefer">{{ section.settings.prefer_text | escape }}</p>
+
+    <div class="bt-path__levels">
+      {%- for block in section.blocks -%}
+        <div class="bt-path__level" {{ block.shopify_attributes }}>
+          <div class="bt-path__level-img">
+            {%- if block.settings.image != blank -%}
+              <img src="{{ block.settings.image | image_url: width: 900 }}" alt="" loading="lazy">
+            {%- endif -%}
+            <div class="bt-path__level-badge">{{ block.settings.duration | escape }}</div>
+            <div class="bt-path__level-title">
+              <span class="bt-path__level-title1">{{ block.settings.title | escape }}</span>
+              <span class="bt-path__level-title2">{{ block.settings.subtitle | escape }}</span>
+            </div>
+          </div>
+          <div class="bt-path__level-body">
+            <div class="bt-path__price-row">
+              <span class="bt-path__price-now bt-path__price-now--dark">{{ block.settings.price | escape }}</span>
+              <span class="bt-path__price-reg">Reg. {{ block.settings.reg_price | escape }}</span>
+            </div>
+            <p class="bt-path__desc">{{ block.settings.description | escape }}</p>
+            <a href="#nass-bundle-builder" class="bt-path__cta" data-bt-open-bundle data-bt-bb-preselect="false">{{ cta_level | escape }} <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <p class="bt-path__bottom1">{{ section.settings.bottom_1 | escape }}</p>
+    <p class="bt-path__bottom2">{{ section.settings.bottom_2 | escape }}</p>
+  </div>
+</section>
+
+<script>
+(function(){
+  (function(){
+    var sectionEl = document.getElementById('shopify-section-{{ section.id }}');
+    if (!sectionEl) return;
+    if (!document.body.classList.contains('product--body_transformation')) return;
+
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        document.body.classList.toggle('bt-choose-path-active', entry.isIntersecting);
+      });
+    }, { rootMargin: '-15% 0px -55% 0px', threshold: 0.01 });
+
+    io.observe(sectionEl);
+  })();
+
+  function tryOpenBundleWizard(maxRetries){
+    maxRetries = typeof maxRetries === 'number' ? maxRetries : 20;
+    var retries = 0;
+    function tick(){
+      var bb = (window.NassBundleBuilder && typeof window.NassBundleBuilder.openWizard === 'function') ? window.NassBundleBuilder : null;
+      if (bb) {
+        bb.openWizard();
+        return;
+      }
+      if (retries >= maxRetries) {
+        window.location.hash = '#nass-bundle-builder';
+        return;
+      }
+      retries += 1;
+      window.location.hash = '#nass-bundle-builder';
+      setTimeout(tick, 100);
+    }
+    tick();
+  }
+
+  var root = document.getElementById('shopify-section-{{ section.id }}');
+  if (!root) return;
+  root.querySelectorAll('[data-bt-open-bundle]').forEach(function(el){
+    el.addEventListener('click', function(e){
+      e.preventDefault();
+      window.__bt_bb_preselect_first = el.getAttribute('data-bt-bb-preselect') === 'true';
+      tryOpenBundleWizard(25);
+    });
+  });
+})();
+</script>
+
+{% stylesheet %}
+  .bt-wrap { width: 100%; display: flex; justify-content: center; padding: 24px 16px; box-sizing: border-box; }
+  @media (min-width: 768px) { .bt-wrap { padding: 40px 0; } }
+  .bt-container { width: 100%; max-width: 335px; text-align: center; }
+  @media (min-width: 768px) { .bt-container { max-width: 1184px; } }
+
+  .bt-pc.bt-wrap { padding-top: 0; }
+  @media (min-width: 768px) { .bt-pc.bt-wrap { padding-top: 0; } }
+
+  .bt-path__prefer { margin: 8px 0 0; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 14px; color: #111; }
+  @media (min-width: 768px) { .bt-path__prefer { margin-top: 0; font-size: 18px; } }
+
+  .bt-path__levels { margin-top: 24px; display: flex; flex-direction: column; gap: 20px; }
+  @media (min-width: 768px) { .bt-path__levels { flex-direction: row; } }
+  .bt-path__level { flex: 1; display: flex; flex-direction: column; background: #fff; border-radius: 30px; overflow: hidden; box-shadow: 0 6px 28px rgba(0,0,0,0.15); }
+
+  .bt-path__level-img { position: relative; margin: 12px; border-radius: 22px; overflow: hidden; height: 284px; background: #111; }
+  @media (min-width: 768px) { .bt-path__level-img { height: 312px; } }
+  .bt-path__level-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .bt-path__level-badge { position: absolute; left: 20px; top: 20px; background: #FAFF00; border-radius: 999px; padding: 6px 12px; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 800; font-size: 14px; color: #111; }
+  @media (min-width: 768px) { .bt-path__level-badge { font-size: 18px; } }
+  .bt-path__level-title { position: absolute; left: 20px; bottom: 20px; color: #fff; text-align: left; }
+  .bt-path__level-title1,
+  .bt-path__level-title2 { display: block; font-family: 'Anybody', sans-serif; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 20px; line-height: 1.05; }
+  @media (min-width: 768px) { .bt-path__level-title1, .bt-path__level-title2 { font-size: 24px; } }
+  .bt-path__level-title1 { font-weight: 900; }
+  .bt-path__level-title2 { font-weight: 600; }
+
+  .bt-path__level-body { padding: 0 20px 20px; margin-top: -8px; display: flex; flex-direction: column; flex: 1; text-align: left; }
+  .bt-path__price-row { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+  .bt-path__price-now { font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 800; font-size: 21px; color: #0A8A2A; }
+  @media (min-width: 768px) { .bt-path__price-now { font-size: 24px; } }
+  .bt-path__price-now--dark { color: #111; }
+  .bt-path__price-reg { font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 16px; color: #111; border-radius: 999px; border: 1px solid rgba(0,0,0,0.1); padding: 6px 12px; position: relative; }
+  @media (min-width: 768px) { .bt-path__price-reg { font-size: 18px; } }
+  .bt-path__desc { margin: 12px 0 0; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 14px; color: #8A8A8A; flex: 1; }
+  @media (min-width: 768px) { .bt-path__desc { font-size: 18px; } }
+
+  .bt-path__cta { margin-top: 20px; display: flex; align-items: center; justify-content: space-between; width: 100%; border-radius: 32px; padding: 17px 26px 18px; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 18px; text-decoration: none; background: #111; color: #fff; }
+
+  .bt-path__bottom1 { margin: 32px auto 0; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 14px; color: #111; max-width: 702px; }
+  @media (min-width: 768px) { .bt-path__bottom1 { margin-top: 48px; font-size: 18px; } }
+  .bt-path__bottom2 { margin: 16px auto 0; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 14px; color: #8A8A8A; }
+  @media (min-width: 768px) { .bt-path__bottom2 { font-size: 18px; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "BT_ProgramCards",
+  "class": "shopify-section--bt-program-cards",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "prefer_text", "label": "Prefer text", "default": "Prefer to start smaller? Pick one level below." },
+    { "type": "text", "id": "cta_level", "label": "Level CTA text", "default": "Shop now" },
+    { "type": "text", "id": "bottom_1", "label": "Bottom text 1", "default": "Most women choose the Full Bundle — so they can start Soft now and have the full roadmap ready when they're ready." },
+    { "type": "text", "id": "bottom_2", "label": "Bottom text 2", "default": "Still want to hear it from women who started exactly where you are?" }
+  ],
+  "blocks": [
+    {
+      "type": "level",
+      "name": "Level card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "duration", "label": "Duration badge", "default": "4 weeks" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Soft" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "(Foundation)" },
+        { "type": "text", "id": "price", "label": "Price", "default": "$37" },
+        { "type": "text", "id": "reg_price", "label": "Reg price", "default": "$80" },
+        { "type": "text", "id": "description", "label": "Description", "default": "Start joint-friendly and build the base" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BT_ProgramCards",
+      "blocks": [
+        { "type": "level", "settings": { "title": "Soft", "subtitle": "(Foundation)", "price": "$37", "reg_price": "$80", "description": "Start joint-friendly and build the base" } },
+        { "type": "level", "settings": { "title": "Basic", "subtitle": "(Sculpt)", "price": "$47", "reg_price": "$100", "description": "Strength-based sculpting for visible tone" } },
+        { "type": "level", "settings": { "title": "Hard", "subtitle": "(Burn)", "price": "$57", "reg_price": "$120", "description": "Higher intensity when you're ready" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
