@@ -81,21 +81,6 @@
     </script>
     <script async src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=TT4MNz"></script>
 
-    <script>
-      window.OCUApi = window.OCUApi || {};
-      window.OCUApi.customAddToCartButton = '[data-nass-ocu-atc]';
-      window.OCUApi.getCustomAddToCartData = function() {
-        var btn = window.__nassOcuLastButton;
-        if (!btn) return {};
-        var variantId = btn.getAttribute('data-variant-id');
-        if (!variantId && btn.hasAttribute('data-booty-workouts-cart-cta') && typeof window.nassGetBootyWorkoutsTierVariantId === 'function') {
-          variantId = window.nassGetBootyWorkoutsTierVariantId(btn);
-        }
-        if (!variantId) return {};
-        return { id: variantId, quantity: 1, properties: {} };
-      };
-    </script>
-
     {{ content_for_header }}
 
     {{- 'theme.css' | asset_url | stylesheet_tag: preload: true -}}

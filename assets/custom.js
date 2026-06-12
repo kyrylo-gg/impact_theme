@@ -493,31 +493,46 @@ window.nassAddVariantToCart = async function nassAddVariantToCart(variantId, tri
     if (variantId) btn.setAttribute('data-variant-id', variantId);
   };
 
-  function isOcuRuntimeReady() {
-    return !!(window.OCUIncart || (window.Zipify && window.Zipify.OCU));
+  function hasVisibleOcuPopup() {
+    const selectors = [
+      '.ocu-popup',
+      '.ocu-modal',
+      '[class*="ocu-popup"]',
+      '[class*="ocu-offer"]',
+      '[id*="ocu-popup"]',
+      'zipify-ocu-offer',
+      '#ocu-app'
+    ];
+    return selectors.some((selector) => {
+      const node = document.querySelector(selector);
+      if (!node) return false;
+      const style = window.getComputedStyle(node);
+      return style.display !== 'none' && style.visibility !== 'hidden' && style.opacity !== '0';
+    });
   }
 
-  document.addEventListener('mousedown', (event) => {
-    const btn = event.target.closest('[data-nass-ocu-atc]');
-    if (!btn) return;
-    window.__nassOcuLastButton = btn;
-    window.__nassOcuLastClick = Date.now();
-    window.nassSyncBootyWorkoutsCartCta(btn);
-  }, true);
-
-  document.addEventListener('variant:add', (event) => {
-    if (!event.detail) return;
-    const recentOcuClick = window.__nassOcuLastClick && Date.now() - window.__nassOcuLastClick < 5000;
-    if (recentOcuClick) {
-      event.detail.blockCartDrawerOpening = true;
+  function openCartDrawerIfNeeded() {
+    if (
+      !window.themeVariables
+      || window.themeVariables.settings.cartType !== 'drawer'
+    ) {
+      return;
     }
-  }, true);
+    const drawer = document.querySelector('cart-drawer');
+    if (drawer && typeof drawer.show === 'function') {
+      drawer.show();
+    }
+  }
 
   document.addEventListener('click', async (event) => {
     const btn = event.target.closest('[data-nass-ocu-atc]');
-    if (!btn || isOcuRuntimeReady()) return;
+    if (!btn || btn.getAttribute('aria-busy') === 'true') return;
 
     event.preventDefault();
+    event.stopPropagation();
+
+    window.__nassOcuLastButton = btn;
+    window.nassSyncBootyWorkoutsCartCta(btn);
 
     const variantId = btn.getAttribute('data-variant-id')
       || window.nassGetBootyWorkoutsTierVariantId(btn);
@@ -525,9 +540,16 @@ window.nassAddVariantToCart = async function nassAddVariantToCart(variantId, tri
 
     btn.setAttribute('aria-busy', 'true');
     try {
-      await window.nassAddVariantToCart(variantId, btn, { blockCartDrawerOpening: false });
+      const added = await window.nassAddVariantToCart(variantId, btn, { blockCartDrawerOpening: true });
+      if (!added) return;
+
+      window.setTimeout(() => {
+        if (!hasVisibleOcuPopup()) {
+          openCartDrawerIfNeeded();
+        }
+      }, 500);
     } finally {
       btn.removeAttribute('aria-busy');
     }
-  });
+  }, true);
 })();
