@@ -383,9 +383,11 @@
   });
 })();
 
-window.nassAddVariantToCart = async function nassAddVariantToCart(variantId, triggerEl) {
+window.nassAddVariantToCart = async function nassAddVariantToCart(variantId, triggerEl, options) {
   if (!variantId) return false;
 
+  const opts = options && typeof options === 'object' ? options : {};
+  const blockCartDrawerOpening = opts.blockCartDrawerOpening !== false;
   const routesRoot = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/';
   const sectionsToBundle = ['variant-added'];
 
@@ -432,12 +434,17 @@ window.nassAddVariantToCart = async function nassAddVariantToCart(variantId, tri
   const cartContent = await (await fetch(routesRoot + 'cart.js')).json();
   cartContent.sections = responseJson.sections || {};
 
+  const variantAddDetail = {
+    items: Object.prototype.hasOwnProperty.call(responseJson, 'items') ? responseJson.items : [responseJson],
+    cart: cartContent
+  };
+  if (blockCartDrawerOpening) {
+    variantAddDetail.blockCartDrawerOpening = true;
+  }
+
   (triggerEl || document.documentElement).dispatchEvent(new CustomEvent('variant:add', {
     bubbles: true,
-    detail: {
-      items: Object.prototype.hasOwnProperty.call(responseJson, 'items') ? responseJson.items : [responseJson],
-      cart: cartContent
-    }
+    detail: variantAddDetail
   }));
   document.documentElement.dispatchEvent(new CustomEvent('cart:change', {
     bubbles: true,
@@ -447,5 +454,80 @@ window.nassAddVariantToCart = async function nassAddVariantToCart(variantId, tri
     }
   }));
 
+  if (window.OCUApi && typeof window.OCUApi.renderOCUDiscounts === 'function') {
+    window.OCUApi.renderOCUDiscounts();
+  }
+
   return true;
 };
+
+(function() {
+  window.nassGetBootyWorkoutsTierVariantId = function nassGetBootyWorkoutsTierVariantId(triggerEl) {
+    const section = triggerEl && triggerEl.closest
+      ? triggerEl.closest('.booty-workouts')
+      : null;
+    if (!section) return null;
+
+    const fallbackId = section.getAttribute('data-booty-workouts-fallback-variant-id');
+    const tiersRoot = section.querySelector('[data-booty-workouts-tiers]');
+    if (!tiersRoot) return fallbackId || null;
+
+    const tiers = Array.from(tiersRoot.querySelectorAll('[data-booty-workouts-tier]'));
+    const selectedTier = tiers.find((tier) => tier.classList.contains('is-selected'))
+      || tiers.find((tier) => tier.classList.contains('is-expanded'))
+      || tiers[0];
+    if (!selectedTier) return fallbackId || null;
+
+    return selectedTier.getAttribute('data-variant-id') || fallbackId || null;
+  };
+
+  window.nassSyncBootyWorkoutsCartCta = function nassSyncBootyWorkoutsCartCta(triggerEl) {
+    const btn = triggerEl && triggerEl.hasAttribute('data-booty-workouts-cart-cta')
+      ? triggerEl
+      : (triggerEl && triggerEl.closest
+        ? triggerEl.closest('[data-booty-workouts-cart-cta]')
+        : null);
+    if (!btn) return;
+
+    const variantId = window.nassGetBootyWorkoutsTierVariantId(btn);
+    if (variantId) btn.setAttribute('data-variant-id', variantId);
+  };
+
+  function isOcuRuntimeReady() {
+    return !!(window.OCUIncart || (window.Zipify && window.Zipify.OCU));
+  }
+
+  document.addEventListener('mousedown', (event) => {
+    const btn = event.target.closest('[data-nass-ocu-atc]');
+    if (!btn) return;
+    window.__nassOcuLastButton = btn;
+    window.__nassOcuLastClick = Date.now();
+    window.nassSyncBootyWorkoutsCartCta(btn);
+  }, true);
+
+  document.addEventListener('variant:add', (event) => {
+    if (!event.detail) return;
+    const recentOcuClick = window.__nassOcuLastClick && Date.now() - window.__nassOcuLastClick < 5000;
+    if (recentOcuClick) {
+      event.detail.blockCartDrawerOpening = true;
+    }
+  }, true);
+
+  document.addEventListener('click', async (event) => {
+    const btn = event.target.closest('[data-nass-ocu-atc]');
+    if (!btn || isOcuRuntimeReady()) return;
+
+    event.preventDefault();
+
+    const variantId = btn.getAttribute('data-variant-id')
+      || window.nassGetBootyWorkoutsTierVariantId(btn);
+    if (!variantId || typeof window.nassAddVariantToCart !== 'function') return;
+
+    btn.setAttribute('aria-busy', 'true');
+    try {
+      await window.nassAddVariantToCart(variantId, btn, { blockCartDrawerOpening: false });
+    } finally {
+      btn.removeAttribute('aria-busy');
+    }
+  });
+})();

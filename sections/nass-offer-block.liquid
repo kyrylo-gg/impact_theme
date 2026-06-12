@@ -113,6 +113,7 @@
           class="nass-cta"
           {% if cta_adds_to_cart %}
             data-nass-offer-cart-cta
+            data-nass-ocu-atc
             {% if bundle != blank %}data-variant-id="{{ bundle.selected_or_first_available_variant.id }}"{% endif %}
           {% else %}
             data-bb-trigger
@@ -200,6 +201,7 @@
           class="nass-cta"
           {% if cta_adds_to_cart %}
             data-nass-offer-cart-cta
+            data-nass-ocu-atc
             {% if single != blank %}data-variant-id="{{ single.selected_or_first_available_variant.id }}"{% endif %}
           {% else %}
             data-bb-trigger
@@ -295,19 +297,6 @@
       });
     });
 
-    root.querySelectorAll('[data-nass-offer-cart-cta]').forEach(function(btn) {
-      btn.addEventListener('click', async function() {
-        var variantId = btn.getAttribute('data-variant-id');
-        if (!variantId || typeof window.nassAddVariantToCart !== 'function') return;
-
-        btn.setAttribute('aria-busy', 'true');
-        try {
-          await window.nassAddVariantToCart(variantId, btn);
-        } finally {
-          btn.removeAttribute('aria-busy');
-        }
-      });
-    });
   })();
 </script>
 
