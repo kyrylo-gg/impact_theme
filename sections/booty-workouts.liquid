@@ -24,11 +24,14 @@
   endif
 
   assign booty_workouts_role = ''
+  assign booty_workouts_cta_anchor_id = ''
   if is_pop_booty_template
     if booty_workouts_anchor == 'booty-workouts'
       assign booty_workouts_role = 'hero'
+      assign booty_workouts_cta_anchor_id = 'booty-workouts-cta'
     elsif booty_workouts_anchor == 'booty-workouts-repeat'
       assign booty_workouts_role = 'repeat'
+      assign booty_workouts_cta_anchor_id = 'booty-workouts-repeat-cta'
     endif
   endif
 
@@ -647,6 +650,7 @@
                   class="booty-workouts__cta"
                   data-booty-workouts-cart-cta
                   data-nass-ocu-atc
+                  {% if booty_workouts_cta_anchor_id != blank %}id="{{ booty_workouts_cta_anchor_id }}"{% endif %}
                   {% if cta_fallback_variant_id != blank %}data-variant-id="{{ cta_fallback_variant_id }}"{% endif %}
                 >
                   <span>{{ section.settings.cta_label | escape }}</span>
@@ -663,6 +667,7 @@
                 class="booty-workouts__cta"
                 href="{% if cta_opens_bundle_builder %}#nass-bundle-builder{% else %}{{ section.settings.cta_url | default: '#' }}{% endif %}"
                 {% if cta_opens_bundle_builder %}data-booty-workouts-bundle-cta{% endif %}
+                {% if booty_workouts_cta_anchor_id != blank %}id="{{ booty_workouts_cta_anchor_id }}"{% endif %}
               >
                 <span>{{ section.settings.cta_label | escape }}</span>
                 <span class="booty-workouts__cta-arrow" aria-hidden="true">

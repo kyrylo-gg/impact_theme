@@ -359,8 +359,10 @@
           display: none !important;
         }
 
-        body[class*="product--pop_booty"] .booty-workouts[data-booty-workouts-role] {
+        body[class*="product--pop_booty"] #booty-workouts-cta,
+        body[class*="product--pop_booty"] #booty-workouts-repeat-cta {
           scroll-margin-top: calc(var(--sticky-area-height, 0px) + 16px);
+          scroll-margin-bottom: calc(var(--sticky-area-height, 0px) + 16px);
         }
 
         @media (max-width: 767px) {
@@ -421,19 +423,32 @@
         (function() {
           if (!document.body || !/product--pop_booty/.test(document.body.className)) return;
 
-          var anchorRoles = {
+          var anchorTargets = {
+            'booty-workouts': '#booty-workouts-cta',
+            'booty-workouts-cta': '#booty-workouts-cta',
+            'booty-workouts-repeat': '#booty-workouts-repeat-cta',
+            'booty-workouts-repeat-cta': '#booty-workouts-repeat-cta'
+          };
+
+          var anchorRoleFallback = {
             'booty-workouts': 'hero',
             'booty-workouts-repeat': 'repeat'
           };
 
           function scrollToBootyAnchor(hash) {
-            var role = anchorRoles[hash];
-            if (!role) return false;
+            var selector = anchorTargets[hash];
+            if (!selector) return false;
 
-            var target = document.querySelector('[data-booty-workouts-role="' + role + '"]');
+            var target = document.querySelector(selector);
+            if (!target) {
+              var role = anchorRoleFallback[hash];
+              if (!role) return false;
+              var section = document.querySelector('[data-booty-workouts-role="' + role + '"]');
+              target = section && section.querySelector('.booty-workouts__cta');
+            }
             if (!target) return false;
 
-            target.scrollIntoView({ block: 'start', behavior: 'smooth' });
+            target.scrollIntoView({ block: 'center', behavior: 'smooth' });
             return true;
           }
 
@@ -451,7 +466,7 @@
             if (url.pathname !== window.location.pathname || url.search !== window.location.search) return;
 
             var hash = url.hash.replace(/^#/, '');
-            if (!anchorRoles[hash]) return;
+            if (!anchorTargets[hash]) return;
             if (!scrollToBootyAnchor(hash)) return;
 
             event.preventDefault();
@@ -464,7 +479,7 @@
 
           window.addEventListener('load', function() {
             var hash = window.location.hash.replace(/^#/, '');
-            if (!anchorRoles[hash]) return;
+            if (!anchorTargets[hash]) return;
             scrollToBootyAnchor(hash);
           });
         })();

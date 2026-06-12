@@ -584,8 +584,10 @@
   assign sticky_cta_href = section.settings.button_link
   if is_hips_complete_system_anchor_template
     assign sticky_cta_href = '#complete-system'
-  elsif template.name == 'product' and template.suffix == 'pop_booty' and sticky_cta_href == blank
-    assign sticky_cta_href = '#booty-workouts'
+  elsif template.name == 'product' and template.suffix == 'pop_booty' or template.name == 'product' and template.suffix == 'pop_booty_new'
+    if sticky_cta_href == blank or sticky_cta_href == '#booty-workouts'
+      assign sticky_cta_href = '#booty-workouts-cta'
+    endif
   endif
 -%}
 

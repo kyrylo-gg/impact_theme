@@ -3,9 +3,17 @@
   Enable per section via show_pop_booty_footer setting.
 {% endcomment %}
 {% if section.settings.show_pop_booty_footer and template.suffix == 'pop_booty' or section.settings.show_pop_booty_footer and template.suffix == 'pop_booty_new' %}
+  {% liquid
+    assign pop_booty_cta_link = section.settings.cta_link
+    if pop_booty_cta_link == blank or pop_booty_cta_link == '#'
+      assign pop_booty_cta_link = '#booty-workouts-cta'
+    elsif pop_booty_cta_link == '#booty-workouts'
+      assign pop_booty_cta_link = '#booty-workouts-cta'
+    endif
+  %}
   <div class="pop-booty-cta-trust">
     {% if section.settings.cta_text != blank %}
-      <a class="pop-booty-cta-trust__cta" href="{{ section.settings.cta_link | default: '#' }}">
+      <a class="pop-booty-cta-trust__cta" href="{{ pop_booty_cta_link }}">
         <span>{{ section.settings.cta_text | escape }}</span>
         <span class="pop-booty-cta-trust__cta-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none">

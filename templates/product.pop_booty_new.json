@@ -2226,7 +2226,7 @@
       "name": "TS Sticky Add",
       "settings": {
         "product": "nass-twerk-program",
-        "button_link": "#booty-workouts",
+        "button_link": "#booty-workouts-cta",
         "button_text": "Shop now",
         "background_button": "#faff00",
         "text_color_button": "#1a1a1a",
