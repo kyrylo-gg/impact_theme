@@ -536,60 +536,70 @@ window.nassAddVariantToCart = async function nassAddVariantToCart(variantId, tri
     }
   }
 
-  async function isVariantInCart(variantId) {
-    const routesRoot = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/';
-    try {
-      const cart = await (await fetch(routesRoot + 'cart.js')).json();
-      return (cart.items || []).some((item) => String(item.variant_id) === String(variantId));
-    } catch (error) {
-      return false;
-    }
+  function wait(ms) {
+    return new Promise((resolve) => window.setTimeout(resolve, ms));
   }
 
-  async function handleCustomAddToCart(btn, variantId) {
-    if (!variantId || typeof window.nassAddVariantToCart !== 'function') return false;
-    if (btn.getAttribute('aria-busy') === 'true') return false;
+  async function triggerCartCheckoutForOcu() {
+    const checkoutBtn = document.querySelector('cart-drawer button[name="checkout"]');
+    if (!checkoutBtn) return false;
 
-    btn.setAttribute('aria-busy', 'true');
-    try {
-      return await window.nassAddVariantToCart(variantId, btn, { blockCartDrawerOpening: false });
-    } finally {
-      btn.removeAttribute('aria-busy');
-    }
-  }
-
-  function scheduleOcuFallback(btn, variantId) {
-    const startedAt = Date.now();
-    const maxWait = 2200;
-
-    const tick = async () => {
-      if (hasVisibleOcuPopup()) return;
-
-      const inCart = await isVariantInCart(variantId);
-      if (inCart && Date.now() - startedAt < maxWait) {
-        window.setTimeout(tick, 300);
-        return;
-      }
-
-      if (inCart) {
-        if (!hasVisibleOcuPopup()) {
-          openCartDrawerIfNeeded();
-        }
-        return;
-      }
-
-      if (Date.now() - startedAt >= maxWait) {
-        const added = await handleCustomAddToCart(btn, variantId);
-        if (added && !hasVisibleOcuPopup()) {
-          openCartDrawerIfNeeded();
-        }
-        return;
-      }
-
-      window.setTimeout(tick, 250);
+    const cartForm = checkoutBtn.closest('form');
+    const preventProgrammaticCheckout = (submitEvent) => {
+      submitEvent.preventDefault();
+      submitEvent.stopImmediatePropagation();
     };
 
-    window.setTimeout(tick, 350);
+    if (cartForm) {
+      cartForm.addEventListener('submit', preventProgrammaticCheckout, { capture: true, once: true });
+    }
+
+    checkoutBtn.dispatchEvent(new MouseEvent('click', {
+      bubbles: true,
+      cancelable: true,
+      view: window
+    }));
+
+    await wait(700);
+    return hasVisibleOcuPopup();
+  }
+
+  async function tryShowOcuAfterCartDrawer() {
+    if (!isOcuRuntimeReady()) return false;
+
+    if (window.OCUApi && typeof window.OCUApi.renderOCUDiscounts === 'function') {
+      window.OCUApi.renderOCUDiscounts();
+    }
+
+    await wait(500);
+
+    const cartForm = document.querySelector('cart-drawer form[action*="/cart"]');
+
+    if (window.OCUApi && typeof window.OCUApi.showUpsell === 'function' && cartForm) {
+      try {
+        await window.OCUApi.showUpsell({ form: cartForm });
+        await wait(400);
+        if (hasVisibleOcuPopup()) return true;
+      } catch (error) {
+        // OCU has no matching pre-purchase offer for this cart state.
+      }
+    }
+
+    if (window.Zipify && window.Zipify.OCU && window.Zipify.OCU.api
+      && typeof window.Zipify.OCU.api.showUpsell === 'function') {
+      try {
+        const result = window.Zipify.OCU.api.showUpsell();
+        if (result && typeof result.then === 'function') {
+          await result;
+        }
+        await wait(400);
+        if (hasVisibleOcuPopup()) return true;
+      } catch (error) {
+        // OCU has no matching pre-purchase offer for this cart state.
+      }
+    }
+
+    return triggerCartCheckoutForOcu();
   }
 
   document.addEventListener('mousedown', (event) => {
@@ -599,26 +609,29 @@ window.nassAddVariantToCart = async function nassAddVariantToCart(variantId, tri
     window.nassSyncBootyWorkoutsCartCta(btn);
   }, true);
 
-  document.addEventListener('click', (event) => {
+  document.addEventListener('click', async (event) => {
     const btn = event.target.closest('[data-nass-ocu-atc]');
-    if (!btn) return;
+    if (!btn || btn.getAttribute('aria-busy') === 'true') return;
+
+    event.preventDefault();
+    event.stopPropagation();
 
     window.__nassOcuLastButton = btn;
     window.nassSyncBootyWorkoutsCartCta(btn);
 
     const variantId = btn.getAttribute('data-variant-id')
       || window.nassGetBootyWorkoutsTierVariantId(btn);
-    if (!variantId) return;
+    if (!variantId || typeof window.nassAddVariantToCart !== 'function') return;
 
-    if (isOcuRuntimeReady()) {
-      scheduleOcuFallback(btn, variantId);
-      return;
+    btn.setAttribute('aria-busy', 'true');
+    try {
+      const added = await window.nassAddVariantToCart(variantId, btn, { blockCartDrawerOpening: true });
+      if (!added) return;
+
+      openCartDrawerIfNeeded();
+      await tryShowOcuAfterCartDrawer();
+    } finally {
+      btn.removeAttribute('aria-busy');
     }
-
-    event.preventDefault();
-    event.stopPropagation();
-    handleCustomAddToCart(btn, variantId).then((added) => {
-      if (added) openCartDrawerIfNeeded();
-    });
-  }, false);
+  }, true);
 })();
