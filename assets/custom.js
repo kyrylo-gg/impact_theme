@@ -500,12 +500,6 @@ window.nassAddVariantToCart = async function nassAddVariantToCart(variantId, tri
     }
   };
 
-  function isOcuPopupVisible() {
-    return !!document.querySelector(
-      '.ocu-popup, [class*="ocu-popup"], zipify-oneclickupsell-single, [id*="zipify-oneclickupsell"]'
-    );
-  }
-
   function openCartDrawerIfNeeded() {
     if (
       !window.themeVariables
@@ -519,44 +513,6 @@ window.nassAddVariantToCart = async function nassAddVariantToCart(variantId, tri
     }
   }
 
-  async function isVariantInCart(variantId) {
-    const routesRoot = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/';
-    try {
-      const cart = await (await fetch(routesRoot + 'cart.js')).json();
-      return (cart.items || []).some((item) => String(item.variant_id) === String(variantId));
-    } catch (error) {
-      return false;
-    }
-  }
-
-  async function manualAddToCartWithDrawer(btn, variantId) {
-    if (!variantId || typeof window.nassAddVariantToCart !== 'function') return false;
-    if (btn.getAttribute('aria-busy') === 'true') return false;
-
-    btn.setAttribute('aria-busy', 'true');
-    try {
-      const added = await window.nassAddVariantToCart(variantId, btn, { blockCartDrawerOpening: false });
-      if (added) openCartDrawerIfNeeded();
-      return added;
-    } finally {
-      btn.removeAttribute('aria-busy');
-    }
-  }
-
-  function prepareOcuAtcButton(btn) {
-    if (!btn) return null;
-    window.__nassOcuLastButton = btn;
-    window.nassSyncBootyWorkoutsCartCta(btn);
-    return btn.getAttribute('data-variant-id')
-      || window.nassGetBootyWorkoutsTierVariantId(btn);
-  }
-
-  document.addEventListener('mousedown', (event) => {
-    const btn = event.target.closest('[data-nass-ocu-atc]');
-    if (!btn) return;
-    prepareOcuAtcButton(btn);
-  }, true);
-
   document.addEventListener('submit', (event) => {
     const form = event.target.closest('[data-nass-ocu-form]');
     if (!form) return;
@@ -564,53 +520,24 @@ window.nassAddVariantToCart = async function nassAddVariantToCart(variantId, tri
     event.stopPropagation();
   }, true);
 
-  let pendingOcuFallback = null;
-
-  function clearPendingOcuFallback() {
-    if (pendingOcuFallback && pendingOcuFallback.timer) {
-      window.clearTimeout(pendingOcuFallback.timer);
-    }
-    pendingOcuFallback = null;
-  }
-
-  function scheduleOcuFallback(btn, variantId) {
-    clearPendingOcuFallback();
-    if (!btn || !variantId) return;
-
-    const timer = window.setTimeout(async () => {
-      if (pendingOcuFallback?.btn !== btn) return;
-      clearPendingOcuFallback();
-
-      if (isOcuPopupVisible()) return;
-
-      const inCart = await isVariantInCart(variantId);
-      if (!inCart) {
-        await manualAddToCartWithDrawer(btn, variantId);
-        return;
-      }
-
-      openCartDrawerIfNeeded();
-    }, 5000);
-
-    pendingOcuFallback = { btn, variantId, timer };
-  }
-
-  document.addEventListener('click', (event) => {
+  document.addEventListener('click', async (event) => {
     const btn = event.target.closest('[data-nass-ocu-atc]');
     if (!btn || btn.getAttribute('aria-busy') === 'true') return;
 
-    const variantId = prepareOcuAtcButton(btn);
-    if (!variantId) return;
+    event.preventDefault();
+    event.stopPropagation();
 
-    scheduleOcuFallback(btn, variantId);
-  }, false);
+    window.nassSyncBootyWorkoutsCartCta(btn);
+    const variantId = btn.getAttribute('data-variant-id')
+      || window.nassGetBootyWorkoutsTierVariantId(btn);
+    if (!variantId || typeof window.nassAddVariantToCart !== 'function') return;
 
-  document.addEventListener('ocuNativeClick', () => {
-    clearPendingOcuFallback();
-    window.setTimeout(() => {
-      if (!isOcuPopupVisible()) {
-        openCartDrawerIfNeeded();
-      }
-    }, 300);
-  });
+    btn.setAttribute('aria-busy', 'true');
+    try {
+      const added = await window.nassAddVariantToCart(variantId, btn, { blockCartDrawerOpening: false });
+      if (added) openCartDrawerIfNeeded();
+    } finally {
+      btn.removeAttribute('aria-busy');
+    }
+  }, true);
 })();
