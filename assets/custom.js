@@ -493,21 +493,33 @@ window.nassAddVariantToCart = async function nassAddVariantToCart(variantId, tri
     if (variantId) btn.setAttribute('data-variant-id', variantId);
   };
 
+  function isOcuRuntimeReady() {
+    return !!(
+      window.OCUIncart
+      || (window.Zipify && window.Zipify.OCU)
+      || (window.Zipify && window.Zipify.Cart)
+    );
+  }
+
   function hasVisibleOcuPopup() {
     const selectors = [
       '.ocu-popup',
       '.ocu-modal',
       '[class*="ocu-popup"]',
       '[class*="ocu-offer"]',
+      '[class*="OCU"]',
       '[id*="ocu-popup"]',
+      '[id*="ocu-app"]',
       'zipify-ocu-offer',
-      '#ocu-app'
+      '#ocu-app',
+      '[data-ocu-popup]'
     ];
     return selectors.some((selector) => {
-      const node = document.querySelector(selector);
-      if (!node) return false;
-      const style = window.getComputedStyle(node);
-      return style.display !== 'none' && style.visibility !== 'hidden' && style.opacity !== '0';
+      const nodes = document.querySelectorAll(selector);
+      return Array.from(nodes).some((node) => {
+        const style = window.getComputedStyle(node);
+        return style.display !== 'none' && style.visibility !== 'hidden' && Number(style.opacity) > 0;
+      });
     });
   }
 
@@ -524,32 +536,89 @@ window.nassAddVariantToCart = async function nassAddVariantToCart(variantId, tri
     }
   }
 
-  document.addEventListener('click', async (event) => {
-    const btn = event.target.closest('[data-nass-ocu-atc]');
-    if (!btn || btn.getAttribute('aria-busy') === 'true') return;
+  async function isVariantInCart(variantId) {
+    const routesRoot = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/';
+    try {
+      const cart = await (await fetch(routesRoot + 'cart.js')).json();
+      return (cart.items || []).some((item) => String(item.variant_id) === String(variantId));
+    } catch (error) {
+      return false;
+    }
+  }
 
-    event.preventDefault();
-    event.stopPropagation();
+  async function handleCustomAddToCart(btn, variantId) {
+    if (!variantId || typeof window.nassAddVariantToCart !== 'function') return false;
+    if (btn.getAttribute('aria-busy') === 'true') return false;
+
+    btn.setAttribute('aria-busy', 'true');
+    try {
+      return await window.nassAddVariantToCart(variantId, btn, { blockCartDrawerOpening: false });
+    } finally {
+      btn.removeAttribute('aria-busy');
+    }
+  }
+
+  function scheduleOcuFallback(btn, variantId) {
+    const startedAt = Date.now();
+    const maxWait = 2200;
+
+    const tick = async () => {
+      if (hasVisibleOcuPopup()) return;
+
+      const inCart = await isVariantInCart(variantId);
+      if (inCart && Date.now() - startedAt < maxWait) {
+        window.setTimeout(tick, 300);
+        return;
+      }
+
+      if (inCart) {
+        if (!hasVisibleOcuPopup()) {
+          openCartDrawerIfNeeded();
+        }
+        return;
+      }
+
+      if (Date.now() - startedAt >= maxWait) {
+        const added = await handleCustomAddToCart(btn, variantId);
+        if (added && !hasVisibleOcuPopup()) {
+          openCartDrawerIfNeeded();
+        }
+        return;
+      }
+
+      window.setTimeout(tick, 250);
+    };
+
+    window.setTimeout(tick, 350);
+  }
+
+  document.addEventListener('mousedown', (event) => {
+    const btn = event.target.closest('[data-nass-ocu-atc]');
+    if (!btn) return;
+    window.__nassOcuLastButton = btn;
+    window.nassSyncBootyWorkoutsCartCta(btn);
+  }, true);
+
+  document.addEventListener('click', (event) => {
+    const btn = event.target.closest('[data-nass-ocu-atc]');
+    if (!btn) return;
 
     window.__nassOcuLastButton = btn;
     window.nassSyncBootyWorkoutsCartCta(btn);
 
     const variantId = btn.getAttribute('data-variant-id')
       || window.nassGetBootyWorkoutsTierVariantId(btn);
-    if (!variantId || typeof window.nassAddVariantToCart !== 'function') return;
+    if (!variantId) return;
 
-    btn.setAttribute('aria-busy', 'true');
-    try {
-      const added = await window.nassAddVariantToCart(variantId, btn, { blockCartDrawerOpening: true });
-      if (!added) return;
-
-      window.setTimeout(() => {
-        if (!hasVisibleOcuPopup()) {
-          openCartDrawerIfNeeded();
-        }
-      }, 500);
-    } finally {
-      btn.removeAttribute('aria-busy');
+    if (isOcuRuntimeReady()) {
+      scheduleOcuFallback(btn, variantId);
+      return;
     }
-  }, true);
+
+    event.preventDefault();
+    event.stopPropagation();
+    handleCustomAddToCart(btn, variantId).then((added) => {
+      if (added) openCartDrawerIfNeeded();
+    });
+  }, false);
 })();

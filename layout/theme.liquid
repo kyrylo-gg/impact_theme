@@ -81,6 +81,82 @@
     </script>
     <script async src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=TT4MNz"></script>
 
+    <script>
+      (function() {
+        var selector = '[data-nass-ocu-atc]';
+
+        function getBootyVariantId(btn) {
+          if (!btn || !btn.hasAttribute('data-booty-workouts-cart-cta')) return '';
+          var section = btn.closest('.booty-workouts');
+          if (!section) return '';
+          var fallbackId = section.getAttribute('data-booty-workouts-fallback-variant-id') || '';
+          var tiersRoot = section.querySelector('[data-booty-workouts-tiers]');
+          if (!tiersRoot) return fallbackId;
+          var tiers = tiersRoot.querySelectorAll('[data-booty-workouts-tier]');
+          var selected = null;
+          tiers.forEach(function(tier) {
+            if (tier.classList.contains('is-selected') || tier.classList.contains('is-expanded')) {
+              selected = tier;
+            }
+          });
+          if (!selected && tiers.length) selected = tiers[0];
+          return (selected && selected.getAttribute('data-variant-id')) || fallbackId;
+        }
+
+        function resolveVariantId(btn) {
+          if (!btn) return '';
+          var variantId = btn.getAttribute('data-variant-id') || getBootyVariantId(btn);
+          return variantId ? String(variantId) : '';
+        }
+
+        function getLegacyAddToCartData() {
+          var variantId = resolveVariantId(window.__nassOcuLastButton);
+          if (!variantId) return {};
+          return {
+            id: parseInt(variantId, 10),
+            quantity: 1,
+            properties: {}
+          };
+        }
+
+        function getZipifyAddToCartData(form, event) {
+          var btn = window.__nassOcuLastButton;
+          if (!btn && event && event.target && event.target.closest) {
+            btn = event.target.closest(selector);
+          }
+          var variantId = resolveVariantId(btn);
+          if (!variantId) return null;
+          var fd = new FormData();
+          fd.append('id', variantId);
+          fd.append('quantity', '1');
+          return fd;
+        }
+
+        function applyOcuConfig() {
+          window.OCUApi = window.OCUApi || {};
+          window.OCUApi.customAddToCartButton = selector;
+          window.OCUApi.getCustomAddToCartData = getLegacyAddToCartData;
+
+          if (window.Zipify && window.Zipify.Cart && window.Zipify.Cart.api) {
+            window.Zipify.Cart.api.customAddToCartButton = selector;
+            window.Zipify.Cart.api.getCustomAddToCartData = getZipifyAddToCartData;
+          }
+        }
+
+        applyOcuConfig();
+        document.addEventListener('DOMContentLoaded', applyOcuConfig);
+
+        var tries = 0;
+        var poll = window.setInterval(function() {
+          applyOcuConfig();
+          tries += 1;
+          if (tries > 40 || (window.Zipify && window.Zipify.Cart && window.Zipify.Cart.api)) {
+            window.clearInterval(poll);
+          }
+        }, 250);
+      })();
+    </script>
+
     {{ content_for_header }}
 
     {{- 'theme.css' | asset_url | stylesheet_tag: preload: true -}}
