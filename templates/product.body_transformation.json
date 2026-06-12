@@ -546,18 +546,21 @@
         "full_item_1": {
           "type": "item",
           "settings": {
+            "icon": "\ud83e\udd38",
             "text": "Soft + Basic + Hard (12 weeks)"
           }
         },
         "full_item_2": {
           "type": "item",
           "settings": {
+            "icon": "\ud83d\ude0c",
             "text": "Plan B Flow."
           }
         },
         "full_item_3": {
           "type": "item",
           "settings": {
+            "icon": "\u2705",
             "text": "Readiness Test."
           }
         }
@@ -579,7 +582,19 @@
         "full_price": "$99",
         "full_reg_price": "$300",
         "full_save": "Save $201 today (67% OFF!)",
-        "cta_full": "Get the Full Program"
+        "cta_full": "Get the Full Program",
+        "image_offer_badge": "\ud83c\udf81 Free Leggings",
+        "show_rating": true,
+        "rating_label": "Rated",
+        "rating_value": "4.96 out of 5",
+        "guarantee_text": "30-Days Money Back Guarantee",
+        "show_payment_icons": true,
+        "payment_icons_alt": "Accepted payment methods",
+        "show_testimonial": true,
+        "testimonial_name": "Sarah Johnson",
+        "testimonial_headline": "Exactly what I needed",
+        "testimonial_quote": "Challenging enough to feel progress, but never overwhelming.",
+        "testimonial_avatar": "shopify://shop_images/Frame_44-3.png"
       }
     },
     "bt_program_cards": {
@@ -979,6 +994,13 @@
         "label_minutes": "Mins",
         "label_seconds": "Secs"
       }
+    },
+    "bt_choose_your_path": {
+      "type": "bt_choose_your_path",
+      "disabled": true,
+      "blocks": {},
+      "block_order": [],
+      "settings": {}
     }
   },
   "order": [
@@ -993,6 +1015,7 @@
     "bt_no_restart",
     "bt_app_access",
     "bt_real_results",
+    "bt_choose_your_path",
     "bt_full_program_card",
     "bt_program_cards",
     "nass_bundle_builder",

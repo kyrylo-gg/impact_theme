@@ -7,6 +7,11 @@
   assign title = section.settings.title | default: 'Choose Your Path'
   assign subtitle = section.settings.subtitle | default: 'Start at your level today — or get the complete system for the best value.'
   assign cta_full = section.settings.cta_full | default: 'Get the Full Program'
+  assign image_offer_badge = section.settings.image_offer_badge | default: '🎁 Free Leggings'
+  assign rating_label = section.settings.rating_label | default: 'Rated'
+  assign rating_value = section.settings.rating_value | default: '4.96 out of 5'
+  assign guarantee_text = section.settings.guarantee_text | default: '30-Days Money Back Guarantee'
+  assign payment_icons_alt = section.settings.payment_icons_alt | default: 'Accepted payment methods'
 -%}
 
 <section class="bt-wrap bt-path bt-fpc" data-bt-choose-path>
@@ -17,51 +22,123 @@
 
     <div class="bt-path__full">
       <div id="bt-path__full-card" class="bt-path__full-card">
-        <div class="bt-path__full-img">
-          {%- if section.settings.full_image_mobile != blank -%}
-            <img class="bt-path__img bt-path__img--m" src="{{ section.settings.full_image_mobile | image_url: width: 900 }}" alt="" loading="lazy">
-          {%- endif -%}
-          {%- if section.settings.full_image_desktop != blank -%}
-            <img class="bt-path__img bt-path__img--d" src="{{ section.settings.full_image_desktop | image_url: width: 1100 }}" alt="" loading="lazy">
-          {%- endif -%}
-          <div class="bt-path__badges">
-            <span class="bt-path__badge bt-path__badge--y">{{ section.settings.badge_1 | escape }}</span>
-            <span class="bt-path__badge bt-path__badge--g">{{ section.settings.badge_2 | escape }}</span>
+        <div class="bt-path__full-main">
+          <div class="bt-path__full-media">
+            <div class="bt-path__full-img">
+              {%- if section.settings.full_image_mobile != blank -%}
+                <img class="bt-path__img bt-path__img--m" src="{{ section.settings.full_image_mobile | image_url: width: 900 }}" alt="" loading="lazy">
+              {%- endif -%}
+              {%- if section.settings.full_image_desktop != blank -%}
+                <img class="bt-path__img bt-path__img--d" src="{{ section.settings.full_image_desktop | image_url: width: 1100 }}" alt="" loading="lazy">
+              {%- endif -%}
+              <div class="bt-path__badges">
+                <span class="bt-path__badge bt-path__badge--y">{{ section.settings.badge_1 | escape }}</span>
+                <span class="bt-path__badge bt-path__badge--dark">{{ section.settings.badge_2 | escape }}</span>
+              </div>
+              {%- if image_offer_badge != blank -%}
+                <span class="bt-path__img-offer bt-path__img-offer--overlay">{{ image_offer_badge | escape }}</span>
+              {%- endif -%}
+            </div>
+            {%- if image_offer_badge != blank -%}
+              <span class="bt-path__img-offer bt-path__img-offer--below">{{ image_offer_badge | escape }}</span>
+            {%- endif -%}
           </div>
-        </div>
-        <div class="bt-path__full-body">
-          <div class="bt-path__full-title">{{ section.settings.full_title | escape }}</div>
-          <p class="bt-path__full-sub">{{ section.settings.full_subtitle | escape }}</p>
-          <div class="bt-path__price-row">
-            <span class="bt-path__price-now">{{ section.settings.full_price | escape }}</span>
-            <span class="bt-path__price-reg">Reg. {{ section.settings.full_reg_price | escape }}</span>
-          </div>
-          <p class="bt-path__save">{{ section.settings.full_save | escape }}</p>
-          <div class="bt-path__bonuses">
-            <p class="bt-path__bonuses-title">Bonuses:</p>
-            <ul class="bt-path__bonuses-list">
-              <li>🏷️ 60% off apparel &amp; equipment</li>
-              <li>🥗 Nutrition guide</li>
-              <li>🧘‍♀️ Guided meditations</li>
-            </ul>
-          </div>
-          <ul class="bt-path__list">
-            {%- for block in section.blocks -%}
-              <li {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</li>
-            {%- endfor -%}
-          </ul>
 
-          <a id="bt-full-program-cta" href="#nass-bundle-builder" class="bt-path__cta bt-path__cta--full" data-bt-open-bundle data-bt-bb-preselect="true">{{ cta_full | escape }} <span aria-hidden="true">→</span></a>
-          <p class="bt-path__guarantee">
-            <span class="bt-path__guarantee-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="14" height="14" focusable="false">
-                <path d="M12 2L4 5v6c0 5.2 3.4 9.9 8 11 4.6-1.1 8-5.8 8-11V5l-8-3zm0 2.1 6 2.3V11c0 4.2-2.6 8.1-6 9.2-3.4-1.1-6-5-6-9.2V6.4l6-2.3z" fill="currentColor"></path>
-                <path d="M10.9 14.7 8.2 12l1.1-1.1 1.6 1.6 3.8-3.8 1.1 1.1-4.9 4.9z" fill="currentColor"></path>
-              </svg>
-            </span>
-            <span>30-day money-back guarantee</span>
-          </p>
+          <div class="bt-path__full-body">
+            <div class="bt-path__full-title">{{ section.settings.full_title | escape }}</div>
+            <p class="bt-path__full-sub">{{ section.settings.full_subtitle | escape }}</p>
+
+            {%- if section.settings.show_rating -%}
+              <div class="bt-path__rating" aria-label="{{ rating_label | escape }} {{ rating_value | escape }}">
+                <span class="bt-path__rating-label">{{ rating_label | escape }}</span>
+                <span class="bt-path__rating-stars" aria-hidden="true">
+                  {%- for i in (1..5) -%}
+                    {%- render 'icon' with 'rating-star', width: 14, height: 14, class: 'bt-path__rating-star' -%}
+                  {%- endfor -%}
+                </span>
+                <span class="bt-path__rating-value">{{ rating_value | escape }}</span>
+              </div>
+            {%- endif -%}
+
+            <div class="bt-path__price-row">
+              <span class="bt-path__price-now">{{ section.settings.full_price | escape }}</span>
+              <span class="bt-path__price-reg">Reg. {{ section.settings.full_reg_price | escape }}</span>
+            </div>
+            <p class="bt-path__save">{{ section.settings.full_save | escape }}</p>
+
+            <ul class="bt-path__list">
+              {%- for block in section.blocks -%}
+                <li {{ block.shopify_attributes }}>
+                  {%- if block.settings.icon != blank -%}
+                    <span class="bt-path__list-icon" aria-hidden="true">{{ block.settings.icon | escape }}</span>
+                  {%- endif -%}
+                  <span>{{ block.settings.text | escape }}</span>
+                </li>
+              {%- endfor -%}
+            </ul>
+
+            <a id="bt-full-program-cta" href="#nass-bundle-builder" class="bt-path__cta bt-path__cta--full" data-bt-open-bundle data-bt-bb-preselect="true">{{ cta_full | escape }} <span aria-hidden="true">→</span></a>
+
+            <p class="bt-path__guarantee">
+              <span class="bt-path__guarantee-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="14" height="14" focusable="false">
+                  <path d="M12 2L4 5v6c0 5.2 3.4 9.9 8 11 4.6-1.1 8-5.8 8-11V5l-8-3zm0 2.1 6 2.3V11c0 4.2-2.6 8.1-6 9.2-3.4-1.1-6-5-6-9.2V6.4l6-2.3z" fill="currentColor"></path>
+                  <path d="M10.9 14.7 8.2 12l1.1-1.1 1.6 1.6 3.8-3.8 1.1 1.1-4.9 4.9z" fill="currentColor"></path>
+                </svg>
+              </span>
+              <span>{{ guarantee_text | escape }}</span>
+            </p>
+
+            {%- if section.settings.show_payment_icons -%}
+              <div class="bt-path__payments">
+                {%- if section.settings.payment_icons_image != blank -%}
+                  {{
+                    section.settings.payment_icons_image
+                    | image_url: width: 900
+                    | image_tag:
+                      class: 'bt-path__payments-img',
+                      loading: 'lazy',
+                      widths: '320,480,640,900',
+                      sizes: '(min-width: 768px) 360px, 100%',
+                      alt: payment_icons_alt
+                  }}
+                {%- elsif shop.enabled_payment_types.size > 0 -%}
+                  <div class="bt-path__payments-grid">
+                    {%- for type in shop.enabled_payment_types -%}
+                      {{- type | payment_type_svg_tag: class: 'bt-path__payment-icon' -}}
+                    {%- endfor -%}
+                  </div>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          </div>
         </div>
+
+        {%- if section.settings.show_testimonial -%}
+          <div class="bt-path__testimonial">
+            {%- if section.settings.testimonial_avatar != blank -%}
+              <img
+                class="bt-path__testimonial-avatar"
+                src="{{ section.settings.testimonial_avatar | image_url: width: 120 }}"
+                alt=""
+                loading="lazy"
+                width="40"
+                height="40"
+              >
+            {%- endif -%}
+            <div class="bt-path__testimonial-body">
+              {%- if section.settings.testimonial_name != blank -%}
+                <p class="bt-path__testimonial-name">{{ section.settings.testimonial_name | escape }}</p>
+              {%- endif -%}
+              {%- if section.settings.testimonial_headline != blank -%}
+                <p class="bt-path__testimonial-headline">{{ section.settings.testimonial_headline | escape }}</p>
+              {%- endif -%}
+              {%- if section.settings.testimonial_quote != blank -%}
+                <p class="bt-path__testimonial-quote">{{ section.settings.testimonial_quote | escape }}</p>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
       </div>
     </div>
   </div>
@@ -132,32 +209,170 @@
 
   .bt-path__full { margin-top: 24px; display: flex; justify-content: center; }
   @media (min-width: 768px) { .bt-path__full { margin-top: 40px; } }
-  .bt-path__full-card { background: #fff; border-radius: 30px; overflow: hidden; box-shadow: 0 6px 28px rgba(0,0,0,0.15); }
-  @media (min-width: 768px) { .bt-path__full-card { display: flex; max-width: 782px; width: 100%; } }
 
-  .bt-path__full-img { position: relative; margin: 12px; border-radius: 18px; overflow: hidden; height: 311px; border: 0; background: #fff; }
-  @media (min-width: 768px) { .bt-path__full-img { width: 369px; height: 396px; flex: 0 0 369px; align-self: center; } }
+  .bt-path__full-card {
+    background: #fff;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 6px 28px rgba(0,0,0,0.15);
+    width: 100%;
+    text-align: left;
+  }
+  @media (min-width: 768px) {
+    .bt-path__full-card {
+      display: flex;
+      flex-direction: column;
+      max-width: 782px;
+    }
+  }
+
+  .bt-path__full-main { display: flex; flex-direction: column; }
+  @media (min-width: 768px) {
+    .bt-path__full-main {
+      flex-direction: row;
+      align-items: stretch;
+    }
+  }
+
+  .bt-path__full-media { margin: 12px 12px 0; }
+  @media (min-width: 768px) {
+    .bt-path__full-media {
+      margin: 12px 0 12px 12px;
+      flex: 0 0 369px;
+      display: flex;
+      flex-direction: column;
+      align-self: center;
+    }
+  }
+
+  .bt-path__full-img {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    height: 311px;
+    border: 0;
+    background: #fff;
+  }
+  @media (min-width: 768px) {
+    .bt-path__full-img {
+      width: 100%;
+      height: 396px;
+      border-radius: 18px;
+    }
+  }
+
   .bt-path__img { width: 100%; height: 100%; object-fit: cover; display: none; }
   .bt-path__img--m { display: block; }
-  @media (min-width: 768px) { .bt-path__img--m { display: none; } .bt-path__img--d { display: block; } }
+  @media (min-width: 768px) {
+    .bt-path__img--m { display: none; }
+    .bt-path__img--d { display: block; }
+  }
 
-  .bt-path__badges { position: absolute; left: 20px; top: 20px; display: flex; gap: 8px; }
-  .bt-path__badge { border-radius: 999px; padding: 6px 12px; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 800; font-size: 14px; color: #111; }
+  .bt-path__badges { position: absolute; left: 20px; top: 20px; display: flex; gap: 8px; z-index: 2; flex-wrap: wrap; }
+  .bt-path__badge {
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-family: Avenir, 'Nunito Sans', system-ui, sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 1.2;
+  }
   @media (min-width: 768px) { .bt-path__badge { font-size: 18px; } }
-  .bt-path__badge--y { background: #FAFF00; }
-  .bt-path__badge--g { background: #B8FF00; }
+  .bt-path__badge--y { background: #FAFF00; color: #111; }
+  .bt-path__badge--dark { background: #111; color: #fff; }
 
-  .bt-path__full-body { padding: 0 20px 20px; text-align: left; }
-  @media (min-width: 768px) { .bt-path__full-body { padding: 32px; } }
-  .bt-path__full-title { margin: 0; font-family: 'Anybody', sans-serif; font-weight: 600; text-transform: uppercase; font-stretch: 150%; letter-spacing: 0.03em; font-size: 20px; color: #111; }
+  .bt-path__img-offer {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 8px 14px;
+    background: #B8FF00;
+    color: #111;
+    font-family: Avenir, 'Nunito Sans', system-ui, sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+  @media (min-width: 768px) { .bt-path__img-offer { font-size: 16px; padding: 10px 16px; } }
+
+  .bt-path__img-offer--overlay {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    z-index: 2;
+  }
+  @media (min-width: 768px) { .bt-path__img-offer--overlay { display: none; } }
+
+  .bt-path__img-offer--below {
+    display: none;
+    margin: 12px auto 0;
+  }
+  @media (min-width: 768px) {
+    .bt-path__img-offer--below {
+      display: inline-flex;
+      align-self: center;
+    }
+  }
+
+  .bt-path__full-body { padding: 16px 20px 20px; }
+  @media (min-width: 768px) { .bt-path__full-body { padding: 32px 32px 32px 24px; flex: 1; } }
+
+  .bt-path__full-title {
+    margin: 0;
+    font-family: 'Anybody', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-stretch: 150%;
+    letter-spacing: 0.03em;
+    font-size: 20px;
+    color: #111;
+  }
   @media (min-width: 768px) { .bt-path__full-title { font-size: 24px; } }
-  .bt-path__full-sub { margin: 8px 0 0; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 800; font-size: 16px; color: #111; }
+
+  .bt-path__full-sub {
+    margin: 8px 0 0;
+    font-family: Avenir, 'Nunito Sans', system-ui, sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    color: #111;
+  }
   @media (min-width: 768px) { .bt-path__full-sub { font-size: 18px; } }
 
-  .bt-path__price-row { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+  .bt-path__rating {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    color: #8A8A8A;
+    font-family: Avenir, 'Nunito Sans', system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+  }
+  @media (min-width: 768px) { .bt-path__rating { font-size: 16px; margin-top: 10px; } }
+
+  .bt-path__rating-stars {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    color: #FFC300;
+  }
+  .bt-path__rating-star { display: block; }
+
+  .bt-path__price-row { display: flex; align-items: center; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
   .bt-path__price-now { font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 800; font-size: 21px; color: #0A8A2A; }
   @media (min-width: 768px) { .bt-path__price-now { font-size: 24px; } }
-  .bt-path__price-reg { font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 16px; color: #111; border-radius: 999px; border: 1px solid rgba(0,0,0,0.1); padding: 6px 12px; position: relative; }
+  .bt-path__price-reg {
+    font-family: Avenir, 'Nunito Sans', system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #111;
+    border-radius: 999px;
+    border: 1px solid rgba(0,0,0,0.1);
+    padding: 6px 12px;
+    position: relative;
+  }
   @media (min-width: 768px) { .bt-path__price-reg { font-size: 18px; } }
 
   .bt-path__full .bt-path__price-now { color: #00C853; }
@@ -176,24 +391,122 @@
 
   .bt-path__save { margin: 8px 0 0; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 800; font-size: 14px; color: #111; }
   @media (min-width: 768px) { .bt-path__save { font-size: 18px; } }
-  .bt-path__bonuses { margin-top: 10px; }
-  .bt-path__bonuses-title { margin: 0; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 800; font-size: 14px; color: #111; }
-  .bt-path__bonuses-list { margin: 6px 0 0; padding: 0; list-style: none; display: grid; gap: 4px; }
-  .bt-path__bonuses-list li { font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 14px; color: #111; text-align: left; }
-  @media (min-width: 768px) {
-    .bt-path__bonuses-title { font-size: 16px; }
-    .bt-path__bonuses-list li { font-size: 16px; }
-  }
 
   .bt-path__list { margin: 16px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; }
-  .bt-path__list li { font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 14px; color: #111; text-align: left; }
+  .bt-path__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-family: Avenir, 'Nunito Sans', system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: #111;
+    text-align: left;
+  }
   @media (min-width: 768px) { .bt-path__list li { font-size: 18px; } }
+  .bt-path__list-icon { flex-shrink: 0; line-height: 1.35; }
 
-  .bt-path__cta { margin-top: 20px; display: flex; align-items: center; justify-content: space-between; width: 100%; border-radius: 32px; padding: 17px 26px 18px; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 18px; text-decoration: none; background: #111; color: #fff; }
+  .bt-path__cta {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border-radius: 32px;
+    padding: 17px 26px 18px;
+    font-family: Avenir, 'Nunito Sans', system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    text-decoration: none;
+    background: #111;
+    color: #fff;
+    box-sizing: border-box;
+  }
   .bt-path__cta--full { background: #0038FF; }
-  .bt-path__guarantee { margin: 8px 0 0; font-family: Avenir, 'Nunito Sans', system-ui, sans-serif; font-weight: 500; font-size: 12px; color: #8A8A8A; text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px; }
+
+  .bt-path__guarantee {
+    margin: 8px 0 0;
+    font-family: Avenir, 'Nunito Sans', system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    color: #8A8A8A;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
   .bt-path__guarantee-icon { display: inline-flex; color: #9A9A9A; line-height: 0; }
   @media (min-width: 768px) { .bt-path__guarantee { font-size: 13px; } }
+
+  .bt-path__payments { margin-top: 12px; }
+  .bt-path__payments-img { display: block; width: 100%; max-width: 360px; height: auto; margin: 0 auto; }
+  .bt-path__payments-grid {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 6px 8px;
+  }
+  .bt-path__payment-icon { display: block; height: 22px; width: auto; }
+
+  .bt-path__testimonial {
+    margin: 16px 12px 12px;
+    padding: 12px;
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 10px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: #fff;
+  }
+  @media (min-width: 768px) {
+    .bt-path__testimonial {
+      margin: 0 12px 12px;
+      padding: 16px;
+      gap: 16px;
+    }
+  }
+
+  .bt-path__testimonial-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+  @media (min-width: 768px) {
+    .bt-path__testimonial-avatar { width: 48px; height: 48px; }
+  }
+
+  .bt-path__testimonial-body { min-width: 0; }
+  .bt-path__testimonial-name {
+    margin: 0;
+    font-family: Avenir, 'Nunito Sans', system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    color: #8A8A8A;
+  }
+  @media (min-width: 768px) { .bt-path__testimonial-name { font-size: 14px; } }
+
+  .bt-path__testimonial-headline {
+    margin: 4px 0 0;
+    font-family: Avenir, 'Nunito Sans', system-ui, sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    color: #111;
+  }
+  @media (min-width: 768px) { .bt-path__testimonial-headline { font-size: 16px; } }
+
+  .bt-path__testimonial-quote {
+    margin: 4px 0 0;
+    font-family: Avenir, 'Nunito Sans', system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: #111;
+    line-height: 1.4;
+  }
+  @media (min-width: 768px) { .bt-path__testimonial-quote { font-size: 16px; } }
 
   body.product--body_transformation .nass-bundle-builder .bb-section { display: none !important; }
 {% endstylesheet %}
@@ -211,18 +524,34 @@
     { "type": "image_picker", "id": "full_image_desktop", "label": "Full image (desktop)" },
     { "type": "text", "id": "badge_1", "label": "Badge 1", "default": "Recommended" },
     { "type": "text", "id": "badge_2", "label": "Badge 2", "default": "Best Value" },
+    { "type": "text", "id": "image_offer_badge", "label": "Image offer badge", "default": "🎁 Free Leggings" },
     { "type": "text", "id": "full_title", "label": "Full title", "default": "FULL 12-WEEK PROGRAM" },
     { "type": "text", "id": "full_subtitle", "label": "Full subtitle", "default": "(Soft + Basic + Hard)" },
+    { "type": "checkbox", "id": "show_rating", "label": "Show rating", "default": true },
+    { "type": "text", "id": "rating_label", "label": "Rating label", "default": "Rated" },
+    { "type": "text", "id": "rating_value", "label": "Rating value", "default": "4.96 out of 5" },
     { "type": "text", "id": "full_price", "label": "Full price", "default": "$99" },
     { "type": "text", "id": "full_reg_price", "label": "Full reg price", "default": "$300" },
     { "type": "text", "id": "full_save", "label": "Full save line", "default": "Save $201 today (67% OFF!)" },
-    { "type": "text", "id": "cta_full", "label": "Full CTA text", "default": "Get the Full Program" }
+    { "type": "text", "id": "cta_full", "label": "Full CTA text", "default": "Get the Full Program" },
+    { "type": "text", "id": "guarantee_text", "label": "Guarantee text", "default": "30-Days Money Back Guarantee" },
+    { "type": "header", "content": "Payment icons" },
+    { "type": "checkbox", "id": "show_payment_icons", "label": "Show payment icons", "default": true },
+    { "type": "image_picker", "id": "payment_icons_image", "label": "Payment icons image (optional)" },
+    { "type": "text", "id": "payment_icons_alt", "label": "Payment icons alt text", "default": "Accepted payment methods" },
+    { "type": "header", "content": "Testimonial" },
+    { "type": "checkbox", "id": "show_testimonial", "label": "Show testimonial", "default": true },
+    { "type": "image_picker", "id": "testimonial_avatar", "label": "Testimonial avatar" },
+    { "type": "text", "id": "testimonial_name", "label": "Testimonial name", "default": "Sarah Johnson" },
+    { "type": "text", "id": "testimonial_headline", "label": "Testimonial headline", "default": "Exactly what I needed" },
+    { "type": "textarea", "id": "testimonial_quote", "label": "Testimonial quote", "default": "Challenging enough to feel progress, but never overwhelming." }
   ],
   "blocks": [
     {
       "type": "item",
       "name": "Program feature",
       "settings": [
+        { "type": "text", "id": "icon", "label": "Icon (emoji)", "default": "🤸" },
         { "type": "text", "id": "text", "label": "Text", "default": "Soft + Basic + Hard (12 weeks)" }
       ]
     }
@@ -231,9 +560,9 @@
     {
       "name": "BT_FullProgramCard",
       "blocks": [
-        { "type": "item", "settings": { "text": "Soft + Basic + Hard (12 weeks)" } },
-        { "type": "item", "settings": { "text": "Plan B Flow." } },
-        { "type": "item", "settings": { "text": "Readiness Test." } }
+        { "type": "item", "settings": { "icon": "🤸", "text": "Soft + Basic + Hard (12 weeks)" } },
+        { "type": "item", "settings": { "icon": "😌", "text": "Plan B Flow." } },
+        { "type": "item", "settings": { "icon": "✅", "text": "Readiness Test." } }
       ]
     }
   ]
