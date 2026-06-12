@@ -1390,11 +1390,12 @@
     white-space: nowrap;
   }
 
-  .booty-workouts__cta {
+  a.booty-workouts__cta,
+  button.booty-workouts__cta {
     width: 100%;
     min-height: 60px;
     border-radius: 999px;
-    background: #000;
+    background-color: #000;
     color: #fff;
     text-decoration: none;
     border: none;
@@ -1410,8 +1411,14 @@
     transition: background-color 160ms ease;
   }
 
-  .booty-workouts__cta:hover {
-    background: #1b1b1b;
+  a.booty-workouts__cta:hover,
+  a.booty-workouts__cta:focus,
+  a.booty-workouts__cta:focus-visible,
+  button.booty-workouts__cta:hover,
+  button.booty-workouts__cta:focus,
+  button.booty-workouts__cta:focus-visible {
+    background-color: #000;
+    color: #fff;
   }
 
   .booty-workouts__cta-arrow {
@@ -1729,7 +1736,8 @@
       font-size: 35px;
     }
 
-    .booty-workouts__cta {
+    a.booty-workouts__cta,
+    button.booty-workouts__cta {
       min-height: 68px;
     }
 

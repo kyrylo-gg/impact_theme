@@ -508,28 +508,6 @@ window.nassAddVariantToCart = async function nassAddVariantToCart(variantId, tri
     );
   }
 
-  function hasVisibleOcuPopup() {
-    const selectors = [
-      '.ocu-popup',
-      '.ocu-modal',
-      '[class*="ocu-popup"]',
-      '[class*="ocu-offer"]',
-      '[class*="OCU"]',
-      '[id*="ocu-popup"]',
-      '[id*="ocu-app"]',
-      'zipify-ocu-offer',
-      '#ocu-app',
-      '[data-ocu-popup]'
-    ];
-    return selectors.some((selector) => {
-      const nodes = document.querySelectorAll(selector);
-      return Array.from(nodes).some((node) => {
-        const style = window.getComputedStyle(node);
-        return style.display !== 'none' && style.visibility !== 'hidden' && Number(style.opacity) > 0;
-      });
-    });
-  }
-
   function openCartDrawerIfNeeded() {
     if (
       !window.themeVariables
@@ -541,10 +519,6 @@ window.nassAddVariantToCart = async function nassAddVariantToCart(variantId, tri
     if (drawer && typeof drawer.show === 'function') {
       drawer.show();
     }
-  }
-
-  function wait(ms) {
-    return new Promise((resolve) => window.setTimeout(resolve, ms));
   }
 
   async function manualAddToCartWithDrawer(btn, variantId) {
@@ -559,44 +533,6 @@ window.nassAddVariantToCart = async function nassAddVariantToCart(variantId, tri
     } finally {
       btn.removeAttribute('aria-busy');
     }
-  }
-
-  async function tryShowOcuAfterCartDrawer() {
-    if (!isOcuRuntimeReady()) return false;
-
-    if (window.OCUApi && typeof window.OCUApi.renderOCUDiscounts === 'function') {
-      window.OCUApi.renderOCUDiscounts();
-    }
-
-    await wait(400);
-
-    const cartForm = document.querySelector('cart-drawer form[action*="/cart"]');
-
-    if (window.OCUApi && typeof window.OCUApi.showUpsell === 'function' && cartForm) {
-      try {
-        await window.OCUApi.showUpsell({ form: cartForm });
-        await wait(400);
-        if (hasVisibleOcuPopup()) return true;
-      } catch (error) {
-        // OCU has no matching pre-purchase offer for this cart state.
-      }
-    }
-
-    if (window.Zipify && window.Zipify.OCU && window.Zipify.OCU.api
-      && typeof window.Zipify.OCU.api.showUpsell === 'function') {
-      try {
-        const result = window.Zipify.OCU.api.showUpsell();
-        if (result && typeof result.then === 'function') {
-          await result;
-        }
-        await wait(400);
-        if (hasVisibleOcuPopup()) return true;
-      } catch (error) {
-        // OCU has no matching pre-purchase offer for this cart state.
-      }
-    }
-
-    return hasVisibleOcuPopup();
   }
 
   function prepareOcuAtcButton(btn) {
@@ -624,15 +560,20 @@ window.nassAddVariantToCart = async function nassAddVariantToCart(variantId, tri
     const btn = event.target.closest('[data-nass-ocu-atc]');
     if (!btn || btn.getAttribute('aria-busy') === 'true') return;
 
+    prepareOcuAtcButton(btn);
+
+    if (isOcuRuntimeReady()) {
+      // OCU handles the click and uses customAddToCartFetch for AJAX + popup.
+      return;
+    }
+
     event.preventDefault();
     event.stopPropagation();
 
-    const variantId = prepareOcuAtcButton(btn);
+    const variantId = btn.getAttribute('data-variant-id')
+      || window.nassGetBootyWorkoutsTierVariantId(btn);
     if (!variantId) return;
 
-    const added = await manualAddToCartWithDrawer(btn, variantId);
-    if (!added) return;
-
-    await tryShowOcuAfterCartDrawer();
+    await manualAddToCartWithDrawer(btn, variantId);
   }, true);
 })();

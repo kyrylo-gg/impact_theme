@@ -159,14 +159,96 @@
           return fd;
         }
 
+        function nassOcuCustomAddToCartFetch(options) {
+          var btn = resolveButton(window.__nassOcuLastButton);
+          var payload = buildAddToCartPayload(btn);
+          if (!payload && options && options.data) {
+            var data = options.data;
+            var variantId = data.id || (data.items && data.items[0] && data.items[0].id);
+            if (variantId) {
+              payload = {
+                id: parseInt(variantId, 10),
+                quantity: data.quantity || 1,
+                properties: data.properties || {}
+              };
+            }
+          }
+          if (!payload || !payload.id) {
+            return Promise.reject(new Error('NASS OCU: missing variant id'));
+          }
+
+          var routesRoot = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/';
+          var sectionsToBundle = ['variant-added'];
+
+          document.documentElement.dispatchEvent(new CustomEvent('cart:prepare-bundled-sections', {
+            bubbles: true,
+            detail: { sections: sectionsToBundle }
+          }));
+
+          return fetch(routesRoot + 'cart/add.js', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json',
+              'X-Requested-With': 'XMLHttpRequest'
+            },
+            body: JSON.stringify({
+              id: payload.id,
+              quantity: payload.quantity || 1,
+              sections: sectionsToBundle.join(','),
+              sections_url: routesRoot + 'variants/' + payload.id
+            })
+          }).then(function(response) {
+            return response.json().then(function(addResponse) {
+              if (!response.ok || addResponse.status) {
+                throw new Error(addResponse.description || addResponse.message || 'Could not add to cart');
+              }
+              return addResponse;
+            });
+          }).then(function(addResponse) {
+            return fetch(routesRoot + 'cart.js').then(function(response) {
+              return response.json().then(function(cart) {
+                cart.sections = addResponse.sections || {};
+                var items = Object.prototype.hasOwnProperty.call(addResponse, 'items')
+                  ? addResponse.items
+                  : [addResponse];
+                var triggerEl = btn || document.documentElement;
+                triggerEl.dispatchEvent(new CustomEvent('variant:add', {
+                  bubbles: true,
+                  detail: {
+                    items: items,
+                    cart: cart,
+                    blockCartDrawerOpening: false
+                  }
+                }));
+                document.documentElement.dispatchEvent(new CustomEvent('cart:change', {
+                  bubbles: true,
+                  detail: {
+                    baseEvent: 'variant:add',
+                    cart: cart
+                  }
+                }));
+                if (window.OCUApi && typeof window.OCUApi.renderOCUDiscounts === 'function') {
+                  window.OCUApi.renderOCUDiscounts();
+                }
+                return { data: cart };
+              });
+            });
+          });
+        }
+
         function applyOcuConfig() {
           window.OCUApi = window.OCUApi || {};
           window.OCUApi.customAddToCartButton = selector;
           window.OCUApi.getCustomAddToCartData = getLegacyAddToCartData;
+          window.OCUApi.customAddToCartFetch = nassOcuCustomAddToCartFetch;
+          window.OCUApi.customSkipCart = true;
+          window.OCUApi.isWindowLocationForClickListener = true;
 
           if (window.Zipify && window.Zipify.OCU && window.Zipify.OCU.api) {
             window.Zipify.OCU.api.customAddToCartButton = selector;
             window.Zipify.OCU.api.getCustomAddToCartData = getZipifyOcuAddToCartData;
+            window.Zipify.OCU.api.customAddToCartFetch = nassOcuCustomAddToCartFetch;
             window.Zipify.OCU.api.customSkipCart = true;
             window.Zipify.OCU.api.isWindowLocationForClickListener = true;
           }
