@@ -24,7 +24,7 @@
   }
 
   .custom-quick-add.show {
-    display: flex;
+    display: flex !important;
   }
 
   .custom-quick-add.hidden {
@@ -748,8 +748,9 @@
     const twerkOfferBlock = document.getElementById('nass-twerk-offer-block');
     const searchParams = new URLSearchParams(window.location.search);
     const isBodyTransformationPage = document.body.classList.contains('product--body_transformation');
-    const isTwerkEssentialPage = document.body.classList.contains('product--twerk_essential');
+    const isTwerkEssentialPage = /product--twerk[-_]essential/.test(document.body.className);
     const isTwerkProgramR1Page = document.body.classList.contains('product--twerk-program-r1');
+    const mobileMediaQuery = window.matchMedia('(max-width: 768px)');
 
     if (sticky) {
       sticky.classList.add('show');
@@ -798,11 +799,32 @@
       return el.getBoundingClientRect().bottom <= 0;
     }
 
+    function isElementVisible(el) {
+      if (!el) return false;
+      const style = window.getComputedStyle(el);
+      if (style.display === 'none' || style.visibility === 'hidden') return false;
+      const rect = el.getBoundingClientRect();
+      return rect.width > 0 && rect.height > 0;
+    }
+
+    function isElementInViewport(el, threshold = 0) {
+      const rect = el.getBoundingClientRect();
+      const height = window.innerHeight || document.documentElement.clientHeight;
+      return rect.top < height * (1 - threshold) && rect.bottom > height * threshold;
+    }
+
     function updateStickyVisibility() {
-      const hideOriginal = original && isElementInViewport(original, 0.1);
-      const hideBuyButtons = !isBodyTransformationPage && buyButtons && isElementInViewport(buyButtons, 0.15);
-      const hideBundleBuilder = bundleBuilder && isElementInViewport(bundleBuilder, 0.1);
-      const hideTwerkOfferBlock = isTwerkEssentialPage && twerkOfferBlock && isElementInViewport(twerkOfferBlock, 0.1);
+      const isMobile = mobileMediaQuery.matches;
+      const hideOriginal = isMobile && original && isElementInViewport(original, 0.1);
+      const hideBuyButtons = isMobile
+        && !isBodyTransformationPage
+        && buyButtons
+        && isElementInViewport(buyButtons, 0.15);
+      const hideBundleBuilder = isElementVisible(bundleBuilder) && isElementInViewport(bundleBuilder, 0.1);
+      const hideTwerkOfferBlock = isMobile
+        && isTwerkEssentialPage
+        && twerkOfferBlock
+        && isElementInViewport(twerkOfferBlock, 0.1);
       const hideUntilCountdownPassed = isTwerkProgramR1Page
         && nassCountdownBanner
         && !hasPassedCountdownAnchor(nassCountdownBanner);
@@ -816,12 +838,6 @@
       } else {
         sticky.classList.remove('hidden');
       }
-    }
-
-    function isElementInViewport(el, threshold = 0) {
-      const rect = el.getBoundingClientRect();
-      const height = window.innerHeight || document.documentElement.clientHeight;
-      return rect.top < height * (1 - threshold) && rect.bottom > height * threshold;
     }
 
     document.addEventListener('scroll', updateStickyVisibility, { passive: true });
