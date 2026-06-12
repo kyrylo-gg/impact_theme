@@ -260,11 +260,37 @@
     },
     "bt_meet_nastya": {
       "type": "bt_meet_nastya",
+      "blocks": {
+        "meet_photo_1": {
+          "type": "photo",
+          "settings": {
+            "image_mobile": "shopify://shop_images/Frame_245.png",
+            "image_desktop": "shopify://shop_images/Frame_38.png"
+          }
+        },
+        "meet_photo_2": {
+          "type": "photo",
+          "settings": {
+            "image_mobile": "shopify://shop_images/Frame_245.png",
+            "image_desktop": "shopify://shop_images/Frame_38.png"
+          }
+        },
+        "meet_photo_3": {
+          "type": "photo",
+          "settings": {
+            "image_mobile": "shopify://shop_images/Frame_245.png",
+            "image_desktop": "shopify://shop_images/Frame_38.png"
+          }
+        }
+      },
+      "block_order": [
+        "meet_photo_1",
+        "meet_photo_2",
+        "meet_photo_3"
+      ],
       "settings": {
         "title_1": "Meet",
         "title_2": "Nastya Nass",
-        "photo_mobile": "shopify://shop_images/Frame_245.png",
-        "photo_desktop": "shopify://shop_images/Frame_38.png",
         "avatar": "shopify://shop_images/Frame_37.png",
         "verified_badge": "shopify://shop_images/Vector_470c13d4-bda2-41de-816e-ef6792792c20.png",
         "person_icon": "shopify://shop_images/Vector-2.png",

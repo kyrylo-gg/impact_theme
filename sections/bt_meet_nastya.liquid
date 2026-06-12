@@ -1,6 +1,7 @@
 {% comment %}
   BT_MeetNastya (Body Transformation)
-  Based on lovable spec for MeetNastyaSection.tsx
+  Photo gallery carousel: 2 images visible on mobile, 3 on desktop.
+  Each block has separate mobile and desktop images.
 {% endcomment %}
 
 {%- liquid
@@ -15,14 +16,19 @@
   assign quote_first = quote_parts[0]
   assign quote_rest = quote_parts | slice: 1, quote_parts.size | join: '. '
 
-  assign photo_mobile = section.settings.photo_mobile
-  assign photo_desktop = section.settings.photo_desktop
   assign avatar = section.settings.avatar
   assign verified_badge = section.settings.verified_badge
   assign person_icon = section.settings.person_icon
+
+  assign photo_count = 0
+  for block in section.blocks
+    if block.settings.image_mobile != blank or block.settings.image_desktop != blank
+      assign photo_count = photo_count | plus: 1
+    endif
+  endfor
 -%}
 
-<section class="bt-wrap bt-meet">
+<section class="bt-wrap bt-meet" data-bt-meet id="bt-meet-{{ section.id }}">
   <div class="bt-container bt-meet__container">
     <div class="bt-meet__title">
       <span class="bt-meet__title-w">{{ title_1 | escape }}</span><br>
@@ -31,15 +37,64 @@
     <div class="bt-meet__divider" aria-hidden="true"></div>
 
     <div class="bt-meet__card">
-      <div class="bt-meet__photo">
-        {%- if photo_mobile != blank -%}
-          <img class="bt-meet__img bt-meet__img--m" src="{{ photo_mobile | image_url: width: 900 }}" alt="" loading="lazy">
-        {%- endif -%}
-        {%- if photo_desktop != blank -%}
-          <img class="bt-meet__img bt-meet__img--d" src="{{ photo_desktop | image_url: width: 1200 }}" alt="" loading="lazy">
-        {%- endif -%}
-        <div class="bt-meet__grad" aria-hidden="true"></div>
-      </div>
+      {%- if photo_count > 0 -%}
+        <div class="bt-meet__gallery" data-bt-meet-gallery>
+          <div class="bt-meet__track" data-bt-meet-track role="region" aria-label="Nastya Nass photos">
+            {%- for block in section.blocks -%}
+              {%- if block.settings.image_mobile != blank or block.settings.image_desktop != blank -%}
+                <div class="bt-meet__slide" {{ block.shopify_attributes }}>
+                  {%- if block.settings.image_mobile != blank -%}
+                    <img
+                      class="bt-meet__slide-img bt-meet__slide-img--m"
+                      src="{{ block.settings.image_mobile | image_url: width: 600 }}"
+                      srcset="{{ block.settings.image_mobile | image_url: width: 400 }} 400w, {{ block.settings.image_mobile | image_url: width: 600 }} 600w"
+                      sizes="(min-width: 768px) 33vw, 50vw"
+                      alt=""
+                      loading="lazy"
+                      width="{{ block.settings.image_mobile.width }}"
+                      height="{{ block.settings.image_mobile.height }}"
+                    >
+                  {%- elsif block.settings.image_desktop != blank -%}
+                    <img
+                      class="bt-meet__slide-img bt-meet__slide-img--m"
+                      src="{{ block.settings.image_desktop | image_url: width: 600 }}"
+                      alt=""
+                      loading="lazy"
+                      width="{{ block.settings.image_desktop.width }}"
+                      height="{{ block.settings.image_desktop.height }}"
+                    >
+                  {%- endif -%}
+                  {%- if block.settings.image_desktop != blank -%}
+                    <img
+                      class="bt-meet__slide-img bt-meet__slide-img--d"
+                      src="{{ block.settings.image_desktop | image_url: width: 800 }}"
+                      srcset="{{ block.settings.image_desktop | image_url: width: 500 }} 500w, {{ block.settings.image_desktop | image_url: width: 800 }} 800w"
+                      sizes="(min-width: 768px) 33vw, 50vw"
+                      alt=""
+                      loading="lazy"
+                      width="{{ block.settings.image_desktop.width }}"
+                      height="{{ block.settings.image_desktop.height }}"
+                    >
+                  {%- elsif block.settings.image_mobile != blank -%}
+                    <img
+                      class="bt-meet__slide-img bt-meet__slide-img--d"
+                      src="{{ block.settings.image_mobile | image_url: width: 800 }}"
+                      alt=""
+                      loading="lazy"
+                      width="{{ block.settings.image_mobile.width }}"
+                      height="{{ block.settings.image_mobile.height }}"
+                    >
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+
+          {%- if photo_count > 2 -%}
+            <div class="bt-meet__dots" data-bt-meet-dots aria-hidden="true"></div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
 
       <div class="bt-meet__body">
         <div class="bt-meet__row">
@@ -85,6 +140,99 @@
   </div>
 </section>
 
+<script>
+(function() {
+  var root = document.getElementById('bt-meet-{{ section.id }}');
+  if (!root) return;
+
+  var track = root.querySelector('[data-bt-meet-track]');
+  var dotsWrap = root.querySelector('[data-bt-meet-dots]');
+  if (!track) return;
+
+  var slides = Array.prototype.slice.call(track.querySelectorAll('.bt-meet__slide'));
+  if (!slides.length) return;
+
+  var mq = window.matchMedia('(min-width: 768px)');
+  var dots = [];
+
+  function visibleCount() {
+    return mq.matches ? 3 : 2;
+  }
+
+  function pageCount() {
+    var visible = visibleCount();
+    return Math.max(1, slides.length - visible + 1);
+  }
+
+  function stepSize() {
+    var slide = slides[0];
+    if (!slide) return 0;
+    var gap = parseFloat(getComputedStyle(track).gap) || 0;
+    return slide.getBoundingClientRect().width + gap;
+  }
+
+  function buildDots() {
+    if (!dotsWrap) return;
+    dotsWrap.innerHTML = '';
+    dots = [];
+    var count = pageCount();
+    if (count <= 1) {
+      dotsWrap.style.display = 'none';
+      return;
+    }
+    dotsWrap.style.display = '';
+    for (var i = 0; i < count; i++) {
+      var dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'bt-meet__dot-btn' + (i === 0 ? ' is-active' : '');
+      dot.setAttribute('aria-label', 'Photo page ' + (i + 1));
+      dot.addEventListener('click', function(idx) {
+        return function() {
+          track.scrollTo({ left: idx * stepSize(), behavior: 'smooth' });
+        };
+      }(i));
+      dotsWrap.appendChild(dot);
+      dots.push(dot);
+    }
+  }
+
+  function setActiveDot(index) {
+    dots.forEach(function(dot, idx) {
+      dot.classList.toggle('is-active', idx === index);
+    });
+  }
+
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function() {
+      ticking = false;
+      var step = stepSize();
+      if (!step) return;
+      var idx = Math.round(track.scrollLeft / step);
+      idx = Math.max(0, Math.min(idx, pageCount() - 1));
+      setActiveDot(idx);
+    });
+  }
+
+  track.addEventListener('scroll', onScroll, { passive: true });
+
+  function onResize() {
+    buildDots();
+    onScroll();
+  }
+
+  if (typeof mq.addEventListener === 'function') {
+    mq.addEventListener('change', onResize);
+  } else if (typeof mq.addListener === 'function') {
+    mq.addListener(onResize);
+  }
+
+  buildDots();
+})();
+</script>
+
 {% stylesheet %}
   .bt-wrap { width: 100%; display: flex; justify-content: center; padding: 24px 16px; box-sizing: border-box; }
   @media (min-width: 768px) { .bt-wrap { padding: 40px 0; } }
@@ -100,16 +248,66 @@
   .bt-meet__card { margin-top: 24px; background: #fff; border-radius: 30px; box-shadow: 0 6px 28px rgba(0,0,0,0.15); overflow: hidden; }
   @media (min-width: 768px) { .bt-meet__card { margin-top: 40px; border: 1px solid #F4F4F4; max-width: 782px; margin-left: auto; margin-right: auto; } }
 
-  .bt-meet__photo { position: relative; margin: 8px; border-radius: 22px; overflow: hidden; }
-  .bt-meet__img { width: 100%; height: 100%; object-fit: cover; display: none; }
-  .bt-meet__img--m { display: block; height: 275px; }
-  .bt-meet__img--d { display: none; }
-  @media (min-width: 768px) {
-    .bt-meet__img--m { display: none; }
-    .bt-meet__photo { margin: 12px; border-radius: 26px; }
-    .bt-meet__img--d { display: block; height: 390px; }
+  .bt-meet__gallery { margin: 8px 8px 0; }
+  @media (min-width: 768px) { .bt-meet__gallery { margin: 12px 12px 0; } }
+
+  .bt-meet__track {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
-  .bt-meet__grad { position: absolute; left: 0; right: 0; bottom: 0; height: 222px; background: linear-gradient(to top, rgba(0,0,0,0.5), transparent); }
+  .bt-meet__track::-webkit-scrollbar { display: none; }
+
+  .bt-meet__slide {
+    flex: 0 0 calc((100% - 8px) / 2);
+    scroll-snap-align: start;
+    border-radius: 22px;
+    overflow: hidden;
+    background: #111;
+  }
+  @media (min-width: 768px) {
+    .bt-meet__slide {
+      flex: 0 0 calc((100% - 16px) / 3);
+      border-radius: 26px;
+    }
+  }
+
+  .bt-meet__slide-img {
+    width: 100%;
+    height: 275px;
+    object-fit: cover;
+    display: none;
+  }
+  .bt-meet__slide-img--m { display: block; }
+  @media (min-width: 768px) {
+    .bt-meet__slide-img--m { display: none; }
+    .bt-meet__slide-img--d { display: block; height: 390px; }
+  }
+
+  .bt-meet__dots {
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+  @media (min-width: 768px) { .bt-meet__dots { margin-top: 16px; } }
+
+  .bt-meet__dot-btn {
+    height: 2px;
+    width: 20px;
+    padding: 0;
+    border: 0;
+    background: rgba(138,138,138,0.4);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: width 150ms ease, background 150ms ease;
+  }
+  @media (min-width: 768px) { .bt-meet__dot-btn { height: 3px; width: 28px; } }
+  .bt-meet__dot-btn.is-active { width: 40px; background: #8A8A8A; }
+  @media (min-width: 768px) { .bt-meet__dot-btn.is-active { width: 50px; } }
 
   .bt-meet__body { padding: 0 20px 20px; margin-top: -24px; position: relative; text-align: left; }
   @media (min-width: 768px) { .bt-meet__body { padding: 0 28px 28px; margin-top: -40px; } }
@@ -154,9 +352,7 @@
   "settings": [
     { "type": "text", "id": "title_1", "label": "Title line 1", "default": "Meet" },
     { "type": "text", "id": "title_2", "label": "Title line 2 (blue)", "default": "Nastya Nass" },
-    { "type": "header", "content": "Images" },
-    { "type": "image_picker", "id": "photo_mobile", "label": "Photo mobile" },
-    { "type": "image_picker", "id": "photo_desktop", "label": "Photo desktop" },
+    { "type": "header", "content": "Profile images" },
     { "type": "image_picker", "id": "avatar", "label": "Avatar" },
     { "type": "image_picker", "id": "verified_badge", "label": "Verified badge" },
     { "type": "image_picker", "id": "person_icon", "label": "Person icon" },
@@ -166,7 +362,25 @@
     { "type": "text", "id": "bio", "label": "Bio", "default": "Nastya is a famous twerk star and a mom of two. She knows how to get back on track with a system that adapts to real life." },
     { "type": "text", "id": "quote", "label": "Quote", "default": "Between kids and a busy schedule, I needed a plan that adapts. This roadmap helped me keep going when life got messy." }
   ],
-  "presets": [{ "name": "BT_MeetNastya" }]
+  "blocks": [
+    {
+      "type": "photo",
+      "name": "Gallery photo",
+      "settings": [
+        { "type": "image_picker", "id": "image_mobile", "label": "Photo mobile" },
+        { "type": "image_picker", "id": "image_desktop", "label": "Photo desktop" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BT_MeetNastya",
+      "blocks": [
+        { "type": "photo" },
+        { "type": "photo" },
+        { "type": "photo" }
+      ]
+    }
+  ]
 }
 {% endschema %}
-
