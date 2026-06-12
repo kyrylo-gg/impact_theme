@@ -386,7 +386,7 @@
         "image_radius": 30,
         "cta_label": "Order Today",
         "cta_action": "add_product",
-        "cta_product": "",
+        "cta_product": "nass-twerk-program",
         "cta_url": "",
         "trust_guarantee": "30-Day Money-Back Guarantee",
         "trust_support": "World-Famous support",
