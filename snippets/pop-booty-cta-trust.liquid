@@ -2,7 +2,7 @@
   CTA button + trust badges for pop_booty sections (matches nass-programs footer).
   Enable per section via show_pop_booty_footer setting.
 {% endcomment %}
-{% if template.suffix == 'pop_booty' and section.settings.show_pop_booty_footer %}
+{% if section.settings.show_pop_booty_footer and template.suffix == 'pop_booty' or section.settings.show_pop_booty_footer and template.suffix == 'pop_booty_new' %}
   <div class="pop-booty-cta-trust">
     {% if section.settings.cta_text != blank %}
       <a class="pop-booty-cta-trust__cta" href="{{ section.settings.cta_link | default: '#' }}">

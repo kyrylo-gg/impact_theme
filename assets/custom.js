@@ -382,3 +382,70 @@
     }
   });
 })();
+
+window.nassAddVariantToCart = async function nassAddVariantToCart(variantId, triggerEl) {
+  if (!variantId) return false;
+
+  const routesRoot = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/';
+  const sectionsToBundle = ['variant-added'];
+
+  document.documentElement.dispatchEvent(new CustomEvent('cart:prepare-bundled-sections', {
+    bubbles: true,
+    detail: { sections: sectionsToBundle }
+  }));
+
+  const response = await fetch(routesRoot + 'cart/add.js', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      'X-Requested-With': 'XMLHttpRequest'
+    },
+    body: JSON.stringify({
+      id: parseInt(variantId, 10),
+      quantity: 1,
+      sections: sectionsToBundle.join(','),
+      sections_url: routesRoot + 'variants/' + variantId
+    })
+  });
+
+  const responseJson = await response.json();
+
+  if (!response.ok || responseJson.status) {
+    document.documentElement.dispatchEvent(new CustomEvent('cart:error', {
+      bubbles: true,
+      detail: {
+        error: responseJson.description || responseJson.message || 'Could not add to cart'
+      }
+    }));
+    return false;
+  }
+
+  if (
+    window.themeVariables
+    && (window.themeVariables.settings.cartType === 'page' || window.themeVariables.settings.pageType === 'cart')
+  ) {
+    window.location.href = routesRoot + 'cart';
+    return true;
+  }
+
+  const cartContent = await (await fetch(routesRoot + 'cart.js')).json();
+  cartContent.sections = responseJson.sections || {};
+
+  (triggerEl || document.documentElement).dispatchEvent(new CustomEvent('variant:add', {
+    bubbles: true,
+    detail: {
+      items: Object.prototype.hasOwnProperty.call(responseJson, 'items') ? responseJson.items : [responseJson],
+      cart: cartContent
+    }
+  }));
+  document.documentElement.dispatchEvent(new CustomEvent('cart:change', {
+    bubbles: true,
+    detail: {
+      baseEvent: 'variant:add',
+      cart: cartContent
+    }
+  }));
+
+  return true;
+};

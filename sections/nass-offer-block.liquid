@@ -13,6 +13,20 @@
   • Every textual + numeric piece is editable from the theme editor.
 {% endcomment %}
 
+{% liquid
+  assign show_bundle_card = true
+  if section.settings.card_layout == 'single_only'
+    assign show_bundle_card = false
+  endif
+
+  assign cta_opens_bundle_builder = true
+  assign cta_adds_to_cart = false
+  if section.settings.cta_action == 'add_to_cart'
+    assign cta_opens_bundle_builder = false
+    assign cta_adds_to_cart = true
+  endif
+%}
+
 <link rel="stylesheet" href="{{ 'nass-offer-block.css' | asset_url }}">
 
 <section
@@ -32,7 +46,8 @@
   {%- assign bundle = section.settings.bundle_product -%}
   {%- assign single = section.settings.single_product -%}
 
-  <div class="nass-grid nass-grid--2 nass-grid--cards">
+  <div class="nass-grid nass-grid--cards{% if show_bundle_card %} nass-grid--2{% else %} nass-grid--1{% endif %}">
+    {% if show_bundle_card %}
     <div class="nass-card nass-card--bundle">
       <span class="nass-blob nass-blob--a"></span>
       <span class="nass-blob nass-blob--b"></span>
@@ -96,9 +111,14 @@
         <button
           type="button"
           class="nass-cta"
-          data-bb-trigger
-          data-bb-program-index="0"
-          data-bb-flow="bundle"
+          {% if cta_adds_to_cart %}
+            data-nass-offer-cart-cta
+            {% if bundle != blank %}data-variant-id="{{ bundle.selected_or_first_available_variant.id }}"{% endif %}
+          {% else %}
+            data-bb-trigger
+            data-bb-program-index="0"
+            data-bb-flow="bundle"
+          {% endif %}
         >
           <span>{{ section.settings.cta_label }}</span>
           <span class="nass-cta__arrow">→</span>
@@ -131,6 +151,7 @@
         </div>
       </div>
     </div>
+    {% endif %}
 
     <div class="nass-card nass-card--single">
       <div class="nass-card__body">
@@ -177,9 +198,14 @@
         <button
           type="button"
           class="nass-cta"
-          data-bb-trigger
-          data-bb-program-index="1"
-          data-bb-flow="single"
+          {% if cta_adds_to_cart %}
+            data-nass-offer-cart-cta
+            {% if single != blank %}data-variant-id="{{ single.selected_or_first_available_variant.id }}"{% endif %}
+          {% else %}
+            data-bb-trigger
+            data-bb-program-index="1"
+            data-bb-flow="single"
+          {% endif %}
         >
           <span>{{ section.settings.cta_label }}</span>
           <span class="nass-cta__arrow">→</span>
@@ -268,6 +294,20 @@
         openBuilderFromOffer(programIndex, flow);
       });
     });
+
+    root.querySelectorAll('[data-nass-offer-cart-cta]').forEach(function(btn) {
+      btn.addEventListener('click', async function() {
+        var variantId = btn.getAttribute('data-variant-id');
+        if (!variantId || typeof window.nassAddVariantToCart !== 'function') return;
+
+        btn.setAttribute('aria-busy', 'true');
+        try {
+          await window.nassAddVariantToCart(variantId, btn);
+        } finally {
+          btn.removeAttribute('aria-busy');
+        }
+      });
+    });
   })();
 </script>
 
@@ -278,6 +318,26 @@
   "class": "nass-offer-section",
   "settings": [
     { "type": "header", "content": "Offer cards" },
+    {
+      "type": "select",
+      "id": "card_layout",
+      "label": "Cards layout",
+      "options": [
+        { "value": "two_cards", "label": "Bundle + Single" },
+        { "value": "single_only", "label": "Single product only" }
+      ],
+      "default": "two_cards"
+    },
+    {
+      "type": "select",
+      "id": "cta_action",
+      "label": "CTA action",
+      "options": [
+        { "value": "auto", "label": "Open bundle builder" },
+        { "value": "add_to_cart", "label": "Add product to cart" }
+      ],
+      "default": "auto"
+    },
     { "type": "image_picker", "id": "background_image", "label": "Section background image" },
     { "type": "color", "id": "bundle_bg", "label": "Bundle card background", "default": "#E94F76" },
     { "type": "text", "id": "flash_text", "label": "Flash sale label", "default": "Flash Dance Day Sale" },

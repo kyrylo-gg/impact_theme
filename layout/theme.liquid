@@ -52,7 +52,7 @@
       {% render 'nass-fonts' %}
     {%- endif -%}
     {%- if template.name == 'product' -%}
-      {%- if template.suffix == 'body_transformation' or template.suffix == 'pop_booty' or template.suffix == 'hips_a' or template.suffix == 'hips_a_eu' or template.suffix == 'hips_a_ab' or template.suffix == 'hips_a_ceo' or template.suffix == 'hips_b' or template.suffix == 'hips_c' -%}
+      {%- if template.suffix == 'body_transformation' or template.suffix == 'pop_booty' or template.suffix == 'pop_booty_new' or template.suffix == 'hips_a' or template.suffix == 'hips_a_eu' or template.suffix == 'hips_a_ab' or template.suffix == 'hips_a_ceo' or template.suffix == 'hips_b' or template.suffix == 'hips_c' -%}
         {% render 'bt-body-transformation-fonts' %}
       {%- endif -%}
     {%- endif -%}
@@ -350,68 +350,68 @@
     </script>
     {%- endif -%}
 
-    {%- if template.name == 'product' and template.suffix == 'pop_booty' -%}
+    {%- if template.name == 'product' and template.suffix == 'pop_booty' or template.name == 'product' and template.suffix == 'pop_booty_new' -%}
       {% render 'pop-booty-bt-headings' %}
       {% render 'pop-booty-cta-trust-styles' %}
       <style>
         /* pop_booty: inline bundle landing hidden; wizard opens from Booty Workouts CTA */
-        body.product--pop_booty .nass-bundle-builder .bb-section {
+        body[class*="product--pop_booty"] .nass-bundle-builder .bb-section {
           display: none !important;
         }
 
-        body.product--pop_booty .booty-workouts[data-booty-workouts-role] {
+        body[class*="product--pop_booty"] .booty-workouts[data-booty-workouts-role] {
           scroll-margin-top: calc(var(--sticky-area-height, 0px) + 16px);
         }
 
         @media (max-width: 767px) {
-          html:has(body.product--pop_booty),
-          body.product--pop_booty,
-          body.product--pop_booty main#main.anchor {
+          html:has(body[class*="product--pop_booty"]),
+          body[class*="product--pop_booty"],
+          body[class*="product--pop_booty"] main#main.anchor {
             overflow-x: hidden;
             max-width: 100%;
           }
 
-          body.product--pop_booty main#main.anchor .shopify-section,
-          body.product--pop_booty .zpa-published-page-holder {
+          body[class*="product--pop_booty"] main#main.anchor .shopify-section,
+          body[class*="product--pop_booty"] .zpa-published-page-holder {
             max-width: 100%;
           }
 
-          body.product--pop_booty .testimonials__scroll,
-          body.product--pop_booty .twerk-lessons__scroll-wrapper,
-          body.product--pop_booty .program-cards__scroll-wrapper,
-          body.product--pop_booty .student-progress__scroll-wrapper {
+          body[class*="product--pop_booty"] .testimonials__scroll,
+          body[class*="product--pop_booty"] .twerk-lessons__scroll-wrapper,
+          body[class*="product--pop_booty"] .program-cards__scroll-wrapper,
+          body[class*="product--pop_booty"] .student-progress__scroll-wrapper {
             max-width: 100%;
           }
 
-          body.product--pop_booty .nass-banner__title-row {
+          body[class*="product--pop_booty"] .nass-banner__title-row {
             max-width: 100%;
             padding-right: 88px;
           }
 
-          body.product--pop_booty .nass-timer {
+          body[class*="product--pop_booty"] .nass-timer {
             gap: 4px;
             max-width: 100%;
             justify-content: center;
           }
 
-          body.product--pop_booty .nass-timer__box {
+          body[class*="product--pop_booty"] .nass-timer__box {
             width: 58px;
             height: 40px;
             font-size: 18px;
           }
 
-          body.product--pop_booty .nass-timer__sep {
+          body[class*="product--pop_booty"] .nass-timer__sep {
             height: 40px;
             font-size: 18px;
           }
 
-          body.product--pop_booty .dance-workouts,
-          body.product--pop_booty .dance-workouts__video-stage {
+          body[class*="product--pop_booty"] .dance-workouts,
+          body[class*="product--pop_booty"] .dance-workouts__video-stage {
             overflow-x: clip;
           }
 
-          body.product--pop_booty .video-reviews-grid__inner,
-          body.product--pop_booty .video-reviews-grid__grid {
+          body[class*="product--pop_booty"] .video-reviews-grid__inner,
+          body[class*="product--pop_booty"] .video-reviews-grid__grid {
             min-width: 0;
             max-width: 100%;
           }
@@ -419,7 +419,7 @@
       </style>
       <script>
         (function() {
-          if (!document.body || !document.body.classList.contains('product--pop_booty')) return;
+          if (!document.body || !/product--pop_booty/.test(document.body.className)) return;
 
           var anchorRoles = {
             'booty-workouts': 'hero',
