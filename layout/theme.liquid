@@ -104,6 +104,9 @@
         }
 
         function resolveButton(context) {
+          if (context && context.event && context.event.target && context.event.target.closest) {
+            return context.event.target.closest(selector);
+          }
           if (context && context.closest) {
             return context.closest(selector);
           }
@@ -133,10 +136,16 @@
         function buildAddToCartPayload(btn) {
           var variantId = resolveVariantId(btn);
           if (!variantId) return null;
-          return {
+          var item = {
             id: parseInt(variantId, 10),
             quantity: 1,
             properties: {}
+          };
+          return {
+            id: item.id,
+            quantity: item.quantity,
+            properties: item.properties,
+            payload: item
           };
         }
 
@@ -218,7 +227,7 @@
                   detail: {
                     items: items,
                     cart: cart,
-                    blockCartDrawerOpening: false
+                    blockCartDrawerOpening: true
                   }
                 }));
                 document.documentElement.dispatchEvent(new CustomEvent('cart:change', {
@@ -240,6 +249,7 @@
         function applyOcuConfig() {
           window.OCUApi = window.OCUApi || {};
           window.OCUApi.customAddToCartButton = selector;
+          window.OCUApi.customAddToCartForm = '[data-nass-ocu-form]';
           window.OCUApi.getCustomAddToCartData = getLegacyAddToCartData;
           window.OCUApi.customAddToCartFetch = nassOcuCustomAddToCartFetch;
           window.OCUApi.customSkipCart = true;
@@ -247,6 +257,7 @@
 
           if (window.Zipify && window.Zipify.OCU && window.Zipify.OCU.api) {
             window.Zipify.OCU.api.customAddToCartButton = selector;
+            window.Zipify.OCU.api.customAddToCartForm = '[data-nass-ocu-form]';
             window.Zipify.OCU.api.getCustomAddToCartData = getZipifyOcuAddToCartData;
             window.Zipify.OCU.api.customAddToCartFetch = nassOcuCustomAddToCartFetch;
             window.Zipify.OCU.api.customSkipCart = true;
