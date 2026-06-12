@@ -20,12 +20,6 @@
   assign verified_badge = section.settings.verified_badge
   assign person_icon = section.settings.person_icon
 
-  assign photo_count = 0
-  for block in section.blocks
-    if block.settings.image_mobile != blank or block.settings.image_desktop != blank
-      assign photo_count = photo_count | plus: 1
-    endif
-  endfor
 -%}
 
 <section class="bt-wrap bt-meet" data-bt-meet id="bt-meet-{{ section.id }}">
@@ -37,62 +31,62 @@
     <div class="bt-meet__divider" aria-hidden="true"></div>
 
     <div class="bt-meet__card">
-      {%- if photo_count > 0 -%}
+      {%- if section.blocks.size > 0 -%}
         <div class="bt-meet__gallery" data-bt-meet-gallery>
           <div class="bt-meet__track" data-bt-meet-track role="region" aria-label="Nastya Nass photos">
             {%- for block in section.blocks -%}
-              {%- if block.settings.image_mobile != blank or block.settings.image_desktop != blank -%}
-                <div class="bt-meet__slide" {{ block.shopify_attributes }}>
-                  {%- if block.settings.image_mobile != blank -%}
-                    <img
-                      class="bt-meet__slide-img bt-meet__slide-img--m"
-                      src="{{ block.settings.image_mobile | image_url: width: 600 }}"
-                      srcset="{{ block.settings.image_mobile | image_url: width: 400 }} 400w, {{ block.settings.image_mobile | image_url: width: 600 }} 600w"
-                      sizes="(min-width: 768px) 33vw, 50vw"
-                      alt=""
-                      loading="lazy"
-                      width="{{ block.settings.image_mobile.width }}"
-                      height="{{ block.settings.image_mobile.height }}"
-                    >
-                  {%- elsif block.settings.image_desktop != blank -%}
-                    <img
-                      class="bt-meet__slide-img bt-meet__slide-img--m"
-                      src="{{ block.settings.image_desktop | image_url: width: 600 }}"
-                      alt=""
-                      loading="lazy"
-                      width="{{ block.settings.image_desktop.width }}"
-                      height="{{ block.settings.image_desktop.height }}"
-                    >
-                  {%- endif -%}
-                  {%- if block.settings.image_desktop != blank -%}
-                    <img
-                      class="bt-meet__slide-img bt-meet__slide-img--d"
-                      src="{{ block.settings.image_desktop | image_url: width: 800 }}"
-                      srcset="{{ block.settings.image_desktop | image_url: width: 500 }} 500w, {{ block.settings.image_desktop | image_url: width: 800 }} 800w"
-                      sizes="(min-width: 768px) 33vw, 50vw"
-                      alt=""
-                      loading="lazy"
-                      width="{{ block.settings.image_desktop.width }}"
-                      height="{{ block.settings.image_desktop.height }}"
-                    >
-                  {%- elsif block.settings.image_mobile != blank -%}
-                    <img
-                      class="bt-meet__slide-img bt-meet__slide-img--d"
-                      src="{{ block.settings.image_mobile | image_url: width: 800 }}"
-                      alt=""
-                      loading="lazy"
-                      width="{{ block.settings.image_mobile.width }}"
-                      height="{{ block.settings.image_mobile.height }}"
-                    >
-                  {%- endif -%}
-                </div>
-              {%- endif -%}
+              <div class="bt-meet__slide" {{ block.shopify_attributes }}>
+                {%- if block.settings.image_mobile != blank -%}
+                  <img
+                    class="bt-meet__slide-img bt-meet__slide-img--m"
+                    src="{{ block.settings.image_mobile | image_url: width: 600 }}"
+                    srcset="{{ block.settings.image_mobile | image_url: width: 400 }} 400w, {{ block.settings.image_mobile | image_url: width: 600 }} 600w"
+                    sizes="(min-width: 768px) 33vw, 50vw"
+                    alt=""
+                    loading="lazy"
+                    width="{{ block.settings.image_mobile.width }}"
+                    height="{{ block.settings.image_mobile.height }}"
+                  >
+                {%- elsif block.settings.image_desktop != blank -%}
+                  <img
+                    class="bt-meet__slide-img bt-meet__slide-img--m"
+                    src="{{ block.settings.image_desktop | image_url: width: 600 }}"
+                    alt=""
+                    loading="lazy"
+                    width="{{ block.settings.image_desktop.width }}"
+                    height="{{ block.settings.image_desktop.height }}"
+                  >
+                {%- endif -%}
+                {%- if block.settings.image_desktop != blank -%}
+                  <img
+                    class="bt-meet__slide-img bt-meet__slide-img--d"
+                    src="{{ block.settings.image_desktop | image_url: width: 800 }}"
+                    srcset="{{ block.settings.image_desktop | image_url: width: 500 }} 500w, {{ block.settings.image_desktop | image_url: width: 800 }} 800w"
+                    sizes="(min-width: 768px) 33vw, 50vw"
+                    alt=""
+                    loading="lazy"
+                    width="{{ block.settings.image_desktop.width }}"
+                    height="{{ block.settings.image_desktop.height }}"
+                  >
+                {%- elsif block.settings.image_mobile != blank -%}
+                  <img
+                    class="bt-meet__slide-img bt-meet__slide-img--d"
+                    src="{{ block.settings.image_mobile | image_url: width: 800 }}"
+                    alt=""
+                    loading="lazy"
+                    width="{{ block.settings.image_mobile.width }}"
+                    height="{{ block.settings.image_mobile.height }}"
+                  >
+                {%- endif -%}
+              </div>
             {%- endfor -%}
           </div>
+        </div>
 
-          {%- if photo_count > 2 -%}
-            <div class="bt-meet__dots" data-bt-meet-dots aria-hidden="true"></div>
-          {%- endif -%}
+        <div class="bt-meet__dots" data-bt-meet-dots aria-hidden="true">
+          {%- for block in section.blocks -%}
+            <span class="bt-meet__gallery-dot{% if forloop.first %} is-active{% endif %}"></span>
+          {%- endfor -%}
         </div>
       {%- endif -%}
 
@@ -144,92 +138,33 @@
 (function() {
   var root = document.getElementById('bt-meet-{{ section.id }}');
   if (!root) return;
-
   var track = root.querySelector('[data-bt-meet-track]');
   var dotsWrap = root.querySelector('[data-bt-meet-dots]');
-  if (!track) return;
+  if (!track || !dotsWrap) return;
+  var dots = Array.prototype.slice.call(dotsWrap.querySelectorAll('.bt-meet__gallery-dot'));
+  if (!dots.length) return;
 
-  var slides = Array.prototype.slice.call(track.querySelectorAll('.bt-meet__slide'));
-  if (!slides.length) return;
-
-  var mq = window.matchMedia('(min-width: 768px)');
-  var dots = [];
-
-  function visibleCount() {
-    return mq.matches ? 3 : 2;
-  }
-
-  function pageCount() {
-    var visible = visibleCount();
-    return Math.max(1, slides.length - visible + 1);
-  }
-
-  function stepSize() {
-    var slide = slides[0];
-    if (!slide) return 0;
-    var gap = parseFloat(getComputedStyle(track).gap) || 0;
-    return slide.getBoundingClientRect().width + gap;
-  }
-
-  function buildDots() {
-    if (!dotsWrap) return;
-    dotsWrap.innerHTML = '';
-    dots = [];
-    var count = pageCount();
-    if (count <= 1) {
-      dotsWrap.style.display = 'none';
-      return;
-    }
-    dotsWrap.style.display = '';
-    for (var i = 0; i < count; i++) {
-      var dot = document.createElement('button');
-      dot.type = 'button';
-      dot.className = 'bt-meet__dot-btn' + (i === 0 ? ' is-active' : '');
-      dot.setAttribute('aria-label', 'Photo page ' + (i + 1));
-      dot.addEventListener('click', function(idx) {
-        return function() {
-          track.scrollTo({ left: idx * stepSize(), behavior: 'smooth' });
-        };
-      }(i));
-      dotsWrap.appendChild(dot);
-      dots.push(dot);
-    }
-  }
-
-  function setActiveDot(index) {
-    dots.forEach(function(dot, idx) {
-      dot.classList.toggle('is-active', idx === index);
+  function setActive(i) {
+    dots.forEach(function(d, idx) {
+      d.classList.toggle('is-active', idx === i);
     });
   }
 
   var ticking = false;
-  function onScroll() {
+  track.addEventListener('scroll', function() {
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(function() {
       ticking = false;
-      var step = stepSize();
-      if (!step) return;
-      var idx = Math.round(track.scrollLeft / step);
-      idx = Math.max(0, Math.min(idx, pageCount() - 1));
-      setActiveDot(idx);
+      var slide = track.querySelector('.bt-meet__slide');
+      if (!slide) return;
+      var gap = parseFloat(getComputedStyle(track).gap) || 0;
+      var w = slide.getBoundingClientRect().width + gap;
+      var idx = Math.round(track.scrollLeft / w);
+      idx = Math.max(0, Math.min(idx, dots.length - 1));
+      setActive(idx);
     });
-  }
-
-  track.addEventListener('scroll', onScroll, { passive: true });
-
-  function onResize() {
-    buildDots();
-    onScroll();
-  }
-
-  if (typeof mq.addEventListener === 'function') {
-    mq.addEventListener('change', onResize);
-  } else if (typeof mq.addListener === 'function') {
-    mq.addListener(onResize);
-  }
-
-  buildDots();
+  }, { passive: true });
 })();
 </script>
 
@@ -288,35 +223,81 @@
   }
 
   .bt-meet__dots {
-    margin-top: 12px;
+    margin-top: 24px;
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 8px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 4;
+    padding: 0 20px;
+    box-sizing: border-box;
   }
-  @media (min-width: 768px) { .bt-meet__dots { margin-top: 16px; } }
+  @media (min-width: 768px) {
+    .bt-meet__dots { margin-top: 40px; }
+  }
 
-  .bt-meet__dot-btn {
+  .bt-meet__gallery-dot {
+    display: block;
+    flex: 0 0 auto;
     height: 2px;
     width: 20px;
-    padding: 0;
-    border: 0;
-    background: rgba(138,138,138,0.4);
+    background: rgba(138, 138, 138, 0.4);
     border-radius: 999px;
-    cursor: pointer;
     transition: width 150ms ease, background 150ms ease;
   }
-  @media (min-width: 768px) { .bt-meet__dot-btn { height: 3px; width: 28px; } }
-  .bt-meet__dot-btn.is-active { width: 40px; background: #8A8A8A; }
-  @media (min-width: 768px) { .bt-meet__dot-btn.is-active { width: 50px; } }
+  @media (min-width: 768px) {
+    .bt-meet__gallery-dot {
+      height: 3px;
+      width: 28px;
+    }
+  }
+  .bt-meet__gallery-dot.is-active {
+    width: 40px;
+    background: #8A8A8A;
+  }
+  @media (min-width: 768px) {
+    .bt-meet__gallery-dot.is-active {
+      width: 50px;
+    }
+  }
 
-  .bt-meet__body { padding: 0 20px 20px; margin-top: -24px; position: relative; text-align: left; }
-  @media (min-width: 768px) { .bt-meet__body { padding: 0 28px 28px; margin-top: -40px; } }
+  .bt-meet__body { padding: 0 20px 20px; position: relative; text-align: left; }
+  @media (min-width: 768px) { .bt-meet__body { padding: 0 28px 28px; } }
 
-  .bt-meet__row { display: flex; align-items: center; justify-content: flex-start; gap: 12px; }
-  @media (min-width: 768px) { .bt-meet__row { gap: 16px; align-items: flex-end; } }
+  .bt-meet__row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    margin-top: 16px;
+    position: relative;
+    z-index: 2;
+  }
+  @media (min-width: 768px) {
+    .bt-meet__row {
+      gap: 16px;
+      align-items: flex-end;
+      margin-top: 24px;
+    }
+  }
 
-  .bt-meet__avatar-wrap { position: relative; flex-shrink: 0; width: 84px; height: 84px; }
-  @media (min-width: 768px) { .bt-meet__avatar-wrap { width: 115px; height: 115px; transform: translateY(-28px); } }
+  .bt-meet__avatar-wrap {
+    position: relative;
+    flex-shrink: 0;
+    width: 84px;
+    height: 84px;
+    margin-top: -52px;
+  }
+  @media (min-width: 768px) {
+    .bt-meet__avatar-wrap {
+      width: 115px;
+      height: 115px;
+      margin-top: -68px;
+      transform: translateY(-28px);
+    }
+  }
 
   .bt-meet__avatar { width: 100%; height: 100%; border-radius: 999px; border: 3px solid #fff; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.15); background: #fff; }
   .bt-meet__avatar-img { width: 100%; height: 100%; object-fit: cover; display: block; }
