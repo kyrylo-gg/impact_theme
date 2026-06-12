@@ -108,23 +108,38 @@
           <span class="nass-card__strike">{{ section.settings.bundle_was }}</span>
         </div>
 
-        <button
-          type="button"
-          name="add"
-          class="nass-cta"
-          {% if cta_adds_to_cart %}
-            data-nass-offer-cart-cta
-            data-nass-ocu-atc
-            {% if bundle != blank %}data-variant-id="{{ bundle.selected_or_first_available_variant.id }}"{% endif %}
-          {% else %}
+        {% if cta_adds_to_cart and bundle != blank %}
+          <form
+            action="{{ routes.cart_add_url }}"
+            method="post"
+            class="nass-ocu-atc-form"
+            data-nass-ocu-form
+          >
+            <input type="hidden" name="id" value="{{ bundle.selected_or_first_available_variant.id }}">
+            <button
+              type="submit"
+              name="add"
+              class="nass-cta"
+              data-nass-offer-cart-cta
+              data-nass-ocu-atc
+              data-variant-id="{{ bundle.selected_or_first_available_variant.id }}"
+            >
+              <span>{{ section.settings.cta_label }}</span>
+              <span class="nass-cta__arrow">→</span>
+            </button>
+          </form>
+        {% else %}
+          <button
+            type="button"
+            class="nass-cta"
             data-bb-trigger
             data-bb-program-index="0"
             data-bb-flow="bundle"
-          {% endif %}
-        >
-          <span>{{ section.settings.cta_label }}</span>
-          <span class="nass-cta__arrow">→</span>
-        </button>
+          >
+            <span>{{ section.settings.cta_label }}</span>
+            <span class="nass-cta__arrow">→</span>
+          </button>
+        {% endif %}
 
         <div class="nass-trust nass-trust--light">
           <span class="nass-trust__item">
@@ -197,23 +212,38 @@
           <span class="nass-card__strike">$159</span>
         </div>
 
-        <button
-          type="button"
-          name="add"
-          class="nass-cta"
-          {% if cta_adds_to_cart %}
-            data-nass-offer-cart-cta
-            data-nass-ocu-atc
-            {% if single != blank %}data-variant-id="{{ single.selected_or_first_available_variant.id }}"{% endif %}
-          {% else %}
+        {% if cta_adds_to_cart and single != blank %}
+          <form
+            action="{{ routes.cart_add_url }}"
+            method="post"
+            class="nass-ocu-atc-form"
+            data-nass-ocu-form
+          >
+            <input type="hidden" name="id" value="{{ single.selected_or_first_available_variant.id }}">
+            <button
+              type="submit"
+              name="add"
+              class="nass-cta"
+              data-nass-offer-cart-cta
+              data-nass-ocu-atc
+              data-variant-id="{{ single.selected_or_first_available_variant.id }}"
+            >
+              <span>{{ section.settings.cta_label }}</span>
+              <span class="nass-cta__arrow">→</span>
+            </button>
+          </form>
+        {% else %}
+          <button
+            type="button"
+            class="nass-cta"
             data-bb-trigger
             data-bb-program-index="1"
             data-bb-flow="single"
-          {% endif %}
-        >
-          <span>{{ section.settings.cta_label }}</span>
-          <span class="nass-cta__arrow">→</span>
-        </button>
+          >
+            <span>{{ section.settings.cta_label }}</span>
+            <span class="nass-cta__arrow">→</span>
+          </button>
+        {% endif %}
 
         <div class="nass-trust">
           <span class="nass-trust__item">

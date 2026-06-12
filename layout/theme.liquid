@@ -103,15 +103,36 @@
           return (selected && selected.getAttribute('data-variant-id')) || fallbackId;
         }
 
+        function resolveButton(context) {
+          if (context && context.closest) {
+            return context.closest(selector);
+          }
+          if (context && context.target && context.target.closest) {
+            return context.target.closest(selector);
+          }
+          if (context && context.matches && context.matches(selector)) {
+            return context;
+          }
+          if (window.__nassOcuLastButton) {
+            return window.__nassOcuLastButton;
+          }
+          var active = document.activeElement;
+          return active && active.closest ? active.closest(selector) : null;
+        }
+
         function resolveVariantId(btn) {
           if (!btn) return '';
-          var variantId = btn.getAttribute('data-variant-id') || getBootyVariantId(btn);
+          var form = btn.closest('[data-nass-ocu-form]');
+          var formVariantId = form && form.querySelector('input[name="id"]')
+            ? form.querySelector('input[name="id"]').value
+            : '';
+          var variantId = formVariantId || btn.getAttribute('data-variant-id') || getBootyVariantId(btn);
           return variantId ? String(variantId) : '';
         }
 
-        function getLegacyAddToCartData() {
-          var variantId = resolveVariantId(window.__nassOcuLastButton);
-          if (!variantId) return {};
+        function buildAddToCartPayload(btn) {
+          var variantId = resolveVariantId(btn);
+          if (!variantId) return null;
           return {
             id: parseInt(variantId, 10),
             quantity: 1,
@@ -119,16 +140,22 @@
           };
         }
 
-        function getZipifyAddToCartData(form, event) {
-          var btn = window.__nassOcuLastButton;
-          if (!btn && event && event.target && event.target.closest) {
-            btn = event.target.closest(selector);
-          }
-          var variantId = resolveVariantId(btn);
-          if (!variantId) return null;
+        function getLegacyAddToCartData(context) {
+          var payload = buildAddToCartPayload(resolveButton(context));
+          return payload || {};
+        }
+
+        function getZipifyOcuAddToCartData(context) {
+          return buildAddToCartPayload(resolveButton(context)) || {};
+        }
+
+        function getZipifyCartAddToCartData(form, event) {
+          var btn = resolveButton(event);
+          var payload = buildAddToCartPayload(btn);
+          if (!payload) return null;
           var fd = new FormData();
-          fd.append('id', variantId);
-          fd.append('quantity', '1');
+          fd.append('id', String(payload.id));
+          fd.append('quantity', String(payload.quantity || 1));
           return fd;
         }
 
@@ -136,12 +163,26 @@
           window.OCUApi = window.OCUApi || {};
           window.OCUApi.customAddToCartButton = selector;
           window.OCUApi.getCustomAddToCartData = getLegacyAddToCartData;
-          window.OCUApi.enableCustomPages = true;
+
+          if (window.Zipify && window.Zipify.OCU && window.Zipify.OCU.api) {
+            window.Zipify.OCU.api.customAddToCartButton = selector;
+            window.Zipify.OCU.api.getCustomAddToCartData = getZipifyOcuAddToCartData;
+            window.Zipify.OCU.api.customSkipCart = true;
+            window.Zipify.OCU.api.isWindowLocationForClickListener = true;
+          }
 
           if (window.Zipify && window.Zipify.Cart && window.Zipify.Cart.api) {
             window.Zipify.Cart.api.customAddToCartButton = selector;
-            window.Zipify.Cart.api.getCustomAddToCartData = getZipifyAddToCartData;
+            window.Zipify.Cart.api.getCustomAddToCartData = getZipifyCartAddToCartData;
           }
+        }
+
+        function isOcuConfigReady() {
+          return !!(
+            (window.Zipify && window.Zipify.OCU && window.Zipify.OCU.api)
+            || (window.Zipify && window.Zipify.Cart && window.Zipify.Cart.api)
+            || window.OCUIncart
+          );
         }
 
         applyOcuConfig();
@@ -151,7 +192,7 @@
         var poll = window.setInterval(function() {
           applyOcuConfig();
           tries += 1;
-          if (tries > 40 || (window.Zipify && window.Zipify.Cart && window.Zipify.Cart.api)) {
+          if (tries > 80 || isOcuConfigReady()) {
             window.clearInterval(poll);
           }
         }, 250);

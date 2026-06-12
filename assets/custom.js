@@ -490,7 +490,14 @@ window.nassAddVariantToCart = async function nassAddVariantToCart(variantId, tri
     if (!btn) return;
 
     const variantId = window.nassGetBootyWorkoutsTierVariantId(btn);
-    if (variantId) btn.setAttribute('data-variant-id', variantId);
+    if (!variantId) return;
+
+    btn.setAttribute('data-variant-id', variantId);
+    const form = btn.closest('[data-nass-ocu-form]');
+    if (form) {
+      const input = form.querySelector('input[name="id"]');
+      if (input) input.value = variantId;
+    }
   };
 
   function isOcuRuntimeReady() {
@@ -600,22 +607,34 @@ window.nassAddVariantToCart = async function nassAddVariantToCart(variantId, tri
     event.detail.blockCartDrawerOpening = true;
   }, true);
 
+  function prepareOcuAtcButton(btn) {
+    if (!btn) return null;
+    window.__nassOcuLastButton = btn;
+    window.nassSyncBootyWorkoutsCartCta(btn);
+    return btn.getAttribute('data-variant-id')
+      || window.nassGetBootyWorkoutsTierVariantId(btn);
+  }
+
+  function beginOcuAtcFlow(btn, variantId) {
+    if (!btn || !variantId) return;
+    window.__nassOcuPendingAtc = true;
+    scheduleOcuAtcFallback(btn, variantId);
+  }
+
   document.addEventListener('mousedown', (event) => {
     const btn = event.target.closest('[data-nass-ocu-atc]');
     if (!btn) return;
-    window.__nassOcuLastButton = btn;
-    window.nassSyncBootyWorkoutsCartCta(btn);
+    prepareOcuAtcButton(btn);
   }, true);
 
-  document.addEventListener('click', (event) => {
-    const btn = event.target.closest('[data-nass-ocu-atc]');
+  document.addEventListener('submit', (event) => {
+    const form = event.target.closest('[data-nass-ocu-form]');
+    if (!form) return;
+
+    const btn = form.querySelector('[data-nass-ocu-atc]');
     if (!btn || btn.getAttribute('aria-busy') === 'true') return;
 
-    window.__nassOcuLastButton = btn;
-    window.nassSyncBootyWorkoutsCartCta(btn);
-
-    const variantId = btn.getAttribute('data-variant-id')
-      || window.nassGetBootyWorkoutsTierVariantId(btn);
+    const variantId = prepareOcuAtcButton(btn);
     if (!variantId) return;
 
     if (!isOcuRuntimeReady()) {
@@ -625,9 +644,24 @@ window.nassAddVariantToCart = async function nassAddVariantToCart(variantId, tri
       return;
     }
 
-    // OCU funnel is configured for "Page with Product Buy Box" / Add To Cart.
-    // Do not block the click — OCU must receive it in capture phase.
-    window.__nassOcuPendingAtc = true;
-    scheduleOcuAtcFallback(btn, variantId);
+    beginOcuAtcFlow(btn, variantId);
+  }, true);
+
+  document.addEventListener('click', (event) => {
+    const btn = event.target.closest('[data-nass-ocu-atc]');
+    if (!btn || btn.getAttribute('aria-busy') === 'true') return;
+    if (btn.closest('[data-nass-ocu-form]')) return;
+
+    const variantId = prepareOcuAtcButton(btn);
+    if (!variantId) return;
+
+    if (!isOcuRuntimeReady()) {
+      event.preventDefault();
+      event.stopPropagation();
+      manualAddToCartWithDrawer(btn, variantId);
+      return;
+    }
+
+    beginOcuAtcFlow(btn, variantId);
   }, false);
 })();
