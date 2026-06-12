@@ -105,7 +105,7 @@
         "0669bfe9-354c-4601-abcf-c38d6afaeb80": {
           "type": "text",
           "settings": {
-            "text": "<p>\ud83d\udd04 30 Day Returns<br/>\ud83d\ude9a $140+ Free US Shipping<br/>\ud83d\udc83 Unique NassyStitch Technology<br/>\ud83d\udc9a Eco-Friendly Packaging</p>"
+            "text": "<p>🔄 30 Day Returns<br/>🚚 $140+ Free US Shipping<br/>💃 Unique NassyStitch Technology<br/>💚 Eco-Friendly Packaging</p>"
           }
         },
         "cba091ce-a0d9-465f-ab86-d40697549bf2": {
@@ -167,6 +167,7 @@
       "blocks": {
         "gallery_image_U9R449": {
           "type": "gallery_image",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/Image_1_a5d1b47f-d39f-4ae5-99eb-3ab197fdbc64.png",
             "alt": "",
@@ -187,6 +188,7 @@
         },
         "gallery_image_NMNdFh": {
           "type": "gallery_image",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/Image_3_abc9ffcc-2f57-4171-8405-43ed7b932224.png",
             "alt": "",
@@ -197,6 +199,7 @@
         },
         "gallery_image_Vd8eMH": {
           "type": "gallery_image",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/Image_4_c015493c-8a4c-44cc-8e03-f7ea412002ae.png",
             "alt": "",
@@ -207,6 +210,7 @@
         },
         "gallery_image_rfPzwb": {
           "type": "gallery_image",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/Community_1.2.png",
             "alt": "",
@@ -265,29 +269,9 @@
         },
         "benefit_RhpRMG": {
           "type": "benefit",
+          "disabled": true,
           "settings": {
             "label": "Open Hips & Free Movement"
-          }
-        },
-        "booty_tier_1": {
-          "type": "tier",
-          "settings": {
-            "title": "VIP Bundle",
-            "old_price": "$717",
-            "price": "$149",
-            "discount": "79% OFF",
-            "ribbon": "Extra 60% Off all Booty Clothing",
-            "thumb": "shopify://shop_images/VIP_Bundle_pdp.png",
-            "preselected": true,
-            "feature_1": "7-Day Twerk Program",
-            "feature_2": "Booty Program",
-            "feature_3": "Advanced Booty Program",
-            "feature_4": "Hip Mobility Program",
-            "extra_1_label": "Lifetime access",
-            "extra_1_icon": "\u2705",
-            "extra_2_label": "3+ months of training videos",
-            "extra_2_icon": "\ud83e\uddd8\u200d\u2640\ufe0f",
-            "product": "all-in-one-bundle"
           }
         },
         "tier_NEy4e9": {
@@ -300,15 +284,15 @@
             "ribbon": "",
             "thumb": "shopify://shop_images/Twerk_Program_pdp_1.png",
             "preselected": false,
+            "product": "twerk-star",
             "feature_1": "7-Day Twerk Program",
             "feature_2": "",
             "feature_3": "",
             "feature_4": "",
             "extra_1_label": "Lifetime access",
-            "extra_1_icon": "\u2705",
+            "extra_1_icon": "✅",
             "extra_2_label": "",
-            "extra_2_icon": "\ud83e\uddd8\u200d\u2640\ufe0f",
-            "product": "twerk-star"
+            "extra_2_icon": "🧘‍♀️"
           }
         },
         "booty_faq_1": {
@@ -331,7 +315,7 @@
           "type": "faq",
           "settings": {
             "question": "About the community",
-            "answer": "<p>All programs are personally created by Nastya NASS and thoughtfully designed to help you grow stronger, more confident, and more connected to your body.\u2028</p><p></p><p>More than 6,000 girls have already completed these programs\u2028and become part of our vibrant, supportive community.</p>",
+            "answer": "<p>All programs are personally created by Nastya NASS and thoughtfully designed to help you grow stronger, more confident, and more connected to your body. </p><p></p><p>More than 6,000 girls have already completed these programs and become part of our vibrant, supportive community.</p>",
             "open_by_default": true
           }
         },
@@ -376,7 +360,6 @@
         "booty_benefit_2",
         "booty_benefit_3",
         "benefit_RhpRMG",
-        "booty_tier_1",
         "tier_NEy4e9",
         "booty_faq_1",
         "faq_wazNCx",
@@ -385,7 +368,7 @@
         "review_k3DmXG",
         "review_XU4i7y"
       ],
-      "name": "Booty Workouts \u2014 Hero",
+      "name": "Booty Workouts — Hero",
       "settings": {
         "anchor_id": "booty-workouts",
         "rating_label": "Rated",
@@ -402,6 +385,8 @@
         "hero_image": "shopify://shop_images/Banner_Product_1_935cbba9-6018-4188-95c4-4f0a3b9fe2bb.png",
         "image_radius": 30,
         "cta_label": "Order Today",
+        "cta_action": "add_product",
+        "cta_product": "",
         "cta_url": "",
         "trust_guarantee": "30-Day Money-Back Guarantee",
         "trust_support": "World-Famous support",
@@ -409,8 +394,7 @@
         "payment_icons_alt": "Accepted payment methods",
         "review_avatar": "shopify://shop_images/Frame_32.png",
         "review_title": "Super fun",
-        "review_body": "<p>I'm enjoying the twerk program, and the booty-building program - as someone with very little junk in the trunk, they complement each other perfectly!! Highly recommend.</p>",
-        "cta_action": "add_product"
+        "review_body": "<p>I'm enjoying the twerk program, and the booty-building program - as someone with very little junk in the trunk, they complement each other perfectly!! Highly recommend.</p>"
       }
     },
     "nass_testimonials_ELPAbp": {
@@ -481,7 +465,7 @@
           "settings": {
             "rating": 5,
             "title": "Amazing content",
-            "body": "Im so happy I finally get to learn with the master of twerk, online \u2026 can't wait to reach that level of experience like Nastya",
+            "body": "Im so happy I finally get to learn with the master of twerk, online … can't wait to reach that level of experience like Nastya",
             "reviewer_name": "Myriam El baouch",
             "verified": true
           }
@@ -737,6 +721,7 @@
         "step_leggings",
         "step_tops"
       ],
+      "disabled": true,
       "settings": {
         "image_1": "shopify://shop_images/Frame_7-6.png",
         "image_2": "shopify://shop_images/Frame_7-4.png",
@@ -769,8 +754,7 @@
         "discount_applied_text": "60% all clothing applied!",
         "size_chart_config_handle": "size-chart-settings",
         "storefront_api_token": "568094b7f376083a4b0dc6fee4785741"
-      },
-      "disabled": true
+      }
     },
     "confidence_without_pressure_pop": {
       "type": "confidence-without-pressure",
@@ -820,7 +804,7 @@
         "dance_benefit_1": {
           "type": "benefit",
           "settings": {
-            "icon": "\u26a1",
+            "icon": "⚡",
             "title": "Confidence Boost",
             "description": "<p>Feel proud of your body and unlock your femininity and power.</p>",
             "column": "left"
@@ -829,7 +813,7 @@
         "dance_benefit_2": {
           "type": "benefit",
           "settings": {
-            "icon": "\ud83d\udcaa",
+            "icon": "💪",
             "title": "Strong & Toned Booty",
             "description": "<p>Build strength in your glutes and legs while sculpting beautiful, natural curves.</p>",
             "column": "left"
@@ -838,7 +822,7 @@
         "dance_benefit_3": {
           "type": "benefit",
           "settings": {
-            "icon": "\ud83d\ude01",
+            "icon": "😁",
             "title": "Mood & Energy Lift",
             "description": "<p>Dance releases endorphins, reduces stress, and fills you with vibrant energy that lasts all day.</p>",
             "column": "left"
@@ -847,16 +831,16 @@
         "dance_benefit_4": {
           "type": "benefit",
           "settings": {
-            "icon": "\ud83e\uddd8\u200d\u2640\ufe0f",
+            "icon": "🧘‍♀️",
             "title": "Better Body Awareness",
-            "description": "<p>Learn to control every muscle, improving posture, flexibility,\u2028and coordination.</p>",
+            "description": "<p>Learn to control every muscle, improving posture, flexibility, and coordination.</p>",
             "column": "right"
           }
         },
         "dance_benefit_5": {
           "type": "benefit",
           "settings": {
-            "icon": "\ud83d\ude4c",
+            "icon": "🙌",
             "title": "Community & Support",
             "description": "<p>Join a global sisterhood of women who move, grow, and celebrate progress together.</p>",
             "column": "right"
@@ -865,7 +849,7 @@
         "dance_benefit_6": {
           "type": "benefit",
           "settings": {
-            "icon": "\u2728",
+            "icon": "✨",
             "title": "Fun Way to Stay Fit",
             "description": "<p>Forget boring workouts. Twerk is pure joy, fitness that feels like dancing at your favorite party.</p>",
             "column": "right"
@@ -966,9 +950,9 @@
       ],
       "settings": {
         "heading_part_1": "WHAT MAKES NASS",
-        "heading_part_2": "PROGRAMS DIFFERENT?",
+        "heading_part_2": "PROGRAM DIFFERENT?",
         "accent_color": "#0038ff",
-        "cta_text": "Shop Booty Programs",
+        "cta_text": "Shop Twerk  Program",
         "cta_link": "#",
         "badge_1_text": "30-Day Money-Back Guarantee",
         "badge_2_text": "World-Famous support"
@@ -981,7 +965,7 @@
           "type": "card",
           "settings": {
             "image": "shopify://shop_images/Frame_358.png",
-            "emoji": "\u26a1",
+            "emoji": "⚡",
             "title": "For women who want to feel confident and powerful",
             "text": "You'll learn to love your body, move freely, and radiate feminine energy in every step."
           }
@@ -990,7 +974,7 @@
           "type": "card",
           "settings": {
             "image": "shopify://shop_images/Frame_359.png",
-            "emoji": "\ud83e\udd38",
+            "emoji": "🤸",
             "title": "For those who are tired of boring workouts and stressful fitness routines",
             "text": "Twerk turns fitness into pure fun. Dance, smile, and see real progress while enjoying every move."
           }
@@ -999,7 +983,7 @@
           "type": "card",
           "settings": {
             "image": "shopify://shop_images/Frame_360_66ca3817-6924-4ad1-9247-ffd760fc387e.png",
-            "emoji": "\ud83d\ude0c",
+            "emoji": "😌",
             "title": "For all levels, from beginners to advanced",
             "text": "No dance experience needed. Nastya NASS will guide you step-by-step, helping you master each movement safely and with joy."
           }
@@ -1061,7 +1045,7 @@
           "type": "lesson_card",
           "settings": {
             "title": "Lesson Five",
-            "description": "Twerk on your toes \u2014 new position.",
+            "description": "Twerk on your toes — new position.",
             "video": "shopify://files/videos/Lesson demo 5 (1) (online-video-cutter.com)_b94585f5-7c4c-44ea-8820-97891cef43af.webm"
           }
         },
@@ -1102,7 +1086,7 @@
       ],
       "name": "Twerk Lessons",
       "settings": {
-        "heading": "Only 7 Days to\u2028",
+        "heading": "Only 7 Days to ",
         "heading_highlight": "Master Twerk Moves",
         "show_pop_booty_footer": true,
         "cta_text": "Start Your 7-Day Journey",
@@ -1165,6 +1149,7 @@
         "program_card_4Dn6eY",
         "program_card_h3ETJ6"
       ],
+      "disabled": true,
       "name": "Program Cards",
       "settings": {
         "heading": "WHAT the booty pack",
@@ -1529,13 +1514,13 @@
         "row_other_mAwkFT": {
           "type": "row_other",
           "settings": {
-            "text": "Progress takes weeks \u2028or months"
+            "text": "Progress takes weeks  or months"
           }
         },
         "row_other_NbLHRd": {
           "type": "row_other",
           "settings": {
-            "text": "Quality depends on \u2028the trainer"
+            "text": "Quality depends on  the trainer"
           }
         },
         "row_other_67mYEe": {
@@ -1553,7 +1538,7 @@
         "row_other_WrRqyU": {
           "type": "row_other",
           "settings": {
-            "text": "Focuses only on physical\u2028 effort"
+            "text": "Focuses only on physical  effort"
           }
         },
         "row_other_WYwBQP": {
@@ -1565,19 +1550,19 @@
         "row_other_jPQFbB": {
           "type": "row_other",
           "settings": {
-            "text": "Hard to maintain without\u2028 routine"
+            "text": "Hard to maintain without  routine"
           }
         },
         "row_this_VViVqj": {
           "type": "row_this",
           "settings": {
-            "text": "Learn real twerk moves in just \u20287 days, train with pleasure"
+            "text": "Learn real twerk moves in just  7 days, train with pleasure"
           }
         },
         "row_this_4CypLN": {
           "type": "row_this",
           "settings": {
-            "text": "Created by world-famous \u2028trainer Nastya Nass"
+            "text": "Created by world-famous  trainer Nastya Nass"
           }
         },
         "row_this_nr99VC": {
@@ -1589,13 +1574,13 @@
         "row_this_KXB4rE": {
           "type": "row_this",
           "settings": {
-            "text": "Keeps your body toned\u2028 through dance & joy"
+            "text": "Keeps your body toned  through dance & joy"
           }
         },
         "row_this_TWmPYy": {
           "type": "row_this",
           "settings": {
-            "text": "Boosts confidence and\u2028 body awareness"
+            "text": "Boosts confidence and  body awareness"
           }
         },
         "row_this_RrgUpf": {
@@ -1607,7 +1592,7 @@
         "row_this_6GYiqB": {
           "type": "row_this",
           "settings": {
-            "text": "Dance after the course,\u2028 stay in shape with ease"
+            "text": "Dance after the course,  stay in shape with ease"
           }
         }
       },
@@ -1634,7 +1619,7 @@
         "heading_highlight": "Without a Boring Fitness Routine",
         "subheading": "",
         "left_image": "shopify://shop_images/Group_69.png",
-        "right_image": "shopify://shop_images/Group_70.png"
+        "right_image": "shopify://shop_images/Group_70.jpg"
       }
     },
     "student_progress_3GQNkJ": {
@@ -1683,7 +1668,7 @@
       "settings": {
         "show_announcement": true,
         "announcement_highlight": "Limited  Offer:",
-        "announcement_text": "Best Booty Programs for Only $149",
+        "announcement_text": "twerk program  for only $59",
         "marquee_speed": 30,
         "title": "JOIN NASS TODAY",
         "show_arrows": true,
@@ -1713,6 +1698,7 @@
       "blocks": {
         "gallery_image_byNN49": {
           "type": "gallery_image",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/Image_1_a5d1b47f-d39f-4ae5-99eb-3ab197fdbc64.png",
             "alt": "",
@@ -1733,6 +1719,7 @@
         },
         "gallery_image_TWXefQ": {
           "type": "gallery_image",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/Image_3_abc9ffcc-2f57-4171-8405-43ed7b932224.png",
             "alt": "",
@@ -1743,6 +1730,7 @@
         },
         "gallery_image_q6aBpx": {
           "type": "gallery_image",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/Image_4_c015493c-8a4c-44cc-8e03-f7ea412002ae.png",
             "alt": "",
@@ -1801,29 +1789,9 @@
         },
         "benefit_Djy3xQ": {
           "type": "benefit",
+          "disabled": true,
           "settings": {
             "label": "Open Hips & Free Movement"
-          }
-        },
-        "tier_k8hdQQ": {
-          "type": "tier",
-          "settings": {
-            "title": "VIP Bundle",
-            "old_price": "$717",
-            "price": "$149",
-            "discount": "79% OFF",
-            "ribbon": "Extra 60% Off all Booty Clothing",
-            "thumb": "shopify://shop_images/VIP_Bundle_pdp.png",
-            "preselected": true,
-            "feature_1": "7-Day Twerk Program",
-            "feature_2": "Booty Program",
-            "feature_3": "Advanced Booty Program",
-            "feature_4": "Hip Mobility Program",
-            "extra_1_label": "Lifetime access",
-            "extra_1_icon": "\u2705",
-            "extra_2_label": "3+ months of training videos",
-            "extra_2_icon": "\ud83e\uddd8\u200d\u2640\ufe0f",
-            "product": "all-in-one-bundle"
           }
         },
         "tier_ixwBBH": {
@@ -1836,15 +1804,15 @@
             "ribbon": "",
             "thumb": "shopify://shop_images/Twerk_Program_pdp_1.png",
             "preselected": false,
+            "product": "twerk-star",
             "feature_1": "7-Day Twerk Program",
             "feature_2": "",
             "feature_3": "",
             "feature_4": "",
             "extra_1_label": "Lifetime access",
-            "extra_1_icon": "\u2705",
+            "extra_1_icon": "✅",
             "extra_2_label": "",
-            "extra_2_icon": "\ud83e\uddd8\u200d\u2640\ufe0f",
-            "product": "twerk-star"
+            "extra_2_icon": "🧘‍♀️"
           }
         }
       },
@@ -1860,10 +1828,9 @@
         "benefit_EEzJXt",
         "benefit_riBj96",
         "benefit_Djy3xQ",
-        "tier_k8hdQQ",
         "tier_ixwBBH"
       ],
-      "name": "Booty Workouts \u2014 Offer repeat",
+      "name": "Booty Workouts — Offer repeat",
       "settings": {
         "anchor_id": "booty-workouts-repeat",
         "rating_label": "Rated",
@@ -1880,14 +1847,15 @@
         "hero_image": "shopify://shop_images/Banner_Product_1_935cbba9-6018-4188-95c4-4f0a3b9fe2bb.png",
         "image_radius": 30,
         "cta_label": "Order Today",
+        "cta_action": "add_product",
+        "cta_product": "",
         "cta_url": "",
         "trust_guarantee": "30-Day Money-Back Guarantee",
         "trust_support": "World-Famous support",
         "secure_label": "Secure Checkout",
         "payment_icons_alt": "Accepted payment methods",
         "review_title": "",
-        "review_body": "",
-        "cta_action": "add_product"
+        "review_body": ""
       }
     },
     "nass_testimonials_TarRJf": {
@@ -1958,7 +1926,7 @@
           "settings": {
             "rating": 5,
             "title": "Amazing content",
-            "body": "Im so happy I finally get to learn with the master of twerk, online \u2026 can't wait to reach that level of experience like Nastya",
+            "body": "Im so happy I finally get to learn with the master of twerk, online … can't wait to reach that level of experience like Nastya",
             "reviewer_name": "Myriam El baouch",
             "verified": true
           }
@@ -2158,7 +2126,7 @@
           "type": "faq",
           "settings": {
             "question": "Can I access the course on my phone?",
-            "answer": "Yes! The course is fully mobile-responsive. Watch on any device \u2014 smartphone, tablet, laptop, or TV."
+            "answer": "Yes! The course is fully mobile-responsive. Watch on any device — smartphone, tablet, laptop, or TV."
           }
         },
         "faq_LaxJWm": {
@@ -2172,7 +2140,7 @@
           "type": "faq",
           "settings": {
             "question": "How do I access the program?",
-            "answer": "You'll get instant access through our app. Works on any device \u2014 phone, tablet, or computer."
+            "answer": "You'll get instant access through our app. Works on any device — phone, tablet, or computer."
           }
         },
         "faq_YbQyNM": {
@@ -2186,7 +2154,7 @@
           "type": "faq",
           "settings": {
             "question": "Is the content private?",
-            "answer": "All lessons are private and can be watched in the comfort of your own home. There's no live component \u2014 it's just you and the videos at your own pace."
+            "answer": "All lessons are private and can be watched in the comfort of your own home. There's no live component — it's just you and the videos at your own pace."
           }
         }
       },
@@ -2247,7 +2215,7 @@
         "hide_heading": false,
         "show_pop_booty_footer": true,
         "subheading": "<p>You can achieve this too!</p>",
-        "cta_text": "Shop Booty Programs",
+        "cta_text": "Shop Twerk  Program",
         "cta_link": "",
         "badge_1_text": "30-Day Money-Back Guarantee",
         "badge_2_text": "World-Famous support"
