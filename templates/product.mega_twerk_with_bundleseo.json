@@ -1250,7 +1250,7 @@
       "type": "custom-quick-add",
       "name": "TS Sticky Add",
       "settings": {
-        "product": "vip-bundle",
+        "product": "twerk-program",
         "button_link": "#nass-bundle-builder",
         "button_text": "Shop now",
         "background_button": "#faff00",
