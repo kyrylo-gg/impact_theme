@@ -673,10 +673,10 @@
           "type": "bundle_step",
           "settings": {
             "title": "Select programs",
-            "collection": "bundle_bundle-copy",
+            "collection": "father",
             "is_programs_step": true,
             "program_pack_product": "vip-bundle",
-            "program_pack_product_secondary": "all-in-one-bundle"
+            "program_pack_product_secondary": "vip-bundle-father"
           }
         },
         "extra_step_3UdwGU": {
