@@ -76,18 +76,8 @@
         "title": {
           "type": "title",
           "settings": {
-            "label": "New Hip Opener Bundle! Just $99",
-            "color": "#000000",
-            "desk_font_size": 25,
-            "mob_font_size": 13
-          }
-        },
-        "subtitle": {
-          "type": "subtitle",
-          "disabled": true,
-          "settings": {
-            "label": "",
-            "color": "#000000",
+            "label": "Big NASS Shorts Sale!  This Father's Day Only💥",
+            "color": "#72BBDD",
             "desk_font_size": 25,
             "mob_font_size": 13
           }
@@ -124,7 +114,6 @@
       },
       "block_order": [
         "title",
-        "subtitle",
         "timer_42j3k2",
         "button"
       ],
