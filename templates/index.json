@@ -14,7 +14,6 @@
       "blocks": {
         "80655a36-c320-42b3-984e-3e96b1a32056": {
           "type": "image",
-          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/Banner_1_Desk_74dbc57f-b25f-4b64-88e4-2cde1978ed76.png",
             "mobile_image": "shopify://shop_images/Banner_1_Mobile_42e88364-0446-40e8-8b2e-9e6584170364.png",
@@ -37,10 +36,9 @@
         },
         "image_kjqBkw": {
           "type": "image",
-          "disabled": true,
           "settings": {
-            "image": "shopify://shop_images/Banner_2_Desk_9777b0f7-c469-44de-b623-4462d2ca3192.png",
-            "mobile_image": "shopify://shop_images/Banner_2_Mobile_d7c9aef9-2e70-40c6-a313-8c85cbbfb115.png",
+            "image": "shopify://shop_images/Banner_2_Desk_5f268733-639d-47ea-a380-7792a9a696f2.png",
+            "mobile_image": "shopify://shop_images/Banner_2_Mobile_b9313bfe-8876-44ec-9c5d-53b96b58f0a3.png",
             "content_max_width": 780,
             "mobile_text_position": "place-self-end-start text-start",
             "desktop_text_position": "sm:place-self-end-start sm:text-start",
@@ -48,7 +46,7 @@
             "title": "",
             "heading_tag": "h1",
             "button_text": "",
-            "button_link": "shopify://products/body-transformation",
+            "button_link": "shopify://collections/shorts-all",
             "text_color": "#ffffff",
             "button_background": "#ffffff",
             "button_text_color": "#000000",
@@ -60,6 +58,7 @@
         },
         "image_aEp4BX": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/Banner_3_Desk_c7a4932a-52bb-4946-b74e-3ee49af3b7f6.png",
             "mobile_image": "shopify://shop_images/Banner_3_Mobile_8abd67e3-5088-4d8c-8fba-0958e89f45ee.png",
