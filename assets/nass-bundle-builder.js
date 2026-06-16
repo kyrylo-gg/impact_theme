@@ -164,6 +164,9 @@
     const skipProgramsStepOnOpen = templateSuffix === 'twerk_essential' || templateSuffix === 'twerk-essential';
     const isVipPackTwoFreeItemsTemplate = templateSuffix === 'nass-fans-ab'
       || templateSuffix === 'nass_fans_ab';
+    const isTemplateWithBundleSpecificShortsFree = templateSuffix === 'mega_twerk_with_bundleseo'
+      || templateSuffix === 'nass_fans'
+      || templateSuffix === 'nass-fans';
     const isTwerkProgramR1Template = templateSuffix === 'twerk-program-r1'
       || templateSuffix === 'twerk_program_r1';
     const isPopBootyTemplate = templateSuffix === 'pop_booty'
@@ -713,15 +716,69 @@
       return !!extraStepIdMap[String(stepId)];
     }
 
+    function getSelectedProgramProduct() {
+      var programsStep = bbState.steps.find(function(s) { return s && s.isProgramsStep; });
+      if (!programsStep) return null;
+      var selectedProgramItem = bbState.selectedItems.find(function(item) {
+        return String(item.stepId) === String(programsStep.id);
+      });
+      if (!selectedProgramItem) return null;
+      return bbState.productsById[selectedProgramItem.productId] || null;
+    }
+
+    function isShortsStep(stepId) {
+      var step = bbState.steps.find(function(s) { return String(s.id) === String(stepId); });
+      if (!step) return false;
+      var title = normalizeForMatch(step.title);
+      var handle = normalizeForMatch(step.collectionHandle);
+      return title.indexOf('short') !== -1 || handle.indexOf('short') !== -1;
+    }
+
+    function getBundleSpecificShortsFreeItemsLimit() {
+      if (!isTemplateWithBundleSpecificShortsFree) return 0;
+      var selectedProgram = getSelectedProgramProduct();
+      if (!selectedProgram) return 0;
+      var title = normalizeForMatch(selectedProgram.title);
+      var handle = normalizeForMatch(selectedProgram.handle);
+      var isVipOrAllInOne = (
+        title.indexOf('vip bundle') !== -1
+        || title.indexOf('all in one bundle') !== -1
+        || title.indexOf('all-in-one bundle') !== -1
+        || handle.indexOf('vip-bundle') !== -1
+        || handle.indexOf('all-in-one-bundle') !== -1
+      );
+      if (isVipOrAllInOne) return 2;
+      var isOneFreeBundle = (
+        title.indexOf('twerk program') !== -1
+        || title.indexOf('hip opener bundle') !== -1
+        || title.indexOf('booty builder bundle') !== -1
+        || handle.indexOf('twerk-program') !== -1
+        || handle.indexOf('hip-opener-bundle') !== -1
+        || handle.indexOf('booty-builder-bundle') !== -1
+      );
+      return isOneFreeBundle ? 1 : 0;
+    }
+
+    function hasVipPackFreeProgramSelected() {
+      if (isTemplateWithBundleSpecificShortsFree) {
+        return getBundleSpecificShortsFreeItemsLimit() > 0;
+      }
+      return hasSelectedProgramPackInProgramsStep();
+    }
+
     function isVipPackFreeEligibleStep(stepId) {
       var step = bbState.steps.find(function(s) { return String(s.id) === String(stepId); });
       if (!step || step.isProgramsStep || step.id === 'review') return false;
       if (stepIsWorkoutEquipment(stepId)) return false;
+      if (isTemplateWithBundleSpecificShortsFree) return isShortsStep(stepId);
       if (isVipPackTwoFreeItemsTemplate) return true;
       return isExtraStep(stepId);
     }
 
     function getVipPackFreeItemsLimit() {
+      if (isTemplateWithBundleSpecificShortsFree) {
+        return getBundleSpecificShortsFreeItemsLimit();
+      }
       return isVipPackTwoFreeItemsTemplate ? 2 : EXTRA_STEP_FREE_ITEMS_LIMIT;
     }
 
@@ -788,7 +845,7 @@
 
     function getVipPackFreeProductIds() {
       var freeIds = {};
-      if (!hasSelectedProgramPackInProgramsStep()) return freeIds;
+      if (!hasVipPackFreeProgramSelected()) return freeIds;
       var freeLimit = getVipPackFreeItemsLimit();
       var freeCount = 0;
       bbState.selectedItems.forEach(function(item) {
@@ -801,7 +858,7 @@
     }
 
     function hasVipPackFreeSlotAvailable() {
-      if (!hasSelectedProgramPackInProgramsStep()) return false;
+      if (!hasVipPackFreeProgramSelected()) return false;
       return Object.keys(getVipPackFreeProductIds()).length < getVipPackFreeItemsLimit();
     }
 
@@ -1092,6 +1149,7 @@
         || (handle.indexOf('booty') !== -1 && handle.indexOf('band') !== -1)
       );
       if (isBootyBandSet && mode === 'vip_or_essential') {
+        if (isTemplateWithBundleSpecificShortsFree) return null;
         if (isPopBootyVipBundleSelected()) return null;
         return { free: true, mode: mode, type: 'booty_band' };
       }
@@ -2106,7 +2164,7 @@
         final = 0;
         hasDiscount = false;
         compareAt = null;
-      } else if (isVipPackFreeEligibleStep(stepId) && hasSelectedProgramPackInProgramsStep()) {
+      } else if (isVipPackFreeEligibleStep(stepId) && hasVipPackFreeProgramSelected()) {
         var vipFreeIds = getVipPackFreeProductIds();
         var isVipPackFreeItem = !!vipFreeIds[String(productId)] || hasVipPackFreeSlotAvailable();
         if (isVipPackFreeItem) {
@@ -2468,7 +2526,7 @@
         var btFreeOrig = (compareAt != null && compareAt > price) ? compareAt : price;
         return { orig: btFreeOrig, final: 0 };
       }
-      if (isVipPackFreeEligibleStep(item.stepId) && hasSelectedProgramPackInProgramsStep()) {
+      if (isVipPackFreeEligibleStep(item.stepId) && hasVipPackFreeProgramSelected()) {
         var vipFreeIds = getVipPackFreeProductIds();
         if (vipFreeIds[String(item.productId)]) {
           var vipFreeOrig = (compareAt != null && compareAt > price) ? compareAt : price;
