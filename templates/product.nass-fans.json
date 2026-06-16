@@ -688,10 +688,10 @@
           "type": "bundle_step",
           "settings": {
             "title": "Select programs",
-            "collection": "bundle-programs-ab-a-copy-2",
+            "collection": "father",
             "is_programs_step": true,
-            "program_pack_product": "vip-bundle",
-            "program_pack_product_secondary": "all-in-one-bundle"
+            "program_pack_product": "all-in-one-bundle-father",
+            "program_pack_product_secondary": "vip-bundle-father"
           }
         },
         "bundle_step_bb96UU": {
