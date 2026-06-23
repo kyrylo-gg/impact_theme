@@ -673,9 +673,9 @@
           "type": "bundle_step",
           "settings": {
             "title": "Select programs",
-            "collection": "father",
+            "collection": "bundle-programs-ab-a-copy-2",
             "is_programs_step": true,
-            "program_pack_product": "all-in-one-bundle-father",
+            "program_pack_product": "all-in-one-bundle",
             "program_pack_product_secondary": "vip-bundle-father"
           }
         },
@@ -1272,7 +1272,7 @@
         "sublime_text_color": "#1a1a1a",
         "sublime_text_color_mobile": "",
         "sublime_text": "<p>Free Pair of Shorts with Any NASS Program</p>",
-        "block_background": "#72BBDD",
+        "block_background": "#72bbdd",
         "timer_enabled": true,
         "timer_type": "daily",
         "cancel_date": "01-01-2026 12:00",
