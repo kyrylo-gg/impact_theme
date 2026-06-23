@@ -676,7 +676,7 @@
             "collection": "bundle-programs-ab-a-copy-2",
             "is_programs_step": true,
             "program_pack_product": "all-in-one-bundle",
-            "program_pack_product_secondary": "vip-bundle"
+            "program_pack_product_secondary": "vip-bundle-father"
           }
         },
         "extra_step_3UdwGU": {
@@ -781,8 +781,8 @@
         "show_one_click_alternative": false,
         "one_click_product": "twerk-program-lovable",
         "one_click_label": "Twerk program",
-        "program_pack_product": "all-in-one-bundle-father",
-        "program_pack_product_secondary": "vip-bundle-father",
+        "program_pack_product": "all-in-one-bundle",
+        "program_pack_product_secondary": "vip-bundle",
         "discount_code": "",
         "show_discount_banner": true,
         "discount_promo_text": "2 Free Shorts with VIP Bundle or All-In-One Bundles",
