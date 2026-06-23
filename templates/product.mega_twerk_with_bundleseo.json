@@ -784,7 +784,7 @@
         "program_pack_product": "all-in-one-bundle",
         "program_pack_product_secondary": "vip-bundle",
         "discount_code": "",
-        "show_discount_banner": true,
+        "show_discount_banner": false,
         "discount_promo_text": "2 Free Shorts with VIP Bundle or All-In-One Bundles",
         "discount_applied_text": "2 Free Shorts Discount Applied!",
         "size_chart_config_handle": "size-chart-settings",
